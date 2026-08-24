@@ -292,6 +292,7 @@ namespace Content.Server.Singularity.EntitySystems
             else if (component.SetTypePorts.TryGetValue(args.Port, out var boltType))
             {
                 component.BoltType = boltType;
+                Dirty(uid, component);
             }
         }
 
