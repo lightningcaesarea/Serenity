@@ -106,7 +106,7 @@ public abstract partial class SharedDefibrillatorSystem : EntitySystem
 
     private void OnAfterInteract(Entity<DefibrillatorComponent> ent, ref AfterInteractEvent args)
     {
-        if (args.Handled || args.Target is not { } target)
+        if (args.Handled || args.Target is not { } target || !args.CanReach)
             return;
 
         // Starlight - To stop you from being able to defib someone by clicking on them with a hardsuit.
