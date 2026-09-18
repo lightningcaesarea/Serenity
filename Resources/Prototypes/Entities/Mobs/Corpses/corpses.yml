@@ -1,0 +1,101 @@
+- type: entity
+  parent: SalvageHumanCorpse
+  id: MobRandomServiceCorpse
+  suffix: Dead, Service
+  components:
+  - type: Loadout
+    prototypes:
+      - HoPCorpseGear #SL Edit
+      - ClownCorpseGear #SL Edit
+      - MimeCorpseGear #SL Edit
+      - JanitorCorpseGear #SL Edit
+      - ServiceWorkerCorpseGear #SL Edit
+      - MusicianCorpseGear #SL Edit
+      - BotanistCorpseGear #SL Edit
+      - ChefCorpseGear #SL Edit
+      - ChaplainCorpseGear #SL Edit
+      - AssistantCorpseGear #SL Edit
+      - TiderCorpseGear #SL Edit
+
+- type: entity
+  parent: SalvageHumanCorpse
+  id: MobRandomEngineerCorpse
+  suffix: Dead, Engineer
+  components:
+  - type: Loadout
+    prototypes:
+    - TechnicalAssistantCorpseGear #SL Edit
+    - AtmosphericTechnicianCorpseGear #SL Edit
+    - StationEngineerCorpseGear #SL Edit
+
+- type: entity
+  parent: SalvageHumanCorpse
+  id: MobRandomCargoCorpse
+  suffix: Dead, Cargo
+  components:
+  - type: Loadout
+    prototypes:
+    - CargoTechCorpseGear #SL Edit
+    - MailTechCorpseGear #SL Edit
+    - MinerCorpseGear #SL Edit
+    - SalvageSpecialistCorpseGear #SL Edit
+
+- type: entity
+  parent: SalvageHumanCorpse
+  id: MobRandomMedicCorpse
+  suffix: Dead, Medic
+  components:
+  - type: Loadout
+    prototypes:
+    - MedicalInternCorpseGear #SL Edit
+    - PsychologistCorpseGear #SL Edit
+    - ChemistCorpseGear #SL Edit
+    - DoctorCorpseGear #SL Edit
+    - VirologistCorpseGear #SL Edit
+    - GeneticsCorpseGear #SL Edit
+
+- type: entity
+  parent: SalvageHumanCorpse
+  id: MobRandomScienceCorpse
+  suffix: Dead, Science
+  components:
+  - type: Loadout
+    prototypes:
+    - ResearchAssistantCorpseGear #SL Edit
+    - ScientistCorpseGear #SL Edit
+    - RoboticistCorpseGear #SL Edit
+
+- type: entity
+  parent: SalvageHumanCorpse
+  id: MobRandomSecurityCorpse
+  suffix: Dead, Security
+  components:
+  - type: Loadout
+    prototypes:
+    - SecurityCadetCorpseGear #SL Edit
+    - SecurityOfficerCorpseGear #SL Edit
+    - DetectiveCorpseGear #SL Edit
+    - BrigMedicCorpseGear #SL Edit
+    - WardenCorpseGear #SL Edit
+    - PrisonerCorpseGear #SL Edit
+
+- type: entity
+  parent: SalvageHumanCorpse
+  id: MobRandomCommandCorpse
+  suffix: Dead, Command
+  components:
+  - type: Loadout
+    prototypes:
+    - HoPCorpseGear #SL Edit
+    - CentcomCorpseGear #SL Edit
+    - CaptainCorpseGear #SL Edit
+    - HoSCorpseGear #SL Edit
+    - ResearchDirectorCorpseGear #SL Edit
+    - CMOCorpseGear #SL Edit
+    - ChiefEngineerCorpseGear #SL Edit
+    - QuartermasterCorpseGear #SL Edit
+    - IAACorpseGear #SL Edit
+    - MagistrateCorpseGear #SL Edit
+    - NTRCorpseGear #SL Edit
+    - BSOCorpseGear #SL Edit
+    - NTMarineCorpseGear #SL Edit

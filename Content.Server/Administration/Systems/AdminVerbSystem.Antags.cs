@@ -1,0 +1,362 @@
+using Content.Server._Starlight.Administration.Systems;
+using Content.Server._Starlight.GameTicking.Rules.Components;
+using Content.Server.Antag;
+using Content.Server.Clothing.Systems;
+using Content.Server.GameTicking;
+using Content.Server.GameTicking.Rules.Components;
+using Content.Server.Speech.Components; // Starlight
+using Content.Server.Zombies;
+using Content.Shared.Administration;
+using Content.Shared.Database;
+using Content.Shared.Humanoid;
+using Content.Shared.Mind.Components;
+using Content.Shared.Roles;
+using Content.Shared.Roles.Components;
+using Content.Shared.Verbs;
+using Robust.Shared.Audio; // Starlight
+using Robust.Shared.Player;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Utility;
+using Content.Shared._Starlight.Shadekin.Components; // Starlight
+
+namespace Content.Server.Administration.Systems;
+
+public sealed partial class AdminVerbSystem
+{
+    [Dependency] private AntagSelectionSystem _antag = default!;
+    [Dependency] private ZombieSystem _zombie = default!;
+    [Dependency] private GameTicker _gameTicker = default!;
+    [Dependency] private OutfitSystem _outfit = default!;
+    [Dependency] private AutoDiscordLogSystem _autolog = default!; //Starlight
+
+    private static readonly EntProtoId DefaultTraitorRule = "Traitor";
+    private static readonly EntProtoId DefaultInitialInfectedRule = "Zombie";
+    private static readonly EntProtoId DefaultNukeOpRule = "LoneOpsSpawn";
+    private static readonly EntProtoId DefaultRevsRule = "Revolutionary";
+    private static readonly EntProtoId DefaultThiefRule = "Thief";
+    private static readonly EntProtoId DefaultChangelingRule = "Changeling";
+    private static readonly EntProtoId ParadoxCloneRuleId = "ParadoxCloneSpawn";
+    private static readonly EntProtoId DefaultWizardRule = "Wizard";
+    private static readonly EntProtoId DefaultNinjaRule = "NinjaSpawn";
+    private static readonly ProtoId<StartingGearPrototype> PirateGearId = "PirateGear";
+    private static readonly EntProtoId DefaultVampireRule = "Vampire"; //Starlight
+    private static readonly EntProtoId DefaultDevilRule = "Devil"; // starlight
+    private static readonly EntProtoId DefaultBrighteyeRule = "SubBrighteye"; //Starlight
+	private static readonly EntProtoId DefaultSELFRule = "SiliconLiberation"; //Starlight
+    private static readonly string _theDarkMap = "TheDarkMap";
+
+    // All antag verbs have names so invokeverb works.
+    private void AddAntagVerbs(GetVerbsEvent<Verb> args)
+    {
+        if (!TryComp<ActorComponent>(args.User, out var actor))
+            return;
+
+        var player = actor.PlayerSession;
+
+        if (!_adminManager.HasAdminFlag(player, AdminFlags.Fun))
+            return;
+
+        if (!HasComp<MindContainerComponent>(args.Target) || !TryComp<ActorComponent>(args.Target, out var targetActor))
+            return;
+
+        var targetPlayer = targetActor.PlayerSession;
+
+        var traitorName = Loc.GetString("admin-verb-text-make-traitor");
+        Verb traitor = new()
+        {
+            Text = traitorName,
+            Category = VerbCategory.Antag,
+            Icon = new SpriteSpecifier.Rsi(new ResPath("/Textures/Interface/Misc/job_icons.rsi"), "Syndicate"),
+            Act = () =>
+            {
+                _antag.ForceMakeAntag<TraitorRuleComponent>(targetPlayer, DefaultTraitorRule);
+                _autolog.LogToDiscord(string.Join(": ", traitorName, Loc.GetString("admin-verb-make-traitor")), player.Name); //Starlight
+            },
+            Impact = LogImpact.High,
+            Message = string.Join(": ", traitorName, Loc.GetString("admin-verb-make-traitor")),
+        };
+        args.Verbs.Add(traitor);
+
+        var initialInfectedName = Loc.GetString("admin-verb-text-make-initial-infected");
+        Verb initialInfected = new()
+        {
+            Text = initialInfectedName,
+            Category = VerbCategory.Antag,
+            Icon = new SpriteSpecifier.Rsi(new("/Textures/Interface/Misc/job_icons.rsi"), "InitialInfected"),
+            Act = () =>
+            {
+                _antag.ForceMakeAntag<ZombieRuleComponent>(targetPlayer, DefaultInitialInfectedRule);
+                _autolog.LogToDiscord(string.Join(": ", initialInfectedName, Loc.GetString("admin-verb-make-initial-infected")), player.Name); //Starlight
+            },
+            Impact = LogImpact.High,
+            Message = string.Join(": ", initialInfectedName, Loc.GetString("admin-verb-make-initial-infected")),
+        };
+        args.Verbs.Add(initialInfected);
+
+        var zombieName = Loc.GetString("admin-verb-text-make-zombie");
+        Verb zombie = new()
+        {
+            Text = zombieName,
+            Category = VerbCategory.Antag,
+            Icon = new SpriteSpecifier.Rsi(new("/Textures/Interface/Misc/job_icons.rsi"), "Zombie"),
+            Act = () =>
+            {
+                _zombie.ZombifyEntity(args.Target);
+                _autolog.LogToDiscord(string.Join(": ", zombieName, Loc.GetString("admin-verb-make-zombie")), player.Name); //Starlight
+            },
+            Impact = LogImpact.High,
+            Message = string.Join(": ", zombieName, Loc.GetString("admin-verb-make-zombie")),
+        };
+        args.Verbs.Add(zombie);
+
+        var nukeOpName = Loc.GetString("admin-verb-text-make-nuclear-operative");
+        Verb nukeOp = new()
+        {
+            Text = nukeOpName,
+            Category = VerbCategory.Antag,
+            Icon = new SpriteSpecifier.Rsi(new("/Textures/Clothing/Head/Hardsuits/syndicate.rsi"), "icon"),
+            Act = () =>
+            {
+                _antag.ForceMakeAntag<NukeopsRuleComponent>(targetPlayer, DefaultNukeOpRule);
+                _autolog.LogToDiscord(string.Join(": ", nukeOpName, Loc.GetString("admin-verb-make-nuclear-operative")), player.Name); //Starlight
+            },
+            Impact = LogImpact.High,
+            Message = string.Join(": ", nukeOpName, Loc.GetString("admin-verb-make-nuclear-operative")),
+        };
+        args.Verbs.Add(nukeOp);
+
+        var pirateName = Loc.GetString("admin-verb-text-make-pirate") + " (Wizden)"; // Starlight
+        Verb pirate = new()
+        {
+            Text = pirateName,
+            Category = VerbCategory.Antag,
+            Icon = new SpriteSpecifier.Rsi(new("/Textures/Clothing/Head/Hats/pirate.rsi"), "icon"),
+            Act = () =>
+            {
+                // pirates just get an outfit because they don't really have logic associated with them
+                _outfit.SetOutfit(args.Target, PirateGearId);
+                _autolog.LogToDiscord(string.Join(": ", pirateName, Loc.GetString("admin-verb-make-pirate")), player.Name); //Starlight
+            },
+            Impact = LogImpact.High,
+            Message = string.Join(": ", pirateName, Loc.GetString("admin-verb-make-pirate")),
+        };
+        args.Verbs.Add(pirate);
+
+        var headRevName = Loc.GetString("admin-verb-text-make-head-rev");
+        Verb headRev = new()
+        {
+            Text = headRevName,
+            Category = VerbCategory.Antag,
+            Icon = new SpriteSpecifier.Rsi(new("/Textures/Interface/Misc/job_icons.rsi"), "HeadRevolutionary"),
+            Act = () =>
+            {
+                _antag.ForceMakeAntag<RevolutionaryRuleComponent>(targetPlayer, DefaultRevsRule);
+                _autolog.LogToDiscord(string.Join(": ", headRevName, Loc.GetString("admin-verb-make-head-rev")), player.Name); //Starlight
+            },
+            Impact = LogImpact.High,
+            Message = string.Join(": ", headRevName, Loc.GetString("admin-verb-make-head-rev")),
+        };
+        args.Verbs.Add(headRev);
+
+        var thiefName = Loc.GetString("admin-verb-text-make-thief");
+        Verb thief = new()
+        {
+            Text = thiefName,
+            Category = VerbCategory.Antag,
+            Icon = new SpriteSpecifier.Rsi(new ResPath("/Textures/Clothing/Hands/Gloves/Color/black.rsi"), "icon"),
+            Act = () =>
+            {
+                _antag.ForceMakeAntag<ThiefRuleComponent>(targetPlayer, DefaultThiefRule);
+                _autolog.LogToDiscord(string.Join(": ", thiefName, Loc.GetString("admin-verb-make-thief")), player.Name); //Starlight
+            },
+            Impact = LogImpact.High,
+            Message = string.Join(": ", thiefName, Loc.GetString("admin-verb-make-thief")),
+        };
+        args.Verbs.Add(thief);
+
+        var changelingName = Loc.GetString("admin-verb-text-make-changeling-wip"); //SL edit, -wip as we allready have lings
+        Verb changeling = new()
+        {
+            Text = changelingName,
+            Category = VerbCategory.Antag,
+            Icon = new SpriteSpecifier.Rsi(new ResPath("/Textures/Objects/Weapons/Melee/armblade.rsi"), "icon"),
+            Act = () =>
+            {
+                _antag.ForceMakeAntag<ChangelingRuleComponent>(targetPlayer, DefaultChangelingRule);
+                _autolog.LogToDiscord(string.Join(": ", changelingName, Loc.GetString("admin-verb-make-changeling-wip")), player.Name); //Starlight
+            },
+            Impact = LogImpact.High,
+            Message = string.Join(": ", changelingName, Loc.GetString("admin-verb-make-changeling-wip")), //SL edit: -wip as we have lings allready
+        };
+        args.Verbs.Add(changeling);
+
+        var paradoxCloneName = Loc.GetString("admin-verb-text-make-paradox-clone");
+        Verb paradox = new()
+        {
+            Text = paradoxCloneName,
+            Category = VerbCategory.Antag,
+            Icon = new SpriteSpecifier.Rsi(new("/Textures/Interface/Misc/job_icons.rsi"), "ParadoxClone"),
+            Act = () =>
+            {
+                var ruleEnt = _gameTicker.AddGameRule(ParadoxCloneRuleId);
+
+                if (!TryComp<ParadoxCloneRuleComponent>(ruleEnt, out var paradoxCloneRuleComp))
+                    return;
+
+                paradoxCloneRuleComp.OriginalBody = args.Target; // override the target player
+
+                _gameTicker.StartGameRule(ruleEnt);
+                _autolog.LogToDiscord(string.Join(": ", paradoxCloneName, Loc.GetString("admin-verb-make-paradox-clone")), player.Name); //Starlight
+            },
+            Impact = LogImpact.High,
+            Message = string.Join(": ", paradoxCloneName, Loc.GetString("admin-verb-make-paradox-clone")),
+        };
+
+        var wizardName = Loc.GetString("admin-verb-text-make-wizard");
+        Verb wizard = new()
+        {
+            Text = wizardName,
+            Category = VerbCategory.Antag,
+            Icon = new SpriteSpecifier.Rsi(new("/Textures/Interface/Misc/job_icons.rsi"), "Wizard"),
+            Act = () =>
+            {
+                // Wizard has no rule components as of writing, but I gotta put something here to satisfy the machine so just make it wizard mind rule :)
+                _antag.ForceMakeAntag<WizardRoleComponent>(targetPlayer, DefaultWizardRule);
+                _autolog.LogToDiscord(string.Join(": ", wizardName, Loc.GetString("admin-verb-make-wizard")), player.Name); //Starlight
+            },
+            Impact = LogImpact.High,
+            Message = string.Join(": ", wizardName, Loc.GetString("admin-verb-make-wizard")),
+        };
+        args.Verbs.Add(wizard);
+
+        var ninjaName = Loc.GetString("admin-verb-text-make-space-ninja");
+        Verb ninja = new()
+        {
+            Text = ninjaName,
+            Category = VerbCategory.Antag,
+            Icon = new SpriteSpecifier.Rsi(new("/Textures/Objects/Weapons/Melee/energykatana.rsi"), "icon"),
+            Act = () =>
+            {
+                _antag.ForceMakeAntag<NinjaRoleComponent>(targetPlayer, DefaultNinjaRule);
+                _autolog.LogToDiscord(string.Join(": ", ninjaName, Loc.GetString("admin-verb-make-space-ninja")), player.Name); //Starlight
+            },
+            Impact = LogImpact.High,
+            Message = string.Join(": ", ninjaName, Loc.GetString("admin-verb-make-space-ninja")),
+        };
+        args.Verbs.Add(ninja);
+
+        if (HasComp<HumanoidAppearanceComponent>(args.Target)) // only humanoids can be cloned
+            args.Verbs.Add(paradox);
+        /// Starlight START
+        Verb ling = new()
+        {
+            Text = Loc.GetString("admin-verb-text-make-changeling"),
+            Category = VerbCategory.Antag,
+            Icon = new SpriteSpecifier.Rsi(new ResPath("/Textures/Changeling/changeling_abilities.rsi"), "transform"),
+            Act = () =>
+            {
+                _antag.ForceMakeAntag<SLChangelingRuleComponent>(targetPlayer, "SLChangeling");
+                _autolog.LogToDiscord(Loc.GetString("admin-verb-make-changeling"), player.Name);
+            },
+            Impact = LogImpact.High,
+            Message = Loc.GetString("admin-verb-make-changeling"),
+        };
+        args.Verbs.Add(ling);
+
+        Verb vampire = new()
+        {
+            Text = Loc.GetString("admin-verb-text-make-vampire"),
+            Category = VerbCategory.Antag,
+            Icon = new SpriteSpecifier.Rsi(new ResPath("/Textures/_Starlight/Vampire/actions_vampire.rsi"), "select_class"), // Starlight
+            Act = () =>
+            {
+                _antag.ForceMakeAntag<VampireRuleComponent>(targetPlayer, DefaultVampireRule);
+                _autolog.LogToDiscord(Loc.GetString("admin-verb-make-vampire"), player.Name);
+            },
+            Impact = LogImpact.High,
+            Message = Loc.GetString("admin-verb-make-vampire"),
+        };
+        args.Verbs.Add(vampire);
+
+		var selfagentName = Loc.GetString("admin-verb-text-make-selfagent");
+        Verb selfagent = new()
+        {
+            Text = selfagentName,
+            Category = VerbCategory.Antag,
+            Icon = new SpriteSpecifier.Rsi(new ResPath("/Textures/_Starlight/Objects/Specific/SELF/freemag.rsi"), "icon"),
+            Act = () =>
+            {
+                _antag.ForceMakeAntag<SELFRuleComponent>(targetPlayer, DefaultSELFRule);
+                _autolog.LogToDiscord(string.Join(": ", selfagentName, Loc.GetString("admin-verb-make-selfagent")), player.Name);
+            },
+            Impact = LogImpact.High,
+            Message = string.Join(": ", selfagentName, Loc.GetString("admin-verb-make-selfagent")),
+        };
+        args.Verbs.Add(selfagent);
+
+        Verb devil = new()
+        {
+            Text = Loc.GetString("admin-verb-text-make-devil"),
+            Category = VerbCategory.Antag,
+            Icon = new SpriteSpecifier.Rsi(new ResPath("/Textures/Effects/fire.rsi"), "fire"),
+            Act = () =>
+            {
+                _antag.ForceMakeAntag<DevilRuleComponent>(targetPlayer, DefaultDevilRule);
+                _autolog.LogToDiscord(string.Join(": ", Loc.GetString("admin-verb-text-make-devil"), Loc.GetString("admin-verb-make-devil")), player.Name);
+            },
+            Impact = LogImpact.High,
+            Message = Loc.GetString("admin-verb-make-devil")
+        };
+        args.Verbs.Add(devil);
+
+        if (HasComp<ShadekinComponent>(args.Target))
+        {
+            Verb brighteye = new()
+            {
+                Text = Loc.GetString("admin-verb-text-make-brighteye"),
+                Category = VerbCategory.Antag,
+                Icon = new SpriteSpecifier.Rsi(new ResPath("/Textures/_Starlight/Interface/Actions/shadekin.rsi"), "rest"),
+                Act = () =>
+                {
+                    _gameTicker.StartGameRule(_theDarkMap); // The Dark should always be spawned for any brighteye.
+                    _antag.ForceMakeAntag<BrighteyeRuleComponent>(targetPlayer, DefaultBrighteyeRule);
+                    _autolog.LogToDiscord(Loc.GetString("admin-verb-make-brighteye"), player.Name);
+                },
+                Impact = LogImpact.High,
+                Message = Loc.GetString("admin-verb-make-brighteye"),
+            };
+            args.Verbs.Add(brighteye);
+        }
+
+        var pirateSLName = Loc.GetString("admin-verb-text-make-pirate-sl");
+        Verb pirateSL = new()
+        {
+            Text = pirateSLName,
+            Category = VerbCategory.Antag,
+            Icon = new SpriteSpecifier.Rsi(new("/Textures/Objects/Misc/id_cards.rsi"), "pirate"),
+            Act = () =>
+            {
+                _npcFactionSmite.RemoveFaction(args.Target, _smiteNanoTrasenFaction, false);
+                _npcFactionSmite.AddFaction(args.Target, _smitePirateFaction);
+                _outfit.SetOutfit(args.Target, PirateGearId); // Starlight
+                EnsureComp<PirateAccentComponent>(args.Target); // Starlight
+
+                if (_mindSystem.TryGetMind(args.Target, out var pirateMindId, out var pirateMind))
+                {
+                    _role.MindAddRole(pirateMindId, _pirateMindRole);
+                    _mindSystem.TryAddObjective(pirateMindId, pirateMind, "PirateFollowCaptainObjective"); // Starlight
+                }
+
+                _antag.SendBriefing(args.Target,
+                    Loc.GetString("pirate-crew-briefing"),
+                    null,
+                    new SoundPathSpecifier("/Audio/Ambience/Antag/pirate_start.ogg"));
+                _autolog.LogToDiscord(string.Join(": ", pirateSLName, Loc.GetString("admin-verb-make-pirate-sl")), player.Name);
+            },
+            Impact = LogImpact.High,
+            Message = string.Join(": ", pirateSLName, Loc.GetString("admin-verb-make-pirate-sl")),
+        };
+        args.Verbs.Add(pirateSL);
+        // STARLIGHT END
+    }
+}

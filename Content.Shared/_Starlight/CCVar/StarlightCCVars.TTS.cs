@@ -1,0 +1,44 @@
+using Robust.Shared.Configuration;
+
+namespace Content.Shared._Starlight.CCVar;
+public sealed partial class StarlightCCVars
+{
+    /// <summary>
+    /// URL of the TTS server API.
+    /// </summary>
+    public static readonly CVarDef<bool> TTSEnabled =
+        CVarDef.Create("tts.enabled", false, CVar.SERVER | CVar.REPLICATED | CVar.ARCHIVE);
+
+    public static readonly CVarDef<string> TTSConnectionString =
+        CVarDef.Create("tts.connection_string", "", CVar.SERVERONLY | CVar.CONFIDENTIAL);
+
+    /// <summary>
+    /// Option to disable TTS events for client
+    /// </summary>
+    public static readonly CVarDef<bool> TTSClientEnabled =
+        CVarDef.Create("tts.client_enabled", true, CVar.CLIENTONLY | CVar.ARCHIVE);
+
+    /// <summary>
+    /// Default volume setting of TTS sound
+    /// </summary>
+    public static readonly CVarDef<float> TTSVolume =
+        CVarDef.Create("tts.volume", 0.50f, CVar.CLIENTONLY | CVar.ARCHIVE);
+
+    public static readonly CVarDef<float> TTSRadioVolume =
+        CVarDef.Create("tts.radio_volume", 0.50f, CVar.CLIENTONLY | CVar.ARCHIVE);
+
+    public static readonly CVarDef<bool> TTSRadioQueueEnabled =
+        CVarDef.Create("tts.radio_queue_enabled", true, CVar.CLIENTONLY | CVar.ARCHIVE);
+
+    public static readonly CVarDef<float> TTSAnnounceVolume =
+        CVarDef.Create("tts.announce_volume", 0.50f, CVar.CLIENTONLY | CVar.ARCHIVE);
+
+    public static readonly CVarDef<float> TTSChimeVolume =
+        CVarDef.Create("tts.chime_volume", 0.50f, CVar.CLIENTONLY | CVar.ARCHIVE);
+
+    /// <summary>
+    /// Option to mute radio chime sounds
+    /// </summary>
+    public static readonly CVarDef<bool> RadioChimeMuted =
+        CVarDef.Create("audio.radio_chime_muted", false, CVar.CLIENTONLY | CVar.ARCHIVE);
+}

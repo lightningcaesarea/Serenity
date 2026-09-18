@@ -1,0 +1,235 @@
+- type: entity
+  abstract: true
+  parent: BaseCartridge
+  id: BaseShellShotgun
+  name: 12 gauge shotgun shell # Starlight change: .50 -> 12 gauge
+  components:
+  - type: Tag
+    tags:
+    - ShellShotgun
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Ammunition/Casings/shotgun_shell.rsi
+    layers:
+      - state: base
+        map: [ "enum.AmmoVisualLayers.Base" ]
+  - type: Appearance
+  - type: SpentAmmoVisuals
+    revealSpent: true # Starlight
+    tip: true
+
+- type: entity
+  parent: [ BaseShellShotgun, BaseSecurityBartenderContraband ]
+  id: ShellShotgunBeanbag
+  name: 12 gauge beanbag slug # Starlight change: .50 -> 12 gauge
+  description: The standard cartridge used by most modern shotguns. Beanbag ammunition contains a single less-than-lethal projectile that can stun targets.
+  components:
+  - type: Tag
+    tags:
+    - ShellShotgun
+    - ShellShotgunLight
+  - type: Sprite
+    layers:
+      - state: base
+        map: [ "enum.AmmoVisualLayers.Base" ]
+      - state: tip
+        map: [ "enum.AmmoVisualLayers.Tip" ]
+        color: "#149A1E"
+      - state: spent
+        map: [ "enum.AmmoVisualLayers.Spent" ]
+        visible: false
+  - type: CartridgeAmmo
+    soundEject:
+      collection: ShellEject
+    proto: PelletShotgunBeanbagTrace
+
+- type: entity
+  parent: [ BaseShellShotgun, BaseSecurityContraband]
+  id: ShellShotgunSlug
+  name: 12 gauge slug # Starlight change: .50 -> 12 gauge
+  description: The standard cartridge used by most modern shotguns. Slug ammunition contains a single high-density projectile effective at longer ranges than pellet ammunition.
+  components:
+  - type: Sprite
+    layers:
+      - state: slug
+        map: [ "enum.AmmoVisualLayers.Base" ]
+      - state: tip-long
+        map: [ "enum.AmmoVisualLayers.Tip" ]
+        color: "#252525"
+      - state: spent-long
+        map: [ "enum.AmmoVisualLayers.Spent" ]
+        visible: false
+  - type: CartridgeAmmo
+    soundEject:
+      collection: ShellEject
+    proto: PelletShotgunSlugTrace
+
+- type: entity
+  parent: BaseShellShotgun
+  id: ShellShotgunFlare
+  name: 12 gauge flare # Starlight change: .50 -> 12 gauge
+  description: The standard cartridge used by most modern shotguns. Flare ammunition contains a single brightly-burning projectile intended for illumination and signalling, rather than combat.
+  components:
+  - type: Tag
+    tags:
+    - ShellShotgun
+    - ShellShotgunLight
+  - type: Sprite
+    layers:
+      - state: base
+        map: [ "enum.AmmoVisualLayers.Base" ]
+      - state: tip
+        map: [ "enum.AmmoVisualLayers.Tip" ]
+        color: "#FFFF0B"
+      - state: flare
+      - state: spent
+        map: [ "enum.AmmoVisualLayers.Spent" ]
+        visible: false
+  - type: CartridgeAmmo
+    proto: PelletShotgunFlare
+    soundEject:
+      collection: ShellEject
+
+- type: entity
+  parent: [ BaseShellShotgun, BaseSecurityContraband ]
+  id: ShellShotgun
+  name: 12 gauge buckshot # Starlight change: .50 -> 12 gauge
+  description: The standard cartridge used by most modern shotguns. Standard kinetic ammunition is common and useful in most situations.
+  components:
+  - type: Sprite
+    layers:
+      - state: base
+        map: [ "enum.AmmoVisualLayers.Base" ]
+      - state: tip
+        map: [ "enum.AmmoVisualLayers.Tip" ]
+        color: "#F4001F"
+      - state: spent
+        map: [ "enum.AmmoVisualLayers.Spent" ]
+        visible: false
+  - type: CartridgeAmmo
+    soundEject:
+      collection: ShellEject
+    proto: PelletShotgunSpreadTrace
+
+- type: entity
+  parent: [ BaseShellShotgun, BaseSecurityContraband ]
+  id: ShellShotgunIncendiary
+  name: 12 gauge incendiary buckshot # Starlight change: .50 -> 12 gauge
+  description: The standard cartridge used by most modern shotguns. Incendiary ammunition contains a self-igniting compound that sets targets ablaze.
+  components:
+  - type: Sprite
+    layers:
+      - state: base
+        map: [ "enum.AmmoVisualLayers.Base" ]
+      - state: tip
+        map: [ "enum.AmmoVisualLayers.Tip" ]
+        color: "#FFFF0B"
+      - state: incendiary
+      - state: spent
+        map: [ "enum.AmmoVisualLayers.Spent" ]
+        visible: false
+  - type: CartridgeAmmo
+    soundEject:
+      collection: ShellEject
+    proto: PelletShotgunIncendiarySpreadTrace
+
+- type: entity
+  parent: [ BaseShellShotgun, BaseSecurityContraband ]
+  id: ShellShotgunPractice
+  name: 12 gauge blank # Starlight change: .50 -> 12 gauge
+  description: The standard cartridge used by most modern shotguns. Practice ammunition fires chalk pellets that sting a little, but otherwise cause no lasting damage.
+  components:
+  - type: Sprite
+    layers:
+      - state: base
+        map: [ "enum.AmmoVisualLayers.Base" ]
+      - state: tip
+        map: [ "enum.AmmoVisualLayers.Tip" ]
+      - state: practice
+      - state: spent
+        map: [ "enum.AmmoVisualLayers.Spent" ]
+        visible: false
+  - type: CartridgeAmmo
+    soundEject:
+      collection: ShellEject
+    proto: PelletShotgunPracticeSpreadTrace
+
+- type: entity
+  parent: [ SolutionAmmo, SolutionToolVeryTiny, BaseShellShotgun  ]
+  id: ShellTranquilizer
+  name: 12 gauge tranquilizer slug # Starlight change: .50 -> 12 gauge
+  description: The standard cartridge used by most modern shotguns. Tranquilizer ammunition contains a single ballistic syringe loaded with a strong sedative that harmlessly puts targets to sleep.
+  components:
+  - type: Tag
+    tags:
+    - ShellShotgun
+    - ShellShotgunLight
+  - type: Sprite
+    layers:
+      - state: base
+        map: [ "enum.AmmoVisualLayers.Base" ]
+      - state: tip
+        map: [ "enum.AmmoVisualLayers.Tip" ]
+        color: "#49CECE"
+      - state: spent
+        map: [ "enum.AmmoVisualLayers.Spent" ]
+        visible: false
+  - type: CartridgeAmmo
+    proto: PelletShotgunTranquilizer
+  - type: ChemicalAmmo
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Nocturine #🌟Starlight🌟
+        Quantity: 7.5
+  - type: SolutionTransfer
+    maxTransferAmount: 3.5
+
+- type: entity
+  parent: [ BaseShellShotgun, BaseSecurityContraband ]
+  id: ShellShotgunImprovised
+  name: improvised 12 gauge shell # Starlight change: .50 -> 12 gauge
+  description: A homemade shotgun shell loaded with chunks of glass shrapnel. Surprisingly effective, but the spread is so wide that you couldn't hit the broad side of a barn.
+  components:
+  - type: Tag
+    tags:
+    - ShellShotgun
+    - ShellShotgunLight
+  - type: Sprite
+    layers:
+      - state: improvised
+        map: [ "enum.AmmoVisualLayers.Base" ]
+      - state: tip
+        map: [ "enum.AmmoVisualLayers.Tip" ]
+        color: "#555555"
+      - state: spent
+        map: [ "enum.AmmoVisualLayers.Spent" ]
+        visible: false
+  - type: Construction
+    graph: ImprovisedShotgunShellGraph
+    node: shell
+  - type: CartridgeAmmo
+    soundEject:
+      collection: ShellEject
+    proto: PelletShotgunImprovisedSpreadTrace
+
+- type: entity
+  parent: [ BaseShellShotgun, BaseSecurityContraband ]
+  id: ShellShotgunUranium
+  name: 12 gauge uranium buckshot shell # Starlight change: .50 -> 12 gauge
+  description: The standard cartridge used by most modern shotguns. Uranium ammunition replaces the lead core of the pellets with fissile material, irradiating targets from the inside.
+  components:
+  - type: Sprite
+    layers:
+      - state: slug
+        map: [ "enum.AmmoVisualLayers.Base" ]
+      - state: tip-long
+        map: [ "enum.AmmoVisualLayers.Tip" ]
+        color: "#252525"
+      - state: depleted-uranium
+      - state: spent-long
+        map: [ "enum.AmmoVisualLayers.Spent" ]
+        visible: false
+  - type: CartridgeAmmo
+    soundEject:
+      collection: ShellEject
+    proto: PelletShotgunUraniumSpreadTrace

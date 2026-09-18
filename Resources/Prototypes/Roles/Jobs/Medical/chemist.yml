@@ -1,0 +1,41 @@
+- type: job
+  id: Chemist
+  name: job-name-chemist
+  description: job-description-chemist
+  playTimeTracker: JobChemist
+  requirements:
+    - !type:DepartmentTimeRequirement
+      department: Medical
+      time: 5h
+  startingGear: ChemistGear
+  icon: "JobIconChemist"
+  supervisors: job-supervisors-cmo
+  displayWeight: 4 # Starlight
+  access:
+  - Medical
+  - Chemistry
+  - Maintenance
+  # Starlight Start
+  extendedAccess:
+  - Paramedic
+  - Surgery
+  # Starlight End
+
+- type: startingGear
+  id: ChemistGear
+  equipment:
+    # id: ChemistryPDA #Starlight
+    ears: ClothingHeadsetMedical
+#    belt: ChemBag # Starlight start
+#    pocket1: HandLabeler
+#    eyes: ClothingEyesGlassesChemical # Starlight end
+
+- type: chameleonOutfit
+  id: ChemistChameleonOutfit
+  job: Chemist
+  equipment:
+    head: ClothingHeadHatBeretMedic
+    mask: ClothingMaskSterile
+    neck: ClothingNeckStethoscope
+    outerClothing: ClothingOuterCoatLabChem
+    gloves: ClothingHandsGlovesLatex

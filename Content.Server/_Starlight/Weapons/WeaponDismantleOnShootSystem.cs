@@ -1,0 +1,90 @@
+using System.Numerics;
+using Content.Shared.Throwing;
+using Content.Shared.Weapons.Ranged.Events;
+using Robust.Shared.Random;
+using Content.Shared.Weapons.Ranged.Components;
+using Robust.Shared.Audio.Systems;
+using Robust.Shared.Map;
+using Content.Shared.Damage.Systems;
+using Content.Shared._Starlight.Weapons;
+using Content.Shared._Starlight.Weapons.Components;
+
+namespace Content.Server._Starlight.Weapons;
+public sealed partial class WeaponDismantleOnShootSystem : SharedWeaponDismantleOnShootSystem
+{
+    [Dependency] private ThrowingSystem _throwing = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    public override void Initialize()
+    {
+        base.Initialize();
+        SubscribeLocalEvent<WeaponDismantleOnShootComponent, AmmoShotEvent>(OnGunShot);
+    }
+
+    private void OnGunShot(Entity<WeaponDismantleOnShootComponent> ent, ref AmmoShotEvent args)
+    {
+        if (DismantleCheck(ent, ref args) == false)
+            return;
+
+        if (!args.Shooter.HasValue)
+            return;
+
+        //apply the damage to the shooter
+        //get the shooters damageable component
+        _damageable.TryChangeDamage(args.Shooter.Value, ent.Comp.SelfDamage, origin:args.Shooter.Value);
+
+        //we need the user past this point
+        if (!args.Shooter.HasValue)
+            return;
+
+        _audio.PlayPvs(ent.Comp.DismantleSound, args.Shooter.Value);
+
+        //get the users transform
+        var userPosition = Transform(args.Shooter.Value).Coordinates;
+
+        if (!TryComp<GunComponent>(ent, out var gunComponent))
+            return;
+
+        var toCoordinates = gunComponent.ShootCoordinates;
+
+        if (toCoordinates == null)
+            return;
+
+        //loop through all of the items
+        var random = IoCManager.Resolve<IRobustRandom>();
+        foreach (var item in ent.Comp.items)
+        {
+            for (var i = 0; i < item.Amount; i++)
+            {
+                //roll to see if we destroy the item or not
+                if (!random.Prob(item.SpawnProbability))
+                    continue;
+
+                //get the item entity
+                var itemEntity = Spawn(item.PrototypeId, userPosition);
+
+                Vector2 direction = toCoordinates.Value.Position;
+                //normalize it
+                direction = Vector2.Normalize(direction);
+                //multiply it by the distance
+                direction *= ent.Comp.DismantleDistance;
+                //rotate it by the angle
+                direction = item.LaunchAngle.RotateVec(direction);
+
+                //roll for random angle modifier
+                double randomAngle = random.NextDouble(-item.AngleRandomness.Degrees, item.AngleRandomness.Degrees);
+                //rotate it by the random angle
+                direction = Angle.FromDegrees(randomAngle).RotateVec(direction);
+
+                var throwDirection = new EntityCoordinates(args.Shooter.Value, direction);
+
+                _throwing.TryThrow(itemEntity, throwDirection, ent.Comp.DismantleDistance, compensateFriction: true);
+            }
+        }
+
+        //now we need to destroy the gun
+        //get the gun entity
+        _entityManager.QueueDeleteEntity(ent.Owner);
+    }
+}

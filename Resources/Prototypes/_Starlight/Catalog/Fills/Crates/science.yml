@@ -1,0 +1,60 @@
+- type: entity
+  id: CrateLawboards
+  categories: [ ShouldMapStation ]
+  parent: CrateRDSecure
+  name: AI lawboard crate
+  description: A crate filled with various AI lawboards.
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: NTDefaultCircuitBoard
+        - id: AsimovCircuitBoard
+        - id: CorporateCircuitBoard
+        - id: CommandmentCircuitBoard
+        - id: PaladinCircuitBoard
+        - id: PanicmovCircuitBoard
+        - id: GenieCircuitBoard
+        - id: ReporterCircuitBoard
+        - id: LiveLetLiveCircuitBoard
+        - id: StationEfficiencyCircuitBoard
+        - id: RobocopCircuitBoard
+        - id: OverlordCircuitBoard
+        - id: GameMasterCircuitBoard
+        - id: ArtistCircuitBoard
+        - id: NutimovCircuitBoard
+        - id: JermovCircuitBoard
+        - id: JanimovCircuitBoard
+
+- type: entity
+  id: CrateStarterXenobiology
+  parent: CrateScienceSecure
+  name: xenobiology starter crate
+  description: Contains a gray slime extract and a box of monkey cubes to get you started on your xenobiology adventures. Or because you really messed up. Oh, and a camera tagger. Don't let any spies get their hands on that thing.
+  components:
+    - type: EntityTableContainerFill
+      containers:
+        entity_storage: !type:AllSelector
+          children:
+            - id: GraySlimeExtract
+            - id: MonkeyCubeBox
+            - id: XenobiologyConsoleCameraTagger
+
+- type: entity
+  parent: CrateScienceSecure
+  id: CrateStationAiUpload
+  name: station AI upload console crate
+  description: Contains the components for constructing a station AI upload console. Still requires manual linking to the core. Requires Science access to open.
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: StationAiUploadCircuitboard
+        - id: SheetSteel1
+          amount: 5
+        - id: SheetGlass1
+          amount: 2
+        - id: CableApcStack1
+          amount: 5

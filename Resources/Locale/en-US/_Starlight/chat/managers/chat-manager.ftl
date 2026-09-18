@@ -1,0 +1,45 @@
+
+chat-manager-sender-announcement-wrap-message = [font size=14][bold]{$sender} Announcement[/font][font size=12]
+                                                {$message}[/bold][/font]
+
+chat-manager-entity-say-wrap-message = [BubbleHeader][bold][Name]{$entityName}[/Name][/bold][/BubbleHeader] {$verb}, [font={$fontType} size={$fontSize}]"[BubbleContent][font="{$fontType}" size={$fontSize}][color={$color}]{$message}[/color][/font][/BubbleContent]"[/font]
+chat-manager-entity-say-bold-wrap-message = [BubbleHeader][bold][Name]{$entityName}[/Name][/bold][/BubbleHeader] {$verb}, [font={$fontType} size={$fontSize}]"[BubbleContent][font="{$fontType}" size={$fontSize}][bold][color={$color}]{$message}[/color][/font][/bold][/BubbleContent]"[/font]
+
+chat-manager-entity-whisper-wrap-message = [font size=11][italic][BubbleHeader][Name]{$entityName}[/Name][/BubbleHeader] whispers: "[BubbleContent][color={$color}][font="{$fontType}"]{$message}[/font][/color][/BubbleContent][font size=11]"[/italic][/font]
+chat-manager-entity-whisper-unknown-wrap-message = [font size=11][italic][BubbleHeader]Someone[/BubbleHeader] whispers: "[BubbleContent][color={$color}][font="{$fontType}"]{$message}[/color][/font][/BubbleContent][font size=11]"[/italic][/font]
+
+chat-manager-send-ooc-wrap-message = OOC: [bold]{$playerTitle} [color={$nameColor}]{$playerName}:[/color] [color={$messageColor}]{$message}[/color][/bold]
+
+chat-speech-verb-name-felionoid = Felionoid
+chat-speech-verb-felionoid-1 = purrs
+chat-speech-verb-felionoid-2 = meows
+chat-speech-verb-felionoid-3 = hisses
+chat-speech-verb-felionoid-4 = yowls
+chat-speech-verb-name-vulpkanin = Vulpkanin
+
+chat-speech-verb-suffix-pause = ...
+
+chat-speech-verb-marish = marrs
+
+chat-manager-language-requires-hands = You need free hands to speak this language!
+
+chat-speech-verb-name-thaven = Thaven
+chat-speech-verb-thaven-1 = sings
+chat-speech-verb-thaven-2 = chimes
+chat-speech-verb-thaven-3 = says
+chat-speech-verb-thaven-4 = voices
+
+chat-speech-verb-name-lagomorph = Lagomorph
+chat-speech-verb-lagomorph = squeaks
+chat-speech-verb-name-resomi = Resomi
+chat-speech-verb-resomi-1 = squawks
+chat-speech-verb-resomi-2 = chirps
+
+chat-speech-verb-name-rodentia = Rodentia
+chat-speech-verb-rodentia-1 = squeaks
+chat-speech-verb-rodentia-2 = pieps
+chat-speech-verb-rodentia-3 = chatters
+chat-speech-verb-rodentia-4 = squeals
+
+chat-speech-verb-name-pause = Pausing
+chat-speech-verb-pause = pauses

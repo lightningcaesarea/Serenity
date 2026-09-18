@@ -1,0 +1,87 @@
+- type: entity
+  id: BaseMagazineGrenade
+  name: grenade cartridge
+  parent: BaseItem # Starlight edit: Security -> No contra
+  abstract: true
+  components:
+  - type: Tag
+    tags:
+    - MagazineGrenade
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    whitelist:
+      tags:
+        - Grenade
+    capacity: 6 # starlight change: 5 -> 6 to fit the hydra
+    soundRack:
+      path: /Audio/Weapons/Guns/Bolt/lmg_bolt_closed.ogg
+      params:
+        variation: 0.05
+    soundInsert:
+      path: /Audio/Weapons/Guns/MagIn/rifle_load.ogg
+      params:
+        variation: 0.05
+  - type: Item
+    size: Large
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Ammunition/Magazine/Grenade/grenade_cartridge.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-5
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 6 # starlight change: 5 -> 6 to fit the hydra
+    zeroVisible: false
+  - type: Appearance
+
+- type: entity
+  parent: BaseMagazineGrenade
+  id: MagazineGrenadeEmpty
+  name: grenade cartridge
+  components:
+  - type: BallisticAmmoProvider
+
+- type: entity
+  id: MagazineGrenadeFrag
+  name: frag grenade cartridge
+  parent: [ BaseMagazineGrenade, BaseSyndicateContraband ] # Starlight edit: Security -> Syndicate contraband TODO decide on if these should eventually be sec contra?
+  components:
+  - type: BallisticAmmoProvider
+    proto: GrenadeFrag
+
+- type: entity
+  id: MagazineGrenadeEMP
+  name: EMP grenade cartridge
+  parent: [ BaseMagazineGrenade, BaseSecurityContraband] # Starlight edit: Re-add Security contraband
+  components:
+  - type: BallisticAmmoProvider
+    proto: GrenadeEMP
+
+- type: entity
+  id: MagazineGrenadeFlash
+  name: flash grenade cartridge
+  parent: [ BaseMagazineGrenade, BaseSecurityContraband] # Starlight edit: Re-add Security contraband
+  components:
+  - type: BallisticAmmoProvider
+    proto: GrenadeFlash
+
+- type: entity
+  id: MagazineGrenadeBlast
+  name: blast grenade cartridge
+  parent: [ BaseMagazineGrenade, BaseSecurityContraband ] # Starlight edit: Re-add Security contraband
+  components:
+  - type: BallisticAmmoProvider
+    proto: GrenadeBlast
+
+- type: entity
+  id: MagazineGrenadeBaton
+  name: baton grenade cartridge
+  parent: [ BaseMagazineGrenade, BaseSecurityContraband] # Starlight edit: Re-add Security contraband
+  components:
+  - type: BallisticAmmoProvider
+    proto: GrenadeBaton

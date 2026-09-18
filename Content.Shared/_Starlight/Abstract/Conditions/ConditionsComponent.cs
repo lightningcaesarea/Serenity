@@ -1,0 +1,9 @@
+namespace Content.Shared._Starlight.Abstract.Conditions;
+
+[RegisterComponent]
+public sealed partial class ConditionsComponent : Component
+{
+    [NonSerialized]
+    [DataField(serverOnly: true)]
+    public List<BaseCondition> Conditions = [];
+}

@@ -1,0 +1,173 @@
+using System.Linq; // Starlight-edit
+using Content.Shared._Afterlight.Silicons.Borgs; // Afterlight
+using Content.Shared._Starlight; // Starlight-edit
+using Content.Shared.Actions;
+using Content.Shared.Interaction;
+using Content.Shared.Interaction.Components;
+using Content.Shared.Movement.Components;
+using Content.Shared.Silicons.Borgs.Components;
+using Robust.Shared.Player;
+using Robust.Shared.Prototypes;
+using Content.Shared._NullLink; // Starlight-edit
+
+namespace Content.Shared.Silicons.Borgs;
+
+/// <summary>
+/// Implements borg type switching.
+/// </summary>
+/// <seealso cref="BorgSwitchableTypeComponent"/>
+public abstract partial class SharedBorgSwitchableTypeSystem : EntitySystem
+{
+    // TODO: Allow borgs to be reset to default configuration.
+
+    [Dependency] private SharedActionsSystem _actionsSystem = default!;
+    [Dependency] private SharedUserInterfaceSystem _userInterface = default!;
+    [Dependency] protected IPrototypeManager Prototypes = default!;
+    [Dependency] private InteractionPopupSystem _interactionPopup = default!;
+    [Dependency] private ISharedNullLinkPlayerResourcesManager _playerResources = default!; // Starlight-edit
+    [Dependency] private IComponentFactory _componentFactory = default!; // Starlight
+
+    public static readonly EntProtoId ActionId = "ActionSelectBorgType";
+
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        SubscribeLocalEvent<BorgSwitchableTypeComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<BorgSwitchableTypeComponent, ComponentShutdown>(OnShutdown);
+        SubscribeLocalEvent<BorgSwitchableTypeComponent, BorgToggleSelectTypeEvent>(OnSelectBorgTypeAction);
+
+        Subs.BuiEvents<BorgSwitchableTypeComponent>(BorgSwitchableTypeUiKey.SelectBorgType,
+            sub =>
+            {
+                sub.Event<BorgSelectTypeMessage>(SelectTypeMessageHandler);
+            });
+    }
+
+    //
+    // UI-adjacent code
+    //
+
+    private void OnMapInit(Entity<BorgSwitchableTypeComponent> ent, ref MapInitEvent args)
+    {
+        _actionsSystem.AddAction(ent, ref ent.Comp.SelectTypeAction, ActionId);
+        Dirty(ent);
+
+        if (ent.Comp.SelectedBorgType != null)
+        {
+            SelectBorgModule(ent, ent.Comp.SelectedBorgType.Value);
+        }
+    }
+
+    private void OnShutdown(Entity<BorgSwitchableTypeComponent> ent, ref ComponentShutdown args)
+    {
+        _actionsSystem.RemoveAction(ent.Owner, ent.Comp.SelectTypeAction);
+    }
+
+    private void OnSelectBorgTypeAction(Entity<BorgSwitchableTypeComponent> ent, ref BorgToggleSelectTypeEvent args)
+    {
+        if (args.Handled || !TryComp<ActorComponent>(ent, out var actor))
+            return;
+
+        args.Handled = true;
+
+        _userInterface.TryToggleUi((ent.Owner, null), BorgSwitchableTypeUiKey.SelectBorgType, actor.PlayerSession);
+    }
+
+    private void SelectTypeMessageHandler(Entity<BorgSwitchableTypeComponent> ent, ref BorgSelectTypeMessage args)
+    {
+        if (ent.Comp.SelectedBorgType is { } selected && selected != _Starlight.Silicons.Borgs.BorgChassisResetSystem.UnselectedType) // Starlight: a reset chassis may pick again
+            return;
+
+        if (!Prototypes.HasIndex(args.Prototype))
+            return;
+
+        if (args.Prototype == _Starlight.Silicons.Borgs.BorgChassisResetSystem.UnselectedType) return;// Starlight
+
+        // Starlight-start: Handle subtype cost
+        if (TryComp<BorgSwitchableSubtypeComponent>(ent, out var subtypeComp) && subtypeComp.BorgSubtype != null
+            && Prototypes.Index(subtypeComp.BorgSubtype.Value).TryComp<BorgSubtypeDefinitionComponent>(out var subtype, _componentFactory) && subtype.Price is not null and > 0) // Starlight
+        {
+            if (!_playerResources.TryGetResource(ent.Owner, "credits", out var balance)
+                || balance < subtype.Price)
+                return;
+
+            _playerResources.TryUpdateResource(ent.Owner, "credits", -subtype.Price.Value);
+        }
+        // Starlight-end
+
+        SelectBorgModule(ent, args.Prototype);
+    }
+
+    //
+    // Implementation
+    //
+
+    public virtual void SelectBorgModule( // Starlight: public so the chassis reset can reapply a blank type
+        Entity<BorgSwitchableTypeComponent> ent,
+        ProtoId<BorgTypePrototype> borgType)
+    {
+        ent.Comp.SelectedBorgType = borgType;
+
+        _actionsSystem.RemoveAction(ent.Owner, ent.Comp.SelectTypeAction);
+        ent.Comp.SelectTypeAction = null;
+        Dirty(ent);
+
+        _userInterface.CloseUi((ent.Owner, null), BorgSwitchableTypeUiKey.SelectBorgType);
+
+        UpdateEntityAppearance(ent);
+
+        // Afterlight-start: event for subtype system, always runs at end of borg type code
+        var ev = new AfterBorgTypeSelectEvent();
+        RaiseLocalEvent(ent, ref ev);
+        // Afterlight-end
+    }
+
+    public void UpdateEntityAppearance(Entity<BorgSwitchableTypeComponent> entity) // Starlight: public so the subtype system can hand the sprite back
+    {
+        if (!Prototypes.Resolve(entity.Comp.SelectedBorgType, out var proto))
+            return;
+
+        UpdateEntityAppearance(entity, proto);
+    }
+
+    protected virtual void UpdateEntityAppearance(
+        Entity<BorgSwitchableTypeComponent> entity,
+        BorgTypePrototype prototype)
+    {
+        if (TryComp(entity, out InteractionPopupComponent? popup))
+        {
+            _interactionPopup.SetInteractSuccessString((entity.Owner, popup), prototype.PetSuccessString);
+            _interactionPopup.SetInteractFailureString((entity.Owner, popup), prototype.PetFailureString);
+        }
+
+        if (TryComp(entity, out FootstepModifierComponent? footstepModifier))
+        {
+            footstepModifier.FootstepSoundCollection = prototype.FootstepCollection;
+        }
+
+        // Starlight-start: Movement sprite state
+        if (!(TryComp<BorgSwitchableSubtypeComponent>(entity, out var subtype) && subtype.BorgSubtype != null))
+        {
+        // Starlight-end: Movement sprite state
+            if (prototype.SpriteBodyMovementState is { } movementState)
+            {
+                var spriteMovement = EnsureComp<SpriteMovementComponent>(entity);
+                spriteMovement.NoMovementLayers.Clear();
+                spriteMovement.NoMovementLayers["movement"] = new PrototypeLayerData
+                {
+                    State = prototype.SpriteBodyState,
+                };
+                spriteMovement.MovementLayers.Clear();
+                spriteMovement.MovementLayers["movement"] = new PrototypeLayerData
+                {
+                    State = movementState,
+                };
+            }
+            else
+            {
+                RemComp<SpriteMovementComponent>(entity);
+            }
+        } // Starlight - close of movement sprite state block
+    }
+}

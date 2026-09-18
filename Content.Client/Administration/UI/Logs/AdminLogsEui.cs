@@ -1,0 +1,205 @@
+﻿using System.IO;
+using System.Linq;
+using Content.Client.Administration.UI.CustomControls;
+using Content.Client.Eui;
+using Content.Shared.Administration.Logs;
+using Content.Shared.Eui;
+using JetBrains.Annotations;
+using Robust.Client.UserInterface;
+using static Content.Shared.Administration.Logs.AdminLogsEuiMsg;
+
+namespace Content.Client.Administration.UI.Logs;
+
+[UsedImplicitly]
+public sealed partial class AdminLogsEui : BaseEui
+{
+    [Dependency] private IFileDialogManager _dialogManager = default!;
+    [Dependency] private ILogManager _log = default!;
+
+    private const char CsvSeparator = ',';
+    private const string CsvQuote = "\"";
+    private const string CsvHeader = "Date,ID,PlayerID,Severity,Type,Message";
+
+    private ISawmill _sawmill;
+
+    private bool _currentlyExportingLogs = false;
+
+    public AdminLogsEui()
+    {
+        LogsWindow = new AdminLogsWindow();
+        LogsWindow.OnFinalClose += () => SendMessage(new CloseEuiMessage()); // Starlight: popout support
+        LogsControl = LogsWindow.Logs;
+
+        LogsControl.LogSearch.OnTextEntered += _ => RequestLogs();
+        LogsControl.RefreshButton.OnPressed += _ => RequestLogs();
+        LogsControl.NextButton.OnPressed += _ => NextLogs();
+        LogsControl.ExportLogs.OnPressed += _ => ExportLogs();
+
+        _sawmill = _log.GetSawmill("admin.logs.ui");
+    }
+
+    private AdminLogsWindow? LogsWindow { get; set; }
+
+    private AdminLogsControl LogsControl { get; }
+
+    private bool FirstState { get; set; } = true;
+
+    private void RequestLogs()
+    {
+        var request = new LogsRequest(
+            LogsControl.SelectedRoundId,
+            LogsControl.Search,
+            LogsControl.SelectedTypes.ToHashSet(),
+            null,
+            null,
+            null,
+            LogsControl.SelectedPlayers.Count != 0,
+            LogsControl.SelectedPlayers.ToArray(),
+            null,
+            LogsControl.IncludeNonPlayerLogs,
+            DateOrder.Descending);
+
+        SendMessage(request);
+    }
+
+    private void NextLogs()
+    {
+        LogsControl.NextButton.Disabled = true;
+        var request = new NextLogsRequest();
+        SendMessage(request);
+    }
+
+    private async void ExportLogs()
+    {
+        if (_currentlyExportingLogs)
+            return;
+
+        _currentlyExportingLogs = true;
+        LogsControl.ExportLogs.Disabled = true;
+
+        var file = await _dialogManager.SaveFile(new FileDialogFilters(new FileDialogFilters.Group("csv")));
+
+        if (file == null)
+            return;
+
+        try
+        {
+            // Buffer is set to 4KB for performance reasons. As the average export of 1000 logs is ~200KB
+            await using var writer = new StreamWriter(file.Value.fileStream, bufferSize: 4096);
+            await writer.WriteLineAsync(CsvHeader);
+            foreach (var child in LogsControl.LogsContainer.Children)
+            {
+                if (child is not AdminLogLabel logLabel || !child.Visible)
+                    continue;
+
+                var log = logLabel.Log;
+
+                // Date
+                // I swear to god if someone adds ,s or "s to the other fields...
+                await writer.WriteAsync(log.Date.ToString("s", System.Globalization.CultureInfo.InvariantCulture));
+                await writer.WriteAsync(CsvSeparator);
+                // ID
+                await writer.WriteAsync(log.Id.ToString());
+                await writer.WriteAsync(CsvSeparator);
+                // PlayerID
+                var players = log.Players;
+                for (var i = 0; i < players.Length; i++)
+                {
+                    await writer.WriteAsync(players[i] + (i == players.Length - 1 ? "" : " "));
+                }
+                await writer.WriteAsync(CsvSeparator);
+                // Severity
+                await writer.WriteAsync(log.Impact.ToString());
+                await writer.WriteAsync(CsvSeparator);
+                // Type
+                await writer.WriteAsync(log.Type.ToString());
+                await writer.WriteAsync(CsvSeparator);
+                // Message
+                await writer.WriteAsync(CsvQuote);
+                await writer.WriteAsync(log.Message.Replace(CsvQuote, CsvQuote + CsvQuote));
+                await writer.WriteAsync(CsvQuote);
+
+                await writer.WriteLineAsync();
+            }
+        }
+        catch (Exception exc)
+        {
+            _sawmill.Error($"Error when exporting admin log:\n{exc.StackTrace}");
+        }
+        finally
+        {
+            await file.Value.fileStream.DisposeAsync();
+            _currentlyExportingLogs = false;
+            LogsControl.ExportLogs.Disabled = false;
+        }
+    }
+
+    public override void HandleState(EuiStateBase state)
+    {
+        var s = (AdminLogsEuiState) state;
+
+        if (s.IsLoading)
+        {
+            return;
+        }
+
+        LogsControl.SetCurrentRound(s.RoundId);
+        LogsControl.SetPlayers(s.Players);
+        LogsControl.UpdateCount(round: s.RoundLogs);
+
+        if (!FirstState)
+        {
+            return;
+        }
+
+        FirstState = false;
+        LogsControl.SetRoundSpinBox(s.RoundId);
+        RequestLogs();
+    }
+
+    public override void HandleMessage(EuiMessageBase msg)
+    {
+        base.HandleMessage(msg);
+
+        switch (msg)
+        {
+            case NewLogs newLogs:
+                if (newLogs.Replace)
+                {
+                    LogsControl.SetLogs(newLogs.Logs);
+                }
+                else
+                {
+                    LogsControl.AddLogs(newLogs.Logs);
+                }
+
+                LogsControl.NextButton.Disabled = !newLogs.HasNext;
+                break;
+
+            case SetLogFilter setLogFilter:
+                if (setLogFilter.Search != null)
+                    LogsControl.LogSearch.SetText(setLogFilter.Search);
+
+                if (setLogFilter.Types != null)
+                    LogsControl.SetTypesSelection(setLogFilter.Types, setLogFilter.InvertTypes);
+
+                break;
+        }
+    }
+
+    public override void Opened()
+    {
+        base.Opened();
+
+        LogsWindow?.OpenCentered();
+    }
+
+    public override void Closed()
+    {
+        base.Closed();
+
+        LogsWindow?.DisposePopOut(); // Starlight: close the popout if it exists
+        LogsControl.Dispose();
+        LogsWindow?.Dispose();
+    }
+}

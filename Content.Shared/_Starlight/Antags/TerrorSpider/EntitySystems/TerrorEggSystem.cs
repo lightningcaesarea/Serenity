@@ -1,0 +1,45 @@
+﻿using Content.Shared.Damage.Prototypes;
+using Content.Shared.Damage;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Random;
+using Content.Shared.Damage.Systems;
+using Content.Shared._Starlight.Abstract;
+
+namespace Content.Shared._Starlight.Antags.TerrorSpider.EntitySystems;
+public sealed partial class TerrorEggSystem : AccUpdateEntitySystem
+{
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+
+    private readonly Dictionary<EntityUid, Entity<EggHolderComponent>> _eggs = [];
+    private readonly EntProtoId[] _terrorSpiders = ["MobTerrorGray", "MobTerrorGreen", "MobTerrorRed"];
+    private static readonly ProtoId<DamageTypePrototype> _bluntDamageType = "Blunt";
+    private DamageTypePrototype? _blunt;
+    private DamageSpecifier? _damage;
+    public override void Initialize()
+    {
+        SubscribeLocalEvent<EggHolderComponent, ComponentInit>(AddEgg);
+        SubscribeLocalEvent<EggHolderComponent, ComponentShutdown>(RemoveEgg);
+    }
+
+    private void AddEgg(Entity<EggHolderComponent> ent, ref ComponentInit args) => _eggs.TryAdd(ent.Owner, ent);
+    private void RemoveEgg(Entity<EggHolderComponent> ent, ref ComponentShutdown args) => _eggs.Remove(ent.Owner);
+
+    protected override float Threshold { get; set; } = 1f;
+    protected override void AccUpdate(float _)
+    {
+        foreach (var egg in _eggs)
+        {
+            egg.Value.Comp.Counter++;
+            _blunt ??= _prototypes.Index(_bluntDamageType);
+            _damage ??= new(_blunt, 1);
+            _damageable.TryChangeDamage(egg.Value.Owner, _damage, false);
+            if (egg.Value.Comp.Counter >= 300)
+            {
+                PredictedSpawnAtPosition(_random.Pick(_terrorSpiders), Transform(egg.Value.Owner).Coordinates);
+                RemComp<EggHolderComponent>(egg.Value.Owner);
+            }
+        }
+    }
+}

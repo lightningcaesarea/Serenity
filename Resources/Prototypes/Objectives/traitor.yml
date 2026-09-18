@@ -1,0 +1,375 @@
+- type: entity
+  abstract: true
+  parent: BaseObjective
+  id: BaseTraitorObjective
+  components:
+  - type: Objective
+    issuer: objective-issuer-syndicate
+  - type: RoleRequirement
+    roles:
+    - TraitorRole
+
+- type: entity
+  abstract: true
+  parent: [BaseTraitorObjective, BaseSocialObjective]
+  id: BaseTraitorSocialObjective
+  components:
+  - type: Objective
+    icon:
+      sprite: Objects/Misc/folders.rsi
+      state: folder-colormap
+  - type: MultipleTraitorsRequirement
+
+- type: entity
+  abstract: true
+  parent: [BaseTraitorObjective, BaseStealObjective]
+  id: BaseTraitorStealObjective
+  components:
+  - type: StealCondition
+    verifyMapExistence: false
+  - type: Objective
+    difficulty: 1.5 #Starlight edit, this was way too high and it made stuff like hypo, crew monitor, license and diploma cost 2.75 which is odd
+  - type: ObjectiveLimit
+    limit: 2 # there is usually only 1 of each steal objective, have 2 max for drama
+  - type: ObjectiveBlacklistRequirement # Starlight start
+    blacklist:
+      components:
+      - DieCondition # Starlight end, it's been a common complaint that this objective is *impossible* with DAGD, since you physically can't extract with it.
+
+# state
+
+- type: entity
+  parent: [BaseTraitorObjective, BaseLivingObjective]
+  id: EscapeShuttleObjective
+  name: Escape to CentComm alive and unrestrained via the escape shuttle.
+  description: One of our undercover agents will debrief you when you arrive. Don't show up in cuffs.
+  components:
+  - type: Objective
+    difficulty: 1 #Starlight edit
+    icon:
+      sprite: Structures/Furniture/chairs.rsi
+      state: shuttle
+  - type: EscapeShuttleCondition
+  - type: ObjectiveBlacklistRequirement # Starlight start
+    blacklist:
+      components:
+      - DieCondition # Starlight end, makes no sense you can get both.
+
+- type: entity
+  parent: BaseTraitorObjective
+  id: DieObjective
+  name: Die a glorious death
+  description: Die.
+  components:
+  - type: Objective
+    difficulty: 0.5
+    icon:
+      sprite: Mobs/Ghosts/ghost_human.rsi
+      state: icon
+  - type: ObjectiveBlacklistRequirement
+    blacklist:
+      components:
+      - EscapeShuttleCondition
+      - StealCondition
+  - type: DieCondition
+  - type: ObjectiveLimit #Starlight edit
+    limit: 3 # Starlight
+
+#- type: entity
+#  parent: [BaseTraitorObjective, BaseLivingObjective]
+#  id: HijackShuttleObjective
+#  name: Hijack emergency shuttle
+#  description: Leave on the shuttle free and clear of the loyal Nanotrasen crew on board. Use ANY methods available to you. Syndicate agents, Nanotrasen enemies, and handcuffed hostages may remain alive on the shuttle. Ignore assistance from anyone other than a support agent.
+#  components:
+#    - type: Objective
+#      difficulty: 5 # insane, default config max difficulty
+#      icon:
+#        sprite: Objects/Tools/emag.rsi
+#        state: icon
+#    - type: HijackShuttleCondition
+
+# kill
+
+- type: entity
+  parent: [BaseTraitorObjective, BaseKillObjective]
+  id: KillRandomPersonObjective
+  description: Do it however you like, just make sure they don't get off the station.
+  components:
+  - type: Objective
+    difficulty: 1.5 #Starlight edit
+    unique: false
+  - type: TargetObjective
+    title: objective-condition-maroon-person-title
+  - type: PickRandomPerson
+    filters:
+    # Can't have multiple objectives to kill the same person.
+    - !type:TargetObjectiveMindFilter
+      blacklist:
+        components:
+        - KillPersonCondition
+  - type: KillPersonCondition
+    requireMaroon: true
+
+- type: entity
+  parent: [BaseTraitorObjective, BaseKillObjective]
+  id: KillRandomHeadObjective
+  description: We need this head gone and you probably know why. Make sure they don't make it to CentComm, even if they're dead. Good luck, agent.
+  components:
+  - type: Objective
+    # technically its still possible for KillRandomPersonObjective to roll a head but this is guaranteed, so higher difficulty
+    difficulty: 2.5 #Starlight edit
+    # killing 1 head is enough
+    unique: true
+  - type: TargetObjective
+    title: objective-condition-kill-maroon-title
+  - type: PickRandomPerson
+    filters:
+    - !type:BodyMindFilter
+      whitelist:
+        components:
+        - CommandStaff
+    # Can't have multiple objectives to kill the same person.
+    - !type:TargetObjectiveMindFilter
+      blacklist:
+        components:
+        - KillPersonCondition
+  - type: KillPersonCondition
+    # don't count missing evac as killing as heads are higher profile, so you really need to do the dirty work
+    # if ce flies a shittle to centcom you better find a way onto it
+    requireDead: true
+    requireMaroon: true
+
+# social
+
+- type: entity
+  parent: [BaseTraitorSocialObjective, BaseKeepAliveObjective]
+  id: RandomTraitorAliveObjective
+  description: Identify yourself at your own risk. We just need them alive.
+  components:
+  - type: Objective
+    difficulty: 1.75
+  - type: TargetObjective
+    title: objective-condition-other-traitor-alive-title
+  - type: PickRandomPerson
+    filters:
+    - !type:HasRoleMindFilter
+      whitelist:
+        components:
+        - TraitorRole
+    # Can't have multiple objectives to help/save the same person
+    - !type:TargetObjectiveMindFilter
+      blacklist:
+        components:
+        - HelpProgressCondition
+        - KeepAliveCondition
+        - DieCondition # Starlight, don't help DAGDs.
+
+- type: entity
+  parent: [BaseTraitorSocialObjective, BaseHelpProgressObjective]
+  id: RandomTraitorProgressObjective
+  description: Identify yourself at your own risk. We just need them to succeed.
+  components:
+  - type: Objective
+    difficulty: 1 #Starlight edit, i have NO idea why the difficulty was so high, its a big fat nothingburger
+  - type: TargetObjective
+    title: objective-condition-other-traitor-progress-title
+  - type: PickRandomPerson
+    filters:
+    - !type:HasRoleMindFilter
+      whitelist:
+        components:
+        - TraitorRole
+    # Can't help anyone who is tasked with helping:
+    # 1. thats boring
+    # 2. no cyclic progress dependencies!!!
+    - !type:ObjectiveMindFilter
+      blacklist:
+        components:
+        - HelpProgressCondition
+        - DieCondition # Starlight, don't help DAGDs.
+    # Can't have multiple objectives to help/save the same person
+    - !type:TargetObjectiveMindFilter
+      blacklist:
+        components:
+        - HelpProgressCondition
+        - KeepAliveCondition
+        - DieCondition # Starlight start, don't help DAGDs.
+  - type: ObjectiveBlacklistRequirement # Only one, its not that cool, noone wants all their objectives to be "help X"
+    blacklist:
+      components:
+        - HelpProgressCondition # Starlight end
+
+# steal
+
+## cmo
+
+- type: entity
+  abstract: true
+  parent: BaseTraitorStealObjective
+  id: BaseCMOStealObjective
+  components:
+  - type: NotJobRequirement
+    jobs: [ MedicalDoctor, Paramedic, ChiefMedicalOfficer, MedicalIntern, Surgeon, Chemist, Psychologist ] # Starlight. Too easy.
+  - type: StealCondition
+    owner: job-name-cmo
+
+- type: entity
+  parent: BaseTraitorStealObjective # Starlight
+  id: CMOHyposprayStealObjective
+  components:
+  - type: NotJobRequirement # Starlight
+    jobs: [ MedicalDoctor, Paramedic, ChiefMedicalOfficer, MedicalIntern, Surgeon, Chemist, Psychologist, SecurityOfficer, HeadOfSecurity, Detective, Warden, Brigmedic, DutyOfficer, SecurityCadet] # Starlight, tactical jet injector
+  - type: StealCondition
+    stealGroup: Hypospray
+
+# Starlight start
+#- type: entity
+#  parent: BaseCMOStealObjective
+#  id: CMOCrewMonitorStealObjective # Starlight. Disabled in favor of the monitor collection objective, since the game doesn't support items belonging to 2 steal groups. CMO already gets enough pain anyways.
+#  components:
+#  - type: StealCondition
+#    stealGroup: [HandheldCrewMonitor, CrewMonitorCollection]
+# Starlight end
+
+## rd
+
+- type: entity
+  abstract: true
+  parent: BaseTraitorStealObjective
+  id: BaseRDStealObjective
+  components:
+  - type: NotJobRequirement
+    jobs: [ ResearchDirector, ResearchAssistant, Scientist, Roboticist ] # Starlight. Too easy.
+  - type: StealCondition
+    owner: job-name-rd
+
+- type: entity
+  parent: BaseRDStealObjective
+  id: RDHardsuitStealObjective
+  components:
+  - type: StealCondition
+    stealGroup: ClothingOuterHardsuitRd
+  - type: Objective
+    # This item must be worn or stored in a slowing duffelbag, very hard to hide.
+    difficulty: 2.5 #Starlight edit
+
+- type: entity
+  parent: BaseRDStealObjective
+  id: HandTeleporterStealObjective
+  components:
+  - type: StealCondition
+    stealGroup: HandTeleporter
+
+## hos
+
+# - type: entity # Starlight Start
+#  parent: BaseTraitorStealObjective
+#  id: EnergyMagnumStealObjective # Removed in favor of combined shotgun-magnum objective
+#  components:
+#  - type: Objective
+#    # HoS will have this on them a lot of the time so..
+#    difficulty: 1.5 # Starlight, lowered difficulty since it's a lot easier to deal with Det than HoS
+#  - type: NotJobRequirement
+#    jobs: [ SecurityOfficer, HeadOfSecurity, Detective, Warden, Brigmedic, DutyOfficer, SecurityCadet ] # Starlight - magnum to detective, and rest of department excluded
+#  - type: StealCondition
+#    stealGroup: WeaponEnergyMagnum
+#    owner: job-name-detective # Starlight end
+
+## ce
+
+- type: entity
+  parent: BaseTraitorStealObjective
+  id: MagbootsStealObjective
+  components:
+  - type: NotJobRequirement
+    jobs: [ ChiefEngineer, StationEngineer, AtmosphericTechnician, TechnicalAssistant ] # Starlight. Too easy.
+  - type: StealCondition
+    stealGroup: ClothingShoesBootsMagAdv
+    owner: job-name-ce
+
+## qm
+
+- type: entity
+  parent: BaseTraitorStealObjective
+  id: ClipboardStealObjective
+  components:
+  - type: NotJobRequirement
+    jobs: [ Quartermaster, CargoTechnician, MailTech, MiningSpecialist, SalvageSpecialist, SalvageLead ] # Starlight. Too easy.
+  - type: StealCondition
+    stealGroup: BoxFolderQmClipboard
+    owner: job-name-qm
+
+- type: entity
+  parent: BaseTraitorStealObjective
+  id: KnuckleDustersStealObjective
+  components:
+  - type: NotJobRequirement
+    jobs: [ Quartermaster, CargoTechnician, MailTech, MiningSpecialist, SalvageSpecialist, SalvageLead ] # Starlight. Too easy.
+  - type: StealCondition
+    stealGroup: ClothingHandsKnuckleDustersQM
+    owner: job-name-qm
+
+## hop
+
+- type: entity
+  parent: BaseTraitorStealObjective
+  id: CorgiMeatStealObjective
+  components:
+  - type: NotJobRequirement
+    jobs: [ HeadOfPersonnel ]
+  - type: ObjectiveLimit
+    limit: 3 # ian only has 2 slices, 3 obj for drama
+  - type: StealCondition
+    stealGroup: FoodMeatCorgi
+    owner: objective-condition-steal-Ian
+
+## cap
+
+- type: entity
+  abstract: true
+  parent: BaseTraitorStealObjective
+  id: BaseCaptainObjective
+  components:
+  - type: Objective
+    # sorry ce but your jordans are not as high security as the caps gear
+    difficulty: 2.5 #Starlight edit, jetpacks in the room most of the time and theres copies of the id that are pretty easy to get
+  - type: NotJobRequirement
+    jobs: [ Captain ]
+
+- type: entity
+  parent: BaseCaptainObjective
+  id: CaptainIDStealObjective
+  components:
+  - type: StealCondition
+    stealGroup: CaptainIDCard
+
+- type: entity
+  parent: BaseCaptainObjective
+  id: CaptainJetpackStealObjective
+  components:
+  - type: StealCondition
+    stealGroup: JetpackCaptainFilled
+
+- type: entity
+  parent: BaseCaptainObjective
+  id: CaptainGunStealObjective
+  components:
+  - type: Objective
+    difficulty: 3 #Starlight edit, usually on cap the microsecond its code blue, so this ones ACTUALLY risky
+  - type: StealCondition
+    stealGroup: WeaponAntiqueLaser
+    owner: job-name-captain
+
+- type: entity
+  parent: BaseCaptainObjective
+  id: NukeDiskStealObjective
+  components:
+  - type: Objective
+    # high difficulty since the hardest item both to steal, and to not get caught down the road,
+    # since anyone with a pinpointer can track you down and kill you
+    # it's close to being a stealth loneop
+    difficulty: 4
+  - type: NotCommandRequirement
+  - type: StealCondition
+    stealGroup: NukeDisk
+    owner: objective-condition-steal-station

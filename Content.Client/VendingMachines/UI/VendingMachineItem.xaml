@@ -1,0 +1,31 @@
+<BoxContainer xmlns="https://spacestation14.io"
+            Orientation="Horizontal"
+            HorizontalExpand="True"
+            SeparationOverride="4">
+    <EntityPrototypeView
+            Name="ItemPrototype"
+            Margin="4 0 0 0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            MinSize="32 32"
+            />
+    <!-- Starlight-edit -->
+    <Label Name="NameLabel"
+            SizeFlagsStretchRatio="1"
+            HorizontalExpand="True"
+            ClipText="True"/>
+    <!-- 🌟Starlight🌟 Amount in brackets -->
+        <Label Name="AmountLabel"
+                        HorizontalAlignment="Right"
+                        HorizontalExpand="False"
+                        MinSize="40 0"
+                        Margin="6 0 0 0"
+                        ClipText="True"/>
+    <!-- 🌟Starlight🌟 Price with currency -->
+        <Label Name="PriceLabel"
+                        HorizontalAlignment="Right"
+                        HorizontalExpand="False"
+                        MinSize="60 0"
+                        Margin="6 0 6 0"
+                        ClipText="True"/>
+</BoxContainer>

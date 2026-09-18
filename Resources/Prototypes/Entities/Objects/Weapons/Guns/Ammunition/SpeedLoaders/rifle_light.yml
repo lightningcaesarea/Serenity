@@ -1,0 +1,30 @@
+- type: entity
+  parent: [ BaseItem, BaseMinorContraband ] # Starlight - Security->Minor
+  id: SpeedLoaderLightRifle
+  name: "speed loader (.45 magnum)" # Starlight
+  components:
+  - type: SpeedLoader
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    fillDelay: 0.1 #Starlight
+    whitelist:
+      tags:
+        - CartridgeMagnum # Starlight
+    capacity: 5
+    proto: CartridgeMagnumSP # Starlight
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Ammunition/SpeedLoaders/LightRifle/light_rifle_speed_loader.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-5
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 6
+    zeroVisible: false
+  - type: Appearance
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+        ents: []

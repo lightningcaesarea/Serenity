@@ -1,0 +1,143 @@
+- type: tile
+  id: BaseFloorPlanet
+  abstract: true
+  heatCapacity: 10000
+  isSubfloor: true
+  footstepSounds:
+    collection: FootstepAsteroid
+  weather: true
+  indestructible: true
+
+- type: tile
+  id: FloorPlanetDirt
+  parent: BaseFloorPlanet
+  name: tiles-dirt-planet-floor
+  sprite: /Textures/Tiles/Planet/dirt.rsi/dirt.png
+  variants: 4
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+
+# Desert
+- type: tile
+  id: FloorDesert
+  parent: BaseFloorPlanet
+  name: tiles-desert-floor
+  sprite: /Textures/Tiles/Planet/Desert/desert.png
+  variants: 6
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+
+- type: tile
+  id: FloorLowDesert
+  name: tiles-low-desert-floor
+  sprite: /Textures/Tiles/Planet/Desert/low_desert.png
+  variants: 6
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+
+# Grass
+- type: tile
+  id: FloorPlanetGrass
+  parent: BaseFloorPlanet
+  name: tiles-grass-planet-floor
+  sprite: /Textures/_Starlight/Tiles/Grass/grass.png #SL Edit
+  variants: 6 #SL
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0 #SL
+  - 1.0 #SL
+  edgeSpritePriority: 1
+  edgeSprites:
+    SouthEast: /Textures/_Starlight/Tiles/Grass/single_edge.png #SL Edit
+    NorthEast: /Textures/_Starlight/Tiles/Grass/single_edge.png #SL Edit
+    NorthWest: /Textures/_Starlight/Tiles/Grass/single_edge.png #SL Edit
+    SouthWest: /Textures/_Starlight/Tiles/Grass/single_edge.png #SL Edit
+    South: /Textures/_Starlight/Tiles/Grass/double_edge.png #SL Edit
+    East: /Textures/_Starlight/Tiles/Grass/double_edge.png #SL Edit
+    North: /Textures/_Starlight/Tiles/Grass/double_edge.png #SL Edit
+    West: /Textures/_Starlight/Tiles/Grass/double_edge.png #SL Edit
+  baseTurf: FloorPlanetDirt
+  footstepSounds:
+    collection: FootstepGrass
+
+# Lava
+- type: tile
+  id: FloorBasalt
+  name: tiles-basalt-floor
+  parent: BaseFloorPlanet
+  sprite: /Textures/Tiles/Planet/basalt.png
+
+# Snow
+- type: tile
+  id: FloorSnow
+  parent: BaseFloorPlanet
+  name: tiles-snow
+  sprite: /Textures/Tiles/Planet/Snow/snow.png
+  variants: 13
+  placementVariants:
+  - 0.8
+  - 0.0166
+  - 0.0166
+  - 0.0166
+  - 0.0166
+  - 0.0166
+  - 0.0166
+  - 0.0166
+  - 0.0166
+  - 0.0166
+  - 0.0166
+  - 0.0116
+  - 0.0116
+  edgeSpritePriority: 2
+  edgeSprites:
+    South: /Textures/Tiles/Planet/Snow/snow_double_edge_south.png
+    East: /Textures/Tiles/Planet/Snow/snow_double_edge_east.png
+    North: /Textures/Tiles/Planet/Snow/snow_double_edge_north.png
+    West: /Textures/Tiles/Planet/Snow/snow_double_edge_west.png
+  footstepSounds:
+    collection: FootstepSnow
+
+# Ice
+- type: tile
+  id: FloorIce
+  name: tiles-ice
+  sprite: /Textures/Tiles/Planet/Snow/ice.png
+  isSubfloor: true
+  friction: 0.05
+  heatCapacity: 10000
+  weather: true
+  mobAcceleration: 0.1
+  indestructible: true
+
+# Dug snow
+- type: tile
+  id: FloorSnowDug
+  parent: BaseFloorPlanet
+  name: tiles-snow-dug
+  sprite: /Textures/Tiles/Planet/Snow/snow_dug.png
+  edgeSpritePriority: 1
+  edgeSprites:
+    South: /Textures/Tiles/Planet/Snow/snow_dug_double_edge_south.png
+    East: /Textures/Tiles/Planet/Snow/snow_dug_double_edge_east.png
+    North: /Textures/Tiles/Planet/Snow/snow_dug_double_edge_north.png
+    West: /Textures/Tiles/Planet/Snow/snow_dug_double_edge_west.png
+  footstepSounds:
+    collection: FootstepSnow
+
+# Wasteland

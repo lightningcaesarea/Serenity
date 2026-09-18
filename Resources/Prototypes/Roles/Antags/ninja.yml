@@ -1,0 +1,95 @@
+- type: antag
+  id: SpaceNinja
+  name: roles-antag-space-ninja-name
+  antagonist: true
+  setPreference: true # Starlight - allow setting pref for ninja
+  objective: roles-antag-space-ninja-objective
+  roleLoadout: [ AntagSpaceNinja ] # Starlight
+  guides: [ SpaceNinja ]
+  # Starlight start
+  previewStartingGear: SpaceNinjaGear
+  requirements:
+  - !type:OverallPlaytimeRequirement
+    time: 24h
+  - !type:RoleTimeRequirement
+    role: JobSecurityOfficer # It's better than nothing.
+    time: 1h
+  - !type:RoleTimeRequirement
+    role: AntagThief # Learn how to be subversive and stealthy.
+    time: 1h
+  playTimeTracker: AntagNinja
+  # Starlight end
+
+- type: antagSpecifier
+  parent: RestrictedAntag
+  id: SpaceNinja
+  prefRoles: # Starlight
+  - SpaceNinja # Starlight
+  spawnerPrototype: SpawnPointGhostSpaceNinja
+  #pickPlayer: false # Starlight, you can be a ninja.
+  startingGear: SpaceNinjaGear
+  roleLoadout:
+  - AntagSpaceNinja # Starlight
+  briefing:
+    text: ninja-role-greeting
+    color: Green
+    sound: /Audio/Misc/ninja_greeting.ogg
+  tags: # Starlight
+    - CantBecomeRevolutionary # Starlight
+  components:
+  - type: SpaceNinja
+  - type: ThermalVision # Starlight
+  - type: NpcFactionMember
+    factions:
+    - Syndicate
+  - type: AutoImplant
+    implants:
+    - DeathAcidifierImplant
+  - type: RandomMetadata
+    nameSegments:
+    - NamesNinjaTitle
+    - NamesNinja
+    nameFormat: name-format-ninja
+  mindRoles:
+  - MindRoleNinja
+
+#Ninja Gear
+- type: startingGear
+  id: SpaceNinjaGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitNinja
+    back: ClothingBackpackSatchelNinja
+    mask: ClothingMaskNinja
+    head: ClothingHeadHelmetSpaceNinja
+    eyes: ClothingEyesVisorNinja
+    gloves: ClothingHandsGlovesSpaceNinja
+    outerClothing: ClothingOuterSuitSpaceNinja
+    shoes: ClothingShoesSpaceNinja
+    id: NinjaPDA
+    ears: ClothingHeadsetNinja
+    pocket1: SpiderCharge
+    pocket2: PinpointerStation
+    belt: EnergyKatana
+  inhand:
+    - JetpackBlackFilled
+    - WeaponNinjaChainSickle  # MoffStation -> Jetpack kept, so ninja gets both.
+  storage:
+    back: # belt holds katana so satchel has the tools for sabotaging things
+    - Crowbar
+    - Wrench
+    - Screwdriver
+    - Wirecutter
+    - Welder
+    - Multitool
+    - EmergencyMedipen
+    - Flare
+    - FoodSnackNutribrick
+    - DrinkWaterBottleFull
+
+- type: chameleonOutfit
+  id: NinjaChameleonOutfit
+  name: roles-antag-space-ninja-name
+  icon: "JobIconNinja"
+  startingGear: SpaceNinjaGear
+  equipment:
+    neck: ClothingNeckGoldmedal

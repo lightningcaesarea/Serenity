@@ -1,0 +1,214 @@
+- type: entity
+  id: ChemistryBottleChloralHydrate
+  suffix: chloral hydrate
+  parent: BaseChemistryBottleFilled
+  components:
+  - type: Label
+    currentLabel: reagent-name-chloral-hydrate
+  - type: Solution
+    id: drink
+    solution:
+      reagents:
+      - ReagentId: ChloralHydrate
+        Quantity: 30
+
+- type: entity
+  id: ChemistryBottleTazinide
+  suffix: tazinide
+  parent: BaseChemistryBottleFilled
+  components:
+  - type: Label
+    currentLabel: reagent-name-tazinide
+  - type: Solution
+    id: drink
+    solution:
+      reagents:
+      - ReagentId: Tazinide
+        Quantity: 30
+
+- type: entity
+  id: ChemistryBottleAmmonia
+  suffix: ammonia
+  parent: BaseChemistryBottleFilled
+  components:
+  - type: Label
+    currentLabel: reagent-name-ammonia
+  - type: Solution
+    id: drink
+    solution:
+      reagents:
+      - ReagentId: Ammonia
+        Quantity: 30
+
+- type: entity
+  id: ChemistryBottleAmoxla
+  suffix: amoxla
+  parent: BaseChemistryBottleFilled
+  components:
+  - type: Label
+    currentLabel: reagent-name-amoxla
+  - type: Solution
+    id: drink
+    solution:
+      reagents:
+      - ReagentId: Amoxla
+        Quantity: 30
+
+- type: entity
+  id: ChemistryBottleDoctorsDelight
+  suffix: doctor's delight
+  parent: BaseChemistryBottleFilled
+  components:
+  - type: Label
+    currentLabel: reagent-name-doctors-delight
+  - type: Solution
+    id: drink
+    solution:
+      reagents:
+      - ReagentId: DoctorsDelight
+        Quantity: 30
+
+- type: entity
+  id: ChemistryBottleDesoxyephedrine
+  suffix: desoxyephedrine
+  parent: BaseChemistryBottleFilled
+  components:
+  - type: Label
+    currentLabel: reagent-name-desoxyephedrine
+  - type: Solution
+    id: drink
+    solution:
+      reagents:
+      - ReagentId: Desoxyephedrine
+        Quantity: 30
+
+- type: entity
+  id: ChemistryBottleWeldingFuel
+  suffix: welding fuel
+  parent: BaseChemistryBottleFilled
+  components:
+  - type: Label
+    currentLabel: reagent-name-welding-fuel
+  - type: Solution
+    id: drink
+    solution:
+      reagents:
+      - ReagentId: WeldingFuel
+        Quantity: 30
+
+- type: entity
+  id: ChemistryBottleOil
+  suffix: oil
+  parent: BaseChemistryBottleFilled
+  components:
+  - type: Label
+    currentLabel: reagent-name-oil
+  - type: Solution
+    id: drink
+    solution:
+      reagents:
+      - ReagentId: Oil
+        Quantity: 30
+
+- type: entity
+  id: ChemistryBottleCornoil
+  suffix: corn oil
+  parent: BaseChemistryBottleFilled
+  components:
+  - type: Label
+    currentLabel: reagent-name-cornoil
+  - type: Solution
+    id: drink
+    solution:
+      reagents:
+      - ReagentId: Cornoil
+        Quantity: 30
+
+- type: entity
+  id: ChemistryBottleAcetone
+  suffix: acetone
+  parent: BaseChemistryBottleFilled
+  components:
+  - type: Label
+    currentLabel: reagent-name-acetone
+  - type: Solution
+    id: drink
+    solution:
+      reagents:
+      - ReagentId: Acetone
+        Quantity: 30
+
+- type: entity
+  id: ChemistryBottlePhenol
+  suffix: phenol
+  parent: BaseChemistryBottleFilled
+  components:
+  - type: Label
+    currentLabel: reagent-name-phenol
+  - type: Solution
+    id: drink
+    solution:
+      reagents:
+      - ReagentId: Phenol
+        Quantity: 30
+
+- type: entity
+  id: ChemistryBottlePhenylpiperidine
+  suffix: phenylpiperidine
+  parent: BaseChemistryBottleFilled
+  components:
+  - type: Label
+    currentLabel: reagent-name-phenylpiperidine
+  - type: Solution
+    id: drink
+    solution:
+      reagents:
+      - ReagentId: Phenylpiperidine
+        Quantity: 30
+
+- type: entity
+  id: ChemistryBottleWeh
+  suffix: weh
+  parent: BaseChemistryBottleFilled
+  components:
+  - type: Label
+    currentLabel: reagent-name-weh
+  - type: Solution
+    id: drink
+    solution:
+      reagents:
+      - ReagentId: JuiceThatMakesYouWeh
+        Quantity: 30
+
+- type: entity
+  id: ChemistryBottleHew
+  suffix: hew
+  parent: BaseChemistryBottleFilled
+  components:
+  - type: Label
+    currentLabel: reagent-name-hew
+  - type: Solution
+    id: drink
+    solution:
+      reagents:
+      - ReagentId: JuiceThatMakesYouHew
+        Quantity: 30
+
+- type: entity
+  parent: BaseChemistryBottleFilled
+  id: CorgiJuiceChemistryBottle
+  suffix: essence of corgi
+  components:
+  - type: Label
+    currentLabel: reagent-name-corgi-endless
+  - type: Solution
+    id: drink
+    solution:
+      reagents:
+      - ReagentId: CorgiJuice
+        Quantity: 30
+  - type: SolutionRegeneration
+    generated:
+      reagents:
+      - ReagentId: CorgiJuice
+        Quantity: 0.075

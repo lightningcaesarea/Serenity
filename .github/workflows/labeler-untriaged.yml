@@ -1,0 +1,25 @@
+﻿name: "Labels: Untriaged"
+
+# Cancel older jobs on PRs when new changes are pushed
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request_target' }}
+
+on:
+  issues:
+    types: [opened]
+  pull_request_target:
+    types: [opened]
+
+jobs:
+  add_label:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+      issues: write
+    steps:
+    - uses: actions-ecosystem/action-add-labels@v1
+      if: join(github.event.issue.labels) == ''
+      with:
+        labels: "S: Untriaged"

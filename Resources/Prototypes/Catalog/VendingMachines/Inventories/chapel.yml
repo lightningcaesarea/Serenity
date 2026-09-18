@@ -1,0 +1,52 @@
+- type: vendingMachineInventory
+  id: PietyVendInventory
+  startingInventory:
+    ClothingUniformJumpsuitChaplain: 2
+    ClothingUniformJumpskirtChaplain: 2
+    ClothingUniformJumpsuitMonasticRobeDark: 1
+    ClothingUniformJumpsuitMonasticRobeLight: 1
+    ClothingNeckStoleChaplain: 1
+    ClothingOuterHoodieChaplain: 1
+    ClothingOuterHoodieBlack: 1
+    ClothingHeadHatHoodNunHood: 1
+    ClothingOuterNunRobe: 1
+    ClothingHeadHatFez: 1
+    ClothingHeadHatPlaguedoctor: 1
+    ClothingHeadHatWitch: 1
+    ClothingHeadHatWitch1: 1
+    ClothingOuterPlagueSuit: 1
+    ClothingMaskPlague: 1
+    ClothingHeadsetService: 2
+    #Starlight
+    DruidRobesUniformSuit: 1
+    TogaUniformSuit: 1
+    ClothingOuterBurnedRobes: 1
+    ClothingKitsuneMask: 1
+    ClothingNeckEyeAmulet: 1
+    ClothingNeckMoonAmulet: 1
+    ClothingNeckStarAmulet: 1
+    ClothingNeckSunAmulet: 1
+    #Endofstarlight
+    BoxCandle: 2
+    BoxCandleSmall: 2
+    Urn: 5
+    Bible: 1
+    CosmicCenser: 1 # Starlight: Cosmic Cult
+    TarotCardDeckBox: 1 # Moffstation - Add Tarot cards to the chapel vending machine.
+  contrabandInventory:
+    FoodBakedBunHotX: 2
+    DrinkWineBottleFull: 1
+    ToyFigurineChaplain: 1
+    ClothingNeckScarfStripedBlack: 3
+    #StarLight
+    BibleBibble:  1
+    #Endofstarlight
+  emaggedInventory:
+    ClothingOuterRobesCult: 3
+    ClothingHeadHatHoodCulthood: 3
+    ClothingShoesCult: 4
+    BedsheetCult: 4
+    #Starlight Start
+    ClothingShoesRatvar: 1
+    ClothingOuterCoatRatvarRobes: 1
+    #Starlight End

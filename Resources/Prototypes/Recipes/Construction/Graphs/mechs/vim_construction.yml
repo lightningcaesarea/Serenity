@@ -1,0 +1,35 @@
+- type: constructionGraph
+  id: Vim
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: vim
+      steps:
+      - assemblyId: Vim
+        guideString: mech-construction-guide-string
+
+      - tag: VoiceTrigger
+        name: construction-graph-tag-voice-trigger
+        icon:
+          sprite: "Objects/Devices/voice.rsi"
+          state: "voice"
+        completed:
+        - !type:VisualizerDataInt
+          key: "enum.MechAssemblyVisuals.State"
+          data: 1
+      #Starlight Start - Mech Reactors
+      - tag: MechReactor
+        name: construction-graph-tag-mech-reactor
+        store: battery-container
+        icon:
+          sprite: _Starlight/Objects/Power/mech_reactors.rsi
+          state: medium
+      - tool: Screwing
+        doAfter: 1
+      #Starlight End
+
+  - node: vim
+    actions:
+    - !type:BuildMech
+      mechPrototype: MechVim

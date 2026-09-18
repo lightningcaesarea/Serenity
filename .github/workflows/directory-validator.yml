@@ -1,0 +1,32 @@
+name: Check Starlight Directories
+
+# Cancel older jobs on PRs when new changes are pushed
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, edited]
+
+jobs:
+  check-typo-directory:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Check for StarLight folders
+        run: |
+          bad_paths="$(find . -path './.git' -prune -o -type d -name '*StarLight*' -print)"
+
+          if [ -n "$bad_paths" ]; then
+            echo "::error::Found folders using StarLight. They should use Starlight."
+            echo "$bad_paths"
+            exit 1
+          else
+            echo "No StarLight folders found."
+          fi
+
+      - name: Validate _Starlight namespaces
+        run: python3 Tools/_Starlight/check_starlight_namespaces.py

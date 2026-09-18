@@ -1,0 +1,381 @@
+- type: entity
+  parent: Jug
+  suffix: uranium
+  id: JugUranium
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Label
+    currentLabel: reagent-name-uranium
+  - type: Solution
+    id: drink
+    solution:
+      reagents:
+      - ReagentId: Uranium
+        Quantity: 240
+
+- type: entity
+  parent: Jug
+  suffix: Corn oil
+  id: JugCornoil
+  components:
+  - type: Label
+    currentLabel: reagent-name-corn-oil
+  - type: Solution
+    id: drink
+    solution:
+      reagents:
+      - ReagentId: Cornoil
+        Quantity: 240
+
+# Medicine Jugs for Chemist Locker
+- type: entity
+  parent: Jug
+  suffix: arithrazine
+  id: JugArithrazine
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Label
+    currentLabel: reagent-name-arithrazine
+  - type: Solution
+    id: drink
+    solution:
+      reagents:
+      - ReagentId: Arithrazine
+        Quantity: 240
+
+- type: entity
+  parent: Jug
+  suffix: diphenhydramine
+  id: JugDiphenhydramine
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Label
+    currentLabel: reagent-name-diphenhydramine
+  - type: Solution
+    id: drink
+    solution:
+      reagents:
+      - ReagentId: Diphenhydramine
+        Quantity: 240
+
+- type: entity
+  parent: Jug
+  suffix: cryoxadone
+  id: JugCryoxadone
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Label
+    currentLabel: reagent-name-cryoxadone
+  - type: Solution
+    id: drink
+    solution:
+      reagents:
+      - ReagentId: Cryoxadone
+        Quantity: 240
+
+- type: entity
+  parent: Jug
+  suffix: doxarubixadone
+  id: JugDoxarubixadone
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Label
+    currentLabel: reagent-name-doxarubixadone
+  - type: Solution
+    id: drink
+    solution:
+      reagents:
+      - ReagentId: Doxarubixadone
+        Quantity: 240
+
+- type: entity
+  parent: Jug
+  suffix: aloxadone
+  id: JugAloxadone
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Label
+    currentLabel: reagent-name-aloxadone
+  - type: Solution
+    id: drink
+    solution:
+      reagents:
+      - ReagentId: Aloxadone
+        Quantity: 240
+
+- type: entity
+  parent: Jug
+  suffix: sigynate
+  id: JugSigynate
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Label
+    currentLabel: reagent-name-sigynate
+  - type: Solution
+    id: drink
+    solution:
+      reagents:
+      - ReagentId: Sigynate
+        Quantity: 240
+
+- type: entity
+  parent: Jug
+  suffix: leporazine
+  id: JugLeporazine
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Label
+    currentLabel: reagent-name-leporazine
+  - type: Solution
+    id: drink
+    solution:
+      reagents:
+      - ReagentId: Leporazine
+        Quantity: 240
+
+- type: entity
+  parent: Jug
+  suffix: bruizine
+  id: JugBruizine
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Label
+    currentLabel: reagent-name-bruizine
+  - type: Solution
+    id: drink
+    solution:
+      reagents:
+      - ReagentId: Bruizine
+        Quantity: 240
+
+- type: entity
+  parent: Jug
+  suffix: lacerinol
+  id: JugLacerinol
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Label
+    currentLabel: reagent-name-lacerinol
+  - type: Solution
+    id: drink
+    solution:
+      reagents:
+      - ReagentId: Lacerinol
+        Quantity: 240
+
+- type: entity
+  parent: Jug
+  suffix: pyrazine
+  id: JugPyrazine
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Label
+    currentLabel: reagent-name-pyrazine
+  - type: Solution
+    id: drink
+    solution:
+      reagents:
+      - ReagentId: Pyrazine
+        Quantity: 240
+
+- type: entity
+  parent: Jug
+  suffix: insuzine
+  id: JugInsuzine
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Label
+    currentLabel: reagent-name-insuzine
+  - type: Solution
+    id: drink
+    solution:
+      reagents:
+      - ReagentId: Insuzine
+        Quantity: 240
+
+- type: entity
+  parent: Jug
+  suffix: ambuzol
+  id: JugAmbuzol
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Label
+    currentLabel: reagent-name-ambuzol
+  - type: Solution
+    id: drink
+    solution:
+      reagents:
+      - ReagentId: Ambuzol
+        Quantity: 240
+
+- type: entity
+  parent: Jug
+  suffix: ambuzol plus
+  id: JugAmbuzolPlus
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Label
+    currentLabel: reagent-name-ambuzol-plus
+  - type: Solution
+    id: drink
+    solution:
+      reagents:
+      - ReagentId: AmbuzolPlus
+        Quantity: 240
+
+- type: entity
+  parent: Jug
+  suffix: amoxla
+  id: JugAmoxla
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Label
+    currentLabel: reagent-name-amoxla
+  - type: Solution
+    id: drink
+    solution:
+      reagents:
+      - ReagentId: Amoxla
+        Quantity: 240
+
+# Golden jugs
+- type: entity
+  parent: GoldenJug
+  suffix: bicaridine
+  id: JugGoldenBicaridine
+  components:
+  - type: Label
+    currentLabel: reagent-name-bicaridine
+  - type: Solution
+    id: drink
+    solution:
+      reagents:
+      - ReagentId: Bicaridine
+        Quantity: 480
+
+- type: entity
+  parent: GoldenJug
+  suffix: dermaline
+  id: JugGoldenDermaline
+  components:
+  - type: Label
+    currentLabel: reagent-name-dermaline
+  - type: Solution
+    id: drink
+    solution:
+      reagents:
+      - ReagentId: Dermaline
+        Quantity: 480
+
+# Large cryo chemical beakers
+- type: entity
+  suffix: cryoxadone
+  parent: LargeBeaker
+  id: CryoxadoneBeakerLarge
+  components:
+  - type: Label
+    currentLabel: reagent-name-cryoxadone
+  - type: Solution
+    id: beaker
+    solution:
+      reagents:
+      - ReagentId: Cryoxadone
+        Quantity: 120
+
+- type: entity
+  suffix: doxarubixadone
+  parent: LargeBeaker
+  id: DoxarubixadoneBeakerLarge
+  components:
+  - type: Label
+    currentLabel: reagent-name-doxarubixadone
+  - type: Solution
+    id: beaker
+    solution:
+      reagents:
+      - ReagentId: Doxarubixadone
+        Quantity: 120
+
+- type: entity
+  suffix: arcryox
+  parent: LargeBeaker
+  id: ArcryoxBeakerLarge
+  components:
+  - type: Label
+    currentLabel: reagent-name-arcryox
+  - type: Solution
+    id: beaker
+    solution:
+      reagents:
+      - ReagentId: Arcryox
+        Quantity: 120
+
+- type: entity
+  suffix: necrosol
+  parent: LargeBeaker
+  id: NecrosolBeakerLarge
+  components:
+  - type: Label
+    currentLabel: reagent-name-necrosol
+  - type: Solution
+    id: beaker
+    solution:
+      reagents:
+      - ReagentId: Necrosol
+        Quantity: 120
+
+- type: entity
+  suffix: chronexaline
+  parent: LargeBeaker
+  id: ChronexalineBeakerLarge
+  components:
+  - type: Label
+    currentLabel: reagent-name-chronexaline
+  - type: Solution
+    id: beaker
+    solution:
+      reagents:
+      - ReagentId: Chronexaline
+        Quantity: 120
+
+- type: entity
+  suffix: aloxadone
+  parent: LargeBeaker
+  id: AloxadoneBeakerLarge
+  components:
+  - type: Label
+    currentLabel: reagent-name-aloxadone
+  - type: Solution
+    id: beaker
+    solution:
+      reagents:
+      - ReagentId: Aloxadone
+        Quantity: 120
+
+- type: entity
+  suffix: opporozidone
+  parent: LargeBeaker
+  id: OpporozidoneBeakerLarge
+  components:
+  - type: Label
+    currentLabel: reagent-name-opporozidone
+  - type: Solution
+    id: beaker
+    solution:
+      reagents:
+      - ReagentId: Opporozidone
+        Quantity: 120
+
+- type: entity
+  parent: Jug
+  id: JugLacer
+  suffix: lacer
+  components:
+  - type: Label
+    currentLabel: reagent-name-lacerinol
+  - type: Solution
+    id: drink
+    solution:
+      reagents:
+      - ReagentId: Lacerinol
+        Quantity: 240

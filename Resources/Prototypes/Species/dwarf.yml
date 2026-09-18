@@ -1,0 +1,18 @@
+- type: species
+  id: Dwarf
+  name: species-name-dwarf
+  roundStart: true
+  prototype: MobDwarf
+  sprites: MobHumanSprites
+  markingLimits: MobHumanMarkingLimits
+  dollPrototype: AppearanceDwarf
+  skinColoration: HumanToned
+  displacement: Dwarfism # Starlight start
+  customName: true
+  minHeight: 0.8
+  defaultHeight: 0.8
+  maxHeight: 0.85
+  minAge: 30
+  youngAge: 50
+  oldAge: 130
+  maxAge: 200 # Starlight end

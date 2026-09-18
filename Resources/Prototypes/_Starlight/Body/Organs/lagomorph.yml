@@ -1,0 +1,60 @@
+- type: entity
+  id: OrganLagomorphEyes
+  parent: OrganHumanEyes
+  name: lagomorph eyes
+  suffix: Lagomorph
+  description: "Couldn't have seen that one coming."
+  components:
+  - type: OrganVisualization
+    layer: Eyes
+    prototypes:
+      Default: MobLagomorphEyes
+
+- type: entity
+  id: OrganLagomorphStomach
+  parent: [OrganAnimalStomach, BaseOrganStomach]
+  name: lagomorph stomach
+  suffix: Lagomorph
+  description: "Yearns for fresh produce."
+  components:
+  - type: Sprite
+    sprite: Mobs/Species/Human/organs.rsi
+    state: stomach
+  - type: Item
+    size: Small
+    heldPrefix: stomach
+  - type: SolutionManager
+    solutions:
+    - SolutionOrganFoodMeat
+    - SolutionOrganStomach50
+  - type: Metabolizer
+    updateInterval: 0.75
+
+
+- type: entity
+  id: OrganLagomorphHeart
+  parent: OrganAnimalHeart
+  name: lagomorph heart
+  suffix: Lagomorph
+  description: "The rapidly beating heart of a Lagomorph."
+  components:
+  - type: Sprite
+    sprite: Mobs/Species/Human/organs.rsi
+    state: heart-on
+  - type: Item
+    size: Small
+    heldPrefix: heart
+  - type: Metabolizer
+    updateInterval: 0.75
+
+- type: entity
+  id: OrganLagomorphTongue
+  parent: OrganHumanTongue
+  suffix: Lagomorph
+  components:
+  - type: OrganTongue
+    allowedEmotes: ['Squee', 'Snort', 'Sneeze', 'LagomorphSnore', 'LagomorphStomp']
+    sounds:
+      Male: MaleLagomorph
+      Female: FemaleLagomorph
+      Unsexed: FemaleLagomorph

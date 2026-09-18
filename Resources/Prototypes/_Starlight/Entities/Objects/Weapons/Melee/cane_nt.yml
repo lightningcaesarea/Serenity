@@ -1,0 +1,93 @@
+- type: entity
+  name: fancy cane
+  parent: [ BaseItem, BaseCommandContraband ]
+  id: CaneNT
+  description: A cane with special engraving on it. It seems well suited for fending off assailants...
+  components:
+  - type: Sprite
+    sprite: _Starlight/Objects/Weapons/Melee/cane_nt.rsi
+    layers:
+    - state: cane-nt-active
+      visible: true
+      map: [ "enum.StunbatonVisualLayers.Stunbaton_on" ]
+    - state: cane-nt
+      visible: false
+      map: [ "enum.StunbatonVisualLayers.Stunbaton_off" ]
+    - state: cane-nt
+      visible: false
+      map: [ "enum.StunbatonVisualLayers.Stunbaton_nocell" ]
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.StunbatonVisuals.Stunbaton_on:
+        enum.StunbatonVisualLayers.Stunbaton_on:
+          True: { visible: true }
+          False: { visible: false }
+      enum.StunbatonVisuals.Stunbaton_off:
+        enum.StunbatonVisualLayers.Stunbaton_off:
+          True: { visible: true }
+          False: { visible: false }
+      enum.StunbatonVisuals.Stunbaton_nocell:
+        enum.StunbatonVisualLayers.Stunbaton_nocell:
+          True: { visible: true }
+          False: { visible: false }
+  - type: Stunbaton
+    energyPerUse: 18 # from 25 to account for medium power cells. (720 charge with 18 per use = 40 hits (yes the NT cane is a monster))
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: power-cell-slot-component-slot-name-default
+        startingItem: PowerCellMicroreactor # A little treat for our hard working paperwork jockies.
+        disableEject: true # No ejects little one.
+        swap: false
+        blacklist:
+          tags:
+          - MechReactor
+  - type: PowerCellSlot
+    cellSlotId: cell_slot
+  - type: ContainerContainer
+    containers:
+      cell_slot: !type:ContainerSlot
+  - type: ItemToggle
+    predictable: false
+    soundDeactivate:
+      collection: sparks
+      params:
+        variation: 0.250
+    soundFailToActivate:
+      path: /Audio/Machines/button.ogg
+      params:
+        variation: 0.250
+  - type: ItemToggleMeleeWeapon
+    activatedDamage:
+      types:
+        Blunt: 0
+  - type: MeleeWeapon
+    wideAnimationRotation: 60
+    damage:
+      types:
+        Blunt: 10
+    bluntStaminaDamageFactor: 2.0
+    angle: 65
+    animation: WeaponArcThrust
+  - type: StaminaDamageOnHit
+    damage: 40
+    sound: /Audio/Weapons/egloves.ogg
+  - type: StaminaDamageOnCollide
+    damage: 40
+    sound: /Audio/Weapons/egloves.ogg
+  - type: LandAtCursor
+  - type: UseDelay
+  - type: Item
+    heldPrefix: off
+    size: Normal
+  - type: DisarmMalus
+    malus: 0.300
+  - type: MobilityAid
+  - type: Prying
+    useSoundOnDoafter: /Audio/_Starlight/Machines/airlock_pry.ogg
+    playSoundOnDoafter: true
+    speedModifier: 0.5
+  - type: ESSparkOnItemToggle
+    count: 1
+    sparkPrototype: SLEffectSparksBaton

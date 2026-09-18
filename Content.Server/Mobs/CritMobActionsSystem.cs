@@ -1,0 +1,97 @@
+﻿using Content.Server.Administration;
+using Content.Server.Chat.Systems;
+using Content.Server.Popups;
+using Content.Shared.Chat;
+using Content.Shared.Mobs;
+using Content.Shared.Mobs.Components;
+using Content.Shared.Mobs.Systems;
+using Robust.Server.Console;
+using Robust.Shared.Player;
+using Content.Shared.Speech.Muting;
+using Content.Shared.StatusEffectNew; //Starlight
+using Content.Shared._Starlight.BreathOrgan.Systems; //Starlight
+
+namespace Content.Server.Mobs;
+
+/// <summary>
+///     Handles performing crit-specific actions.
+/// </summary>
+public sealed partial class CritMobActionsSystem : EntitySystem
+{
+    [Dependency] private ChatSystem _chat = default!;
+    [Dependency] private DeathgaspSystem _deathgasp = default!;
+    [Dependency] private IServerConsoleHost _host = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private PopupSystem _popupSystem = default!;
+    [Dependency] private QuickDialogSystem _quickDialog = default!;
+    [Dependency] private StatusEffectsSystem _status = default!; // Starlight
+
+    private const int MaxLastWordsLength = 30;
+
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        SubscribeLocalEvent<MobStateActionsComponent, CritSuccumbEvent>(OnSuccumb);
+        SubscribeLocalEvent<MobStateActionsComponent, CritFakeDeathEvent>(OnFakeDeath);
+        SubscribeLocalEvent<MobStateActionsComponent, CritLastWordsEvent>(OnLastWords);
+    }
+
+    private void OnSuccumb(EntityUid uid, MobStateActionsComponent component, CritSuccumbEvent args)
+    {
+        if (!TryComp<ActorComponent>(uid, out var actor) || !_mobState.IsCritical(uid))
+            return;
+
+        _host.ExecuteCommand(actor.PlayerSession, "ghost");
+        args.Handled = true;
+    }
+
+    private void OnFakeDeath(EntityUid uid, MobStateActionsComponent component, CritFakeDeathEvent args)
+    {
+        if (_mobState.IsDead(uid)) //Starlight - changed to checking if the creature is *dead*, rather than not critical, now we can use the same action to fake death on anyone still alive.
+            return;
+
+        //Starlight Start
+        _status.TrySetStatusEffectDuration(uid, HeldBreathSystem.HeldBreathId, out _);
+
+        if (HasComp<MutedComponent>(uid))
+        {
+            _popupSystem.PopupEntity(Loc.GetString("fake-death-muted-success"), uid, uid);
+            args.Handled = true;
+            return;
+        //Starlight End
+        }
+
+        args.Handled = _deathgasp.Deathgasp(uid);
+    }
+
+    private void OnLastWords(EntityUid uid, MobStateActionsComponent component, CritLastWordsEvent args)
+    {
+        if (!TryComp<ActorComponent>(uid, out var actor))
+            return;
+
+        _quickDialog.OpenDialog(actor.PlayerSession, Loc.GetString("action-name-crit-last-words"), "",
+            (string lastWords) =>
+            {
+                // if a person is gibbed/deleted, they can't say last words
+                if (Deleted(uid))
+                    return;
+
+                // Intentionally does not check for muteness
+                if (actor.PlayerSession.AttachedEntity != uid
+                    || !_mobState.IsCritical(uid))
+                    return;
+
+                if (lastWords.Length > MaxLastWordsLength)
+                {
+                    lastWords = lastWords.Substring(0, MaxLastWordsLength);
+                }
+                lastWords += "...";
+
+                _chat.TrySendInGameICMessage(uid, lastWords, InGameICChatType.Whisper, ChatTransmitRange.Normal, checkRadioPrefix: false, ignoreActionBlocker: true);
+                _host.ExecuteCommand(actor.PlayerSession, "ghost");
+            });
+
+        args.Handled = true;
+    }
+}

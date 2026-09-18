@@ -1,0 +1,96 @@
+using Content.Client._Starlight.Managers;
+using Content.Client.Administration.Managers;
+using Content.Client.Audio.Midi;
+using Content.Client.Changelog;
+using Content.Client.Chat.Managers;
+using Content.Client.Clickable;
+using Content.Client.DebugMon;
+using Content.Client.Eui;
+using Content.Client.FeedbackPopup;
+using Content.Client.Fullscreen;
+using Content.Client.GameTicking.Managers;
+using Content.Client.GhostKick;
+using Content.Client.Guidebook;
+using Content.Client.Launcher;
+using Content.Client.Lobby;
+using Content.Client.Mapping;
+using Content.Client.Parallax.Managers;
+using Content.Client.Players.PlayTimeTracking;
+using Content.Client.Playtime;
+using Content.Client.Players.RateLimiting;
+using Content.Client.Replay;
+using Content.Client.Screenshot;
+using Content.Client.Stylesheets;
+using Content.Client.Viewport;
+using Content.Client.Voting;
+using Content.Shared._NullLink;
+using Content.Shared._Starlight.Achievement;
+using Content.Shared.Administration.Logs;
+using Content.Shared.Administration.Managers;
+using Content.Shared.Chat;
+using Content.Shared.FeedbackSystem;
+using Content.Shared.IoC;
+using Content.Shared.Players.PlayTimeTracking;
+using Content.Shared.Players.RateLimiting;
+using Content.Shared._Starlight;
+using Content.Client._NullLink;
+using Content.Client._Starlight.Achievement;
+using Content.Client._Starlight.Shaders;
+using Content.Shared._Starlight.DocumentManager;
+
+namespace Content.Client.IoC
+{
+    internal static class ClientContentIoC
+    {
+        public static void Register(IDependencyCollection collection)
+        {
+            SharedContentIoC.Register(collection);
+            collection.Register<IParallaxManager, ParallaxManager>();
+            collection.Register<GeneratedParallaxCache>();
+            collection.Register<IChatManager, ChatManager>();
+            collection.Register<ISharedChatManager, ChatManager>();
+            collection.Register<IClientPreferencesManager, ClientPreferencesManager>();
+            collection.Register<IStylesheetManager, StylesheetManager>();
+            collection.Register<IScreenshotHook, ScreenshotHook>();
+            collection.Register<FullscreenHook, FullscreenHook>();
+            collection.Register<IClickMapManager, ClickMapManager>();
+            collection.Register<IClientAdminManager, ClientAdminManager>();
+            collection.Register<ISharedAdminManager, ClientAdminManager>();
+            collection.Register<IClientPlayerRolesManager, ClientPlayerManager>();  // 🌟Starlight🌟
+            collection.Register<ISharedPlayersRoleManager, ClientPlayerManager>(); //🌟Starlight🌟
+            collection.Register<EuiManager, EuiManager>();
+            collection.Register<IVoteManager, VoteManager>();
+            collection.Register<ChangelogManager, ChangelogManager>();
+            collection.Register<ViewportManager, ViewportManager>();
+            collection.Register<ISharedAdminLogManager, SharedAdminLogManager>();
+            collection.Register<GhostKickManager>();
+            collection.Register<ExtendedDisconnectInformationManager>();
+            collection.Register<JobRequirementsManager>();
+            collection.Register<DocumentParsingManager>();
+            collection.Register<ContentReplayPlaybackManager>();
+            collection.Register<ISharedPlaytimeManager, JobRequirementsManager>();
+            collection.Register<MappingManager>();
+            collection.Register<DebugMonitorManager>();
+            collection.Register<PlayerRateLimitManager>();
+            collection.Register<SharedPlayerRateLimitManager, PlayerRateLimitManager>();
+            collection.Register<TitleWindowManager>();
+            collection.Register<ClientsidePlaytimeTrackingManager>();
+            collection.Register<ClientFeedbackManager>();
+            collection.Register<ISharedFeedbackManager, ClientFeedbackManager>();
+            collection.Register<MidiFileCollectionManager>();
+
+            // NullLink start
+            collection.Register<INullLinkPlayerRolesManager, NullLinkPlayerRolesManager>();
+            collection.Register<ISharedNullLinkPlayerResourcesManager, NullLinkPlayerResourcesManager>();
+            collection.Register<INullLinkPlayerResourcesManager, NullLinkPlayerResourcesManager>();
+            collection.Register<ISharedNullLinkPlayerRolesReqManager, PlayerRolesReqManager>();
+            collection.Register<INullLinkPlayTimeManager, NullLinkPlayTimeManager>();
+            // NullLink end
+
+            collection.Register<IClientAchievementManager, ClientAchievementManager>(); // Starlight
+            collection.Register<IAchievementRewardManager, ClientAchievementManager>(); // Starlight
+            collection.Register<PreWrittenDocumentManager>(); // Starlight
+            collection.Register<IStarlightShaderManager, StarlightShaderManager>(); // Starlight
+        }
+    }
+}

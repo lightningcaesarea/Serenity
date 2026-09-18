@@ -1,0 +1,38 @@
+using Content.Shared.Shuttles.Systems;
+using Robust.Shared.GameStates;
+using Content.Shared._Starlight.Astronav;
+
+namespace Content.Shared.Shuttles.Components;
+
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[Access(typeof(SharedRadarConsoleSystem), typeof(AstroNavSystem))] // Starlight-edit
+[AutoGenerateComponentPause] // Starlight
+public sealed partial class RadarConsoleComponent : Component
+{
+    [ViewVariables(VVAccess.ReadWrite)]
+    public float RangeVV
+    {
+        get => MaxRange;
+        set => IoCManager
+            .Resolve<IEntitySystemManager>()
+            .GetEntitySystem<SharedRadarConsoleSystem>()
+            .SetRange(Owner, value, this);
+    }
+
+    [DataField, AutoNetworkedField]
+    public float MaxRange = 256f;
+
+    /// <summary>
+    /// If true, the radar will be centered on the entity. If not - on the grid on which it is located.
+    /// </summary>
+    [DataField]
+    public bool FollowEntity = false;
+
+    #region Starlight
+    /// <summary>
+    /// When the last interface update was transmitted.
+    /// </summary>
+    [AutoPausedField]
+    public TimeSpan LastInterfaceUpdateTime;
+    #endregion
+}

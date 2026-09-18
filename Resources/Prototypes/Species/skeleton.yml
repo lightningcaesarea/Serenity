@@ -1,0 +1,110 @@
+- type: species
+  id: Skeleton
+  name: species-name-skeleton
+  roundStart: false
+  prototype: MobSkeletonPerson
+  sprites: MobSkeletonSprites
+  defaultSkinTone: "#fff9e2"
+  markingLimits: MobHumanMarkingLimits
+  maleFirstNames: NamesSkeletonFirst
+  femaleFirstNames: NamesSkeletonFirst
+  dollPrototype: AppearanceSkeletonPerson
+  skinColoration: TintedHues
+
+- type: speciesBaseSprites
+  id: MobSkeletonSprites
+  sprites:
+    Head: MobSkeletonHead
+    Chest: MobSkeletonTorso
+    LArm: MobSkeletonLArm
+    RArm: MobSkeletonRArm
+    LHand: MobSkeletonLHand
+    RHand: MobSkeletonRHand
+    LLeg: MobSkeletonLLeg
+    RLeg: MobSkeletonRLeg
+    LFoot: MobSkeletonLFoot
+    RFoot: MobSkeletonRFoot
+
+- type: humanoidBaseSprite
+  id: MobSkeletonHead
+  baseSprite:
+    sprite: _Starlight/Mobs/Species/Skeleton/parts.rsi # Starlight
+    state: head_m
+
+- type: humanoidBaseSprite
+  id: MobSkeletonHeadMale
+  baseSprite:
+    sprite: _Starlight/Mobs/Species/Skeleton/parts.rsi # Starlight
+    state: head_m
+
+- type: humanoidBaseSprite
+  id: MobSkeletonHeadFemale
+  baseSprite:
+    sprite: _Starlight/Mobs/Species/Skeleton/parts.rsi # Starlight
+    state: head_f
+
+- type: humanoidBaseSprite
+  id: MobSkeletonTorso
+  baseSprite:
+    sprite: _Starlight/Mobs/Species/Skeleton/parts.rsi # Starlight
+    state: torso_m
+
+- type: humanoidBaseSprite
+  id: MobSkeletonTorsoMale
+  baseSprite:
+    sprite: _Starlight/Mobs/Species/Skeleton/parts.rsi # Starlight
+    state: torso_m
+
+- type: humanoidBaseSprite
+  id: MobSkeletonTorsoFemale
+  baseSprite:
+    sprite: _Starlight/Mobs/Species/Skeleton/parts.rsi # Starlight
+    state: torso_f
+
+- type: humanoidBaseSprite
+  id: MobSkeletonLLeg
+  baseSprite:
+    sprite: _Starlight/Mobs/Species/Skeleton/parts.rsi # Starlight
+    state: l_leg
+
+- type: humanoidBaseSprite
+  id: MobSkeletonLArm
+  baseSprite:
+    sprite: _Starlight/Mobs/Species/Skeleton/parts.rsi # Starlight
+    state: l_arm
+
+- type: humanoidBaseSprite
+  id: MobSkeletonLHand
+  baseSprite:
+    sprite: _Starlight/Mobs/Species/Skeleton/parts.rsi # Starlight
+    state: l_hand
+
+- type: humanoidBaseSprite
+  id: MobSkeletonLFoot
+  baseSprite:
+    sprite: _Starlight/Mobs/Species/Skeleton/parts.rsi # Starlight
+    state: l_foot
+
+- type: humanoidBaseSprite
+  id: MobSkeletonRLeg
+  baseSprite:
+    sprite: _Starlight/Mobs/Species/Skeleton/parts.rsi # Starlight
+    state: r_leg
+
+- type: humanoidBaseSprite
+  id: MobSkeletonRArm
+  baseSprite:
+    sprite: _Starlight/Mobs/Species/Skeleton/parts.rsi # Starlight
+    state: r_arm
+
+- type: humanoidBaseSprite
+  id: MobSkeletonRHand
+  baseSprite:
+    sprite: _Starlight/Mobs/Species/Skeleton/parts.rsi # Starlight
+    state: r_hand
+
+- type: humanoidBaseSprite
+  id: MobSkeletonRFoot
+  baseSprite:
+    sprite: _Starlight/Mobs/Species/Skeleton/parts.rsi # Starlight
+    state: r_foot

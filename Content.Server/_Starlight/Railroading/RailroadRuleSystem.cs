@@ -1,0 +1,367 @@
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Linq;
+using Content.Server.GameTicking;
+using Content.Server.GameTicking.Rules;
+using Content.Shared.GameTicking.Components;
+using Content.Shared.Mind;
+using Content.Shared.Roles.Jobs;
+using Content.Shared.Objectives.Components;
+using Content.Shared._Starlight;
+using Robust.Server.Player;
+using Robust.Shared.Map;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Random;
+using Content.Shared._Starlight.Railroading.Components;
+using Content.Shared._Starlight.Abstract;
+using static Content.Shared._Starlight.Railroading.Components.RailroadRuleComponent;
+using Content.Shared._Starlight.Abstract.Conditions;
+
+namespace Content.Server._Starlight.Railroading;
+
+public sealed partial class RailroadRuleSystem : GameRuleSystem<RailroadRuleComponent>
+{
+    // it’s something that should be synchronized across all rules.
+    private const byte CardPerUser = 3;
+    private const byte SpawnPerTick = 10;
+    private const byte ProcessingMaxTry = 10;
+
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private IComponentFactory _comp = default!;
+    [Dependency] private IPlayerManager _players = default!;
+    [Dependency] private RailroadingSystem _railroading = default!;
+    [Dependency] private GameTicker _gameTicker = default!;
+    [Dependency] private SharedJobSystem _job = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+
+    public override void Initialize()
+        => base.Initialize();
+
+    protected override void Added(EntityUid uid, RailroadRuleComponent comp, GameRuleComponent gameRule, GameRuleAddedEvent args)
+    {
+        if (TryGetActiveRule(out var rule))
+        {
+            if(rule.Value.Owner == uid)
+                return;
+            foreach (var card in comp.Cards)
+                rule.Value.Comp.DynamicCards.Enqueue(card);
+            _gameTicker.EndGameRule(uid);
+            comp.Stage = RailroadStage.Stopped;
+            return;
+        }
+        base.Added(uid, comp, gameRule, args);
+        comp.Timer = comp.PreSpawnDelay;
+    }
+
+    protected override void ActiveTick(EntityUid uid, RailroadRuleComponent comp, GameRuleComponent gameRule, float frameTime)
+    => _ = comp.Stage switch
+    {
+        RailroadStage.PreSpawnDelay => TickPreSpawnDelay((uid, comp), frameTime),
+        RailroadStage.StaticSpawn => TickStaticSpawn((uid, comp)),
+        RailroadStage.DynamicSpawn => TickDynamicSpawn((uid, comp)),
+        RailroadStage.CardShuffle => TickCardShuffle((uid, comp)),
+        RailroadStage.PreCardIssuance => TickPreCardIssuance((uid, comp)),
+        RailroadStage.CardIssuance => TickCardIssuance((uid, comp)),
+        RailroadStage.CycleDelay => TickCycleDelay((uid, comp), frameTime),
+        _ => false
+    };
+
+    #region ——— Stage Tick Methods ———
+
+    private static bool TickPreSpawnDelay(Entity<RailroadRuleComponent> ruleEnt, float dt)
+    {
+        ruleEnt.Comp.Timer -= dt;
+        if (ruleEnt.Comp.Timer > 0f)
+            return true;
+
+        ruleEnt.Comp.Stage = RailroadStage.StaticSpawn;
+        return true;
+    }
+
+    private bool TickStaticSpawn(Entity<RailroadRuleComponent> ruleEnt)
+    {
+        for (var i = 0; i < SpawnPerTick && ruleEnt.Comp.SpawnIndex < ruleEnt.Comp.Cards.Count; i++)
+        {
+            RegisterCardInstance(ruleEnt.Comp.Cards[ruleEnt.Comp.SpawnIndex], ruleEnt);
+            ruleEnt.Comp.SpawnIndex++;
+        }
+
+        if (ruleEnt.Comp.SpawnIndex >= ruleEnt.Comp.Cards.Count)
+            ruleEnt.Comp.Stage = RailroadStage.DynamicSpawn;
+        return true;
+    }
+
+    private bool TickDynamicSpawn(Entity<RailroadRuleComponent> ruleEnt)
+    {
+        for (var i = 0; i < SpawnPerTick && ruleEnt.Comp.DynamicCards.TryDequeue(out var card); i++)
+        {
+            RegisterCardInstance(card, ruleEnt);
+            ruleEnt.Comp.SpawnIndex++;
+        }
+
+        if (ruleEnt.Comp.DynamicCards.Count == 0)
+            ruleEnt.Comp.Stage = RailroadStage.CardShuffle;
+        return true;
+    }
+
+    // The shuffle is done because after a card’s condition isn’t met, we take the next card in order
+    // and this prevents us from running into 10 cards in a row with the same conditions.
+    // At the same time, for the job-specific pool this isn’t needed, since there are only a few cards there.
+    private bool TickCardShuffle(Entity<RailroadRuleComponent> ruleEnt)
+    {
+        _random.Shuffle(ruleEnt.Comp.Pool);
+        ruleEnt.Comp.Stage = RailroadStage.PreCardIssuance;
+
+        return true;
+    }
+
+    private bool TickPreCardIssuance(Entity<RailroadRuleComponent> ruleEnt)
+    {
+        var query = EntityQueryEnumerator<RailroadableComponent>();
+
+        while (query.MoveNext(out var uid, out var railroadableComp))
+            if (_players.TryGetSessionByEntity(uid, out _))
+                ruleEnt.Comp.IssuanceQueue.Enqueue((uid, railroadableComp));
+
+        ruleEnt.Comp.Stage = RailroadStage.CardIssuance;
+
+        return true;
+    }
+
+    private bool TickCardIssuance(Entity<RailroadRuleComponent> ruleEnt)
+    {
+        if (ruleEnt.Comp.IssuanceQueue.TryDequeue(out var subject))
+        {
+            if (!Deleted(subject.Owner)
+                && !subject.Comp.Restricted
+                && (subject.Comp.IssuedCards is not { } cards || cards.Count < CardPerUser)
+                && (subject.Comp.ActiveCard == null || Deleted(subject.Comp.ActiveCard)))
+            {
+                subject.Comp.IssuedCards ??= new List<Entity<RailroadCardComponent, RuleOwnerComponent>>(CardPerUser);
+
+                // Try to pick a job-specific card first (at most 1, placed in center).
+                Entity<RailroadCardComponent, RuleOwnerComponent>? jobCard = null;
+                if (TryGetJobSpecificPool(ruleEnt, subject, out var jobPool))
+                    jobCard = PopRandomFromPool(jobPool, subject);
+                // Try to pick an objective card.
+                Entity<RailroadCardComponent, RuleOwnerComponent>? objectiveCard = null;
+                if (TryGetObjectiveSpecificPool(ruleEnt, subject, out var objectivePool))
+                    objectiveCard = PopRandomFromPool(objectivePool, subject);
+
+                var generalSlots = CardPerUser - subject.Comp.IssuedCards.Count - (jobCard != null ? 1 : 0) - (objectiveCard != null ? 1 : 0);
+
+                // Fill first general slot, then place job card in center if possible.
+                if (generalSlots > 0)
+                {
+                    var card = PopRandomFromPool(ruleEnt.Comp.Pool, subject);
+                    if (card != null)
+                    {
+                        subject.Comp.IssuedCards.Add(card.Value);
+                        generalSlots--;
+                    }
+                }
+
+                if (jobCard != null)
+                    subject.Comp.IssuedCards.Add(jobCard.Value);
+
+                if (objectiveCard != null)
+                    subject.Comp.IssuedCards.Add(objectiveCard.Value);
+
+                for (var i = 0; i < generalSlots; i++)
+                {
+                    var card = PopRandomFromPool(ruleEnt.Comp.Pool, subject);
+                    if (card == null)
+                        break;
+
+                    subject.Comp.IssuedCards.Add(card.Value);
+                }
+
+                if (subject.Comp.IssuedCards.Count > 0)
+                    _railroading.NotifyCardsAvailable(subject.Owner);
+            }
+        }
+        else
+        {
+            ruleEnt.Comp.Timer = ruleEnt.Comp.Delay;
+            ruleEnt.Comp.Stage = RailroadStage.CycleDelay;
+        }
+        return true;
+    }
+
+    private static bool TickCycleDelay(Entity<RailroadRuleComponent> ruleEnt, float dt)
+    {
+        ruleEnt.Comp.Timer -= dt;
+        if (ruleEnt.Comp.Timer > 0f)
+            return true;
+
+        ruleEnt.Comp.Stage = RailroadStage.DynamicSpawn;
+        return true;
+    }
+
+    #endregion
+
+    public void AddCardToPool(Entity<RailroadRuleComponent> ruleEnt, Entity<RailroadCardComponent> card)
+    {
+        var ruleOwner = EnsureComp<RuleOwnerComponent>(card.Owner);
+        ruleOwner.RuleOwner = ruleEnt.Owner;
+
+        if (TryComp<RailroadSpawnFlowComponent>(card.Owner, out var flow))
+        {
+            if (flow.JobPrototype is { } job)
+            {
+                if (ruleEnt.Comp.PoolByJob.TryGetValue(job, out var list))
+                    list.Add((card.Owner, card.Comp, ruleOwner));
+                else
+                    ruleEnt.Comp.PoolByJob.Add(job, [(card.Owner, card.Comp, ruleOwner)]);
+            }
+            else if (flow.ObjectivePrototype is { } objectivePrototype)
+            {
+                if (ruleEnt.Comp.PoolByObjective.TryGetValue(objectivePrototype, out var list))
+                    list.Add((card.Owner, card.Comp, ruleOwner));
+                else
+                    ruleEnt.Comp.PoolByObjective.Add(objectivePrototype, [(card.Owner, card.Comp, ruleOwner)]);
+            }
+            else if (HasComp<ObjectiveComponent>(card.Owner)
+                    && MetaData(card.Owner).EntityPrototype is { } objectiveEntityPrototype)
+            {
+                var objectiveProtoId = new EntProtoId<ObjectiveComponent>(objectiveEntityPrototype.ID);
+                if (ruleEnt.Comp.PoolByObjective.TryGetValue(objectiveProtoId, out var list))
+                    list.Add((card.Owner, card.Comp, ruleOwner));
+                else
+                    ruleEnt.Comp.PoolByObjective.Add(objectiveProtoId, [(card.Owner, card.Comp, ruleOwner)]);
+            }
+            else
+            {
+                ruleEnt.Comp.Pool.Add((card.Owner, card.Comp, ruleOwner));
+            }
+        }
+        else
+        {
+            ruleEnt.Comp.Pool.Add((card.Owner, card.Comp, ruleOwner));
+        }
+    }
+
+    #region ——— Helpers ———
+
+    private void RegisterCardInstance(EntProtoId<RailroadCardComponent> proto, Entity<RailroadRuleComponent> ruleEnt)
+    {
+        if (!_proto.TryIndex(proto, out var cardProto))
+            return;
+
+        // You’re probably going to ask why the entity itself holds information about how to spawn it.
+        // Yes.
+        if (cardProto.TryGetComponent<RailroadSpawnFlowComponent>(out var flow, _comp))
+        {
+            if (flow.Probability < 1.0f && !_random.Prob(flow.Probability))
+                return;
+
+            for (var i = 0; i < flow.Count.Next(_random); i++)
+                Register(proto, ruleEnt);
+        }
+        else
+            Register(proto, ruleEnt);
+
+        void Register(EntProtoId<RailroadCardComponent> proto, Entity<RailroadRuleComponent> ruleEnt)
+        {
+            var eid = Spawn(proto, MapCoordinates.Nullspace);
+            var cardComp = EnsureComp<RailroadCardComponent>(eid);
+
+            if (_proto.TryIndex(proto, out var cardProto)
+                && cardProto.TryGetComponent<RailroadSpawnFlowComponent>(out var flow, _comp)
+                && flow.ObjectivePrototype is { }
+                && _proto.TryIndex(flow.ObjectivePrototype, out var objectiveProto))
+            {
+                EntityManager.AddComponents(eid, objectiveProto.Components, removeExisting: false);
+            }
+
+            AddCardToPool(ruleEnt, (eid, cardComp));
+        }
+    }
+
+    private Entity<RailroadCardComponent, RuleOwnerComponent>? PopRandomFromPool(List<Entity<RailroadCardComponent, RuleOwnerComponent>> pool, EntityUid subject)
+    {
+        var startIndex = _random.Next(pool.Count);
+        for (var i = startIndex; i < ProcessingMaxTry + startIndex && pool.Count > 0; i++)
+        {
+            var index = i % pool.Count;
+            var card = pool[index];
+            if (Deleted(card))
+            {
+                pool.RemoveSwapBack(index);
+                continue;
+            }
+            if (TryComp<ConditionsComponent>(card, out var conditions)
+                && !conditions.Conditions.All(x => x.Handle(subject, card)))
+                continue;
+            pool.RemoveSwapBack(index);
+            return card;
+        }
+        return null;
+    }
+
+    private bool TryGetActiveRule([NotNullWhen(true)] out Entity<RailroadRuleComponent>? rule)
+    {
+        rule = null;
+        var query = EntityQueryEnumerator<RailroadRuleComponent, GameRuleComponent>();
+        while (query.MoveNext(out var uid, out var comp1, out var comp2))
+        {
+            if (!GameTicker.IsGameRuleActive(uid, comp2) || comp1.Stage == RailroadStage.Stopped)
+                continue;
+
+            rule = (uid, comp1);
+            return true;
+        }
+        return false;
+    }
+
+    private bool TryGetJobSpecificPool
+    (
+        Entity<RailroadRuleComponent> ruleEnt,
+        Entity<RailroadableComponent> subject,
+        [NotNullWhen(true)] out List<Entity<RailroadCardComponent, RuleOwnerComponent>>? pool
+    )
+    {
+        if (_mind.TryGetMind(subject.Owner, out var mindUid, out var mind)
+            && _job.MindTryGetJobId(mindUid, out var job)
+            && job != null
+            && ruleEnt.Comp.PoolByJob.TryGetValue(job.Value, out var jobPool)
+            && jobPool.Count > 0)
+        {
+            pool = jobPool;
+            return true;
+        }
+        pool = null;
+        return false;
+    }
+
+    private bool TryGetObjectiveSpecificPool
+    (
+        Entity<RailroadRuleComponent> ruleEnt,
+        Entity<RailroadableComponent> subject,
+        [NotNullWhen(true)] out List<Entity<RailroadCardComponent, RuleOwnerComponent>>? pool
+    )
+    {
+        if (_mind.TryGetMind(subject.Owner, out var mindUid, out var mind))
+        {
+            foreach (var objectiveUid in mind.Objectives)
+            {
+                if (!TryComp<ObjectiveComponent>(objectiveUid, out var objectiveComp))
+                    continue;
+
+                if (MetaData(objectiveUid).EntityPrototype is { } objectiveEntityPrototype)
+                {
+                    var objectiveProtoId = new EntProtoId<ObjectiveComponent>(objectiveEntityPrototype.ID);
+                    if (ruleEnt.Comp.PoolByObjective.TryGetValue(objectiveProtoId, out var objectivePool)
+                        && objectivePool.Count > 0)
+                    {
+                        pool = objectivePool;
+                        return true;
+                    }
+                }
+            }
+        }
+        pool = null;
+        return false;
+    }
+    #endregion
+}

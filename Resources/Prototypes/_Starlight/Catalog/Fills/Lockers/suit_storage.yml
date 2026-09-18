@@ -1,0 +1,71 @@
+# Mining
+- type: entity
+  id: SuitStorageMiningSpecialist
+  parent: SuitStorageBase
+  suffix: Mining
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: FillMiningSpecialistHardsuitSpaceHazard
+  - type: AccessReader
+    access: [["Mining"]]
+
+# Blueshield
+- type: entity
+  id: SuitStorageBlueShield
+  parent: SuitStorageBase
+  suffix: BlueShield
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: OxygenTankFilled
+        - id: NitrogenTankFilled
+        - id: CoolingUnit
+        - id: ClothingOuterHardsuitBlueshield
+        - id: ClothingMaskBreath
+        - id: ClothingShoesBootsMagBSO
+  - type: AccessReader
+    access: [["BlueShield"]]
+
+- type: entity
+  id: SuitStorageBlueShieldBluespaced
+  suffix: BlueShield, Bluespaced
+  parent: SuitStorageBlueShield
+  categories: [ Spawner ]
+  components:
+  - type: TriggerOnSpawn
+  - type: SpawnOnTrigger
+    proto: EffectFlashBluespace
+
+# Security
+- type: entity
+  id: SuitStorageSecDouble
+  parent: SuitStorageSec
+  name: double suit storage unit
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: FillSuitStorageSecurityDouble
+
+- type: entityTable
+  id: FillSuitStorageSecurityDouble
+  table: !type:AllSelector
+    children:
+    - id: OxygenTankFilled
+      amount: 2
+    - id: NitrogenTankFilled
+      amount: 2
+    - id: CoolingUnit
+      amount: 2
+    - id: ClothingOuterHardsuitSecurity
+      amount: 2
+    - id: ClothingMaskBreath
+      amount: 2
+    - id: ClothingShoesBootsMagSec
+      amount: 2
+    - id: JetpackSecurityFilled # because mapping them manually sucks
+      amount: 2

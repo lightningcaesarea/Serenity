@@ -1,0 +1,151 @@
+# Standard Access Configurator
+- type: entity
+  parent: BaseItem
+  id: AccessConfigurator
+  name: access configurator
+  description: Used to modify the access level requirements for airlocks and other lockable devices.
+  components:
+    - type: EmitSoundOnLand
+      sound:
+        path: /Audio/Items/multitool_drop.ogg
+    - type: Sprite
+      sprite: Objects/Tools/access_configurator.rsi
+      state: icon
+    - type: Item
+      size: Small
+    - type: Clothing
+      sprite: Objects/Tools/access_configurator.rsi
+      quickEquip: false
+      slots:
+        - Belt
+    - type: AccessOverrider
+      # Starlight-edit: Start
+      accessGroups:
+      - General
+      - Security
+      - Cargo
+      - Command
+      - Research
+      - Medical
+      - Service
+      - Engineering
+      - Law
+      # Starlight-edit: End
+      privilegedIdSlot:
+        name: AccessOverrider-privilegedId
+        ejectSound: /Audio/Machines/id_swipe.ogg
+        insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+        ejectOnBreak: true
+        swap: false
+        whitelist:
+          components:
+            - IdCard
+      denialSound:
+        path: /Audio/Machines/custom_deny.ogg
+      doAfter: 0.5
+    - type: UserInterface
+      interfaces:
+        enum.AccessOverriderUiKey.Key:
+          type: AccessOverriderBoundUserInterface
+    - type: ActivatableUI
+      key: enum.AccessOverriderUiKey.Key
+      requiresComplex: true
+      requireActiveHand: false
+      singleUser: true
+      inHandsOnly: true
+    - type: ItemSlots
+    - type: ContainerContainer
+      containers:
+        AccessOverrider-privilegedId: !type:ContainerSlot
+    - type: StealTarget # Starlight
+      stealGroup: AccessConfigurator # Starlight
+
+# Universal/Admin Access Configurator
+- type: entity
+  parent: AccessConfigurator
+  id: AccessConfiguratorUniversal
+  name: universal access configurator
+  suffix: Admin
+  description: A modified access configurator used only by the mythical Administrator.
+  components:
+    - type: Sprite
+      sprite: Objects/Tools/universal_access_configurator.rsi
+    - type: Clothing
+      sprite: Objects/Tools/universal_access_configurator.rsi
+    - type: AccessOverrider
+    # Starlight-edit: Start
+      accessGroups:
+      - General
+      - Security
+      - Cargo
+      - Command
+      - Research
+      - Medical
+      - Service
+      - Engineering
+      - Law
+      - Misc
+      - CentralCommand
+      - NanoTrasen
+      - Syndicate
+      - Silicon
+      - Xenoborg
+      overridesTargetRestrictions: true
+      privilegedIdSlot:
+        name: AccessOverrider-privilegedId # Starlight-edit
+        startingItem: UniversalIDCard
+        ejectSound: /Audio/Machines/id_swipe.ogg
+        insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+        ejectOnBreak: true
+        swap: false
+        whitelist:
+          components:
+            - IdCard
+      denialSound:
+        path: /Audio/Machines/custom_deny.ogg
+      doAfter: 0.5
+
+    - type: UserInterface
+      interfaces:
+        enum.AccessOverriderUiKey.Key:
+          type: AccessOverriderBoundUserInterface
+    - type: ActivatableUI
+      key: enum.AccessOverriderUiKey.Key
+      requiresComplex: true
+      requireActiveHand: false
+      singleUser: true
+      inHandsOnly: true
+    - type: ItemSlots
+    - type: ContainerContainer
+      containers:
+        AccessOverrider-privilegedId: !type:ContainerSlot
+    # Starlight-edit: End
+
+- type: entity
+  parent: AccessConfigurator
+  id: AccessConfiguratorXenoborg
+  name: xenoborg access configurator
+  description: A modified access configurator used by the xenoborgs.
+  components:
+  - type: Sprite
+    sprite: Objects/Tools/access_configurator.rsi
+  - type: Clothing
+    sprite: Objects/Tools/access_configurator.rsi
+  - type: AccessOverrider
+    showPrivilegedId: false
+    accessGroups: # Starlight-edit - accessLevels -> accessGroups
+    - Xenoborg
+    privilegedIdSlot:
+      name: id-card-console-privileged-id
+      startingItem: XenoborgIDCard
+      ejectSound: /Audio/Machines/id_swipe.ogg
+      insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+      ejectOnBreak: true
+      disableEject: true
+      swap: false
+      whitelist:
+        components:
+        - IdCard
+    denialSound:
+      path: /Audio/Machines/custom_deny.ogg
+    doAfter: 0.5

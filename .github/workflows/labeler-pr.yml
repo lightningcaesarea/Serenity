@@ -1,0 +1,20 @@
+﻿name: "Labels: PR"
+
+# Cancel older jobs on PRs when new changes are pushed
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+on:
+- pull_request_target
+
+jobs:
+  labeler:
+    if: github.actor != 'PJBot'
+    permissions:
+      contents: read
+      pull-requests: write
+      issues: write
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/labeler@v5

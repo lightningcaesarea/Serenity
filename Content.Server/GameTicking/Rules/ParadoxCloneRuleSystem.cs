@@ -1,0 +1,175 @@
+using System.Linq;
+using Content.Server.Antag;
+using Content.Server.Chat.Managers;
+using Content.Server.Cloning;
+using Content.Server.GameTicking.Rules.Components;
+using Content.Server.Medical.SuitSensors;
+using Content.Server.Objectives.Components;
+using Content.Shared.GameTicking.Components;
+using Content.Shared.Gibbing.Components;
+using Content.Shared.Medical.SuitSensor;
+using Content.Shared.Mind;
+using Robust.Shared.Random;
+// Starlight start
+using Content.Shared._Starlight.Antags.Vampires.Components;
+using Content.Shared._Starlight.Antags.Vampires.Prototypes;
+using Robust.Shared.Prototypes;
+using Content.Server._Starlight.Objectives.Components;
+using Content.Shared._Starlight.Overlay.Components;
+// Starlight end
+
+namespace Content.Server.GameTicking.Rules;
+
+public sealed partial class ParadoxCloneRuleSystem : GameRuleSystem<ParadoxCloneRuleComponent>
+{
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private CloningSystem _cloning = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private SuitSensorSystem _sensor = default!;
+    [Dependency] private IChatManager _chatManager = default!; // SL add
+    [Dependency] private IPrototypeManager _proto = default!; // SL add
+    [Dependency] private IComponentFactory _componentFactory = default!; // SL add
+
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        SubscribeLocalEvent<ParadoxCloneRuleComponent, AntagSelectEntityEvent>(OnAntagSelectEntity);
+        SubscribeLocalEvent<ParadoxCloneRuleComponent, AfterAntagEntitySelectedEvent>(AfterAntagEntitySelected);
+    }
+
+    protected override void Started(EntityUid uid, ParadoxCloneRuleComponent component, GameRuleComponent gameRule, GameRuleStartedEvent args)
+    {
+        base.Started(uid, component, gameRule, args);
+
+        // check if we got enough potential cloning targets, otherwise cancel the gamerule so that the ghost role does not show up
+        var allHumans = _mind.GetAliveHumans();
+
+        if (allHumans.Count == 0)
+        {
+            Log.Info("Could not find any alive players to create a paradox clone from! Ending gamerule.");
+            ForceEndSelf(uid, gameRule);
+        }
+
+        // SL start
+        if (FindValidPlayer() is null)
+        {
+            Log.Warning("Exhausted all alive players while searching for a valid target. Failed to create paradox clone.");
+            ForceEndSelf(uid, gameRule);
+        }
+        // SL end
+    }
+
+    // we have to do the spawning here so we can transfer the mind to the correct entity and can assign the objectives correctly
+    private void OnAntagSelectEntity(Entity<ParadoxCloneRuleComponent> ent, ref AntagSelectEntityEvent args)
+    {
+        if (ent.Comp.OriginalBody != null) // target was overridden, for example by admin antag control
+        {
+            if (Deleted(ent.Comp.OriginalBody.Value) || !_mind.TryGetMind(ent.Comp.OriginalBody.Value, out var originalMindId, out var _))
+            {
+                Log.Warning("Could not find mind of target player to paradox clone!");
+                return;
+            }
+            ent.Comp.OriginalMind = originalMindId;
+        }
+        else
+        {
+            // get possible targets
+            var allAliveHumanoids = _mind.GetAliveHumans();
+
+            // we already checked when starting the gamerule, but someone might have died since then.
+            if (allAliveHumanoids.Count == 0)
+            {
+                Log.Warning("Could not find any alive players to create a paradox clone from!");
+                if (args.Session is { } session) // Starlight
+                    _chatManager.DispatchServerMessage(args.Session, Loc.GetString("alerts-error-failed-to-spawn-ghost-role")); // SL edit
+                _chatManager.SendAdminAnnouncement($"Player {args.Session} tried to claim Paradox Clone ghost role and it failed to spawn."); // SL edit
+                return;
+            }
+
+            // SL start
+            // pick a random VALID player
+            var randomHumanoidMind = FindValidPlayer();
+            if (randomHumanoidMind is null)
+            {
+                Log.Warning("Exhausted all alive players while searching for a valid target. Failed to create paradox clone.");
+                if (args.Session is { } session) // Starlight
+                    _chatManager.DispatchServerMessage(args.Session, Loc.GetString("alerts-error-failed-to-spawn-ghost-role"));
+                _chatManager.SendAdminAnnouncement($"Player {args.Session} tried to claim Paradox Clone ghost role and it failed to spawn.");
+                return;
+            }
+            ent.Comp.OriginalMind = randomHumanoidMind;
+            ent.Comp.OriginalBody = randomHumanoidMind.Value.Comp.OwnedEntity;
+            // SL end
+
+        }
+
+        if (ent.Comp.OriginalBody == null || !_cloning.TryCloning(ent.Comp.OriginalBody.Value, args.Coords, ent.Comp.Settings, out var clone))
+        {
+            Log.Error($"Unable to make a paradox clone of entity {ToPrettyString(ent.Comp.OriginalBody)}");
+            return;
+        }
+
+        var targetComp = EnsureComp<TargetOverrideComponent>(clone.Value);
+        targetComp.Target = ent.Comp.OriginalMind; // set the kill target
+
+        var gibComp = EnsureComp<GibOnRoundEndComponent>(clone.Value);
+        gibComp.SpawnProto = ent.Comp.GibProto;
+        gibComp.PreventGibbingObjectives = new() { "ParadoxCloneKillObjective" }; // don't gib them if they killed the original.
+
+        // turn their suit sensors off so they don't immediately get noticed
+        _sensor.SetAllSensors(clone.Value, SuitSensorMode.SensorOff);
+
+        args.Entity = clone;
+
+        // Starlight-edit
+        TryCopyVampireAbilities(ent.Comp.OriginalBody.Value, clone.Value);
+    }
+
+    private void AfterAntagEntitySelected(Entity<ParadoxCloneRuleComponent> ent, ref AfterAntagEntitySelectedEvent args)
+    {
+        if (ent.Comp.OriginalMind == null)
+            return;
+
+        if (!_mind.TryGetMind(args.EntityUid, out var cloneMindId, out var cloneMindComp))
+            return;
+
+        _mind.CopyObjectives(ent.Comp.OriginalMind.Value, (cloneMindId, cloneMindComp), ent.Comp.ObjectiveWhitelist, ent.Comp.ObjectiveBlacklist);
+    }
+
+    // SL start
+    private Entity<MindComponent>? FindValidPlayer()
+    {
+        var validPlayers = _mind.GetAliveHumans().Where(mind => !HasComp<NoObjectiveTargetComponent>(mind.Comp.OwnedEntity)).ToHashSet();
+        if (validPlayers.Count == 0) return null;
+        return _random.Pick(validPlayers);
+    }
+
+    private void TryCopyVampireAbilities(EntityUid original, EntityUid clone)
+    {
+        if (!TryComp<VampireComponent>(original, out var originalVampire))
+            return;
+
+        var cloneVampire = EnsureComp<VampireComponent>(clone);
+
+        cloneVampire.TotalBlood = originalVampire.TotalBlood;
+        cloneVampire.DrunkBlood = originalVampire.DrunkBlood;
+        cloneVampire.BloodFullness = originalVampire.BloodFullness;
+        cloneVampire.ChosenClassId = originalVampire.ChosenClassId;
+        cloneVampire.FullPower = originalVampire.FullPower;
+
+        Dirty(clone, cloneVampire);
+
+        if (!string.IsNullOrWhiteSpace(originalVampire.ChosenClassId)
+            && _proto.TryIndex<VampireClassPrototype>(originalVampire.ChosenClassId, out var classProto))
+        {
+            var reg = _componentFactory.GetRegistration(classProto.ClassComponent, ignoreCase: true);
+            var classComp = _componentFactory.GetComponent(reg.Type);
+            AddComp(clone, classComp);
+
+            if (classProto.ID == "Umbrae")
+                EnsureComp<NightVisionComponent>(clone);
+        }
+    }
+    // SL end
+}

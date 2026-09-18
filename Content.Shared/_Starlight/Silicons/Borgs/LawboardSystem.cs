@@ -1,0 +1,50 @@
+using Content.Shared.Examine;
+using Content.Shared.Silicons.Laws;
+using Content.Shared.Silicons.Laws.Components;
+using Robust.Shared.Prototypes;
+
+namespace Content.Shared._Starlight.Silicons.Borgs;
+
+public sealed partial class LawboardSystem : EntitySystem
+{
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private ILocalizationManager _loc = default!;
+
+    public override void Initialize()
+    {
+        SubscribeLocalEvent<SiliconLawProviderComponent, ExaminedEvent>(OnExamined);
+    }
+
+    private void OnExamined(EntityUid uid, SiliconLawProviderComponent component, ExaminedEvent args)
+    {
+        if (!args.IsInDetailsRange)
+            return;
+        // DONT DISPLAY LAWS OF BORGS OR AI CORES LIKE THE MORON I AM
+        if (!component.IsLawboard)
+            return;
+
+        if (!_prototype.TryIndex<SiliconLawsetPrototype>(component.Laws, out var lawsetProto))
+            return;
+
+        var lawsetName = lawsetProto.Name != null
+            ? _loc.GetString(lawsetProto.Name)
+            : "Unknown";
+        var description = $"[color=cyan]An electronics board containing the [color=yellow]{lawsetName}[/color] lawset.[/color]\n[color=orange]Uploaded Laws:[/color]";
+
+        int lawNum = lawsetProto.StartAtZero ? 0 : 1;
+        foreach (var lawId in lawsetProto.Laws)
+        {
+            if (_prototype.TryIndex<SiliconLawPrototype>(lawId, out var lawProto))
+            {
+                var lawText = lawProto.LawString != null
+                    ? _loc.GetString(lawProto.LawString)
+                    : lawProto.ID;
+
+                description += $"\n[color=lime]Law {lawNum}:[/color] [color=white]{lawText}[/color]";
+                lawNum++;
+            }
+        }
+
+        args.PushMarkup(description);
+    }
+}

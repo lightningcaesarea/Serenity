@@ -1,0 +1,43 @@
+- type: vendingMachineInventory
+  id: SecDrobeInventory
+  startingInventory:
+    ClothingBackpackSecurity: 3
+    ClothingBackpackSatchelSecurity: 3
+    ClothingBackpackDuffelSecurity: 3
+    ClothingUniformJumpsuitSec: 3
+    ClothingShoesBootsJack: 3
+    ClothingHeadHatBeretSecurity: 3
+    ClothingHeadHatSecsoft: 3
+    ClothingHeadBandRed: 3
+    ClothingMaskNeckGaiterRed: 3
+    ClothingHandsGlovesSecurityRed: 3
+    ClothingHandsGlovesSecurityFingerlessRed: 3
+    ClothingHandsMittensSecurityRed: 3 # SL
+    ClothingUniformJumpskirtSec: 3
+    ClothingUniformJumpsuitSecGrey: 3
+    ClothingUniformJumpskirtSecGrey: 3
+    ClothingUniformJumpsuitSecBlue: 3
+    ClothingUniformSecurityTshirt: 3 #SL Edit
+    ClothingHeadsetSecurity: 3
+    ClothingOuterWinterSec: 2
+    ClothingOuterArmorBasic: 2
+    ClothingOuterArmorBasicSlim: 2
+    ClothingOuterArmorPlate: 2
+    ClothingOuterArmorStab: 2
+    ClothingOuterArmorHeatAbsorb: 2
+    ClothingHeadHelmetPlate: 2
+    ClothingHeadHelmetStabproof: 2
+    ClothingHeadHelmetHeatAbsorbent: 2
+    ClothingNeckScarfStripedRed: 3
+    ClothingEyesBlindfold: 1
+    ClothingShoesBootsCombat: 1
+    ClothingShoesBootsWinterSec: 2
+    ClothingOuterSecurityBomber: 2 #SL Edit
+    ClothingOuterWindbreakerSecurity: 2 #Starlight
+    ClothingHeadHelmetJustice: 1
+  contrabandInventory:
+    ClothingMaskClownSecurity: 1
+    ClothingMaskMimeSecurity: 1
+    ToyFigurineSecurity: 1
+    ToyFigurineWarden: 1
+    ToyFigurineHeadOfSecurity: 1

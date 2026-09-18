@@ -1,0 +1,119 @@
+- type: entity
+  id: ChemDispenserEmpty
+  name: chemical dispenser
+  suffix: Empty
+  parent: ReagentDispenserBasePowerCell # Starlight-edit: power cell chem dispenser
+  description: An industrial grade chemical dispenser.
+  components:
+  - type: Sprite
+    sprite: Structures/dispensers.rsi
+    # Starlight-start: Chem Dispenser unpowered/wiring panel states
+    layers:
+      - state: industrial-off
+      - state: industrial-working
+        visible: false
+        map: [ "enum.PowerDeviceVisualLayers.Powered" ]
+      - state: industrial-panel
+        map: ["enum.WiresVisualLayers.MaintenancePanel"]
+        visible: false
+    snapCardinals: false # Starlight-edit: allow non-cardinal rotation for chem dispenser to avoid conflict with 4 direction plumbing connector sprites
+    # Starlight-end
+  - type: Storage
+    openOnActivate: false
+    whitelist:
+      tags:
+      - ChemDispensable
+  - type: ApcPowerReceiver
+  - type: ExtensionCableReceiver
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalGlassBreak
+      - !type:ChangeConstructionNodeBehavior
+        node: machineFrame
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: Machine
+    board: ChemDispenserMachineCircuitboard
+  - type: GuideHelp
+    guides:
+    - Chemicals
+    - Chemist
+  - type: StealTarget
+    stealGroup: ChemDispenser
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25, -0.4, 0.25, 0.4"
+        density: 190
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  # Starlight-start: Generatable Reagents
+  - type: ReagentDispenser
+    generatableReagents:
+      Iron: 2 # ReagentId: x energy for 1 quantity
+      Carbon: 2
+      Copper: 2
+      Hydrogen: 2
+      Oxygen: 0 # You really can't pump oxygen or generate it on 2525?
+      Sugar: 2
+      Silicon: 5
+      Phosphorus: 5
+  - type: WiresVisuals
+  - type: Appearance
+  - type: BatteryVisuals
+  # Starlight-end
+
+- type: entity
+  id: ChemDispenser
+  suffix: Filled
+  parent: ChemDispenserEmpty
+  components:
+  - type: ReagentDispenser
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: JugAluminium
+#        - id: JugCarbon
+        - id: JugChlorine
+#        - id: JugCopper
+        - id: JugEthanol
+        - id: JugFluorine
+#        - id: JugSugar
+#        - id: JugHydrogen
+        - id: JugIodine
+#        - id: JugIron
+        - id: JugLithium
+        - id: JugMercury
+        - id: JugNitrogen
+#        - id: JugOxygen
+#        - id: JugPhosphorus
+        - id: JugPotassium
+        - id: JugRadium
+#        - id: JugSilicon
+        - id: JugSodium
+        - id: JugSulfur
+  # Starlight-start: Filled powercell slot
+  - type: PowerCellSlot
+    cellSlotId: cell_slot
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: power-cell-slot-component-slot-name-default
+        startingItem: PowerCellMedium
+        #Starlight Start
+        blacklist:
+          tags:
+          - MechReactor
+        #Starlight End
+  # Starlight-end

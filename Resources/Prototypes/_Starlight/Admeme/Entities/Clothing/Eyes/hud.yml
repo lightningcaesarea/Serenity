@@ -1,0 +1,26 @@
+- type: entity
+  parent: [ClothingEyesBase, BaseNanoTrasenContraband]
+  id: ClothingEyesHudNTNC
+  name: NanoTrasen navy marine hud
+  description: Standard issue heads up display for NanoTrasen Navy Marines
+  components:
+    - type: Sprite
+      sprite: _Starlight/Admeme/Clothing/Eyes/Hud/ntnc.rsi
+    - type: Clothing
+      sprite: _Starlight/Admeme/Clothing/Eyes/Hud/ntnc.rsi
+    - type: ShowJobIcons
+    - type: ShowMindShieldIcons
+    - type: ShowCriminalRecordIcons
+    - type: ShowHealthBars
+      damageContainers:
+        - Biological
+        - Hybrid
+    - type: ShowHealthIcons
+      damageContainers:
+        - Biological
+        - Hybrid
+    - type: Tag
+      tags:
+        - HudMedical
+    - type: EyeProtection
+      protectionTime: 5

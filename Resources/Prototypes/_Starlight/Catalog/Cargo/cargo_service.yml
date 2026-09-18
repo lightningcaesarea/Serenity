@@ -1,0 +1,29 @@
+- type: cargoProduct
+  id: ServiceHydraRefill
+  icon:
+    sprite: Objects/Weapons/Guns/Ammunition/Explosives/explosives.rsi
+    state: cleanade
+  product: CrateServiceHydraRefill
+  cost: 750
+  category: cargoproduct-category-name-service
+  group: market
+
+- type: cargoProduct
+  id: ServiceIceCreamMakerStarter
+  icon:
+    sprite: _Starlight/Structures/Machines/ice_cream_maker.rsi
+    state: icon
+  product: CrateServiceIceCreamMakerStarter
+  cost: 2250
+  category: cargoproduct-category-name-service
+  group: market
+
+- type: cargoProduct
+  id: ServiceDocumentPrinter
+  icon:
+    sprite: _Starlight/Structures/Machines/printer.rsi
+    state: icon
+  product: CrateServiceDocumentPrinter
+  cost: 2000
+  category: cargoproduct-category-name-service
+  group: market

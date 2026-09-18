@@ -1,0 +1,33 @@
+﻿using Content.Server.Chat.Managers;
+using Content.Shared._Starlight.Railroading.Components.Handlers.Message;
+using Content.Shared._Starlight.Railroading.Events;
+using Content.Shared.Chat;
+using Robust.Server.Player;
+using Robust.Shared.Random;
+
+namespace Content.Server._Starlight.Railroading.HandlerSystem;
+
+public sealed partial class RailroadingMessageHandlerSystem : EntitySystem
+{
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private IChatManager _chat = default!;
+    [Dependency] private IPlayerManager _players = default!;
+
+    public override void Initialize()
+    {
+        base.Initialize();
+        SubscribeLocalEvent<RailroadMessageOnChosenComponent, RailroadingCardChosenEvent>(OnChosen);
+    }
+
+    private void OnChosen(Entity<RailroadMessageOnChosenComponent> ent, ref RailroadingCardChosenEvent args)
+    {
+        if (!_players.TryGetSessionByEntity(args.Subject, out var player))
+            return;
+
+        var msg = _random.Pick(ent.Comp.Messages);
+
+        var message = Loc.GetString(msg.Message);
+        var wrappedMessage = Loc.GetString(msg.Wrapped);
+        _chat.ChatMessageToOne(ChatChannel.Radio, message, wrappedMessage, default, false, player.Channel, msg.Color ?? Color.FromHex("#57A3F7"));
+    }
+}

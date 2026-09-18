@@ -1,0 +1,21 @@
+- type: loadout
+  id: RDClassicalJumpsuit
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitRDClassical
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorResearcher
+
+- type: loadout
+  id: RDClassicalJumpskirt
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtRDClassical
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorResearcher
+
+# Head
+- type: loadout
+  id: ResearchDirectorBeretRD
+  equipment:
+    head: ClothingHeadHatBeretRD

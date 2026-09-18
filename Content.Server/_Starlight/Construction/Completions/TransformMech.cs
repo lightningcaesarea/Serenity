@@ -1,0 +1,117 @@
+using Content.Server.Construction;
+using Content.Server.Mech.Systems;
+using Content.Shared.Construction;
+using Content.Shared.Mech.Components;
+using Content.Shared.Power.Components;
+using JetBrains.Annotations;
+using Robust.Server.Containers;
+using Robust.Shared.Containers;
+using Robust.Shared.Prototypes;
+
+namespace Content.Server._Starlight.Construction.Completions;
+
+/// <summary>
+/// Transforms a mech to a different type, this is used for upgrading mechs.
+/// Right now, this is only the Ripley.
+/// </summary>
+[UsedImplicitly, DataDefinition]
+public sealed partial class TransformMech : IGraphAction
+{
+    [Dependency] private ILogManager _logManager = default!;
+
+    private ISawmill _log { get => field ??= _logManager.GetSawmill("construction.mech"); } = default!;
+
+    [DataField(required: true)]
+    public EntProtoId MechPrototype = string.Empty;
+
+    [DataField]
+    public string BatteryContainer = "mech-battery-slot";
+
+    [DataField]
+    public string GasTankContainer = "mech-gas-tank-slot";
+
+    [DataField]
+    public string EquipmentContainer = "mech-equipment-container";
+
+    [DataField]
+    public string PilotContainer = "mech-pilot-slot";
+
+    // TODO use or generalize ConstructionSystem.ChangeEntity();
+    public void PerformAction(EntityUid uid, EntityUid? userUid, IEntityManager entityManager)
+    {
+        if (!entityManager.TryGetComponent(uid, out ContainerManagerComponent? containerManager))
+        {
+            _log.Warning($"Mech construct entity {uid} did not have a container manager! Aborting build mech action.");
+            return;
+        }
+
+        var containerSystem = entityManager.EntitySysManager.GetEntitySystem<ContainerSystem>();
+        var mechSys = entityManager.System<MechSystem>();
+
+        if (!containerSystem.TryGetContainer(uid, BatteryContainer, out var batteryContainer, containerManager))
+        {
+            _log.Warning($"Mech construct entity {uid} did not have the specified '{BatteryContainer}' container! Aborting build mech action.");
+            return;
+        }
+
+        if (!containerSystem.TryGetContainer(uid, GasTankContainer, out var gasTankContainer, containerManager))
+        {
+            _log.Warning($"Mech construct entity {uid} did not have the specified '{GasTankContainer}' container! Aborting build mech action.");
+            return;
+        }
+
+        if (!containerSystem.TryGetContainer(uid, EquipmentContainer, out var equipmentContainer, containerManager))
+        {
+            _log.Warning($"Mech construct entity {uid} did not have the specified '{EquipmentContainer}' container! Aborting build mech action.");
+            return;
+        }
+
+        if (!containerSystem.TryGetContainer(uid, PilotContainer, out var pilotContainer, containerManager))
+        {
+            _log.Warning($"Mech construct entity {uid} did not have the specified '{PilotContainer}' container! Aborting build mech action.");
+            return;
+        }
+        var transform = entityManager.GetComponent<TransformComponent>(uid);
+        var mech = entityManager.SpawnEntity(MechPrototype, transform.Coordinates);
+
+        if (entityManager.TryGetComponent<MechComponent>(mech, out var mechComp))
+        {
+            if (batteryContainer.ContainedEntities.Count == 1)
+            {
+                var cell = batteryContainer.ContainedEntities[0];
+                if (!entityManager.TryGetComponent<BatteryComponent>(cell, out var batteryComponent))
+                {
+                    _log.Warning($"Mech construct entity {uid} had an invalid entity in container \"{BatteryContainer}\"! Aborting build mech action.");
+                    return;
+                }
+
+                containerSystem.Remove(cell, batteryContainer);
+                if (mechComp.BatterySlot.ContainedEntity == null)
+                {
+                    mechSys.InsertBattery(mech, cell, mechComp, batteryComponent);
+                    containerSystem.Insert(cell, mechComp.BatterySlot);
+                }
+            }
+            if (mechComp.GasTankSlot.ContainedEntity == null && gasTankContainer.ContainedEntities.Count > 0)
+            {
+                var gasTank = gasTankContainer.ContainedEntities[0];
+                containerSystem.Insert(gasTank, mechComp.GasTankSlot);
+            }
+            while (equipmentContainer.ContainedEntities.Count > 0)
+            {
+                var equipment = equipmentContainer.ContainedEntities[0];
+                containerSystem.Remove(equipment, equipmentContainer);
+                containerSystem.Insert(equipment, mechComp.EquipmentContainer);
+            }
+            if (mechComp.PilotSlot.ContainedEntity == null && pilotContainer.ContainedEntities.Count > 0)
+            {
+                mechSys.TryEject(uid);
+                mechSys.TryInsert(mech, pilotContainer.ContainedEntities[0]);
+            }
+        }
+        var entChangeEv = new ConstructionChangeEntityEvent(mech, uid);
+        entityManager.EventBus.RaiseLocalEvent(uid, entChangeEv);
+        entityManager.EventBus.RaiseLocalEvent(mech, entChangeEv, broadcast: true);
+        entityManager.QueueDeleteEntity(uid);
+    }
+}

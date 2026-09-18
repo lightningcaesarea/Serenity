@@ -1,0 +1,88 @@
+using System.Numerics;
+using Content.Server.Chat.Systems;
+using Content.Server.Station.Systems;
+using Content.Server.StationEvents.Components;
+using Content.Shared.GameTicking.Components;
+using Content.Shared.Random.Helpers;
+using Robust.Server.Audio;
+using Robust.Shared.Map;
+using Robust.Shared.Physics.Components;
+using Robust.Shared.Physics.Systems;
+using Robust.Shared.Random;
+
+namespace Content.Server.StationEvents.Events;
+
+public sealed partial class MeteorSwarmSystem : StationEventSystem<MeteorSwarmComponent> // Starlight-edit: Use station event system
+{
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private AudioSystem _audio = default!;
+    [Dependency] private ChatSystem _chat = default!;
+    [Dependency] private StationSystem _station = default!;
+
+    protected override void Added(EntityUid uid, MeteorSwarmComponent component, GameRuleComponent gameRule, GameRuleAddedEvent args)
+    {
+        base.Added(uid, component, gameRule, args);
+
+        component.WaveCounter = component.Waves.Next(RobustRandom);
+
+        //Starlight begin
+        if (!TryComp<StationEventComponent>(uid, out var stationEvent)) return;
+        if (component.Announcement is { } locId)
+            Announce(stationEvent, locId, false, colorOverride: Color.Gold);
+        //Starlight end
+    }
+
+    protected override void ActiveTick(EntityUid uid, MeteorSwarmComponent component, GameRuleComponent gameRule, float frameTime)
+    {
+        if (Timing.CurTime < component.NextWaveTime)
+            return;
+
+        component.NextWaveTime += TimeSpan.FromSeconds(component.WaveCooldown.Next(RobustRandom));
+
+        //Starlight begin
+        if(!TryComp<StationEventComponent>(uid, out var stationEvent)) return;
+
+        if (stationEvent.TargetStation is null) return;
+        if (_station.GetLargestGrid(stationEvent.TargetStation.Value) is not { } grid)
+            return;
+        //Starlight end
+
+        var mapId = Transform(grid).MapID;
+        var playableArea = _physics.GetWorldAABB(grid);
+
+        var minimumDistance = (playableArea.TopRight - playableArea.Center).Length() + 50f;
+        var maximumDistance = minimumDistance + 100f;
+
+        var center = playableArea.Center;
+
+        var meteorsToSpawn = component.MeteorsPerWave.Next(RobustRandom);
+        for (var i = 0; i < meteorsToSpawn; i++)
+        {
+            var spawnProto = RobustRandom.Pick(component.Meteors);
+
+            var angle = component.NonDirectional
+                ? RobustRandom.NextAngle()
+                : new Random(uid.Id).NextAngle();
+
+            var offset = angle.RotateVec(new Vector2((maximumDistance - minimumDistance) * RobustRandom.NextFloat() + minimumDistance, 0));
+
+            // the line at which spawns occur is perpendicular to the offset.
+            // This means the meteors are less likely to bunch up and hit the same thing.
+            var subOffsetAngle = RobustRandom.Prob(0.5f)
+                ? angle + Math.PI / 2
+                : angle - Math.PI / 2;
+            var subOffset = subOffsetAngle.RotateVec(new Vector2( (playableArea.TopRight - playableArea.Center).Length() / 3 * RobustRandom.NextFloat(), 0));
+
+            var spawnPosition = new MapCoordinates(center + offset + subOffset, mapId);
+            var meteor = Spawn(spawnProto, spawnPosition);
+            var physics = Comp<PhysicsComponent>(meteor);
+            _physics.ApplyLinearImpulse(meteor, -offset.Normalized() * component.MeteorVelocity * physics.Mass, body: physics);
+        }
+
+        component.WaveCounter--;
+        if (component.WaveCounter <= 0)
+        {
+            ForceEndSelf(uid, gameRule);
+        }
+    }
+}

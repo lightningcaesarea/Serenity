@@ -1,0 +1,48 @@
+- type: job
+  id: SalvageSpecialist
+  name: job-name-salvagespec
+  description: job-description-salvagespecSL
+  rules: job-rules-itg-aligned #Starlight
+  playTimeTracker: JobSalvageSpecialist
+  requirements:
+    - !type:DepartmentTimeRequirement
+      department: Cargo
+      time: 5h # Starlight start. You should learn how to drive the shuttle, or at least sell stuff at ATS.
+    - !type:OverallPlaytimeRequirement
+      time: 8h
+  icon: "JobIconSalvageSpecialist" # Starlight - New distinct icon, Starlight end
+  startingGear: SalvageSpecialistGear
+  supervisors: job-supervisors-itg #starlight
+  displayWeight: 4 # Starlight
+  access:
+  - Salvage
+  - External
+  - Maintenance
+  - Shuttle # Starlight
+  special:
+  - !type:AddImplantSpecial
+    implants: [ MindShieldImplant ]
+  - !type:AddComponentSpecial
+    components:
+      - type: NoObjectiveTarget #starlight
+
+- type: startingGear
+  id: SalvageSpecialistGear
+  equipment:
+   # id: SalvagePDA #Starlight
+    ears: ClothingHeadsetSalvageLead #starlight
+  #storage:
+    #back:
+    #- Stuff
+
+- type: chameleonOutfit
+  id: SalvageSpecialistChameleonOutfit
+  job: SalvageSpecialist
+  equipment:
+    head: ClothingHeadHatCargosoft
+    eyes: ClothingEyesGlassesCheapSunglasses
+    mask: ClothingMaskGasExplorer
+    outerClothing: ClothingOuterWinterMiner
+    neck: ClothingNeckScarfStripedBrown
+    gloves: ClothingHandsGlovesColorBlack
+

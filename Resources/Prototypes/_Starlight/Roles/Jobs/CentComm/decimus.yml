@@ -1,0 +1,67 @@
+- type: job
+  id: Decimus
+  name: job-name-decimus
+  description: job-description-decimus
+  playTimeTracker: JobDecimus
+  requirements:
+    - !type:DepartmentTimeRequirement
+      department: Security
+      time: 72000 # 20 hrs
+    - !type:RolesRequirement
+      proto: ExtRolesReq
+  setPreference: false
+  startingGear: DecimusGear
+  icon: JobIconDecimus
+  rules: job-rules-corporate-aligned
+  supervisors: job-supervisors-none
+  bypassEorPacification: true
+  accessGroups:
+  - AllAccess
+  access:
+  - CentralCommand
+
+- type: startingGear
+  id: DecimusGear
+  equipment:
+    jumpsuit: ClothingUniformNTNCFatigues
+    back: ClothingBackpackDeathSquad
+    mask: ClothingMaskGasDeathSquad
+    eyes: ClothingEyesGlassesNanotrasen
+    ears: ClothingHeadsetAltNTSF
+    gloves: ClothingHandsGlovesCombat
+    outerClothing: ClothingOuterHardsuitDecimus
+    shoes: ClothingShoesBootsMagERT
+    id: DecimusPDA
+    pocket1: EnergySword
+    pocket2: EnergyShieldUnbreakable
+    belt: ClothingBeltMilitaryWebbingERT
+    suitstorage: WeaponPulseRifle
+  storage:
+    back:
+    - WelderExperimental
+    - ToolDebug
+    - AccessOveriderUnlimited
+    - MagazinePistolSubMachineGunAP
+    - MagazinePistolSubMachineGunAP
+    - MagazinePistolSubMachineGunAP
+    - WeaponSubMachineGunDrozd
+    - PortableRecharger
+    - MedkitCombatFilled
+    - JugPunctTranex
+    - Hypospray
+    - WhiteholeGrenade
+    - ToxicGasGrenade
+    - ClusterGrenade
+    - PowerCellMicroreactor
+    - SingularityGrenade
+    belt:
+    - WeaponRevolverMatebaAP
+    - SpeedLoaderMagnumAP
+    - SpeedLoaderMagnumAP
+    - GrenadeShrapnel
+    - GrenadeIncendiary
+    - DefibrillatorCompact
+    - MedkitCombatFilled
+    - CombatMedipen
+    - CombatMedipen
+    - CombatMedipen

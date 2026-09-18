@@ -1,0 +1,65 @@
+using System.Linq;
+using Content.Server.Station.Systems;
+using Content.Server.StationEvents.Components;
+﻿using Content.Shared.GameTicking.Components;
+using JetBrains.Annotations;
+using Robust.Shared.Random;
+
+namespace Content.Server.StationEvents.Events;
+
+[UsedImplicitly]
+public sealed partial class BureaucraticErrorRule : StationEventSystem<BureaucraticErrorRuleComponent>
+{
+    [Dependency] private StationJobsSystem _stationJobs = default!;
+
+    protected override void Started(EntityUid uid, BureaucraticErrorRuleComponent component, GameRuleComponent gameRule, GameRuleStartedEvent args)
+    {
+        base.Started(uid, component, gameRule, args);
+
+        //Starlight begin | Prefer target station if there is one, if SOMEHOW that odesn't exist, fallback to existing trygetrandomstation call
+        EntityUid? chosenStation = null;
+        if (!TryComp<StationEventComponent>(uid, out var stationEvent)) return;
+        chosenStation = stationEvent.TargetStation;
+        if (chosenStation is null)
+            if (!TryGetRandomStation(out chosenStation))
+                return;
+        //Starlight end
+
+        var jobList = _stationJobs.GetJobs(chosenStation.Value).Keys.ToList();
+
+        foreach(var job in component.IgnoredJobs)
+            jobList.Remove(job);
+
+        if (jobList.Count == 0)
+            return;
+
+        // Low chance to completely change up the late-join landscape by closing all positions except infinite slots.
+        // Lower chance than the /tg/ equivalent of this event.
+        if (RobustRandom.Prob(0.25f))
+        {
+            var chosenJob = RobustRandom.PickAndTake(jobList);
+            _stationJobs.MakeJobUnlimited(chosenStation.Value, chosenJob); // INFINITE chaos.
+            foreach (var job in jobList)
+            {
+                if (_stationJobs.IsJobUnlimited(chosenStation.Value, job))
+                    continue;
+                _stationJobs.TrySetJobSlot(chosenStation.Value, job, 0);
+            }
+        }
+        else
+        {
+            var lower = (int) (jobList.Count * 0.20);
+            var upper = (int) (jobList.Count * 0.30);
+            // Changing every role is maybe a bit too chaotic so instead change 20-30% of them.
+            var num = RobustRandom.Next(lower, upper);
+            for (var i = 0; i < num; i++)
+            {
+                var chosenJob = RobustRandom.PickAndTake(jobList);
+                if (_stationJobs.IsJobUnlimited(chosenStation.Value, chosenJob))
+                    continue;
+
+                _stationJobs.TryAdjustJobSlot(chosenStation.Value, chosenJob, RobustRandom.Next(0, 6), clamp: true); //Starlight Edit: No removing job slots - we don't have enough as it is.
+            }
+        }
+    }
+}

@@ -1,0 +1,297 @@
+using Content.Shared.ActionBlocker;
+using Content.Shared.Chemistry.Components;
+using Content.Shared.Chemistry.Components.SolutionManager;
+using Content.Shared.Database;
+using Content.Shared.DoAfter;
+using Content.Shared.Examine;
+using Content.Shared.FixedPoint;
+using Content.Shared.Interaction;
+using Content.Shared.Item.ItemToggle.Components;
+using Content.Shared.Tools.Components;
+using Content.Shared._Starlight.ItemSwitch.Components;
+using Content.Shared._Starlight.Chemistry.Components;
+using System.Linq;
+
+namespace Content.Shared.Tools.Systems;
+
+public abstract partial class SharedToolSystem
+{
+    [Dependency] private ActionBlockerSystem _actionBlocker = default!;
+
+    public void InitializeWelder()
+    {
+        SubscribeLocalEvent<WelderComponent, MapInitEvent>(OnWelderInit);
+        SubscribeLocalEvent<WelderComponent, ExaminedEvent>(OnWelderExamine);
+        SubscribeLocalEvent<WelderComponent, AfterInteractEvent>(OnWelderAfterInteract);
+
+        SubscribeLocalEvent<WelderComponent, ToolUseAttemptEvent>((uid, comp, ev) =>
+        {
+            CanCancelWelderUse((uid, comp), ev.User, ev.Fuel, ev);
+        });
+        SubscribeLocalEvent<WelderComponent, DoAfterAttemptEvent<ToolDoAfterEvent>>((uid, comp, ev) =>
+        {
+            CanCancelWelderUse((uid, comp), ev.Event.User, ev.Event.Fuel, ev);
+        });
+        SubscribeLocalEvent<WelderComponent, ToolDoAfterEvent>(OnWelderDoAfter);
+
+        SubscribeLocalEvent<WelderComponent, ItemToggledEvent>(OnToggle);
+        SubscribeLocalEvent<WelderComponent, ItemToggleActivateAttemptEvent>(OnActivateAttempt);
+        SubscribeLocalEvent<WelderComponent, ItemToggleDeactivateAttemptEvent>(OnDeactivateAttempt);
+        SubscribeLocalEvent<WelderComponent, ItemSwitchedEvent>(ToggleComponent);
+    }
+
+    public void TurnOn(Entity<WelderComponent> entity, EntityUid? user)
+    {
+        if (!SolutionContainerSystem.TryGetSolution(entity.Owner, entity.Comp.FuelSolutionName, out var solutionComp, out _))
+            return;
+
+        SolutionContainerSystem.RemoveReagent(solutionComp.Value, entity.Comp.FuelReagent, entity.Comp.FuelLitCost);
+        entity.Comp.NextUpdate = _timing.CurTime + entity.Comp.WelderUpdateTimer; // Starlight, hmm, maybe don't consume infinite fuel a second
+        AdminLogger.Add(LogType.InteractActivate, LogImpact.Low,
+            $"{ToPrettyString(user):user} toggled {ToPrettyString(entity.Owner):welder} on");
+
+        entity.Comp.Enabled = true;
+        Dirty(entity, entity.Comp);
+    }
+
+    public void TurnOff(Entity<WelderComponent> entity, EntityUid? user)
+    {
+        AdminLogger.Add(LogType.InteractActivate, LogImpact.Low,
+            $"{ToPrettyString(user):user} toggled {ToPrettyString(entity.Owner):welder} off");
+        entity.Comp.Enabled = false;
+        Dirty(entity, entity.Comp);
+    }
+
+    public (FixedPoint2 fuel, FixedPoint2 capacity) GetWelderFuelAndCapacity(EntityUid uid, WelderComponent? welder = null, SolutionManagerComponent? solutionContainer = null)
+    {
+        if (!Resolve(uid, ref welder))
+            return default;
+
+        if (!SolutionContainerSystem.TryGetSolution(
+                (uid, solutionContainer),
+                welder.FuelSolutionName,
+                out _,
+                out var fuelSolution))
+        {
+            return default;
+        }
+
+        return (fuelSolution.GetTotalPrototypeQuantity(welder.FuelReagent), fuelSolution.MaxVolume);
+    }
+
+    private void OnWelderInit(Entity<WelderComponent> ent, ref MapInitEvent args)
+    {
+        ent.Comp.NextUpdate = _timing.CurTime + ent.Comp.WelderUpdateTimer;
+        Dirty(ent);
+    }
+
+    private void OnWelderExamine(Entity<WelderComponent> entity, ref ExaminedEvent args)
+    {
+        if (ShouldWelderBuggerOff(entity))
+            return;
+        using (args.PushGroup(nameof(WelderComponent)))
+        {
+            if (ItemToggle.IsActivated(entity.Owner))
+            {
+                args.PushMarkup(Loc.GetString("welder-component-on-examine-welder-lit-message"));
+            }
+            else
+            {
+                args.PushMarkup(Loc.GetString("welder-component-on-examine-welder-not-lit-message"));
+            }
+
+            if (args.IsInDetailsRange)
+            {
+                var (fuel, capacity) = GetWelderFuelAndCapacity(entity.Owner, entity.Comp);
+
+                args.PushMarkup(Loc.GetString("welder-component-on-examine-detailed-message",
+                    ("colorName", fuel < capacity / FixedPoint2.New(4f) ? "darkorange" : "orange"),
+                    ("fuelLeft", fuel),
+                    ("fuelCapacity", capacity),
+                    ("status", string.Empty))); // Lit status is handled above
+            }
+        }
+    }
+
+    private void OnWelderAfterInteract(Entity<WelderComponent> entity, ref AfterInteractEvent args)
+    {
+        if (ShouldWelderBuggerOff(entity)) /// STARLIGHT
+            return;
+        if (args.Handled)
+            return;
+
+        if (args.Target is not { Valid: true } target || !args.CanReach)
+            return;
+
+        if (TryComp(target, out ReagentTankComponent? tank)
+            && tank.TankType == ReagentTankType.Fuel
+            && SolutionContainerSystem.TryGetDrainableSolution(target, out var targetSoln, out var targetSolution)
+            && SolutionContainerSystem.TryGetSolution(entity.Owner, entity.Comp.FuelSolutionName, out var solution, out var welderSolution))
+        {
+            // Starlight Start
+            if (TryComp<RefillReagentFilterComponent>(entity.Owner, out var filter))
+            {
+                if (targetSolution.Contents.Any(sol => !filter.Reagents.Contains(sol.Reagent.Prototype)))
+                {
+                    _popup.PopupClient(Loc.GetString(filter.Popup), entity, args.User);
+                    args.Handled = true;
+                    return;
+                }
+            }
+            // Starlight End
+            var trans = FixedPoint2.Min(welderSolution.AvailableVolume, targetSolution.Volume);
+            if (trans > 0)
+            {
+                var drained = SolutionContainerSystem.Drain(target, targetSoln.Value, trans);
+                SolutionContainerSystem.TryAddSolution(solution.Value, drained);
+                _audioSystem.PlayPredicted(entity.Comp.WelderRefill, entity, user: args.User);
+                _popup.PopupClient(Loc.GetString("welder-component-after-interact-refueled-message"), entity, args.User);
+            }
+            else if (welderSolution.AvailableVolume <= 0)
+            {
+                _popup.PopupClient(Loc.GetString("welder-component-already-full"), entity, args.User);
+            }
+            else
+            {
+                _popup.PopupClient(Loc.GetString("welder-component-no-fuel-in-tank", ("owner", args.Target)), entity, args.User);
+            }
+
+            args.Handled = true;
+        }
+    }
+
+    private void CanCancelWelderUse(Entity<WelderComponent> entity, EntityUid user, float requiredFuel, CancellableEntityEventArgs ev)
+    {
+        if (ShouldWelderBuggerOff(entity)) /// STARLIGHT
+            return;
+        if (!ItemToggle.IsActivated(entity.Owner))
+        {
+            _popup.PopupClient(Loc.GetString("welder-component-welder-not-lit-message"), entity, user);
+            ev.Cancel();
+        }
+
+        var (currentFuel, _) = GetWelderFuelAndCapacity(entity);
+
+        if (requiredFuel > currentFuel)
+        {
+            _popup.PopupClient(Loc.GetString("welder-component-cannot-weld-message"), entity, user);
+            ev.Cancel();
+        }
+    }
+
+    private void OnWelderDoAfter(Entity<WelderComponent> ent, ref ToolDoAfterEvent args)
+    {
+        if (ShouldWelderBuggerOff(ent)) //STARLIGHT
+            return;
+        if (args.Cancelled)
+            return;
+
+        if (!SolutionContainerSystem.TryGetSolution(ent.Owner, ent.Comp.FuelSolutionName, out var solution))
+            return;
+
+        SolutionContainerSystem.RemoveReagent(solution.Value, ent.Comp.FuelReagent, FixedPoint2.New(args.Fuel));
+    }
+
+    private void OnToggle(Entity<WelderComponent> entity, ref ItemToggledEvent args)
+    {
+        if (args.Activated)
+            TurnOn(entity, args.User);
+        else
+            TurnOff(entity, args.User);
+    }
+
+    private void OnActivateAttempt(Entity<WelderComponent> entity, ref ItemToggleActivateAttemptEvent args)
+    {
+        if (ShouldWelderBuggerOff(entity)) /// Starlight
+            return;
+        if (args.User != null && !_actionBlocker.CanComplexInteract(args.User.Value))
+        {
+            args.Cancelled = true;
+            return;
+        }
+
+        if (!SolutionContainerSystem.TryGetSolution(entity.Owner, entity.Comp.FuelSolutionName, out _, out var solution))
+        {
+            args.Cancelled = true;
+            args.Popup = Loc.GetString("welder-component-no-fuel-message");
+            return;
+        }
+
+        var fuel = solution.GetTotalPrototypeQuantity(entity.Comp.FuelReagent);
+        if (fuel == FixedPoint2.Zero || fuel < entity.Comp.FuelLitCost)
+        {
+            args.Popup = Loc.GetString("welder-component-no-fuel-message");
+            args.Cancelled = true;
+        }
+    }
+
+    private void OnDeactivateAttempt(Entity<WelderComponent> entity, ref ItemToggleDeactivateAttemptEvent args)
+    {
+        if (args.User != null && !_actionBlocker.CanComplexInteract(args.User.Value))
+        {
+            args.Cancelled = true;
+        }
+    }
+
+    private void UpdateWelders()
+    {
+        // TODO: Same as the other EntityQueryEnumerators...
+        // TODO: ActiveWelderComponent
+        var query = EntityQueryEnumerator<WelderComponent>();
+        var curTime = _timing.CurTime;
+        while (query.MoveNext(out var uid, out var welder))
+        {
+            if (curTime < welder.NextUpdate)
+                continue;
+
+            welder.NextUpdate = curTime + welder.WelderUpdateTimer; // Starlight, don't consume infinite fuel dude
+            Dirty(uid, welder);
+
+            if (!welder.Enabled)
+                continue;
+
+            // TODO: Relations
+            if (!SolutionContainerSystem.TryGetSolution(uid, welder.FuelSolutionName, out var solutionComp, out var solution))
+                continue;
+
+            SolutionContainerSystem.RemoveReagent(solutionComp.Value, welder.FuelReagent, welder.FuelConsumption * welder.WelderUpdateTimer.TotalSeconds);
+
+            if (solution.GetTotalPrototypeQuantity(welder.FuelReagent) <= FixedPoint2.Zero)
+                ItemToggle.Toggle(uid);
+        }
+    }
+
+    /// <summary>
+    /// STARLIGHT
+    /// Method to cancel welder methods if the welder is deactivated as part of an omnitool or similar.
+    /// </summary>
+    /// <param name="entity"></param>
+    /// <returns></returns>
+    private bool ShouldWelderBuggerOff(Entity<WelderComponent> entity)
+    {
+        if (entity.Comp.ComponentActive == false)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    /// <summary>
+    /// STARLIGHT
+    /// Method to toggle the welder component off, to make ShouldWelderBuggerOff function.
+    /// </summary>
+    /// <param name="entity"></param>
+    /// <param name="args"></param>
+    private void ToggleComponent(Entity<WelderComponent> entity, ref ItemSwitchedEvent args)
+    {
+        if (args.State.ToLower().Contains("welding"))
+        {
+            entity.Comp.ComponentActive = true;
+        }
+        else
+        {
+            entity.Comp.ComponentActive = false;
+        }
+    }
+}

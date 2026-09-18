@@ -1,0 +1,586 @@
+- type: entity
+  parent: GasPipeBase
+  abstract: true
+  id: GasUnaryBase
+  placement:
+    mode: AlignAtmosPipeLayers # starlight
+  components:
+    - type: AtmosDevice
+    - type: Tag
+      tags:
+        - Unstackable
+    - type: SubFloorHide
+      blockInteractions: false
+      blockAmbience: false
+    - type: NodeContainer
+      nodes:
+        pipe:
+          !type:PipeNode
+          nodeGroupID: Pipe
+          pipeDirection: South
+    - type: CollideOnAnchor
+
+- type: entity
+  parent: [GasUnaryBase, AirSensorBase]
+  id: GasVentPump
+  name: air vent
+  description: Has a valve and a pump attached to it.
+  placement:
+    mode: AlignAtmosPipeLayers # starlight
+  components:
+    - type: Weldable
+      time: 3
+    # Starlight start
+    - type: VentCrawlTube
+      blocksVision: false
+    - type: VentCrawlEntry
+    # Starlight end
+    - type: ApcPowerReceiver
+    - type: ExtensionCableReceiver
+    - type: DeviceNetwork
+      prefix: device-address-prefix-vent
+    - type: Tag
+      tags:
+        - GasVent
+        - Unstackable
+    - type: SubFloorHide
+      visibleLayers:
+      - enum.SubfloorLayers.FirstLayer
+    - type: Sprite
+      drawdepth: FloorObjects
+      sprite: Structures/Piping/Atmospherics/vent.rsi
+      layers:
+        - sprite: _Carpmosia/Structures/Piping/Atmospherics/pipe.rsi # Carpmosia-edit - 5 pipe layers
+          state: pipeUnaryConnectors
+          map: [ "enum.PipeVisualLayers.Pipe" ]
+        - state: vent_off
+          map: [ "enabled", "enum.SubfloorLayers.FirstLayer" ]
+    # Carpmosia-start - Atmos Alt Prototypes
+    - type: AtmosPipeLayers
+      alternativePrototypes:
+        Primary: GasVentPump
+        Secondary: GasVentPumpAlt1
+        Tertiary: GasVentPumpAlt2
+        Quaternary: GasVentPumpAlt3
+        Quinary: GasVentPumpAlt4
+    # Carpmosia-end - Atmos Alt Prototypes
+    - type: Appearance
+    - type: PipeColorVisuals
+    - type: GenericVisualizer
+      visuals:
+        enum.VentPumpVisuals.State:
+          enabled:
+            Off: { state: vent_off }
+            In: { state: vent_in }
+            Out: { state: vent_out }
+            Welded: { state: vent_welded }
+            Lockout: { state: vent_lockout }
+    - type: GasVentPump
+    - type: Construction
+      graph: GasUnary
+      node: ventpump
+    - type: VentCritterSpawnLocation
+    - type: AmbientSound
+      enabled: true
+      volume: -12
+      range: 5
+      sound:
+        path: /Audio/Ambience/Objects/gas_vent.ogg
+    - type: AtmosMonitoringConsoleDevice
+      navMapBlip: GasVentOpening
+    - type: GuideHelp
+      guides:
+      - AirVent
+      - DeviceMonitoringAndControl
+
+- type: entity
+  parent: GasUnaryBase
+  id: GasPassiveVent
+  name: passive vent
+  description: It's an open vent.
+  placement:
+    mode: AlignAtmosPipeLayers # starlight
+  components:
+    # Starlight start
+    - type: Weldable
+      time: 3
+    - type: VentCrawlTube
+      blocksVision: false
+    - type: VentCrawlEntry
+    # Starlight end
+    - type: SubFloorHide
+      visibleLayers:
+      - enum.SubfloorLayers.FirstLayer
+    - type: Sprite
+      drawdepth: FloorObjects
+      sprite: Structures/Piping/Atmospherics/vent.rsi
+      layers:
+        - sprite: _Carpmosia/Structures/Piping/Atmospherics/pipe.rsi # Carpmosia-edit - 5 pipe layers
+          state: pipeUnaryConnectors
+          map: [ "enum.PipeVisualLayers.Pipe" ]
+        - state: vent_passive
+          map: [ "enum.SubfloorLayers.FirstLayer" ]
+    # Carpmosia-start - Atmos Alt Prototypes
+    - type: AtmosPipeLayers
+      alternativePrototypes:
+        Primary: GasPassiveVent
+        Secondary: GasPassiveVentAlt1
+        Tertiary: GasPassiveVentAlt2
+        Quaternary: GasPassiveVentAlt3
+        Quinary: GasPassiveVentAlt4
+    # Carpmosia-end - Atmos Alt Prototypes
+    - type: Appearance
+    - type: PipeColorVisuals
+    - type: GasPassiveVent
+    - type: Construction
+      graph: GasUnary
+      node: passivevent
+    - type: AtmosMonitoringConsoleDevice
+      navMapBlip: GasVentOpening
+    - type: GuideHelp
+      guides:
+      - PassiveVent
+
+- type: entity
+  parent: [GasUnaryBase, AirSensorBase]
+  id: GasVentScrubber
+  name: air scrubber
+  description: Has a valve and pump attached to it.
+  placement:
+    mode: AlignAtmosPipeLayers # starlight
+  components:
+    - type: Weldable
+      time: 3
+    # Starlight start
+    - type: VentCrawlTube
+      blocksVision: false
+    - type: VentCrawlEntry
+    # Starlight end
+    - type: ApcPowerReceiver
+    - type: ExtensionCableReceiver
+    - type: DeviceNetwork
+      prefix: device-address-prefix-scrubber
+    - type: Tag
+      tags:
+        - GasScrubber
+        - Unstackable
+    - type: SubFloorHide
+      visibleLayers:
+      - enum.SubfloorLayers.FirstLayer
+    - type: Sprite
+      drawdepth: FloorObjects
+      sprite: Structures/Piping/Atmospherics/scrubber.rsi
+      layers:
+        - sprite: _Carpmosia/Structures/Piping/Atmospherics/pipe.rsi # Carpmosia-edit - 5 pipe layers
+          state: pipeUnaryConnectors
+          map: [ "enum.PipeVisualLayers.Pipe" ]
+        - state: scrub_off
+          map: [ "enabled", "enum.SubfloorLayers.FirstLayer" ]
+    # Carpmosia-start - Atmos Alt Prototypes
+    - type: AtmosPipeLayers
+      alternativePrototypes:
+        Primary: GasVentScrubber
+        Secondary: GasVentScrubberAlt1
+        Tertiary: GasVentScrubberAlt2
+        Quaternary: GasVentScrubberAlt3
+        Quinary: GasVentScrubberAlt4
+    # Carpmosia-end - Atmos Alt Prototypes
+    - type: Appearance
+    - type: PipeColorVisuals
+    - type: GenericVisualizer
+      visuals:
+        enum.ScrubberVisuals.State:
+          enabled:
+            Off: { state: scrub_off }
+            Scrub: { state: scrub_on }
+            Siphon: { state: scrub_purge }
+            WideScrub: { state: scrub_wide }
+            Welded: { state: scrub_welded }
+    - type: AtmosDevice
+    - type: GasVentScrubber
+    - type: Construction
+      graph: GasUnary
+      node: ventscrubber
+    - type: AmbientSound
+      enabled: true
+      volume: -12
+      range: 5
+      sound:
+        path: /Audio/Ambience/Objects/gas_vent.ogg
+    - type: AtmosMonitoringConsoleDevice
+      navMapBlip: GasVentScrubber
+    - type: GuideHelp
+      guides:
+      - AirScrubber
+      - DeviceMonitoringAndControl
+
+- type: entity
+  parent: GasUnaryBase
+  id: GasOutletInjector
+  name: air injector
+  description: Has a valve and pump attached to it.
+  placement:
+    mode: AlignAtmosPipeLayers # starlight
+  components:
+    - type: Sprite
+      drawdepth: FloorObjects
+      sprite: _Carpmosia/Structures/Piping/Atmospherics/outletinjector.rsi # Carpmosia-edit - 5 pipe layers
+      layers:
+        - state: pipeUnaryConnectors
+          sprite: _Carpmosia/Structures/Piping/Atmospherics/pipe.rsi # Carpmosia-edit - 5 pipe layers
+          map: [ "enum.PipeVisualLayers.Pipe" ]
+        - state: injector
+          map: [ "enum.SubfloorLayers.FirstLayer" ]
+        - state: injector-unshaded
+          shader: unshaded
+          map: [ "enum.LightLayers.Unshaded" ]
+          color: "#990000"
+    # Carpmosia-start - Atmos Alt Prototypes
+    - type: AtmosPipeLayers
+      alternativePrototypes:
+        Primary: GasOutletInjector
+        Secondary: GasOutletInjectorAlt1
+        Tertiary: GasOutletInjectorAlt2
+        Quaternary: GasOutletInjectorAlt3
+        Quinary: GasOutletInjectorAlt4
+    # Carpmosia-end - Atmos Alt Prototypes
+    - type: Appearance
+    - type: GenericVisualizer
+      visuals:
+       # toggle color of the unshaded light:
+       enum.OutletInjectorVisuals.Enabled:
+         enum.LightLayers.Unshaded:
+           True: { color: "#5eff5e" }
+           False: { color: "#990000" }
+    - type: PipeColorVisuals
+    - type: GasOutletInjector
+    - type: Construction
+      graph: GasUnary
+      node: outletinjector
+    - type: SubFloorHide
+      visibleLayers:
+      - enum.SubfloorLayers.FirstLayer
+      - enum.LightLayers.Unshaded
+    - type: AtmosMonitoringConsoleDevice
+      navMapBlip: GasVentOpening
+    # Starlight start
+    - type: VentCrawlTube
+    - type: VentCrawlJunction
+      degrees:
+        - 0
+    - type: DeviceNetwork
+      deviceNetId: Wireless
+      receiveFrequencyId: BasicDevice
+      prefix: device-address-prefix-air-injector
+    - type: WirelessNetworkConnection
+      range: 200
+    - type: DeviceLinkSink
+      ports:
+        - On
+        - Off
+        - Toggle
+    - type: GasOutletInjectorSignal
+    # Starlight end
+    - type: GuideHelp
+      guides:
+      - AirInjector
+
+- type: entity
+  parent: [ BaseMachinePowered, ConstructibleMachine ]
+  id: BaseGasThermoMachine
+  name: thermomachine
+  abstract: true
+  placement:
+    mode: SnapgridCenter
+  components:
+    - type: Sprite
+      sprite: Structures/Piping/Atmospherics/thermomachine.rsi
+      snapCardinals: true
+    - type: Appearance
+    - type: PipeColorVisuals
+    - type: Rotatable
+    - type: GasThermoMachine
+    - type: AtmosPipeColor
+    - type: AtmosPipeLayers
+      spriteLayersRsiPaths:
+        enum.PipeVisualLayers.Pipe:
+          # Carpmosia-start - 5 pipe layers
+          Primary: _Carpmosia/Structures/Piping/Atmospherics/thermomachine.rsi
+          Secondary: _Carpmosia/Structures/Piping/Atmospherics/thermomachine_alt1.rsi
+          Tertiary: _Carpmosia/Structures/Piping/Atmospherics/thermomachine_alt2.rsi
+          Quaternary: _Carpmosia/Structures/Piping/Atmospherics/thermomachine_alt3.rsi
+          Quinary: _Carpmosia/Structures/Piping/Atmospherics/thermomachine_alt4.rsi
+          # Carpmosia-end - 5 pipe layers
+    - type: AtmosDevice
+    - type: UserInterface
+      interfaces:
+        enum.ThermomachineUiKey.Key:
+          type: GasThermomachineBoundUserInterface
+    - type: ActivatableUI
+      inHandsOnly: false
+      key: enum.ThermomachineUiKey.Key
+    - type: WiresPanel
+    - type: WiresVisuals
+    - type: PipeRestrictOverlap
+    - type: NodeContainer
+      nodes:
+        pipe:
+          !type:PipeNode
+          nodeGroupID: Pipe
+          pipeDirection: South
+    - type: Transform
+      noRot: false
+    - type: DeviceNetwork
+      deviceNetId: AtmosDevices
+      receiveFrequencyId: AtmosMonitor
+      transmitFrequencyId: AtmosMonitor
+      sendBroadcastAttemptEvent: true
+      examinableAddress: true
+    - type: WiredNetworkConnection
+    - type: PowerSwitch
+    - type: AtmosMonitoringConsoleDevice
+      navMapBlip: Thermoregulator
+    - type: GuideHelp
+      guides:
+      - Thermomachines
+    # Starlight start
+    - type: VentCrawlTube
+    - type: VentCrawlJunction
+      degrees:
+        - 0
+    # Starlight end
+
+- type: entity
+  parent: BaseGasThermoMachine
+  id: GasThermoMachineFreezer
+  name: freezer
+  description: Cools gas in connected pipes.
+  placement:
+    mode: SnapgridCenter
+  components:
+    - type: StationAiWhitelist
+    - type: Sprite
+      granularLayersRendering: true
+      layers:
+        - state: freezerOff
+          map: [ "enum.PowerDeviceVisualLayers.Powered" ]
+        - state: freezerPanelOpen
+          map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
+        - state: pipe
+          map: [ "enum.PipeVisualLayers.Pipe" ]
+          renderingStrategy: Default
+    - type: GenericVisualizer
+      visuals:
+        enum.PowerDeviceVisuals.Powered:
+          enum.PowerDeviceVisualLayers.Powered:
+            True: { state: freezerOn }
+            False: { state: freezerOff }
+    - type: GasThermoMachine
+      coefficientOfPerformance: -3.9
+    - type: ApcPowerReceiver
+      powerDisabled: true #starts off
+    - type: Machine
+      board: ThermomachineFreezerMachineCircuitBoard
+    - type: DeviceNetwork
+      prefix: device-address-prefix-freezer
+    - type: StealTarget
+      stealGroup: FreezerHeater
+    # Starlight start
+    - type: VentCrawlTube
+    - type: VentCrawlJunction
+      degrees:
+        - 0
+    # Starlight end
+
+- type: entity
+  parent: GasThermoMachineFreezer
+  id: GasThermoMachineFreezerEnabled
+  suffix: Enabled
+  components:
+  - type: GasThermoMachine
+  - type: ApcPowerReceiver
+    powerDisabled: false
+
+- type: entity
+  parent: BaseGasThermoMachine
+  id: GasThermoMachineHeater
+  name: heater
+  description: Heats gas in connected pipes.
+  placement:
+    mode: SnapgridCenter
+  components:
+    - type: StationAiWhitelist
+    - type: Sprite
+      granularLayersRendering : true
+      layers:
+        - state: heaterOff
+          map: [ "enum.PowerDeviceVisualLayers.Powered" ]
+        - state: heaterPanelOpen
+          map: ["enum.WiresVisualLayers.MaintenancePanel"]
+        - state: pipe
+          map: [ "enum.PipeVisualLayers.Pipe" ]
+          renderingStrategy: Default
+    - type: GenericVisualizer
+      visuals:
+        enum.PowerDeviceVisuals.Powered:
+          enum.PowerDeviceVisualLayers.Powered:
+            True: { state: heaterOn }
+            False: { state: heaterOff }
+    - type: GasThermoMachine
+      coefficientOfPerformance: 0.95
+    - type: ApcPowerReceiver
+      powerDisabled: true #starts off
+    - type: Machine
+      board: ThermomachineHeaterMachineCircuitBoard
+    - type: DeviceNetwork
+      prefix: device-address-prefix-heater
+    - type: StealTarget
+      stealGroup: FreezerHeater
+    # Starlight start
+    - type: VentCrawlTube
+    - type: VentCrawlJunction
+      degrees:
+        - 0
+    # Starlight end
+
+- type: entity
+  parent: GasThermoMachineHeater
+  id: GasThermoMachineHeaterEnabled
+  suffix: Enabled
+  components:
+  - type: GasThermoMachine
+  - type: ApcPowerReceiver
+    powerDisabled: false
+
+- type: entity
+  parent: GasThermoMachineFreezer
+  id: GasThermoMachineHellfireFreezer
+  name: hellfire freezer
+  description: An advanced machine that cools gas in connected pipes. Has the side effect of chilling the surrounding area. Cold as Hell!
+  components:
+  - type: Sprite
+    sprite: Structures/Piping/Atmospherics/hellfirethermomachine.rsi
+  - type: GasThermoMachine
+    minTemperature: 13.15 # Funkystation Edit: 23.15 -> 13.15
+    heatCapacity: 40000
+    energyLeakPercentage: 0.08 # Funkystation Edit: 0.15 -> 0.08
+  - type: Machine
+    board: HellfireFreezerMachineCircuitBoard
+
+- type: entity
+  parent: GasThermoMachineHeater
+  id: GasThermoMachineHellfireHeater
+  name: hellfire heater
+  description: An advanced machine that heats gas in connected pipes. Has the side effect of leaking heat into the surrounding area. Hot as Hell!
+  components:
+  - type: Sprite
+    sprite: Structures/Piping/Atmospherics/hellfirethermomachine.rsi
+  - type: GasThermoMachine
+    maxTemperature: 1593.15 # Funkystation Edit: 1193.15 -> 1593.15
+    heatCapacity: 40000
+    energyLeakPercentage: 0.08 # Funkystation Edit: 0.15 -> 0.08
+  - type: Machine
+    board: HellfireHeaterMachineCircuitBoard
+
+- type: entity
+  parent: [ SolutionTank, SolutionHuge, BaseMachinePowered, SmallConstructibleMachine ]
+  id: BaseGasCondenser
+  categories: [ ShouldMapStation ] # Starlight
+  name: condenser
+  description: Condenses gases into liquids. Now we just need some plumbing.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: Structures/Piping/Atmospherics/condenser.rsi
+    snapCardinals: true
+    granularLayersRendering: true
+    layers:
+    - state: off
+      map: [ "enum.PowerDeviceVisualLayers.Powered" ]
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+    - state: pipe
+      map: [ "enum.PipeVisualLayers.Pipe" ]
+      renderingStrategy: Default
+    - state: fill-1
+      map: ["enum.SolutionContainerLayers.Fill"]
+      visible: false
+    - state: trans
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.PowerDeviceVisuals.Powered:
+        enum.PowerDeviceVisualLayers.Powered:
+          True: { state: on }
+          False: { state: off }
+  - type: SolutionContainerVisuals
+    maxFillLevels: 7
+    fillBaseName: fill-
+  - type: PipeColorVisuals
+  - type: Rotatable
+  - type: GasCondenser
+  - type: AtmosPipeColor
+  - type: AtmosPipeLayers
+    spriteLayersRsiPaths:
+      enum.PipeVisualLayers.Pipe:
+        # Carpmosia-start - 5 pipe layers
+        Primary: _Carpmosia/Structures/Piping/Atmospherics/condenser.rsi
+        Secondary: _Carpmosia/Structures/Piping/Atmospherics/condenser_alt1.rsi
+        Tertiary: _Carpmosia/Structures/Piping/Atmospherics/condenser_alt2.rsi
+        Quaternary: _Carpmosia/Structures/Piping/Atmospherics/condenser_alt3.rsi
+        Quinary: _Carpmosia/Structures/Piping/Atmospherics/condenser_alt4.rsi
+        # Carpmosia-end - 5 pipe layers
+  - type: AtmosDevice
+  - type: PipeRestrictOverlap
+  - type: ApcPowerReceiver
+    powerLoad: 10000
+  - type: Machine
+    board: CondenserMachineCircuitBoard
+  - type: WiresPanel
+  - type: WiresVisuals
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpillBehavior
+        solution: tank
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+  - type: NodeContainer
+    nodes:
+      pipe:
+        !type:PipeNode
+        nodeGroupID: Pipe
+        pipeDirection: South
+  - type: Transform
+    noRot: false
+  - type: MixableSolution
+    solution: tank
+  - type: DrainableSolution
+    solution: tank
+  - type: ExaminableSolution
+    solution: tank
+  - type: PowerSwitch
+  - type: AtmosMonitoringConsoleDevice
+    navMapBlip: Thermoregulator
+  - type: GuideHelp
+    guides:
+    - GasCondensing
+  # Starlight start
+  - type: VentCrawlTube
+  - type: VentCrawlJunction
+    degrees:
+      - 0
+  # Starlight end

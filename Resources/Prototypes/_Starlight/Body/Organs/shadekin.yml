@@ -1,0 +1,143 @@
+- type: entity
+  id: OrganShadekinBrain
+  parent: OrganHumanBrain
+  name: shadekin brain
+  suffix: Shadekin
+  description: "The source of incredible, unending intelligence. Marr."
+  components:
+  - type: Sprite
+    sprite: _Starlight/Mobs/Species/Shadekin/organs.rsi
+    state: brain
+
+- type: entity
+  id: OrganShadekinEyes
+  parent: OrganHumanEyes
+  name: shadekin eyes
+  suffix: Shadekin
+  description: "Eyes of a Black-eye Shadekin that can never see their home reality again. These eyes have excellent night vision, but are very sensitive to bright flashes as a result."
+  components:
+  - type: Sprite
+    sprite: _Starlight/Mobs/Species/Shadekin/organs.rsi
+    layers:
+      - state: eyes
+  - type: FunctionalOrgan
+    comps:
+    - type: NightVision
+      disabilityBlockable: true
+    - type: FlashModifier
+      modifier: 2
+  - type: OrganVisualization
+    layer: Eyes
+    prototypes:
+      Default: MobShadekinEyes
+  - type: Tag
+    tags:
+      - ShadekinEyes
+
+- type: entity
+  id: OrganShadekinTongue
+  parent: OrganHumanTongue
+  name: shadekin tongue
+  suffix: Shadekin
+  description: "Used to marr and occasionally wurble."
+  components:
+  - type: OrganTongue
+    allowedEmotes: ["Marr", "Wurble", "Hisses", "Growl", "Purr"]
+    sounds:
+      Male: MaleShadekin
+      Female: FemaleShadekin
+      Unsexed: MaleShadekin
+  - type: Sprite
+    sprite: _Starlight/Mobs/Species/Shadekin/organs.rsi
+    state: tongue
+
+- type: entity
+  id: OrganShadekinAppendix
+  parent: OrganHumanAppendix
+  name: shadekin appendix
+  suffix: Shadekin
+  components:
+  - type: Sprite
+    sprite: _Starlight/Mobs/Species/Shadekin/organs.rsi
+    layers:
+      - state: appendix
+
+- type: entity
+  id: OrganShadekinHeart
+  parent: OrganHumanHeart
+  name: shadekin heart
+  suffix: Shadekin
+  components:
+  - type: Sprite
+    sprite: _Starlight/Mobs/Species/Shadekin/organs.rsi
+    state: heart
+
+- type: entity
+  id: OrganShadekinStomach
+  parent: OrganHumanStomach
+  name: shadekin stomach
+  suffix: Shadekin
+  components:
+  - type: Sprite
+    sprite: _Starlight/Mobs/Species/Shadekin/organs.rsi
+    state: stomach
+  - type: SolutionManager
+    solutions:
+    - SolutionOrganNutriment
+    - SolutionOrganFoodMeat
+    - SolutionOrganStomach40
+
+- type: entity
+  id: OrganShadekinLiver
+  parent: OrganHumanLiver
+  name: shadekin liver
+  suffix: Shadekin
+  components:
+  - type: Sprite
+    sprite: _Starlight/Mobs/Species/Shadekin/organs.rsi
+    state: liver
+
+- type: entity
+  id: OrganShadekinKidneys
+  parent: OrganHumanKidneys
+  name: shadekin kidneys
+  suffix: Shadekin
+  components:
+  - type: Sprite
+    sprite: _Starlight/Mobs/Species/Shadekin/organs.rsi
+    layers:
+      - state: kidneys
+
+- type: entity
+  id: OrganShadekinCore
+  parent: BaseItem
+  name: shadekin core
+  suffix: Shadekin
+  description: A core of a Shadekin, a mysterious and powerful organ that seems to be the source of their energy.
+  components:
+  - type: OrganShadekinCore
+  - type: Organ
+  - type: Sprite
+    sprite: _Starlight/Mobs/Species/Shadekin/organs.rsi
+    layers:
+      - state: core
+  - type: Tag
+    tags:
+      - DamagedShadekinCore
+  - type: StaticPrice
+    price: 200
+
+
+- type: entity
+  id: OrganShadekinCoreUndamaged
+  parent: OrganShadekinCore
+  name: bright-eye core
+  suffix: Bright-eye
+  components:
+  - type: OrganShadekinCore
+    damaged: false
+  - type: Tag
+    tags:
+      - ShadekinCore
+  - type: StaticPrice
+    price: 50000

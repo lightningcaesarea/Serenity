@@ -1,0 +1,60 @@
+- type: job
+  id: Warden
+  name: job-name-warden
+  description: job-description-warden
+  playTimeTracker: JobWarden
+  requirements:
+    - !type:RoleTimeRequirement
+      role: JobSecurityOfficer
+      time: 15h # Starlight
+    - !type:RoleTimeRequirement # Starlight
+      role: JobDutyOfficer # Starlight
+      time: 5h # Starlight
+    - !type:RoleTimeRequirement
+      role: JobDetective # Starlight
+      time: 1h # Starlight
+  weight: 5
+  startingGear: WardenGear
+  icon: "JobIconWarden"
+  supervisors: job-supervisors-hos
+  access:
+  - Cadet # Starlight
+  - Security
+  - Brig
+  - Armory
+  - Maintenance
+  - External
+  - Detective
+  - Cryogenics
+  - Brigmedic # Starlight
+  - GenpopEnter
+  - GenpopLeave
+  special:
+  - !type:AddImplantSpecial
+    implants: [ MindShieldImplant ]
+
+- type: startingGear
+  id: WardenGear
+  equipment:
+    id: WardenPDA
+    ears: ClothingHeadsetSecurityWarden
+    pocket1: WeaponPistolDP
+  storage:
+    back:
+    - Flash
+    - MagazinePistol40SP
+    - MagazinePistol40SP
+
+- type: chameleonOutfit
+  id: WardenChameleonOutfit
+  job: Warden
+  hasMindShield: true
+  equipment:
+    head: ClothingHeadHatWarden
+    mask: ClothingMaskGasSecurity
+    outerClothing: ClothingOuterCoatWarden
+    jumpsuit: ClothingUniformJumpsuitWarden
+    neck: Dinkystar
+    belt: ClothingBeltSecurity
+    # gloves: ClothingHandsGlovesCombat # Starlight
+    shoes: ClothingShoesBootsJack

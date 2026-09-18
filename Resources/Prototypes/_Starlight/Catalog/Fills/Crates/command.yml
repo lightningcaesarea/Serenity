@@ -1,0 +1,28 @@
+- type: entity
+  parent: CrateCommandSecure
+  suffix: Tech Vault, Secure
+  id: CrateEmergencyRestart
+  name: emergency restart crate
+  description: A secure crate with the essential circuitboards to rebuild a station. For truly dire situations.
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: ProtolatheMachineCircuitboard
+        - id: IDComputerCircuitboard
+        - id: CommsComputerCircuitboard
+        - id: AutolatheMachineCircuitboard
+        - id: CircuitImprinterMachineCircuitboard
+
+- type: entity
+  parent: [ CrateCommandSecure, BaseCommandContraband ]
+  id: CrateCommandTrackingImplants
+  name: command tracking implants
+  description: Contains a handful of command tracking implanters. Can't let them run around without supervision.
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage:
+        id: CommandTrackerImplanter
+        amount: 5

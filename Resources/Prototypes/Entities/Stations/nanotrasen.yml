@@ -1,0 +1,56 @@
+- type: entity
+  abstract: true
+  id: BaseStationNanotrasen
+  components:
+    - type: NpcFactionMember
+      factions:
+        - NanoTrasen
+
+- type: entity
+  id: StandardNanotrasenStationTestOnly # Starlight - rename from Station to StationTestOnly, so we can add Station below. This lets us avoid spending 0.6 seconds per test spawning in the armories.
+  parent:
+    - BaseStation
+    - BaseStationNews
+    - BaseStationCargo
+    - BaseStationJobsSpawning
+    - BaseStationRecords
+    - BaseStationArrivals
+    - BaseStationGateway
+    - BaseStationShuttles
+    - BaseStationCentcomm
+    - BaseStationEvacuation
+    - BaseStationAlertLevels
+    - BaseStationMagnet
+    - BaseStationExpeditions
+    - BaseStationSalvageJobs
+    - BaseStationSiliconLawCrewsimov
+    - BaseStationAllEventsEligible
+    - BaseStationNanotrasen
+    - BaseStationDeliveries
+    - BaseStationCryoTeleportation #Starlight
+    - BaseStationSecureTerminal # Starlight
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Transform
+
+- type: entity
+  id: NanotrasenCentralCommand
+  parent:
+    - BaseStation
+    - BaseStationAlertLevels
+    - BaseStationNanotrasen
+    - BaseStationCryoTeleportation
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Transform
+
+- type: entity
+  id: StandardStationArena
+  parent:
+  - BaseStation
+  - BaseStationJobsSpawning
+  - BaseStationRecords
+  - BaseStationNanotrasen
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Transform

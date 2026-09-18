@@ -1,0 +1,315 @@
+using Content.Shared.Administration.Logs;
+using Content.Shared.Body.Components;
+using System.Linq;
+using Content.Shared.Chemistry.Components;
+using Content.Shared.Chemistry.Components.SolutionManager;
+using Content.Shared.Chemistry.EntitySystems;
+using Content.Shared.Chemistry.Reagent;
+using Content.Shared.Audio;
+using Content.Shared.Damage;
+using Content.Shared.Damage.Components;
+using Content.Shared.Damage.Systems;
+using Content.Shared.Database;
+using Content.Shared.DoAfter;
+using Content.Shared.FixedPoint;
+using Content.Shared.IdentityManagement;
+using Content.Shared.Interaction;
+using Content.Shared.Interaction.Events;
+using Content.Shared.Mobs;
+using Content.Shared.Mobs.Components;
+using Content.Shared.Mobs.Systems;
+using Content.Shared.Popups;
+using Content.Shared.Stacks;
+using Robust.Shared.Audio.Systems;
+using Content.Shared._FarHorizons.Medical.ConditionalHealing;
+using Content.Shared.Eye.Blinding.Components;
+using Content.Shared.Eye.Blinding.Systems;
+using Content.Shared._Starlight.Medical.Body.Systems;
+
+namespace Content.Shared.Medical.Healing;
+
+public sealed partial class HealingSystem : EntitySystem
+{
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private SharedBloodstreamSystem _bloodstreamSystem = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedStackSystem _stacks = default!;
+    [Dependency] private SharedInteractionSystem _interactionSystem = default!;
+    [Dependency] private MobThresholdSystem _mobThresholdSystem = default!;
+    [Dependency] private SharedPopupSystem _popupSystem = default!;
+    [Dependency] private SharedSolutionContainerSystem _solutionContainerSystem = default!;
+    [Dependency] private ConditionalHealingSystem _conditionalHealing = default!; // Far Horizons
+    [Dependency] private BlindableSystem _blindable = default!; // Far Horizons
+
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        SubscribeLocalEvent<HealingComponent, UseInHandEvent>(OnHealingUse);
+        SubscribeLocalEvent<HealingComponent, AfterInteractEvent>(OnHealingAfterInteract);
+        SubscribeLocalEvent<DamageableComponent, HealingDoAfterEvent>(OnDoAfter);
+    }
+
+    private void OnDoAfter(Entity<DamageableComponent> target, ref HealingDoAfterEvent args)
+    {
+
+        if (args.Handled || args.Cancelled)
+            return;
+
+        if (!TryComp(args.Used, out HealingComponent? healing))
+        {
+            // Far Horizons, handle conditional healing items.
+            if (args.Used is null || _conditionalHealing.SelectBestMatch(args.Used.Value, target) is not ConditionalHealingData healingData)
+                return;
+            var healingEntity = _conditionalHealing.ValidateConditionalHealing(args.Used.Value, healingData); // Starlight, healing component validation
+            healing = healingEntity.Comp; // Starlight, apply it.
+        }
+
+        if (healing.DamageContainers is not null &&
+            target.Comp.DamageContainerID is not null &&
+            !healing.DamageContainers.Contains(target.Comp.DamageContainerID.Value))
+        {
+            return;
+        }
+
+        TryComp<BloodstreamComponent>(target, out var bloodstream);
+
+        // Heal some bloodloss damage.
+        if (healing.BloodlossModifier != 0 && bloodstream != null)
+        {
+            var isBleeding = bloodstream.BleedAmount > 0;
+            _bloodstreamSystem.TryModifyBleedAmount((target.Owner, bloodstream), healing.BloodlossModifier);
+            if (isBleeding != bloodstream.BleedAmount > 0)
+            {
+                var popup = (args.User == target.Owner)
+                    ? Loc.GetString("medical-item-stop-bleeding-self")
+                    : Loc.GetString("medical-item-stop-bleeding", ("target", Identity.Entity(target.Owner, EntityManager)));
+                _popupSystem.PopupClient(popup, target, args.User);
+            }
+        }
+
+        // Restores missing blood
+        if (healing.ModifyBloodLevel != 0 && bloodstream != null)
+            _bloodstreamSystem.TryModifyBloodLevel((target.Owner, bloodstream), healing.ModifyBloodLevel);
+
+        // Far Horizons
+        // Restores vision
+        if (healing.AdjustEyeDamage != 0 && TryComp(target, out BlindableComponent? blindable))
+            _blindable.AdjustEyeDamage((target, blindable), healing.AdjustEyeDamage);
+
+        if (!_damageable.TryChangeDamage(target.Owner, healing.Damage * _damageable.UniversalTopicalsHealModifier, out var healed, true, origin: args.Args.User) && healing.BloodlossModifier != 0)
+            return;
+
+        if (healed == null && healing.BloodlossModifier != 0 && healing.AdjustEyeDamage != 0) // Far Horizons - added eye healing
+            return;
+
+        var total = healed?.GetTotal();
+
+        // Re-verify that we can heal the damage.
+        var dontRepeat = false;
+        if (TryComp<StackComponent>(args.Used.Value, out var stackComp))
+        {
+            _stacks.ReduceCount((args.Used.Value, stackComp), 1);
+
+            if (_stacks.GetCount((args.Used.Value, stackComp)) <= 0)
+                dontRepeat = true;
+        }
+        #region Starlight
+        else if (healing.SolutionDrain &&
+                    _solutionContainerSystem.TryGetSolution(args.Used.Value, "injector", out var solutionEntity, out var solution))
+        {
+            var reagentsToRemove = new List<(ReagentQuantity Reagent, FixedPoint2 Amount)>();
+            foreach(var reagent in solution.Contents)
+            {
+                var drainReagent = healing.ReagentsToDrain.FirstOrDefault(drain => drain.Reagent == reagent.Reagent && reagent.Quantity >= drain.Quantity);
+                reagentsToRemove.Add((reagent, drainReagent.Quantity));
+            }
+
+            foreach (var (reagent, amount) in reagentsToRemove)
+                _solutionContainerSystem.RemoveReagent(solutionEntity.Value, reagent.Reagent, amount);
+
+            if (!solution.Contents.Any(sol => healing.ReagentsToDrain.Any(req => req.Reagent == sol.Reagent && sol.Quantity >= req.Quantity)))
+                dontRepeat = true;
+        }
+        #endregion
+        else
+        {
+            PredictedQueueDel(args.Used.Value);
+        }
+
+        if (target.Owner != args.User)
+        {
+            _adminLogger.Add(LogType.Healed,
+                $"{ToPrettyString(args.User):user} healed {ToPrettyString(target.Owner):target} for {total:damage} damage");
+        }
+        else
+        {
+            _adminLogger.Add(LogType.Healed,
+                $"{ToPrettyString(args.User):user} healed themselves for {total:damage} damage");
+        }
+
+        _audio.PlayPredicted(healing.HealingEndSound, target.Owner, args.User);
+
+        // Logic to determine the whether or not to repeat the healing action
+        args.Repeat = HasDamage((args.Used.Value, healing), target) && !dontRepeat;
+        args.Handled = true;
+
+        if (!args.Repeat)
+        {
+            _popupSystem.PopupClient(Loc.GetString("medical-item-finished-using", ("item", args.Used)), target.Owner, args.User);
+            return;
+        }
+
+        // Update our self heal delay so it shortens as we heal more damage.
+        if (args.User == target.Owner)
+            args.Args.Delay = healing.Delay * GetScaledHealingPenalty(target.Owner, healing.SelfHealPenaltyMultiplier);
+    }
+
+    private bool HasDamage(Entity<HealingComponent> healing, Entity<DamageableComponent> target)
+    {
+        var damageableDict = target.Comp.Damage.DamageDict;
+        var healingDict = healing.Comp.Damage.DamageDict;
+        foreach (var type in healingDict)
+        {
+            if (damageableDict[type.Key].Value > 0)
+            {
+                return true;
+            }
+        }
+
+        if (TryComp<BloodstreamComponent>(target, out var bloodstream))
+        {
+            // Is ent missing blood that we can restore?
+            if (healing.Comp.ModifyBloodLevel > 0
+                && _solutionContainerSystem.ResolveSolution(target.Owner, bloodstream.BloodSolutionName, ref bloodstream.BloodSolution, out var bloodSolution)
+                && _bloodstreamSystem.GetBloodLevel((target, bloodstream)) < 1)
+            {
+                return true;
+            }
+
+            // Is ent bleeding and can we stop it?
+            if (healing.Comp.BloodlossModifier < 0 && bloodstream.BleedAmount > 0)
+            {
+                return true;
+            }
+        }
+
+        // Far Horizons start
+        if (healing.Comp.AdjustEyeDamage != 0 &&
+            TryComp<BlindableComponent>(target, out var blindable) &&
+            blindable.EyeDamage != 0)
+            return true;
+        // Far Horizons end
+
+        return false;
+    }
+
+    private void OnHealingUse(Entity<HealingComponent> healing, ref UseInHandEvent args)
+    {
+        if (args.Handled)
+            return;
+
+        if (TryHeal(healing, args.User, args.User))
+            args.Handled = true;
+    }
+
+    private void OnHealingAfterInteract(Entity<HealingComponent> healing, ref AfterInteractEvent args)
+    {
+        if (args.Handled || !args.CanReach || args.Target == null)
+            return;
+
+        if (TryHeal(healing, args.Target.Value, args.User))
+            args.Handled = true;
+    }
+
+    // Far Horizons - made function public
+    public bool TryHeal(Entity<HealingComponent> healing, Entity<DamageableComponent?> target, EntityUid user)
+    {
+        if (!Resolve(target, ref target.Comp, false))
+            return false;
+
+        if (healing.Comp.DamageContainers is not null &&
+            target.Comp.DamageContainerID is not null &&
+            !healing.Comp.DamageContainers.Contains(target.Comp.DamageContainerID.Value))
+        {
+            return false;
+        }
+
+        if (user != target.Owner && !_interactionSystem.InRangeUnobstructed(user, target.Owner, popup: true))
+            return false;
+
+        if (TryComp<StackComponent>(healing, out var stack) && stack.Count < 1)
+            return false;
+
+        #region Starlight
+        if (healing.Comp.SolutionDrain)
+        {
+            if (_solutionContainerSystem.TryGetSolution(healing.Owner, "injector", out _, out var solution))
+            {
+                if (!solution.Contents.Any(sol => healing.Comp.ReagentsToDrain.Any(req => req.Reagent == sol.Reagent && sol.Quantity >= req.Quantity)))
+                {
+                    _popupSystem.PopupClient(Loc.GetString("medical-item-solution-missing", ("item", healing.Owner)), healing.Owner, user);
+                    return false;
+                }
+            }
+            else
+                return false;
+        }
+        #endregion
+        if (!HasDamage(healing, target!))
+        {
+            _popupSystem.PopupClient(Loc.GetString("medical-item-cant-use", ("item", healing.Owner)), healing, user);
+            return false;
+        }
+
+        _audio.PlayPredicted(healing.Comp.HealingBeginSound, healing, user);
+
+        var isNotSelf = user != target.Owner;
+
+        if (isNotSelf)
+        {
+            var msg = Loc.GetString("medical-item-popup-target", ("user", Identity.Entity(user, EntityManager)), ("item", healing.Owner));
+            _popupSystem.PopupEntity(msg, target, target, PopupType.Medium);
+        }
+
+        var delay = isNotSelf
+            ? healing.Comp.Delay
+            : healing.Comp.Delay * GetScaledHealingPenalty(target, healing.Comp.SelfHealPenaltyMultiplier);
+
+        var doAfterEventArgs =
+            new DoAfterArgs(EntityManager, user, delay, new HealingDoAfterEvent(), target, target: target, used: healing)
+            {
+                // Didn't break on damage as they may be trying to prevent it and
+                // not being able to heal your own ticking damage would be frustrating.
+                NeedHand = true,
+                BreakOnMove = true,
+                BreakOnWeightlessMove = false,
+            };
+
+        _doAfter.TryStartDoAfter(doAfterEventArgs);
+        return true;
+    }
+
+    /// <summary>
+    /// Scales the self-heal penalty based on the amount of damage taken
+    /// </summary>
+    /// <param name="ent">Entity we're healing</param>
+    /// <param name="mod">Maximum modifier we can have.</param>
+    /// <returns>Modifier we multiply our healing time by</returns>
+    public float GetScaledHealingPenalty(Entity<DamageableComponent?, MobThresholdsComponent?> ent, float mod)
+    {
+        if (!Resolve(ent, ref ent.Comp1, ref ent.Comp2, false))
+            return mod;
+
+        if (!_mobThresholdSystem.TryGetThresholdForState(ent, MobState.Critical, out var amount, ent.Comp2))
+            return 1;
+
+        var percentDamage = (float)(ent.Comp1.TotalDamage / amount);
+        //basically make it scale from 1 to the multiplier.
+
+        var output = percentDamage * (mod - 1) + 1;
+        return Math.Max(output, 1);
+    }
+}

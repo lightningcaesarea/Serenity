@@ -1,0 +1,150 @@
+using Content.Shared.Body.Components;
+using Content.Shared.Body.Systems;
+using Content.Shared.Camera;
+using Content.Shared.Eye.Blinding.Components;
+using Content.Shared.Inventory;
+using Content.Shared.Rejuvenate;
+using JetBrains.Annotations;
+#region Starlight
+using Content.Shared._Starlight.Medical.Surgery.Components;
+#endregion
+
+namespace Content.Shared.Eye.Blinding.Systems;
+
+public sealed partial class BlindableSystem : EntitySystem
+{
+    [Dependency] private BlurryVisionSystem _blurriness = default!;
+    [Dependency] private EyeClosingSystem _eyelids = default!;
+    [Dependency] private SharedBodySystem _bodySystem = default!;
+
+    public override void Initialize()
+    {
+        base.Initialize();
+        SubscribeLocalEvent<BlindableComponent, RejuvenateEvent>(OnRejuvenate);
+        SubscribeLocalEvent<BlindableComponent, EyeDamageChangedEvent>(OnDamageChanged);
+        SubscribeLocalEvent<BlindableComponent, GetEyePvsScaleAttemptEvent>(OnGetEyePvsScaleAttemptEvent);
+        SubscribeLocalEvent<BlindableComponent, GetEyeOffsetAttemptEvent>(OnGetEyeOffsetAttemptEvent);
+    }
+
+    private void OnRejuvenate(Entity<BlindableComponent> ent, ref RejuvenateEvent args)
+    {
+        AdjustEyeDamage((ent.Owner, ent.Comp), -ent.Comp.EyeDamage);
+    }
+
+    private void OnDamageChanged(Entity<BlindableComponent> ent, ref EyeDamageChangedEvent args)
+    {
+        _blurriness.UpdateBlurMagnitude((ent.Owner, ent.Comp), ent.Comp.IsWearingGlasses); // Starlight-edit
+        _eyelids.UpdateEyesClosable((ent.Owner, ent.Comp));
+    }
+
+    private void OnGetEyePvsScaleAttemptEvent(Entity<BlindableComponent> ent, ref GetEyePvsScaleAttemptEvent args)
+    {
+        if (ent.Comp.IsBlind)
+            args.Cancelled = true;
+    }
+
+    private void OnGetEyeOffsetAttemptEvent(Entity<BlindableComponent> ent, ref GetEyeOffsetAttemptEvent args)
+    {
+        if (ent.Comp.IsBlind)
+            args.Cancelled = true;
+    }
+
+    [PublicAPI]
+    public void UpdateIsBlind(Entity<BlindableComponent?> blindable, bool bypass = false) // Starlight-edit: add bypass option
+    {
+        if (!Resolve(blindable, ref blindable.Comp, false))
+            return;
+
+        var old = blindable.Comp.IsBlind;
+
+        var forceBlind = false;
+        if (TryComp<BodyComponent>(blindable.Owner, out var body))
+        {
+            var eyes = _bodySystem.GetBodyOrganEntityComps<OrganEyesComponent>((blindable.Owner, body));
+
+            forceBlind = eyes.Count == 0 && _bodySystem.HasOrganSlot(blindable.Owner, body, "eyes");
+        }
+
+        // Don't bother raising an event if the eye is too damaged.
+        if ((blindable.Comp.EyeDamage >= blindable.Comp.MaxDamage || forceBlind) && !bypass) // Starlight-edit: add bypass option
+        {
+            blindable.Comp.IsBlind = true;
+        }
+        else
+        {
+            var ev = new CanSeeAttemptEvent();
+            RaiseLocalEvent(blindable.Owner, ev);
+            blindable.Comp.IsBlind = ev.Blind;
+        }
+
+        if (old == blindable.Comp.IsBlind)
+            return;
+
+        var changeEv = new BlindnessChangedEvent(blindable.Comp.IsBlind);
+        RaiseLocalEvent(blindable.Owner, ref changeEv);
+        Dirty(blindable);
+    }
+
+    public void AdjustEyeDamage(Entity<BlindableComponent?> blindable, int amount)
+    {
+        if (!Resolve(blindable, ref blindable.Comp, false) || amount == 0)
+            return;
+
+        blindable.Comp.EyeDamage += amount;
+        UpdateEyeDamage(blindable, true);
+    }
+    private void UpdateEyeDamage(Entity<BlindableComponent?> blindable, bool isDamageChanged)
+    {
+        if (!Resolve(blindable, ref blindable.Comp, false))
+            return;
+
+        var previousDamage = blindable.Comp.EyeDamage;
+        blindable.Comp.EyeDamage = Math.Clamp(blindable.Comp.EyeDamage, blindable.Comp.MinDamage, blindable.Comp.MaxDamage);
+        Dirty(blindable);
+        if (!isDamageChanged && previousDamage == blindable.Comp.EyeDamage)
+            return;
+
+        UpdateIsBlind(blindable);
+        var ev = new EyeDamageChangedEvent(blindable.Comp.EyeDamage);
+        RaiseLocalEvent(blindable.Owner, ref ev);
+    }
+    public void SetMinDamage(Entity<BlindableComponent?> blindable, int amount)
+    {
+        if (!Resolve(blindable, ref blindable.Comp, false))
+            return;
+
+        blindable.Comp.MinDamage = amount;
+        UpdateEyeDamage(blindable, false);
+    }
+}
+
+/// <summary>
+///     This event is raised when an entity's blindness changes
+/// </summary>
+[ByRefEvent]
+public record struct BlindnessChangedEvent(bool Blind);
+
+/// <summary>
+///     This event is raised when an entity's eye damage changes
+/// </summary>
+[ByRefEvent]
+public record struct EyeDamageChangedEvent(int Damage);
+
+/// <summary>
+///     Raised directed at an entity to see whether the entity is currently blind or not.
+/// </summary>
+public sealed class CanSeeAttemptEvent : CancellableEntityEventArgs, IInventoryRelayEvent
+{
+    public bool Blind => Cancelled;
+    public SlotFlags TargetSlots => SlotFlags.EYES | SlotFlags.MASK | SlotFlags.HEAD;
+}
+
+public sealed class GetEyeProtectionEvent : EntityEventArgs, IInventoryRelayEvent
+{
+    /// <summary>
+    ///     Time to subtract from any temporary blindness sources.
+    /// </summary>
+    public TimeSpan Protection;
+
+    public SlotFlags TargetSlots => SlotFlags.EYES | SlotFlags.MASK | SlotFlags.HEAD;
+}

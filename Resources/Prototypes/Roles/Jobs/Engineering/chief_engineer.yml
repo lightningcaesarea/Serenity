@@ -1,0 +1,66 @@
+- type: job
+  id: ChiefEngineer
+  name: job-name-ce
+  description: job-description-ce
+  playTimeTracker: JobChiefEngineer
+  requirements:
+    - !type:RoleTimeRequirement
+      role: JobAtmosphericTechnician
+      time: 7h # Starlight
+    - !type:RoleTimeRequirement
+      role: JobStationEngineer
+      time: 7h # Starlight
+    - !type:DepartmentTimeRequirement
+      department: Engineering
+      time: 20h # Starlight
+    - !type:TraitsRequirement # Starlight
+      traits:
+        - Iterator
+        - Muted
+      inverted: true
+  weight: 10
+  startingGear: ChiefEngineerGear
+  icon: "JobIconChiefEngineer"
+  supervisors: job-supervisors-captain
+  access:
+  - Maintenance
+  - Engineering
+  - Command
+  - External
+  - ChiefEngineer
+  - Atmospherics
+  - Brig
+  - Cryogenics
+  - GenpopEnter #starlight
+  - GenpopLeave #starlight
+  - Debrief # Starlight
+  - Shuttle # Starlight
+  special:
+  - !type:AddImplantSpecial
+    implants: [ MindShieldImplant ]
+  - !type:AddComponentSpecial
+    components:
+      - type: CommandStaff
+
+- type: startingGear
+  id: ChiefEngineerGear
+  equipment:
+    id: CEPDA
+    eyes: ClothingEyesGlassesMeson
+    ears: ClothingHeadsetCE
+    belt: ClothingBeltUtilityEngineering
+  storage:
+    back:
+    - Flash
+
+- type: chameleonOutfit
+  id: ChiefEngineerChameleonOutfit
+  job: ChiefEngineer
+  hasMindShield: true
+  equipment:
+    head: ClothingHeadHatBeretEngineering
+    mask: ClothingMaskBreath
+    neck: ClothingNeckCloakCe
+    outerClothing: ClothingOuterWinterCE
+    gloves: ClothingHandsGlovesColorYellow
+    shoes: ClothingShoesBootsMagAdv

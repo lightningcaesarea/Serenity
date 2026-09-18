@@ -1,0 +1,44 @@
+#Wizard outfit startingGear definitions.
+- type: startingGear
+  id: WizardBlueGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitColorDarkBlue
+    head: ClothingHeadHatWizard
+    back: ClothingBackpackWizard # Starlight, Wizard backpack!
+    outerClothing: ClothingOuterWizard
+    shoes: ClothingShoesWizard
+    id: WizardPDA
+    ears: ClothingHeadsetAltWizard #Starlight
+    belt: ClothingBeltWand
+    pocket1: WizardTeleportScroll
+    pocket2: WizardsGrimoire
+  storage: #Starlight
+    back:
+    - WizardWarTablet
+
+- type: startingGear
+  id: WizardRedGear
+  parent: WizardBlueGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitColorRed
+    head: ClothingHeadHatRedwizard
+    outerClothing: ClothingOuterWizardRed
+
+- type: startingGear
+  id: WizardPurpleGear # Starlight, violet -> Purple
+  parent: WizardBlueGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitColorPurple
+    head: ClothingHeadHatPurplewizard # Starlight, violet -> Purple
+    outerClothing: ClothingOuterWizardPurple # Starlight, violet -> Purple
+
+- type: chameleonOutfit
+  id: WizardChameleonOutfit
+  name: roles-antag-wizard-name
+  startingGear: WizardBlueGear
+  icon: "JobIconWizard"
+  equipment:
+    eyes: ClothingEyesGlassesCheapSunglasses
+    mask: ClothingMaskBreath
+    neck: ClothingNeckLGBTPin
+    gloves: ClothingHandsGlovesColorBlack

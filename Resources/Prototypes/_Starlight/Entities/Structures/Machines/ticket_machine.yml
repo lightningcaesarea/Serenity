@@ -1,0 +1,159 @@
+- type: entity
+  id: BaseTicketMachine
+  parent: [ BaseWallmountMachine ]
+  abstract: true
+  components:
+  - type: TicketMachine
+  - type: WallMount
+  - type: Appearance
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: Transform
+    anchored: true
+  - type: DeviceList
+  - type: DeviceNetwork
+    deviceNetId: Wireless
+    receiveFrequencyId: BasicDevice
+  - type: WirelessNetworkConnection
+    range: 200
+  - type: DeviceLinkSink
+    ports:
+      - TicketMachineNextNumber
+      - TicketMachineBurnTickets
+  - type: ContainerContainer
+    containers:
+      TicketMachinePaper: !type:ContainerSlot
+  - type: ItemSlots
+    slots:
+      TicketMachinePaper:
+        whitelist:
+          tags:
+          - LabellerRefillPaper
+
+- type: entity
+  id: TicketMachine
+  parent: BaseTicketMachine
+  name: ticket machine
+  description: It prints out numbered tickets for queue management.
+  suffix: No Access, Empty
+  components:
+  - type: Sprite
+    sprite: _Starlight/Structures/Machines/ticket_machine.rsi
+    layers:
+    - state: base
+    - state: paper_3
+      map: [ "enum.TicketMachineVisualLayers.Paper" ]
+    - map: [ "enum.TicketMachineVisualLayers.Display1" ]
+    - map: [ "enum.TicketMachineVisualLayers.Display2" ]
+      offset: -0.15, 0
+    - map: [ "enum.TicketMachineVisualLayers.Display3" ]
+      offset: -0.3, 0
+
+- type: entity
+  id: TicketMachineFilled
+  parent: TicketMachine
+  suffix: Filled, White
+  components:
+  - type: ContainerFill
+    containers:
+      TicketMachinePaper:
+        - LabellerRefillPaper
+
+- type: entity
+  id: TicketMachineFilledRed
+  parent: TicketMachineFilled
+  suffix: Filled, Red
+  components:
+  - type: TicketMachine
+    ticketProtoId: "TicketRed"
+
+- type: entity
+  id: TicketMachineFilledBlue
+  parent: TicketMachineFilled
+  suffix: Filled, Blue
+  components:
+  - type: TicketMachine
+    ticketProtoId: "TicketBlue"
+
+- type: entity
+  id: TicketMachineFilledCyan
+  parent: TicketMachineFilled
+  suffix: Filled, Cyan
+  components:
+  - type: TicketMachine
+    ticketProtoId: "TicketCyan"
+
+- type: entity
+  id: TicketMachineFilledGreen
+  parent: TicketMachineFilled
+  suffix: Filled, Green
+  components:
+  - type: TicketMachine
+    ticketProtoId: "TicketGreen"
+
+- type: entity
+  id: TicketMachineFilledBrown
+  parent: TicketMachineFilled
+  suffix: Filled, Brown
+  components:
+  - type: TicketMachine
+    ticketProtoId: "TicketBrown"
+
+- type: entity
+  id: TicketMachineFilledOrange
+  parent: TicketMachineFilled
+  suffix: Filled, Orange
+  components:
+  - type: TicketMachine
+    ticketProtoId: "TicketOrange"
+
+- type: entity
+  id: TicketMachineFilledYellow
+  parent: TicketMachineFilled
+  suffix: Filled, Yellow
+  components:
+  - type: TicketMachine
+    ticketProtoId: "TicketYellow"
+
+- type: entity
+  id: TicketMachineFilledPurple
+  parent: TicketMachineFilled
+  suffix: Filled, Purple
+  components:
+  - type: TicketMachine
+    ticketProtoId: "TicketPurple"
+
+- type: entity
+  id: TicketMachineHOP
+  parent: TicketMachineFilled
+  suffix: HOP, Filled, White
+  components:
+  - type: TicketMachine
+    ticketProtoId: "TicketNT"
+  - type: AccessReader
+    access: [["HeadOfPersonnel"]]
+
+- type: entity
+  id: TicketMachineHOPBlue
+  parent: TicketMachineFilledBlue
+  suffix: HOP, Filled, Blue
+  components:
+  - type: AccessReader
+    access: [["HeadOfPersonnel"]]
+
+- type: entity
+  id: TicketMachineQM
+  parent: TicketMachineFilledBrown
+  suffix: QM, Filled, Brown
+  components:
+  - type: AccessReader
+    access: [["Quartermaster"]]

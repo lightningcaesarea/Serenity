@@ -1,0 +1,83 @@
+﻿using Content.Server.Administration.BanList;
+using Content.Server.EUI;
+using Content.Shared.Administration;
+using Robust.Shared.Console;
+using Content.Server.Administration.Managers; // NullLink-edit: move to general method at Manager
+
+namespace Content.Server.Administration.Commands;
+
+[AdminCommand(AdminFlags.Ban)]
+public sealed partial class RoleBanListCommand : IConsoleCommand
+{
+    //[Dependency] private readonly IServerDbManager _dbManager = default!; NullLink-edit: move to general method at Manager
+
+    [Dependency] private EuiManager _eui = default!;
+
+    [Dependency] private IPlayerLocator _locator = default!;
+
+    [Dependency] private IBanManager _banManager = default!; // NullLink-edit: move to general method at Manager
+
+    public string Command => "rolebanlist";
+    public string Description => Loc.GetString("cmd-rolebanlist-desc");
+    public string Help => Loc.GetString("cmd-rolebanlist-help");
+
+    public async void Execute(IConsoleShell shell, string argStr, string[] args)
+    {
+        if (args.Length != 1 && args.Length != 2)
+        {
+            shell.WriteLine($"Invalid amount of args. {Help}");
+            return;
+        }
+
+        var includeUnbanned = true;
+        if (args.Length == 2 && !bool.TryParse(args[1], out includeUnbanned))
+        {
+            shell.WriteLine($"Argument two ({args[1]}) is not a boolean.");
+            return;
+        }
+
+        var data = await _locator.LookupIdByNameOrIdAsync(args[0]);
+
+        if (data == null)
+        {
+            shell.WriteError("Unable to find a player with that name or id.");
+            return;
+        }
+
+        if (shell.Player is not { } player)
+        {
+
+            var bans = await _banManager.GetServerRoleBansAsync(data.LastAddress, data.UserId, data.LastLegacyHWId, data.LastModernHWIds, includeUnbanned); // NullLink-edit: move to general method at Manager
+
+            if (bans.Count == 0)
+            {
+                shell.WriteLine("That user has no bans in their record.");
+                return;
+            }
+
+            foreach (var ban in bans)
+            {
+                var msg = $"ID: {ban.Id}: Role: {ban.Role} Reason: {ban.Reason}";
+                shell.WriteLine(msg);
+            }
+            return;
+        }
+
+        var ui = new BanListEui();
+        _eui.OpenEui(ui, player);
+        await ui.ChangeBanListPlayer(data.UserId);
+
+    }
+
+    public CompletionResult GetCompletion(IConsoleShell shell, string[] args)
+    {
+        return args.Length switch
+        {
+            1 => CompletionResult.FromHintOptions(CompletionHelper.SessionNames(),
+                Loc.GetString("cmd-rolebanlist-hint-1")),
+            2 => CompletionResult.FromHintOptions(CompletionHelper.Booleans,
+                Loc.GetString("cmd-rolebanlist-hint-2")),
+            _ => CompletionResult.Empty
+        };
+    }
+}

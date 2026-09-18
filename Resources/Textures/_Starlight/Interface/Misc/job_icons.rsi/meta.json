@@ -1,0 +1,334 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Starlight, TG Station, Paradise. Soviet and TSF from: https://github.com/ParadiseSS13/Paradise",
+    "size": {
+        "x": 8,
+        "y": 8
+    },
+    "states": [
+        {
+            "name": "Magistrate",
+            "copyright": "Chim"
+        },
+        {
+            "name": "IAA",
+            "copyright": "Chim"
+        },
+        {
+            "name": "BlueShield",
+            "copyright": "Modified by wonderfulnewworld"
+        },
+        {
+            "name": "NanoTrasenRepresentative",
+            "copyright": "TG Station, wonderfulnewworld"
+        },
+        {
+            "name": "StationAi",
+            "copyright": "TG Station, lunarcomets, wonderfulnewworld"
+        },
+        {
+            "name": "NanoTrasenCareerTrainer",
+            "copyright": "TG Station, K-Dynamic, wonderfulnewworld"
+        },
+        {
+            "name": "Vampire"
+        },
+        {
+            "name": "Surgeon"
+        },
+        {
+            "name": "MailTech",
+            "delays": [
+                [
+                    10,
+                    0.2,
+                    0.2,
+                    0.2,
+                    0.2,
+                    0.2,
+                    0.2,
+                    0.2,
+                    0.2,
+                    0.2
+                ]
+            ],
+            "copyright": "Happyrobot33, fqqf"
+        },
+        {
+            "name": "DutyOfficer",
+            "copyright": "BORT"
+        },
+        {
+            "name": "K9",
+            "copyright": "Made by Swonkus (GitHub)"
+        },
+        {
+            "name": "Performer",
+            "copyright": "wonderfulnewworld"
+        },
+        {
+            "name": "LawyerSL",
+            "delays": [
+                [
+                    10,
+                    0.2,
+                    0.2,
+                    0.2
+                ]
+            ]
+        },
+		{
+            "name": "AssistantManager",
+            "copyright": "wonderfulnewworld"
+        },
+        {
+            "name": "CentComm",
+            "copyright": "Happyrobot33, fqqf"
+        },
+        {
+            "name": "NTSF",
+            "copyright": "by teapoterror"
+        },
+        {
+            "name": "Decimus",
+            "copyright": "by teapoterror"
+        },
+        {
+            "name": "NanoTrasenRed",
+            "copyright": "by ShadesMars"
+        },
+        {
+            "name": "CentCommOperator",
+            "copyright": "Happyrobot33, fqqf"
+        },
+        {
+            "name": "Commander"
+        },
+        {
+            "name": "Operative"
+        },
+        {
+            "name": "SyndicateAgent"
+        },
+        {
+            "name": "HeadRevolutionary",
+            "copyright": "JustAdler"
+        },
+        {
+            "name": "Revolutionary",
+            "copyright": "JustAdler"
+        },
+        {
+            "name": "NTNCBlueShield",
+            "copyright": "Conflee Modified by Tjmaxmillion"
+        },
+        {
+            "name": "CCGreenShield",
+            "copyright": "Conflee Modified by Tjmaxmillion"
+        },
+        {
+            "name": "CCServiceWorker",
+            "copyright": "Wizards Den, modified by bynddark8"
+
+        },
+        {
+            "name": "CCChef",
+            "copyright": "Wizards Den, modified by bynddark8"
+
+        },
+        {
+            "name": "CCBartender",
+            "copyright": "Wizards Den, modified by bynddark8"
+
+        },
+        {
+            "name": "CCJanitor",
+            "copyright": "Wizards Den, modified by bynddark8"
+
+        },
+        {
+            "name": "SalvageLead",
+            "copyright": "mikeysaurus"
+        },
+        {
+            "name": "SalvageSpecialist",
+            "copyright": "mikeysaurus"
+        },
+        {
+            "name": "Soviet",
+            "copyright": "Paradise SS13"
+        },
+        {
+            "name": "TSF",
+            "copyright": "Paradise SS13"
+        },
+        {
+            "name": "TSFOfficer",
+            "copyright": "Sprited by Wassuy"
+        },
+        {
+            "name": "Xenoborg",
+            "copyright": "neomoth"
+        },
+        {
+            "name": "Mothership",
+            "copyright": "neomoth"
+        },
+        {
+            "name": "Skub",
+            "copyright": "neomoth"
+        },
+        {
+            "name": "CultistChaplain",
+            "copyright": "neomoth, Rhetorica"
+        },
+        {
+            "name": "ERTChaplain",
+            "copyright": "Taken and modified from /tg/station13 from https://github.com/tgstation/tgstation/blob/ce6beb8a4d61235d9a597a7126c407160ed674ea/icons/mob/huds/hud.dmi, Conflee"
+        },
+        {
+            "name": "ERTEngineer",
+            "copyright": "Taken and modified from /tg/station13 from https://github.com/tgstation/tgstation/blob/ce6beb8a4d61235d9a597a7126c407160ed674ea/icons/mob/huds/hud.dmi, Conflee"
+        },
+        {
+            "name": "ERTJanitor",
+            "copyright": "Taken and modified from /tg/station13 from https://github.com/tgstation/tgstation/blob/ce6beb8a4d61235d9a597a7126c407160ed674ea/icons/mob/huds/hud.dmi, Conflee"
+        },
+        {
+            "name": "ERTLeader",
+            "copyright": "Taken and modified from /tg/station13 from https://github.com/tgstation/tgstation/blob/ce6beb8a4d61235d9a597a7126c407160ed674ea/icons/mob/huds/hud.dmi, Conflee"
+        },
+        {
+            "name": "ERTMedical",
+            "copyright": "Taken and modified from /tg/station13 from https://github.com/tgstation/tgstation/blob/ce6beb8a4d61235d9a597a7126c407160ed674ea/icons/mob/huds/hud.dmi, Conflee"
+        },
+        {
+            "name": "ERTSecurity",
+            "copyright": "Taken and modified from /tg/station13 from https://github.com/tgstation/tgstation/blob/ce6beb8a4d61235d9a597a7126c407160ed674ea/icons/mob/huds/hud.dmi, Conflee"
+        },
+        {
+            "name": "CBURN",
+            "copyright": "Taken and modified from /tg/station13 from https://github.com/tgstation/tgstation/blob/ce6beb8a4d61235d9a597a7126c407160ed674ea/icons/mob/huds/hud.dmi, Conflee"
+        },
+        {
+            "name": "Chaplain",
+            "copyright": "Rhetorica"
+        },
+        {
+            "name": "TSF_Mindshield",
+            "copyright": "Taken from commit: https://github.com/Monolith-Station/Monolith/commit/87c200ff42a1987117105d49d885df82c5912bd9",
+            "delays": [
+                [
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1
+                ]
+            ]
+        },
+        {
+            "name": "Blackstar",
+            "copyright": "Captain icon from /tg/station13 from https://github.com/tgstation/tgstation/blob/ce6beb8a4d61235d9a597a7126c407160ed674ea/icons/mob/huds/hud.dmi, recolored to Blackstar colors by @redmushie (github)"
+        },
+        {
+            "name": "MedTakLeader",
+            "copyright": "SevenShades"
+        },
+        {
+            "name": "MedTakDispatcher",
+            "copyright": "SevenShades"
+        },
+        {
+            "name": "MedTakMedic",
+            "copyright": "SevenShades"
+        },
+        {
+            "name": "MedTakPilot",
+            "copyright": "SevenShades"
+        },
+        {
+            "name": "MedTakSecurity",
+            "copyright": "SevenShades"
+        },
+        {
+            "name": "MedTakBorg",
+            "copyright": "SevenShades"
+        },
+        {
+            "name": "MedTak_Mindshield",
+            "copyright": "SevenShades",
+            "delays": [
+                [
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1
+                ]
+            ]
+        },
+        {
+            "name": "SalvageMedic",
+            "copyright": "Swonki"
+        },
+        {
+            "name": "ClericalAssistant",
+            "copyright": "Wizards Den, modified by bynddark8"
+        },
+        {
+            "name": "CookAssistant",
+            "copyright": "Wizards Den, modified by bynddark8"
+        },
+        {
+            "name": "DeliveryAssistant",
+            "copyright": "Wizards Den, modified by bynddark8"
+        },
+        {
+            "name": "GardenerAssistant",
+            "copyright": "Wizards Den, modified by bynddark8"
+        },
+        {
+            "name": "HandymanAssistant",
+            "copyright": "Wizards Den, modified by bynddark8"
+        },
+        {
+            "name": "MedicalAssistant",
+            "copyright": "Wizards Den, modified by bynddark8"
+        },
+        {
+            "name": "ReligiousAssistant",
+            "copyright": "Rhetorica, modified by bynddark8"
+        },
+        {
+            "name": "JanitorAssistant",
+            "copyright": "Wizards Den, modified by bynddark8"
+        },
+        {
+            "name": "ShopkeeperAssistant",
+            "copyright": "bynddark8"
+        },
+        {
+            "name": "MakeshiftID",
+            "copyright": "rhithebirdthing"
+        }
+    ]
+}

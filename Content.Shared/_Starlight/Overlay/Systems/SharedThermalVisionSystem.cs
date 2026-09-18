@@ -1,0 +1,55 @@
+﻿using Content.Shared.Actions;
+using Robust.Shared.Prototypes;
+using Content.Shared._Starlight.Overlay.Components;
+using Content.Shared._Starlight.Overlay.Events;
+
+namespace Content.Shared._Starlight.Overlay.Systems;
+
+public abstract partial class SharedThermalVisionSystem : EntitySystem
+{
+    [Dependency] private SharedActionsSystem _actionsSystem = default!;
+
+    protected virtual bool IsPredict() => false;
+    public EntProtoId Action = "ActionToggleThermal";
+    public override void Initialize()
+    {
+        base.Initialize();
+        SubscribeLocalEvent<ThermalVisionComponent, MapInitEvent>(OnVisionInit);
+        SubscribeLocalEvent<ThermalVisionComponent, ComponentShutdown>(OnVisionShutdown);
+        SubscribeLocalEvent<ThermalVisionComponent, ToggleThermalVisionEvent>(OnToggleThermalVision);
+    }
+
+    private void OnVisionInit(Entity<ThermalVisionComponent> ent, ref MapInitEvent args)
+    {
+        _actionsSystem.AddAction(ent.Owner, ref ent.Comp.ActionEntity, Action);
+    }
+
+    private void OnVisionShutdown(Entity<ThermalVisionComponent> ent, ref ComponentShutdown args)
+    {
+        _actionsSystem.RemoveAction(ent.Comp.ActionEntity);
+        //force turn off
+        ToggleOff(ent);
+    }
+
+    private void OnToggleThermalVision(Entity<ThermalVisionComponent> ent, ref ToggleThermalVisionEvent args)
+    {
+        if(args.Handled || IsPredict()) return;
+        args.Handled = true;
+
+        ent.Comp.Active = !ent.Comp.Active;
+
+        if(ent.Comp.Active)
+            ToggleOn(ent);
+        else
+            ToggleOff(ent);
+    }
+    protected virtual void ToggleOn(Entity<ThermalVisionComponent> ent)
+    {
+
+    }
+    protected virtual void ToggleOff(Entity<ThermalVisionComponent> ent)
+    {
+
+    }
+}
+

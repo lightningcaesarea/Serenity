@@ -1,0 +1,252 @@
+- type: entity
+  parent: BaseGameRule
+  id: DerelictBorgiSpawn
+  components:
+  - type: StationEvent
+    globalAnnouncement: false
+    weight: 5
+    earliestStart: 15
+    reoccurrenceDelay: 20
+    minimumPlayers: 4
+    duration: null
+  - type: SpaceSpawnRule
+    spawnDistance: 0
+  - type: AntagSpawner
+    prototype: DerelictBorgiChassis
+  - type: AntagSelection
+    antags:
+    - !type:LinearAntagCount
+      proto: DerelictBorgi
+      playerRatio: 80
+      range:
+        min: 1
+        max: 2
+
+# Derelict Cyborgs
+
+- type: entity
+  parent: BaseGameRule
+  id: DerelictPurrfusCyborgSpawn
+  components:
+  - type: StationEvent
+    globalAnnouncement: false
+    weight: 2.5
+    earliestStart: 15
+    reoccurrenceDelay: 20
+    minimumPlayers: 4
+    duration: null
+  - type: SpaceSpawnRule
+    spawnDistance: 0
+  - type: AntagSpawner
+    prototype: PlayerPurrfusBorgDerelictGhostRole
+  - type: AntagSelection
+    antags:
+    - !type:LinearAntagCount
+      proto: DerelictPurrfusCyborg
+      playerRatio: 80
+      range:
+        min: 1
+        max: 2
+
+- type: entity
+  parent: BaseGameRule
+  id: DerelictHeavyXenoborgSpawn
+  components:
+  - type: StationEvent
+    globalAnnouncement: false
+    weight: 1
+    earliestStart: 15
+    reoccurrenceDelay: 20
+    minimumPlayers: 15
+    duration: null
+  - type: SpaceSpawnRule
+    spawnDistance: 0
+  - type: AntagSpawner
+    prototype: PlayerDerelictHeavyXenoborgGhostRole
+  - type: AntagSelection
+    antags:
+    - !type:LinearAntagCount
+      proto: DerelictHeavyXenoborg
+      playerRatio: 80
+      range:
+        min: 1
+        max: 2
+
+- type: entity
+  parent: BaseGameRule
+  id: DerelictEngiXenoborgSpawn
+  components:
+  - type: StationEvent
+    globalAnnouncement: false
+    weight: 1
+    earliestStart: 15
+    reoccurrenceDelay: 20
+    minimumPlayers: 15
+    duration: null
+  - type: SpaceSpawnRule
+    spawnDistance: 0
+  - type: AntagSpawner
+    prototype: PlayerDerelictEngiXenoborgGhostRole
+  - type: AntagSelection
+    antags:
+    - !type:LinearAntagCount
+      proto: DerelictEngiXenoborg
+      playerRatio: 80
+      range:
+        min: 1
+        max: 2
+
+- type: entity
+  parent: BaseGameRule
+  id: DerelictScoutXenoborgSpawn
+  components:
+  - type: StationEvent
+    globalAnnouncement: false
+    weight: 1
+    earliestStart: 15
+    reoccurrenceDelay: 20
+    minimumPlayers: 15
+    duration: null
+  - type: SpaceSpawnRule
+    spawnDistance: 0
+  - type: AntagSpawner
+    prototype: PlayerDerelictScoutXenoborgGhostRole
+  - type: AntagSelection
+    antags:
+    - !type:LinearAntagCount
+      proto: DerelictScoutXenoborg
+      playerRatio: 80
+      range:
+        min: 1
+        max: 2
+
+- type: entity
+  parent: BaseGameRule
+  id: DerelictStealthXenoborgSpawn
+  components:
+  - type: StationEvent
+    globalAnnouncement: false
+    weight: 1
+    earliestStart: 15
+    reoccurrenceDelay: 20
+    minimumPlayers: 15
+    duration: null
+  - type: SpaceSpawnRule
+    spawnDistance: 0
+  - type: AntagSpawner
+    prototype: PlayerDerelictStealthXenoborgGhostRole
+  - type: AntagSelection
+    antags:
+    - !type:LinearAntagCount
+      proto: DerelictStealthXenoborg
+      playerRatio: 80
+      range:
+        min: 1
+        max: 2
+
+- type: entity
+  parent: BaseGameRule
+  id: DerelictXenoBorgiSpawn
+  components:
+  - type: StationEvent
+    globalAnnouncement: false
+    weight: 1
+    earliestStart: 15
+    reoccurrenceDelay: 20
+    minimumPlayers: 15
+    duration: null
+  - type: SpaceSpawnRule
+    spawnDistance: 0
+  - type: AntagSpawner
+    prototype: PlayerDerelictXenoBorgiGhostRole
+  - type: AntagSelection
+    antags:
+    - !type:LinearAntagCount
+      proto: DerelictXenoBorgi
+      playerRatio: 80
+      range:
+        min: 1
+        max: 2
+
+# Syndicate dead drop
+- type: entity
+  parent: BaseGameRule
+  id: SyndicateDeadDrop
+  components:
+  - type: StationEvent
+    startAnnouncement: station-syndicate-dead-drop-announcement
+    startAudio:
+      path: /Audio/Announcements/attention.ogg
+    earliestStart: 15
+    duration: 1
+    minimumPlayers: 10
+    maxOccurrences: 2
+    weight: 10
+  - type: RandomSpawnRule
+    prototype: SyndieDeadDropSpawner
+    radioMessage: {channel: Syndicate, message: "syndicate-dead-drop-announcement"}
+
+# Shitstation
+- type: entityTable
+  id: ShitEventsTable
+  table: !type:AllSelector # we need to pass a list of rules, since rules have further restrictions to consider via StationEventComp
+    children:
+    - id: BreakerFlip
+    - id: CockroachMigration
+    - id: MoproachMigration # They can clean. This is the lucky pull of this pool.
+    - id: MouseMigration
+    - id: GasLeak
+    - id: KudzuGrowth
+    - id: PowerGridCheck
+    - id: VentClog
+    - id: IonStormPlus # I think it's funny to have the double chance to get this.
+
+- type: entity
+  parent: BaseGameRule
+  id: IonStormPlus # It's a more frequent Ion Storm, for ShitStation.
+  components:
+  - type: StationEvent
+    globalAnnouncement: false
+    weight: 10
+    reoccurrenceDelay: 15
+    duration: 1
+  - type: IonStormRule
+
+# Multi Paradoxes
+- type: entity
+  parent: ParadoxCloneSpawn
+  id: ParadoxCrisisSpawn
+  components:
+  - type: StationEvent
+    weight: 2
+    duration: null
+    earliestStart: 35
+    reoccurrenceDelay: 20
+    minimumPlayers: 15
+  - type: AntagSelection
+    agentName: paradox-clone-round-end-agent-name
+    antags:
+    - !type:LinearAntagCount
+      proto: ParadoxClone
+      playerRatio: 70
+      range:
+        min: 1
+        max: 4
+  - type: DynamicRuleCost
+    cost: 125
+
+# Funky Station
+- type: entity
+  parent: BaseStationEvent
+  id: UtilityLineRupture
+  name: Utility Line Rupture
+  components:
+  - type: UtilityLineRuptureRule
+  - type: StationEvent
+    earliestStart: 15
+    weight: 5
+    duration: null
+  - type: GameRule
+    delay:
+      min: 0
+      max: 0

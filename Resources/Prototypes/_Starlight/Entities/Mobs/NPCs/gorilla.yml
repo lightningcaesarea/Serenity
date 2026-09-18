@@ -1,0 +1,77 @@
+- type: entity
+  name: Rampaging Gorilla
+  parent: MobGorilla
+  id: MobGorillaRampaging
+  description: A gorilla that has gone wild. Run!
+  components:
+    - type: Sprite
+      drawdepth: Mobs
+      layers:
+        - map: ["enum.DamageStateVisualLayers.Base"]
+          state: crawling
+          sprite: Mobs/Animals/gorilla.rsi
+          color: "#FF0000"
+    - type: MobThresholds
+      thresholds:
+        0: Alive
+        350: Critical
+        400: Dead
+    - type: MeleeWeapon
+      soundHit:
+        collection: Punch
+      damage:
+        types:
+          Blunt: 35
+          Structural: 20
+    - type: AmputateOnHit
+      chance: 0.5
+    - type: StaminaDamageOnHit
+      damage: 50
+    - type: MeleeThrowOnHit
+      speed: 40
+      distance: 5
+    - type: MovementSpeedModifier
+      baseWalkSpeed: 2
+      baseSprintSpeed: 4
+    - type: Damageable
+      damageContainer: Biological
+      damageModifierSet: GorillaRampaging
+    - type: NpcFactionMember
+      factions:
+        - Gorilla
+        - Syndicate
+        - SyndicateSilicon
+
+- type: entity
+  name: Cargorilla
+  parent: MobGorilla
+  id: MobCargorilla
+  description: Cargo's pet gorilla. He seems to have an 'I love Mom' tattoo.
+  components:
+    - type: LanguageKnowledge
+      speaks:
+      - Ancestor
+      understands:
+      - Ancestor
+      - GalacticCommon
+    - type: Sprite
+      drawdepth: Mobs
+      layers:
+        - map: ["enum.DamageStateVisualLayers.Base"]
+          state: cargo_crawling
+          sprite: Mobs/Animals/gorilla.rsi
+    - type: DamageStateVisuals
+      states:
+        Alive:
+          Base: cargo_crawling
+        Critical:
+          Base: cargo_dead
+        Dead:
+          Base: cargo_dead
+    - type: HTN
+      rootTask:
+        task: IdleCompound
+      blackboard:
+        NavClimb: !type:Bool true
+        NavInteract: !type:Bool true
+    - type: Pacified

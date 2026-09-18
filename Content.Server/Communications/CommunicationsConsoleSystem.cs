@@ -1,0 +1,480 @@
+// Starlight Start
+
+using Content.Server.Administration.Logs;
+using Content.Server.AlertLevel;
+using Content.Server.Chat.Systems;
+using Content.Server.DeviceNetwork.Systems;
+using Content.Server.Popups;
+using Content.Server.RoundEnd;
+using Content.Server.Shuttles.Components;
+using Content.Server.Shuttles.Systems;
+using Content.Server.Station.Systems;
+using Content.Shared._Starlight.Speech;
+using Content.Shared.Access.Components;
+using Content.Shared.Access.Systems;
+using Content.Shared.CCVar;
+using Content.Shared.Chat;
+using Content.Shared.Communications;
+using Content.Shared.Database;
+using Content.Shared.DeviceNetwork;
+using Content.Shared.DeviceNetwork.Components;
+using Content.Shared.IdentityManagement;
+using Content.Shared.Popups;
+using Content.Shared.Screen.Components;
+using Content.Shared.Speech;
+using Content.Shared.Speech.Muting;
+using Content.Shared.Station.Components;
+using Robust.Server.GameObjects;
+using Robust.Shared.Configuration;
+// Starlight Start
+using Content.Shared._Starlight.SecureTerminal;
+using Robust.Shared.Player;
+using Robust.Shared.Timing;
+using Content.Shared.Silicons.StationAi;
+// Starlight End
+
+namespace Content.Server.Communications
+{
+    public sealed partial class CommunicationsConsoleSystem : EntitySystem
+    {
+        [Dependency] private AccessReaderSystem _accessReaderSystem = default!;
+        [Dependency] private AlertLevelSystem _alertLevelSystem = default!;
+        [Dependency] private ChatSystem _chatSystem = default!;
+        [Dependency] private DeviceNetworkSystem _deviceNetworkSystem = default!;
+        [Dependency] private EmergencyShuttleSystem _emergency = default!;
+        [Dependency] private PopupSystem _popupSystem = default!;
+        [Dependency] private RoundEndSystem _roundEndSystem = default!;
+        [Dependency] private StationSystem _stationSystem = default!;
+        [Dependency] private UserInterfaceSystem _uiSystem = default!;
+        [Dependency] private IConfigurationManager _cfg = default!;
+        [Dependency] private IAdminLogManager _adminLogger = default!;
+        [Dependency] private IGameTiming _gameTiming = default!; // Starlight
+
+        private const float UIUpdateInterval = 5.0f;
+        // Starlight Start
+        private const float DefaultGlobalRecallCooldownSeconds = 30f;
+        private float _globalRecallCooldownRemaining = 0f;
+        // Starlight End
+
+        public override void Initialize()
+        {
+            // All events that refresh the BUI
+            SubscribeLocalEvent<AlertLevelChangedEvent>(OnAlertLevelChanged);
+            SubscribeLocalEvent<RoundEndSystemChangedEvent>(_ => OnGenericBroadcastEvent());
+            SubscribeLocalEvent<AlertLevelDelayFinishedEvent>(_ => OnGenericBroadcastEvent());
+
+            // Messages from the BUI
+            SubscribeLocalEvent<CommunicationsConsoleComponent, CommunicationsConsoleSelectAlertLevelMessage>(OnSelectAlertLevelMessage);
+            SubscribeLocalEvent<CommunicationsConsoleComponent, CommunicationsConsoleAnnounceMessage>(OnAnnounceMessage);
+            SubscribeLocalEvent<CommunicationsConsoleComponent, CommunicationsConsoleBroadcastMessage>(OnBroadcastMessage);
+            SubscribeLocalEvent<CommunicationsConsoleComponent, CommunicationsConsoleCallEmergencyShuttleMessage>(OnCallShuttleMessage);
+            SubscribeLocalEvent<CommunicationsConsoleComponent, CommunicationsConsoleRecallEmergencyShuttleMessage>(OnRecallShuttleMessage);
+
+            // On console init, set cooldown
+            SubscribeLocalEvent<CommunicationsConsoleComponent, MapInitEvent>(OnCommunicationsConsoleMapInit);
+
+            // Starlight Start: Secure Command Terminal
+            SubscribeLocalEvent<CommunicationsConsoleComponent, CommunicationsConsoleOpenSecureTerminalMessage>(OnOpenSecureTerminalMessage);
+            // Starlight End
+        }
+
+        public override void Update(float frameTime)
+        {
+            // Starlight Start
+            if (_globalRecallCooldownRemaining > 0f)
+                _globalRecallCooldownRemaining -= frameTime;
+            else
+                _globalRecallCooldownRemaining = 0f;
+            // Starlight End
+            var query = EntityQueryEnumerator<CommunicationsConsoleComponent>();
+            while (query.MoveNext(out var uid, out var comp))
+            {
+                // TODO refresh the UI in a less horrible way
+                if (comp.AnnouncementCooldownRemaining > 0f) // Starlight-edit: this can't be lesser than 0.
+                {
+                    comp.AnnouncementCooldownRemaining = Math.Max(0, comp.AnnouncementCooldownRemaining - frameTime); // Starlight-edit: this can't be lesser than 0.
+                }
+
+                comp.UIUpdateAccumulator += frameTime;
+
+                if (comp.UIUpdateAccumulator < UIUpdateInterval)
+                    continue;
+
+                comp.UIUpdateAccumulator -= UIUpdateInterval;
+
+                if (_uiSystem.IsUiOpen(uid, CommunicationsConsoleUiKey.Key))
+                    UpdateCommsConsoleInterface(uid, comp);
+            }
+
+            base.Update(frameTime);
+        }
+
+        public void OnCommunicationsConsoleMapInit(EntityUid uid, CommunicationsConsoleComponent comp, MapInitEvent args)
+        {
+            comp.AnnouncementCooldownRemaining = comp.InitialDelay;
+            UpdateCommsConsoleInterface(uid, comp);
+
+            //Starlight begin
+            if (!TryComp<StationMemberComponent>(Transform(uid).GridUid, out var stationMember)) return;
+            if (!TryComp<StationCentcommComponent>(stationMember.Station, out var ccComp)) return;
+            if (ccComp.Entity is null) return;
+            comp.AdditionalGrids.Add(ccComp.Entity.Value);
+            //Starlight end
+        }
+
+        // Starlight Start: Secure Command Terminal
+        private void OnOpenSecureTerminalMessage(EntityUid uid, CommunicationsConsoleComponent comp,
+            CommunicationsConsoleOpenSecureTerminalMessage msg)
+        {
+            if (msg.Actor is not { Valid: true } actor) return;
+            if (!CanUse(actor, uid)) return;
+            if (!TryComp<SecureCommandTerminalConsoleComponent>(uid, out var terminal) || !terminal.Enabled) return;
+            if (HasComp<StationAiHeldComponent>(actor)) return;
+            _uiSystem.TryOpenUi(uid, SecureCommandTerminalUiKey.Key, actor);
+        }
+        // Starlight End
+
+        /// <summary>
+        /// Update the UI of every comms console.
+        /// </summary>
+        private void OnGenericBroadcastEvent()
+        {
+            var query = EntityQueryEnumerator<CommunicationsConsoleComponent>();
+            while (query.MoveNext(out var uid, out var comp))
+            {
+                UpdateCommsConsoleInterface(uid, comp);
+            }
+        }
+
+        /// <summary>
+        /// Updates all comms consoles belonging to the station that the alert level was set on
+        /// </summary>
+        /// <param name="args">Alert level changed event arguments</param>
+        private void OnAlertLevelChanged(AlertLevelChangedEvent args)
+        {
+            var query = EntityQueryEnumerator<CommunicationsConsoleComponent>();
+            while (query.MoveNext(out var uid, out var comp))
+            {
+                var entStation = _stationSystem.GetOwningStation(uid);
+                if (args.Station == entStation)
+                    UpdateCommsConsoleInterface(uid, comp);
+            }
+        }
+
+        /// <summary>
+        /// Updates the UI for all comms consoles.
+        /// </summary>
+        public void UpdateCommsConsoleInterface()
+        {
+            var query = EntityQueryEnumerator<CommunicationsConsoleComponent>();
+            while (query.MoveNext(out var uid, out var comp))
+            {
+                UpdateCommsConsoleInterface(uid, comp);
+            }
+        }
+
+        /// <summary>
+        /// Updates the UI for a particular comms console.
+        /// </summary>
+        public void UpdateCommsConsoleInterface(EntityUid uid, CommunicationsConsoleComponent comp)
+        {
+            var stationUid = _stationSystem.GetOwningStation(uid);
+            List<string>? levels = null;
+            string currentLevel = default!;
+            float currentDelay = 0;
+
+            if (stationUid != null)
+            {
+                if (TryComp(stationUid.Value, out AlertLevelComponent? alertComp) &&
+                    alertComp.AlertLevels != null)
+                {
+                    if (alertComp.IsSelectable)
+                    {
+                        levels = new();
+                        foreach (var (id, detail) in alertComp.AlertLevels.Levels)
+                        {
+                            if (detail.Selectable && (comp.SettableAlertLevels == null || comp.SettableAlertLevels.Contains(id))) // Starlight
+                            {
+                                levels.Add(id);
+                            }
+                        }
+                    }
+
+                    currentLevel = alertComp.CurrentLevel;
+                    currentDelay = _alertLevelSystem.GetAlertLevelDelay(stationUid.Value, alertComp);
+                }
+            }
+            // Starlight Start
+            TimeSpan? announceEndTime = null;
+            if (comp.AnnouncementCooldownRemaining > 0f)
+                announceEndTime = _gameTiming.CurTime + TimeSpan.FromSeconds(comp.AnnouncementCooldownRemaining);
+
+            TimeSpan? recallEndTime = null;
+            if (_globalRecallCooldownRemaining > 0f)
+                recallEndTime = _gameTiming.CurTime + TimeSpan.FromSeconds(_globalRecallCooldownRemaining);
+            // Starlight End
+
+            // Starlight edit Start
+            _uiSystem.SetUiState(uid, CommunicationsConsoleUiKey.Key, new CommunicationsConsoleInterfaceState(
+                canAnnounce: CanAnnounce(comp),
+                canBroadcast: comp.CanBroadcast,
+                canCall: CanCallOrRecall(comp),
+                alertLevels: levels,
+                currentAlert: currentLevel,
+                currentAlertDelay: currentDelay,
+                expectedCountdownEnd: _roundEndSystem.ExpectedCountdownEnd,
+                announcementCooldownEnd: announceEndTime,
+                callRecallCooldownEnd: recallEndTime,
+                shuttleCountdownEnd: _roundEndSystem.ExpectedCountdownEnd,
+                shuttleCallsAllowed: _roundEndSystem.GetShuttleCallsEnabled(),
+                lastCountdownStart: _roundEndSystem.LastCountdownStart,
+                hasSecureTerminal: TryComp<Content.Shared._Starlight.SecureTerminal.SecureCommandTerminalConsoleComponent>(uid, out var sct) && sct.Enabled
+            // Starlight edit End
+            ));
+        }
+
+        private static bool CanAnnounce(CommunicationsConsoleComponent comp)
+        {
+            return comp.AnnouncementCooldownRemaining <= 0f;
+        }
+
+        private bool CanUse(EntityUid user, EntityUid console)
+        {
+            if (TryComp<AccessReaderComponent>(console, out var accessReaderComponent))
+            {
+                return _accessReaderSystem.IsAllowed(user, console, accessReaderComponent);
+            }
+            return true;
+        }
+
+        private bool CanCallOrRecall(CommunicationsConsoleComponent comp)
+        {
+            // Defer to what the round end system thinks we should be able to do.
+            if (_emergency.EmergencyShuttleArrived || !_roundEndSystem.CanCallOrRecall())
+                return false;
+
+            // Ensure that we can communicate with the shuttle (either call or recall)
+            if (!comp.CanShuttle)
+                return false;
+
+            // Starlight edit Start
+            if (_globalRecallCooldownRemaining > 0f)
+                return false;
+
+            if (_roundEndSystem.ExpectedCountdownEnd is { } expectedEnd && _roundEndSystem.LastCountdownStart is { } lastStart)
+            {
+                var expectedLength = expectedEnd - lastStart;
+                if (expectedLength < TimeSpan.FromMinutes(5))
+                    return false;
+            }
+
+            return true;
+            // Starlight edit End
+        }
+
+        private void OnSelectAlertLevelMessage(EntityUid uid, CommunicationsConsoleComponent comp, CommunicationsConsoleSelectAlertLevelMessage message)
+        {
+            if (message.Actor is not { Valid: true } mob)
+                return;
+
+            if (!CanUse(mob, uid))
+            {
+                _popupSystem.PopupCursor(Loc.GetString("comms-console-permission-denied"), message.Actor, PopupType.Medium);
+                return;
+            }
+
+            // Starlight BEGIN
+            var tryGetIdentityShortInfoEvent = new TryGetIdentityShortInfoEvent(uid, mob);
+            RaiseLocalEvent(tryGetIdentityShortInfoEvent);
+            var author = tryGetIdentityShortInfoEvent.Title;
+            // Starlight END
+
+            var stationUid = _stationSystem.GetOwningStation(uid);
+            if (stationUid != null)
+            {
+                _alertLevelSystem.SetLevel(stationUid.Value, message.Level, true, true, actor: comp.AnnounceSentBy ? author : null); // Starlight: +actor
+                _adminLogger.Add(LogType.Action, LogImpact.Extreme, $"{ToPrettyString(message.Actor):player} has set {message.Level} alert level");  // Starlight (Far-Horizons)
+            }
+        }
+
+        private void OnAnnounceMessage(EntityUid uid, CommunicationsConsoleComponent comp,
+            CommunicationsConsoleAnnounceMessage message)
+        {
+            var maxLength = _cfg.GetCVar(CCVars.ChatMaxAnnouncementLength);
+            //#region Starlight
+            var msg = new SpeechMessage
+            {
+                Text = message.Message,
+                Tts = message.Message,
+                OriginalText = message.Message,
+                Modifier = SpeechModifier.None
+            };
+            msg.Text = SharedChatSystem.SanitizeAnnouncement(message.Message, maxLength);
+            msg = _chatSystem.SanitizeMessageReplaceWords(msg);
+            var accentEv = new AccentGetEvent(uid, msg);
+            RaiseLocalEvent(uid,accentEv);
+            msg = accentEv.Message;
+
+            EntityUid? speaker = null;
+            //#endregion Starlight
+            var author = Loc.GetString("comms-console-announcement-unknown-sender");
+            if (message.Actor is { Valid: true } mob)
+            {
+                if (!CanAnnounce(comp))
+                {
+                    return;
+                }
+
+                if (!CanUse(mob, uid))
+                {
+                    _popupSystem.PopupEntity(Loc.GetString("comms-console-permission-denied"), uid, message.Actor);
+                    return;
+                }
+
+                // Starlight start
+                if (!HasComp<MutedComponent>(mob))
+                    speaker = mob;
+                // Starlight end
+
+                var tryGetIdentityShortInfoEvent = new TryGetIdentityShortInfoEvent(uid, mob);
+                RaiseLocalEvent(tryGetIdentityShortInfoEvent);
+                author = tryGetIdentityShortInfoEvent.Title;
+            }
+
+            comp.AnnouncementCooldownRemaining = comp.Delay;
+            UpdateCommsConsoleInterface(uid, comp);
+
+            var ev = new CommunicationConsoleAnnouncementEvent(uid, comp, msg.Text, message.Actor); // Starlight
+            RaiseLocalEvent(ref ev);
+
+            // allow admemes with vv
+            Loc.TryGetString(comp.Title, out var title);
+            title ??= comp.Title;
+
+            if (comp.AnnounceSentBy)
+                msg.Text += "\n" + Loc.GetString("comms-console-announcement-sent-by") + " " + author;
+
+            if (comp.Global)
+            {
+                _chatSystem.DispatchGlobalAnnouncement(msg.Tts ?? msg.Text, title, announcementSound: comp.Sound, colorOverride: comp.Color, speaker: speaker); // Starlight
+
+                _adminLogger.Add(LogType.Chat, LogImpact.Low, $"{ToPrettyString(message.Actor):player} has sent the following global announcement: {msg}");
+                return;
+            }
+
+            _chatSystem.DispatchCommunicationsConsoleAnnouncement(uid, msg.Text, title, announcementSound: comp.Sound, speaker: speaker, colorOverride: comp.Color); // 🌟Starlight🌟
+            //Starlight begin
+            foreach (var grid in comp.AdditionalGrids)
+            {
+                var allPlayersOnGrid = Filter.Empty().AddWhere(session =>
+                {
+                    if (session.AttachedEntity is null) return false;
+                    var gridUid = Transform(session.AttachedEntity.Value).GridUid;
+                    if (gridUid == Transform(uid).GridUid) return false; // They already got the announcement from the dispatch above this
+                    return gridUid == grid;
+                });
+                // These are not recorded in replays since they are unnecessary and cause multiple to send at once in the replay, which is annoying as shit.
+                _chatSystem.DispatchFilteredAnnouncement(allPlayersOnGrid, msg.Text, announcementSound: comp.Sound, colorOverride: comp.Color, sender: title, recordToReplay: false);
+            }
+            //Starlight end
+
+            _adminLogger.Add(LogType.Chat, LogImpact.Low, $"{ToPrettyString(message.Actor):player} has sent the following station announcement: {msg}");
+
+        }
+
+        private void OnBroadcastMessage(EntityUid uid, CommunicationsConsoleComponent component, CommunicationsConsoleBroadcastMessage message)
+        {
+            if (!TryComp<DeviceNetworkComponent>(uid, out var net))
+                return;
+
+            if (!component.CanBroadcast) // Starlight
+                return; // Starlight
+
+            var payload = new NetworkPayload
+            {
+                [ScreenMasks.Text] = message.Message
+            };
+
+            _deviceNetworkSystem.QueuePacket(uid, null, payload, net.TransmitFrequency);
+
+            _adminLogger.Add(LogType.DeviceNetwork, LogImpact.Low, $"{ToPrettyString(message.Actor):player} has sent the following broadcast: {message.Message:msg}");
+        }
+
+        private void OnCallShuttleMessage(EntityUid uid, CommunicationsConsoleComponent comp, CommunicationsConsoleCallEmergencyShuttleMessage message)
+        {
+            if (!CanCallOrRecall(comp) || !_roundEndSystem.GetShuttleCallsEnabled()) // Starlight edit
+                return;
+
+            var mob = message.Actor;
+
+            if (!CanUse(mob, uid))
+            {
+                _popupSystem.PopupEntity(Loc.GetString("comms-console-permission-denied"), uid, message.Actor);
+                return;
+            }
+
+            var ev = new CommunicationConsoleCallShuttleAttemptEvent(uid, comp, mob);
+            RaiseLocalEvent(ref ev);
+            if (ev.Cancelled)
+            {
+                _popupSystem.PopupEntity(ev.Reason ?? Loc.GetString("comms-console-shuttle-unavailable"), uid, message.Actor);
+                return;
+            }
+
+            _roundEndSystem.RequestRoundEnd(mob, uid);
+            // Starlight start
+            _globalRecallCooldownRemaining = DefaultGlobalRecallCooldownSeconds;
+
+            UpdateCommsConsoleInterface(uid, comp);
+            // Starlight End
+            _adminLogger.Add(LogType.Action, LogImpact.High, $"{ToPrettyString(mob):player} has called the shuttle.");
+        }
+
+        private void OnRecallShuttleMessage(EntityUid uid, CommunicationsConsoleComponent comp, CommunicationsConsoleRecallEmergencyShuttleMessage message)
+        {
+            if (!CanCallOrRecall(comp))
+                return;
+
+            var mob = message.Actor;
+
+            if (!CanUse(mob, uid))
+            {
+                _popupSystem.PopupEntity(Loc.GetString("comms-console-permission-denied"), uid, message.Actor);
+                return;
+            }
+
+            _roundEndSystem.CancelRoundEndCountdown(mob, uid);
+            // Starlight start
+            _globalRecallCooldownRemaining = DefaultGlobalRecallCooldownSeconds;
+
+            UpdateCommsConsoleInterface(uid, comp);
+            // Starlight End
+            _adminLogger.Add(LogType.Action, LogImpact.High, $"{ToPrettyString(message.Actor):player} has recalled the shuttle.");
+        }
+    }
+
+    /// <summary>
+    /// Raised on announcement
+    /// </summary>
+    [ByRefEvent]
+    public record struct CommunicationConsoleAnnouncementEvent(EntityUid Uid, CommunicationsConsoleComponent Component, string Text, EntityUid? Sender)
+    {
+        public EntityUid Uid = Uid;
+        public CommunicationsConsoleComponent Component = Component;
+        public EntityUid? Sender = Sender;
+        public string Text = Text;
+    }
+
+    /// <summary>
+    /// Raised on shuttle call attempt. Can be cancelled
+    /// </summary>
+    [ByRefEvent]
+    public record struct CommunicationConsoleCallShuttleAttemptEvent(EntityUid Uid, CommunicationsConsoleComponent Component, EntityUid? Sender)
+    {
+        public bool Cancelled = false;
+        public EntityUid Uid = Uid;
+        public CommunicationsConsoleComponent Component = Component;
+        public EntityUid? Sender = Sender;
+        public string? Reason;
+    }
+}

@@ -1,0 +1,129 @@
+using Content.Shared.UserInterface;
+using Content.Server.Advertise.EntitySystems;
+using Content.Shared.Advertise.Components;
+using Content.Shared.Power;
+using Robust.Server.GameObjects;
+using Content.Shared.Arcade.BlockGame;
+using Content.Server._Starlight.Arcade.Systems;
+
+namespace Content.Server.Arcade.BlockGame;
+
+public sealed partial class BlockGameArcadeSystem : EntitySystem
+{
+    [Dependency] private UserInterfaceSystem _uiSystem = default!;
+    [Dependency] private SpeakOnUIClosedSystem _speakOnUIClosed = default!;
+
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        SubscribeLocalEvent<BlockGameArcadeComponent, ComponentInit>(OnComponentInit);
+        SubscribeLocalEvent<BlockGameArcadeComponent, AfterActivatableUIOpenEvent>(OnAfterUIOpen);
+        SubscribeLocalEvent<BlockGameArcadeComponent, PowerChangedEvent>(OnBlockPowerChanged);
+        SubscribeLocalEvent<BlockGameArcadeComponent, ArcadeScorePlacementSubmittedEvent>(OnPlacementSubmitted); // Starlight-edit
+
+        Subs.BuiEvents<BlockGameArcadeComponent>(BlockGameUiKey.Key, subs =>
+        {
+            subs.Event<BoundUIClosedEvent>(OnAfterUiClose);
+            subs.Event<BlockGamePlayerActionMessage>(OnPlayerAction); // Starlight-edit
+        });
+    }
+
+    public override void Update(float frameTime)
+    {
+        var query = EntityQueryEnumerator<BlockGameArcadeComponent>();
+        while (query.MoveNext(out var _, out var blockGame))
+        {
+            blockGame.Game?.GameTick(frameTime);
+        }
+    }
+
+    private void UpdatePlayerStatus(EntityUid uid, EntityUid actor, BlockGameArcadeComponent? blockGame = null)
+    {
+        if (!Resolve(uid, ref blockGame))
+            return;
+
+        _uiSystem.ServerSendUiMessage(uid, BlockGameUiKey.Key, new BlockGameUserStatusMessage(blockGame.Player == actor), actor); // Starlight-edit
+    }
+
+    private void OnComponentInit(EntityUid uid, BlockGameArcadeComponent component, ComponentInit args)
+    {
+        component.Game = new(uid);
+    }
+
+    private void OnAfterUIOpen(EntityUid uid, BlockGameArcadeComponent component, AfterActivatableUIOpenEvent args)
+    {
+        if (component.Player == null)
+            component.Player = args.User;
+        else
+            component.Spectators.Add(args.User);
+
+        UpdatePlayerStatus(uid, args.User, component);
+        component.Game?.UpdateNewPlayerUI(args.User);
+    }
+
+    private void OnAfterUiClose(EntityUid uid, BlockGameArcadeComponent component, BoundUIClosedEvent args)
+    {
+        if (component.Player != args.Actor)
+        {
+            component.Spectators.Remove(args.Actor);
+            UpdatePlayerStatus(uid, args.Actor, blockGame: component);
+            return;
+        }
+
+        var temp = component.Player;
+        if (component.Spectators.Count > 0)
+        {
+            component.Player = component.Spectators[0];
+            component.Spectators.Remove(component.Player.Value);
+            UpdatePlayerStatus(uid, component.Player.Value, blockGame: component);
+        }
+
+        UpdatePlayerStatus(uid, temp.Value, blockGame: component);
+    }
+
+    private void OnBlockPowerChanged(EntityUid uid, BlockGameArcadeComponent component, ref PowerChangedEvent args)
+    {
+        if (args.Powered)
+            return;
+
+        _uiSystem.CloseUi(uid, BlockGameUiKey.Key);
+        component.Player = null;
+        component.Spectators.Clear();
+    }
+
+    #region Starlight
+    private void OnPlacementSubmitted(Entity<BlockGameArcadeComponent> ent, ref ArcadeScorePlacementSubmittedEvent args)
+    {
+        if (ent.Comp.Game == null)
+            return;
+
+        var game = ent.Comp.Game;
+        var placement = args.Placements;
+        game.SetPlacement(placement);
+    }
+    #endregion
+
+    private void OnPlayerAction(EntityUid uid, BlockGameArcadeComponent component, BlockGamePlayerActionMessage msg) // Starlight-edit
+    {
+        if (component.Game == null)
+            return;
+        if (!BlockGameUiKey.Key.Equals(msg.UiKey))
+            return;
+        if (msg.Actor != component.Player)
+            return;
+
+        if (msg.PlayerAction == BlockGamePlayerAction.NewGame)
+        {
+            if (component.Game.Started == true)
+                component.Game = new(uid);
+            component.Game.StartGame();
+            return;
+        }
+
+        if (TryComp<SpeakOnUIClosedComponent>(uid, out var speakComponent))
+            _speakOnUIClosed.TrySetFlag((uid, speakComponent));
+
+        component.Game.ProcessInput(msg.PlayerAction);
+    }
+}

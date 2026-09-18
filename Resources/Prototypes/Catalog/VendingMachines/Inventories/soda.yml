@@ -1,0 +1,16 @@
+- type: vendingMachineInventory
+  id: SodaInventory
+  startingInventory:
+    DrinkColaCan: 4 #Starlight +1
+    DrinkGrapeCan: 4 #Starlight +1
+    DrinkRootBeerCan: 4 #Starlight +1
+    DrinkIcedTeaCan: 4 #Starlight +1
+    DrinkSolDryCan: 4 #Starlight +1
+    DrinkLemonLimeCan: 4 #Starlight +1
+    DrinkLemonLimeCranberryCan: 4 #Starlight +1
+    DrinkFourteenLokoCan: 3
+  contrabandInventory:
+    DrinkColaBottleFull: 2
+    DrinkChangelingStingCan: 3
+  emaggedInventory:
+    DrinkNukieCan: 3

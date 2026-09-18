@@ -1,0 +1,184 @@
+﻿using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
+using Robust.Shared.Utility;
+
+namespace Content.Shared.Robotics;
+
+[Serializable, NetSerializable]
+public enum RoboticsConsoleUiKey : byte
+{
+    Key
+}
+
+[Serializable, NetSerializable]
+public sealed class RoboticsConsoleState : BoundUserInterfaceState
+{
+    /// <summary>
+    /// Map of device network addresses to cyborg data.
+    /// </summary>
+    public Dictionary<string, CyborgControlData> Cyborgs;
+
+    /// <summary>
+    /// If the UI will have the buttons to disable and destroy.
+    /// </summary>
+    public bool AllowBorgControl;
+
+    public RoboticsConsoleState(Dictionary<string, CyborgControlData> cyborgs, bool allowBorgControl)
+    {
+        Cyborgs = cyborgs;
+        AllowBorgControl = allowBorgControl;
+    }
+}
+
+/// <summary>
+/// Message to disable the selected cyborg.
+/// </summary>
+[Serializable, NetSerializable]
+public sealed class RoboticsConsoleDisableMessage : BoundUserInterfaceMessage
+{
+    public readonly string Address;
+
+    public RoboticsConsoleDisableMessage(string address)
+    {
+        Address = address;
+    }
+}
+
+/// <summary>
+/// Message to destroy the selected cyborg.
+/// </summary>
+[Serializable, NetSerializable]
+public sealed class RoboticsConsoleDestroyMessage : BoundUserInterfaceMessage
+{
+    public readonly string Address;
+
+    public RoboticsConsoleDestroyMessage(string address)
+    {
+        Address = address;
+    }
+}
+
+/// <summary>
+/// All data a client needs to render the console UI for a single cyborg.
+/// Created by <c>BorgTransponderComponent</c> and sent to clients by <c>RoboticsConsoleComponent</c>.
+/// </summary>
+[DataRecord, Serializable, NetSerializable]
+public partial record struct CyborgControlData
+{
+    /// <summary>
+    /// Texture of the borg chassis.
+    /// </summary>
+    [DataField(required: true)]
+    public SpriteSpecifier? ChassisSprite;
+
+    /// <summary>
+    /// Name of the borg chassis.
+    /// </summary>
+    [DataField(required: true)]
+    public string ChassisName = string.Empty;
+#region Starlight
+    /// <summary>
+    /// Name of the borg's entity, without its silicon id.
+    /// </summary>
+    [DataField(required: true)]
+    public string Name = string.Empty;
+
+    /// <summary>
+    /// The borg's silicon id, already bracketed, or empty if it has none.
+    /// </summary>
+    [DataField]
+    public string Identifier = string.Empty;
+
+    /// <summary>
+    /// <see cref="Name"/> with <see cref="Identifier"/> after it, the way the borg reads in world.
+    /// </summary>
+    public string FullName => Identifier == string.Empty ? Name : $"{Name} {Identifier}";
+
+    /// <summary>
+    /// Grid coordinates the borg is broadcasting because it needs help, or empty while it is fine.
+    /// See <c>BorgEmergencyBeaconSystem</c> for what counts as needing help.
+    /// </summary>
+    [DataField]
+    public string Location = string.Empty;
+#endregion
+
+    /// <summary>
+    /// Battery charge from 0 to 1.
+    /// </summary>
+    [DataField]
+    public float Charge;
+
+    /// <summary>
+    /// HP level from 0 to 1.
+    /// </summary>
+    [DataField]
+    public float HpPercent; // 0.0 to 1.0
+
+    /// <summary>
+    /// How many modules this borg has, just useful information for roboticists.
+    /// Lets them keep track of the latejoin borgs that need new modules and stuff.
+    /// </summary>
+    [DataField]
+    public int ModuleCount;
+
+    /// <summary>
+    /// Whether the borg has a brain installed or not.
+    /// </summary>
+    [DataField]
+    public bool HasBrain;
+
+    /// <summary>
+    /// Whether the borg can currently be disabled if the brain is installed,
+    /// if on cooldown then can't queue up multiple disables.
+    /// </summary>
+    [DataField]
+    public bool CanDisable;
+
+#region Starlight
+    /// <summary>
+    /// Whether the borg is currently locked down, which shuts it down the same way running out of power does.
+    /// Controls whether the console offers to engage or release the lockdown.
+    /// </summary>
+    [DataField]
+    public bool LockedDown;
+
+    /// <summary>
+    /// Whether the installed brain actually has someone in it. Meaningless when <see cref="HasBrain"/> is false.
+    /// </summary>
+    [DataField]
+    public bool BrainActive = true;
+#endregion
+    /// <summary>
+    /// When this cyborg's data will be deleted.
+    /// Set by the console when receiving the packet.
+    /// </summary>
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
+    public TimeSpan Timeout = TimeSpan.Zero;
+
+    public CyborgControlData(SpriteSpecifier? chassisSprite, string chassisName, string name, float charge, float hpPercent, int moduleCount, bool hasBrain, bool canDisable, bool lockedDown = false, string identifier = "", string location = "", bool brainActive = true) // Starlight
+    {
+        LockedDown = lockedDown; // Starlight
+        Identifier = identifier; // Starlight
+        Location = location; // Starlight
+        BrainActive = brainActive; // Starlight
+        ChassisSprite = chassisSprite;
+        ChassisName = chassisName;
+        Name = name;
+        Charge = charge;
+        HpPercent = hpPercent;
+        ModuleCount = moduleCount;
+        HasBrain = hasBrain;
+        CanDisable = canDisable;
+    }
+}
+
+public static class RoboticsConsoleConstants
+{
+    // broadcast by cyborgs on Robotics Console frequency
+    public const string NET_CYBORG_DATA = "cyborg-data";
+
+    // sent by robotics console to cyborgs on Cyborg Control frequency
+    public const string NET_DISABLE_COMMAND = "cyborg-disable";
+    public const string NET_DESTROY_COMMAND = "cyborg-destroy";
+}

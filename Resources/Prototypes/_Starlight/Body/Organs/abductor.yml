@@ -1,0 +1,143 @@
+- type: entity
+  id: BaseAbductorOrgan
+  parent: BaseItem
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _Starlight/Mobs/Species/Abductor/organs.rsi
+  - type: Organ
+  - type: Edible
+  - type: Extractable
+    grindableSolutionName: organ
+  - type: SolutionManager
+    solutions:
+    - SolutionOrganNutriment
+    - SolutionOrganFoodMeat
+  - type: FlavorProfile
+    flavors:
+      - people
+  - type: Tag
+    tags:
+      - Meat
+
+
+- type: entity
+  id: OrganAbductorBrain
+  parent: [BaseOrganBrain, BaseAbductorOrgan]
+  name: strange brain
+  suffix: Abductor
+  description: "The source of incredible yet strange intelligence."
+  components:
+  - type: Sprite
+    state: brain
+
+- type: entity
+  id: OrganAbductorEyes
+  parent: [BaseAbductorOrgan, BaseOrganEyes]
+  name: strange eyes
+  suffix: Abductor
+  description: "These large beady eyes silently stare at you."
+  components:
+  - type: Sprite
+    layers:
+      - state: eyeballs
+  - type: OrganVisualization
+    layer: Eyes
+    prototypes:
+      Default: MobAbductorEyes
+
+- type: entity
+  id: OrganAbductorEars
+  parent: [BaseAbductorOrgan, BaseOrganEars]
+  name: strange ears
+  suffix: Abductor
+  description: "There are three parts to the ear: inner, middle and outer. Only one of these parts should normally be visible."
+  components:
+  - type: Sprite
+    state: ears
+
+- type: entity
+  id: OrganAbductorLungs
+  parent: [BaseAbductorOrgan, BaseOrganLungs]
+  name: strange lungs
+  suffix: Abductor
+  description: "Filters oxygen from an atmosphere, which is then sent into the bloodstream to be used as an electron carrier."
+  components:
+  - type: Sprite
+    layers:
+      - state: lung-l
+      - state: lung-r
+
+- type: entity
+  id: OrganAbductorHeart
+  parent: [BaseAbductorOrgan, BaseOrganHeart]
+  name: strange heart
+  suffix: Abductor
+  description: "Doesn't look like this one was experimented on."
+  components:
+  - type: Sprite
+    state: heart-on
+  # The heart 'metabolizes' medicines and poisons that aren't filtered out by other organs.
+  # This is done because these chemicals need to have some effect even if they aren't being filtered out of your body.
+  # You're technically 'immune to poison' without a heart, but.. uhh, you'll have bigger problems on your hands.
+  - type: Metabolizer
+    maxReagents: 2
+    metabolizerTypes: [ Slime ]
+    stages: [ Bloodstream ]
+- type: entity
+  id: OrganAbductorStomach
+  parent: [BaseAbductorOrgan, BaseOrganStomach]
+  name: strange stomach
+  suffix: Abductor
+  description: "May yearn for grilled cheese."
+  components:
+  - type: Sprite
+    state: stomach
+  - type: SolutionManager
+    solutions:
+    - SolutionOrganNutriment
+    - SolutionOrganFoodMeat
+    - SolutionOrganStomach50
+  - type: Stomach
+  # The stomach metabolizes stuff like foods and drinks.
+  # TODO: Have it work off of the ent's solution container, and move this
+  # to intestines instead.
+  - type: Metabolizer
+    # mm yummy
+    maxReagents: 3
+    metabolizerTypes: [ Slime ]
+    stages: [ Digestion ]
+
+- type: entity
+  id: OrganAbductorLiver
+  parent: [BaseAbductorOrgan, BaseOrganLiver]
+  name: strange liver
+  suffix: Abductor
+  description: "This odd liver is rather poor at breaking down alcohol."
+  components:
+  - type: Sprite
+    state: liver
+  - type: Metabolizer # The liver metabolizes certain chemicals only, like alcohol.
+    maxReagents: 1
+    metabolizerTypes: [ Slime ]
+    stages: [ Metabolites ]
+- type: entity
+  id: OrganAbductorKidneys
+  parent: [BaseAbductorOrgan, BaseOrganKidneys]
+  name: strange kidneys
+  suffix: Abductor
+  description: "Filters strange toxins from its strange bloodstream."
+  components:
+  - type: Sprite
+    layers:
+      - state: kidney-l
+      - state: kidney-r
+  # The kidneys just remove anything that doesn't currently have any metabolisms, as a stopgap.
+  - type: Metabolizer
+    maxReagents: 5
+    metabolizerTypes: [ Slime ]
+
+- type: entity
+  id: OrganAbductorTongue
+  parent: OrganHumanTongue
+  suffix: Abductor

@@ -1,0 +1,268 @@
+﻿using Content.Server._Starlight.Achievement;
+using Content.Server.Administration.Managers;
+using Content.Server.EUI;
+using Content.Server.Revolutionary.Components;
+using Content.Shared._Starlight.Railroading;
+using Content.Shared._Starlight.Railroading.Events;
+using Content.Shared.Administration.Logs;
+using Content.Shared.Database;
+using Content.Shared.Examine;
+using Robust.Server.Player;
+using Robust.Shared.Player;
+using Robust.Shared.Random;
+using Robust.Shared.Timing;
+using Robust.Shared.Collections;
+using Content.Shared._Starlight;
+using Content.Shared._Starlight.Railroading.Components;
+using Content.Shared._Starlight.Railroading.Components.Visual;
+using Content.Shared._Starlight.Railroading.Components.Reward;
+using Content.Shared._Starlight.Abstract;
+using Content.Shared._Starlight.Objectives.Events;
+
+namespace Content.Server._Starlight.Railroading;
+
+public sealed partial class RailroadingSystem : SharedRailroadingSystem
+{
+    private const string CriminalCardPrototypeId = "RRCardCriminal";
+    private static readonly TimeSpan SelectionTime = TimeSpan.FromSeconds(40);
+
+    [Dependency] private AchievementSystem _achievements = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private IPlayerManager _players = default!;
+    [Dependency] private IAdminManager _admins = default!;
+    [Dependency] private ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private EuiManager _euiManager = default!;
+    [Dependency] private StarlightEntitySystem _entitySystem = default!;
+    [Dependency] private RailroadRuleSystem _railroadRule = default!;
+    [Dependency] private IGameTiming _timing = default!;
+
+    private readonly Dictionary<ICommonSession, CardSelectionEui> _openUis = [];
+
+    public override void Initialize()
+    {
+        base.Initialize();
+        SubscribeLocalEvent<RailroadCardComponent, MapInitEvent>(OnMapInit);
+        SubscribeNetworkEvent<OpenCardsRequestEvent>(OnOpenCardsRequest);
+        SubscribeLocalEvent<RailroadableComponent, ExaminedEvent>(OnExamined);
+        SubscribeLocalEvent<RailroadableComponent, CollectObjectivesEvent>(OnCollectObjectiveInfo);
+    }
+
+    private void OnMapInit(Entity<RailroadCardComponent> ent, ref MapInitEvent args)
+    {
+        if (ent.Comp.Images != null && ent.Comp.Images.Count != 0)
+            ent.Comp.Image = _random.Pick(ent.Comp.Images); // Randomly picks Image from collection.
+    }
+
+    private void OnCollectObjectiveInfo(Entity<RailroadableComponent> ent, ref CollectObjectivesEvent args)
+    {
+        var collect = new CollectObjectiveInfoEvent([]);
+
+        if (ent.Comp.ActiveCard is { } card)
+            RaiseLocalEvent(card, ref collect);
+
+        if (ent.Comp.Completed is { Count: > 0 })
+            foreach (var item in ent.Comp.Completed)
+                RaiseLocalEvent(item, ref collect);
+
+        args.Groups["Cards"] = collect.Objectives;
+    }
+
+    private void OnExamined(Entity<RailroadableComponent> ent, ref ExaminedEvent args)
+    {
+        // A lot of text, but luckily it’s only for admins.
+        if (_admins.IsAdmin(args.Examiner))
+        {
+            using var group = args.PushGroup("Railroading");
+
+            if (ent.Comp.ActiveCard is { } card)
+            {
+                (string, object)[] @params = [
+                    ("Color", card.Comp1.Color),
+                    ("IconColor", card.Comp1.IconColor),
+                    ("Icon", card.Comp1.Icon),
+                    ("Title", Loc.GetString(card.Comp1.Title)),
+                    ("Desc", Loc.GetString(card.Comp1.Description)),
+                ];
+                args.PushMarkup(Loc.GetString("railroading-card-examined", @params));
+            }
+            if (ent.Comp.IssuedCards is { Count: > 0 } cards)
+            {
+                foreach (var item in cards)
+                {
+                    (string, object)[] @params = [
+                        ("Color", item.Comp1.Color),
+                        ("IconColor", item.Comp1.IconColor),
+                        ("Icon", item.Comp1.Icon),
+                        ("Title", Loc.GetString(item.Comp1.Title))
+                    ];
+                    args.PushMarkup(Loc.GetString("railroading-issued-card", @params));
+                }
+            }
+        }
+    }
+
+    public Card EntToCard(Entity<RailroadCardComponent, RuleOwnerComponent> entity)
+        => new()
+        {
+            Id = GetNetEntity(entity.Owner),
+            Title = Loc.GetString(entity.Comp1.Title),
+            Icon = entity.Comp1.Icon,
+            Color = entity.Comp1.Color,
+            IconColor = entity.Comp1.IconColor,
+            Description = Loc.GetString(entity.Comp1.Description),
+            Image = entity.Comp1.Image,
+
+            CreditReward = !TryComp<RailroadDonationRewardComponent>(entity, out var creditReward) ? null : creditReward.Amount,
+            HasSecretAccess = HasComp<RailroadSecretVendingAccessComponent>(entity)
+        };
+
+    private void OnOpenCardsRequest(OpenCardsRequestEvent msg, EntitySessionEventArgs args)
+    {
+        var user = args.SenderSession;
+        if (user.AttachedEntity is not { } uid
+            || !TryComp<RailroadableComponent>(uid, out var comp)
+            || comp.IssuedCards is not { Count: > 0 }
+            || _openUis.ContainsKey(user))
+            return;
+
+        if (!comp.Important && TryComp<RailroadCardsPendingComponent>(uid, out var pending))
+            pending.Deadline ??= _timing.CurTime + SelectionTime;
+
+        var eui = _openUis[user] = new CardSelectionEui()
+        {
+            Subject = (uid, comp)
+        };
+        _euiManager.OpenEui(eui, user);
+        eui.StateDirty();
+    }
+
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
+
+        var now = _timing.CurTime;
+        var expired = new ValueList<Entity<RailroadableComponent>>();
+
+        var query = EntityQueryEnumerator<RailroadCardsPendingComponent, RailroadableComponent>();
+        while (query.MoveNext(out var uid, out var pending, out var railroadable))
+        {
+            if (pending.Deadline is { } deadline && deadline <= now)
+                expired.Add((uid, railroadable));
+        }
+
+        foreach (var subject in expired)
+            ExpireSelection(subject);
+    }
+
+    public void CloseEui(ICommonSession session)
+    {
+        if (!_openUis.ContainsKey(session))
+            return;
+
+        _openUis.Remove(session, out var eui);
+
+        eui?.Close();
+    }
+
+    // todo: timer
+    public void NotifyCardsAvailable(EntityUid owner)
+    {
+        if (!_players.TryGetSessionByEntity(owner, out var user) || _openUis.ContainsKey(user))
+            return;
+
+        EnsureComp<RailroadCardsPendingComponent>(owner);
+    }
+
+    public void OnCardSelected(Entity<RailroadableComponent> subject, NetEntity cardNetUid)
+    {
+        if (_players.TryGetSessionByEntity(subject.Owner, out var user) && _openUis.ContainsKey(user))
+            _openUis.Remove(user);
+
+        var cardUid = GetEntity(cardNetUid);
+        if (!cardUid.IsValid() || subject.Comp.IssuedCards is null)
+            return;
+
+        foreach (var card in subject.Comp.IssuedCards)
+            if (card.Owner == cardUid)
+            {
+                var ev = new RailroadingAssignedEvent(subject);
+                RaiseLocalEvent(card, ref ev);
+                if (ev.Cancelled)
+                {
+                    Log.Warning($"Could not assign card {ToPrettyString(cardUid)}, deleted it");
+                    if (_entitySystem.TryEntity<RailroadRuleComponent>(card.Comp2.RuleOwner, out var rule))
+                        _railroadRule.AddCardToPool(rule, card);
+
+                    continue;
+                }
+
+                subject.Comp.ActiveCard = card;
+                card.Comp1.Subject = subject.Owner;
+                _adminLogger.Add(LogType.Railroading, LogImpact.Medium, $"{ToPrettyString(subject)} selected card {ToPrettyString(cardUid)}.");
+
+                var cardPerformer = EnsureComp<RailroadCardPerformerComponent>(card);
+                cardPerformer.Performer = subject;
+
+                if (MetaData(card.Owner).EntityPrototype?.ID == CriminalCardPrototypeId)
+                {
+                    var achievementId = HasComp<CommandStaffComponent>(subject.Owner)
+                        ? "wavering_loyalty"
+                        : "on_the_run";
+                    _achievements.QueueUnlockAchievement(subject.Owner, achievementId);
+                }
+
+                var @event = new RailroadingCardChosenEvent(subject);
+                RaiseLocalEvent(card, ref @event);
+            }
+            else if (_entitySystem.TryEntity<RailroadRuleComponent>(card.Comp2.RuleOwner, out var rule))
+                _railroadRule.AddCardToPool(rule, card);
+
+        subject.Comp.IssuedCards = null;
+        RemComp<RailroadCardsPendingComponent>(subject);
+    }
+    /// <summary>
+    /// Closing only gives up the window. The hand stays issued until its deadline runs out,
+    /// so it can be reopened as often as wanted until then.
+    /// </summary>
+    public void OnCardSelectionClosed(Entity<RailroadableComponent> subject)
+    {
+        if (_players.TryGetSessionByEntity(subject.Owner, out var user))
+            CloseEui(user);
+    }
+
+    /// <summary>
+    /// The deadline ran out without a pick. Returns the hand to the pool and bars further offers.
+    /// </summary>
+    private void ExpireSelection(Entity<RailroadableComponent> subject)
+    {
+        if (_players.TryGetSessionByEntity(subject.Owner, out var user))
+            CloseEui(user);
+
+        if (subject.Comp.IssuedCards is null || subject.Comp.Important)
+            return;
+
+        foreach (var card in subject.Comp.IssuedCards)
+            if (_entitySystem.TryEntity<RailroadRuleComponent>(card.Comp2.RuleOwner, out var rule))
+                _railroadRule.AddCardToPool(rule, card);
+
+        subject.Comp.IssuedCards = null;
+        subject.Comp.Restricted = true;
+        RemComp<RailroadCardsPendingComponent>(subject);
+        EnsureComp<RailroadRestrictedComponent>(subject);
+    }
+
+    public void CardFailed(Entity<RailroadableComponent> ent)
+    {
+        if (ent.Comp.ActiveCard is null)
+            return;
+
+        var @event = new RailroadingCardFailedEvent(ent);
+        RaiseLocalEvent(ent.Comp.ActiveCard.Value, ref @event);
+        RaiseLocalEvent(ent, ref @event);
+
+        _adminLogger.Add(LogType.Railroading, LogImpact.Medium, $"{ToPrettyString(ent)} failed card {ToPrettyString(ent.Comp.ActiveCard.Value)}.");
+        ent.Comp.Completed ??= [];
+        ent.Comp.Completed.Add(ent.Comp.ActiveCard.Value);
+        ent.Comp.ActiveCard = null;
+    }
+}

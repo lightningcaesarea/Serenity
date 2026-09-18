@@ -1,0 +1,65 @@
+- type: job
+  id: Quartermaster
+  name: job-name-qm
+  description: job-description-qm
+  playTimeTracker: JobQuartermaster
+  requirements:
+    - !type:RoleTimeRequirement
+      role: JobCargoTechnician
+      time: 5h
+    - !type:RoleTimeRequirement
+      role: JobSalvageSpecialist
+      time: 5h # Starlight
+    - !type:DepartmentTimeRequirement
+      department: Cargo
+      time: 30h # Starlight
+    - !type:TraitsRequirement # Starlight
+      traits:
+        - Iterator
+        - Muted
+      inverted: true
+  weight: 10
+  startingGear: QuartermasterGear
+  icon: "JobIconQuartermaster" #Starlight
+  supervisors: job-supervisors-captain
+  access:
+  - Cargo
+  - Mining # Starlight
+  - Mail # Starlight
+  - Quartermaster
+  - Maintenance
+  - External
+  - Command
+  - Brig
+  - Cryogenics
+  - Debrief # Starlight
+  - Shuttle # Starlight
+  special:
+  - !type:AddImplantSpecial
+    implants: [ MindShieldImplant ]
+  - !type:AddComponentSpecial
+    components:
+      - type: CommandStaff
+
+- type: startingGear
+  id: QuartermasterGear
+  equipment:
+    id: QuartermasterPDA
+    ears: ClothingHeadsetQM
+    belt: BoxFolderClipboardThreePapers
+    pocket1: AppraisalTool
+  storage:
+    back:
+    - Flash
+
+- type: chameleonOutfit
+  id: QuartermasterChameleonOutfit
+  job: Quartermaster
+  hasMindShield: true
+  equipment:
+    head: ClothingHeadHatQMsoft
+    eyes: ClothingEyesGlassesSunglasses
+    mask: ClothingMaskBreath
+    outerClothing: ClothingOuterWinterQM
+    neck: ClothingNeckCloakQm
+    gloves: ClothingHandsKnuckleDustersQM

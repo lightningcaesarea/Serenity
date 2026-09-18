@@ -1,0 +1,43 @@
+﻿using System.Linq;
+using Content.Server.EUI;
+using Content.Shared._Starlight.Railroading;
+using Content.Shared._Starlight.Railroading.Components;
+using Content.Shared.Eui;
+
+namespace Content.Server._Starlight.Railroading;
+
+public sealed partial class CardSelectionEui : BaseEui
+{
+    [Dependency] private IEntitySystemManager _systems = default!;
+    [Dependency] private IEntityManager _entities = default!;
+    public required Entity<RailroadableComponent> Subject { get; init; }
+
+    public CardSelectionEui() => IoCManager.InjectDependencies(this);
+    public override CardSelectionEuiState GetNewState() => new()
+    {
+        Cards = Subject.Comp.IssuedCards != null
+            ? [.. Subject.Comp.IssuedCards.Select(_systems.GetEntitySystem<RailroadingSystem>().EntToCard)]
+            : [],
+        Deadline = _entities.TryGetComponent<RailroadCardsPendingComponent>(Subject.Owner, out var pending)
+            ? pending.Deadline
+            : null
+    };
+    public override void HandleMessage(EuiMessageBase msg)
+    {
+        base.HandleMessage(msg);
+        switch (msg)
+        {
+            case CardSelectedMessage selectedMessage:
+                _systems.GetEntitySystem<RailroadingSystem>().OnCardSelected(Subject, selectedMessage.Card);
+                break;
+            case CardSelectionClosedMessage:
+                _systems.GetEntitySystem<RailroadingSystem>().OnCardSelectionClosed(Subject);
+                break;
+            default:
+                break;
+        }
+    }
+
+    public override void Closed()
+        => base.Closed();
+}

@@ -1,0 +1,78 @@
+- type: entity
+  id: BaseShowcaseRobot
+  abstract: true
+  parent: BaseStructure
+  name: security robot showcase
+  description: A non-functional replica of an old security robot.
+  components:
+    - type: Rotatable # SL Edit
+    - type: Anchorable
+    - type: Damageable
+      damageContainer: StructuralInorganic
+      damageModifierSet: Metallic
+    - type: Destructible
+      thresholds:
+        - trigger:
+            !type:DamageTrigger
+            damage: 150
+          behaviors:
+            - !type:DoActsBehavior
+              acts: [ "Destruction" ]
+        - trigger:
+            !type:DamageTrigger
+            damage: 75
+          behaviors:
+            - !type:PlaySoundBehavior
+              sound:
+                collection: MetalBreak
+            - !type:SpawnEntitiesBehavior
+              spawn:
+                PartRodMetal1:
+                  min: 5
+                  max: 10
+            - !type:DoActsBehavior
+              acts: [ "Destruction" ]
+
+- type: entity
+  id: ShowcaseRobot
+  parent: BaseShowcaseRobot
+  name: security robot showcase
+  description: A non-functional replica of an old security robot.
+  components:
+  - type: Sprite
+    sprite: _Starlight/Structures/Decorations/showcase.rsi #SL Edit
+    state: showcase_1
+    noRot: true #SL Edit
+
+- type: entity
+  id: ShowcaseRobotWhite
+  parent: BaseShowcaseRobot
+  name: white robot showcase
+  description: A non-functional replica of an old robot.
+  components:
+  - type: Sprite
+    sprite: _Starlight/Structures/Decorations/showcase.rsi #SL Edit
+    state: showcase_2
+    noRot: true #SL Edit
+
+- type: entity
+  id: ShowcaseRobotAntique
+  parent: BaseShowcaseRobot
+  name: cargo mech showcase #SL Edit
+  description: A non-functional replica of an old cargo mech. #SL Edit
+  components:
+  - type: Sprite
+    sprite: _Starlight/Structures/Decorations/showcase.rsi #SL Edit
+    state: showcase_3
+    noRot: true #SL Edit
+
+- type: entity
+  id: ShowcaseRobotMarauder
+  parent: BaseShowcaseRobot
+  name: durand MK1 showcase #SL Edit
+  description: A non-functional replica of a MK1 Durand. #SL Edit
+  components:
+  - type: Sprite
+    sprite: _Starlight/Structures/Decorations/showcase.rsi #SL Edit
+    state: showcase_4
+    noRot: true #SL Edit

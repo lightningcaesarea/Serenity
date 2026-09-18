@@ -1,0 +1,650 @@
+# Base
+
+- type: entity
+  id: SpawnPointJobBase
+  parent: MarkerBase
+  abstract: true
+  suffix: Job Spawn
+  components:
+  - type: SpawnPoint
+    spawn_type: Job
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+
+- type: entity
+  name: observer spawn point
+  id: SpawnPointObserver
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    layers:
+      - state: green
+      - sprite: Mobs/Ghosts/ghost_human.rsi
+        state: icon
+    state: observer
+  - type: SpawnPoint
+    spawn_type: Observer
+
+- type: entity
+  name: latejoin spawn point
+  id: SpawnPointLatejoin
+  categories: [ ShouldMapStation ] # Starlight
+  parent: SpawnPointJobBase
+  components:
+  - type: Sprite
+    # Starlight Edit Start: Added layers and jobicon
+    layers:
+      - state: green
+      - state: jobicon
+    # Starlight Edit End: Added layers and jobicon
+  - type: SpawnPoint
+    spawn_type: LateJoin
+
+- type: entity
+  name: any job spawn point
+  id: SpawnPointAnyJob # used for integration tests so we don't need to map every single job spawner on the test map
+  parent: SpawnPointJobBase
+  components:
+  - type: Sprite
+    # Starlight Edit Start: Added layers and jobicon
+    layers:
+      - state: green
+      - state: jobicon
+    # Starlight Edit End: Added layers and jobicon
+  - type: SpawnPoint
+    spawn_type: Job
+    job_id: null # any job can spawn here
+
+# Cargo
+
+- type: entity
+  id: SpawnPointQuartermaster
+  parent: SpawnPointJobBase
+  name: quartermaster
+  components:
+  - type: SpawnPoint
+    job_id: Quartermaster
+  - type: Sprite
+    layers:
+      - state: green
+      - state: qm
+      - state: jobicon # Starlight
+
+- type: entity
+  id: SpawnPointCargoTechnician
+  parent: SpawnPointJobBase
+  name: cargotechnician
+  components:
+  - type: SpawnPoint
+    job_id: CargoTechnician
+  - type: Sprite
+    layers:
+      - state: green
+      - state: cargo_tech
+      - state: jobicon # Starlight
+
+- type: entity
+  id: SpawnPointSalvageSpecialist
+  parent: SpawnPointJobBase
+  name: salvagespecialist
+  components:
+  - type: SpawnPoint
+    job_id: SalvageSpecialist
+  - type: Sprite
+    layers:
+      - state: green
+      - state: salvagespecialist
+      - state: jobicon # Starlight
+
+# Civilian
+
+- type: entity
+  id: SpawnPointAssistant
+  parent: SpawnPointJobBase
+  name: assistant
+  components:
+  - type: SpawnPoint
+    job_id: Assistant
+  - type: Sprite
+    layers:
+      - state: green
+      - state: assistant
+      - state: jobicon # Starlight
+
+- type: entity
+  id: SpawnPointTechnicalAssistant
+  parent: SpawnPointJobBase
+  name: technical assistant
+  components:
+  - type: SpawnPoint
+    job_id: TechnicalAssistant
+  - type: Sprite
+    layers:
+      - state: green
+      - state: technicalassistant
+      - state: jobicon # Starlight
+
+- type: entity
+  id: SpawnPointMedicalIntern
+  parent: SpawnPointJobBase
+  name: medical intern
+  components:
+  - type: SpawnPoint
+    job_id: MedicalIntern
+  - type: Sprite
+    layers:
+      - state: green
+      - state: medicalintern
+      - state: jobicon # Starlight
+
+- type: entity
+  id: SpawnPointSecurityCadet
+  parent: SpawnPointJobBase
+  name: security cadet
+  components:
+  - type: SpawnPoint
+    job_id: SecurityCadet
+  - type: Sprite
+    layers:
+      - state: green
+      - state: security_cadet
+      - state: jobicon # Starlight
+
+- type: entity
+  id: SpawnPointResearchAssistant
+  parent: SpawnPointJobBase
+  name: research assistant
+  components:
+  - type: SpawnPoint
+    job_id: ResearchAssistant
+  - type: Sprite
+    layers:
+      - state: green
+      - state: researchassistant
+      - state: jobicon # Starlight
+
+- type: entity
+  id: SpawnPointServiceWorker
+  parent: SpawnPointJobBase
+  name: service worker
+  components:
+  - type: SpawnPoint
+    job_id: ServiceWorker
+  - type: Sprite
+    layers:
+      - state: green
+      - state: serviceworker
+      - state: jobicon # Starlight
+
+- type: entity
+  id: SpawnPointBartender
+  parent: SpawnPointJobBase
+  name: bartender
+  components:
+  - type: SpawnPoint
+    job_id: Bartender
+  - type: Sprite
+    layers:
+      - state: green
+      - state: bartender
+      - state: jobicon # Starlight
+
+- type: entity
+  id: SpawnPointChef
+  parent: SpawnPointJobBase
+  name: chef
+  components:
+  - type: SpawnPoint
+    job_id: Chef
+  - type: Sprite
+    layers:
+      - state: green
+      - state: chef
+      - state: jobicon # Starlight
+
+- type: entity
+  id: SpawnPointBotanist
+  parent: SpawnPointJobBase
+  name: botanist
+  components:
+  - type: SpawnPoint
+    job_id: Botanist
+  - type: Sprite
+    layers:
+      - state: green
+      - state: botanist
+      - state: jobicon # Starlight
+
+- type: entity
+  id: SpawnPointClown
+  parent: SpawnPointJobBase
+  name: clown
+  components:
+  - type: SpawnPoint
+    job_id: Clown
+  - type: Sprite
+    layers:
+      - state: green
+      - state: clown
+      - state: jobicon # Starlight
+
+- type: entity
+  id: SpawnPointMime
+  parent: SpawnPointJobBase
+  name: mime
+  components:
+  - type: SpawnPoint
+    job_id: Mime
+  - type: Sprite
+    layers:
+      - state: green
+      - state: mime
+      - state: jobicon # Starlight
+
+- type: entity
+  id: SpawnPointChaplain
+  parent: SpawnPointJobBase
+  name: chaplain
+  components:
+  - type: SpawnPoint
+    job_id: Chaplain
+  - type: Sprite
+    layers:
+      - state: green
+      - state: chaplain
+      - state: jobicon # Starlight
+
+- type: entity
+  id: SpawnPointLibrarian
+  parent: SpawnPointJobBase
+  name: librarian
+  components:
+  - type: SpawnPoint
+    job_id: Librarian
+  - type: Sprite
+    layers:
+      - state: green
+      - state: librarian
+      - state: jobicon # Starlight
+
+- type: entity
+  id: SpawnPointLawyer
+  parent: SpawnPointJobBase
+  name: lawyer
+  components:
+  - type: SpawnPoint
+    job_id: Lawyer
+  - type: Sprite
+    layers:
+      - state: green
+      - state: lawyer
+      - state: jobicon # Starlight
+
+- type: entity
+  id: SpawnPointJanitor
+  parent: SpawnPointJobBase
+  name: janitor
+  components:
+  - type: SpawnPoint
+    job_id: Janitor
+  - type: Sprite
+    layers:
+      - state: green
+      - state: janitor
+      - state: jobicon # Starlight
+
+- type: entity
+  id: SpawnPointMusician
+  parent: SpawnPointJobBase
+  name: musician
+  components:
+  - type: SpawnPoint
+    job_id: Musician
+  - type: Sprite
+    layers:
+      - state: green
+      - state: musician
+      - state: jobicon # Starlight
+
+- type: entity
+  id: SpawnPointBorg
+  parent: SpawnPointJobBase
+  name: cyborg
+  components:
+  - type: SpawnPoint
+    job_id: Borg
+  - type: Sprite
+    layers:
+    - state: green
+    - sprite: Mobs/Silicon/Chassis/generic.rsi
+      state: borg
+    - sprite: Mobs/Silicon/Chassis/generic.rsi
+      state: borg_e
+    - state: jobicon # Starlight
+
+# Command
+
+- type: entity
+  id: SpawnPointCaptain
+  parent: SpawnPointJobBase
+  name: captain
+  components:
+  - type: SpawnPoint
+    job_id: Captain
+  - type: Sprite
+    layers:
+      - state: green
+      - state: captain
+      - state: jobicon # Starlight
+
+- type: entity
+  id: SpawnPointHeadOfPersonnel
+  parent: SpawnPointJobBase
+  name: headofpersonnel
+  components:
+  - type: SpawnPoint
+    job_id: HeadOfPersonnel
+  - type: Sprite
+    layers:
+      - state: green
+      - state: hop
+      - state: jobicon # Starlight
+
+# Engineering
+
+- type: entity
+  id: SpawnPointChiefEngineer
+  parent: SpawnPointJobBase
+  name: chiefengineer
+  components:
+  - type: SpawnPoint
+    job_id: ChiefEngineer
+  - type: Sprite
+    layers:
+      - state: green
+      - state: ce
+      - state: jobicon # Starlight
+
+- type: entity
+  id: SpawnPointStationEngineer
+  parent: SpawnPointJobBase
+  name: stationengineer
+  components:
+  - type: SpawnPoint
+    job_id: StationEngineer
+  - type: Sprite
+    layers:
+      - state: green
+      - state: engineer
+      - state: jobicon # Starlight
+
+- type: entity
+  id: SpawnPointAtmos
+  parent: SpawnPointJobBase
+  name: atmospherics
+  components:
+  - type: SpawnPoint
+    job_id: AtmosphericTechnician
+  - type: Sprite
+    layers:
+      - state: green
+      - state: atmospherics
+      - state: jobicon # Starlight
+
+# Medical
+
+- type: entity
+  id: SpawnPointChiefMedicalOfficer
+  parent: SpawnPointJobBase
+  name: chiefmedicalofficer
+  components:
+  - type: SpawnPoint
+    job_id: ChiefMedicalOfficer
+  - type: Sprite
+    layers:
+      - state: green
+      - state: cmo
+      - state: jobicon # Starlight
+
+- type: entity
+  id: SpawnPointMedicalDoctor
+  parent: SpawnPointJobBase
+  name: medicaldoctor
+  components:
+  - type: SpawnPoint
+    job_id: MedicalDoctor
+  - type: Sprite
+    layers:
+      - state: green
+      - state: doctor
+      - state: jobicon # Starlight
+
+- type: entity
+  id: SpawnPointParamedic
+  parent: SpawnPointJobBase
+  name: paramedic
+  components:
+  - type: SpawnPoint
+    job_id: Paramedic
+  - type: Sprite
+    layers:
+      - state: green
+      - state: paramedic
+      - state: jobicon # Starlight
+
+- type: entity
+  id: SpawnPointChemist
+  parent: SpawnPointJobBase
+  name: chemist
+  components:
+  - type: SpawnPoint
+    job_id: Chemist
+  - type: Sprite
+    layers:
+      - state: green
+      - state: chemist
+      - state: jobicon # Starlight
+
+# Science
+
+- type: entity
+  id: SpawnPointResearchDirector
+  parent: SpawnPointJobBase
+  name: researchdirector
+  components:
+  - type: SpawnPoint
+    job_id: ResearchDirector
+  - type: Sprite
+    layers:
+      - state: green
+      - state: rd
+      - state: jobicon # Starlight
+
+- type: entity
+  id: SpawnPointScientist
+  parent: SpawnPointJobBase
+  name: scientist
+  components:
+  - type: SpawnPoint
+    job_id: Scientist
+  - type: Sprite
+    layers:
+      - state: green
+      - state: scientist
+      - state: jobicon # Starlight
+
+# Security
+
+- type: entity
+  id: SpawnPointHeadOfSecurity
+  parent: SpawnPointJobBase
+  name: headofsecurity
+  components:
+  - type: SpawnPoint
+    job_id: HeadOfSecurity
+  - type: Sprite
+    layers:
+      - state: green
+      - state: hos
+      - state: jobicon # Starlight
+
+- type: entity
+  id: SpawnPointWarden
+  parent: SpawnPointJobBase
+  name: warden
+  components:
+  - type: SpawnPoint
+    job_id: Warden
+  - type: Sprite
+    layers:
+      - state: green
+      - state: warden
+      - state: jobicon # Starlight
+
+- type: entity
+  id: SpawnPointSecurityOfficer
+  parent: SpawnPointJobBase
+  name: securityofficer
+  components:
+  - type: SpawnPoint
+    job_id: SecurityOfficer
+  - type: Sprite
+    layers:
+      - state: green
+      - state: security_officer
+      - state: jobicon # Starlight
+
+- type: entity
+  id: SpawnPointDetective
+  parent: SpawnPointJobBase
+  name: detective
+  components:
+  - type: SpawnPoint
+    job_id: Detective
+  - type: Sprite
+    layers:
+      - state: green
+      - state: detective
+      - state: jobicon # Starlight
+
+- type: entity
+  id: SpawnPointBrigmedic
+  parent: SpawnPointJobBase
+  name: brigmedic
+  components:
+  - type: SpawnPoint
+    job_id: Brigmedic
+  - type: Sprite
+    layers:
+      - state: green
+      - state: brigmedic
+      - state: jobicon # Starlight
+
+# SPECIAL
+# ERT
+- type: entity
+  id: SpawnPointERTLeader
+  parent: SpawnPointJobBase
+  name: ERTleader
+  components:
+  - type: SpawnPoint
+    job_id: ERTLeader
+  - type: Sprite
+    layers:
+      - state: green
+      - state: ertleader
+      - state: jobicon # Starlight
+
+- type: entity
+  id: SpawnPointERTChaplain
+  parent: SpawnPointJobBase
+  name: ERTchaplain
+  components:
+  - type: SpawnPoint
+    job_id: ERTChaplain
+  - type: Sprite
+    layers:
+      - state: green
+      - state: chaplain
+      - state: jobicon # Starlight
+
+- type: entity
+  id: SpawnPointERTEngineer
+  parent: SpawnPointJobBase
+  name: ERTengineer
+  components:
+  - type: SpawnPoint
+    job_id: ERTEngineer
+  - type: Sprite
+    layers:
+      - state: green
+      - state: ertengineer
+      - state: jobicon # Starlight
+
+- type: entity
+  id: SpawnPointERTMedical
+  parent: SpawnPointJobBase
+  name: ERTmedical
+  components:
+  - type: SpawnPoint
+    job_id: ERTMedical
+  - type: Sprite
+    layers:
+      - state: green
+      - state: ertmedical
+      - state: jobicon # Starlight
+
+- type: entity
+  id: SpawnPointERTSecurity
+  parent: SpawnPointJobBase
+  name: ERTsecurity
+  components:
+  - type: SpawnPoint
+    job_id: ERTSecurity
+  - type: Sprite
+    layers:
+      - state: green
+      - state: ertsecurity
+      - state: jobicon # Starlight
+
+- type: entity
+  id: SpawnPointERTJanitor
+  parent: SpawnPointJobBase
+  name: ERTjanitor
+  components:
+  - type: SpawnPoint
+    job_id: ERTJanitor
+  - type: Sprite
+    layers:
+      - state: green
+      - state: ertjanitor
+      - state: jobicon # Starlight
+
+# STATION SPECIFIC
+
+- type: entity
+  id: SpawnPointReporter
+  parent: SpawnPointJobBase
+  name: reporter
+  components:
+  - type: SpawnPoint
+    job_id: Reporter
+  - type: Sprite
+    layers:
+      - state: green
+      - state: reporter
+      - state: jobicon # Starlight
+
+- type: entity
+  id: SpawnPointPsychologist
+  parent: SpawnPointJobBase
+  name: psychologist
+  components:
+  - type: SpawnPoint
+    job_id: Psychologist
+  - type: Sprite
+    layers:
+      - state: green
+      - state: psychologist
+      - state: jobicon # Starlight

@@ -1,0 +1,28 @@
+- type: currency
+  id: BuildToken
+  displayName: "Currency"
+  cash:
+    1: BuildToken
+  canWithdraw: true
+
+- type: currency
+  id: Telebond
+  displayName: "Telebonds"
+  cash:
+    1: Telebond1
+  canWithdraw: true
+
+- type: currency
+  id: Conversion
+  displayName: "Total Conversions"
+  canWithdraw: false
+
+- type: currency
+  id: BloodEssence
+  displayName: store-currency-display-blood-essence
+  canWithdraw: false
+
+- type: currency
+  id: EvolutionPoint
+  displayName: store-currency-display-evolutionpoints
+  canWithdraw: false

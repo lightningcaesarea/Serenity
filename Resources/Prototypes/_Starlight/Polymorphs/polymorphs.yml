@@ -1,0 +1,107 @@
+- type: polymorph
+  id: AdmemeForcedJohnToe
+  configuration:
+    entity: MobJohnToe
+    forced: true
+    inventory: Transfer
+    allowRepeatedMorphs: true
+    transferName: false
+    transferDamage: true
+    revertOnCrit: false
+    revertOnDeath: false
+    polymorphSound: !type:SoundPathSpecifier
+      path: /Audio/Magic/forcewall.ogg
+    exitPolymorphSound: !type:SoundPathSpecifier
+      path: /Audio/Magic/forcewall.ogg
+
+- type: polymorph
+  id: VampireSanguinePoolPolymorph
+  configuration:
+    entity: MobVampireSanguinePool
+    forced: true
+    transferDamage: true
+    transferName: true
+    inventory: Transfer
+    revertOnCrit: true
+    revertOnDeath: true
+    effectProto: null
+    polymorphSound: !type:SoundPathSpecifier
+      path: /Audio/_Starlight/Effects/vampire/enter_blood.ogg
+    exitPolymorphSound: !type:SoundPathSpecifier
+      path: /Audio/_Starlight/Effects/vampire/exit_blood.ogg
+
+- type: polymorph
+  id: AdminMouse
+  configuration:
+    entity: MobAdminMouse
+    forced: true
+    inventory: None
+    allowRepeatedMorphs: false
+
+- type: polymorph
+  id: MentorMouse
+  configuration:
+    entity: MobMentorMouse
+    forced: true
+    inventory: None
+    allowRepeatedMorphs: false
+
+- type: polymorph
+  id: AdminFelioSmite
+  configuration:
+    entity: MobFelionoid
+    forced: true
+    transferName: true
+    inventory: Transfer
+    ignoreAllowRepeatedMorphs: true
+
+- type: polymorph
+  id: InfernalJaunt
+  configuration:
+    entity: InfernalJaunt
+    transferName: true
+    inventory: None
+    forced: true
+    revertOnDeath: true
+    revertOnCrit: true
+    allowRepeatedMorphs: false
+    polymorphSound: /Audio/Magic/ethereal_enter.ogg
+    exitPolymorphSound: /Audio/Magic/ethereal_exit.ogg
+    duration: 5
+
+- type: polymorph
+  id: ForcedCluwneBeast
+  configuration:
+    entity: MobCluwneBeast
+    forced: true
+    inventory: None
+    revertOnDeath: true
+    revertOnCrit: true
+    transferName: false
+    transferDamage: false
+
+- type: polymorph
+  id: PermanentCorgiMorph
+  configuration:
+    entity: MobCorgiSmart
+    forced: true
+    inventory: Drop
+    transferName: true
+    revertOnCrit: false
+    revertOnDeath: false
+    allowRepeatedMorphs: false
+
+#Vampire
+- type: polymorph
+  id: VampireMouse
+  configuration:
+    entity: MobMouse
+    revertOnDeath: true
+    revertOnCrit: true
+
+- type: polymorph
+  id: VampireBat
+  configuration:
+    entity: MobBat
+    revertOnDeath: true
+    revertOnCrit: true

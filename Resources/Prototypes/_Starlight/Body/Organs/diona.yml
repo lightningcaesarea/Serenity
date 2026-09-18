@@ -1,0 +1,184 @@
+- type: entity
+  id: BaseDionaOrgan
+  parent: BaseItem
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: Mobs/Species/Diona/organs.rsi
+  - type: Organ
+  - type: Edible
+  - type: Extractable
+    grindableSolutionName: organ
+  - type: SolutionManager
+    solutions:
+    - SolutionOrganSap
+    - SolutionOrganFoodCellulose
+  - type: FlavorProfile
+    flavors:
+      - people
+
+
+- type: entity
+  id: OrganDionaBrain
+  parent: [BaseOrganBrain, BaseDionaOrgan]
+  name: diona brain
+  suffix: Diona
+  description: "The central hub of a diona's pseudo-neurological activity, its root-like tendrils search for its former body."
+  components:
+  - type: Sprite
+    state: brain
+
+
+- type: entity
+  id: OrganDionaEyes
+  parent: [BaseDionaOrgan, BaseOrganEyes]
+  name: diona eyes
+  suffix: Diona
+  description: "I see you!"
+  components:
+  - type: Sprite
+    layers:
+      - state: eyeball-l
+      - state: eyeball-r
+  - type: OrganVisualization
+    layer: Eyes
+    # 🌟Starlight🌟 start
+    prototypes:
+      Default: MobDionaEyes
+    # 🌟Starlight🌟 end
+
+- type: entity
+  id: OrganDionaStomach
+  parent: [BaseDionaOrgan, BaseOrganStomach]
+  name: diona stomach
+  suffix: Diona
+  description: "The diona's equivalent of a stomach, it reeks of asparagus and vinegar."
+  components:
+  - type: Sprite
+    state: stomach
+  - type: SolutionManager
+    solutions:
+    - SolutionOrganSap
+    - SolutionOrganFoodCellulose
+    - SolutionOrganStomach50
+  - type: Stomach
+  - type: Metabolizer
+    maxReagents: 6
+    metabolizerTypes: [ Plant ]
+    stages: [ Digestion, Bloodstream, Metabolites ]
+  - type: Item
+    size: Small
+    heldPrefix: stomach
+
+
+- type: entity
+  id: OrganDionaLungs
+  parent: [BaseDionaOrgan, BaseOrganLungs]
+  name: diona lungs
+  suffix: Diona
+  description: "A spongy mess of slimy, leaf-like structures. Capable of breathing both carbon dioxide and oxygen."
+  components:
+  - type: Sprite
+    state: lungs
+  - type: Item
+    size: Small
+    heldPrefix: lungs
+  - type: Lung
+  - type: Metabolizer
+    metabolizerTypes: [ Plant ]
+    stages: [ Respiration ]
+  - type: SolutionManager
+    solutions:
+    - SolutionOrganSap
+    - SolutionOrganFoodCellulose
+    - SolutionOrganLung
+
+- type: entity
+  id: OrganDionaBrainNymph
+  categories: [ HideSpawnMenu ]
+  parent: OrganDionaBrain
+  name: diona nymph brain
+  suffix: Diona Nymph
+  description: "The source of incredible, unending intelligence. Honk."
+  components:
+  - type: Brain
+  - type: Nymph # This will make the organs turn into a nymph when they're removed.
+    entityPrototype: OrganDionaNymphBrain
+    transferMind: true
+
+- type: entity
+  id: OrganDionaStomachNymph
+  categories: [ HideSpawnMenu ]
+  parent: OrganDionaStomach
+  name: diona nymph stomach
+  suffix: Diona Nymph
+  description: "Gross. This is hard to stomach."
+  components:
+  - type: Nymph
+    entityPrototype: OrganDionaNymphStomach
+
+- type: entity
+  id: OrganDionaLungsNymph
+  categories: [ HideSpawnMenu ]
+  parent: OrganDionaLungs
+  name: diona nymph lungs
+  suffix: Diona Nymph
+  description: "Filters oxygen from an atmosphere, which is then sent into the bloodstream to be used as an electron carrier."
+  components:
+  - type: Nymph
+    entityPrototype: OrganDionaNymphLungs
+
+# Nymphs that the organs will turn into
+- type: entity
+  id: OrganDionaNymphBrain
+  categories: [ HideSpawnMenu ]
+  parent: MobDionaNymph #starlight Nubody will not pass.
+  name: diona nymph
+  suffix: Diona Nymph
+  description: Contains the brain of a formerly fully-formed Diona. Killing this would kill the Diona forever. You monster.
+  components:
+  - type: IsDeadIC
+  # Starlight - start
+  - type: Body
+    prototype: AnimalNymphBrain
+  # Starlight - end
+
+- type: entity
+  id: OrganDionaNymphStomach
+  categories: [ HideSpawnMenu ]
+  parent: MobDionaNymphAccent #starlight Nubody will not pass.
+  name: diona nymph stomach
+  suffix: Diona Nymph
+  description: Contains the stomach of a formerly fully-formed Diona. It doesn't taste any better for it.
+  components:
+  - type: IsDeadIC
+  # Starlight - start
+  - type: Body
+    prototype: AnimalNymphStomach
+  # Starlight - end
+
+- type: entity
+  id: OrganDionaNymphLungs
+  categories: [ HideSpawnMenu ]
+  parent: MobDionaNymphAccent #starlight Nubody will not pass.
+  name: diona nymph lungs
+  suffix: Diona Nymph
+  description: Contains the lungs of a formerly fully-formed Diona. Breathtaking.
+  components:
+  - type: IsDeadIC
+  # Starlight - start
+  - type: Body
+    prototype: AnimalNymphLungs
+  # Starlight - end
+
+- type: entity
+  id: OrganDionaTongue
+  parent: OrganHumanTongue
+  suffix: Diona
+  components:
+  - type: OrganTongue
+    allowedEmotes: ['Chirp']
+    sounds:
+      Male: UnisexDiona
+      Female: UnisexDiona
+      Unsexed: UnisexDiona

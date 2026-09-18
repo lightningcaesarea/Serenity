@@ -1,0 +1,135 @@
+- type: entity
+  parent: ToteBase
+  id: BoxCaptainCircuitboards
+  name: bridge circuit tote
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: CommandTechFabCircuitboard # Starlight
+        - id: CommsComputerCircuitboard
+        - id: StationRecordsComputerCircuitboard
+        - id: ShipyardComputerCircuitboard # Starlight
+
+- type: entity
+  parent: ToteBase
+  id: BoxCECircuitboards
+  name: engineering circuit tote
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: EngineeringTechFabCircuitboard  # Starlight
+        - id: CargoRequestEngineeringComputerCircuitboard
+        - id: AlertsComputerCircuitboard
+        - id: AtmosMonitoringComputerCircuitboard
+        - id: PowerComputerCircuitboard
+        - id: SolarControlComputerCircuitboard
+        - id: BluespaceHarvesterMachineCircuitboard # Starlight
+        - id: EngineeringCommsComputerCircuitboard # Starlight
+
+- type: entity
+  parent: ToteBase
+  id: BoxCMOCircuitboards
+  name: medical circuit tote
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: MedicalTechFabCircuitboard
+        - id: CargoRequestMedicalComputerCircuitboard
+        - id: MedicalCommsComputerCircuitboard # Starlight
+
+- type: entity
+  parent: ToteBase
+  id: BoxHoPCircuitboards
+  name: head of personnel circuit tote
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: ServiceTechFabCircuitboard # Starlight
+        - id: IDComputerCircuitboard
+        - id: FundingAllocationComputerCircuitboard
+        - id: CargoRequestServiceComputerCircuitboard
+        - id: ServiceCommsComputerCircuitboard # Starlight
+
+- type: entity
+  parent: BoxStamps
+  id: BoxHoPStamps
+  name: head of personnel's stamp box
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: RubberStampApproved
+        - id: RubberStampDenied
+        - id: RubberStampHop
+
+- type: entity
+  parent: ToteBase
+  id: BoxHoSCircuitboards
+  name: security circuit tote
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: SecurityTechFabCircuitboard
+        - id: CargoRequestSecurityComputerCircuitboard
+        - id: SecurityCommsComputerCircuitboard # Starlight
+
+- type: entity
+  parent: ToteBase
+  id: BoxQMCircuitboards
+  name: cargo circuit tote
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: CargoTechFabCircuitboard # Starlight
+        - id: CargoBountyComputerCircuitboard
+        - id: CargoRequestComputerCircuitboard
+        - id: CargoSaleComputerCircuitboard
+        - id: CargoShuttleConsoleCircuitboard
+        - id: SalvageMagnetMachineCircuitboard
+        - id: MailTeleporterMachineCircuitboard
+        - id: CargoCommsComputerCircuitboard # Starlight
+
+- type: entity
+  parent: BoxStamps
+  id: BoxQMStamps
+  name: quartermaster's stamp box
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: RubberStampApproved
+        - id: RubberStampDenied
+        - id: RubberStampQm
+
+- type: entity
+  parent: ToteBase
+  id: BoxRDCircuitboards
+  name: science circuit tote
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: CircuitImprinterMachineCircuitboard
+        - id: ScienceTechFabCircuitboard # Starlight
+        - id: ResearchComputerCircuitboard
+        - id: CargoRequestScienceComputerCircuitboard
+        - id: RoboticsConsoleCircuitboard
+        - id: AnalysisComputerCircuitboard #Because sometimes round start artis just fucking explode on the pad.
+        - id: ArtifactAnalyzerMachineCircuitboard
+        - id: StationAiFixerCircuitboard
+        - id: ScienceCommsComputerCircuitboard # Starlight

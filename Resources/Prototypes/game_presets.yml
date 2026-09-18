@@ -1,0 +1,319 @@
+- type: gamePreset
+  id: Survival
+  alias:
+    - survival
+  name: survival-title
+  showInVote: true # 🌟Starlight🌟
+  minPlayers: 15 # Starlight
+  description: survival-description
+  rules:
+    - MeteorSwarmScheduler
+    - RampingStationEventScheduler
+    - SpaceTrafficControlEventScheduler # Starlight
+    - SpaceTrafficControlFriendlyEventScheduler # Starlight
+    - BasicRoundstartVariation
+
+- type: gamePreset
+  id: KesslerSyndrome
+  alias:
+    - kessler
+    - junk
+    - meteorhell
+  name: kessler-syndrome-title
+  showInVote: true # 🌟Starlight🌟
+  minPlayers: 15 # Starlight
+  description: kessler-syndrome-description
+  rules:
+    - KesslerSyndromeScheduler
+    - RampingStationEventScheduler
+    - SpaceTrafficControlEventScheduler # Starlight
+    - BasicRoundstartVariation
+
+- type: gamePreset
+  id: AllAtOnce
+  alias:
+  - all
+  name: all-at-once-title
+  minPlayers: 60 # Starlight
+  description: all-at-once-description
+  showInVote: false
+  rules:
+    - Nukeops
+    - Traitor
+    - Revolutionary
+    - Zombie
+    - WizardDuel # Starlight
+    #- Xenoborgs # Starlight
+    - KesslerSyndromeScheduler
+    - RampingStationEventScheduler
+    - SLChangeling #Starlight
+    - SpaceTrafficControlEventScheduler # Starlight
+    - BasicRoundstartVariation
+    - BasicRoundstartVariation # Starlight, ShitStation
+    - ShitStationEventScheduler # Starlight, ShitStation
+    - Vampire #Starlight
+    - SiliconLiberation #Starlight
+    - SubBrighteye #Starlight
+    - ThiefGamerule # Starlight, Event Light
+    - CosmicCult #Starlight
+    #- TerrorSpidersSpawn # Starlight
+    - Devil # Starlight
+
+- type: gamePreset
+  id: AllerAtOnce
+  alias:
+  - allall
+  - aller
+  - badidea
+  - punishment
+  name: aller-at-once-title
+  description: aller-at-once-description
+  showInVote: false #Please god dont do this
+  minPlayers: 60 # Starlight
+  rules:
+    - Nukeops
+    - Traitor
+    - Revolutionary
+    - Zombie
+    - SubWizard # Starlight. Well, you did say *Aller* at once.
+    - WizardDuel # Starlight. Well, you did say *Aller* at once.
+    #- Xenoborgs # Starlight
+    - BasicStationEventScheduler
+    - BasicStationEventScheduler # Starlight, ShitStation
+    - ShitStationEventScheduler # Starlight, ShitStation
+    - KesslerSyndromeScheduler
+    - MeteorSwarmMildScheduler
+    - MeteorSwarmScheduler
+    - RampingStationEventScheduler
+    - SpaceTrafficControlEventScheduler # Starlight
+    - SpaceTrafficControlFriendlyEventScheduler # Starlight
+    - BasicRoundstartVariation
+    - BasicRoundstartVariation # Starlight, ShitStation
+    - BasicRoundstartVariation # Starlight, ShitStation
+    - BasicRoundstartVariation # Starlight, ShitStation
+    - BasicRoundstartVariation # Starlight, ShitStation
+    - SLChangeling # Starlight
+    - Vampire #Starlight
+    - SiliconLiberation #Starlight
+    - SubBrighteye #Starlight
+    - ThiefGamerule # Starlight, Event Light
+    - LoneOpsSpawn # Starlight
+    - RailroadingTerminator # Starlight
+    - RailroadingMinor # Starlight
+    - CosmicCult # Starlight
+    #- TerrorSpidersSpawn # Starlight
+    - Devil # Starlight
+
+- type: gamePreset
+  id: Extended
+  alias:
+  - extended
+  - shittersafari
+  name: extended-title
+  showInVote: true # 🌟Starlight🌟
+  description: extended-description
+  minPlayers: 0 # Starlight
+  voteCooldown: 0 # Starlight
+  rules:
+  - BasicStationEventScheduler
+  - MeteorSwarmScheduler
+  - SpaceTrafficControlEventScheduler # Starlight
+  - BasicRoundstartVariation
+
+- type: gamePreset
+  id: Greenshift
+  alias:
+  - greenshift
+  - shittersafarideluxeedition
+  name: greenshift-title
+  showInVote: true # 🌟Starlight🌟
+  description: greenshift-description
+  rules:
+  - SpaceTrafficControlFriendlyEventScheduler # Starlight
+  - BasicRoundstartVariation
+
+- type: gamePreset
+  id: Dynamic
+  alias:
+  - dynamic
+  - multiantag
+  - director
+  name: dynamic-title
+  showInVote: false # admin-only for now until we fix some bugs
+  description: dynamic-description
+  minPlayers: 40 # 🌟Starlight🌟
+  voteCooldown: 0 # Starlight, this one actually can roll back to back.
+  rules:
+  - SLDynamicRule # Starlight, we have a modified scheduler.
+#  - DummyNonAntag # Starlight, remove DummyNonAntag
+#  - DynamicStationEventScheduler # Starlight, we're adding this to Dynamic itself, so we can make it compete with Dynamic Survival, Kessler, and ShitStation.
+#  - MeteorSwarmScheduler # Starlight, also moving this to Dynamic's modes, mainly because we don't want double meteors with Kessler.
+  - SpaceTrafficControlEventScheduler # Starlight
+  - BasicRoundstartVariation
+  - RailroadingMinor # Starlight, railroading
+
+- type: gamePreset
+  id: Secret
+  alias:
+    - secret
+    - sekrit
+  name: secret-title
+  showInVote: true
+  minPlayers: 5 # Starlight
+  description: secret-description
+  rules:
+    - Secret
+    - RailroadingMinor # 🌟Starlight🌟
+
+- type: gamePreset
+  id: Sandbox
+  alias:
+    - sandbox
+  name: sandbox-title
+  description: sandbox-description
+  showInVote: false # Not suitable for use without admin intervention, since entity spamming can quickly crash a server
+  maxPlayers: 5
+  rules:
+    - Sandbox
+
+- type: gamePreset
+  id: Traitor
+  alias:
+    - traitor
+    - tator
+  name: traitor-title
+  description: traitor-description
+  minPlayers: 5 # 🌟Starlight🌟
+  showInVote: true # 🌟Starlight🌟
+  rules:
+  # - DummyNonAntagChance 🌟Starlight🌟
+  - Traitor
+  - SubGamemodesRuleNoChangelings #Starlight
+  - BasicStationEventScheduler
+  - MeteorSwarmScheduler
+  - SpaceTrafficControlEventScheduler # Starlight
+  - BasicRoundstartVariation
+  - RailroadingMinor # 🌟Starlight🌟
+
+
+- type: gamePreset
+  id: Deathmatch
+  alias:
+    - deathmatch
+    - dm
+  name: death-match-title
+  description: death-match-description
+#  minPlayers: 4 # Starlight start
+#  maxPlayers: 15
+#  showInVote: false
+#   supportedMaps: DeathMatchMapPool # Starlight end
+  rules:
+    - DeathMatch31
+
+- type: gamePreset
+  id: Nukeops
+  alias:
+    - nukeops
+  name: nukeops-title
+  description: nukeops-description
+  minPlayers: 40
+  showInVote: true # 🌟Starlight🌟
+  rules:
+  - Nukeops
+  # - DummyNonAntagChance 🌟Starlight🌟
+  - SubGamemodesRuleNuclearOperativeScaling # Starlight
+  - BasicStationEventScheduler
+  - MeteorSwarmScheduler
+  - SpaceTrafficControlEventScheduler # Starlight
+  - BasicRoundstartVariation
+
+- type: gamePreset
+  id: Revolutionary
+  alias:
+    - rev
+    - revs
+    - revolutionaries
+  name: rev-title
+  description: rev-description
+  minPlayers: 30
+  showInVote: true # 🌟Starlight🌟
+  rules:
+  # - DummyNonAntagChance 🌟Starlight🌟
+  - Revolutionary
+  - SubGamemodesRuleConversion # Starlight. 3 max thieves on revs, so they can't be guaranteed an Emag.
+  - BasicStationEventScheduler
+  - MeteorSwarmScheduler
+  - SpaceTrafficControlEventScheduler # Starlight
+  - BasicRoundstartVariation
+
+- type: gamePreset
+  id: Wizard
+  alias:
+  - wizard
+  name: wizard-title
+  description: wizard-description
+  minPlayers: 40 # 🌟Starlight🌟
+  showInVote: false
+  rules:
+  - Wizard
+  # - DummyNonAntagChance 🌟Starlight🌟
+  - SubGamemodesRuleNoWizard #No Dual Wizards at the start, midround is fine
+  - BasicStationEventScheduler
+  - MeteorSwarmScheduler
+  - SpaceTrafficControlEventScheduler # Starlight
+  - BasicRoundstartVariation
+
+- type: gamePreset
+  id: Xenoborgs
+  alias:
+    - xenoborgs
+  name: xenoborgs-title
+  description: xenoborgs-description
+  minPlayers: 30 # 🌟Starlight🌟
+  showInVote: true # 🌟Starlight🌟
+  rules:
+  - Xenoborgs
+  # - DummyNonAntagChance 🌟Starlight🌟
+  - SubGamemodesRuleNoXenoborg # Starlight. no two motherships. Allows wizards to spawn on Xenoborgs. Space is dangerous, yo.
+  - BasicStationEventScheduler
+  - MeteorSwarmScheduler
+  - SpaceTrafficControlEventScheduler # Starlight
+  - BasicRoundstartVariation
+
+- type: gamePreset
+  id: Zombie
+  alias:
+  - zombie
+  - zombies
+  - Zombies
+  - zz14
+  - zomber
+  name: zombie-title
+  description: zombie-description
+  minPlayers: 50 # 🌟Starlight🌟
+  showInVote: true # 🌟Starlight🌟
+  rules:
+  - Zombie
+  - SubGamemodesRuleZombieCompliantAntags # Starlight. I want to trial this, see how it plays out. If it goes poorly, we'll remove Xenoborgs from it.
+  - BasicStationEventScheduler
+  - MeteorSwarmScheduler
+  - SpaceTrafficControlEventScheduler # Starlight
+  - BasicRoundstartVariation
+
+- type: gamePreset
+  id: Zombieteors
+  alias:
+  - zombieteors
+  - zombombies
+  - meteombies
+  name: zombieteors-title
+  description: zombieteors-description
+  minPlayers: 50 # 🌟Starlight🌟
+  showInVote: true # 🌟Starlight🌟
+  rules:
+  - Zombie
+  - SubGamemodesRuleZombieCompliantAntags # Starlight. I want to trial this, see how it plays out. If it goes poorly, we'll remove Xenoborgs from it.
+  - BasicStationEventScheduler
+  - KesslerSyndromeScheduler
+  - SpaceTrafficControlEventScheduler # Starlight
+  - BasicRoundstartVariation

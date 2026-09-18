@@ -1,0 +1,45 @@
+- type: job
+  id: Detective
+  name: job-name-detective
+  description: job-description-detective
+  playTimeTracker: JobDetective
+  requirements:
+  - !type:RoleTimeRequirement
+    role: JobSecurityOfficer
+    time: 10h # Starlight
+  displayWeight: 3 # Starlight
+  startingGear: DetectiveGear
+  icon: "JobIconDetective"
+  supervisors: job-supervisors-hos
+  access:
+  - Security
+  - Brig
+  - Maintenance
+  - Detective
+  - Cryogenics
+  - External
+  special:
+  - !type:AddImplantSpecial
+    implants: [ MindShieldImplant ]
+
+- type: startingGear
+  id: DetectiveGear
+  equipment:
+    id: DetectivePDA
+    ears: ClothingHeadsetDetective # Starlight
+    # belt: ClothingBeltHolsterFilled # Starlight, removed to allow Detective to choose their sidearm
+  storage:
+    back:
+    - Flash
+    - ForensicPad
+    - ForensicScanner
+
+- type: chameleonOutfit
+  id: DetectiveChameleonOutfit
+  job: Detective
+  hasMindShield: true
+  equipment:
+    head: ClothingHeadHatFedoraBrown
+    mask: ClothingMaskGasSecurity
+    neck: ClothingNeckTieDet
+    gloves: ClothingHandsGlovesForensic

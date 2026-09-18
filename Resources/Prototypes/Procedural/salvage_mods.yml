@@ -1,0 +1,99 @@
+# Markers
+- type: entity
+  id: SalvageShuttleMarker
+  name: salvage shuttle marker
+  parent: FTLPoint
+
+# Biome mods -> at least 1 required
+- type: salvageBiomeMod
+  id: Caves
+  desc: salvage-biome-mod-caves
+  biome: Caves
+  # Starlight
+  difficulties:
+    - Challenging
+    - Moderate
+    - Easy
+    - Difficult
+
+- type: salvageBiomeMod
+  id: Grasslands
+  desc: salvage-biome-mod-grasslands
+  biome: Grasslands
+  # Starlight
+  difficulties:
+    - Challenging
+    - Moderate
+    - Easy
+    - Difficult
+
+- type: salvageBiomeMod
+  id: Snow
+  desc: salvage-biome-mod-snow
+  cost: 1
+  biome: Snow
+  # Starlight
+  difficulties:
+    - Challenging
+    - Moderate
+    - Easy
+    - Difficult
+
+- type: salvageBiomeMod
+  id: Lava
+  desc: salvage-biome-mod-lava
+  cost: 2
+  biome: Lava
+  # Starlight
+  difficulties:
+    - Challenging
+    - Moderate
+    - Easy
+    - Difficult
+
+#- type: salvageBiomeMod
+#  id: Space
+#  cost: 1
+#  weather: false
+#  biome: null
+
+# Light mods -> required
+- type: salvageLightMod
+  id: Daylight
+  desc: salvage-light-mod-daylight
+  color: "#D8B059"
+  biomes:
+    - Grasslands
+
+- type: salvageLightMod
+  id: Lavalight
+  desc: salvage-light-mod-daylight
+  color: "#A34931"
+  biomes:
+    - Lava
+
+- type: salvageLightMod
+  id: Evening
+  desc: salvage-light-mod-evening
+  color: "#2b3143"
+
+- type: salvageLightMod
+  id: Night
+  desc: salvage-light-mod-night
+  cost: 1
+  color: null
+
+
+
+# Weather mods -> not required
+#- type: salvageWeatherMod
+#  id: SnowfallHeavy
+#  weather: SnowfallHeavy
+#  cost: 1
+#
+#- type: salvageWeatherMod
+#  id: Rain
+#  weather: Rain
+
+# Dungeons
+#  For now just simple 1-dungeon setups

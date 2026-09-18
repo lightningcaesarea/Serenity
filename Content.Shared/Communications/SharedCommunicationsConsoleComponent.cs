@@ -1,0 +1,119 @@
+using Robust.Shared.Serialization;
+
+namespace Content.Shared.Communications
+{
+    [Virtual]
+    public partial class SharedCommunicationsConsoleComponent : Component
+    {
+    }
+
+    [Serializable, NetSerializable]
+    public sealed class CommunicationsConsoleInterfaceState : BoundUserInterfaceState
+    {
+        public readonly bool CanAnnounce;
+        public readonly bool CanBroadcast; // Starlight
+        public readonly bool CanCall;
+        public readonly TimeSpan? ExpectedCountdownEnd;
+        public readonly bool CountdownStarted;
+        public List<string>? AlertLevels;
+        public string CurrentAlert;
+        public float CurrentAlertDelay;
+
+        // Starlight edit Start
+        public readonly TimeSpan? AnnouncementCooldownEnd;
+        public readonly TimeSpan? ShuttleCountdownEnd;
+        public readonly TimeSpan? CallRecallCooldownEnd;
+        public readonly bool ShuttleCallsAllowed;
+        public readonly TimeSpan? LastCountdownStart;
+        public readonly bool HasSecureTerminal; // Starlight: SCT enabled
+
+        public CommunicationsConsoleInterfaceState(
+            bool canAnnounce,
+            bool canCall,
+            List<string>? alertLevels,
+            string currentAlert,
+            float currentAlertDelay,
+            bool canBroadcast,
+            TimeSpan? expectedCountdownEnd = null,
+            TimeSpan? announcementCooldownEnd = null,
+            TimeSpan? callRecallCooldownEnd = null,
+            TimeSpan? shuttleCountdownEnd = null,
+            bool shuttleCallsAllowed = true,
+            TimeSpan? lastCountdownStart = null,
+            bool hasSecureTerminal = false
+        )
+        // Starlight edit End
+        {
+            CanAnnounce = canAnnounce;
+            CanCall = canCall;
+            ExpectedCountdownEnd = expectedCountdownEnd;
+            CountdownStarted = expectedCountdownEnd != null;
+            AlertLevels = alertLevels;
+            CurrentAlert = currentAlert;
+            CurrentAlertDelay = currentAlertDelay;
+            // Starlight Start
+            CanBroadcast = canBroadcast;
+            AnnouncementCooldownEnd = announcementCooldownEnd;
+            CallRecallCooldownEnd = callRecallCooldownEnd;
+            ShuttleCountdownEnd = shuttleCountdownEnd;
+            ShuttleCallsAllowed = shuttleCallsAllowed;
+            LastCountdownStart = lastCountdownStart;
+            HasSecureTerminal = hasSecureTerminal;
+            // Starlight End
+        }
+    }
+
+    [Serializable, NetSerializable]
+    public sealed class CommunicationsConsoleSelectAlertLevelMessage : BoundUserInterfaceMessage
+    {
+        public readonly string Level;
+
+        public CommunicationsConsoleSelectAlertLevelMessage(string level)
+        {
+            Level = level;
+        }
+    }
+
+    [Serializable, NetSerializable]
+    public sealed class CommunicationsConsoleAnnounceMessage : BoundUserInterfaceMessage
+    {
+        public readonly string Message;
+
+        public CommunicationsConsoleAnnounceMessage(string message)
+        {
+            Message = message;
+        }
+    }
+
+    [Serializable, NetSerializable]
+    public sealed class CommunicationsConsoleBroadcastMessage : BoundUserInterfaceMessage
+    {
+        public readonly string Message;
+        public CommunicationsConsoleBroadcastMessage(string message)
+        {
+            Message = message;
+        }
+    }
+
+    [Serializable, NetSerializable]
+    public sealed class CommunicationsConsoleCallEmergencyShuttleMessage : BoundUserInterfaceMessage
+    {
+    }
+
+    [Serializable, NetSerializable]
+    public sealed class CommunicationsConsoleRecallEmergencyShuttleMessage : BoundUserInterfaceMessage
+    {
+    }
+
+    [Serializable, NetSerializable]
+    public enum CommunicationsConsoleUiKey
+    {
+        Key
+    }
+
+    // Starlight Start: Secure Command Terminal
+    /// <summary>Sent from the client when the player presses the "Secure Terminal" button.</summary>
+    [Serializable, NetSerializable]
+    public sealed class CommunicationsConsoleOpenSecureTerminalMessage : BoundUserInterfaceMessage { }
+    // Starlight End
+}

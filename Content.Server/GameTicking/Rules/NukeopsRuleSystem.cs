@@ -1,0 +1,678 @@
+using Content.Server.Antag;
+using Content.Server.Communications;
+using Content.Server.GameTicking.Rules.Components;
+using Content.Server.Nuke;
+using Content.Server.NukeOps;
+using Content.Server.Popups;
+using Content.Server.Roles;
+using Content.Server.RoundEnd;
+using Content.Server.Shuttles.Events;
+using Content.Server.Shuttles.Systems;
+using Content.Server.Station.Components;
+using Content.Server.Store.Systems;
+using Content.Shared.GameTicking.Components;
+using Content.Shared.NPC.Components;
+using Content.Shared.NPC.Systems;
+using Content.Shared.Nuke;
+using Content.Shared.NukeOps;
+using Content.Shared.Roles.Components;
+using Content.Shared.Store;
+using Content.Shared.Tag;
+using Content.Shared.Zombies;
+using Robust.Shared.Map;
+using Robust.Shared.Random;
+using Robust.Shared.Utility;
+using System.Linq;
+using Content.Shared.Station.Components;
+using Content.Shared.Store.Components;
+// Starlight Start
+using Content.Shared.Mobs;
+using Content.Shared.Mobs.Components;
+using Content.Shared.Cuffs.Components;
+using Content.Shared.Cuffs;
+using Prometheus;
+using Robust.Shared.Prototypes;
+using Content.Server.AlertLevel;
+using Content.Server._NullLink.Helpers;
+using Content.Server._Starlight.Station;
+using Content.Shared._Starlight.CCVar;
+using Robust.Shared.Configuration;
+using Robust.Server.Player;
+using Content.Server._Starlight.Achievement;
+// Starlight End
+
+namespace Content.Server.GameTicking.Rules;
+
+public sealed partial class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
+{
+    // Starlight start: Achievements
+    private static readonly (int Threshold, string AchievementId)[] LoneOperativeAchievements =
+    [
+        (50, "lone_operative"),
+        (100, "one_against_all"),
+        (150, "one_man_syndicate"),
+        (200, "john_syndicate")
+    ];
+    // Starlight end: Achievements
+    #region Starlight data collection
+    private static readonly Counter _nukeopsCount = Metrics.CreateCounter(
+        "nukie_count",
+        "Number of all nukies Win/Loses Count.",
+        ["results"]);
+    #endregion
+
+    [Dependency] private AntagSelectionSystem _antag = default!;
+    [Dependency] private EmergencyShuttleSystem _emergency = default!;
+    [Dependency] private NpcFactionSystem _npcFaction = default!;
+    [Dependency] private PopupSystem _popupSystem = default!;
+    [Dependency] private RoundEndSystem _roundEndSystem = default!;
+    [Dependency] private StoreSystem _store = default!;
+    [Dependency] private TagSystem _tag = default!;
+    // Starlight Start
+    [Dependency] private SharedCuffableSystem _cuffable = default!;
+    [Dependency] private AlertLevelSystem _alertLevel = default!;
+    [Dependency] private StationCrewCountSystem _stationCrewCount = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private AchievementSystem _achievements = default!; // Starlight: Achievements
+    [Dependency] private IPlayerManager _playerManager = default!; // StarlightL Achievements
+    // Starlight End
+
+    private static readonly ProtoId<CurrencyPrototype> TelecrystalCurrencyPrototype = "Telecrystal";
+    private static readonly ProtoId<TagPrototype> NukeOpsUplinkTagPrototype = "NukeOpsUplink";
+
+    // TODO: This shouldn't be matching by ProtoId.
+    // It would be better if this were checked by component or something,
+    // but it needs to be distinct between the full Nukeops and Loneops rules,
+    // which NukeopsRuleComponent currently isn't.
+    // Better yet, maybe the behaviors this is used for could be moved to the rule component.
+    private static readonly EntProtoId NukeopsGameRule = "Nukeops";
+
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        SubscribeLocalEvent<NukeExplodedEvent>(OnNukeExploded);
+        SubscribeLocalEvent<GameRunLevelChangedEvent>(OnRunLevelChanged);
+        SubscribeLocalEvent<NukeDisarmSuccessEvent>(OnNukeDisarm);
+
+        SubscribeLocalEvent<NukeOperativeComponent, ComponentRemove>(OnComponentRemove);
+        SubscribeLocalEvent<NukeOperativeComponent, MobStateChangedEvent>(OnMobStateChanged);
+        SubscribeLocalEvent<NukeOperativeComponent, EntityZombifiedEvent>(OnOperativeZombified);
+
+        SubscribeLocalEvent<NukeopsRoleComponent, GetBriefingEvent>(OnGetBriefing);
+
+        SubscribeLocalEvent<ConsoleFTLAttemptEvent>(OnShuttleFTLAttempt);
+        SubscribeLocalEvent<WarDeclaredEvent>(OnWarDeclared);
+        SubscribeLocalEvent<CommunicationConsoleCallShuttleAttemptEvent>(OnShuttleCallAttempt);
+
+        SubscribeLocalEvent<NukeopsRuleComponent, AfterAntagEntitySelectedEvent>(OnAfterAntagEntSelected);
+        SubscribeLocalEvent<NukeopsRuleComponent, RuleLoadedGridsEvent>(OnRuleLoadedGrids);
+
+        SubscribeLocalEvent<NukeOperativeComponent, CuffedStateChangeEvent>(OnNukieCuffStateChanged); // Starlight: Check when nukie is cuffed
+    }
+
+    protected override void Started(EntityUid uid,
+        NukeopsRuleComponent component,
+        GameRuleComponent gameRule,
+        GameRuleStartedEvent args)
+    {
+        var eligible = new List<Entity<StationEventEligibleComponent, NpcFactionMemberComponent>>();
+        var eligibleQuery = EntityQueryEnumerator<StationEventEligibleComponent, NpcFactionMemberComponent>();
+        while (eligibleQuery.MoveNext(out var eligibleUid, out var eligibleComp, out var member))
+        {
+            if (!_npcFaction.IsFactionHostile(component.Faction, (eligibleUid, member)))
+                continue;
+
+            eligible.Add((eligibleUid, eligibleComp, member));
+        }
+
+        if (eligible.Count == 0)
+            return;
+
+        component.TargetStation = RobustRandom.Pick(eligible);
+        var ev = new NukeopsTargetStationSelectedEvent(uid, component.TargetStation);
+        RaiseLocalEvent(ref ev);
+    }
+
+    #region Event Handlers
+    protected override void AppendRoundEndText(EntityUid uid,
+        NukeopsRuleComponent component,
+        GameRuleComponent gameRule,
+        ref RoundEndTextAppendEvent args)
+    {
+        var winText = Loc.GetString($"nukeops-{component.WinType.ToString().ToLower()}");
+        args.AddLine(winText);
+
+        foreach (var cond in component.WinConditions)
+        {
+            var text = Loc.GetString($"nukeops-cond-{cond.ToString().ToLower()}");
+            args.AddLine(text);
+        }
+
+        args.AddLine(Loc.GetString("nukeops-list-start"));
+
+        var antags = _antag.GetAntagIdentifiers(uid);
+
+        foreach (var (_, sessionData, name) in antags)
+        {
+            args.AddLine(Loc.GetString("nukeops-list-name-user", ("name", name), ("user", sessionData.UserName)));
+        }
+        args.AddLine("");
+    }
+
+    private void OnNukeExploded(NukeExplodedEvent ev)
+    {
+        var query = QueryActiveRules();
+        while (query.MoveNext(out var uid, out _, out var nukeops, out _))
+        {
+            if (ev.OwningStation != null)
+            {
+                if (ev.OwningStation == GetOutpost(uid))
+                {
+                    nukeops.WinConditions.Add(WinCondition.NukeExplodedOnNukieOutpost);
+                    SetWinType((uid, nukeops), WinType.CrewMajor, GameTicker.IsGameRuleActive(NukeopsGameRule)); // End the round ONLY if the actual gamemode is NukeOps.
+                    if (!GameTicker.IsGameRuleActive(NukeopsGameRule)) // End the rule if the LoneOp shuttle got nuked, because that particular LoneOp clearly failed, and should not be considered a Syndie victory even if a future LoneOp wins.
+                        GameTicker.EndGameRule(uid);
+                    continue;
+                }
+
+                if (TryComp(nukeops.TargetStation, out StationDataComponent? data))
+                {
+                    var correctStation = false;
+                    foreach (var grid in data.Grids)
+                    {
+                        if (grid != ev.OwningStation)
+                        {
+                            continue;
+                        }
+
+                        nukeops.WinConditions.Add(WinCondition.NukeExplodedOnCorrectStation);
+                        SetWinType((uid, nukeops), WinType.OpsMajor);
+                        correctStation = true;
+                    }
+
+                    if (correctStation)
+                        continue;
+                }
+
+                nukeops.WinConditions.Add(WinCondition.NukeExplodedOnIncorrectLocation);
+            }
+            else
+            {
+                nukeops.WinConditions.Add(WinCondition.NukeExplodedOnIncorrectLocation);
+            }
+
+            if (GameTicker.IsGameRuleActive(NukeopsGameRule)) // If it's Nukeops then end the round on any detonation
+            {
+                _roundEndSystem.EndRound(TimeSpan.FromSeconds(_cfg.GetCVar(StarlightCCVars.NukeRoundRestartTime))); // Starlight Edit: Round end timer set by Cvar
+            }
+            else
+            { // It's a LoneOp. Only end the round if the station was destroyed
+                var handled = false;
+                foreach (var cond in nukeops.WinConditions)
+                {
+                    if (cond.ToString().ToLower() == "NukeExplodedOnCorrectStation") // If this is true, then the nuke destroyed the station! It's likely everyone is very dead so keeping the round going is pointless.
+                    {
+                        _roundEndSystem.EndRound(TimeSpan.FromSeconds(_cfg.GetCVar(StarlightCCVars.NukeRoundRestartTime))); // end the round! // Starlight Edit: Round end timer set by Cvar
+                        handled = true;
+                        break;
+                    }
+                }
+                if (!handled) // The round didn't end, so end the rule so it doesn't get overridden by future LoneOps.
+                {
+                    GameTicker.EndGameRule(uid);
+                }
+            }
+        }
+    }
+
+    private void OnRunLevelChanged(GameRunLevelChangedEvent ev)
+    {
+        if (ev.New is not GameRunLevel.PostRound)
+            return;
+
+        var query = QueryActiveRules();
+        while (query.MoveNext(out var uid, out _, out var nukeops, out _))
+        {
+            OnRoundEnd((uid, nukeops));
+        }
+    }
+
+    private void OnRoundEnd(Entity<NukeopsRuleComponent> ent)
+    {
+        // If the win condition was set to operative/crew major win, ignore.
+        if (ent.Comp.WinType == WinType.OpsMajor || ent.Comp.WinType == WinType.CrewMajor)
+            return;
+
+        var nukeQuery = AllEntityQuery<NukeComponent, TransformComponent>();
+        var centcomms = _emergency.GetCentcommMaps();
+
+        while (nukeQuery.MoveNext(out var nuke, out var nukeTransform))
+        {
+            if (nuke.Status != NukeStatus.ARMED)
+                continue;
+
+            // UH OH
+            if (nukeTransform.MapUid != null && centcomms.Contains(nukeTransform.MapUid.Value))
+            {
+                ent.Comp.WinConditions.Add(WinCondition.NukeActiveAtCentCom);
+                SetWinType((ent, ent), WinType.OpsMajor);
+                return;
+            }
+
+            if (nukeTransform.GridUid == null || ent.Comp.TargetStation == null)
+                continue;
+
+            if (!TryComp(ent.Comp.TargetStation.Value, out StationDataComponent? data))
+                continue;
+
+            foreach (var grid in data.Grids)
+            {
+                if (grid != nukeTransform.GridUid)
+                    continue;
+
+                ent.Comp.WinConditions.Add(WinCondition.NukeActiveInStation);
+                SetWinType(ent, WinType.OpsMajor);
+                return;
+            }
+        }
+
+        if (_antag.AllAntagsAlive(ent.Owner))
+        {
+            SetWinType(ent, WinType.OpsMinor);
+            ent.Comp.WinConditions.Add(WinCondition.AllNukiesAlive);
+            return;
+        }
+
+        ent.Comp.WinConditions.Add(_antag.AnyAliveAntags(ent.Owner)
+            ? WinCondition.SomeNukiesAlive
+            : WinCondition.AllNukiesDead);
+
+        var diskAtCentCom = false;
+        var diskQuery = AllEntityQuery<NukeDiskComponent, TransformComponent>();
+        while (diskQuery.MoveNext(out var diskUid, out _, out var transform))
+        {
+            diskAtCentCom = transform.MapUid != null && centcomms.Contains(transform.MapUid.Value);
+            diskAtCentCom |= _emergency.IsTargetEscaping(diskUid);
+
+            // TODO: The target station should be stored, and the nuke disk should store its original station.
+            // This is fine for now, because we can assume a single station in base SS14.
+            break;
+        }
+
+        // If the disk is currently at Central Command, the crew wins - just slightly.
+        // This also implies that some nuclear operatives have died.
+        SetWinType(ent,
+            diskAtCentCom
+            ? WinType.CrewMinor
+            : WinType.OpsMinor);
+        ent.Comp.WinConditions.Add(diskAtCentCom
+            ? WinCondition.NukeDiskOnCentCom
+            : WinCondition.NukeDiskNotOnCentCom);
+    }
+
+    private void OnNukeDisarm(NukeDisarmSuccessEvent ev)
+    {
+        CheckRoundShouldEnd();
+    }
+
+    private void OnComponentRemove(EntityUid uid, NukeOperativeComponent component, ComponentRemove args)
+    {
+        CheckRoundShouldEnd();
+    }
+
+    private void OnMobStateChanged(EntityUid uid, NukeOperativeComponent component, MobStateChangedEvent ev)
+    {
+        if (ev.NewMobState == MobState.Dead)
+            CheckRoundShouldEnd();
+    }
+
+    private void OnOperativeZombified(EntityUid uid, NukeOperativeComponent component, ref EntityZombifiedEvent args)
+    {
+        RemCompDeferred(uid, component);
+    }
+
+    // Starlight Start: Check round end when nukie is cuffed/uncuffed
+    private void OnNukieCuffStateChanged(EntityUid uid, NukeOperativeComponent component, ref CuffedStateChangeEvent args) => CheckRoundShouldEnd();
+    // Starlight End
+
+    private void OnRuleLoadedGrids(Entity<NukeopsRuleComponent> ent, ref RuleLoadedGridsEvent args)
+    {
+        // Check each nukie shuttle
+        var query = EntityQueryEnumerator<NukeOpsShuttleComponent>();
+        while (query.MoveNext(out var uid, out var shuttle))
+        {
+            // Check if the shuttle's mapID is the one that just got loaded for this rule
+            if (Transform(uid).MapID == args.Map)
+            {
+                shuttle.AssociatedRule = ent;
+                break;
+            }
+        }
+    }
+
+    private void OnShuttleFTLAttempt(ref ConsoleFTLAttemptEvent ev)
+    {
+        var query = QueryActiveRules();
+        while (query.MoveNext(out var uid, out _, out var nukeops, out _))
+        {
+            if (ev.Uid != GetShuttle((uid, nukeops)))
+                continue;
+
+            if (nukeops.WarDeclaredTime != null)
+            {
+                var timeAfterDeclaration = Timing.CurTime.Subtract(nukeops.WarDeclaredTime.Value);
+                var timeRemain = nukeops.WarNukieArriveDelay.Subtract(timeAfterDeclaration);
+                if (timeRemain > TimeSpan.Zero)
+                {
+                    ev.Cancelled = true;
+                    ev.Reason = Loc.GetString("war-ops-infiltrator-unavailable",
+                        ("time", timeRemain.ToString("mm\\:ss")));
+                    continue;
+                }
+            }
+
+            nukeops.LeftOutpost = true;
+        }
+    }
+
+    private void OnShuttleCallAttempt(ref CommunicationConsoleCallShuttleAttemptEvent ev)
+    {
+        var query = QueryActiveRules();
+        while (query.MoveNext(out _, out _, out var nukeops, out _))
+        {
+            // Can't call while war nukies are preparing to arrive
+            if (nukeops is { WarDeclaredTime: not null })
+            {
+                // Nukies must wait some time after declaration of war to get on the station
+                var warTime = Timing.CurTime.Subtract(nukeops.WarDeclaredTime.Value);
+                if (warTime < nukeops.WarEvacShuttleDisabled)
+                {
+                    ev.Cancelled = true;
+                    ev.Reason = Loc.GetString("war-ops-shuttle-call-unavailable");
+                    return;
+                }
+            }
+        }
+    }
+
+    private void OnWarDeclared(ref WarDeclaredEvent ev)
+    {
+        // TODO: this is VERY awful for multi-nukies
+        var query = QueryActiveRules();
+        while (query.MoveNext(out var uid, out _, out var nukeops, out _))
+        {
+            if (nukeops.WarDeclaredTime != null)
+                continue;
+
+            if (TryComp<RuleGridsComponent>(uid, out var grids) && Transform(ev.DeclaratorEntity).MapID != grids.Map)
+                continue;
+
+            var newStatus = GetWarCondition(nukeops, ev.Status);
+            ev.Status = newStatus;
+            if (newStatus == WarConditionStatus.WarReady)
+            {
+                nukeops.WarDeclaredTime = Timing.CurTime;
+                var timeRemain = nukeops.WarNukieArriveDelay + Timing.CurTime;
+                ev.DeclaratorEntity.Comp.ShuttleDisabledTime = timeRemain;
+
+                DistributeExtraTc((uid, nukeops));
+            }
+        }
+    }
+
+    #endregion Event Handlers
+
+    /// <summary>
+    ///     Returns conditions for war declaration
+    /// </summary>
+    public WarConditionStatus GetWarCondition(NukeopsRuleComponent nukieRule, WarConditionStatus? oldStatus)
+    {
+        if (!nukieRule.CanEnableWarOps)
+            return WarConditionStatus.NoWarUnknown;
+
+        if (EntityQuery<NukeopsRoleComponent>().Count() < nukieRule.WarDeclarationMinOps)
+            return WarConditionStatus.NoWarSmallCrew;
+
+        if (nukieRule.LeftOutpost)
+            return WarConditionStatus.NoWarShuttleDeparted;
+
+        if (oldStatus == WarConditionStatus.YesWar)
+            return WarConditionStatus.WarReady;
+
+        return WarConditionStatus.YesWar;
+    }
+
+    private void DistributeExtraTc(Entity<NukeopsRuleComponent> nukieRule)
+    {
+        // Starlight-start
+        var crewCount = _stationCrewCount.GetTotalCrewCount();
+
+        // TC scaling begins at threshold crew count of 80 and maxes out at 200
+        const int TcScaleStart = 80;
+        const int TcScaleCap = 200;
+
+        var clampedCrewCount =  Math.Clamp(crewCount, TcScaleStart, TcScaleCap);
+
+        // +1 bonus TC per 5 crew members
+        var scaledTc = (clampedCrewCount - TcScaleStart) / 5;
+        // Starlight-end
+
+        var enumerator = EntityQueryEnumerator<StoreComponent>();
+        while (enumerator.MoveNext(out var uid, out var component))
+        {
+            if (!_tag.HasTag(uid, NukeOpsUplinkTagPrototype))
+                continue;
+
+            if (GetOutpost(nukieRule.Owner) is not { } outpost)
+                continue;
+
+            if (Transform(uid).MapID != Transform(outpost).MapID) // Will receive bonus TC only on their start outpost
+                continue;
+
+            _store.TryAddCurrency(new() { { TelecrystalCurrencyPrototype, nukieRule.Comp.WarTcAmountPerNukie + scaledTc } }, uid, component); // Starlight-edit
+
+            var msg = Loc.GetString("store-currency-war-boost-given", ("target", uid));
+            _popupSystem.PopupEntity(msg, uid);
+        }
+    }
+
+    private void SetWinType(Entity<NukeopsRuleComponent> ent, WinType type, bool endRound = true)
+    {
+        ent.Comp.WinType = type;
+
+        _nukeopsCount.WithLabels(type.ToString()).Inc(1); // Starlight
+        // Starlight start: Achievements
+        if (type is WinType.OpsMajor or WinType.OpsMinor)
+            TryAwardLoneOperativeAchievements(ent);
+        // Starlight end: Achievements
+        if (endRound && (type == WinType.CrewMajor || type == WinType.OpsMajor))
+            _roundEndSystem.EndRound(TimeSpan.FromSeconds(_cfg.GetCVar(StarlightCCVars.NukeRoundRestartTime))); // Starlight Edit: Round end timer set by Cvar
+    }
+    // Starlight start: Achievements
+    private void TryAwardLoneOperativeAchievements(Entity<NukeopsRuleComponent> ent)
+    {
+        if (!IsLoneOperativeRound(ent))
+            return;
+
+        var crewCount = _stationCrewCount.GetTotalCrewCount();
+
+        foreach (var (_, data, _) in _antag.GetAntagIdentifiers(ent.Owner))
+        {
+            if (!_playerManager.TryGetSessionById(data.UserId, out var session))
+                continue;
+
+            foreach (var (threshold, achievementId) in LoneOperativeAchievements)
+            {
+                if (crewCount < threshold)
+                    continue;
+
+                _achievements.TryUnlockAchievementAsync(session, achievementId)
+                    .AsTask()
+                    .FireAndForget();
+            }
+        }
+    }
+
+    private bool IsLoneOperativeRound(Entity<NukeopsRuleComponent> ent)
+        => ent.Comp.RoundEndBehavior == RoundEndBehavior.Nothing
+           && MetaData(ent).EntityPrototype?.ID == "LoneOpsSpawn";
+    // Starlight end: Achievements
+    private void CheckRoundShouldEnd()
+    {
+        var query = QueryActiveRules();
+        while (query.MoveNext(out var uid, out _, out var nukeops, out _))
+        {
+            CheckRoundShouldEnd((uid, nukeops));
+        }
+    }
+
+    private void CheckRoundShouldEnd(Entity<NukeopsRuleComponent> ent)
+    {
+        var nukeops = ent.Comp;
+
+        if (nukeops.WinType == WinType.CrewMajor || nukeops.WinType == WinType.OpsMajor) // Skip this if the round's victor has already been decided.
+            return;
+
+        // If there are any nuclear bombs that are active, immediately return. We're not over yet.
+        foreach (var nuke in EntityQuery<NukeComponent>())
+        {
+            if (nuke.Status == NukeStatus.ARMED)
+                return;
+        }
+
+        var shuttle = GetShuttle((ent, ent));
+
+        MapId? shuttleMapId = Exists(shuttle)
+            ? Transform(shuttle.Value).MapID
+            : null;
+
+        MapId? targetStationMap = null;
+        if (nukeops.TargetStation != null && TryComp(nukeops.TargetStation, out StationDataComponent? data))
+        {
+            var grid = data.Grids.FirstOrNull();
+            targetStationMap = grid != null
+                ? Transform(grid.Value).MapID
+                : null;
+        }
+
+        // Check if there are nuke operatives still alive on the same map as the shuttle,
+        // or on the same map as the station.
+        // If there are, the round can continue.
+        // Starlight edit Start: Nukies cuff loss check
+        var operatives = EntityQueryEnumerator<NukeOperativeComponent, MobStateComponent, TransformComponent>();
+        var operativesAlive = false;
+        while (operatives.MoveNext(out var uid, out var nukeOp, out var mobState, out var xform))
+        {
+            // Check if alive
+            if (mobState.CurrentState != MobState.Alive || !nukeOp.Running)
+                continue;
+
+            // Check if cuffed
+            if (TryComp<CuffableComponent>(uid, out var cuffable) && _cuffable.IsCuffed((uid, cuffable)))
+                continue;
+
+            operativesAlive = true;
+            break;
+        }
+        // Starlight edit end
+
+        if (operativesAlive)
+            return; // There are living operatives than can access the shuttle, or are still on the station's map.
+
+        // Check that there are spawns available and that they can access the shuttle.
+        var spawnsAvailable = EntityQuery<NukeOperativeSpawnerComponent>(true).Any();
+        if (spawnsAvailable && CompOrNull<RuleGridsComponent>(ent)?.Map == shuttleMapId)
+            return; // Ghost spawns can still access the shuttle. Continue the round.
+
+        // The shuttle is inaccessible to both living nuke operatives and yet to spawn nuke operatives,
+        // and there are no nuclear operatives on the target station's map.
+        nukeops.WinConditions.Add(spawnsAvailable
+            ? WinCondition.NukiesAbandoned
+            : WinCondition.AllNukiesDead);
+
+        SetWinType(ent, WinType.CrewMajor, false);
+
+        if (nukeops.RoundEndBehavior == RoundEndBehavior.Nothing) // It's still worth checking if operatives have all died, even if the round-end behaviour is nothing.
+            return; // Shouldn't actually try to end the round in the case of nothing though.
+
+        // Starlight - Set the station to green alert so its not locked anymore to Gamma.
+        if (nukeops.TargetStation is not null)
+            _alertLevel.SetLevel(nukeops.TargetStation.Value, "green", true, true, true, false);
+
+        _roundEndSystem.DoRoundEndBehavior(nukeops.RoundEndBehavior,
+        nukeops.EvacShuttleTime,
+        nukeops.RoundEndTextSender,
+        nukeops.RoundEndTextShuttleCall,
+        nukeops.RoundEndTextAnnouncement);
+
+        // prevent it called multiple times
+        nukeops.RoundEndBehavior = RoundEndBehavior.Nothing;
+    }
+
+    private void OnAfterAntagEntSelected(Entity<NukeopsRuleComponent> ent, ref AfterAntagEntitySelectedEvent args)
+    {
+        var target = (ent.Comp.TargetStation is not null) ? Name(ent.Comp.TargetStation.Value) : "the target";
+
+        _antag.SendBriefing(args.Session,
+            Loc.GetString("nukeops-welcome",
+                ("station", target),
+                ("name", Name(ent))),
+            Color.Red,
+            ent.Comp.GreetSoundNotification);
+    }
+
+    private void OnGetBriefing(Entity<NukeopsRoleComponent> role, ref GetBriefingEvent args)
+    {
+        // TODO Different character screen briefing for the 3 nukie types
+        args.Append(Loc.GetString("nukeops-briefing"));
+    }
+
+    /// <remarks>
+    /// Is this method the shitty glue holding together the last of my sanity? yes.
+    /// Do i have a better solution? not presently.
+    /// </remarks>
+    private EntityUid? GetOutpost(Entity<RuleGridsComponent?> ent)
+    {
+        if (!Resolve(ent, ref ent.Comp, false))
+            return null;
+
+        return ent.Comp.MapGrids.Where(e => !HasComp<NukeOpsShuttleComponent>(e)).FirstOrNull();
+    }
+
+    /// <remarks>
+    /// Is this method the shitty glue holding together the last of my sanity? yes.
+    /// Do i have a better solution? not presently.
+    /// </remarks>
+    private EntityUid? GetShuttle(Entity<NukeopsRuleComponent?> ent)
+    {
+        if (!Resolve(ent, ref ent.Comp, false))
+            return null;
+
+        var query = EntityQueryEnumerator<NukeOpsShuttleComponent>();
+        while (query.MoveNext(out var uid, out var comp))
+        {
+            if (comp.AssociatedRule == ent.Owner)
+                return uid;
+        }
+
+        return null;
+    }
+}
+
+/// <summary>
+/// Raised when a station has been assigned as a target for the NukeOps rule.
+/// </summary>
+[ByRefEvent]
+public readonly struct NukeopsTargetStationSelectedEvent(EntityUid ruleEntity, EntityUid? targetStation)
+{
+    /// <summary>
+    /// The entity containing the NukeOps gamerule.
+    /// </summary>
+    public readonly EntityUid RuleEntity = ruleEntity;
+
+    /// <summary>
+    /// The target station, if it exists.
+    /// </summary>
+    public readonly EntityUid? TargetStation = targetStation;
+}

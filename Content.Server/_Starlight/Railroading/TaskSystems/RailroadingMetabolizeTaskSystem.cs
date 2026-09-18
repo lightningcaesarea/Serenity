@@ -1,0 +1,75 @@
+﻿using System.Linq;
+using Content.Shared._Starlight.Objectives.Events;
+using Content.Shared._Starlight.Railroading.Components;
+using Content.Shared._Starlight.Railroading.Components.Tasks;
+using Content.Shared._Starlight.Railroading.Components.Watchers;
+using Content.Shared._Starlight.Railroading.Events;
+using Content.Shared.Chemistry.Reagent;
+using Content.Shared.Objectives;
+using Robust.Shared.Prototypes;
+
+namespace Content.Server._Starlight.Railroading.TaskSystems;
+
+public sealed partial class RailroadingMetabolizeTaskSystem : EntitySystem
+{
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private RailroadingSystem _railroading = default!;
+    public override void Initialize()
+    {
+        base.Initialize();
+        SubscribeLocalEvent<RailroadMetabolizeTaskComponent, RailroadingCardChosenEvent>(OnConsumeTaskPicked);
+        SubscribeLocalEvent<RailroadMetabolizeTaskComponent, RailroadingCardCompletionQueryEvent>(OnConsumeTaskCompletionQuery);
+        SubscribeLocalEvent<RailroadMetabolizeTaskComponent, CollectObjectiveInfoEvent>(OnCollectObjectiveInfo);
+
+        SubscribeLocalEvent<RailroadMetabolizerWatcherComponent, RailroadingReagentMetabolizedEvent>(OnMetabolized);
+    }
+
+    private void OnMetabolized(Entity<RailroadMetabolizerWatcherComponent> ent, ref RailroadingReagentMetabolizedEvent args)
+    {
+        if (!TryComp<RailroadableComponent>(ent, out var railroadable)
+            || railroadable.ActiveCard is null
+            || !TryComp<RailroadMetabolizeTaskComponent>(railroadable.ActiveCard, out var task))
+            return;
+
+        var reagent = args.Reagent.Reagent;
+        if (!task.Reagents.Any(x => x.Reagent == reagent))
+            return;
+
+        if (task.MetabolizedReagents.TryGetValue(reagent.Prototype, out var current))
+            task.MetabolizedReagents[reagent.Prototype] = current + args.Reagent.Quantity;
+        else
+            task.MetabolizedReagents[reagent.Prototype] = args.Reagent.Quantity;
+
+        if (task.Reagents.All(x => task.MetabolizedReagents.TryGetValue(x.Reagent.Prototype, out var quantity) && quantity >= x.Quantity))
+        {
+            RemComp<RailroadMetabolizerWatcherComponent>(ent);
+            _railroading.InvalidateProgress((ent, railroadable));
+        }
+    }
+
+    private void OnCollectObjectiveInfo(Entity<RailroadMetabolizeTaskComponent> ent, ref CollectObjectiveInfoEvent args)
+    {
+        foreach (var quantity in ent.Comp.Reagents)
+        {
+            var reagentProto = _proto.Index<ReagentPrototype>(quantity.Reagent.Prototype);
+            args.Objectives.Add(new ObjectiveInfo
+            {
+                Title = Loc.GetString(ent.Comp.Message, ("Target", Loc.GetString(reagentProto.LocalizedName))),
+                Icon = ent.Comp.Icon,
+                Progress = ent.Comp.MetabolizedReagents.TryGetValue(quantity.Reagent.Prototype, out var metabolizedQuantity)
+                    && quantity.Quantity > 0
+                    ? Math.Clamp((metabolizedQuantity / quantity.Quantity).Float(), 0f, 1f) : 0f,
+            });
+        }
+    }
+
+    private void OnConsumeTaskCompletionQuery(Entity<RailroadMetabolizeTaskComponent> ent, ref RailroadingCardCompletionQueryEvent args)
+    {
+        if (args.IsCompleted == false) return;
+
+        args.IsCompleted = ent.Comp.Reagents.All(x => ent.Comp.MetabolizedReagents.TryGetValue(x.Reagent.Prototype, out var quantity) && quantity >= x.Quantity);
+    }
+
+    private void OnConsumeTaskPicked(Entity<RailroadMetabolizeTaskComponent> ent, ref RailroadingCardChosenEvent args)
+        => EnsureComp<RailroadMetabolizerWatcherComponent>(args.Subject.Owner);
+}

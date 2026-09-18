@@ -1,0 +1,91 @@
+- type: constructionGraph
+  id: Turnstile
+  start: start
+  graph:
+  - node: start
+    actions:
+    - !type:DeleteEntity { }
+    edges:
+#Starlight region
+    - to: assembly
+      completed:
+      - !type:SnapToGrid
+      - !type:SetAnchor {}
+      steps:
+      - material: MetalRod
+        amount: 4
+        doAfter: 10
+
+  - node: assembly
+    entity: TurnstileAssembly
+    actions:
+    - !type:SnapToGrid {}
+    edges:
+    - to: electronics
+      conditions:
+      - !type:EntityAnchored {}
+      steps:
+      - component: DoorElectronics
+        store: board
+        name: construction-graph-component-door-electronics-circuit-board
+        icon:
+          sprite: "Objects/Misc/module.rsi"
+          state: "door_electronics"
+        doAfter: 3
+    - to: start
+      conditions:
+      - !type:EntityAnchored
+        anchored: false
+      completed:
+      - !type:SpawnPrototype
+        prototype: PartRodMetal1
+        amount: 4
+      - !type:DeleteEntity {}
+      steps:
+      - tool: Screwing
+        doAfter: 2.0
+      - tool: Prying
+        doAfter: 5
+
+  - node: electronics
+    entity: TurnstileAssembly
+    edges:
+    - to: turnstile
+      conditions:
+      - !type:EntityAnchored {}
+      steps:
+      - material: Plasteel
+        amount: 2
+        doAfter: 5
+    - to: assembly
+      conditions:
+      - !type:EntityAnchored {}
+      completed:
+      - !type:EmptyAllContainers
+        pickup: true
+        emptyAtUser: true
+      steps:
+      - tool: Anchoring
+        doAfter: 2.5
+
+  - node: turnstile
+    entity: Turnstile
+    edges:
+    - to: assembly
+      completed:
+      - !type:EmptyAllContainers
+        pickup: true
+        emptyAtUser: true
+      - !type:SpawnPrototype
+        prototype: SheetPlasteel1
+        amount: 2
+      steps:
+      - tool: Pulsing
+        doAfter: 0.5
+      - tool: Cutting
+        doAfter: 3.0
+      - tool: Welding
+        doAfter: 4.0
+      - tool: Prying
+        doAfter: 5.0
+#Starlight region end

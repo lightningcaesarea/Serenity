@@ -1,0 +1,86 @@
+# Tabs
+
+- type: quickPhrase
+  id: BaseCommonPhrase
+  tab: aac-tab-common #starlight
+  abstract: true
+
+- type: quickPhrase
+  id: BaseJobPhrase
+  tab: aac-tab-jobs #starlight
+  abstract: true
+
+- type: quickPhrase
+  id: BaseLocationPhrase
+  tab: aac-tab-locations #starlight
+  abstract: true
+
+- type: quickPhrase
+  id: BaseSubjectPhrase
+  tab: aac-tab-subjects #starlight
+  abstract: true
+
+- type: quickPhrase
+  id: BaseThreatPhrase
+  tab: aac-tab-safety #starlight
+  abstract: true
+
+- type: quickPhrase
+  id: BaseSpeciesPhrase
+  tab: aac-tab-species #starlight
+  abstract: true
+
+# Departments
+
+- type: quickPhrase
+  id: BaseCivilianPhrase
+  group: Civilian
+  abstract: true
+
+- type: quickPhrase
+  id: BaseCommandPhrase
+  group: Command
+  styleClass: CommandButton
+  abstract: true
+
+- type: quickPhrase
+  id: BaseEngineeringPhrase
+  group: Engineering
+  styleClass: EngineeringButton
+  abstract: true
+
+- type: quickPhrase
+  id: BaseEpistemicsPhrase
+  group: Epistemics
+  styleClass: EpistemicsButton
+  abstract: true
+
+- type: quickPhrase
+  id: BaseJusticePhrase
+  group: Justice
+  styleClass: JusticeButton
+  abstract: true
+
+- type: quickPhrase
+  id: BaseLogisticsPhrase
+  group: Logistics
+  styleClass: LogisticsButton
+  abstract: true
+
+- type: quickPhrase
+  id: BaseMedicalPhrase
+  group: Medical
+  styleClass: MedicalButton
+  abstract: true
+
+- type: quickPhrase
+  id: BaseSecurityPhrase
+  group: Security
+  styleClass: SecurityButton
+  abstract: true
+
+- type: quickPhrase
+  id: BaseServicePhrase
+  group: Service
+  styleClass: ServiceButton
+  abstract: true

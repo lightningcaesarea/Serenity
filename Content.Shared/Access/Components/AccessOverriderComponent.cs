@@ -1,0 +1,135 @@
+using Content.Shared.Access.Systems;
+using Content.Shared.Containers.ItemSlots;
+using Robust.Shared.Audio;
+using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
+
+namespace Content.Shared.Access.Components;
+
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[Access(typeof(SharedAccessOverriderSystem))]
+public sealed partial class AccessOverriderComponent : Component
+{
+    public static string PrivilegedIdCardSlotId = "AccessOverrider-privilegedId";
+
+    /// <summary>
+    /// If the Access Overrider UI will show info about the privileged ID
+    /// </summary>
+    [DataField]
+    public bool ShowPrivilegedId = true;
+
+    [DataField]
+    public ItemSlot PrivilegedIdSlot = new();
+
+    [ViewVariables(VVAccess.ReadWrite)]
+    [DataField]
+    public SoundSpecifier? DenialSound;
+
+    public EntityUid TargetAccessReaderId = new();
+
+    // Starlight-edit: Start
+    [DataField, AutoNetworkedField]
+    public List<ProtoId<AccessGroupPrototype>> AccessGroups = new();
+
+    [AutoNetworkedField]
+    public ProtoId<AccessGroupPrototype>? CurrentAccessGroup;
+
+    // Keep existing AccessLevels (backwards-compatible)
+    [DataField, AutoNetworkedField]
+    public List<ProtoId<AccessLevelPrototype>> AccessLevels = new();
+
+    /// <summary>
+    /// When changing settings on a target, ignore filters based on target e.g. door electronics type?
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool OverridesTargetRestrictions = false;
+
+    [ViewVariables(VVAccess.ReadWrite)]
+    [DataField]
+    public float DoAfter;
+    // Starlight-edit: End
+
+    [Serializable, NetSerializable]
+    public sealed class WriteToTargetAccessReaderIdMessage : BoundUserInterfaceMessage
+    {
+        public readonly List<ProtoId<AccessLevelPrototype>> AccessList;
+
+        public WriteToTargetAccessReaderIdMessage(List<ProtoId<AccessLevelPrototype>> accessList)
+        {
+            AccessList = accessList;
+        }
+    }
+
+    // Starlight-edit: Start
+    [Serializable, NetSerializable]
+    public sealed class AccessGroupSelectedMessage : BoundUserInterfaceMessage
+    {
+        public readonly ProtoId<AccessGroupPrototype> SelectedGroup;
+
+        public AccessGroupSelectedMessage(ProtoId<AccessGroupPrototype> selectedGroup)
+        {
+            SelectedGroup = selectedGroup;
+        }
+    }
+    // Starlight-edit: End
+
+    [Serializable, NetSerializable]
+    public sealed class AccessOverriderBoundUserInterfaceState : BoundUserInterfaceState
+    {
+        public readonly string TargetLabel;
+        public readonly Color TargetLabelColor;
+        public readonly string PrivilegedIdName;
+        public readonly bool IsPrivilegedIdPresent;
+        public readonly bool IsPrivilegedIdAuthorized;
+        public readonly bool ShowPrivilegedIdGrid;
+        public readonly ProtoId<AccessLevelPrototype>[]? AvailableAccessLevels; // Starlight edit
+        public readonly ProtoId<AccessLevelPrototype>[]? PressedAccessLevels; // Starlight edit
+        public readonly ProtoId<AccessLevelPrototype>[]? MissingPrivilegesList;
+
+        // Starlight-edit: Start
+        public readonly ProtoId<AccessGroupPrototype>[]? AccessGroups;
+        public readonly ProtoId<AccessGroupPrototype>? CurrentAccessGroup;
+        // Starlight-edit: End
+
+        public AccessOverriderBoundUserInterfaceState(
+            bool isPrivilegedIdPresent,
+            bool isPrivilegedIdAuthorized,
+            ProtoId<AccessLevelPrototype>[]? availableAccessLevels,
+            ProtoId<AccessLevelPrototype>[]? pressedAccessLevels,
+            ProtoId<AccessLevelPrototype>[]? missingPrivilegesList,
+            string privilegedIdName,
+            string targetLabel,
+            Color targetLabelColor,
+            bool showPrivilegedIdGrid, // Starlight-edit - ) -> ,
+            // Starlight-edit: Start
+            ProtoId<AccessGroupPrototype>[]? accessGroups,
+            ProtoId<AccessGroupPrototype>? currentAccessGroup)
+            // Starlight-edit: End
+        {
+            IsPrivilegedIdPresent = isPrivilegedIdPresent;
+            IsPrivilegedIdAuthorized = isPrivilegedIdAuthorized;
+            // Starlight edit Start
+            // TargetAccessReaderIdAccessList = targetAccessReaderIdAccessList;
+            // AllowedModifyAccessList = allowedModifyAccessList;
+            // Starlight edit End
+            MissingPrivilegesList = missingPrivilegesList;
+            PrivilegedIdName = privilegedIdName;
+            TargetLabel = targetLabel;
+            TargetLabelColor = targetLabelColor;
+            ShowPrivilegedIdGrid = showPrivilegedIdGrid;
+            // Starlight-edit: Start
+            AvailableAccessLevels = availableAccessLevels;
+            PressedAccessLevels = pressedAccessLevels;
+            AccessGroups = accessGroups;
+            CurrentAccessGroup = currentAccessGroup;
+            // Starlight-edit: End
+        }
+    }
+
+    [Serializable, NetSerializable]
+    public enum AccessOverriderUiKey : byte
+    {
+        Key,
+    }
+}

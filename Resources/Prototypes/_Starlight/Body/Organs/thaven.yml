@@ -1,0 +1,35 @@
+- type: entity
+  id: OrganThavenBrain
+  parent: [BaseItem, OrganHumanBrain]
+  name: thaven brain
+  suffix: Thaven
+  description: "An organic positronic brain. Quite remarkable, really."
+  components:
+    - type: BorgBrain
+    - type: Sprite
+      sprite: _Starlight/Mobs/Species/Thaven/organs.rsi
+      state: brain-thaven
+
+- type: entity
+  id: OrganThavenEyes
+  parent: OrganHumanEyes
+  name: thaven eyes
+  suffix: Thaven
+  description: "The eyes of a Thaven."
+  components:
+  - type: OrganVisualization
+    layer: Eyes
+    prototypes:
+      Default: MobThavenEyes
+
+- type: entity
+  id: OrganThavenTongue
+  parent: OrganHumanTongue
+  suffix: Thaven
+  components:
+  - type: OrganTongue
+    allowedEmotes: ["ThavenHum", "ThavenGlub"]
+    sounds:
+      Male: MaleThaven
+      Female: FemaleThaven
+      Unsexed: MaleThaven

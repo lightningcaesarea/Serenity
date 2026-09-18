@@ -1,0 +1,48 @@
+- type: entity
+  id: OrganMothEyes
+  parent: OrganHumanEyes
+  name: moth eyes
+  suffix: Moth
+  description: "Large compound eyes used to catch light."
+  components:
+  - type: OrganVisualization
+    layer: Eyes
+    prototypes:
+      Default: MobMothEyes
+
+- type: entity
+  id: OrganMothStomach
+  parent: [OrganAnimalStomach, OrganHumanStomach]
+  name: moth stomach
+  description: "A stomach specialized for digesting normally inedible cloth."
+  suffix: Moth
+  components:
+  - type: Stomach
+    specialDigestible:
+      tags:
+      - ClothMade
+      - Paper
+      - Pill
+      - IceCream
+      - Birthday
+  - type: SolutionManager
+    solutions:
+    - SolutionOrganFoodMeat
+    - SolutionOrganStomach50
+    - SolutionOrganNutriment
+  - type: Metabolizer
+    maxReagents: 3
+    metabolizerTypes: [ Moth ]
+    stages: [ Digestion ]
+
+- type: entity
+  id: OrganMothTongue
+  parent: OrganHumanTongue
+  suffix: Moth
+  components:
+  - type: OrganTongue
+    allowedEmotes: ['Chitter', 'Squeak']
+    sounds:
+      Male: UnisexMoth
+      Female: UnisexMoth
+      Unsexed: UnisexMoth

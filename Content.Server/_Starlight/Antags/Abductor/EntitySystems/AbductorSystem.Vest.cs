@@ -1,0 +1,86 @@
+﻿using Content.Shared.Clothing.EntitySystems;
+using Content.Shared.Clothing.Components;
+using Content.Shared.Stealth.Components;
+using Content.Shared.Interaction;
+using Content.Shared.Mobs.Components;
+using Content.Shared.Inventory.Events;
+using Content.Shared._Starlight.Antags.Abductor.Components;
+using Content.Shared._Starlight.ItemSwitch.Components;
+using Content.Shared._Starlight.Antags.Abductor.EntitySystems;
+
+namespace Content.Server._Starlight.Antags.Abductor.EntitySystems;
+
+public sealed partial class AbductorSystem : SharedAbductorSystem
+{
+    [Dependency] private ClothingSystem _clothing = default!;
+    public void InitializeVest()
+    {
+        SubscribeLocalEvent<AbductorVestComponent, AfterInteractEvent>(OnVestInteract);
+        SubscribeLocalEvent<AbductorVestComponent, ItemSwitchedEvent>(OnItemSwitch);
+        SubscribeLocalEvent<AbductorVestComponent, GotUnequippedEvent>(OnUnequipped);
+        SubscribeLocalEvent<AbductorVestComponent, GotEquippedEvent>(OnEquipped);
+    }
+    private void OnEquipped(Entity<AbductorVestComponent> ent, ref GotEquippedEvent args)
+    {
+        if (!HasComp<StealthComponent>(args.EquipTarget) && ent.Comp.CurrentState != AbductorArmorModeType.Combat)
+        {
+            AddComp<StealthComponent>(args.EquipTarget);
+            AddComp<StealthOnMoveComponent>(args.EquipTarget);
+        }
+    }
+
+    private void OnUnequipped(Entity<AbductorVestComponent> ent, ref GotUnequippedEvent args)
+    {
+        if (HasComp<StealthComponent>(args.EquipTarget))
+        {
+            RemComp<StealthComponent>(args.EquipTarget);
+            RemComp<StealthOnMoveComponent>(args.EquipTarget);
+        }
+    }
+
+    private void OnItemSwitch(EntityUid uid, AbductorVestComponent component, ref ItemSwitchedEvent args)
+    {
+
+        if (Enum.TryParse<AbductorArmorModeType>(args.State, ignoreCase: true, out var state))
+            component.CurrentState = state;
+
+        var user = Transform(uid).ParentUid;
+
+        if (state == AbductorArmorModeType.Combat)
+        {
+            if (TryComp<ClothingComponent>(uid, out var clothingComponent))
+                _clothing.SetEquippedPrefix(uid, "combat", clothingComponent);
+
+            if (HasComp<MobStateComponent>(user) && HasComp<StealthComponent>(user))
+            {
+                RemComp<StealthComponent>(user);
+                RemComp<StealthOnMoveComponent>(user);
+            }
+        }
+        else
+        {
+            if (TryComp<ClothingComponent>(uid, out var clothingComponent))
+                _clothing.SetEquippedPrefix(uid, null, clothingComponent);
+
+            if (HasComp<MobStateComponent>(user) && !HasComp<StealthComponent>(user))
+            {
+                AddComp<StealthComponent>(user);
+                AddComp<StealthOnMoveComponent>(user);
+            }
+        }
+    }
+
+    private void OnVestInteract(Entity<AbductorVestComponent> ent, ref AfterInteractEvent args)
+    {
+        if (!_actionBlockerSystem.CanInstrumentInteract(args.User, args.Used, args.Target)
+            || !args.Target.HasValue
+            || !TryComp<AbductorConsoleComponent>(args.Target, out var console))
+            return;
+
+        var netEntity = GetNetEntity(ent);
+        console.Armor = netEntity;
+
+        _popup.PopupEntity(Loc.GetString("abductors-ui-vest-linked"), args.User);
+        UpdateGui(netEntity, (args.Target.Value, console));
+    }
+}

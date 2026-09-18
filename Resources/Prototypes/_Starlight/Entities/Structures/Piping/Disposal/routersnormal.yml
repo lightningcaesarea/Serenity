@@ -1,0 +1,637 @@
+- type: entity
+  id: DisposalRouterCommand
+  parent: DisposalRouter
+  suffix: Command
+  components:
+  - type: DisposalRouter
+    tags: ["Command"]
+
+
+- type: entity
+  id: DisposalRouterBridge
+  parent: DisposalRouter
+  suffix: Bridge
+  components:
+  - type: DisposalRouter
+    tags: ["Bridge"]
+
+
+- type: entity
+  id: DisposalRouterVault
+  parent: DisposalRouter
+  suffix: Vault
+  components:
+  - type: DisposalRouter
+    tags: ["Vault"]
+
+
+- type: entity
+  id: DisposalRouterGateway
+  parent: DisposalRouter
+  suffix: Gateway
+  components:
+  - type: DisposalRouter
+    tags: ["Gateway"]
+
+
+- type: entity
+  id: DisposalRouterCaptain
+  parent: DisposalRouter
+  suffix: Captain
+  components:
+  - type: DisposalRouter
+    tags: ["Captain"]
+
+
+- type: entity
+  id: DisposalRouterHoP
+  parent: DisposalRouter
+  suffix: HoP
+  components:
+  - type: DisposalRouter
+    tags: ["HoP"]
+
+
+- type: entity
+  id: DisposalRouterSecurity
+  parent: DisposalRouter
+  suffix: Security
+  components:
+  - type: DisposalRouter
+    tags: ["Security"]
+
+
+- type: entity
+  id: DisposalRouterBrig
+  parent: DisposalRouter
+  suffix: Brig
+  components:
+  - type: DisposalRouter
+    tags: ["Brig"]
+
+
+- type: entity
+  id: DisposalRouterBrigMed
+  parent: DisposalRouter
+  suffix: BrigMed
+  components:
+  - type: DisposalRouter
+    tags: ["BrigMed"]
+
+
+- type: entity
+  id: DisposalRouterWarden
+  parent: DisposalRouter
+  suffix: Warden
+  components:
+  - type: DisposalRouter
+    tags: ["Warden"]
+
+
+- type: entity
+  id: DisposalRouterHoS
+  parent: DisposalRouter
+  suffix: HoS
+  components:
+  - type: DisposalRouter
+    tags: ["HoS"]
+
+
+- type: entity
+  id: DisposalRouterArmory
+  parent: DisposalRouter
+  suffix: Armory
+  components:
+  - type: DisposalRouter
+    tags: ["Armory"]
+
+
+- type: entity
+  id: DisposalRouterPerma
+  parent: DisposalRouter
+  suffix: Perma
+  components:
+  - type: DisposalRouter
+    tags: ["Perma"]
+
+
+- type: entity
+  id: DisposalRouterDetective
+  parent: DisposalRouter
+  suffix: Detective
+  components:
+  - type: DisposalRouter
+    tags: ["Detective"]
+
+
+- type: entity
+  id: DisposalRouterCourtroom
+  parent: DisposalRouter
+  suffix: Courtroom
+  components:
+  - type: DisposalRouter
+    tags: ["Courtroom"]
+
+
+- type: entity
+  id: DisposalRouterLaw
+  parent: DisposalRouter
+  suffix: Law
+  components:
+  - type: DisposalRouter
+    tags: ["Law"]
+
+
+- type: entity
+  id: DisposalRouterSecurityCheckpoint
+  parent: DisposalRouter
+  suffix: SecurityCheckpoint
+  components:
+  - type: DisposalRouter
+    tags: ["SecurityCheckpoint"]
+
+
+- type: entity
+  id: DisposalRouterMedical
+  parent: DisposalRouter
+  suffix: Medical
+  components:
+  - type: DisposalRouter
+    tags: ["Medical"]
+
+
+- type: entity
+  id: DisposalRouterMedbay
+  parent: DisposalRouter
+  suffix: Medbay
+  components:
+  - type: DisposalRouter
+    tags: ["Medbay"]
+
+
+- type: entity
+  id: DisposalRouterChemistry
+  parent: DisposalRouter
+  suffix: Chemistry
+  components:
+  - type: DisposalRouter
+    tags: ["Chemistry"]
+
+
+- type: entity
+  id: DisposalRouterCryogenics
+  parent: DisposalRouter
+  suffix: Cryogenics
+  components:
+  - type: DisposalRouter
+    tags: ["Cryogenics"]
+
+
+- type: entity
+  id: DisposalRouterCMO
+  parent: DisposalRouter
+  suffix: CMO
+  components:
+  - type: DisposalRouter
+    tags: ["CMO"]
+
+
+- type: entity
+  id: DisposalRouterMorgue
+  parent: DisposalRouter
+  suffix: Morgue
+  components:
+  - type: DisposalRouter
+    tags: ["Morgue"]
+
+
+- type: entity
+  id: DisposalRouterSurgery
+  parent: DisposalRouter
+  suffix: Surgery
+  components:
+  - type: DisposalRouter
+    tags: ["Surgery"]
+
+
+- type: entity
+  id: DisposalRouterPsychology
+  parent: DisposalRouter
+  suffix: Psychology
+  components:
+  - type: DisposalRouter
+    tags: ["Psychology"]
+
+
+- type: entity
+  id: DisposalRouterClinic
+  parent: DisposalRouter
+  suffix: Clinic
+  components:
+  - type: DisposalRouter
+    tags: ["Clinic"]
+
+
+- type: entity
+  id: DisposalRouterScience
+  parent: DisposalRouter
+  suffix: Science
+  components:
+  - type: DisposalRouter
+    tags: ["Science"]
+
+
+- type: entity
+  id: DisposalRouterR&D
+  parent: DisposalRouter
+  suffix: R&D
+  components:
+  - type: DisposalRouter
+    tags: ["R&D"]
+
+
+- type: entity
+  id: DisposalRouterRD
+  parent: DisposalRouter
+  suffix: RD
+  components:
+  - type: DisposalRouter
+    tags: ["RD"]
+
+
+- type: entity
+  id: DisposalRouterRobotics
+  parent: DisposalRouter
+  suffix: Robotics
+  components:
+  - type: DisposalRouter
+    tags: ["Robotics"]
+
+
+- type: entity
+  id: DisposalRouterArtifact
+  parent: DisposalRouter
+  suffix: Artifact
+  components:
+  - type: DisposalRouter
+    tags: ["Artifact"]
+
+
+- type: entity
+  id: DisposalRouterAnomaly
+  parent: DisposalRouter
+  suffix: Anomaly
+  components:
+  - type: DisposalRouter
+    tags: ["Anomaly"]
+
+
+- type: entity
+  id: DisposalRouterSupply
+  parent: DisposalRouter
+  suffix: Supply
+  components:
+  - type: DisposalRouter
+    tags: ["Supply"]
+
+
+- type: entity
+  id: DisposalRouterCargo
+  parent: DisposalRouter
+  suffix: Cargo
+  components:
+  - type: DisposalRouter
+    tags: ["Cargo"]
+
+
+- type: entity
+  id: DisposalRouterCargoBay
+  parent: DisposalRouter
+  suffix: CargoBay
+  components:
+  - type: DisposalRouter
+    tags: ["CargoBay"]
+
+
+- type: entity
+  id: DisposalRouterQM
+  parent: DisposalRouter
+  suffix: QM
+  components:
+  - type: DisposalRouter
+    tags: ["QM"]
+
+
+- type: entity
+  id: DisposalRouterSalvage
+  parent: DisposalRouter
+  suffix: Salvage
+  components:
+  - type: DisposalRouter
+    tags: ["Salvage"]
+
+
+- type: entity
+  id: DisposalRouterEngineering
+  parent: DisposalRouter
+  suffix: Engineering
+  components:
+  - type: DisposalRouter
+    tags: ["Engineering"]
+
+
+- type: entity
+  id: DisposalRouterCE
+  parent: DisposalRouter
+  suffix: CE
+  components:
+  - type: DisposalRouter
+    tags: ["CE"]
+
+
+- type: entity
+  id: DisposalRouterAME
+  parent: DisposalRouter
+  suffix: AME
+  components:
+  - type: DisposalRouter
+    tags: ["AME"]
+
+
+- type: entity
+  id: DisposalRouterGravityGenerator
+  parent: DisposalRouter
+  suffix: GravityGenerator
+  components:
+  - type: DisposalRouter
+    tags: ["GravityGenerator"]
+
+
+- type: entity
+  id: DisposalRouterAnchor
+  parent: DisposalRouter
+  suffix: Anchor
+  components:
+  - type: DisposalRouter
+    tags: ["Anchor"]
+
+
+- type: entity
+  id: DisposalRouterParticleAccelerator
+  parent: DisposalRouter
+  suffix: ParticleAccelerator
+  components:
+  - type: DisposalRouter
+    tags: ["ParticleAccelerator"]
+
+
+- type: entity
+  id: DisposalRouterTelecomms
+  parent: DisposalRouter
+  suffix: Telecomms
+  components:
+  - type: DisposalRouter
+    tags: ["Telecomms"]
+
+
+- type: entity
+  id: DisposalRouterAtmos
+  parent: DisposalRouter
+  suffix: Atmos
+  components:
+  - type: DisposalRouter
+    tags: ["Atmos"]
+
+
+- type: entity
+  id: DisposalRouterTEG
+  parent: DisposalRouter
+  suffix: TEG
+  components:
+  - type: DisposalRouter
+    tags: ["TEG"]
+
+
+- type: entity
+  id: DisposalRouterTechVault
+  parent: DisposalRouter
+  suffix: TechVault
+  components:
+  - type: DisposalRouter
+    tags: ["TechVault"]
+
+
+- type: entity
+  id: DisposalRouterService
+  parent: DisposalRouter
+  suffix: Service
+  components:
+  - type: DisposalRouter
+    tags: ["Service"]
+
+
+- type: entity
+  id: DisposalRouterKitchen
+  parent: DisposalRouter
+  suffix: Kitchen
+  components:
+  - type: DisposalRouter
+    tags: ["Kitchen"]
+
+
+- type: entity
+  id: DisposalRouterBar
+  parent: DisposalRouter
+  suffix: Bar
+  components:
+  - type: DisposalRouter
+    tags: ["Bar"]
+
+
+- type: entity
+  id: DisposalRouterBotany
+  parent: DisposalRouter
+  suffix: Botany
+  components:
+  - type: DisposalRouter
+    tags: ["Botany"]
+
+
+- type: entity
+  id: DisposalRouterJanitor
+  parent: DisposalRouter
+  suffix: Janitor
+  components:
+  - type: DisposalRouter
+    tags: ["Janitor"]
+
+
+- type: entity
+  id: DisposalRouterAI
+  parent: DisposalRouter
+  suffix: AI
+  components:
+  - type: DisposalRouter
+    tags: ["AI"]
+
+
+- type: entity
+  id: DisposalRouterAISatellite
+  parent: DisposalRouter
+  suffix: AISatellite
+  components:
+  - type: DisposalRouter
+    tags: ["AISatellite"]
+
+
+- type: entity
+  id: DisposalRouterAICore
+  parent: DisposalRouter
+  suffix: AICore
+  components:
+  - type: DisposalRouter
+    tags: ["AICore"]
+
+
+- type: entity
+  id: DisposalRouterAIUpload
+  parent: DisposalRouter
+  suffix: AIUpload
+  components:
+  - type: DisposalRouter
+    tags: ["AIUpload"]
+
+
+- type: entity
+  id: DisposalRouterAIPower
+  parent: DisposalRouter
+  suffix: AIPower
+  components:
+  - type: DisposalRouter
+    tags: ["AIPower"]
+
+
+- type: entity
+  id: DisposalRouterArrivals
+  parent: DisposalRouter
+  suffix: Arrivals
+  components:
+  - type: DisposalRouter
+    tags: ["Arrivals"]
+
+
+- type: entity
+  id: DisposalRouterEvac
+  parent: DisposalRouter
+  suffix: Evac
+  components:
+  - type: DisposalRouter
+    tags: ["Evac"]
+
+
+- type: entity
+  id: DisposalRouterDockingArm
+  parent: DisposalRouter
+  suffix: DockingArm
+  components:
+  - type: DisposalRouter
+    tags: ["DockingArm"]
+
+
+- type: entity
+  id: DisposalRouterEVAStorage
+  parent: DisposalRouter
+  suffix: EVAStorage
+  components:
+  - type: DisposalRouter
+    tags: ["EVAStorage"]
+
+
+- type: entity
+  id: DisposalRouterChapel
+  parent: DisposalRouter
+  suffix: Shrine # Starlight: Chapel -> Shrine
+  components:
+  - type: DisposalRouter
+    tags: ["Chapel"]
+
+
+- type: entity
+  id: DisposalRouterLibrary
+  parent: DisposalRouter
+  suffix: Library
+  components:
+  - type: DisposalRouter
+    tags: ["Library"]
+
+
+- type: entity
+  id: DisposalRouterReporter
+  parent: DisposalRouter
+  suffix: Reporter
+  components:
+  - type: DisposalRouter
+    tags: ["Reporter"]
+
+
+- type: entity
+  id: DisposalRouterTheater
+  parent: DisposalRouter
+  suffix: Theater
+  components:
+  - type: DisposalRouter
+    tags: ["Theater"]
+
+
+- type: entity
+  id: DisposalRouterDorms
+  parent: DisposalRouter
+  suffix: Dorms
+  components:
+  - type: DisposalRouter
+    tags: ["Dorms"]
+
+
+- type: entity
+  id: DisposalRouterTools
+  parent: DisposalRouter
+  suffix: Tools
+  components:
+  - type: DisposalRouter
+    tags: ["Tools"]
+
+
+- type: entity
+  id: DisposalRouterDisposals
+  parent: DisposalRouter
+  suffix: Disposals
+  components:
+  - type: DisposalRouter
+    tags: ["Disposals"]
+
+
+- type: entity
+  id: DisposalRouterCryosleep
+  parent: DisposalRouter
+  suffix: Cryosleep
+  components:
+  - type: DisposalRouter
+    tags: ["Cryosleep"]
+
+
+- type: entity
+  id: DisposalRouterVox
+  parent: DisposalRouter
+  suffix: Vox
+  components:
+  - type: DisposalRouter
+    tags: ["Vox"]
+
+
+- type: entity
+  id: DisposalRouterWildcard
+  parent: DisposalRouter
+  suffix: Wildcard
+  components:
+  - type: DisposalRouter
+    tags: ["*"]

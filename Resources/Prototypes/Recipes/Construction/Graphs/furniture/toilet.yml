@@ -1,0 +1,35 @@
+- type: constructionGraph
+  id: Toilet
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: toilet
+          completed:
+            - !type:SnapToGrid { }
+          steps:
+            - material: Steel
+              amount: 5
+              doAfter: 1
+            - material: Plasteel # Starlight
+              amount: 1 # Starlight
+              doAfter: 1 # Starlight
+    - node: toilet
+      entity: ToiletEmpty
+      edges:
+        - to: start
+          completed:
+            - !type:SpawnPrototype
+              prototype: SheetSteel1
+              amount: 5
+            - !type:SpawnPrototype # Starlight
+              prototype: SheetPlasteel1 # Starlight
+              amount: 1 # Starlight
+            - !type:EmptyAllContainers {}
+            - !type:DestroyEntity {}
+          conditions:
+            - !type:EntityAnchored
+              anchored: false
+          steps:
+            - tool: Welding
+              doAfter: 2

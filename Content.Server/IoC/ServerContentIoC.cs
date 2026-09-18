@@ -1,0 +1,130 @@
+using Content.Server.Administration;
+using Content.Server.Administration.Logs;
+using Content.Server.Administration.Managers;
+using Content.Server.Administration.Notes;
+using Content.Server.Afk;
+using Content.Server.Chat.Managers;
+using Content.Server.Connection;
+using Content.Server.Database;
+using Content.Server.Discord;
+using Content.Server.Discord.DiscordLink;
+using Content.Server.Discord.WebhookMessages;
+using Content.Server.EUI;
+using Content.Server.FeedbackSystem;
+using Content.Server.GhostKick;
+using Content.Server.Info;
+using Content.Server.Mapping;
+using Content.Server.Maps;
+using Content.Server.NodeContainer.NodeGroups;
+using Content.Server.Players.JobWhitelist;
+using Content.Server.Players.PlayTimeTracking;
+using Content.Server.Players.RateLimiting;
+using Content.Server.Preferences.Managers;
+using Content.Server.ServerInfo;
+using Content.Server.ServerUpdates;
+using Content.Server.Voting.Managers;
+using Content.Server.Worldgen.Tools;
+using Content.Shared.Administration.Logs;
+using Content.Shared.Administration.Managers;
+using Content.Shared.Chat;
+using Content.Shared.FeedbackSystem;
+using Content.Shared.IoC;
+using Content.Shared.Kitchen;
+using Content.Shared.Players.PlayTimeTracking;
+using Content.Shared.Players.RateLimiting;
+
+#region Starlight
+using Content.Server._Starlight.BugReports;
+using Content.Shared._Starlight.Achievement;
+using Content.Server.Holiday;
+using Content.Shared._Starlight;
+using Content.Shared._Starlight.DocumentManager;
+using Content.Server._Starlight;
+#endregion Starlight
+
+#region Nulllink
+using Content.Server._NullLink;
+using Content.Server._NullLink.Core;
+using Content.Server._NullLink.EventBus;
+using Content.Server._NullLink.PlayerData;
+using Content.Shared._NullLink;
+using Content.Server._Starlight.TextToSpeech;
+using Content.Server._Starlight.Economy;
+#endregion Nulllink
+
+namespace Content.Server.IoC;
+
+internal static class ServerContentIoC
+{
+    public static void Register(IDependencyCollection deps)
+    {
+        SharedContentIoC.Register(deps);
+        deps.Register<IChatManager, ChatManager>();
+        deps.Register<ISharedChatManager, ChatManager>();
+        deps.Register<IChatSanitizationManager, ChatSanitizationManager>();
+        deps.Register<IServerPreferencesManager, ServerPreferencesManager>();
+        deps.Register<IServerDbManager, ServerDbManager>();
+        deps.Register<RecipeManager, RecipeManager>();
+        deps.Register<INodeGroupFactory, NodeGroupFactory>();
+        deps.Register<IConnectionManager, ConnectionManager>();
+        deps.Register<ServerUpdateManager>();
+        deps.Register<IAdminManager, AdminManager>();
+        deps.Register<ISharedAdminManager, AdminManager>();
+        deps.Register<EuiManager, EuiManager>();
+        deps.Register<IVoteManager, VoteManager>();
+        deps.Register<IPlayerLocator, PlayerLocator>();
+        deps.Register<IAfkManager, AfkManager>();
+
+        deps.Register<HolidaySystem>(); // Starlight
+
+        deps.Register<IGameMapManager, GameMapManager>();
+        deps.Register<RulesManager, RulesManager>();
+        deps.Register<IBanManager, BanManager>();
+        deps.Register<ContentNetworkResourceManager>();
+        deps.Register<IAdminNotesManager, AdminNotesManager>();
+        deps.Register<GhostKickManager>();
+        deps.Register<ISharedAdminLogManager, AdminLogManager>();
+        deps.Register<IAdminLogManager, AdminLogManager>();
+        deps.Register<PlayTimeTrackingManager>();
+        deps.Register<UserDbDataManager>();
+        deps.Register<ServerInfoManager>();
+        deps.Register<PoissonDiskSampler>();
+        deps.Register<DiscordWebhook>();
+        deps.Register<VoteWebhooks>();
+        deps.Register<ServerDbEntryManager>();
+        deps.Register<ISharedPlaytimeManager, PlayTimeTrackingManager>();
+        deps.Register<ServerApi>();
+        deps.Register<JobWhitelistManager>();
+        deps.Register<PlayerRateLimitManager>();
+        deps.Register<SharedPlayerRateLimitManager, PlayerRateLimitManager>();
+        deps.Register<MappingManager>();
+        deps.Register<IWatchlistWebhookManager, WatchlistWebhookManager>();
+        deps.Register<ConnectionManager>();
+        deps.Register<MultiServerKickManager>();
+        deps.Register<CVarControlManager>();
+        deps.Register<DiscordLink>();
+        deps.Register<DiscordChatLink>();
+        deps.Register<ServerFeedbackManager>();
+        deps.Register<ISharedFeedbackManager, ServerFeedbackManager>();
+
+        // 🌟Starlight🌟 start
+        deps.Register<ISharedPlayersRoleManager, PlayerRolesManager>();
+        deps.Register<IPlayerRolesManager, PlayerRolesManager>();
+        deps.Register<ITTSClient, TTSClient>();
+        deps.Register<ItemPriceManager, ItemPriceManager>();
+        deps.Register<IBugReportManager, BugReportManager>();
+        deps.Register<IAchievementRewardManager, NullLinkPlayerManager>();
+        deps.Register<PreWrittenDocumentManager>();
+        // 🌟Starlight🌟 end
+        // nulllink start
+        deps.Register<IActorRouter, ActorRouter>();
+        deps.Register<NullLinkPlayerManager>();
+        deps.Register<INullLinkPlayerManager, NullLinkPlayerManager>();
+        deps.Register<INullLinkPlayTimeManager, NullLinkPlayTimeManager>();
+        deps.Register<INullLinkEventBusManager, NullLinkEventBusManager>();
+        deps.Register<ISharedNullLinkPlayerRolesReqManager, PlayerRolesReqManager>();
+        deps.Register<ISharedNullLinkPlayerResourcesManager, NullLinkPlayerResourcesManager>();
+
+        // nulllink end
+    }
+}

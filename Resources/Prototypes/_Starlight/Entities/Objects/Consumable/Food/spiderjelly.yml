@@ -1,0 +1,22 @@
+- type: entity
+  parent: [SolutionTiny, FoodBase]
+  id: SpiderJelly
+  name: Royal Jelly
+  description: A strange jelly created by spiders possesses unreal regenerative powers.
+  components:
+  - type: Sprite
+    sprite: _Starlight/Objects/Consumable/Food/spiderjelly.rsi
+    layers:
+    - state: icon
+  - type: Solution
+    id: food
+    solution:
+      reagents:
+      - ReagentId: RoyalJelly
+        Quantity: 10
+  - type: Item
+    size: Tiny
+  - type: FlavorProfile
+    flavors:
+      - medicine
+  - type: Edible

@@ -1,0 +1,769 @@
+using System.Linq;
+using System.Net;
+using System.Net.Sockets;
+using Content.Server.Administration;
+using Content.Server.Administration.Managers;
+using Content.Server.Discord.WebhookMessages;
+using Content.Server.GameTicking;
+using Content.Server.GameTicking.Presets;
+using Content.Server.Roles;
+using Content.Server.RoundEnd;
+using Content.Shared._Starlight.CCVar;
+using Content.Shared.CCVar;
+using Content.Shared.Chat;
+using Content.Shared.Database;
+using Content.Shared.Maps;
+using Content.Shared.Players;
+using Content.Shared.Players.PlayTimeTracking;
+using Content.Shared.Voting;
+using Robust.Shared.Configuration;
+using Robust.Shared.Enums;
+using Robust.Shared.Player;
+using Robust.Shared.Random;
+using Robust.Shared.Prototypes; // Starlight
+using Prometheus;
+using Content.Shared._Starlight.Voting; //Starlight
+
+namespace Content.Server.Voting.Managers
+{
+    public sealed partial class VoteManager
+    {
+
+        #region Starlight data collection
+        private static readonly Counter _gamemode_vote = Metrics.CreateCounter(
+            "sl_gamemode_vote",
+            "Gamemode vote results",
+            [ "option" ]
+        );
+
+        private static readonly Counter _map_vote = Metrics.CreateCounter(
+            "sl_map_vote",
+            "Map/Station vote results",
+            [ "option" ]
+        );
+        #endregion
+        [Dependency] private IPlayerLocator _locator = default!;
+        [Dependency] private ILogManager _logManager = default!;
+        [Dependency] private IBanManager _bans = default!;
+        [Dependency] private VoteWebhooks _voteWebhooks = default!;
+
+        private VotingSystem? _votingSystem;
+        private RoleSystem? _roleSystem;
+        private GameTicker? _gameTicker;
+
+        private readonly Dictionary<string, int> _presetCooldown = new();
+
+        private static readonly Dictionary<StandardVoteType, CVarDef<bool>> VoteTypesToEnableCVars = new()
+        {
+            {StandardVoteType.Restart, CCVars.VoteRestartEnabled},
+            {StandardVoteType.Preset, CCVars.VotePresetEnabled},
+            {StandardVoteType.Map, CCVars.VoteMapEnabled},
+            {StandardVoteType.Votekick, CCVars.VotekickEnabled}
+        };
+
+        private static readonly ProtoId<GamePresetPrototype> SecretPrototype = "Secret";
+
+        public void CreateStandardVote(ICommonSession? initiator, StandardVoteType voteType, string[]? args = null)
+        {
+            if (initiator != null && args == null)
+                _adminLogger.Add(LogType.Vote, LogImpact.Medium, $"{initiator} initiated a {voteType.ToString()} vote");
+            else if (initiator != null && args != null)
+                _adminLogger.Add(LogType.Vote, LogImpact.Extreme, $"{initiator} initiated a {voteType.ToString()} vote with the arguments: {String.Join(",", args)}");
+            else
+                _adminLogger.Add(LogType.Vote, LogImpact.Medium, $"Initiated a {voteType.ToString()} vote");
+
+            _gameTicker = _entityManager.EntitySysManager.GetEntitySystem<GameTicker>();
+
+            bool timeoutVote = true;
+
+            switch (voteType)
+            {
+                case StandardVoteType.Restart:
+                    CreateRestartVote(initiator);
+                    break;
+                case StandardVoteType.Preset:
+                    CreatePresetVote(initiator);
+                    break;
+                case StandardVoteType.Map:
+                    CreateMapVote(initiator);
+                    break;
+                case StandardVoteType.Votekick:
+                    timeoutVote = false; // Allows the timeout to be updated manually in the create method
+                    CreateVotekickVote(initiator, args);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(voteType), voteType, null);
+            }
+            _gameTicker.UpdateInfoText();
+            if (timeoutVote)
+                TimeoutStandardVote(voteType);
+        }
+
+        private void CreateRestartVote(ICommonSession? initiator)
+        {
+
+            var playerVoteMaximum = _cfg.GetCVar(CCVars.VoteRestartMaxPlayers);
+            var totalPlayers = _playerManager.Sessions.Count(session => session.Status != SessionStatus.Disconnected);
+
+            var ghostVotePercentageRequirement = _cfg.GetCVar(CCVars.VoteRestartGhostPercentage);
+            var ghostVoterPercentage = CalculateEligibleVoterPercentage(VoterEligibility.Ghost);
+
+            if (totalPlayers <= playerVoteMaximum || ghostVoterPercentage >= ghostVotePercentageRequirement)
+            {
+                StartVote(initiator);
+            }
+            else
+            {
+                NotifyNotEnoughGhostPlayers(ghostVotePercentageRequirement, ghostVoterPercentage);
+            }
+        }
+
+        /// <summary>
+        /// Gives the current percentage of players eligible to vote, rounded to nearest percentage point.
+        /// </summary>
+        /// <param name="eligibility">The eligibility requirement to vote.</param>
+        public int CalculateEligibleVoterPercentage(VoterEligibility eligibility, List<ICommonSession>? filter = null) // Starlight edit
+        {
+            var eligibleCount = CalculateEligibleVoterNumber(eligibility, filter); // Starlight edit
+
+            var totalPlayers = filter?.Count(session => session.Status != SessionStatus.Disconnected) ?? _playerManager.Sessions.Count(session => session.Status != SessionStatus.Disconnected); // Starlight edit - This would have been two lines but that somehow trips up the .editorconfig check on GitHub. So now I'm adding this comment to explain that because I thought the gag of making this line even longer would be hilarious.
+
+            var eligiblePercentage = 0.0;
+            if (totalPlayers > 0)
+            {
+                eligiblePercentage = ((double)eligibleCount / totalPlayers) * 100;
+            }
+
+            var roundedEligiblePercentage = (int)Math.Round(eligiblePercentage);
+
+            return roundedEligiblePercentage;
+        }
+
+        /// <summary>
+        /// Gives the current number of players eligible to vote.
+        /// </summary>
+        /// <param name="eligibility">The eligibility requirement to vote.</param>
+        public int CalculateEligibleVoterNumber(VoterEligibility eligibility, List<ICommonSession>? filter = null) // Starlight edit
+        {
+            var eligibleCount = 0;
+
+            foreach (var player in filter?.ToArray() ?? _playerManager.Sessions) // Starlight edit
+            {
+                _playerManager.UpdateState(player);
+                if (player.Status != SessionStatus.Disconnected && CheckVoterEligibility(player, eligibility, filter)) // Starlight edit
+                {
+                    eligibleCount++;
+                }
+            }
+
+            return eligibleCount;
+        }
+
+        private void StartVote(ICommonSession? initiator)
+        {
+            var alone = _playerManager.PlayerCount == 1 && initiator != null;
+            var options = new VoteOptions
+            {
+                Title = Loc.GetString("ui-vote-restart-title"),
+                Options =
+                {
+                    (Loc.GetString("ui-vote-restart-yes"), "yes"),
+                    (Loc.GetString("ui-vote-restart-no"), "no"),
+                    (Loc.GetString("ui-vote-restart-abstain"), "abstain")
+                },
+                Duration = alone
+                    ? TimeSpan.FromSeconds(_cfg.GetCVar(CCVars.VoteTimerAlone))
+                    : TimeSpan.FromSeconds(_cfg.GetCVar(CCVars.VoteTimerRestart)),
+                InitiatorTimeout = TimeSpan.FromMinutes(5)
+            };
+
+            if (alone)
+                options.InitiatorTimeout = TimeSpan.FromSeconds(10);
+
+            WirePresetVoteInitiator(options, initiator);
+
+            var vote = CreateVote(options);
+
+            vote.OnFinished += (_, _) =>
+            {
+                var votesYes = vote.VotesPerOption["yes"];
+                var votesNo = vote.VotesPerOption["no"];
+                var total = votesYes + votesNo;
+
+                var ratioRequired = _cfg.GetCVar(CCVars.VoteRestartRequiredRatio);
+                if (total > 0 && votesYes / (float) total >= ratioRequired)
+                {
+                    // Check if an admin is online, and ignore the passed vote if the cvar is enabled
+                    if (_cfg.GetCVar(CCVars.VoteRestartNotAllowedWhenAdminOnline) && _adminMgr.ActiveAdmins.Count() != 0)
+                    {
+                        _adminLogger.Add(LogType.Vote, LogImpact.Medium, $"Restart vote attempted to pass, but an admin was online. {votesYes}/{votesNo}");
+                    }
+                    else // If the cvar is disabled or there's no admins on, proceed as normal
+                    {
+                        _adminLogger.Add(LogType.Vote, LogImpact.Medium, $"Restart vote succeeded: {votesYes}/{votesNo}");
+                        _chatManager.DispatchServerAnnouncement(Loc.GetString("ui-vote-restart-succeeded"));
+                        var roundEnd = _entityManager.EntitySysManager.GetEntitySystem<RoundEndSystem>();
+                        roundEnd.EndRound();
+                    }
+                }
+                else
+                {
+                    _adminLogger.Add(LogType.Vote, LogImpact.Medium, $"Restart vote failed: {votesYes}/{votesNo}");
+                    _chatManager.DispatchServerAnnouncement(
+                        Loc.GetString("ui-vote-restart-failed", ("ratio", ratioRequired)));
+                }
+            };
+
+            if (initiator != null)
+            {
+                // Cast yes vote if created the vote yourself.
+                vote.CastVote(initiator, 0);
+            }
+
+            foreach (var player in _playerManager.Sessions)
+            {
+                if (player != initiator)
+                {
+                    // Everybody else defaults to an abstain vote to say they don't mind.
+                    vote.CastVote(player, 2);
+                }
+            }
+        }
+
+        private void NotifyNotEnoughGhostPlayers(int ghostPercentageRequirement, int roundedGhostPercentage)
+        {
+            // Logic to notify that there are not enough ghost players to start a vote
+            _adminLogger.Add(LogType.Vote, LogImpact.Medium, $"Restart vote failed: Current Ghost player percentage:{roundedGhostPercentage.ToString()}% does not meet {ghostPercentageRequirement.ToString()}%");
+            _chatManager.DispatchServerAnnouncement(
+                Loc.GetString("ui-vote-restart-fail-not-enough-ghost-players", ("ghostPlayerRequirement", ghostPercentageRequirement)));
+        }
+
+        private void CreatePresetVote(ICommonSession? initiator)
+        {
+            //starlight start
+            var presets = GetGamePresets();
+
+            //add the secret prototype
+            if (_prototypeManager.TryIndex<GamePresetPrototype>(SecretPrototype, out var secretPreset))
+            {
+                presets.Add(secretPreset, Loc.GetString("ui-vote-secret-map"));
+            }
+            //starlight end
+
+            /* starlight disable
+            var presets = new Dictionary<GamePresetPrototype, string>();
+            presets.Add("Secret", Loc.GetString("ui-vote-secret-map"));
+            foreach (var preset in GetGamePresets())
+            {
+                presets.Add(preset.Key, preset.Value);
+            } */
+
+            var alone = _playerManager.PlayerCount == 1 && initiator != null;
+            var options = new VoteOptions
+            {
+                Title = Loc.GetString("ui-vote-gamemode-title"),
+                Duration = alone
+                    ? TimeSpan.FromSeconds(_cfg.GetCVar(CCVars.VoteTimerAlone))
+                    : TimeSpan.FromSeconds(_cfg.GetCVar(CCVars.VoteTimerPreset)),
+                DisplayVotes = _cfg.GetCVar(StarlightCCVars.ShowPresetVotes), // 🌟Starlight🌟
+            };
+
+            if (alone)
+                options.InitiatorTimeout = TimeSpan.FromSeconds(10);
+
+            foreach (var (k, v) in presets)
+            {
+                options.Options.Add((Loc.GetString(v), k));
+            }
+
+            WirePresetVoteInitiator(options, initiator);
+
+            var vote = CreateVote(options);
+
+            vote.OnFinished += (_, args) =>
+            {
+                string picked;
+                GamePresetPrototype pickedPreset; //starlight
+                if (args.Winner == null)
+                {
+                    pickedPreset = (GamePresetPrototype)_random.Pick(args.Winners); //starlight
+                    picked = pickedPreset.ModeTitle; //starlight
+                    _chatManager.DispatchServerAnnouncement(
+                        Loc.GetString("ui-vote-gamemode-tie", ("picked", Loc.GetString(pickedPreset.ModeTitle)))); //starlight edit
+                }
+                else
+                {
+                    pickedPreset = (GamePresetPrototype)args.Winner; //starlight
+                    picked = pickedPreset.ModeTitle; //starlight
+                    _chatManager.DispatchServerAnnouncement(
+                        Loc.GetString("ui-vote-gamemode-win", ("winner", Loc.GetString(pickedPreset.ModeTitle)))); //starlight edit
+                }
+                _adminLogger.Add(LogType.Vote, LogImpact.Medium, $"Preset vote finished: {picked}");
+                var ticker = _entityManager.EntitySysManager.GetEntitySystem<GameTicker>();
+                //starlight, keep track of cooldowns
+                //subtract 1 from all keys EXCEPT the one we picked
+                foreach (var key in _presetCooldown.Keys.ToList())
+                {
+                    if (key != pickedPreset.ID)
+                    {
+                        _presetCooldown[key]--;
+                        if (_presetCooldown[key] <= 0)
+                        {
+                            _presetCooldown.Remove(key);
+                            _adminLogger.Add(LogType.Vote, LogImpact.Medium, $"Preset {key} removed from cooldown.");
+                        }
+                    }
+                }
+
+                #region Starlight
+                for (int i = 0; i < options.Options.Count; i++)
+                {
+                    _gamemode_vote.WithLabels(
+                        options.Options[i].text
+                    ).Inc(args.Votes[i]);
+                }
+                #endregion
+                //add the key we picked to the cooldown list
+                //if its secret, never add it
+                if (!(secretPreset != null && pickedPreset.ID == secretPreset.ID))
+                {
+                    _presetCooldown.Add(pickedPreset.ID, pickedPreset.VoteCooldown);
+                    _adminLogger.Add(LogType.Vote, LogImpact.Medium, $"Preset {pickedPreset.ID} added to cooldown for {pickedPreset.VoteCooldown} votes.");
+                }
+                //starlight end
+                ticker.SetGamePreset(pickedPreset.ID);
+            };
+        }
+
+        public void CreateMapVote(ICommonSession? initiator) // Starlight edit
+        {
+            var maps = new Dictionary<string, GameMapPrototype>();
+            var eligibleMaps = _gameMapManager.CurrentlyEligibleMaps().ToList();
+            var selectedMaps = eligibleMaps.OrderBy(_ => _random.Next()).Take(_cfg.GetCVar(StarlightCCVars.MapVotingCount)).ToList();
+            maps.Add(Loc.GetString("ui-vote-secret-map"), _random.Pick(selectedMaps));
+            foreach (var map in selectedMaps)
+            {
+                maps.Add(map.MapName, map);
+            }
+
+            var alone = _playerManager.PlayerCount == 1 && initiator != null;
+            var options = new VoteOptions
+            {
+                Title = Loc.GetString("ui-vote-map-title"),
+                Duration = alone
+                    ? TimeSpan.FromSeconds(_cfg.GetCVar(CCVars.VoteTimerAlone))
+                    : TimeSpan.FromSeconds(_cfg.GetCVar(CCVars.VoteTimerMap)),
+                DisplayVotes = _cfg.GetCVar(StarlightCCVars.ShowMapVotes), // 🌟Starlight🌟
+            };
+
+            if (alone)
+                options.InitiatorTimeout = TimeSpan.FromSeconds(10);
+
+            foreach (var (k, v) in maps)
+            {
+                options.Options.Add((k, v));
+            }
+
+            WirePresetVoteInitiator(options, initiator);
+
+            var vote = CreateVote(options);
+
+            vote.OnFinished += (_, args) =>
+            {
+                GameMapPrototype picked;
+                if (args.Winner == null)
+                {
+                    picked = (GameMapPrototype) _random.Pick(args.Winners);
+                    _chatManager.DispatchServerAnnouncement(
+                        Loc.GetString("ui-vote-map-tie"));
+                }
+                else
+                {
+                    picked = (GameMapPrototype) args.Winner;
+                }
+                _chatManager.DispatchServerAnnouncement(Loc.GetString("ui-vote-map-win"));
+
+                _adminLogger.Add(LogType.Vote, LogImpact.Medium, $"Map vote finished: {picked.MapName}");
+                var ticker = _entityManager.EntitySysManager.GetEntitySystem<GameTicker>();
+                if (ticker.CanUpdateMap())
+                {
+                    #region Starlight
+                    for (int i = 0; i < options.Options.Count; i++)
+                    {
+                        _map_vote.WithLabels(
+                            options.Options[i].text
+                        ).Inc(args.Votes[i]);
+                    }
+                    #endregion
+                    if (_gameMapManager.CheckMapExists(picked.ID))
+                    {
+                        _gameMapManager.SelectMap(picked.ID);
+                        ticker.UpdateInfoText();
+                    }
+                    else
+                    {
+                        _chatManager.DispatchServerAnnouncement(Loc.GetString("ui-vote-map-invalid", ("winner", maps[picked.ID]))); // Starlight
+                    }
+                }
+                else
+                {
+                    if (ticker.RoundPreloadTime <= TimeSpan.Zero)
+                    {
+                        _chatManager.DispatchServerAnnouncement(Loc.GetString("ui-vote-map-notlobby"));
+                    }
+                    else
+                    {
+                        var timeString = $"{ticker.RoundPreloadTime.Minutes:0}:{ticker.RoundPreloadTime.Seconds:00}";
+                        _chatManager.DispatchServerAnnouncement(Loc.GetString("ui-vote-map-notlobby-time", ("time", timeString)));
+                    }
+                }
+            };
+        }
+
+        private async void CreateVotekickVote(ICommonSession? initiator, string[]? args)
+        {
+            if (args == null || args.Length <= 1)
+            {
+                return;
+            }
+
+            if (_roleSystem == null)
+                _roleSystem = _entityManager.SystemOrNull<RoleSystem>();
+            if (_votingSystem == null)
+                _votingSystem = _entityManager.SystemOrNull<VotingSystem>();
+
+            // Check that the initiator is actually allowed to do a votekick.
+            if (_votingSystem != null && !await _votingSystem.CheckVotekickInitEligibility(initiator))
+            {
+                _logManager.GetSawmill("admin.votekick").Warning($"User {initiator} attempted a votekick, despite not being eligible to!");
+                _adminLogger.Add(LogType.Vote, LogImpact.Extreme, $"Votekick attempted by {initiator}, but they are not eligible to votekick!");
+                DirtyCanCallVoteAll();
+                return;
+            }
+
+
+
+            var voterEligibility = _cfg.GetCVar(CCVars.VotekickVoterGhostRequirement) ? VoterEligibility.GhostMinimumPlaytime : VoterEligibility.MinimumPlaytime;
+            if (_cfg.GetCVar(CCVars.VotekickIgnoreGhostReqInLobby) && _gameTicker!.RunLevel == GameRunLevel.PreRoundLobby)
+                voterEligibility = VoterEligibility.MinimumPlaytime;
+
+            var eligibleVoterNumberRequirement = _cfg.GetCVar(CCVars.VotekickEligibleNumberRequirement);
+            var eligibleVoterNumber = CalculateEligibleVoterNumber(voterEligibility);
+
+            string target = args[0];
+            string reason = args[1];
+
+            // Start by getting all relevant target data
+            var located = await _locator.LookupIdByNameOrIdAsync(target);
+            if (located == null)
+            {
+                _logManager.GetSawmill("admin.votekick")
+                    .Warning($"Votekick attempted for player {target} but they couldn't be found!");
+                _adminLogger.Add(LogType.Vote, LogImpact.Extreme, $"Votekick attempted by {initiator} for player string {target}, but they could not be found!");
+                DirtyCanCallVoteAll();
+                return;
+            }
+            var targetUid = located.UserId;
+            var targetHWid = located.LastHWId;
+            (IPAddress, int)? targetIP = null;
+
+            if (located.LastAddress is not null)
+            {
+                targetIP = located.LastAddress.AddressFamily is AddressFamily.InterNetwork
+                    ? (located.LastAddress, 32) // People with ipv4 addresses get a /32 address so we ban that
+                    : (located.LastAddress, 64); // This can only be an ipv6 address. People with ipv6 address should get /64 addresses so we ban that.
+            }
+
+            if (!_playerManager.TryGetSessionById(located.UserId, out ICommonSession? targetSession))
+            {
+                _logManager.GetSawmill("admin.votekick")
+                    .Warning($"Votekick attempted for player {target} but their session couldn't be found!");
+                _adminLogger.Add(LogType.Vote, LogImpact.Extreme, $"Votekick attempted by {initiator} for player string {target}, but they could not be found!");
+                DirtyCanCallVoteAll();
+                return;
+            }
+
+            string targetEntityName = located.Username; // Target's player-facing name when voting; uses the player's username as fallback if no entity name is found
+            if (targetSession.AttachedEntity is { Valid: true } attached && _votingSystem != null)
+                targetEntityName = _votingSystem.GetPlayerVoteListName(attached);
+
+            var isAntagSafe = false;
+            var targetMind = targetSession.GetMind();
+            var playtime = _playtimeManager.GetPlayTimes(targetSession);
+
+            // Check whether the target is an antag, and if they are, give them protection against the Raider votekick if they have the requisite hours.
+            if (targetMind != null &&
+                _roleSystem != null &&
+                _roleSystem.MindIsAntagonist(targetMind) &&
+                playtime.TryGetValue(PlayTimeTrackingShared.TrackerOverall, out TimeSpan overallTime) &&
+                overallTime >= TimeSpan.FromHours(_cfg.GetCVar(CCVars.VotekickAntagRaiderProtection)))
+            {
+                isAntagSafe = true;
+            }
+
+
+            // Don't let a user votekick themselves
+            if (initiator == targetSession)
+            {
+                _adminLogger.Add(LogType.Vote, LogImpact.Extreme, $"Votekick attempted by {initiator} for themselves? Votekick cancelled.");
+                DirtyCanCallVoteAll();
+                return;
+            }
+
+            // Cancels the vote if there's not enough voters; only the person initiating the vote gets a return message.
+            if (eligibleVoterNumber < eligibleVoterNumberRequirement)
+            {
+                _adminLogger.Add(LogType.Vote, LogImpact.Extreme, $"Votekick attempted by {initiator} for player {targetSession}, but there were not enough ghost roles! {eligibleVoterNumberRequirement} required, {eligibleVoterNumber} found.");
+                if (initiator != null)
+                {
+                    var message = Loc.GetString("ui-vote-votekick-not-enough-eligible", ("voters", eligibleVoterNumber.ToString()), ("requirement", eligibleVoterNumberRequirement.ToString()));
+                    var wrappedMessage = Loc.GetString("chat-manager-server-wrap-message", ("message", message));
+                    _chatManager.ChatMessageToOne(ChatChannel.Server, message, wrappedMessage, default, false, initiator.Channel);
+                }
+                DirtyCanCallVoteAll();
+                return;
+            }
+
+            // Check for stuff like the target being an admin. These targets shouldn't show up in the UI, but it's necessary to doublecheck in case someone writes the command in console.
+            if (_votingSystem != null && !_votingSystem.CheckVotekickTargetEligibility(targetSession))
+            {
+                _adminLogger.Add(LogType.Vote, LogImpact.Extreme, $"Votekick attempted by {initiator} for player {targetSession}, but they are not eligible to be votekicked!");
+                DirtyCanCallVoteAll();
+                return;
+            }
+
+            // Create the vote object
+
+            string voteTitle = "";
+            NetEntity? targetNetEntity = _entityManager.GetNetEntity(targetSession.AttachedEntity);
+            var initiatorName = initiator != null ? initiator.Name : Loc.GetString("ui-vote-votekick-unknown-initiator");
+
+            voteTitle = Loc.GetString("ui-vote-votekick-title", ("initiator", initiatorName), ("targetEntity", targetEntityName), ("reason", reason));
+
+            var options = new VoteOptions
+            {
+                Title = voteTitle,
+                Options =
+                {
+                    (Loc.GetString("ui-vote-votekick-yes"), "yes"),
+                    (Loc.GetString("ui-vote-votekick-no"), "no"),
+                    (Loc.GetString("ui-vote-votekick-abstain"), "abstain")
+                },
+                Duration = TimeSpan.FromSeconds(_cfg.GetCVar(CCVars.VotekickTimer)),
+                InitiatorTimeout = TimeSpan.FromSeconds(_cfg.GetCVar(CCVars.VotekickTimeout)),
+                VoterEligibility = voterEligibility,
+                DisplayVotes = false,
+                TargetEntity = targetNetEntity
+            };
+
+            WirePresetVoteInitiator(options, initiator);
+
+            var vote = CreateVote(options);
+            _adminLogger.Add(LogType.Vote, LogImpact.Extreme, $"Votekick for {located.Username} ({targetEntityName}) due to {reason} started, initiated by {initiator}.");
+
+            // Create Discord webhook
+            var webhookState = _voteWebhooks.CreateWebhookIfConfigured(options, _cfg.GetCVar(CCVars.DiscordVotekickWebhook), Loc.GetString("votekick-webhook-name"), options.Title + "\n" + Loc.GetString("votekick-webhook-description", ("initiator", initiatorName), ("target", targetSession)));
+
+            // Time out the vote now that we know it will happen
+            TimeoutStandardVote(StandardVoteType.Votekick, TimeSpan.FromSeconds(_cfg.GetCVar(CCVars.VotekickTimeout)));
+
+            vote.OnFinished += (_, eventArgs) =>
+            {
+
+                var votesYes = vote.VotesPerOption["yes"];
+                var votesNo = vote.VotesPerOption["no"];
+                var total = votesYes + votesNo;
+
+                // Get the voters, for logging purposes.
+                List<ICommonSession> yesVoters = new();
+                List<ICommonSession> noVoters = new();
+                foreach (var (voter, castVote) in vote.CastVotes)
+                {
+                    if (castVote == 0)
+                    {
+                        yesVoters.Add(voter);
+                    }
+                    if (castVote == 1)
+                    {
+                        noVoters.Add(voter);
+                    }
+                }
+                var yesVotersString = string.Join(", ", yesVoters);
+                var noVotersString = string.Join(", ", noVoters);
+
+                var ratioRequired = _cfg.GetCVar(CCVars.VotekickRequiredRatio);
+                if (total > 0 && votesYes / (float)total >= ratioRequired)
+                {
+                    // Some conditions that cancel the vote want to let the vote run its course first and then cancel it
+                    // so we check for that here
+
+                    // Check if an admin is online, and ignore the vote if the cvar is enabled
+                    if (_cfg.GetCVar(CCVars.VotekickNotAllowedWhenAdminOnline) && _adminMgr.ActiveAdmins.Count() != 0)
+                    {
+                        _adminLogger.Add(LogType.Vote, LogImpact.Extreme, $"Votekick for {located.Username} attempted to pass, but an admin was online. Yes: {votesYes} / No: {votesNo}. Yes: {yesVotersString} / No: {noVotersString}");
+                        AnnounceCancelledVotekickForVoters(targetEntityName);
+                        _voteWebhooks.UpdateCancelledWebhookIfConfigured(webhookState, Loc.GetString("votekick-webhook-cancelled-admin-online"));
+                        return;
+                    }
+                    // Check if the target is an antag and the vote reason is raiding (this is to prevent false positives)
+                    else if (isAntagSafe && reason == VotekickReasonType.Raiding.ToString())
+                    {
+                        _adminLogger.Add(LogType.Vote, LogImpact.Extreme, $"Votekick for {located.Username} due to {reason} finished, created by {initiator}, but was cancelled due to the target being an antagonist.");
+                        AnnounceCancelledVotekickForVoters(targetEntityName);
+                        _voteWebhooks.UpdateCancelledWebhookIfConfigured(webhookState, Loc.GetString("votekick-webhook-cancelled-antag-target"));
+                        return;
+                    }
+                    // Check if the target is an admin/de-admined admin
+                    else if (targetSession.AttachedEntity != null && _adminMgr.IsAdmin(targetSession.AttachedEntity.Value, true))
+                    {
+                        _adminLogger.Add(LogType.Vote, LogImpact.Extreme, $"Votekick for {located.Username} due to {reason} finished, created by {initiator}, but was cancelled due to the target being a de-admined admin.");
+                        AnnounceCancelledVotekickForVoters(targetEntityName);
+                        _voteWebhooks.UpdateCancelledWebhookIfConfigured(webhookState, Loc.GetString("votekick-webhook-cancelled-admin-target"));
+                        return;
+                    }
+                    else
+                    {
+                        _adminLogger.Add(LogType.Vote, LogImpact.Extreme, $"Votekick for {located.Username} succeeded:  Yes: {votesYes} / No: {votesNo}. Yes: {yesVotersString} / No: {noVotersString}");
+                        _chatManager.DispatchServerAnnouncement(Loc.GetString("ui-vote-votekick-success", ("target", targetEntityName), ("reason", reason)));
+
+                        if (!Enum.TryParse(_cfg.GetCVar(CCVars.VotekickBanDefaultSeverity), out NoteSeverity severity))
+                        {
+                            _logManager.GetSawmill("admin.votekick")
+                                .Warning("Votekick ban severity could not be parsed from config! Defaulting to high.");
+                            severity = NoteSeverity.High;
+                        }
+
+                        // Discord webhook, success
+                        _voteWebhooks.UpdateWebhookIfConfigured(webhookState, eventArgs);
+
+                        uint minutes = (uint)_cfg.GetCVar(CCVars.VotekickBanDuration);
+
+                        _bans.CreateServerBan(targetUid, target, null, targetIP, targetHWid, minutes, severity, Loc.GetString("votekick-ban-reason", ("reason", reason)));
+                    }
+                }
+                else
+                {
+
+                    // Discord webhook, failure
+                    _voteWebhooks.UpdateWebhookIfConfigured(webhookState, eventArgs);
+
+                    _adminLogger.Add(LogType.Vote, LogImpact.Extreme, $"Votekick failed: Yes: {votesYes} / No: {votesNo}. Yes: {yesVotersString} / No: {noVotersString}");
+                    _chatManager.DispatchServerAnnouncement(Loc.GetString("ui-vote-votekick-failure", ("target", targetEntityName), ("reason", reason)));
+                }
+            };
+
+            if (initiator != null)
+            {
+                // Cast yes vote if created the vote yourself.
+                vote.CastVote(initiator, 0);
+            }
+        }
+
+        private void AnnounceCancelledVotekickForVoters(string target)
+        {
+            foreach (var player in _playerManager.Sessions)
+            {
+                if (CheckVoterEligibility(player, VoterEligibility.GhostMinimumPlaytime))
+                {
+                    var message = Loc.GetString("ui-vote-votekick-server-cancelled", ("target", target));
+                    var wrappedMessage = Loc.GetString("chat-manager-server-wrap-message", ("message", message));
+                    _chatManager.ChatMessageToOne(ChatChannel.Server, message, wrappedMessage, default, false, player.Channel);
+                }
+            }
+        }
+
+        private void TimeoutStandardVote(StandardVoteType type, TimeSpan? timeoutOverride = null)
+        {
+            var timeout = timeoutOverride ?? TimeSpan.FromSeconds(_cfg.GetCVar(CCVars.VoteSameTypeTimeout));
+            _standardVoteTimeout[type] = _timing.RealTime + timeout;
+            DirtyCanCallVoteAll();
+        }
+
+        public Dictionary<GamePresetPrototype, string> GetGamePresets() // Starlight edit
+        {
+            var presets = new Dictionary<GamePresetPrototype, string>();
+
+            var prototypeId = _cfg.GetCVar(StarlightCCVars.RoundVotingChancesPrototype);
+
+            if (!_prototypeManager.TryIndex<RoundVotingChancesPrototype>(prototypeId, out var chancesPrototype))
+            {
+                Logger.Warning($"Failed to find a chance prototype with ID: {prototypeId}");
+                return presets;
+            }
+
+            var validPresets = new List<(GamePresetPrototype preset, float chance)>();
+
+            foreach (var preset in _prototypeManager.EnumeratePrototypes<GamePresetPrototype>())
+            {
+                if (!preset.ShowInVote)
+                    continue;
+
+                if (_playerManager.PlayerCount < (preset.MinPlayers ?? int.MinValue))
+                    continue;
+
+                if (_playerManager.PlayerCount > (preset.MaxPlayers ?? int.MaxValue))
+                    continue;
+
+                //STARLIGHT
+                //check if its on the cooldown list
+                //if the cooldown number is 0 or lower, we dont cooldown this selection anyway
+                if (preset.VoteCooldown > 0)
+                {
+                    if (_presetCooldown.ContainsKey(preset.ID))
+                    {
+                        //admin log it
+                        _adminLogger.Add(LogType.Vote, LogImpact.Medium, $"Preset {preset.ID} skipped for vote selection due to being on cooldown ({_presetCooldown[preset.ID]} votes remaining).");
+                        continue;
+                    }
+                }
+                //STARLIGHT END
+
+                if (chancesPrototype.Chances.TryGetValue(preset.ID, out var chance))
+                {
+                    validPresets.Add((preset, chance));
+                }
+            }
+
+            if (validPresets.Count == 0)
+            {
+                Logger.Warning("There are no suitable game modes for the current number of players.");
+                return presets;
+            }
+
+            var selectedPresets = SelectPresetsByChance(validPresets, _cfg.GetCVar(StarlightCCVars.RoundVotingCount));
+            foreach (var preset in selectedPresets)
+            {
+                presets[preset.preset] = preset.preset.ModeTitle;
+            }
+
+            return presets;
+        }
+
+        private List<(GamePresetPrototype preset, float chance)> SelectPresetsByChance(List<(GamePresetPrototype preset, float chance)> validPresets, int count)
+        {
+            var selectedPresets = new List<(GamePresetPrototype preset, float chance)>();
+            var random = new Random();
+
+            while (selectedPresets.Count < count && validPresets.Count > 0)
+            {
+                var totalChance = validPresets.Sum(p => p.chance);
+
+                var roll = random.NextDouble() * totalChance;
+                float cumulativeChance = 0;
+
+                foreach (var preset in validPresets)
+                {
+                    cumulativeChance += preset.chance;
+                    if (roll < cumulativeChance)
+                    {
+                        selectedPresets.Add(preset);
+                        validPresets.Remove(preset);
+                        break;
+                    }
+                }
+            }
+
+            return selectedPresets;
+        }
+    }
+}

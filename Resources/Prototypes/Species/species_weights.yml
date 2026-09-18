@@ -1,0 +1,22 @@
+#default species weights used for randomly selected species
+- type: weightedRandomSpecies
+  id: SpeciesWeights
+  weights:
+    Human: 10
+    Reptilian: 5
+    Moth: 5
+    Vulpkanin: 5
+    SlimePerson: 4
+    IPC: 3
+    Elf: 3
+    Lagomorph: 4
+    Avali: 3
+    Resomi: 3
+    Felionoid: 3
+    Thaven: 2
+    Dwarf: 2
+    Diona: 2
+    Cyclorite: 2
+    Shadekin: 2
+    Vox: 1
+    Rodentia: 3

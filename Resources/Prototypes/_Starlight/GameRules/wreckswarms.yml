@@ -1,0 +1,65 @@
+# Event Tables
+
+- type: entityTable
+  id: WreckSwarmEventsTable
+  table: !type:AllSelector # we need to pass a list of rules, since rules have further restrictions to consider via StationEventComp
+    children:
+    - id: GameRuleSmallWreckSwarmSpawn
+    - id: GameRuleMediumWreckSwarmSpawn
+    - id: GameRuleLargeWreckSwarmSpawn
+
+- type: entity
+  parent: BaseGameRule
+  id: GameRuleWreckSwarmSpawn
+  abstract: true
+  components:
+  - type: GameRule
+  - type: StationEvent
+    reoccurrenceDelay: 5
+    earliestStart: 15
+    minimumPlayers: 25
+    globalAnnouncement: false
+  - type: WreckSwarm
+    chunkConfig: Medium
+    velocity: 50
+
+- type: entity
+  parent: GameRuleWreckSwarmSpawn
+  id: GameRuleSmallWreckSwarmSpawn
+  components:
+  - type: StationEvent
+    weight: 20
+    earliestStart: 15
+    minimumPlayers: 10
+    globalAnnouncement: false
+  - type: WreckSwarm
+    chunkConfig: Small
+    velocity: 50
+
+- type: entity
+  parent: GameRuleWreckSwarmSpawn
+  id: GameRuleMediumWreckSwarmSpawn
+  components:
+  - type: StationEvent
+    weight: 20
+    earliestStart: 20
+    minimumPlayers: 30
+    globalAnnouncement: false
+  - type: WreckSwarm
+    chunkConfig: Medium
+    velocity: 50
+
+- type: entity
+  parent: GameRuleWreckSwarmSpawn
+  id: GameRuleLargeWreckSwarmSpawn
+  components:
+  - type: StationEvent
+    weight: 10
+    earliestStart: 30
+    minimumPlayers: 50
+    globalAnnouncement: false
+  - type: WreckSwarm
+    announcement: station-event-incoming-wreck-large-announcement
+    announcementSound: /Audio/Announcements/attention.ogg
+    chunkConfig: Large
+    velocity: 50

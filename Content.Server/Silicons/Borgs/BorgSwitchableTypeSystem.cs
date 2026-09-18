@@ -1,0 +1,96 @@
+﻿using Content.Server.Inventory;
+using Content.Shared.Inventory;
+using Content.Shared.Radio.Components;
+using Content.Shared.Silicons.Borgs;
+using Content.Shared.Silicons.Borgs.Components;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Utility;
+
+namespace Content.Server.Silicons.Borgs;
+
+/// <summary>
+/// Server-side logic for borg type switching. Handles more heavyweight and server-specific switching logic.
+/// </summary>
+public sealed partial class BorgSwitchableTypeSystem : SharedBorgSwitchableTypeSystem
+{
+    [Dependency] private BorgSystem _borgSystem = default!;
+    [Dependency] private ServerInventorySystem _inventorySystem = default!;
+
+    public override void SelectBorgModule(Entity<BorgSwitchableTypeComponent> ent, ProtoId<BorgTypePrototype> borgType) // Starlight
+    {
+        var prototype = Prototypes.Index(borgType);
+
+        // Assign radio channels
+        //Starlight begin
+        TryComp(ent, out IntrinsicRadioTransmitterComponent? transmitter);
+        TryComp(ent, out ActiveRadioComponent? activeRadio);
+
+        string[] radioChannels = [.. ent.Comp.InherentRadioChannels, .. prototype.RadioChannels,
+            .. (transmitter != null && transmitter.Channels.Contains("Syndicate")) || (activeRadio != null && activeRadio.Channels.Contains("Syndicate"))
+                ? new[] { "Syndicate" } : []]; //If the borg has the Syndicate channel already (emagged before picking a chassis), they should not lose it when picking a chassis.
+
+        if (transmitter != null)
+        {
+            transmitter.Channels = [.. radioChannels];
+            Dirty(ent.Owner, transmitter);
+        }
+
+        if (activeRadio != null)
+        {
+            activeRadio.Channels = [.. radioChannels];
+            Dirty(ent.Owner, activeRadio);
+        }
+        //Starlight end
+
+        // Borg transponder for the robotics console
+        if (TryComp(ent, out BorgTransponderComponent? transponder))
+        {
+            _borgSystem.SetTransponderSprite(
+                (ent.Owner, transponder),
+                new SpriteSpecifier.Rsi(prototype.SpritePath, prototype.SpriteBodyState));
+
+            _borgSystem.SetTransponderName(
+                (ent.Owner, transponder),
+                Loc.GetString($"borg-type-{borgType}-transponder"));
+        }
+
+        // Configure modules
+        if (TryComp(ent, out BorgChassisComponent? chassis))
+        {
+            var chassisEnt = (ent.Owner, chassis);
+            _borgSystem.SetMaxModules(
+                chassisEnt,
+                prototype.ExtraModuleCount + prototype.DefaultModules.Length);
+
+            _borgSystem.SetModuleWhitelist(chassisEnt, prototype.ModuleWhitelist);
+
+            foreach (var module in prototype.DefaultModules)
+            {
+                var moduleEntity = Spawn(module);
+                var borgModule = Comp<BorgModuleComponent>(moduleEntity);
+                _borgSystem.SetBorgModuleDefault((moduleEntity, borgModule), true);
+                _borgSystem.InsertModule(chassisEnt, moduleEntity);
+            }
+        }
+
+        // Configure special components
+        if (Prototypes.Resolve(ent.Comp.SelectedBorgType, out var previousPrototype))
+        {
+            if (previousPrototype.AddComponents is { } removeComponents)
+                EntityManager.RemoveComponents(ent, removeComponents);
+        }
+
+        if (prototype.AddComponents is { } addComponents)
+        {
+            EntityManager.AddComponents(ent, addComponents);
+        }
+
+        // Configure inventory template (used for hat spacing)
+        if (TryComp(ent, out InventoryComponent? inventory))
+        {
+            _inventorySystem.SetTemplateId((ent.Owner, inventory), prototype.InventoryTemplateId);
+        }
+
+        base.SelectBorgModule(ent, borgType);
+    }
+}

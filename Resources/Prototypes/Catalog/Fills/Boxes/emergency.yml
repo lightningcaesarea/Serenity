@@ -1,0 +1,364 @@
+- type: entity
+  parent: BoxCardboard
+  id: BoxSurvival
+  name: survival box
+  description: It's a box with basic internals inside.
+  # suffix: Standard # Starlight: remove suffix
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: ClothingMaskBreath
+        - id: EmergencyOxygenTankFilled
+        - id: EmergencyMedipen
+        - id: Flare
+        - id: FoodSnackNutribrick
+        - id: DrinkWaterBottleFull
+  - type: Sprite
+    layers:
+    - state: internals
+    - state: emergencytank
+  - type: Item # Starlight start
+    shape:
+      - 0,0,1,3
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,1,3 # Starlight end
+
+- type: entity
+  parent: BoxSurvival
+  id: BoxSurvivalNitrogen
+  suffix: Nitrogen # Starlight: Make suffix clearer
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: ClothingMaskBreath
+        - id: EmergencyNitrogenTankFilled
+        - id: EmergencyMedipen
+        - id: Flare
+        - id: FoodSnackNutribrick
+        - id: DrinkWaterBottleFull
+  - type: Sprite
+    layers:
+    - state: internals
+    - state: nitrogentank
+  - type: Label
+    currentLabel: reagent-name-nitrogen
+
+- type: entity
+  parent: BoxSurvival # Starlight: reparent
+  id: BoxSurvivalEngineering
+  name: extended-capacity survival box
+  description: It's a box with basic internals inside. This one is labelled to contain an extended-capacity tank.
+  # suffix: Extended # Starlight: remove suffix
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: ClothingMaskBreath
+        - id: ExtendedEmergencyOxygenTankFilled
+        - id: EmergencyMedipen
+        - id: Flare
+        - id: FoodSnackNutribrick
+        - id: DrinkWaterBottleFull
+  - type: Sprite
+    layers:
+    - state: internals
+    - state: extendedtank
+
+- type: entity
+  parent: BoxSurvivalEngineering
+  id: BoxSurvivalEngineeringNitrogen
+  suffix: Nitrogen # Starlight: Make suffix clearer
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: ClothingMaskBreath
+        - id: ExtendedEmergencyNitrogenTankFilled
+        - id: EmergencyMedipen
+        - id: Flare
+        - id: FoodSnackNutribrick
+        - id: DrinkWaterBottleFull
+  - type: Sprite
+    layers:
+    - state: internals
+    - state: nitrogentank
+  - type: Label
+    currentLabel: reagent-name-nitrogen
+
+- type: entity
+  parent: BoxSurvivalEngineering # Starlight: reparent
+  id: BoxSurvivalSecurity
+  # name: survival box # Starlight start: reparent
+  # description: It's a box with basic internals inside. This one is labelled to contain an extended-capacity tank. # Starlight end: Reparent
+  suffix: Security
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: ClothingMaskGasSecurity
+        - id: ExtendedEmergencyOxygenTankFilled #Starlight
+        - id: EmergencyMedipen
+        - id: Flare
+        - id: FoodSnackNutribrick
+        - id: DrinkWaterBottleFull
+  # - type: Sprite # Starlight start: Reparent
+  #   layers:
+  #   - state: internals
+  #   - state: emergencytank
+
+- type: entity
+  parent: BoxSurvivalSecurity
+  id: BoxSurvivalSecurityNitrogen
+  suffix: Security, Nitrogen # Starlight: Make suffix clearer
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: ClothingMaskGasSecurity
+        - id: ExtendedEmergencyNitrogenTankFilled #Starlight
+        - id: EmergencyMedipen
+        - id: Flare
+        - id: FoodSnackNutribrick
+        - id: DrinkWaterBottleFull
+  - type: Sprite
+    layers:
+    - state: internals
+    - state: nitrogentank
+  - type: Label
+    currentLabel: reagent-name-nitrogen
+
+- type: entity
+  parent: BoxSurvival # Starlight: reparent
+  id: BoxSurvivalMedical
+  # name: survival box # Starlight: reparent
+  description: It's a box with basic internals inside.
+  suffix: Medical
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: ClothingMaskBreathMedical
+        - id: EmergencyOxygenTankFilled
+        - id: EmergencyMedipen
+        - id: Flare
+        - id: FoodSnackNutribrick
+        - id: DrinkWaterBottleFull
+  # - type: Sprite # Starlight start: Reparent
+  #   layers:
+  #   - state: internals
+  #   - state: emergencytank # Starlight start: Reparent
+
+- type: entity
+  parent: BoxSurvivalMedical
+  id: BoxSurvivalMedicalNitrogen
+  suffix: Medical, Nitrogen # Starlight: Make suffix clearer
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: ClothingMaskBreathMedical
+        - id: EmergencyNitrogenTankFilled
+        - id: EmergencyMedipen
+        - id: Flare
+        - id: FoodSnackNutribrick
+        - id: DrinkWaterBottleFull
+  - type: Sprite
+    layers:
+    - state: internals
+    - state: nitrogentank
+  - type: Label
+    currentLabel: reagent-name-nitrogen
+
+- type: entity
+  parent: BoxSurvival # Starlight: reparent
+  id: BoxHug
+  name: box of hugs
+  description: A special box for sensitive people.
+  suffix: Emergency
+  components:
+  - type: Sprite
+    layers:
+    - state: box_hug
+    - state: heart
+  - type: Item
+    heldPrefix: hug
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: ClothingMaskBreath
+        - id: EmergencyFunnyOxygenTankFilled
+        - id: EmergencyMedipen
+        - id: Flare
+        - id: FoodSnackNutribrick
+        - id: DrinkWaterBottleFull
+  - type: Tag
+    tags:
+    - BoxCardboard
+    - BoxHug
+
+- type: entity
+  parent: BoxHug
+  id: BoxHugNitrogen
+  suffix: Emergency, Nitrogen # Starlight: Make suffix clearer
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: ClothingMaskBreath
+        - id: EmergencyNitrogenTankFilled
+        - id: EmergencyMedipen
+        - id: Flare
+        - id: FoodSnackNutribrick
+        - id: DrinkWaterBottleFull
+  - type: Label
+    currentLabel: reagent-name-nitrogen
+
+- type: entity
+  parent: BoxSurvival
+  id: BoxMime
+  suffix: Mime # Starluight: Make suffix clearer
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: ClothingMaskBreath
+        - id: EmergencyOxygenTankFilled
+        - id: EmergencyMedipen
+        - id: Flare
+        - id: FoodBreadNutriBatard
+        - id: DrinkWaterBottleFull
+
+- type: entity
+  parent: BoxSurvivalNitrogen
+  id: BoxMimeNitrogen
+  suffix: Mime, Nitrogen # Starlight: Make suffix clearer
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: ClothingMaskBreath
+        - id: EmergencyNitrogenTankFilled
+        - id: EmergencyMedipen
+        - id: Flare
+        - id: FoodBreadNutriBatard
+        - id: DrinkWaterBottleFull
+#  - type: Sprite # SL start: Reparent
+#    layers:
+#    - state: internals
+#    - state: nitrogentank # SL end
+  - type: Label
+    currentLabel: reagent-name-nitrogen
+
+- type: entity
+  parent: BoxSurvival
+  id: BoxMimeMoth
+  suffix: Mime, Moth # Starlight: Make suffix clearer
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: ClothingMaskBreath
+        - id: EmergencyOxygenTankFilled
+        - id: EmergencyMedipen
+        - id: Flare
+        - id: FoodBreadCottonNutriBatard
+        - id: DrinkWaterBottleFull
+
+
+- type: entity
+  parent: BoxSurvivalEngineering # Starlight: reparent
+  id: BoxSurvivalSyndicate
+  # name: extended-capacity survival box # Starlight start: Reparent
+  # description: It's a box with basic internals inside. This one is labelled to contain an extended-capacity tank. # Starlight end: Reparent
+  suffix: Syndicate
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: ClothingMaskGasSyndicate
+        - id: ExtendedEmergencyOxygenTankFilled
+        - id: EmergencyMedipen
+        - id: Flare
+        - id: FoodSnackNutribrick
+  - type: Sprite
+  # - type: Sprite # Starlight start - reparent
+  #   layers:
+  #   - state: internals
+  #   - state: extendedtank # Starlight end - reparent
+
+- type: entity
+  parent: BoxSurvivalSyndicate
+  id: BoxSurvivalSyndicateNitrogen
+  suffix: Syndicate, Nitrogen # Starlight: Make suffix clearer
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: ClothingMaskGasSyndicate
+        - id: ExtendedEmergencyNitrogenTankFilled
+        - id: EmergencyMedipen
+        - id: Flare
+        - id: FoodSnackNutribrick
+  - type: Sprite
+    layers:
+    - state: internals
+    - state: nitrogentank
+  - type: Label
+    currentLabel: reagent-name-nitrogen
+
+
+- type: entity
+  parent: BoxCardboardSmall # Cannot fit 3x3 boxes into already-filled ERT backpacks.
+  id: BoxSurvivalMilitaryDouble
+  suffix: Military O2
+  description: It's a box with basic internals inside. This one is labelled to contain an double extended-capacity tank.
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: DoubleEmergencyOxygenTankFilled
+        - id: EmergencyMedipen
+        - id: Flare
+  - type: Sprite
+    layers:
+    - state: internals
+    - state: extendedtank
+
+- type: entity
+  parent: BoxSurvivalMilitaryDouble
+  id: BoxSurvivalMilitaryDoubleNitrogen
+  suffix: Military N2
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: DoubleEmergencyNitrogenTankFilled
+        - id: EmergencyMedipen
+        - id: Flare
+  - type: Sprite
+    layers:
+    - state: internals
+    - state: nitrogentank
+  - type: Label
+    currentLabel: reagent-name-nitrogen

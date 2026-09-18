@@ -1,0 +1,42 @@
+using Content.Shared.Inventory.Events;
+using Content.Shared.Clothing.Components;
+using Robust.Shared.Serialization.Manager;
+using Content.Shared._Starlight.Overlay.Components;
+using Content.Shared._Starlight.Shadekin.Components;
+
+namespace Content.Shared._Starlight.Overlay.Systems;
+
+public sealed partial class ClothesVisionSystem : EntitySystem
+{
+    [Dependency] private ISerializationManager _serialization = default!;
+    public override void Initialize()
+    {
+        base.Initialize();
+        SubscribeLocalEvent<ClothesNightVisionComponent, GotEquippedEvent>(OnEquipped);
+        SubscribeLocalEvent<ClothesNightVisionComponent, GotUnequippedEvent>(OnUnequipped);
+    }
+
+    private void OnEquipped(EntityUid uid, ClothesNightVisionComponent component, GotEquippedEvent args)
+    {
+        if (!TryComp<ClothingComponent>(uid, out var clothing)
+            || !clothing.Slots.HasFlag(args.SlotFlags))
+            return;
+
+        if (!HasComp<NightVisionComponent>(args.EquipTarget) || HasComp<ShadekinComponent>(args.EquipTarget))
+        {
+            var nightvision = EnsureComp<NightVisionComponent>(args.EquipTarget);
+            nightvision.Clothes = true;
+        }
+    }
+
+    private void OnUnequipped(EntityUid uid, ClothesNightVisionComponent component, GotUnequippedEvent args)
+    {
+        if (TryComp<NightVisionComponent>(args.EquipTarget, out var nightvision) && !nightvision.Clothes)
+        {
+            nightvision.Clothes = false;
+            return;
+        }
+
+        RemComp<NightVisionComponent>(args.EquipTarget);
+    }
+}

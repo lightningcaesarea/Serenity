@@ -1,0 +1,169 @@
+- type: species
+  id: Moth
+  name: species-name-moth
+  roundStart: true
+  prototype: MobMoth
+  sprites: MobMothSprites
+  defaultSkinTone: "#ffda93"
+  markingLimits: MobMothMarkingLimits
+  dollPrototype: AppearanceMoth
+  skinColoration: Hues
+  maleFirstNames: NamesMothFirstMale
+  femaleFirstNames: NamesMothFirstFemale
+  lastNames: NamesMothLast
+  customName: true # Starlight
+
+- type: speciesBaseSprites
+  id: MobMothSprites
+  sprites:
+    Head: MobMothHead
+    Hair: MobHumanoidAnyMarking # Starlight
+    Snout: MobHumanoidAnyMarking
+    UndergarmentTop: MobHumanoidAnyMarking
+    UndergarmentBottom: MobHumanoidAnyMarking
+    Chest: MobMothTorso
+    HeadTop: MobHumanoidAnyMarking
+    HeadSide: MobHumanoidAnyMarking
+    Tail: MobHumanoidAnyMarking
+    Eyes: MobMothEyes
+    LArm: MobMothLArm
+    RArm: MobMothRArm
+    LHand: MobMothLHand
+    RHand: MobMothRHand
+    LLeg: MobMothLLeg
+    RLeg: MobMothRLeg
+    LFoot: MobMothLFoot
+    RFoot: MobMothRFoot
+
+- type: humanoidBaseSprite
+  id: MobMothEyes
+  baseSprite:
+    sprite: _Starlight/Mobs/Species/Moth/parts.rsi # Starlight
+    state: eyes
+
+- type: markingPoints
+  id: MobMothMarkingLimits
+  #onlyWhitelisted: true // Starlight removal
+  points:
+    Hair:
+      points: 1 # Starlight
+      required: false
+    FacialHair:
+      points: 0
+      required: false
+    Tail:
+      points: 1
+      required: true
+      defaultMarkings: [ MothWingsDefault ]
+    Snout:
+      points: 1
+      required: false
+    HeadTop:
+      points: 1
+      required: true
+      defaultMarkings: [ MothAntennasDefault ]
+    HeadSide:
+      points: 1
+      required: false
+    Head:
+      points: 1
+      required: false
+    UndergarmentTop:
+      points: 1
+      required: false
+    UndergarmentBottom:
+      points: 1
+      required: false
+    Chest:
+      points: 2
+      required: false
+    Legs:
+      points: 2
+      required: false
+    Arms:
+      points: 2
+      required: false
+
+- type: humanoidBaseSprite
+  id: MobMothHead
+  baseSprite:
+    sprite: _Starlight/Mobs/Species/Moth/parts.rsi # Starlight
+    state: head_m
+
+- type: humanoidBaseSprite
+  id: MobMothHeadMale
+  baseSprite:
+    sprite: _Starlight/Mobs/Species/Moth/parts.rsi # Starlight
+    state: head_m
+
+- type: humanoidBaseSprite
+  id: MobMothHeadFemale
+  baseSprite:
+    sprite: _Starlight/Mobs/Species/Moth/parts.rsi # Starlight
+    state: head_f
+
+- type: humanoidBaseSprite
+  id: MobMothTorso
+  baseSprite:
+    sprite: _Starlight/Mobs/Species/Moth/parts.rsi # Starlight
+    state: torso_m
+
+- type: humanoidBaseSprite
+  id: MobMothTorsoMale
+  baseSprite:
+    sprite: _Starlight/Mobs/Species/Moth/parts.rsi # Starlight
+    state: torso_m
+
+- type: humanoidBaseSprite
+  id: MobMothTorsoFemale
+  baseSprite:
+    sprite: _Starlight/Mobs/Species/Moth/parts.rsi # Starlight
+    state: torso_f
+
+- type: humanoidBaseSprite
+  id: MobMothLLeg
+  baseSprite:
+    sprite: _Starlight/Mobs/Species/Moth/parts.rsi # Starlight
+    state: l_leg
+
+- type: humanoidBaseSprite
+  id: MobMothLHand
+  baseSprite:
+    sprite: _Starlight/Mobs/Species/Moth/parts.rsi # Starlight
+    state: l_hand
+
+- type: humanoidBaseSprite
+  id: MobMothLArm
+  baseSprite:
+    sprite: _Starlight/Mobs/Species/Moth/parts.rsi # Starlight
+    state: l_arm
+
+- type: humanoidBaseSprite
+  id: MobMothLFoot
+  baseSprite:
+    sprite: _Starlight/Mobs/Species/Moth/parts.rsi # Starlight
+    state: l_foot
+
+- type: humanoidBaseSprite
+  id: MobMothRLeg
+  baseSprite:
+    sprite: _Starlight/Mobs/Species/Moth/parts.rsi # Starlight
+    state: r_leg
+
+- type: humanoidBaseSprite
+  id: MobMothRHand
+  baseSprite:
+    sprite: _Starlight/Mobs/Species/Moth/parts.rsi # Starlight
+    state: r_hand
+
+- type: humanoidBaseSprite
+  id: MobMothRArm
+  baseSprite:
+    sprite: _Starlight/Mobs/Species/Moth/parts.rsi # Starlight
+    state: r_arm
+
+- type: humanoidBaseSprite
+  id: MobMothRFoot
+  baseSprite:
+    sprite: _Starlight/Mobs/Species/Moth/parts.rsi # Starlight
+    state: r_foot

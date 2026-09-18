@@ -1,0 +1,64 @@
+- type: entity
+  name: mail bag
+  id: MailBag
+  parent: BaseStorageItem
+  description: A bag for carrying mail around the station. Made from tanned space bear hide.
+  components:
+  - type: Sprite
+    sprite: _Starlight/Objects/Specific/Cargo/mail_bag.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Starlight/Objects/Specific/Cargo/mail_bag.rsi
+    quickEquip: false
+    slots:
+    - belt
+    - back
+  - type: Item
+    size: Ginormous
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,11,3 #starlight edit, makes it larger due to high pop
+    quickInsert: true
+    areaInsert: true
+    whitelist:
+      components:
+      #- Paper
+      - Delivery
+      #tags:
+      #- Document
+      #- Paper
+  - type: Dumpable
+  - type: Tag
+    tags:
+    - ScurretWearable
+    - CorgiWearable
+    # Starlight Edit Start - added toggle to activate magnet
+  - type: ItemToggle
+    onUse: false
+    onActivate: false
+    verbToggleOn: verb-toggle-magnet-activate
+    verbToggleOff: verb-toggle-magnet-deactivate
+    soundActivate:
+      collection: sparks
+      params:
+        variation: 0.250
+    soundDeactivate:
+      collection: sparks
+      params:
+        variation: 0.250
+  - type: AltUseToggle
+  # Starlight Edit End
+  - type: ComponentToggler
+    components:
+    - type: MagnetPickup
+      requiresEquipping: false # Starlight Edit - make it work even without being equipped
+  # Starlight Edit Start - added visual indicator for magnet
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.ToggleableVisuals.Enabled:
+        enum.ToggleableVisuals.Layer:
+          True: { state: "magnet" }
+          False: { state: "icon" }
+  # Starlight Edit End

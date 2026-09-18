@@ -1,0 +1,29 @@
+- type: entity
+  name: Ripley APLU Spawner
+  id: SpawnMechRipley
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    layers:
+      - state: green
+      - sprite: Objects/Specific/Mech/Mechs/Basic/ripley.rsi
+        state: base
+      - state: mechicon
+  - type: ConditionalSpawner
+    prototypes:
+      - MechRipleyBattery
+
+- type: entity
+  name: H.O.N.K. Spawner
+  id: SpawnMechHonker
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    layers:
+      - state: green
+      - sprite: Objects/Specific/Mech/Mechs/Basic/honker.rsi
+        state: base
+      - state: mechicon
+  - type: ConditionalSpawner
+    prototypes:
+      - MechHonkerBattery

@@ -1,0 +1,118 @@
+- type: entity
+  abstract: true
+  id: ReagentDispenserBaseUnpowered # Starlight-edit: power cell chem dispenser
+  parent: SmallConstructibleMachine
+  placement:
+    mode: SnapgridCenter
+  components:
+  # Starlight-start: Make dispenser rotatable.
+  - type: Transform
+    anchored: true
+    noRot: false
+  - type: Rotatable
+    rotateWhileAnchored: true
+  # Starlight-end
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Appearance
+  # Starlight-start: Plumbing connector visuals
+  - type: PlumbingConnectorAppearance
+    offset: 0.09375
+  - type: AtmosPipeColor
+  # Starlight-end
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.3,0.4,0.3"
+        density: 190
+        mask:
+        - TabletopMachineMask
+        layer:
+        - TabletopMachineLayer
+  - type: ActivatableUI
+    key: enum.ReagentDispenserUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.ReagentDispenserUiKey.Key:
+        type: ReagentDispenserBoundUserInterface
+      enum.StorageUiKey.Key:
+        type: StorageBoundUserInterface
+  - type: Anchorable
+  - type: Pullable
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalGlassBreak
+  - type: Storage
+    maxItemSize: Large
+    grid:
+    - 0,0,15,11
+  - type: ReagentDispenser
+    beakerSlot:
+      whitelistFailPopup: reagent-dispenser-component-cannot-put-entity-message
+      whitelist:
+        components:
+        - FitsInDispenser
+      priority: 9
+  - type: ItemSlots
+  - type: ContainerContainer
+    containers:
+      machine_board: !type:Container
+      machine_parts: !type:Container
+      beakerSlot: !type:ContainerSlot
+      storagebase: !type:Container
+  - type: WiresPanel
+  - type: EmptyOnMachineDeconstruct
+    containers:
+    - storagebase
+    - beakerSlot
+  # Starlight-start: Plumbing outlet
+  - type: NodeContainer
+    nodes:
+      outletNorth:  # Provides reagents TO the network (all directions)
+        !type:PlumbingNode
+        nodeGroupID: Plumbing
+        pipeDirection: North
+      outletEast:
+        !type:PlumbingNode
+        nodeGroupID: Plumbing
+        pipeDirection: East
+      outletSouth:
+        !type:PlumbingNode
+        nodeGroupID: Plumbing
+        pipeDirection: South
+      outletWest:
+        !type:PlumbingNode
+        nodeGroupID: Plumbing
+        pipeDirection: West
+  - type: PlumbingOutlet
+    solutionName: beaker
+    connectedOutlets: true
+    outletNames:
+    - outletNorth
+    - outletEast
+    - outletSouth
+    - outletWest
+    containerSlotId: beakerSlot
+    enabled: false
+  # Starlight-end

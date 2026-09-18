@@ -1,0 +1,87 @@
+using Content.Shared.Decals;
+using Content.Shared.Sprite;
+using Content.Shared.Item;
+using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Random;
+
+namespace Content.Server.Sprite;
+
+public sealed partial class RandomSpriteSystem: SharedRandomSpriteSystem
+{
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedItemSystem _item = default!;
+
+    public override void Initialize()
+    {
+        base.Initialize();
+        SubscribeLocalEvent<RandomSpriteComponent, ComponentGetState>(OnGetState);
+        SubscribeLocalEvent<RandomSpriteComponent, MapInitEvent>(OnMapInit);
+    }
+
+    private void OnMapInit(EntityUid uid, RandomSpriteComponent component, MapInitEvent args)
+    {
+        if (component.Selected.Count > 0)
+            return;
+
+        if (component.Available.Count == 0)
+            return;
+
+        var groups = new List<Dictionary<string, Dictionary<string, string?>>>();
+        if (component.GetAllGroups)
+        {
+            groups = component.Available;
+        }
+        else
+        {
+            groups.Add(_random.Pick(component.Available));
+        }
+
+        component.Selected.EnsureCapacity(groups.Count);
+
+        Color? previousColor = null;
+
+        foreach (var group in groups)
+        {
+            foreach (var layer in group)
+            {
+                Color? color = null;
+
+                var selectedState = _random.Pick(layer.Value);
+                if (!string.IsNullOrEmpty(selectedState.Value))
+                {
+                    if (selectedState.Value == $"Inherit")
+                        color = previousColor;
+                    else
+                    {
+                        color = _random.Pick(_prototype.Index<ColorPalettePrototype>(selectedState.Value).Colors.Values);
+                        previousColor = color;
+                    }
+                }
+
+                component.Selected.Add(layer.Key, (selectedState.Key, color));
+
+                if (component.HeldPrefixes.Count > 0 && component.HeldPrefixes.ContainsKey(selectedState.Key))
+                {
+                    var prefix = component.HeldPrefixes[selectedState.Key];
+                    if (TryComp<ItemComponent>(uid, out var itemComp))
+                    {
+                        _item.SetHeldPrefix(uid, prefix);
+                        Dirty(uid, itemComp);
+                    }
+                }
+            }
+        }
+
+        Dirty(uid, component);
+    }
+
+    private void OnGetState(EntityUid uid, RandomSpriteComponent component, ref ComponentGetState args)
+    {
+        args.State = new RandomSpriteColorComponentState()
+        {
+            Selected = component.Selected,
+        };
+    }
+}

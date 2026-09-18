@@ -1,0 +1,343 @@
+- type: entity
+  id: BaseMech
+  save: false
+  abstract: true
+  components:
+  - type: MobMover
+  - type: Mech
+# 🌟Starlight-start🌟
+    maxIntegrity: 170
+    batteryWhitelist:
+      tags:
+      - MechReactor
+  - type: ArmorSparkEffect
+    alwaysSparks: true
+# 🌟Starlight-end🌟
+  - type: MechAir
+  - type: DoAfter
+  - type: Repairable
+    # STARLIGHT BEGIN - Borg-like mech repair
+    damageValue: -30 # 15 seconds to repair durand
+    doAfterDelay: 1
+    fuelCost: 3 # 3x more expensive than cyborg repair costing 70u for durand
+    # STARLIGHT END
+  - type: UserInterface
+    interfaces:
+      enum.MechUiKey.Key:
+        type: MechBoundUserInterface
+      # STARLIGHT BEGIN - Equipment radial
+      enum.MechEquipmentSelectUiKey.Key:
+        type: MechEquipmentSelectBoundUserInterface
+      # STARLIGHT END
+  - type: MeleeWeapon
+    hidden: true
+    attackRate: 0.75
+    # STARLIGHT BEGIN
+    angle: 0
+    animation: WeaponArcFist
+    wideAnimation: WeaponArcFist
+    # STARLIGHT END
+    damage:
+      types:
+        Blunt: 25 #thwack
+        Structural: 20
+    soundHit:
+      collection: MetalThud
+  - type: Puller
+    needsHands: false
+  - type: InputMover
+  - type: InteractionOutline
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 1
+    baseSprintSpeed: 2
+  - type: Tag
+    tags:
+    - DoorBumpOpener
+    - FootstepSound
+  - type: Pullable
+  - type: Physics
+    bodyType: KinematicController
+  - type: GravityAffected
+  - type: Clickable
+  - type: WiresPanel
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.45
+        density: 1000
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: Appearance
+  - type: ContainerContainer
+    containers:
+      mech-pilot-slot: !type:ContainerSlot
+      mech-equipment-container: !type:Container
+      mech-battery-slot: !type:ContainerSlot
+      mech-gas-tank-slot: !type:ContainerSlot
+  - type: Damageable
+    damageContainer: StructuralInorganic #🌟STARLIGHT Inorganic -> StructuralInorganic
+    damageModifierSet: LightArmor
+  - type: FootstepModifier
+    footstepSoundCollection:
+      path: /Audio/Mecha/mechmove03.ogg
+  - type: GuideHelp
+    guides:
+    - Robotics
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 1000
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:ChangeConstructionNodeBehavior
+        node: start
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: PowerCellDraw
+    enabled: false
+    drawRate: 0.333333333 #Starlight, delay was 3 seconds per draw
+  - type: ActiveInputMover
+# 🌟Starlight-start🌟
+  - type: Prying
+    pryPowered: false
+    force: false
+    useSound: /Audio/Items/jaws_pry.ogg
+# 🌟Starlight-end🌟
+
+# Ripley MK-I
+- type: entity
+  id: MechRipley
+  parent: [ BaseMech, IndustrialMech, BaseCargoContraband ]
+  name: Ripley APLU
+  description: Versatile and lightly armored, the Ripley is useful for almost any heavy work scenario. The "APLU" stands for Autonomous Power Loading Unit.
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    noRot: true
+    sprite: Objects/Specific/Mech/Mechs/Basic/ripley.rsi
+    layers:
+    - map: [ "enum.MechVisualLayers.Base" ]
+      state: base
+  - type: FootstepModifier
+    footstepSoundCollection:
+      path: /Audio/Mecha/sound_mecha_powerloader_step.ogg
+  - type: Mech
+    equipmentWhitelist:
+      tags:
+      - IndustrialMech
+      - RipleyMKIIUpgradeKit
+    baseState: base
+    openState: base-open
+    brokenState: base-broken
+    mechToPilotDamageMultiplier: 0.75
+    pilotWhitelist:
+      components:
+        - HumanoidAppearance
+  - type: MeleeWeapon
+    hidden: true
+    attackRate: 1
+    damage:
+      types:
+        Blunt: 25 #Starlight - Ripley gets to punch, but is *not* safe
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2 #Starlight - All mechs walk at the same speed
+    baseSprintSpeed: 3.6
+  - type: PointLight
+    lightMask: ConeSingle
+    autoRot: true
+    radius: 3
+    energy: 5
+    enabled: false
+  - type: Construction
+    graph: RipleyMKIIUpgrade
+    node: start
+    defaultTarget: ripleymkii
+
+- type: entity
+  id: MechRipleyBattery
+  parent: MechRipley
+  suffix: Battery
+  components:
+  - type: ContainerFill
+    containers:
+      mech-battery-slot:
+      - MechReactorHigh #Starlight - MechReactors
+
+# H.O.N.K.
+- type: entity
+  parent: [ BaseMech, SpecialMech, BaseCivilianContraband ]
+  id: MechHonker
+  name: H.O.N.K.
+  description: "Produced by \"Tyranny of Honk, INC\", this exosuit is designed as heavy clown-support. Used to spread the fun and joy of life. HONK!"
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    noRot: true
+    sprite: Objects/Specific/Mech/Mechs/Basic/honker.rsi
+    layers:
+    - map: [ "enum.MechVisualLayers.Base" ]
+      state: base
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: FootstepClown
+      params:
+        variation: 0.17
+  # STARLIGHT BEGIN
+  - type: MeleeWeapon
+    hidden: true
+    attackRate: 1
+    damage:
+      types:
+        Structural: 2
+    soundHit:
+      path: /Audio/Items/bikehorn.ogg
+  - type: MeleeThrowOnHit
+    speed: 1
+    distance: 2
+  # STARLIGHT END
+  - type: Mech
+    baseState: base
+    openState: base-open
+    brokenState: base-broken
+    mechToPilotDamageMultiplier: 0.0 #Starlight - Mechs are safe
+    airtight: true # Space Honks is real.
+    pilotWhitelist:
+      components:
+      - HumanoidAppearance
+
+- type: entity
+  parent: MechHonker
+  id: MechHonkerBattery
+  suffix: Battery
+  components:
+  - type: ContainerFill
+    containers:
+      mech-battery-slot:
+      - MechReactorHigh #Starlight - MechReactors
+
+# HAMTR
+- type: entity
+  parent: [ BaseMech, SmallMech ]
+  id: MechHamtr
+  name: HAMTR
+  description: "An experimental mech which uses a brain–computer interface to connect directly to a hamsters brain."
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    noRot: true
+    sprite: Objects/Specific/Mech/Mechs/Basic/hamtr.rsi
+    layers:
+    - map: [ "enum.MechVisualLayers.Base" ]
+      state: base
+  - type: FootstepModifier
+    footstepSoundCollection:
+      path: /Audio/Mecha/sound_mecha_powerloader_step.ogg
+  - type: Mech
+    baseState: base
+    openState: base-open
+    brokenState: base-broken
+    mechToPilotDamageMultiplier: 0.0 #Starlight - Mechs are safe
+    maxEquipmentAmount: 2
+    airtight: true
+    pilotWhitelist:
+      tags:
+      - Hamster
+  - type: MeleeWeapon
+    hidden: true
+    attackRate: 0.8
+    damage:
+      types:
+        Blunt: 10 #thwack
+        Structural: 2
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2 #Starlight - All mechs walk at the same speed
+    baseSprintSpeed: 3.7
+
+- type: entity
+  parent: MechHamtr
+  id: MechHamtrBattery
+  suffix: Battery, Air
+  components:
+  - type: ContainerFill
+    containers:
+      mech-battery-slot:
+      - MechReactorHigh #Starlight - MechReactors
+      mech-gas-tank-slot:
+      - MechAirTankFilled
+
+# Vim!!!!!!!
+
+- type: entity
+  parent: [ BaseMech, SmallMech ] # Starlight - give Vim equipment
+  id: MechVim
+  name: Vim
+  description: A miniature exosuit from NanoTrasen, developed to let the irreplaceable station pets live a little longer. # SL
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    noRot: true
+    sprite: Objects/Specific/Mech/Mechs/Basic/vim.rsi
+    layers:
+    - map: [ "enum.MechVisualLayers.Base" ]
+      state: base
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.15
+        density: 80
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: FootstepModifier
+    footstepSoundCollection:
+      path: /Audio/Mecha/mechmove03.ogg
+      params:
+        volume: -10
+  - type: Mech
+    baseState: base
+    openState: base-open
+    brokenState: base-broken
+    maxEquipmentAmount: 1 # Starlight - give Vim equipment
+    # keep mouse safe
+    mechToPilotDamageMultiplier: 0.0 #Starlight - Mechs are safe
+    airtight: true
+    pilotWhitelist:
+      tags:
+      - VimPilot
+  - type: MeleeWeapon
+    hidden: true
+    attackRate: 0.8
+    damage:
+      types:
+        Blunt: 10 #thwack
+        Structural: 2
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2 #Starlight - All mechs walk at the same speed
+    baseSprintSpeed: 3.6
+  - type: Access
+    tags:
+    - Maintenance
+  # TOOD: buzz / chime actions
+  # TODO: builtin flashlight
+
+- type: entity
+  parent: MechVim
+  id: MechVimBattery
+  suffix: Battery, Air
+  components:
+  - type: ContainerFill
+    containers:
+      mech-battery-slot:
+      - MechReactorHigh #Starlight - MechReactors
+      mech-gas-tank-slot:
+      - MechAirTankFilled

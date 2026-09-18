@@ -1,0 +1,34 @@
+- type: constructionGraph
+  id: DoughRope
+  start: start
+  graph:
+  - node: start
+    entity: FoodDoughSlice
+    edges:
+    - to: rolled
+      steps:
+      - tool: Rolling
+        doAfter: 1
+  - node: rolled
+    entity: FoodDoughRope
+    edges: # begin starlight
+    - to: flattened
+      steps:
+      - tool: Rolling
+        doAfter: 1
+  - node: flattened
+    entity: FoodDoughPita
+# end starlight
+- type: constructionGraph
+  id: DoughRopeCotton
+  start: start
+  graph:
+  - node: start
+    entity: FoodDoughCottonSlice
+    edges:
+    - to: rolled
+      steps:
+      - tool: Rolling
+        doAfter: 1
+  - node: rolled
+    entity: FoodDoughCottonRope

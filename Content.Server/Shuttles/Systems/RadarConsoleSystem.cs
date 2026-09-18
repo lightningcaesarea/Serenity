@@ -1,0 +1,169 @@
+using System.Numerics;
+// _Starlight
+using Content.Shared.Shuttles.BUIStates;
+using Content.Shared.Shuttles.Components;
+using Content.Shared.Shuttles.Systems;
+using Robust.Server.GameObjects;
+using Robust.Shared.Map;
+using Robust.Shared.Timing;
+using Content.Server._Starlight.Shuttles.Systems;
+using Content.Shared._Starlight.Shuttles.Components;
+using Content.Server._Starlight.Shuttles.Components; // _Starlight
+using Content.Shared.Medical.CrewMonitoring;
+using Content.Shared.Silicons.StationAi;
+using Content.Server.Silicons.StationAi;
+
+namespace Content.Server.Shuttles.Systems;
+
+public sealed partial class RadarConsoleSystem : SharedRadarConsoleSystem
+{
+    [Dependency] private ShuttleConsoleSystem _console = default!;
+    [Dependency] private UserInterfaceSystem _uiSystem = default!;
+    [Dependency] private SharedTransformSystem _transformSystem = default!; // _Starlight
+    [Dependency] private RadarLaserSystem _laserSystem = default!; // _Starlight
+    [Dependency] private IGameTiming _timing = default!; // _Starlight
+    [Dependency] private StationAiSystem _stationAiSystem = default!; // Starlight "OnWarpRequest"
+
+    #region Starlight
+    // Periodic blip/laser update
+    // How often (in seconds) to push fresh blip state to all open radar consoles.
+    private const float BlipUpdateInterval = 0.25f;
+    private float _blipUpdateTimer;
+
+    /// <summary>
+    /// How often to transmit UI updates when a player is actively looking at a console.
+    /// </summary>
+    private static readonly TimeSpan _activeUpdateInterval = TimeSpan.FromMilliseconds(250);
+
+    /// <summary>
+    /// How often to transmit UI updates when nobody is actively looking at a console. This makes it so that the
+    /// consoles show a slightly outdated state initially when opened, rather than just a blank screen.
+    /// </summary>
+    private static readonly TimeSpan _idleUpdateInterval = TimeSpan.FromSeconds(10);
+    #endregion
+
+    public override void Initialize()
+    {
+        base.Initialize();
+        SubscribeLocalEvent<RadarConsoleComponent, ComponentStartup>(OnRadarStartup);
+        SubscribeLocalEvent<RadarConsoleComponent, CrewMonitoringWarpRequestMessage>(OnWarpRequest); // Starlight
+    }
+    #region Starlight
+    private void OnWarpRequest(EntityUid uid, RadarConsoleComponent component, ref CrewMonitoringWarpRequestMessage args)
+    {
+        if (args.Actor is not { Valid: true } actor || !HasComp<StationAiHeldComponent>(actor))
+            return;
+
+        EntityCoordinates coordinates;
+        try
+        {
+            coordinates = GetCoordinates(args.Coordinates);
+        }
+        catch
+        {
+            return;
+        }
+
+        _stationAiSystem.TryWarpEyeToCoordinates(actor, coordinates);
+    }
+    #endregion
+
+    public override void Update(float frameTime) // _Starlight
+    {
+        base.Update(frameTime);
+        _blipUpdateTimer += frameTime;
+        if (_blipUpdateTimer >= BlipUpdateInterval)
+        {
+            _blipUpdateTimer = 0f;
+            // _Starlight - prune expired Apollo laser traces before syncing state
+            _laserSystem.PruneExpiredTraces((float)_timing.CurTime.TotalSeconds);
+        }
+
+        var query = AllEntityQuery<RadarConsoleComponent>();
+        while (query.MoveNext(out var uid, out var comp))
+        {
+            UpdateState(uid, comp);
+        }
+    }
+
+    private void OnRadarStartup(EntityUid uid, RadarConsoleComponent component, ComponentStartup args)
+    {
+        UpdateState(uid, component);
+    }
+
+    protected override void UpdateState(EntityUid uid, RadarConsoleComponent component)
+    {
+        var xform = Transform(uid);
+        var onGrid = xform.ParentUid == xform.GridUid;
+        EntityCoordinates? coordinates = onGrid ? xform.Coordinates : null;
+        Angle? angle = onGrid ? xform.LocalRotation : null;
+
+        if (component.FollowEntity)
+        {
+            coordinates = new EntityCoordinates(uid, Vector2.Zero);
+            angle = Angle.Zero;
+        }
+
+        // Starlight BEGIN
+        var shouldIdleUpdate = component.LastInterfaceUpdateTime + _idleUpdateInterval < _timing.CurTime;
+        var shouldActiveUpdate = component.LastInterfaceUpdateTime + _activeUpdateInterval < _timing.CurTime &&
+                                 _uiSystem.IsUiOpen(uid, RadarConsoleUiKey.Key);
+        if (_uiSystem.HasUi(uid, RadarConsoleUiKey.Key) && (shouldIdleUpdate || shouldActiveUpdate))
+        {
+            component.LastInterfaceUpdateTime = _timing.CurTime;
+            // Starlight END
+            NavInterfaceState state;
+            var docks = _console.GetDockingPortStates(); // Starlight
+
+            if (coordinates != null && angle != null)
+            {
+                state = _console.GetNavState(uid, coordinates.Value, angle.Value); // Starlight: -docks
+            }
+            else
+            {
+                state = _console.GetNavState(uid); // Starlight: -docks
+            }
+
+            state.RotateWithEntity = !component.FollowEntity;
+
+            // _Starlight - populate blips and laser traces
+            // Populate radar blips for entities with RadarBlipComponent (e.g. artillery shells)
+            var consoleMapCoords = _transformSystem.GetMapCoordinates(uid);
+            var maxRangeSq = state.MaxRange * state.MaxRange;
+            var blipQuery = AllEntityQuery<RadarBlipComponent, TransformComponent>();
+            while (blipQuery.MoveNext(out var blipUid, out var blip, out var blipXform))
+            {
+                if (blip.RequireInSpace && blipXform.GridUid != null)
+                    continue;
+                if (blipXform.MapID != consoleMapCoords.MapId)
+                    continue;
+                var blipMapCoords = _transformSystem.GetMapCoordinates(blipUid, blipXform);
+                if ((blipMapCoords.Position - consoleMapCoords.Position).LengthSquared() > maxRangeSq)
+                    continue;
+                state.Blips.Add(new RadarBlipData(GetNetCoordinates(blipXform.Coordinates), blip.Color, blip.Scale, blip.Shape)); // _Starlight - shape
+            }
+
+            // _Starlight - Apollo hitscan laser beam traces
+            // Populate laser traces from hitscan guns with RadarLaserTrackerComponent.
+            var laserQuery = AllEntityQuery<RadarLaserTrackerComponent, TransformComponent>();
+            while (laserQuery.MoveNext(out var laserUid, out var tracker, out var laserXform))
+            {
+                if (laserXform.MapID != consoleMapCoords.MapId)
+                    continue;
+                foreach (var (origin, dir, _) in tracker.Traces)
+                {
+                    // Only show traces from guns within radar range.
+                    if ((origin.Position - consoleMapCoords.Position).LengthSquared() > maxRangeSq)
+                        continue;
+                    state.Lasers.Add(new RadarLaserData(
+                        GetNetCoordinates(laserXform.Coordinates),
+                        dir,
+                        tracker.MaxRange,
+                        tracker.LaserColor));
+                }
+            }
+
+            _uiSystem.SetUiState(uid, RadarConsoleUiKey.Key, new NavBoundUserInterfaceState(state, docks)); // Starlight: +docks
+        }
+    }
+}

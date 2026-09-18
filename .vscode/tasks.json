@@ -1,0 +1,140 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "command": "dotnet",
+            "type": "shell",
+            "args": [
+                "build",
+                "/property:GenerateFullPaths=true", // Ask dotnet build to generate full paths for file names.
+                "/consoleloggerparameters:'ForceNoAlign;NoSummary'" // Do not generate summary otherwise it leads to duplicate errors in Problems panel
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "silent"
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "build-yaml-linter",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/Content.YAMLLinter/Content.YAMLLinter.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:'ForceNoAlign;NoSummary'"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "grafana-up",
+            "command": "docker",
+            "type": "process",
+            "args": [
+                "compose",
+                "-f",
+                "${workspaceFolder}/Tools/_Starlight/prometheus-grafana/compose.yml",
+                "up",
+                "-d",
+                "--wait",
+                "--wait-timeout",
+                "60"
+            ],
+            "presentation": {
+                "reveal": "silent",
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "grafana-link",
+            "command": "echo",
+            "type": "shell",
+            "args": [
+                "Grafana is ready: http://localhost:3000/d/qyFqpFiGk/perf-metrics"
+            ],
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "grafana-down",
+            "command": "docker",
+            "type": "process",
+            "args": [
+                "compose",
+                "-f",
+                "${workspaceFolder}/Tools/_Starlight/prometheus-grafana/compose.yml",
+                "down"
+            ],
+            "presentation": {
+                "reveal": "silent",
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "build-grafana",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "build",
+                "grafana-up",
+                "grafana-link"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "label": "test",
+            "command": "dotnet",
+            "type": "shell",
+            "args": [
+                "test",
+                "--no-build",
+                "--configuration",
+                "DebugOpt",
+                "Content.Tests/Content.Tests.csproj",
+                "--",
+                "NUnit.ConsoleOut=0"
+            ],
+            "group": {
+                "kind": "test"
+            },
+            "presentation": {
+                "reveal": "silent"
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "integration-test",
+            "command": "dotnet",
+            "type": "shell",
+            "args": [
+                "test",
+                "--no-build",
+                "--configuration",
+                "DebugOpt",
+                "Content.IntegrationTests/Content.IntegrationTests.csproj",
+                "--",
+                "NUnit.ConsoleOut=0",
+                "NUnit.MapWarningTo=Failed.ConsoleOut=0",
+                "NUnit.MapWarningTo=Failed"
+            ],
+            "group": {
+                "kind": "test"
+            },
+            "presentation": {
+                "reveal": "silent"
+            },
+            "problemMatcher": "$msCompile"
+        }
+    ]
+}

@@ -1,0 +1,73 @@
+- type: entity
+  parent: ClothingNeckPinBase
+  id: ClothingNeckAngelPin
+  name: pin of good deeds
+  suffix: DO NOT MAP, Admeme
+  description: For the best!
+  components:
+  - type: Sprite
+    sprite: _Starlight/Clothing/Neck/Misc/angeldevil.rsi
+    state: angel
+  - type: Clothing
+    equippedPrefix: angel
+    sprite: _Starlight/Clothing/Neck/Misc/angeldevil.rsi
+  - type: PointLight
+    enabled: true
+    radius: 1.6
+    energy: 0.3
+    softness: 5
+    autoRot: true
+    color: "#ffef8b"
+
+- type: entity
+  parent: ClothingNeckAngelPin
+  id: ClothingNeckDevilPin
+  name: pin of evil deeds
+  suffix: DO NOT MAP, Admeme
+  description: For the worst!
+  components:
+  - type: Sprite
+    state: devil
+  - type: Clothing
+    equippedPrefix: devil
+  - type: PointLight
+    color: "#e90000"
+    energy: 0.6
+    radius: 1.4
+
+- type: entity
+  parent: [BaseItem, BaseToggleClothing, BaseReporterContraband]
+  id: HoloReporterPin
+  name: reporter holo-pin
+  description: "It's an electronic pin with a microphone-shaped button. A way of more clearly saying, DON'T SHOOT!"
+  components:
+    - type: Item
+      size: Tiny
+    - type: Sprite
+      sprite: _Starlight/Clothing/Neck/holo_pin_reporter.rsi
+      state: icon
+    - type: Clothing
+      equippedPrefix: holopin
+      sprite: _Starlight/Clothing/Neck/holo_pin_reporter.rsi
+      quickEquip: true
+      slots:
+        - neck
+    - type: ToggleClothing
+      action: ActionHoloPin
+      disableOnUnequip: true
+    - type: ComponentToggler
+      parent: true
+      components:
+        - type: KillSign
+          sprite:
+            sprite: _Starlight/Clothing/Neck/holo_pin_reporter.rsi
+            state: holopin-sign
+    - type: Tag
+      tags: [] # ignore "WhitelistChameleon" tag
+
+
+- type: entity
+  parent: BaseToggleAction
+  id: ActionHoloPin
+  name: Activate Holo-Pin
+  description: "BREAKING NEWS! DON'T KILL ME PLEASE!"

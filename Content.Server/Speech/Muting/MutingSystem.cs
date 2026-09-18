@@ -1,0 +1,81 @@
+using Content.Server.Popups;
+using Content.Server.Speech.EntitySystems;
+using Content.Shared.Abilities.Mime;
+using Content.Shared.Chat;
+using Content.Shared.Chat.Prototypes;
+using Content.Shared.Puppet;
+using Content.Shared.Speech;
+using Content.Shared.Speech.Muting;
+using Content.Server._Starlight.Language;
+using Content.Server._Starlight.Speech.EntitySystems; // Starlight
+using Content.Shared.StatusEffectNew; // Starlight
+
+namespace Content.Server.Speech.Muting
+{
+    public sealed partial class MutingSystem : EntitySystem
+    {
+        [Dependency] private PopupSystem _popupSystem = default!;
+        [Dependency] private LanguageSystem _languages = default!; // Starlight
+        public override void Initialize()
+        {
+            base.Initialize();
+            SubscribeLocalEvent<MutedComponent, SpeakAttemptEvent>(OnSpeakAttempt);
+            SubscribeLocalEvent<MutedComponent, EmoteEvent>(OnEmote, before: new[] { typeof(VocalSystem), typeof(MumbleAccentSystem) });
+            SubscribeLocalEvent<MutedComponent, ScreamActionEvent>(OnScreamAction, before: new[] { typeof(VocalSystem) });
+
+            // Starlight START
+            // Remove when WizDen finally migrates mute status effect to StatusEffectNew
+            SubscribeLocalEvent<MutedComponent, StatusEffectAppliedEvent>((_, _, ref args) => EnsureComp<MutedComponent>(args.Target));
+            SubscribeLocalEvent<MutedComponent, StatusEffectRemovedEvent>((_, _, ref args) => RemComp<MutedComponent>(args.Target));
+            // Starlight END
+        }
+
+        private void OnEmote(EntityUid uid, MutedComponent component, ref EmoteEvent args)
+        {
+            if (args.Handled)
+                return;
+
+            //still leaves the text so it looks like they are pantomiming a laugh
+            if (args.Emote.Category.HasFlag(EmoteCategory.Vocal))
+                args.Handled = true;
+        }
+
+        private void OnScreamAction(EntityUid uid, MutedComponent component, ScreamActionEvent args)
+        {
+            if (args.Handled)
+                return;
+
+            if (HasComp<MimePowersComponent>(uid))
+                _popupSystem.PopupEntity(Loc.GetString("mime-cant-speak"), uid, uid);
+
+            else
+                _popupSystem.PopupEntity(Loc.GetString("speech-muted"), uid, uid);
+            args.Handled = true;
+        }
+
+        private void OnSpeakAttempt(EntityUid uid, MutedComponent component, SpeakAttemptEvent args)
+        {
+            #region Starlight
+            // Sign language is not pantomiming! Mimes have to break their vow of silence to speak in any form
+            if(TryComp<MimePowersComponent>(uid, out var mime) && !mime.VowBroken)
+            {
+                _popupSystem.PopupEntity(Loc.GetString("mime-cant-speak"), uid, uid);
+                args.Cancel();
+                return;
+            }
+
+            // If language requires speech, block it when muted
+            var language = _languages.GetLanguage(uid);
+            if (language.Speech.RequireSpeech)
+            {
+                if (HasComp<VentriloquistPuppetComponent>(uid))
+                    _popupSystem.PopupEntity(Loc.GetString("ventriloquist-puppet-cant-speak"), uid, uid);
+                else
+                    _popupSystem.PopupEntity(Loc.GetString("speech-muted"), uid, uid);
+
+                args.Cancel();
+            }
+            #endregion Starlight
+        }
+    }
+}

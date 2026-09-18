@@ -1,0 +1,109 @@
+- type: cargoProduct
+  id: AtmosphericsAir
+  icon:
+    sprite: _Starlight/Structures/Storage/canister-ui.rsi #SL Edit
+    state: air #SL Edit
+  product: AirCanister
+  cost: 660 # Starlight, PR #5127
+  category: cargoproduct-category-name-atmospherics
+  group: market
+
+- type: cargoProduct
+  id: AtmosphericsOxygen
+  icon:
+    sprite: _Starlight/Structures/Storage/canister-ui.rsi #SL Edit
+    state: oxygen #SL Edit
+  product: OxygenCanister
+  cost: 700 # Starlight, PR #5127
+  category: cargoproduct-category-name-atmospherics
+  group: market
+
+- type: cargoProduct
+  id: AtmosphericsLiquidOxygen
+  icon:
+    sprite: _Starlight/Structures/Storage/canister-ui.rsi #SL Edit
+    state: l_oxygen #SL Edit
+  product: LiquidOxygenCanister
+  cost: 3750 # Starlight, PR #5127
+  category: cargoproduct-category-name-atmospherics
+  group: market
+
+- type: cargoProduct
+  id: AtmosphericsNitrogen
+  icon:
+    sprite: _Starlight/Structures/Storage/canister-ui.rsi #SL Edit
+    state: nitrogen #SL Edit
+  product: NitrogenCanister
+  cost: 650 # Starlight, PR #5127
+  category: cargoproduct-category-name-atmospherics
+  group: market
+
+- type: cargoProduct
+  id: AtmosphericsLiquidNitrogen
+  icon:
+    sprite: _Starlight/Structures/Storage/canister-ui.rsi #SL Edit
+    state: l_nitrogen #SL Edit
+  product: LiquidNitrogenCanister
+  cost: 3200 # Starlight, PR #5127
+  category: cargoproduct-category-name-atmospherics
+  group: market
+
+- type: cargoProduct
+  id: AtmosphericsCarbonDioxide
+  icon:
+    sprite: _Starlight/Structures/Storage/canister-ui.rsi #SL Edit
+    state: carbon #SL Edit
+  product: CarbonDioxideCanister
+  cost: 800 # Starlight, PR #5127
+  category: cargoproduct-category-name-atmospherics
+  group: market
+
+- type: cargoProduct
+  id: AtmosphericsLiquidCarbonDioxide
+  icon:
+    sprite: _Starlight/Structures/Storage/canister-ui.rsi #SL Edit
+    state: carbon #SL Edit
+  product: LiquidCarbonDioxideCanister
+  cost: 4400 # Starlight, PR #5127
+  category: cargoproduct-category-name-atmospherics
+  group: market
+
+- type: cargoProduct
+  id: AtmosphericsStorage
+  icon:
+    sprite: _Starlight/Structures/Storage/canister-ui.rsi #SL Edit
+    state: storage #SL Edit
+  product: StorageCanister
+  cost: 210 # No gases in it so it's cheaper
+  category: cargoproduct-category-name-atmospherics
+  group: market
+
+#- type: cargoProduct
+#  id: AtmosphericsWaterVapor
+#  icon:
+#    sprite: Structures/Storage/canister.rsi
+#    state: water_vapor
+#  product: WaterVaporCanister
+#  cost: 2600
+#  category: cargoproduct-category-name-atmospherics
+#  group: market
+
+- type: cargoProduct
+  id: AtmosphericsPlasma
+  icon:
+    sprite: _Starlight/Structures/Storage/canister-ui.rsi #SL Edit
+    state: plasma #SL Edit
+  product: PlasmaCanister
+  cost: 4900 # Starlight, PR #5127
+  category: cargoproduct-category-name-atmospherics
+  group: market
+
+#- type: cargoProduct
+#  id: AtmosphericsTritium
+#  icon:
+#    sprite: Structures/Storage/canister.rsi
+#    state: green
+#  product: TritiumCanister
+#  cost: 15500
+#  category: cargoproduct-category-name-atmospherics
+#  group: market

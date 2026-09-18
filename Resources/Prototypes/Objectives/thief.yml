@@ -1,0 +1,579 @@
+- type: entity
+  abstract: true
+  parent: BaseObjective
+  id: BaseThiefObjective
+  components:
+  - type: Objective
+    issuer: objective-issuer-thief
+  - type: RoleRequirement
+    roles:
+    - ThiefRole
+
+- type: entity
+  abstract: true
+  parent: [BaseThiefObjective, BaseStealObjective]
+  id: BaseThiefStealObjective
+  components:
+  - type: StealCondition
+    verifyMapExistence: false
+    descriptionText: objective-condition-thief-description
+    checkStealAreas: true
+
+- type: entity
+  abstract: true
+  parent: [BaseThiefObjective, BaseThiefStealObjective]
+  id: BaseThiefStealCollectionObjective
+  components:
+  - type: StealCondition
+    verifyMapExistence: true
+
+- type: entity
+  abstract: true
+  parent: [BaseThiefObjective, BaseThiefStealObjective]
+  id: BaseThiefStealStructureObjective
+  components:
+  - type: StealCondition
+    verifyMapExistence: true
+  - type: Objective
+    difficulty: 2 # it's hard to hide
+
+- type: entity
+  abstract: true
+  parent: [BaseThiefObjective, BaseThiefStealObjective]
+  id: BaseThiefStealAnimalObjective
+  components:
+  - type: StealCondition
+    verifyMapExistence: true
+    checkAlive: true
+    objectiveNoOwnerText: objective-condition-steal-title-alive-no-owner
+    descriptionText: objective-condition-thief-animal-description
+  - type: Objective
+    difficulty: 2 # it's hard to hide
+
+# Collections
+
+- type: entity
+  parent: BaseThiefStealCollectionObjective
+  id: HeadCloakStealCollectionObjective
+  components:
+  - type: StealCondition
+    stealGroup: HeadCloak
+    minCollectionSize: 3
+    maxCollectionSize: 6
+  - type: Objective
+    difficulty: 1.5
+
+- type: entity
+  parent: BaseThiefStealCollectionObjective
+  id: HeadBedsheetStealCollectionObjective
+  components:
+  - type: StealCondition
+    stealGroup: HeadBedsheet
+    minCollectionSize: 3
+    maxCollectionSize: 6
+  - type: Objective
+    difficulty: 1.3 #Starlight edit
+
+- type: entity
+  parent: BaseThiefStealCollectionObjective
+  id: StampStealCollectionObjective
+  components:
+  - type: NotJobRequirement # Starlight
+    jobs: [ Lawyer, IAA, Chaplain, Clown, Mime, Psychologist, SalvageLead, Warden, Detective, Brigmedic, BlueShield ] # Starlight. Too easy.
+  - type: StealCondition
+    stealGroup: Stamp
+    minCollectionSize: 5
+    maxCollectionSize: 8
+  - type: Objective
+    difficulty: 1.0
+
+- type: entity
+  parent: BaseThiefStealCollectionObjective
+  id: DoorRemoteStealCollectionObjective
+  components:
+  - type: StealCondition
+    stealGroup: DoorRemote
+    minCollectionSize: 2
+    maxCollectionSize: 5
+  - type: Objective
+    difficulty: 1.5
+
+- type: entity
+  parent: BaseThiefStealCollectionObjective
+  id: TechnologyDiskStealCollectionObjective
+  components:
+  - type: NotJobRequirement
+    jobs: [ ResearchDirector, ResearchAssistant, Scientist, Roboticist ] # Starlight. Too easy.
+  - type: StealCondition
+    stealGroup: TechnologyDisk
+    minCollectionSize: 5
+    maxCollectionSize: 15
+    verifyMapExistence: false
+  - type: Objective
+    difficulty: 0.8
+
+- type: entity
+  parent: BaseThiefStealCollectionObjective
+  id: MailStealCollectionObjective
+  components:
+  - type: NotJobRequirement
+    jobs: [ Quartermaster, CargoTechnician, MailTech, MiningSpecialist, SalvageSpecialist, SalvageLead ] # Starlight. Added rest of Cargo.
+  - type: StealCondition
+    stealGroup: Mail
+    minCollectionSize: 4
+    maxCollectionSize: 8
+    verifyMapExistence: false
+  - type: Objective
+    difficulty: 0.3 #Starlight edit
+
+- type: entity
+  parent: BaseThiefStealCollectionObjective
+  id: IDCardsStealCollectionObjective
+  components:
+  - type: NotJobRequirement #Here cause you can buy a personnel crate from cargo which is 8 ID cards. Meaning the ID you start with is number nine and you only need to steal one.
+    jobs: [ Quartermaster, CargoTechnician, MailTech, MiningSpecialist, SalvageSpecialist, SalvageLead, HeadOfPersonnel ] # Starlight. Added rest of Cargo. HoP also has a box of these...
+  - type: StealCondition
+    stealGroup: IDCard
+    minCollectionSize: 5
+    maxCollectionSize: 10
+    verifyMapExistence: false
+  - type: Objective
+    difficulty: 0.5 #Starlight edit
+
+- type: entity
+  parent: BaseThiefStealCollectionObjective
+  id: OfficerHandgunsStealCollectionObjective
+  components:
+  - type: NotJobRequirement
+    jobs: [ SecurityOfficer, HeadOfSecurity, Detective, Warden, Brigmedic, DutyOfficer, SecurityCadet ] # Starlight. Rest of Sec.
+  - type: StealCondition
+    stealGroup: OfficerHandgun
+    minCollectionSize: 2
+    maxCollectionSize: 5
+    verifyMapExistence: false
+  - type: Objective
+    difficulty: 1.2
+
+- type: entity
+  parent: BaseThiefStealCollectionObjective
+  id: LAMPStealCollectionObjective
+  components:
+  - type: SpeciesRequirement
+    allowedSpecies:
+    - Moth
+  - type: StealCondition
+    stealGroup: LAMP
+    minCollectionSize: 1
+    maxCollectionSize: 10
+    verifyMapExistence: true
+  - type: Objective
+    difficulty: 0.1 # just for fun, collecting LAMP on Moth
+
+# Starlight start
+#- type: entity
+#-  parent: BaseThiefStealCollectionObjective
+#  id: ClothingEyesHudsStealCollectionObjective # Starlight, not using this objective, too easy + we combined the beer goggles with other ones
+#  components:
+#  - type: StealCondition
+#    stealGroup: ClothingEyesHuds
+#    minCollectionSize: 7
+#    maxCollectionSize: 12
+#    verifyMapExistence: false
+##  - type: Objective
+#    difficulty: 0.3
+# Starlight end
+
+# steal item
+
+- type: entity                                      #Security subgroup
+  parent: BaseThiefStealObjective
+  id: ForensicScannerStealObjective
+  components:
+  - type: NotJobRequirement
+    jobs: [ SecurityOfficer, HeadOfSecurity, Detective, Warden, Brigmedic, DutyOfficer, SecurityCadet ] # Starlight. Rest of Sec.
+  - type: StealCondition
+    stealGroup: ForensicScanner
+  - type: Objective
+    difficulty: 1
+
+- type: entity
+  parent: BaseThiefStealObjective
+  id: FlippoEngravedLighterStealObjective
+  components:
+  - type: NotJobRequirement
+    jobs: [ SecurityOfficer, HeadOfSecurity, Detective, Warden, Brigmedic, DutyOfficer, SecurityCadet ] # Starlight. Rest of Sec.
+  - type: StealCondition
+    stealGroup: FlippoEngravedLighter
+  - type: Objective
+    difficulty: 0.5 #Starlight edit
+
+- type: entity
+  parent: BaseThiefStealObjective
+  id: ClothingHeadHatWardenStealObjective
+  components:
+  - type: NotJobRequirement # Starlight.
+    jobs: [ SecurityOfficer, HeadOfSecurity, Detective, Warden, Brigmedic, DutyOfficer, SecurityCadet, HeadOfPersonnel ] # Starlight. Rest of Sec. HoP can literally print it.
+  - type: StealCondition
+    stealGroup: ClothingHeadHatWarden
+  - type: Objective
+    difficulty: 1.2
+
+- type: entity
+  parent: BaseThiefStealObjective
+  id: WantedListCartridgeStealObjective
+  components:
+  - type: NotJobRequirement # Starlight
+    jobs: [ SecurityOfficer, HeadOfSecurity, Detective, Warden, Brigmedic, DutyOfficer, SecurityCadet ] # Starlight. Rest of Sec.
+  - type: StealCondition
+    stealGroup: WantedListCartridge
+  - type: Objective
+    difficulty: 1
+
+- type: entity                                      #Medical subgroup
+  parent: BaseThiefStealObjective
+  id: ClothingOuterHardsuitVoidParamedStealObjective
+  components:
+  - type: NotJobRequirement
+    jobs: [ MedicalDoctor, Paramedic, ChiefMedicalOfficer, MedicalIntern, Surgeon, Chemist, Psychologist ] # Starlight. Rest of med.
+  - type: StealCondition
+    stealGroup: ClothingOuterHardsuitVoidParamed
+  - type: Objective
+    difficulty: 1
+
+- type: entity
+  parent: BaseThiefStealObjective
+  id: SecureTechFabCircuitboardStealObjective # Starlight, given to command-sec instead
+  components:
+  - type: NotJobRequirement
+    jobs: [ Captain, HeadOfPersonnel, ResearchDirector, ChiefEngineer, ChiefMedicalOfficer, Quartermaster, NanoTrasenRepresentative, Magistrate, BlueShield, HeadOfSecurity, Warden, Brigmedic, Detective, DutyOfficer, SecurityOfficer, SecurityCadet ] # Starlight, combined with security
+  - type: StealCondition
+    stealGroup: SecureTechFabCircuitboard # Starlight, given to command-sec instead
+  - type: Objective
+    difficulty: 1.4 # Starlight, good luck
+
+- type: entity
+  parent: BaseThiefStealObjective
+  id: ClothingHeadsetAltMedicalStealObjective
+  components:
+  - type: NotJobRequirement
+    jobs: [ MedicalDoctor, Paramedic, ChiefMedicalOfficer, MedicalIntern, Surgeon, Chemist, Psychologist ] # Starlight. Rest of med.
+  - type: StealCondition
+    stealGroup: ClothingHeadsetAltMedical
+  - type: Objective
+    difficulty: 1
+
+- type: entity                                      #Engineering subgroup
+  parent: BaseThiefStealObjective
+  id: FireAxeStealObjective
+  components:
+  - type: NotJobRequirement
+    jobs: [ ChiefEngineer, StationEngineer, AtmosphericTechnician, TechnicalAssistant ] # Starlight. Rest of engi.
+  - type: StealCondition
+    stealGroup: FireAxe
+  - type: Objective
+    difficulty: 0.5 #Starlight edit
+
+- type: entity
+  parent: BaseThiefStealObjective
+  id: AmePartFlatpackStealObjective
+  components:
+  - type: NotJobRequirement
+    jobs: [ ChiefEngineer, StationEngineer, AtmosphericTechnician, TechnicalAssistant ] # Starlight. Rest of engi.
+  - type: StealCondition
+    stealGroup: AmePartFlatpack
+  - type: Objective
+    difficulty: 1
+
+- type: entity
+  parent: BaseThiefStealObjective
+  id: ChiefEngineerToolbeltStealObjective
+  components:
+  - type: NotJobRequirement # Starlight uncomment.
+    jobs: [ ChiefEngineer, StationEngineer, AtmosphericTechnician, TechnicalAssistant ] # Starlight. Too easy.
+  - type: StealCondition
+    stealGroup: ChiefEngineerToolBelt
+  - type: Objective
+    difficulty: 0.7
+
+- type: entity                                      #Cargo subgroup
+  parent: BaseThiefStealObjective
+  id: ExpeditionsCircuitboardStealObjective
+  components:
+  - type: NotJobRequirement
+    jobs: [ Quartermaster, CargoTechnician, MailTech, MiningSpecialist, SalvageSpecialist, SalvageLead ] # Starlight. Rest of cargo.
+  - type: StealCondition
+    stealGroup: SalvageExpeditionsComputerCircuitboard
+  - type: Objective
+    difficulty: 0.7
+
+- type: entity
+  parent: BaseThiefStealObjective
+  id: CargoShuttleCircuitboardStealObjective
+  components:
+  - type: NotJobRequirement
+    jobs: [ Quartermaster, CargoTechnician, MailTech, MiningSpecialist, SalvageSpecialist, SalvageLead ] # Starlight. Rest of cargo.
+  - type: StealCondition
+    stealGroup: CargoShuttleConsoleCircuitboard
+  - type: Objective
+    difficulty: 0.7
+
+- type: entity                                      #Service subgroup
+  parent: BaseThiefStealObjective
+  id: BibleStealObjective
+  components:
+  - type: NotJobRequirement
+    jobs: [ Chaplain ]
+  - type: StealCondition
+    stealGroup: Bible
+  - type: Objective
+    difficulty: 0.4
+
+- type: entity                                      #Other subgroup
+  parent: BaseThiefStealObjective
+  id: ClothingNeckGoldmedalStealObjective
+  components:
+  - type: NotJobRequirement
+    jobs: [ HeadOfPersonnel ]
+  - type: StealCondition
+    stealGroup: ClothingNeckGoldmedal
+  - type: Objective
+    difficulty: 1
+
+- type: entity
+  parent: BaseThiefStealObjective
+  id: ClothingNeckClownmedalStealObjective
+  components:
+  - type: NotJobRequirement
+    jobs: [ Captain ]
+  - type: StealCondition
+    stealGroup: ClothingNeckClownmedal
+  - type: Objective
+    difficulty: 1
+
+- type: entity
+  parent: BaseThiefStealObjective
+  id: CaptainSwordStealObjective
+  components:
+  - type: NotJobRequirement
+    jobs: [ Captain ]
+  - type: StealCondition
+    stealGroup: CaptainSword
+  - type: Objective
+    difficulty: 1.5
+
+# Structures
+
+- type: entity
+  parent: BaseThiefStealStructureObjective
+  id: NuclearBombStealObjective
+  components:
+  - type: NotJobRequirement
+    jobs: [ Captain ]
+  - type: StealCondition
+    stealGroup: NuclearBomb
+  - type: Objective
+    difficulty: 2.5 #Good luck
+
+- type: entity
+  parent: BaseThiefStealStructureObjective
+  id: FaxMachineCaptainStealObjective
+  components:
+  - type: NotJobRequirement
+    jobs: [ Captain ]
+  - type: StealCondition
+    stealGroup: FaxMachineCaptain
+  - type: Objective
+    difficulty: 1.3 #Starlight edit
+
+- type: entity
+  parent: BaseThiefStealStructureObjective
+  id: ChemDispenserStealObjective
+  components:
+  - type: NotJobRequirement
+    jobs: [ Chemist, Scientist ]
+  - type: StealCondition
+    stealGroup: ChemDispenser
+  - type: Objective
+    difficulty: 1
+
+- type: entity
+  parent: BaseThiefStealStructureObjective
+  id: XenoArtifactStealObjective
+  components:
+  - type: NotJobRequirement
+    jobs: [ Scientist ]
+  - type: StealCondition
+    stealGroup: XenoArtifact
+  - type: Objective
+    difficulty: 0.3 #Starlight edit
+
+- type: entity
+  parent: BaseThiefStealStructureObjective
+  id: FreezerHeaterStealObjective
+  components:
+  - type: NotJobRequirement
+    jobs: [ AtmosphericTechnician, MedicalDoctor, Chemist, Paramedic, Psychologist, Scientist, Chef ]
+  - type: StealCondition
+    stealGroup: FreezerHeater
+  - type: Objective
+    difficulty: 0.3 #Starlight edit
+
+- type: entity
+  parent: BaseThiefStealStructureObjective
+  id: TegStealObjective
+  components:
+  - type: NotJobRequirement
+    jobs: [ AtmosphericTechnician, StationEngineer ]
+  - type: StealCondition
+    stealGroup: Teg
+  - type: Objective
+    difficulty: 1
+
+- type: entity
+  parent: BaseThiefStealStructureObjective
+  id: BoozeDispenserStealObjective
+  components:
+  - type: NotJobRequirement
+    jobs: [ Bartender, ServiceWorker ]
+  - type: StealCondition
+    stealGroup: BoozeDispenser
+  - type: Objective
+    difficulty: 0.5
+
+- type: entity
+  parent: BaseThiefStealStructureObjective
+  id: AltarNanotrasenStealObjective
+  components:
+  - type: NotJobRequirement
+    jobs: [ Chaplain ]
+  - type: StealCondition
+    stealGroup: AltarNanotrasen
+  - type: Objective
+    difficulty: 0.3 #Starlight edit
+
+- type: entity
+  parent: BaseThiefStealStructureObjective
+  id: PlantRDStealObjective
+  components:
+  - type: NotJobRequirement
+    jobs: [ Scientist ]
+  - type: StealCondition
+    stealGroup: PlantRD
+  - type: Objective
+    difficulty: 0.5 #Starlight edit
+
+- type: entity
+  parent: BaseThiefStealStructureObjective
+  id: ToiletGoldenStealObjective
+  components:
+  - type: NotJobRequirement
+    jobs: [ Captain ]
+  - type: StealCondition
+    stealGroup: ToiletGoldenDirtyWater
+  - type: Objective
+    difficulty: 1.3 #Starlight edit
+
+# Animal
+
+- type: entity
+  parent: BaseThiefStealAnimalObjective
+  id: IanStealObjective
+  components:
+  - type: NotJobRequirement
+    jobs: [ HeadOfPersonnel ]
+  - type: StealCondition
+    stealGroup: AnimalIan
+  - type: Objective
+    difficulty: 1.3 #Starlight edit, i get ian is a contested steal but what do you MEAN harder to get than caps pet
+
+- type: entity
+  parent: BaseThiefStealAnimalObjective
+  id: BingusStealObjective
+  components:
+  - type: StealCondition
+    stealGroup: AnimalNamedCat
+  - type: Objective
+    difficulty: 1
+
+- type: entity
+  parent: BaseThiefStealAnimalObjective
+  id: McGriffStealObjective
+  components:
+  - type: NotJobRequirement
+    jobs: [ Detective ]
+  - type: StealCondition
+    stealGroup: AnimalMcGriff
+  - type: Objective
+    difficulty: 1
+
+- type: entity
+  parent: BaseThiefStealAnimalObjective
+  id: WalterStealObjective
+  components:
+  - type: NotJobRequirement
+    jobs: [ Chemist ]
+  - type: StealCondition
+    stealGroup: AnimalWalter
+  - type: Objective
+    difficulty: 1
+
+- type: entity
+  parent: BaseThiefStealAnimalObjective
+  id: MortyStealObjective
+  components:
+  - type: StealCondition
+    stealGroup: AnimalMorty
+  - type: Objective
+    difficulty: 0.5
+
+- type: entity
+  parent: BaseThiefStealAnimalObjective
+  id: RenaultStealObjective
+  components:
+  - type: NotJobRequirement
+    jobs: [ Captain ]
+  - type: StealCondition
+    stealGroup: AnimalRenault
+  - type: Objective
+    difficulty: 1.7 #Starlight edit
+
+- type: entity
+  parent: BaseThiefStealAnimalObjective
+  id: ShivaStealObjective
+  components:
+  - type: NotJobRequirement
+    jobs: [ SecurityOfficer ]
+  - type: StealCondition
+    stealGroup: AnimalShiva
+  - type: Objective
+    difficulty: 1.3 #Starlight edit
+
+- type: entity
+  parent: BaseThiefStealAnimalObjective
+  id: TropicoStealObjective
+  components:
+  - type: NotJobRequirement
+    jobs: [ AtmosphericTechnician ]
+  - type: StealCondition
+    stealGroup: AnimalTropico
+  - type: Objective
+    difficulty: 1
+
+# Escape
+
+- type: entity
+  parent: [BaseThiefObjective, BaseLivingObjective]
+  id: EscapeThiefShuttleObjective
+  name: Escape to CentComm alive and unrestrained via the escape shuttle.
+  description: You don't want your illegal activities to be discovered by anyone, do you?
+  components:
+  - type: Objective
+    difficulty: 0.7 #Starlight edit, formerly 1.3, took up like half the max difficulty for thief, weird
+    icon:
+      sprite: Structures/Furniture/chairs.rsi
+      state: shuttle
+  - type: EscapeShuttleCondition
+  - type: ObjectiveBlacklistRequirement # Starlight start
+    blacklist:
+      components: # So you can't get this and the Master Thief objective at the same time.
+      - EscapeShuttleCondition # Starlight end
