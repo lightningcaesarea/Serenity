@@ -1,12 +1,9 @@
 # Assistants Time
 - type: loadoutEffectGroup
   id: HonoredAssistant
-  effects:
-  - !type:JobRequirementLoadoutEffect
-    requirement:
-      !type:RoleTimeRequirement
-      role: JobPassenger
-      time: 10h # silly reward for people who play Assistant a lot
+  # Serenity: time requirement removed, these are unlocked from the start.
+  # Restore by re-adding a JobRequirementLoadoutEffect with a RoleTimeRequirement on JobPassenger.
+  effects: []
 
 # Head of Assistants (for grey mantle)
 - type: loadoutEffectGroup
@@ -172,6 +169,7 @@
     proto: HonoredAssistant
   equipment:
     jumpsuit: ClothingUniformJumpsuitColorGrey
+  groupBy: "jumpsuit"
 
 - type: loadout
   id: GreyJumpskirt
@@ -180,6 +178,7 @@
     proto: HonoredAssistant
   equipment:
     jumpsuit: ClothingUniformJumpskirtColorGrey
+  groupBy: "jumpskirt"
 
 - type: loadout
   id: WhiteJumpsuitLoadout
@@ -188,6 +187,7 @@
     proto: HonoredAssistant
   equipment:
     jumpsuit: ClothingUniformJumpsuitColorWhite
+  groupBy: "jumpsuit"
 
 - type: loadout
   id: WhiteJumpskirtLoadout
@@ -196,6 +196,7 @@
     proto: HonoredAssistant
   equipment:
     jumpsuit: ClothingUniformJumpskirtColorWhite
+  groupBy: "jumpskirt"
 
 - type: loadout
   id: BlackJumpsuitLoadout
@@ -204,6 +205,7 @@
     proto: HonoredAssistant
   equipment:
     jumpsuit: ClothingUniformJumpsuitColorBlack
+  groupBy: "jumpsuit"
 
 - type: loadout
   id: BlackJumpskirtLoadout
@@ -212,6 +214,7 @@
     proto: HonoredAssistant
   equipment:
     jumpsuit: ClothingUniformJumpskirtColorBlack
+  groupBy: "jumpskirt"
 
 - type: loadout
   id: BlueJumpsuitLoadout
@@ -220,6 +223,7 @@
     proto: HonoredAssistant
   equipment:
     jumpsuit: ClothingUniformJumpsuitColorBlue
+  groupBy: "jumpsuit"
 
 - type: loadout
   id: BlueJumpskirtLoadout
@@ -228,6 +232,7 @@
     proto: HonoredAssistant
   equipment:
     jumpsuit: ClothingUniformJumpskirtColorBlue
+  groupBy: "jumpskirt"
 
 - type: loadout
   id: DarkBlueJumpsuitLoadout
@@ -236,6 +241,7 @@
     proto: HonoredAssistant
   equipment:
     jumpsuit: ClothingUniformJumpsuitColorDarkBlue
+  groupBy: "jumpsuit"
 
 - type: loadout
   id: DarkBlueJumpskirtLoadout
@@ -244,6 +250,7 @@
     proto: HonoredAssistant
   equipment:
     jumpsuit: ClothingUniformJumpskirtColorDarkBlue
+  groupBy: "jumpskirt"
 
 - type: loadout
   id: TealJumpsuitLoadout
@@ -252,6 +259,7 @@
     proto: HonoredAssistant
   equipment:
     jumpsuit: ClothingUniformJumpsuitColorTeal
+  groupBy: "jumpsuit"
 
 - type: loadout
   id: TealJumpskirtLoadout
@@ -260,6 +268,7 @@
     proto: HonoredAssistant
   equipment:
     jumpsuit: ClothingUniformJumpskirtColorTeal
+  groupBy: "jumpskirt"
 
 - type: loadout
   id: GreenJumpsuitLoadout
@@ -268,6 +277,7 @@
     proto: HonoredAssistant
   equipment:
     jumpsuit: ClothingUniformJumpsuitColorGreen
+  groupBy: "jumpsuit"
 
 - type: loadout
   id: GreenJumpskirtLoadout
@@ -276,6 +286,7 @@
     proto: HonoredAssistant
   equipment:
     jumpsuit: ClothingUniformJumpskirtColorGreen
+  groupBy: "jumpskirt"
 
 - type: loadout
   id: DarkGreenJumpsuitLoadout
@@ -284,6 +295,7 @@
     proto: HonoredAssistant
   equipment:
     jumpsuit: ClothingUniformJumpsuitColorDarkGreen
+  groupBy: "jumpsuit"
 
 - type: loadout
   id: DarkGreenJumpskirtLoadout
@@ -292,6 +304,7 @@
     proto: HonoredAssistant
   equipment:
     jumpsuit: ClothingUniformJumpskirtColorDarkGreen
+  groupBy: "jumpskirt"
 
 - type: loadout
   id: OrangeJumpsuitLoadout
@@ -300,6 +313,7 @@
     proto: HonoredAssistant
   equipment:
     jumpsuit: ClothingUniformJumpsuitColorOrange
+  groupBy: "jumpsuit"
 
 - type: loadout
   id: OrangeJumpskirtLoadout
@@ -308,6 +322,7 @@
     proto: HonoredAssistant
   equipment:
     jumpsuit: ClothingUniformJumpskirtColorOrange
+  groupBy: "jumpskirt"
 
 - type: loadout
   id: PinkJumpsuitLoadout
@@ -316,6 +331,7 @@
     proto: HonoredAssistant
   equipment:
     jumpsuit: ClothingUniformJumpsuitColorPink
+  groupBy: "jumpsuit"
 
 - type: loadout
   id: PinkJumpskirtLoadout
@@ -324,6 +340,7 @@
     proto: HonoredAssistant
   equipment:
     jumpsuit: ClothingUniformJumpskirtColorPink
+  groupBy: "jumpskirt"
 
 - type: loadout
   id: RedJumpsuitLoadout
@@ -332,6 +349,7 @@
     proto: HonoredAssistant
   equipment:
     jumpsuit: ClothingUniformJumpsuitColorRed
+  groupBy: "jumpsuit"
 
 - type: loadout
   id: RedJumpskirtLoadout
@@ -340,6 +358,7 @@
     proto: HonoredAssistant
   equipment:
     jumpsuit: ClothingUniformJumpskirtColorRed
+  groupBy: "jumpskirt"
 
 - type: loadout
   id: YellowJumpsuitLoadout
@@ -348,6 +367,7 @@
     proto: HonoredAssistant
   equipment:
     jumpsuit: ClothingUniformJumpsuitColorYellow
+  groupBy: "jumpsuit"
 
 - type: loadout
   id: YellowJumpskirtLoadout
@@ -356,6 +376,7 @@
     proto: HonoredAssistant
   equipment:
     jumpsuit: ClothingUniformJumpskirtColorYellow
+  groupBy: "jumpskirt"
 
 - type: loadout
   id: PurpleJumpsuitLoadout
@@ -364,6 +385,7 @@
     proto: HonoredAssistant
   equipment:
     jumpsuit: ClothingUniformJumpsuitColorPurple
+  groupBy: "jumpsuit"
 
 - type: loadout
   id: PurpleJumpskirtLoadout
@@ -372,6 +394,7 @@
     proto: HonoredAssistant
   equipment:
     jumpsuit: ClothingUniformJumpskirtColorPurple
+  groupBy: "jumpskirt"
 
 - type: loadout
   id: LightBrownJumpsuitLoadout
@@ -380,6 +403,7 @@
     proto: HonoredAssistant
   equipment:
     jumpsuit: ClothingUniformJumpsuitColorLightBrown
+  groupBy: "jumpsuit"
 
 - type: loadout
   id: LightBrownJumpskirtLoadout
@@ -388,6 +412,7 @@
     proto: HonoredAssistant
   equipment:
     jumpsuit: ClothingUniformJumpskirtColorLightBrown
+  groupBy: "jumpskirt"
 
 - type: loadout
   id: BrownJumpsuitLoadout
@@ -396,6 +421,7 @@
     proto: HonoredAssistant
   equipment:
     jumpsuit: ClothingUniformJumpsuitColorBrown
+  groupBy: "jumpsuit"
 
 - type: loadout
   id: BrownJumpskirtLoadout
@@ -404,6 +430,7 @@
     proto: HonoredAssistant
   equipment:
     jumpsuit: ClothingUniformJumpskirtColorBrown
+  groupBy: "jumpskirt"
 
 - type: loadout
   id: MaroonJumpsuitLoadout
@@ -412,6 +439,7 @@
     proto: HonoredAssistant
   equipment:
     jumpsuit: ClothingUniformJumpsuitColorMaroon
+  groupBy: "jumpsuit"
 
 - type: loadout
   id: MaroonJumpskirtLoadout
@@ -420,6 +448,7 @@
     proto: HonoredAssistant
   equipment:
     jumpsuit: ClothingUniformJumpskirtColorMaroon
+  groupBy: "jumpskirt"
 
 - type: loadout
   id: BodysuitJeans
@@ -428,6 +457,7 @@
     proto: HonoredAssistant
   equipment:
     jumpsuit: BodysuitJeansUniformSuit
+  groupBy: "novelty outfit"
 
 - type: loadout
   id: CoolTanktop
@@ -436,6 +466,7 @@
     proto: HonoredAssistant
   equipment:
     jumpsuit: CoolTanktopUniformSuit
+  groupBy: "novelty outfit"
 
 - type: loadout
   id: LumberjackOveralls
@@ -444,6 +475,7 @@
     proto: MasterGrey
   equipment:
     jumpsuit: LumberjackOverallsUniformSuit
+  groupBy: "novelty outfit"
 
 - type: loadout
   id: MechanicOveralls
@@ -452,6 +484,7 @@
     proto: MasterGrey
   equipment:
     jumpsuit: MechanicOverallsUniformSuit
+  groupBy: "novelty outfit"
 
 - type: loadout
   id: MessyDressShirt
@@ -460,6 +493,7 @@
     proto: HonoredAssistant
   equipment:
     jumpsuit: MessyDressShirtUniformSuit
+  groupBy: "novelty outfit"
 
 - type: loadout
   id: OldWomanDress
@@ -468,6 +502,7 @@
     proto: HonoredAssistant
   equipment:
     jumpsuit: OldWomanUniformSuit
+  groupBy: "novelty outfit"
 
 - type: loadout
   id: PunkJeans
@@ -476,6 +511,7 @@
     proto: MasterGrey
   equipment:
     jumpsuit: PunkJeansUniformSuit
+  groupBy: "novelty outfit"
 
 - type: loadout
   id: TatteredClothes
@@ -484,6 +520,7 @@
     proto: MasterGrey
   equipment:
     jumpsuit: TatteredClothesUniformSuit
+  groupBy: "novelty outfit"
 
 - type: loadout
   id: TieDye
@@ -492,6 +529,7 @@
     proto: HonoredAssistant
   equipment:
     jumpsuit: TieDyeUniformSuit
+  groupBy: "novelty outfit"
 
 - type: loadout
   id: VintageClothes
@@ -500,16 +538,19 @@
     proto: MasterGrey
   equipment:
     jumpsuit: VintageUniformSuit
+  groupBy: "novelty outfit"
 
 - type: loadout
   id: BasicJumpsuit
   equipment:
     jumpsuit: ClothingUniformJumpsuitAssistant
+  groupBy: "basic uniform"
 
 - type: loadout
   id: BasicJumpskirt
   equipment:
     jumpsuit: ClothingUniformJumpskirtAssistant
+  groupBy: "basic uniform"
 
 - type: loadout
   id: RainbowJumpsuit
@@ -518,6 +559,7 @@
     proto: HonoredAssistant
   equipment:
     jumpsuit: ClothingUniformColorRainbow
+  groupBy: "novelty outfit"
 
 - type: loadout
   id: RainbowJumpskirt
@@ -526,6 +568,7 @@
     proto: HonoredAssistant
   equipment:
     jumpsuit: ClothingUniformJumpskirtColorRainbow
+  groupBy: "novelty outfit"
 
 - type: loadout
   id: AncientJumpsuit
@@ -534,6 +577,309 @@
     proto: HonoredAssistant
   equipment:
     jumpsuit: ClothingUniformJumpsuitAncient
+  groupBy: "novelty outfit"
+
+# Serenity: assistant-tab copy of MaidOutfit, which keeps its "maid outfit" grouping for the Trinkets/ServiceWorker tabs.
+- type: loadout
+  id: MaidOutfitAssistant
+  effects:
+    - !type:JobRequirementLoadoutEffect
+      requirement:
+        !type:OverallPlaytimeRequirement
+        time: 144000 # 40hr
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtElegantMaid
+  groupBy: "novelty outfit"
+
+
+# Turtlenecks - Serenity
+- type: loadout
+  id: GreyTurtleneckLoadout
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: HonoredAssistant
+  equipment:
+    jumpsuit: ClothingUniformTurtleneckColorGrey
+  groupBy: "turtleneck"
+
+- type: loadout
+  id: GreyTurtleneckSkirtLoadout
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: HonoredAssistant
+  equipment:
+    jumpsuit: ClothingUniformTurtleneckSkirtColorGrey
+  groupBy: "turtleneck skirt"
+
+- type: loadout
+  id: WhiteTurtleneckLoadout
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: HonoredAssistant
+  equipment:
+    jumpsuit: ClothingUniformTurtleneckColorWhite
+  groupBy: "turtleneck"
+
+- type: loadout
+  id: WhiteTurtleneckSkirtLoadout
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: HonoredAssistant
+  equipment:
+    jumpsuit: ClothingUniformTurtleneckSkirtColorWhite
+  groupBy: "turtleneck skirt"
+
+- type: loadout
+  id: BlackTurtleneckLoadout
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: HonoredAssistant
+  equipment:
+    jumpsuit: ClothingUniformTurtleneckColorBlack
+  groupBy: "turtleneck"
+
+- type: loadout
+  id: BlackTurtleneckSkirtLoadout
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: HonoredAssistant
+  equipment:
+    jumpsuit: ClothingUniformTurtleneckSkirtColorBlack
+  groupBy: "turtleneck skirt"
+
+- type: loadout
+  id: BlueTurtleneckLoadout
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: HonoredAssistant
+  equipment:
+    jumpsuit: ClothingUniformTurtleneckColorBlue
+  groupBy: "turtleneck"
+
+- type: loadout
+  id: BlueTurtleneckSkirtLoadout
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: HonoredAssistant
+  equipment:
+    jumpsuit: ClothingUniformTurtleneckSkirtColorBlue
+  groupBy: "turtleneck skirt"
+
+- type: loadout
+  id: DarkBlueTurtleneckLoadout
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: HonoredAssistant
+  equipment:
+    jumpsuit: ClothingUniformTurtleneckColorDarkBlue
+  groupBy: "turtleneck"
+
+- type: loadout
+  id: DarkBlueTurtleneckSkirtLoadout
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: HonoredAssistant
+  equipment:
+    jumpsuit: ClothingUniformTurtleneckSkirtColorDarkBlue
+  groupBy: "turtleneck skirt"
+
+- type: loadout
+  id: TealTurtleneckLoadout
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: HonoredAssistant
+  equipment:
+    jumpsuit: ClothingUniformTurtleneckColorTeal
+  groupBy: "turtleneck"
+
+- type: loadout
+  id: TealTurtleneckSkirtLoadout
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: HonoredAssistant
+  equipment:
+    jumpsuit: ClothingUniformTurtleneckSkirtColorTeal
+  groupBy: "turtleneck skirt"
+
+- type: loadout
+  id: GreenTurtleneckLoadout
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: HonoredAssistant
+  equipment:
+    jumpsuit: ClothingUniformTurtleneckColorGreen
+  groupBy: "turtleneck"
+
+- type: loadout
+  id: GreenTurtleneckSkirtLoadout
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: HonoredAssistant
+  equipment:
+    jumpsuit: ClothingUniformTurtleneckSkirtColorGreen
+  groupBy: "turtleneck skirt"
+
+- type: loadout
+  id: DarkGreenTurtleneckLoadout
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: HonoredAssistant
+  equipment:
+    jumpsuit: ClothingUniformTurtleneckColorDarkGreen
+  groupBy: "turtleneck"
+
+- type: loadout
+  id: DarkGreenTurtleneckSkirtLoadout
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: HonoredAssistant
+  equipment:
+    jumpsuit: ClothingUniformTurtleneckSkirtColorDarkGreen
+  groupBy: "turtleneck skirt"
+
+- type: loadout
+  id: OrangeTurtleneckLoadout
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: HonoredAssistant
+  equipment:
+    jumpsuit: ClothingUniformTurtleneckColorOrange
+  groupBy: "turtleneck"
+
+- type: loadout
+  id: OrangeTurtleneckSkirtLoadout
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: HonoredAssistant
+  equipment:
+    jumpsuit: ClothingUniformTurtleneckSkirtColorOrange
+  groupBy: "turtleneck skirt"
+
+- type: loadout
+  id: PinkTurtleneckLoadout
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: HonoredAssistant
+  equipment:
+    jumpsuit: ClothingUniformTurtleneckColorPink
+  groupBy: "turtleneck"
+
+- type: loadout
+  id: PinkTurtleneckSkirtLoadout
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: HonoredAssistant
+  equipment:
+    jumpsuit: ClothingUniformTurtleneckSkirtColorPink
+  groupBy: "turtleneck skirt"
+
+- type: loadout
+  id: RedTurtleneckLoadout
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: HonoredAssistant
+  equipment:
+    jumpsuit: ClothingUniformTurtleneckColorRed
+  groupBy: "turtleneck"
+
+- type: loadout
+  id: RedTurtleneckSkirtLoadout
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: HonoredAssistant
+  equipment:
+    jumpsuit: ClothingUniformTurtleneckSkirtColorRed
+  groupBy: "turtleneck skirt"
+
+- type: loadout
+  id: YellowTurtleneckLoadout
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: HonoredAssistant
+  equipment:
+    jumpsuit: ClothingUniformTurtleneckColorYellow
+  groupBy: "turtleneck"
+
+- type: loadout
+  id: YellowTurtleneckSkirtLoadout
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: HonoredAssistant
+  equipment:
+    jumpsuit: ClothingUniformTurtleneckSkirtColorYellow
+  groupBy: "turtleneck skirt"
+
+- type: loadout
+  id: PurpleTurtleneckLoadout
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: HonoredAssistant
+  equipment:
+    jumpsuit: ClothingUniformTurtleneckColorPurple
+  groupBy: "turtleneck"
+
+- type: loadout
+  id: PurpleTurtleneckSkirtLoadout
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: HonoredAssistant
+  equipment:
+    jumpsuit: ClothingUniformTurtleneckSkirtColorPurple
+  groupBy: "turtleneck skirt"
+
+- type: loadout
+  id: LightBrownTurtleneckLoadout
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: HonoredAssistant
+  equipment:
+    jumpsuit: ClothingUniformTurtleneckColorLightBrown
+  groupBy: "turtleneck"
+
+- type: loadout
+  id: LightBrownTurtleneckSkirtLoadout
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: HonoredAssistant
+  equipment:
+    jumpsuit: ClothingUniformTurtleneckSkirtColorLightBrown
+  groupBy: "turtleneck skirt"
+
+- type: loadout
+  id: BrownTurtleneckLoadout
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: HonoredAssistant
+  equipment:
+    jumpsuit: ClothingUniformTurtleneckColorBrown
+  groupBy: "turtleneck"
+
+- type: loadout
+  id: BrownTurtleneckSkirtLoadout
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: HonoredAssistant
+  equipment:
+    jumpsuit: ClothingUniformTurtleneckSkirtColorBrown
+  groupBy: "turtleneck skirt"
+
+- type: loadout
+  id: MaroonTurtleneckLoadout
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: HonoredAssistant
+  equipment:
+    jumpsuit: ClothingUniformTurtleneckColorMaroon
+  groupBy: "turtleneck"
+
+- type: loadout
+  id: MaroonTurtleneckSkirtLoadout
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: HonoredAssistant
+  equipment:
+    jumpsuit: ClothingUniformTurtleneckSkirtColorMaroon
+  groupBy: "turtleneck skirt"
 
 
 # Back
@@ -573,6 +919,106 @@
     proto: HonoredAssistant
   equipment:
     gloves: ClothingHandsMittensColorYellow # Starlight, replace with fingerless budget insuls
+  groupBy: "mittens"
+
+- type: loadout
+  id: WhiteMittensLoadout
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: HonoredAssistant
+  equipment:
+    gloves: ClothingHandsMittensColorWhite
+  groupBy: "mittens"
+
+- type: loadout
+  id: GrayMittensLoadout
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: HonoredAssistant
+  equipment:
+    gloves: ClothingHandsMittensColorGray
+  groupBy: "mittens"
+
+- type: loadout
+  id: BlackMittensLoadout
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: HonoredAssistant
+  equipment:
+    gloves: ClothingHandsMittensColorBlack
+  groupBy: "mittens"
+
+- type: loadout
+  id: BlueMittensLoadout
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: HonoredAssistant
+  equipment:
+    gloves: ClothingHandsMittensColorBlue
+  groupBy: "mittens"
+
+- type: loadout
+  id: TealMittensLoadout
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: HonoredAssistant
+  equipment:
+    gloves: ClothingHandsMittensColorTeal
+  groupBy: "mittens"
+
+- type: loadout
+  id: GreenMittensLoadout
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: HonoredAssistant
+  equipment:
+    gloves: ClothingHandsMittensColorGreen
+  groupBy: "mittens"
+
+- type: loadout
+  id: OrangeMittensLoadout
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: HonoredAssistant
+  equipment:
+    gloves: ClothingHandsMittensColorOrange
+  groupBy: "mittens"
+
+- type: loadout
+  id: RedMittensLoadout
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: HonoredAssistant
+  equipment:
+    gloves: ClothingHandsMittensColorRed
+  groupBy: "mittens"
+
+- type: loadout
+  id: PurpleMittensLoadout
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: HonoredAssistant
+  equipment:
+    gloves: ClothingHandsMittensColorPurple
+  groupBy: "mittens"
+
+- type: loadout
+  id: LightBrownMittensLoadout
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: HonoredAssistant
+  equipment:
+    gloves: ClothingHandsMittensColorLightBrown
+  groupBy: "mittens"
+
+- type: loadout
+  id: BrownMittensLoadout
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: HonoredAssistant
+  equipment:
+    gloves: ClothingHandsMittensColorBrown
+  groupBy: "mittens"
 
 - type: loadout
   id: AssistantGloves
@@ -619,6 +1065,97 @@
   id: AssistantWintercoat
   equipment:
     outerClothing: ClothingOuterWinterColorGray
+  groupBy: "winter coat"
+
+- type: loadout
+  id: WhiteWintercoatLoadout
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: HonoredAssistant
+  equipment:
+    outerClothing: ClothingOuterWinterColorWhite
+  groupBy: "winter coat"
+
+- type: loadout
+  id: BlackWintercoatLoadout
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: HonoredAssistant
+  equipment:
+    outerClothing: ClothingOuterWinterColorBlack
+  groupBy: "winter coat"
+
+- type: loadout
+  id: BlueWintercoatLoadout
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: HonoredAssistant
+  equipment:
+    outerClothing: ClothingOuterWinterColorBlue
+  groupBy: "winter coat"
+
+- type: loadout
+  id: GreenWintercoatLoadout
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: HonoredAssistant
+  equipment:
+    outerClothing: ClothingOuterWinterColorGreen
+  groupBy: "winter coat"
+
+- type: loadout
+  id: OrangeWintercoatLoadout
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: HonoredAssistant
+  equipment:
+    outerClothing: ClothingOuterWinterColorOrange
+  groupBy: "winter coat"
+
+- type: loadout
+  id: RedWintercoatLoadout
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: HonoredAssistant
+  equipment:
+    outerClothing: ClothingOuterWinterColorRed
+  groupBy: "winter coat"
+
+- type: loadout
+  id: YellowWintercoatLoadout
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: HonoredAssistant
+  equipment:
+    outerClothing: ClothingOuterWinterColorYellow
+  groupBy: "winter coat"
+
+- type: loadout
+  id: PurpleWintercoatLoadout
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: HonoredAssistant
+  equipment:
+    outerClothing: ClothingOuterWinterColorPurple
+  groupBy: "winter coat"
+
+- type: loadout
+  id: LightBrownWintercoatLoadout
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: HonoredAssistant
+  equipment:
+    outerClothing: ClothingOuterWinterColorLightBrown
+  groupBy: "winter coat"
+
+- type: loadout
+  id: BrownWintercoatLoadout
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: HonoredAssistant
+  equipment:
+    outerClothing: ClothingOuterWinterColorBrown
+  groupBy: "winter coat"
 
 # Feet
 - type: loadout

@@ -304,9 +304,6 @@
   loadouts:
   - BasicJumpsuit
   - BasicJumpskirt
-  - AncientJumpsuit
-  - RainbowJumpsuit
-  - RainbowJumpskirt
   - GreyJumpsuit # starlight start
   - GreyJumpskirt
   - WhiteJumpsuitLoadout
@@ -339,6 +336,43 @@
   - BrownJumpskirtLoadout
   - MaroonJumpsuitLoadout
   - MaroonJumpskirtLoadout
+  # Turtlenecks - Serenity
+  - GreyTurtleneckLoadout
+  - GreyTurtleneckSkirtLoadout
+  - WhiteTurtleneckLoadout
+  - WhiteTurtleneckSkirtLoadout
+  - BlackTurtleneckLoadout
+  - BlackTurtleneckSkirtLoadout
+  - BlueTurtleneckLoadout
+  - BlueTurtleneckSkirtLoadout
+  - DarkBlueTurtleneckLoadout
+  - DarkBlueTurtleneckSkirtLoadout
+  - TealTurtleneckLoadout
+  - TealTurtleneckSkirtLoadout
+  - GreenTurtleneckLoadout
+  - GreenTurtleneckSkirtLoadout
+  - DarkGreenTurtleneckLoadout
+  - DarkGreenTurtleneckSkirtLoadout
+  - OrangeTurtleneckLoadout
+  - OrangeTurtleneckSkirtLoadout
+  - PinkTurtleneckLoadout
+  - PinkTurtleneckSkirtLoadout
+  - RedTurtleneckLoadout
+  - RedTurtleneckSkirtLoadout
+  - YellowTurtleneckLoadout
+  - YellowTurtleneckSkirtLoadout
+  - PurpleTurtleneckLoadout
+  - PurpleTurtleneckSkirtLoadout
+  - LightBrownTurtleneckLoadout
+  - LightBrownTurtleneckSkirtLoadout
+  - BrownTurtleneckLoadout
+  - BrownTurtleneckSkirtLoadout
+  - MaroonTurtleneckLoadout
+  - MaroonTurtleneckSkirtLoadout
+  # Specials & novelty outfits
+  - AncientJumpsuit
+  - RainbowJumpsuit
+  - RainbowJumpskirt
   - BodysuitJeans
   - CoolTanktop
   - LumberjackOveralls
@@ -349,7 +383,7 @@
   - TatteredClothes
   - TieDye
   - VintageClothes
-  - MaidOutfit # Starlight
+  - MaidOutfitAssistant # Serenity
 
 
 - type: loadoutGroup
@@ -367,6 +401,18 @@
   loadouts:
   - AssistantGloves
   - AssistantMittens # Starlight
+  # Mittens - Serenity
+  - WhiteMittensLoadout
+  - GrayMittensLoadout
+  - BlackMittensLoadout
+  - BlueMittensLoadout
+  - TealMittensLoadout
+  - GreenMittensLoadout
+  - OrangeMittensLoadout
+  - RedMittensLoadout
+  - PurpleMittensLoadout
+  - LightBrownMittensLoadout
+  - BrownMittensLoadout
   - GreyGloves #starlight
 
 - type: loadoutGroup
@@ -392,6 +438,17 @@
   minLimit: 0
   loadouts:
   - AssistantWintercoat
+  # Winter coats - Serenity
+  - WhiteWintercoatLoadout
+  - BlackWintercoatLoadout
+  - BlueWintercoatLoadout
+  - GreenWintercoatLoadout
+  - OrangeWintercoatLoadout
+  - RedWintercoatLoadout
+  - YellowWintercoatLoadout
+  - PurpleWintercoatLoadout
+  - LightBrownWintercoatLoadout
+  - BrownWintercoatLoadout
   - GreyHoodieA # starlight start
   - GreyTrenchcoatA
   - SpaceAssholeCoat
