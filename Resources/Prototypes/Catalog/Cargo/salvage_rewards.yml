@@ -5,7 +5,7 @@
     sprite: Objects/Tanks/emergency_double.rsi
     state: icon
   product: CrateDoubleEmergencyTank
-  cost: 2400
+  cost: 3600
   category: cargoproduct-category-name-cargo
   group: SalvageJobReward2
 
@@ -15,7 +15,7 @@
     sprite: Objects/Weapons/Bombs/seismic.rsi
     state: icon
   product: CrateSeismicCharge
-  cost: 1800
+  cost: 2700
   category: cargoproduct-category-name-cargo
   group: SalvageJobReward2
 
@@ -25,7 +25,7 @@
     sprite: Objects/Weapons/Melee/crusher.rsi
     state: icon
   product: CrateCrusher
-  cost: 5000
+  cost: 7500
   category: cargoproduct-category-name-cargo
   group: SalvageJobReward2
 
@@ -35,7 +35,7 @@
     sprite: Clothing/OuterClothing/Hardsuits/salvage.rsi
     state: icon
   product: CrateSalvageHardsuit
-  cost: 7500
+  cost: 11250
   category: cargoproduct-category-name-cargo
   group: SalvageJobReward2
 
@@ -46,7 +46,7 @@
     sprite: /Textures/Objects/Tools/fulton.rsi
     state: extraction_pack
   product: CrateFulton
-  cost: 3000
+  cost: 4500
   category: cargoproduct-category-name-cargo
   group: SalvageJobReward3
 
@@ -56,7 +56,7 @@
     sprite: Objects/Tanks/Jetpacks/void.rsi
     state: icon
   product: CrateVoidJetpack
-  cost: 4000
+  cost: 6000
   category: cargoproduct-category-name-cargo
   group: SalvageJobReward3
 
@@ -66,7 +66,7 @@
     sprite: Objects/Weapons/Melee/crusher_glaive.rsi
     state: icon
   product: CrateCrusherGlaive
-  cost: 8000
+  cost: 12000
   category: cargoproduct-category-name-cargo
   group: SalvageJobReward3
 
@@ -78,6 +78,6 @@
     sprite: Clothing/Neck/Cloaks/miner.rsi
     state: icon
   product: CrateSupremeSalvagerCloak
-  cost: 25000
+  cost: 37500
   category: cargoproduct-category-name-cargo
   group: SalvageJobRewardMAX

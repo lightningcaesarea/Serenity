@@ -4,7 +4,7 @@
     sprite: _FarHorizons/Interface/FissionGenerator/cargo_icons.rsi
     state: reactor
   product: CrateNuclearReactorFlatpack # Starlight Edit: NuclearReactorFlatpack -> CrateNuclearReactorFlatpack
-  cost: 15000
+  cost: 22500
   category: cargoproduct-category-name-engineering
   group: market
 
@@ -14,7 +14,7 @@
     sprite: _FarHorizons/Interface/FissionGenerator/cargo_icons.rsi
     state: turbine
   product: CrateGasTurbineFlatpack # Starlight Edit: GasTurbineFlatpack -> CrateGasTurbineFlatpack
-  cost: 10000
+  cost: 15000
   category: cargoproduct-category-name-engineering
   group: market
 
@@ -24,7 +24,7 @@
     sprite: _FarHorizons/Objects/Power/FissionGenerator/reactor_parts.rsi
     state: default_rod
   product: CrateCerenkiteFuelRod
-  cost: 4000
+  cost: 6000
   category: cargoproduct-category-name-engineering
   group: market
 
@@ -34,7 +34,7 @@
     sprite: _FarHorizons/Objects/Power/FissionGenerator/reactor_parts.rsi
     state: default_rod
   product: CrateBohrumControlRod
-  cost: 2000
+  cost: 3000
   category: cargoproduct-category-name-engineering
   group: market
 
@@ -44,7 +44,7 @@
     sprite: _FarHorizons/Objects/Power/FissionGenerator/reactor_parts.rsi
     state: default_rod
   product: CrateSteelGasChannel
-  cost: 1000
+  cost: 1500
   category: cargoproduct-category-name-engineering
   group: market
 
@@ -54,6 +54,6 @@
     sprite: _FarHorizons/Objects/Power/FissionGenerator/reactor_parts.rsi
     state: default_rod
   product: CrateSteelHeatExhanger
-  cost: 1000
+  cost: 1500
   category: cargoproduct-category-name-engineering
   group: market
