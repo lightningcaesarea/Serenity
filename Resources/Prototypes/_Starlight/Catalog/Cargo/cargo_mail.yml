@@ -4,7 +4,7 @@
     sprite: _Starlight/Objects/Specific/Cargo/mail_cart.rsi
     state: icon
   product: MailTrolleyFlatpack
-  cost: 500
+  cost: 750
   category: cargoproduct-category-name-cargo
   group: market
 
@@ -14,6 +14,6 @@
     sprite: Objects/Specific/Cargo/mail_bag.rsi
     state: icon
   product: CrateMailBags
-  cost: 500
+  cost: 750
   category: cargoproduct-category-name-cargo
   group: market

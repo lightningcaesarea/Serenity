@@ -48,7 +48,7 @@
     sprite: _Starlight/CosmicCult/Objects/censer.rsi
     state: icon
   product: CrateServiceReligious
-  cost: 1500
+  cost: 2250
   category: cargoproduct-category-name-service
   group: market
 
@@ -58,6 +58,6 @@
     sprite: Structures/Storage/Crates/science.rsi
     state: icon
   product: CrateScienceAnomalousContainment
-  cost: 8000
+  cost: 12000
   category: cargoproduct-category-name-science
   group: market

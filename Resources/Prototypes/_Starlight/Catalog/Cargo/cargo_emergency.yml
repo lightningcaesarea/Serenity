@@ -4,7 +4,7 @@
     sprite: _Starlight/Clothing/OuterClothing/Hardsuits/spacehazard.rsi
     state: icon
   product: CrateEmergencySpaceHazard
-  cost: 3500
+  cost: 5250
   category: cargoproduct-category-name-emergency
   group: market
 

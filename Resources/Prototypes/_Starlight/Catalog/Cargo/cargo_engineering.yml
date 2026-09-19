@@ -4,7 +4,7 @@
     sprite: _Starlight/Objects/Specific/supermatter.rsi
     state: supermatter
   product: CrateSupermatterFlatpack
-  cost: 8000
+  cost: 12000
   category: cargoproduct-category-name-engineering
   group: market
 
@@ -14,7 +14,7 @@
     sprite: Structures/Power/Generation/teg.rsi
     state: teg
   product: CrateTEGFlatpack
-  cost: 6000
+  cost: 9000
   category: cargoproduct-category-name-engineering
   group: market
 
@@ -24,7 +24,7 @@
     sprite: _Starlight/Structures/Reflector/reflector.rsi
     state: reflector_box
   product: ReflectorFlatpack
-  cost: 5000
+  cost: 7500
   category: cargoproduct-category-name-engineering
   group: market
 
@@ -34,7 +34,7 @@
     sprite: _Starlight/Objects/Tools/rpd.rsi
     state: icon
   product: CrateRPD
-  cost: 800
+  cost: 1200
   category: cargoproduct-category-name-engineering
   group: market
 
@@ -44,7 +44,7 @@
     sprite: _Starlight/Objects/Tools/rpld.rsi
     state: icon
   product: CrateRPLD
-  cost: 800
+  cost: 1200
   category: cargoproduct-category-name-medical
   group: market
 
@@ -54,6 +54,6 @@
     sprite: _Starlight/Objects/Weapons/Grenades/halon_gas.rsi
     state: icon
   product: CardboardBoxLargeEngiGasGrenades
-  cost: 4200
+  cost: 6300
   category: cargoproduct-category-name-engineering
   group: market

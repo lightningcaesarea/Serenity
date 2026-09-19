@@ -4,7 +4,7 @@
     sprite: Objects/Specific/Medical/firstaidkits.rsi
     state: firstaid
   product: CrateMedicalSupplies
-  cost: 2400
+  cost: 3600
   category: cargoproduct-category-name-medical
   group: market
 
@@ -14,7 +14,7 @@
     sprite: Objects/Specific/Chemistry/beaker.rsi
     state: beaker
   product: CrateChemistrySupplies
-  cost: 750
+  cost: 1125
   category: cargoproduct-category-name-medical
   group: market
 
@@ -24,7 +24,7 @@
     sprite: Objects/Specific/Chemistry/vial.rsi
     state: vial
   product: CrateChemistryVials
-  cost: 1100
+  cost: 1650
   category: cargoproduct-category-name-medical
   group: market
 
@@ -34,7 +34,7 @@
     sprite: Objects/Specific/Medical/firstaidkits.rsi
     state: burnkit
   product: CrateEmergencyBurnKit
-  cost: 700
+  cost: 1050
   category: cargoproduct-category-name-medical
   group: market
 
@@ -44,7 +44,7 @@
     sprite: Objects/Specific/Medical/firstaidkits.rsi
     state: toxinkit
   product: CrateEmergencyToxinKit
-  cost: 600
+  cost: 900
   category: cargoproduct-category-name-medical
   group: market
 
@@ -54,7 +54,7 @@
     sprite: Objects/Specific/Medical/firstaidkits.rsi
     state: o2kit
   product: CrateEmergencyO2Kit
-  cost: 600
+  cost: 900
   category: cargoproduct-category-name-medical
   group: market
 
@@ -64,7 +64,7 @@
     sprite: Objects/Specific/Medical/firstaidkits.rsi
     state: brutekit
   product: CrateEmergencyBruteKit
-  cost: 600
+  cost: 900
   category: cargoproduct-category-name-medical
   group: market
 
@@ -74,7 +74,7 @@
     sprite: Objects/Specific/Medical/firstaidkits.rsi
     state: advkit
   product: CrateEmergencyAdvancedKit
-  cost: 1200
+  cost: 1800
   category: cargoproduct-category-name-medical
   group: market
 
@@ -84,7 +84,7 @@
     sprite: Objects/Specific/Medical/firstaidkits.rsi
     state: radkit
   product: CrateEmergencyRadiationKit
-  cost: 600
+  cost: 900
   category: cargoproduct-category-name-medical
   group: market
 
@@ -94,7 +94,7 @@
     sprite: Objects/Specific/Medical/Morgue/bodybags.rsi
     state: bag_folded
   product: CrateBodyBags
-  cost: 700
+  cost: 1050
   category: cargoproduct-category-name-medical
   group: market
 
@@ -104,7 +104,7 @@
     sprite: Clothing/Head/Hoods/Bio/bio.rsi
     state: icon
   product: CrateVirologyBiosuit
-  cost: 800
+  cost: 1200
   category: cargoproduct-category-name-medical
   group: market
 
@@ -114,7 +114,7 @@
     sprite: Objects/Specific/Medical/implanter.rsi
     state: implanter0
   product: CrateMindShieldImplants
-  cost: 3000
+  cost: 4500
   category: cargoproduct-category-name-medical
   group: market
 
@@ -124,7 +124,7 @@
     sprite: Structures/Storage/Crates/chemcrate_secure.rsi
     state: icon
   product: CrateChemistryP
-  cost: 850
+  cost: 1275
   category: cargoproduct-category-name-medical
   group: market
 
@@ -134,7 +134,7 @@
     sprite: Structures/Storage/Crates/chemcrate_secure.rsi
     state: icon
   product: CrateChemistryS
-  cost: 750
+  cost: 1125
   category: cargoproduct-category-name-medical
   group: market
 
@@ -144,6 +144,6 @@
     sprite: Structures/Storage/Crates/chemcrate_secure.rsi
     state: icon
   product: CrateChemistryD
-  cost: 750
+  cost: 1125
   category: cargoproduct-category-name-medical
   group: market
