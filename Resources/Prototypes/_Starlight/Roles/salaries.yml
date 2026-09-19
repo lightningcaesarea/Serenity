@@ -1,68 +1,67 @@
 - type: Salaries
   id: standart
   jobs:
-    Captain: 150
-    HeadOfPersonnel: 130
-    HeadOfSecurity: 145
-    ChiefEngineer: 140
-    ResearchDirector: 130
-    ChiefMedicalOfficer: 135
-    Quartermaster: 120
+    Captain: 15
+    HeadOfPersonnel: 13
+    HeadOfSecurity: 15
+    ChiefEngineer: 14
+    ResearchDirector: 13
+    ChiefMedicalOfficer: 14
+    Quartermaster: 12
 
-    BlueShield: 110
-    NanoTrasenRepresentative: 165
-    Magistrate: 176
-    NanotrasenCareerTrainer: 150
-    IAA: 76
+    BlueShield: 11
+    NanoTrasenRepresentative: 17
+    Magistrate: 18
+    NanotrasenCareerTrainer: 15
+    IAA: 8
 
-    Chemist: 90
-    Psychologist: 76
-    Paramedic: 50
-    MedicalDoctor: 58
-    MedicalIntern: 23
-    Surgeon: 90
+    Chemist: 9
+    Psychologist: 8
+    Paramedic: 5
+    MedicalDoctor: 6
+    MedicalIntern: 2
+    Surgeon: 9
 
-    AtmosphericTechnician: 90
-    StationEngineer: 54
-    TechnicalAssistant: 23
+    AtmosphericTechnician: 9
+    StationEngineer: 5
+    TechnicalAssistant: 2
 
-    Warden: 90
-    Detective: 80
-    Brigmedic: 73
-    DutyOfficer: 70
-    SecurityOfficer: 64
-    SecurityCadet: 23
+    Warden: 9
+    Detective: 8
+    Brigmedic: 7
+    DutyOfficer: 7
+    SecurityOfficer: 6
+    SecurityCadet: 2
 
-    StationAi: 149
-    Borg: 85
+    StationAi: 15
+    Borg: 9
 
-    AssistantManager: 60
-    Chaplain: 50
-    Chef: 50
-    Janitor: 30
-    Botanist: 50
-    Lawyer: 55
-    Librarian: 50
-    Musician: 40
-    Bartender: 50
-    Mime: 30
-    Clown: 30
-    ServiceWorker: 23
-    Performer: 23
-    Reporter: 46
-    Assistant: 15
-    Boxer: 23
+    AssistantManager: 6
+    Chaplain: 5
+    Chef: 5
+    Janitor: 3
+    Botanist: 5
+    Lawyer: 6
+    Librarian: 5
+    Musician: 4
+    Bartender: 5
+    Mime: 3
+    Clown: 3
+    ServiceWorker: 2
+    Performer: 2
+    Reporter: 5
+    Boxer: 2
 
-    Scientist: 65
-    Roboticist: 58
-    ResearchAssistant: 23
+    Scientist: 7
+    Roboticist: 6
+    ResearchAssistant: 2
 
-    SalvageLead: 75
-    SalvageMedic: 70
-    SalvageSpecialist: 60
-    MiningSpecialist: 60
-    CargoTechnician: 45
-    MailTech: 55
+    SalvageLead: 8
+    SalvageMedic: 7
+    SalvageSpecialist: 6
+    MiningSpecialist: 6
+    CargoTechnician: 5
+    MailTech: 6
 
     Visitor: 0
     Prisoner: 0
@@ -118,7 +117,6 @@
     ServiceWorker: "Central Domestic Division"
     Performer: "Central Domestic Division"
     Reporter: "Central Domestic Division"
-    Assistant: "Central Domestic Division"
     Boxer: "Central Domestic Division"
 
     Scientist: "Central Research Division"
