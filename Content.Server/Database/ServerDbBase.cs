@@ -18,6 +18,8 @@ using Content.Server._CD.Records;
 using Content.Shared.GameTicking;
 using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Markings;
+using Content.Shared._Serenity.Consent;
+using Content.Shared._Serenity.Kinks;
 using Content.Shared.Preferences;
 using Content.Shared.Preferences.Loadouts;
 using Content.Shared.Roles;
@@ -93,7 +95,25 @@ namespace Content.Server.Database
 
             var jobPriorities = prefs.JobPriorities.ToDictionary(j => new ProtoId<JobPrototype>(j.JobName), j => (JobPriority)j.Priority);
 
-            return new PlayerPreferences(profiles, Color.FromHex(prefs.AdminOOCColor), constructionFavorites, jobPriorities);
+            var kinkPreferences = new Dictionary<string, KinkPreferenceLevel>();
+            foreach (var entry in prefs.KinkPreferences)
+            {
+                var sep = entry.LastIndexOf(':');
+                if (sep < 0) continue;
+                var kinkId = entry[..sep];
+                if (byte.TryParse(entry[(sep + 1)..], out var levelByte))
+                    kinkPreferences[kinkId] = (KinkPreferenceLevel)levelByte;
+            }
+
+            var consentToggles = new Dictionary<string, bool>();
+            foreach (var entry in prefs.ConsentToggles)
+            {
+                var sep = entry.LastIndexOf(':');
+                if (sep < 0) continue;
+                consentToggles[entry[..sep]] = entry[(sep + 1)..] == "1";
+            }
+
+            return new PlayerPreferences(profiles, Color.FromHex(prefs.AdminOOCColor), constructionFavorites, jobPriorities, kinkPreferences, consentToggles);
         }
 
         public async Task SaveCharacterSlotAsync(NetUserId userId, HumanoidCharacterProfile? humanoid, int slot)
@@ -234,6 +254,32 @@ namespace Content.Server.Database
             foreach (var favorite in constructionFavorites)
                 favorites.Add(favorite.Id);
             prefs.ConstructionFavorites = favorites;
+
+            await db.DbContext.SaveChangesAsync();
+        }
+
+        public async Task SaveKinkPreferencesAsync(NetUserId userId, Dictionary<string, KinkPreferenceLevel> kinkPreferences)
+        {
+            await using var db = await GetDb();
+            var prefs = await db.DbContext.Preference.SingleAsync(p => p.UserId == userId.UserId);
+
+            var entries = new List<string>(kinkPreferences.Count);
+            foreach (var (kinkId, level) in kinkPreferences)
+                entries.Add($"{kinkId}:{(byte)level}");
+            prefs.KinkPreferences = entries;
+
+            await db.DbContext.SaveChangesAsync();
+        }
+
+        public async Task SaveConsentTogglesAsync(NetUserId userId, Dictionary<string, bool> consentToggles)
+        {
+            await using var db = await GetDb();
+            var prefs = await db.DbContext.Preference.SingleAsync(p => p.UserId == userId.UserId);
+
+            var entries = new List<string>(consentToggles.Count);
+            foreach (var (toggleId, allowed) in consentToggles)
+                entries.Add($"{toggleId}:{(allowed ? "1" : "0")}");
+            prefs.ConsentToggles = entries;
 
             await db.DbContext.SaveChangesAsync();
         }

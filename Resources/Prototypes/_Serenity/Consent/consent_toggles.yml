@@ -1,0 +1,169 @@
+# Consent flags. Modelled on Floof Station's 8-toggle set plus HardLight's Aphrodisiacs flag.
+# Anything that can happen TO a player without their own input defaults to false.
+
+# ---- visibility ----
+- type: consentToggle
+  id: NSFWDescriptions
+  name: "Show explicit descriptions"
+  description: "See other players' explicit examine text. Leaving this off hides it from you."
+  category: visibility
+  default: false
+
+- type: consentToggle
+  id: ShowKinkList
+  name: "Publish my kink list"
+  description: "Allow others to view your kink preferences when they examine you."
+  category: visibility
+  default: false
+
+- type: consentToggle
+  id: CustomExamineChangedByOthers
+  name: "Others may edit my examine text"
+  description: "Permit other players to modify your custom examine description."
+  category: visibility
+  default: false
+
+# ---- interaction ----
+- type: consentToggle
+  id: LewdInteractions
+  name: "Lewd interactions"
+  description: "Allow others to initiate adult interactions with your character."
+  category: interaction
+  default: false
+
+- type: consentToggle
+  id: LewdContainerFillByOthers
+  name: "Container interactions by others"
+  description: "Allow other players to initiate milking or filling interactions using containers."
+  category: interaction
+  default: false
+
+- type: consentToggle
+  id: NonCon
+  name: "Consensual non-consent"
+  description: "Allow pre-negotiated non-consent scenes. Does not remove the need to ask first."
+  category: interaction
+  default: false
+
+- type: consentToggle
+  id: PublicScenes
+  name: "Public scenes"
+  description: "Allow adult scenes in areas where other crew may walk in."
+  category: interaction
+  default: false
+
+# ---- chemical and mental ----
+- type: consentToggle
+  id: Aphrodisiacs
+  name: "Aphrodisiac chemicals"
+  description: "Allow your character to be affected by chemicals with aphrodisiac effects."
+  category: chemical
+  default: false
+
+- type: consentToggle
+  id: Hypnosis
+  name: "Hypnosis and suggestion"
+  description: "Allow your character to be hypnotised or made suggestible."
+  category: chemical
+  default: false
+
+- type: consentToggle
+  id: MindControl
+  name: "Mind control"
+  description: "Allow another player to directly control your character's actions."
+  category: chemical
+  default: false
+
+- type: consentToggle
+  id: MindAlteration
+  name: "Lasting mental changes"
+  description: "Allow personality or memory changes that persist for the rest of the round."
+  category: chemical
+  default: false
+
+# ---- vore ----
+- type: consentToggle
+  id: PredVore
+  name: "Vore: predator"
+  description: "Allow your character to take the predator role."
+  category: vore
+  default: false
+
+- type: consentToggle
+  id: PreyVore
+  name: "Vore: prey"
+  description: "Allow your character to be swallowed as prey."
+  category: vore
+  default: false
+
+- type: consentToggle
+  id: Digestable
+  name: "Vore: digestion"
+  description: "Allow digestion as an outcome. This removes your character from the round."
+  category: vore
+  default: false
+
+- type: consentToggle
+  id: UnwillingPrey
+  name: "Vore: unwilling prey"
+  description: "Allow being taken as prey without your character agreeing in-fiction."
+  category: vore
+  default: false
+
+# ---- body ----
+- type: consentToggle
+  id: Transformation
+  name: "Transformation"
+  description: "Allow your character to be transformed into another form or species."
+  category: body
+  default: false
+
+- type: consentToggle
+  id: SizeChange
+  name: "Size changes"
+  description: "Allow your character to be resized by others."
+  category: body
+  default: false
+
+- type: consentToggle
+  id: Pregnancy
+  name: "Pregnancy and breeding"
+  description: "Allow pregnancy, breeding and oviposition mechanics to affect your character."
+  category: body
+  default: false
+
+- type: consentToggle
+  id: Inflation
+  name: "Inflation"
+  description: "Allow body inflation effects."
+  category: body
+  default: false
+
+- type: consentToggle
+  id: PermanentChanges
+  name: "Changes that outlast the round"
+  description: "Allow transformations or injuries that persist past the end of the shift."
+  category: body
+  default: false
+
+# ---- round flow ----
+- type: consentToggle
+  id: MassMindswap
+  name: "Mass mindswap"
+  description: "Allow selection as a target for the mass mindswap game rule."
+  category: roundflow
+  default: true
+
+- type: consentToggle
+  id: NoClone
+  name: "Allow paradox cloning"
+  description: "Allow your character to be duplicated by paradox anomalies."
+  category: roundflow
+  default: true
+
+- type: consentToggle
+  id: CharacterDeath
+  name: "Permanent character death"
+  description: "Allow scenes that end in your character's unrecoverable death."
+  category: roundflow
+  default: false

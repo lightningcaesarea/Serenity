@@ -432,6 +432,8 @@ namespace Content.Server.Database
         public Guid UserId { get; set; }
         public string AdminOOCColor { get; set; } = null!;
         public List<string> ConstructionFavorites { get; set; } = new();
+        public List<string> KinkPreferences { get; set; } = new();
+        public List<string> ConsentToggles { get; set; } = new();
         public List<Profile> Profiles { get; } = new();
         public List<JobPriorityEntry> JobPriorities { get; set; } = new();
     }

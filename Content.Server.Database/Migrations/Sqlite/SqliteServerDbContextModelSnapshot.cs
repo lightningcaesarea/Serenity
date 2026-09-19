@@ -848,6 +848,16 @@ namespace Content.Server.Database.Migrations.Sqlite
                         .HasColumnType("TEXT")
                         .HasColumnName("construction_favorites");
 
+                    b.PrimitiveCollection<string>("ConsentToggles")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("consent_toggles");
+
+                    b.PrimitiveCollection<string>("KinkPreferences")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("kink_preferences");
+
                     b.Property<Guid>("UserId")
                         .HasColumnType("TEXT")
                         .HasColumnName("user_id");

@@ -1,3 +1,5 @@
+using Content.Shared._Serenity.Consent;
+using Content.Shared._Serenity.Kinks;
 using Content.Shared.Construction.Prototypes;
 using Content.Shared.Preferences;
 using Content.Shared.Roles;
@@ -21,5 +23,7 @@ namespace Content.Client.Lobby
         void DeleteCharacter(int slot);
         void UpdateConstructionFavorites(List<ProtoId<ConstructionPrototype>> favorites);
         void UpdateJobPriorities(Dictionary<ProtoId<JobPrototype>, JobPriority> jobPriorities);
+        void UpdateKinkPreferences(Dictionary<string, KinkPreferenceLevel> kinkPreferences);
+        void UpdateConsentToggles(Dictionary<string, bool> consentToggles);
     }
 }
