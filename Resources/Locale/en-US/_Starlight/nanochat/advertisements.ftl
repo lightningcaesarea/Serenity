@@ -103,7 +103,7 @@ nanochat-ad-silverclaw-tour = Listen one, listen all!
 
     Coming to a planet near *you*!
     Every night at 08:45 planetary standard time!
-    Tickets start at [[randomnumber:50:20000]] spesos, get yours before they are all gone!
+    Tickets start at [[randomnumber:50:20000]] F-Bills, get yours before they are all gone!
     (Sales close on {$date} 00:00 galactic standard time)
 
 nanochat-ad-shuttleglass-repair = Did you hit space debris? Does your shuttle have a crack in the solar windshield?
@@ -113,7 +113,7 @@ nanochat-ad-shuttleglass-repair = Did you hit space debris? Does your shuttle ha
     ShuttleGlass repairs,
     ShuttleGlass replaces!
 
-nanochat-ad-webuyyourstation = Would you like to know what {$station} is worth? Find out now, and head on over to webuyyourstation.gal! We will buy your station at fair market value! Get your cut of up to [[randomnumber:1:100000000]] spesos TODAY!
+nanochat-ad-webuyyourstation = Would you like to know what {$station} is worth? Find out now, and head on over to webuyyourstation.gal! We will buy your station at fair market value! Get your cut of up to [[randomnumber:1:100000000]] F-Bills TODAY!
 
 nanochat-ad-hugbot-initiative = Maybe you should go and give {$randomname} a hug!
     Do it right now! You might not be able to later!

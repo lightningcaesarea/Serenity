@@ -122,17 +122,17 @@
       entity_storage: !type:AllSelector
         children:
         - !type:NestedSelector
-          tableId: VarietyInstrumentTable # 200 speso max
+          tableId: VarietyInstrumentTable # 200 F-Bill max
         - !type:NestedSelector
-          tableId: BrassInstrumentTable # 300 speso max
+          tableId: BrassInstrumentTable # 300 F-Bill max
         - !type:NestedSelector
-          tableId: StringInstrumentTable # 300 speso max
+          tableId: StringInstrumentTable # 300 F-Bill max
         - !type:NestedSelector
-          tableId: WoodwindInstrumentTable # 200 speso max
+          tableId: WoodwindInstrumentTable # 200 F-Bill max
         - !type:NestedSelector
-          tableId: KeyedPercussionInstrumentTable # 300 speso max
+          tableId: KeyedPercussionInstrumentTable # 300 F-Bill max
         - !type:NestedSelector
-          tableId: SpecialInstrumentTable # x2 200 speso max
+          tableId: SpecialInstrumentTable # x2 200 F-Bill max
           rolls: 2
 
 # Rest of the fun
