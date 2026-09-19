@@ -8,8 +8,8 @@
 - type: entity
   parent: BaseItem
   id: NTCredit
-  name: credit
-  description: You gotta have real money. Can be used in place of Spesos, at a 1:1 conversion rate.
+  name: Sector Credit
+  description: You gotta have real money. Exchangeable for F-Bills at a currency exchange, for a fee.
   components:
   - type: NTCash
   - type: Cash
@@ -91,7 +91,7 @@
 
 - type: material
   id: NTCredit
-  name: credit
+  name: Sector Credit
   unit: materials-unit-credit
   stackEntity: NTCredit
   icon: { sprite: /Textures/_Starlight/Objects/Economy/cash.rsi, state: cash_1 }

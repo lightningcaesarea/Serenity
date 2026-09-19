@@ -372,7 +372,7 @@
   description: A funny rubber stamp for forging important documents.
   components:
     - type: Stamp
-      stampedName: "Spesos Slave"
+      stampedName: "F-Bills Slave"
 
 - type: entity
   name: fake research director's rubber stamp

@@ -79,8 +79,8 @@
       tableId: RandomAllSodaTable
 
 - type: entityTable # TODO: Add more variety!
-  id: LetterUncommonEntityTable # Some more varied things, should never be more expensive than 100 spesos
-  table: !type:GroupSelector #Starlight Note: Unlike Upstream, we can go over 100 spesos, but for entries that help to build value to the mechanic.
+  id: LetterUncommonEntityTable # Some more varied things, should never be more expensive than 100 F-Bills
+  table: !type:GroupSelector #Starlight Note: Unlike Upstream, we can go over 100 F-Bills, but for entries that help to build value to the mechanic.
     children:
     - !type:NestedSelector
       tableId: RandomSafePillTable
@@ -108,8 +108,8 @@
       amount: !type:RangeNumberSelector
         range: 1, 3 # Starlight end
 - type: entityTable # TODO: Add more variety!
-  id: LetterRareEntityTable # Interesting things that can actually be of use, should never be more expensive than 500 spesos
-  table: !type:GroupSelector #Starlight Note: Unlike Upstream, we can go over 500 spesos, but for entries that help to build value to the mechanic.
+  id: LetterRareEntityTable # Interesting things that can actually be of use, should never be more expensive than 500 F-Bills
+  table: !type:GroupSelector #Starlight Note: Unlike Upstream, we can go over 500 F-Bills, but for entries that help to build value to the mechanic.
     children:
     - id: ResearchDisk5000
     - id: JointRainbow

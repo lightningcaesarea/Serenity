@@ -1,4 +1,4 @@
 materials-unit-tickets = tickets
-materials-unit-credit = credit
-materials-unit-credits = credits
+materials-unit-credit = Sector Credit
+materials-unit-credits = Sector Credits
 currency-display-unit-credit = cr

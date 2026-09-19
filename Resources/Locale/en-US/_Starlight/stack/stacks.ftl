@@ -120,8 +120,8 @@ stack-empty-oilpack = {$amount ->
 }
 
 stack-credit = {$amount ->
-    [1] credit
-    *[other] credits
+    [1] Sector Credit
+    *[other] Sector Credits
 }
 stack-ticket = {$amount ->
     [1] ticket

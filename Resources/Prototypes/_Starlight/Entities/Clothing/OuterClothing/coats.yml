@@ -300,7 +300,7 @@
   parent: [ClothingOuterStorageBase, ClothingOuterBaseWarm, AllowSuitStorageClothing]
   id: ClothingOuterCoatGreytiderTrenchcoat
   name: greytider trenchcoat
-  description: Ah, your trusty coat. There's a few tears here and there, giving it a more timely look. Or at least, that's what you told yourself when you found out gettin' it repaired would set you back 200 spesos.
+  description: Ah, your trusty coat. There's a few tears here and there, giving it a more timely look. Or at least, that's what you told yourself when you found out gettin' it repaired would set you back 200 F-Bills.
   components:
   - type: Sprite
     sprite: _Starlight/Clothing/OuterClothing/Coats/greytider_trenchcoat.rsi

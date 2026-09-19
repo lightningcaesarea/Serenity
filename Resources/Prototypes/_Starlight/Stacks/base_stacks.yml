@@ -29,7 +29,7 @@
     - 25000000
     - 50000000
 
-# Parent of spesos/credits.
+# Parent of F-Bills/credits.
 - type: stack
   abstract: true
   parent: BaseGiganticStack

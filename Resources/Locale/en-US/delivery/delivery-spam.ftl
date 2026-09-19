@@ -111,7 +111,7 @@ delivery-spam-5 =   FREE ALL AXCESS!!
 
                     {"[color=gray]"}
                     {"[bullet/]Note: station ID must be stated in the format of \"NT/NX - ###\""}
-                    {"[bullet/]Note: Payments lodged to the client's station's cargo department amount to roughly $5000 spesos per transaction, not including individual processing fees"}
+                    {"[bullet/]Note: Payments lodged to the client's station's cargo department amount to roughly $5000 F-Bills per transaction, not including individual processing fees"}
                     {"[bullet/]Note: We at Gour-Lecksss LMT. are not responsible if your station's HoP forces you to fill out an ACTUAL Free AA form if they find out about this letter"}
                     {"[/color]"}
 
@@ -224,7 +224,7 @@ delivery-spam-10 =  DO NOT OPEN THIS MAIL
 delivery-spam-11 =  Help mom and dad!
     .desc =         Parents in need of financial support.
     .content =      [bold]Hello Child,[/bold]
-                    This is your Parents writing to you: we are in need of money! Our taxes have been audited and we owe $100,000 in spesos to governnment! please help! they only want gift cards so you will need to send us 100 $1000 spesos Bisa gift cards.
+                    This is your Parents writing to you: we are in need of money! Our taxes have been audited and we owe $100,000 in F-Bills to governnment! please help! they only want gift cards so you will need to send us 100 $1000 F-Bills Bisa gift cards.
 
                     please mail to:
                     50192 Spess Lane
@@ -256,7 +256,7 @@ delivery-spam-12 =  Join us on the maiden voyage!
 
                     {"[head=3]Explore the ruins of Agathar***, now open to the public with the assistance of NanoTrasen's top Scientists. All the mysteries of the old Agatharian civilization are excavated and displayed for your viewing pleasure![/head]"}
 
-                    For the low, low cost of $5,000 spesos a night, the six month luxury cruise could be yours for the vacation of your dreams! Call us today at [color=#00FF00]RELAX-NOW[/color] to book your cruise. Don't wait! Act now!
+                    For the low, low cost of $5,000 F-Bills a night, the six month luxury cruise could be yours for the vacation of your dreams! Call us today at [color=#00FF00]RELAX-NOW[/color] to book your cruise. Don't wait! Act now!
 
 
 

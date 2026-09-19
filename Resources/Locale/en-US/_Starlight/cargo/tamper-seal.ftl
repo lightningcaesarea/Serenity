@@ -1,7 +1,7 @@
 # Unseal popups
 tamper-seal-popup-unseal-begin = You open the tamper seal..
 tamper-seal-popup-unseal-end = The tamper seal opens.
-tamper-seal-popup-unseal-end-reward = Seal opened. {$deliverer} is awarded {$reward} spesos.
+tamper-seal-popup-unseal-end-reward = Seal opened. {$deliverer} is awarded {$reward} F-Bills.
 tamper-seal-popup-unseal-no-access = This order isn't meant for your department.
 
 # Destroy popups
@@ -12,7 +12,7 @@ tamper-seal-popup-destroy-slicing-begin = You cut the tamper seal..
 tamper-seal-popup-destroy-cutting-begin = You cut the tamper seal..
 tamper-seal-popup-destroy-prying-begin = You pry off the tamper seal..
 tamper-seal-popup-destroy-end = Seal broken!
-tamper-seal-popup-destroy-end-penalty = Seal broken! {$deliverer} fined {$penalty} spesos. Refund provided.
+tamper-seal-popup-destroy-end-penalty = Seal broken! {$deliverer} fined {$penalty} F-Bills. Refund provided.
 
 # Verbs
 tamper-seal-verb-destroy = Destroy seal
