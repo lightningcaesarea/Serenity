@@ -1,5 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using Content.Shared._Serenity.Consent;
+using Content.Shared._Serenity.Kinks;
 using Content.Shared.Roles;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
@@ -19,12 +21,14 @@ namespace Content.Shared.Preferences
     {
         private Dictionary<int, HumanoidCharacterProfile> _characters;
 
-        public PlayerPreferences(IEnumerable<KeyValuePair<int, HumanoidCharacterProfile>> characters, Color adminOOCColor, List<ProtoId<ConstructionPrototype>> constructionFavorites,  Dictionary<ProtoId<JobPrototype>, JobPriority> jobPriorities)
+        public PlayerPreferences(IEnumerable<KeyValuePair<int, HumanoidCharacterProfile>> characters, Color adminOOCColor, List<ProtoId<ConstructionPrototype>> constructionFavorites,  Dictionary<ProtoId<JobPrototype>, JobPriority> jobPriorities, Dictionary<string, KinkPreferenceLevel>? kinkPreferences = null, Dictionary<string, bool>? consentToggles = null)
         {
             _characters = new Dictionary<int, HumanoidCharacterProfile>(characters);
             AdminOOCColor = adminOOCColor;
             ConstructionFavorites = constructionFavorites;
             JobPriorities = SanitizeJobPriorities(jobPriorities);
+            KinkPreferences = kinkPreferences ?? new Dictionary<string, KinkPreferenceLevel>();
+            ConsentToggles = consentToggles ?? new Dictionary<string, bool>();
         }
 
         private static Dictionary<ProtoId<JobPrototype>, JobPriority> SanitizeJobPriorities(Dictionary<ProtoId<JobPrototype>, JobPriority> jobPriorities)
@@ -50,6 +54,18 @@ namespace Content.Shared.Preferences
         ///    List of favorite items in the construction menu.
         /// </summary>
         public List<ProtoId<ConstructionPrototype>> ConstructionFavorites { get; set; } = [];
+
+        /// <summary>
+        ///     Per-player kink preference levels (kink prototype ID → preference level).
+        /// </summary>
+        public Dictionary<string, KinkPreferenceLevel> KinkPreferences { get; set; } = new();
+
+        /// <summary>
+        ///     Per-player consent flags (consent toggle prototype ID → allowed).
+        ///     Absent entries mean the player never set it; callers should fall back to
+        ///     <see cref="ConsentTogglePrototype.Default"/> rather than assuming true.
+        /// </summary>
+        public Dictionary<string, bool> ConsentToggles { get; set; } = new();
 
         public int IndexOfCharacter(HumanoidCharacterProfile profile)
         {

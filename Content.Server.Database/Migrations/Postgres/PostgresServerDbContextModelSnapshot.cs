@@ -900,6 +900,16 @@ namespace Content.Server.Database.Migrations.Postgres
                         .HasColumnType("text[]")
                         .HasColumnName("construction_favorites");
 
+                    b.PrimitiveCollection<List<string>>("ConsentToggles")
+                        .IsRequired()
+                        .HasColumnType("text[]")
+                        .HasColumnName("consent_toggles");
+
+                    b.PrimitiveCollection<List<string>>("KinkPreferences")
+                        .IsRequired()
+                        .HasColumnType("text[]")
+                        .HasColumnName("kink_preferences");
+
                     b.Property<Guid>("UserId")
                         .HasColumnType("uuid")
                         .HasColumnName("user_id");

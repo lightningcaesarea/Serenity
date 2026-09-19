@@ -1,0 +1,1793 @@
+# Serenity kink list.
+# Own-authored entries, written to cover the same ground as F-list style lists.
+# Ageplay and its aliases are intentionally excluded and must not be re-added.
+
+# ---- general ----
+- type: kink
+  id: romance
+  name: "Romance"
+  description: "Romantic interactions and emotional intimacy."
+  category: general
+
+- type: kink
+  id: cuddling
+  name: "Cuddling"
+  description: "Physical closeness and affectionate holding."
+  category: general
+
+- type: kink
+  id: kissing
+  name: "Kissing"
+  description: "Kissing and making out."
+  category: general
+
+- type: kink
+  id: flirting
+  name: "Flirting"
+  description: "Playful teasing and flirtatious banter."
+  category: general
+
+- type: kink
+  id: vanilla
+  name: "Vanilla"
+  description: "Straightforward intimacy without kink elements."
+  category: general
+
+- type: kink
+  id: casual
+  name: "Casual Encounters"
+  description: "One-off, no-strings encounters."
+  category: general
+
+- type: kink
+  id: longterm
+  name: "Long-term Relationships"
+  description: "Ongoing relationships with emotional investment."
+  category: general
+
+- type: kink
+  id: dating
+  name: "Dating"
+  description: "In-character dating and courtship."
+  category: general
+
+- type: kink
+  id: monogamy
+  name: "Monogamy"
+  description: "Exclusive pairings."
+  category: general
+
+- type: kink
+  id: polyamory
+  name: "Polyamory"
+  description: "Multiple simultaneous partners, openly."
+  category: general
+
+- type: kink
+  id: friends_to_lovers
+  name: "Friends to Lovers"
+  description: "Relationships that develop from friendship."
+  category: general
+
+- type: kink
+  id: enemies_to_lovers
+  name: "Enemies to Lovers"
+  description: "Relationships that develop from antagonism."
+  category: general
+
+- type: kink
+  id: slow_burn
+  name: "Slow Burn"
+  description: "Gradual build-up over many sessions."
+  category: general
+
+- type: kink
+  id: rp_heavy
+  name: "Heavy Roleplay"
+  description: "Detailed, prose-heavy scenes."
+  category: general
+
+- type: kink
+  id: rp_light
+  name: "Light Roleplay"
+  description: "Brief, low-detail scenes."
+  category: general
+
+- type: kink
+  id: teasing
+  name: "Teasing"
+  description: "Drawn-out teasing and anticipation."
+  category: general
+
+- type: kink
+  id: emotional_intimacy
+  name: "Emotional Intimacy"
+  description: "Vulnerability and emotional connection."
+  category: general
+
+- type: kink
+  id: aftercare
+  name: "Aftercare"
+  description: "Post-scene care, comfort and check-ins."
+  category: general
+
+- type: kink
+  id: public_affection
+  name: "Public Affection"
+  description: "Visible affection around other crew."
+  category: general
+
+- type: kink
+  id: unrequited
+  name: "Unrequited Feelings"
+  description: "One-sided attraction as a story thread."
+  category: general
+
+- type: kink
+  id: reunion
+  name: "Reunions"
+  description: "Reconnecting with a previous partner."
+  category: general
+
+- type: kink
+  id: comfort
+  name: "Comfort"
+  description: "Consoling a distressed partner."
+  category: general
+
+# ---- acts ----
+- type: kink
+  id: oral_giving
+  name: "Oral (Giving)"
+  description: "Performing oral on a partner."
+  category: acts
+
+- type: kink
+  id: oral_receiving
+  name: "Oral (Receiving)"
+  description: "Receiving oral from a partner."
+  category: acts
+
+- type: kink
+  id: vaginal
+  name: "Vaginal"
+  description: "Vaginal intercourse."
+  category: acts
+
+- type: kink
+  id: anal
+  name: "Anal"
+  description: "Anal intercourse."
+  category: acts
+
+- type: kink
+  id: manual
+  name: "Manual Stimulation"
+  description: "Using hands on a partner."
+  category: acts
+
+- type: kink
+  id: frottage
+  name: "Frottage"
+  description: "Body-to-body friction without penetration."
+  category: acts
+
+- type: kink
+  id: mutual
+  name: "Mutual Masturbation"
+  description: "Partners stimulating themselves together."
+  category: acts
+
+- type: kink
+  id: solo
+  name: "Solo Play"
+  description: "Self-stimulation, alone or watched."
+  category: acts
+
+- type: kink
+  id: facesitting
+  name: "Facesitting"
+  description: "Straddling a partner’s face."
+  category: acts
+
+- type: kink
+  id: sixtynine
+  name: "Mutual Oral"
+  description: "Simultaneous mutual oral."
+  category: acts
+
+- type: kink
+  id: deepthroat
+  name: "Deepthroat"
+  description: "Deep oral penetration."
+  category: acts
+
+- type: kink
+  id: creampie
+  name: "Internal Finish"
+  description: "Finishing inside a partner."
+  category: acts
+
+- type: kink
+  id: external_finish
+  name: "External Finish"
+  description: "Finishing on a partner."
+  category: acts
+
+- type: kink
+  id: edging
+  name: "Edging"
+  description: "Repeatedly approaching but delaying climax."
+  category: acts
+
+- type: kink
+  id: denial
+  name: "Orgasm Denial"
+  description: "Withholding climax entirely."
+  category: acts
+
+- type: kink
+  id: forced_orgasm
+  name: "Forced Orgasm"
+  description: "Climax compelled past the point of choice."
+  category: acts
+
+- type: kink
+  id: overstimulation
+  name: "Overstimulation"
+  description: "Continuing past climax."
+  category: acts
+
+- type: kink
+  id: multiple_rounds
+  name: "Multiple Rounds"
+  description: "Extended scenes with repeat encounters."
+  category: acts
+
+- type: kink
+  id: quickie
+  name: "Quickies"
+  description: "Short, hurried encounters."
+  category: acts
+
+- type: kink
+  id: rough
+  name: "Rough Sex"
+  description: "Forceful, high-intensity physicality."
+  category: acts
+
+- type: kink
+  id: gentle
+  name: "Gentle Sex"
+  description: "Slow, careful, tender physicality."
+  category: acts
+
+- type: kink
+  id: passionate
+  name: "Passionate"
+  description: "Intense but affectionate."
+  category: acts
+
+- type: kink
+  id: toys
+  name: "Toys"
+  description: "Use of implements and devices."
+  category: acts
+
+- type: kink
+  id: strap
+  name: "Strap-on"
+  description: "Use of a worn strap-on."
+  category: acts
+
+- type: kink
+  id: double
+  name: "Double Penetration"
+  description: "Two simultaneous penetrations."
+  category: acts
+
+- type: kink
+  id: fisting
+  name: "Fisting"
+  description: "Hand insertion."
+  category: acts
+
+- type: kink
+  id: knotting
+  name: "Knotting"
+  description: "Knot-based anatomy and tying."
+  category: acts
+
+- type: kink
+  id: breeding_act
+  name: "Breeding"
+  description: "Intercourse framed around conception."
+  category: acts
+
+- type: kink
+  id: marking
+  name: "Marking"
+  description: "Leaving visible marks on a partner."
+  category: acts
+
+- type: kink
+  id: biting
+  name: "Biting"
+  description: "Biting as part of intimacy."
+  category: acts
+
+# ---- bdsm ----
+- type: kink
+  id: domination
+  name: "Domination"
+  description: "Taking the dominant role."
+  category: bdsm
+
+- type: kink
+  id: submission
+  name: "Submission"
+  description: "Taking the submissive role."
+  category: bdsm
+
+- type: kink
+  id: switch
+  name: "Switch"
+  description: "Comfortable in either role."
+  category: bdsm
+
+- type: kink
+  id: bondage
+  name: "Bondage"
+  description: "Restraint with rope, cuffs or straps."
+  category: bdsm
+
+- type: kink
+  id: rope
+  name: "Rope Bondage"
+  description: "Decorative and functional rope work."
+  category: bdsm
+
+- type: kink
+  id: cuffs
+  name: "Cuffs and Restraints"
+  description: "Rigid restraints, station-issue included."
+  category: bdsm
+
+- type: kink
+  id: suspension
+  name: "Suspension"
+  description: "Being suspended off the ground."
+  category: bdsm
+
+- type: kink
+  id: sensory_deprivation
+  name: "Sensory Deprivation"
+  description: "Blindfolds, hoods, earplugs."
+  category: bdsm
+
+- type: kink
+  id: blindfolds
+  name: "Blindfolds"
+  description: "Sight restriction specifically."
+  category: bdsm
+
+- type: kink
+  id: gags
+  name: "Gags"
+  description: "Speech restriction."
+  category: bdsm
+
+- type: kink
+  id: chastity
+  name: "Chastity"
+  description: "Enforced denial devices."
+  category: bdsm
+
+- type: kink
+  id: pain_giving
+  name: "Sadism"
+  description: "Giving consensual pain."
+  category: bdsm
+
+- type: kink
+  id: pain_receiving
+  name: "Masochism"
+  description: "Receiving consensual pain."
+  category: bdsm
+
+- type: kink
+  id: impact
+  name: "Impact Play"
+  description: "Spanking, flogging, paddling."
+  category: bdsm
+
+- type: kink
+  id: shock
+  name: "Electrostimulation"
+  description: "Electrical stimulation. Fits station tooling."
+  category: bdsm
+
+- type: kink
+  id: temperature
+  name: "Temperature Play"
+  description: "Heat and cold as sensation."
+  category: bdsm
+
+- type: kink
+  id: wax
+  name: "Wax Play"
+  description: "Hot wax on skin."
+  category: bdsm
+
+- type: kink
+  id: collaring
+  name: "Collaring"
+  description: "Collar-and-leash dynamics."
+  category: bdsm
+
+- type: kink
+  id: petplay
+  name: "Pet Play"
+  description: "Adopting or assigning animal roles."
+  category: bdsm
+
+- type: kink
+  id: ponyplay
+  name: "Pony Play"
+  description: "Equine-styled roleplay and tack."
+  category: bdsm
+
+- type: kink
+  id: degradation_giving
+  name: "Degradation (Giving)"
+  description: "Verbally degrading a partner in scene."
+  category: bdsm
+
+- type: kink
+  id: degradation_receiving
+  name: "Degradation (Receiving)"
+  description: "Being verbally degraded in scene."
+  category: bdsm
+
+- type: kink
+  id: humiliation
+  name: "Humiliation"
+  description: "Embarrassment as the point of the scene."
+  category: bdsm
+
+- type: kink
+  id: praise
+  name: "Praise"
+  description: "Enthusiastic praise and encouragement."
+  category: bdsm
+
+- type: kink
+  id: power_imbalance
+  name: "Power Imbalance"
+  description: "Dynamics built on unequal standing."
+  category: bdsm
+
+- type: kink
+  id: ownership
+  name: "Ownership"
+  description: "Being owned, or owning a partner."
+  category: bdsm
+
+- type: kink
+  id: service
+  name: "Service Submission"
+  description: "Submission expressed through tasks."
+  category: bdsm
+
+- type: kink
+  id: protocol
+  name: "Protocol"
+  description: "Formal rules of address and behaviour."
+  category: bdsm
+
+- type: kink
+  id: orders
+  name: "Orders and Obedience"
+  description: "Following explicit instruction."
+  category: bdsm
+
+- type: kink
+  id: punishment
+  name: "Punishment"
+  description: "Consequences within an agreed dynamic."
+  category: bdsm
+
+- type: kink
+  id: discipline
+  name: "Discipline"
+  description: "Correction and training dynamics."
+  category: bdsm
+
+- type: kink
+  id: brat
+  name: "Brat Play"
+  description: "Deliberate defiance inviting correction."
+  category: bdsm
+
+- type: kink
+  id: primal
+  name: "Primal Play"
+  description: "Instinctive, animalistic chase and struggle."
+  category: bdsm
+
+- type: kink
+  id: predator_prey
+  name: "Predator/Prey"
+  description: "Hunt-and-catch dynamics."
+  category: bdsm
+
+- type: kink
+  id: worship_dom
+  name: "Domination via Worship"
+  description: "Being revered by a submissive."
+  category: bdsm
+
+- type: kink
+  id: financial
+  name: "Findom"
+  description: "Financial control dynamics."
+  category: bdsm
+
+- type: kink
+  id: objectification
+  name: "Objectification"
+  description: "Being treated as furniture or object."
+  category: bdsm
+
+# ---- body ----
+- type: kink
+  id: muscular
+  name: "Muscular"
+  description: "Partners with athletic, muscular builds."
+  category: body
+
+- type: kink
+  id: chubby
+  name: "Chubby"
+  description: "Partners with soft, round builds."
+  category: body
+
+- type: kink
+  id: slim
+  name: "Slim"
+  description: "Partners with slender builds."
+  category: body
+
+- type: kink
+  id: athletic
+  name: "Athletic"
+  description: "Toned, fit builds."
+  category: body
+
+- type: kink
+  id: tall
+  name: "Tall"
+  description: "Partners notably taller than average."
+  category: body
+
+- type: kink
+  id: short
+  name: "Short"
+  description: "Partners notably shorter than average."
+  category: body
+
+- type: kink
+  id: androgynous
+  name: "Androgynous"
+  description: "Ambiguous or blended presentation."
+  category: body
+
+- type: kink
+  id: masculine
+  name: "Masculine"
+  description: "Masculine presentation."
+  category: body
+
+- type: kink
+  id: feminine
+  name: "Feminine"
+  description: "Feminine presentation."
+  category: body
+
+- type: kink
+  id: fluffy
+  name: "Fluffy"
+  description: "Soft, furred body types."
+  category: body
+
+- type: kink
+  id: scales
+  name: "Scaled"
+  description: "Reptilian or scaled bodies."
+  category: body
+
+- type: kink
+  id: slime
+  name: "Slime"
+  description: "Amorphous, gelatinous or fluid bodies."
+  category: body
+
+- type: kink
+  id: chitin
+  name: "Chitinous"
+  description: "Insectile or carapaced bodies."
+  category: body
+
+- type: kink
+  id: synthetic
+  name: "Synthetic Bodies"
+  description: "Chassis, plating and artificial frames."
+  category: body
+
+- type: kink
+  id: taur
+  name: "Taur Forms"
+  description: "Centaur-style multi-limbed forms."
+  category: body
+
+- type: kink
+  id: naga
+  name: "Naga"
+  description: "Serpentine lower bodies."
+  category: body
+
+- type: kink
+  id: wings
+  name: "Wings"
+  description: "Winged characters."
+  category: body
+
+- type: kink
+  id: tails
+  name: "Tails"
+  description: "Prehensile or expressive tails."
+  category: body
+
+- type: kink
+  id: horns
+  name: "Horns and Antlers"
+  description: "Horned characters."
+  category: body
+
+- type: kink
+  id: multi_limb
+  name: "Extra Limbs"
+  description: "More limbs than standard."
+  category: body
+
+- type: kink
+  id: multi_eye
+  name: "Extra Eyes"
+  description: "Unusual eye counts or arrangements."
+  category: body
+
+- type: kink
+  id: scars
+  name: "Scars"
+  description: "Scarring and old injuries."
+  category: body
+
+- type: kink
+  id: augmented
+  name: "Augmented"
+  description: "Visible cybernetic modification."
+  category: body
+
+- type: kink
+  id: hair
+  name: "Hair"
+  description: "Hair as a focus."
+  category: body
+
+- type: kink
+  id: freckles
+  name: "Freckles and Markings"
+  description: "Natural skin markings."
+  category: body
+
+# ---- species ----
+- type: kink
+  id: humans
+  name: "Humans"
+  description: "Human partners."
+  category: species
+
+- type: kink
+  id: lizardfolk
+  name: "Lizardfolk"
+  description: "Unathi and similar reptilian species."
+  category: species
+
+- type: kink
+  id: felinid
+  name: "Felinid"
+  description: "Cat-derived species."
+  category: species
+
+- type: kink
+  id: vulpine
+  name: "Vulpine"
+  description: "Fox-derived species."
+  category: species
+
+- type: kink
+  id: canine
+  name: "Canine"
+  description: "Dog- and wolf-derived species."
+  category: species
+
+- type: kink
+  id: avian
+  name: "Avian"
+  description: "Bird-derived species, including Vox."
+  category: species
+
+- type: kink
+  id: rodentia
+  name: "Rodentia"
+  description: "Rodent-derived species."
+  category: species
+
+- type: kink
+  id: arachnid
+  name: "Arachnid"
+  description: "Spider-derived species."
+  category: species
+
+- type: kink
+  id: moth
+  name: "Moth"
+  description: "Moth-derived species."
+  category: species
+
+- type: kink
+  id: slimefolk
+  name: "Slimefolk"
+  description: "Slime-based people."
+  category: species
+
+- type: kink
+  id: plantfolk
+  name: "Plantfolk"
+  description: "Diona and plant-based people."
+  category: species
+
+- type: kink
+  id: androids
+  name: "Synthetics"
+  description: "IPCs, androids and robotic partners."
+  category: species
+
+- type: kink
+  id: aliens
+  name: "Non-humanoid Aliens"
+  description: "Alien partners without humanoid form."
+  category: species
+
+- type: kink
+  id: daemons
+  name: "Demons"
+  description: "Infernal or demonic characters."
+  category: species
+
+- type: kink
+  id: angels
+  name: "Celestials"
+  description: "Angelic or divine characters."
+  category: species
+
+- type: kink
+  id: undead
+  name: "Undead"
+  description: "Revenants, skeletons and the returned."
+  category: species
+
+- type: kink
+  id: monsters
+  name: "Monsters"
+  description: "Monstrous or creature partners."
+  category: species
+
+- type: kink
+  id: feral
+  name: "Feral"
+  description: "Non-sapient animal characters."
+  category: species
+
+- type: kink
+  id: eldritch
+  name: "Eldritch"
+  description: "Incomprehensible or cosmic entities."
+  category: species
+
+- type: kink
+  id: hybrids
+  name: "Hybrids"
+  description: "Mixed-species characters."
+  category: species
+
+# ---- fetish ----
+- type: kink
+  id: latex
+  name: "Latex and Rubber"
+  description: "Tight, shiny latex garments and suits."
+  category: fetish
+
+- type: kink
+  id: leather
+  name: "Leather"
+  description: "Leather clothing and gear."
+  category: fetish
+
+- type: kink
+  id: uniforms
+  name: "Uniforms"
+  description: "Department uniforms as a focus."
+  category: fetish
+
+- type: kink
+  id: armour
+  name: "Armour"
+  description: "Hardsuits and protective gear."
+  category: fetish
+
+- type: kink
+  id: lingerie
+  name: "Lingerie"
+  description: "Underwear as a focus."
+  category: fetish
+
+- type: kink
+  id: crossdressing
+  name: "Crossdressing"
+  description: "Wearing clothing coded to another gender."
+  category: fetish
+
+- type: kink
+  id: maid
+  name: "Maid Outfits"
+  description: "Maid uniforms and service dress."
+  category: fetish
+
+- type: kink
+  id: formalwear
+  name: "Formalwear"
+  description: "Suits, gowns and dress uniform."
+  category: fetish
+
+- type: kink
+  id: collars
+  name: "Collars"
+  description: "Collars as adornment."
+  category: fetish
+
+- type: kink
+  id: boots
+  name: "Boots"
+  description: "Footwear as a focus."
+  category: fetish
+
+- type: kink
+  id: gloves
+  name: "Gloves"
+  description: "Handwear as a focus."
+  category: fetish
+
+- type: kink
+  id: masks
+  name: "Masks"
+  description: "Face coverings and anonymity."
+  category: fetish
+
+- type: kink
+  id: exhibitionism
+  name: "Exhibitionism"
+  description: "Being seen or displaying oneself."
+  category: fetish
+
+- type: kink
+  id: voyeurism
+  name: "Voyeurism"
+  description: "Watching others."
+  category: fetish
+
+- type: kink
+  id: feet
+  name: "Feet and Paws"
+  description: "Feet, paws and similar."
+  category: fetish
+
+- type: kink
+  id: hands
+  name: "Hands"
+  description: "Hands as a focus."
+  category: fetish
+
+- type: kink
+  id: scent
+  name: "Scent"
+  description: "Body scent as part of intimacy."
+  category: fetish
+
+- type: kink
+  id: musk
+  name: "Musk"
+  description: "Strong natural odours."
+  category: fetish
+
+- type: kink
+  id: body_worship
+  name: "Body Worship"
+  description: "Reverent attention to a partner’s body."
+  category: fetish
+
+- type: kink
+  id: tentacles
+  name: "Tentacles"
+  description: "Tentacle-based scenarios."
+  category: fetish
+
+- type: kink
+  id: vines
+  name: "Vines"
+  description: "Plant and vine restraint."
+  category: fetish
+
+- type: kink
+  id: slime_play
+  name: "Slime Play"
+  description: "Coating and immersion in slime."
+  category: fetish
+
+- type: kink
+  id: goo
+  name: "Goo and Encasement"
+  description: "Full-body encasement."
+  category: fetish
+
+- type: kink
+  id: machines
+  name: "Machine Play"
+  description: "Devices and automated equipment."
+  category: fetish
+
+- type: kink
+  id: cybernetics
+  name: "Cybernetics"
+  description: "Augmetics as a focus."
+  category: fetish
+
+- type: kink
+  id: static
+  name: "Static and Glitching"
+  description: "Synthetic malfunction aesthetics."
+  category: fetish
+
+- type: kink
+  id: breath
+  name: "Breath Play"
+  description: "Controlled breathing restriction."
+  category: fetish
+
+- type: kink
+  id: tickling
+  name: "Tickling"
+  description: "Tickling and ticklish reactions."
+  category: fetish
+
+- type: kink
+  id: biting_fetish
+  name: "Fangs"
+  description: "Fangs and bite marks specifically."
+  category: fetish
+
+- type: kink
+  id: claws
+  name: "Claws"
+  description: "Claws and scratching."
+  category: fetish
+
+- type: kink
+  id: tail_play
+  name: "Tail Play"
+  description: "Tails used deliberately."
+  category: fetish
+
+- type: kink
+  id: ears
+  name: "Ears"
+  description: "Ears as a sensitive focus."
+  category: fetish
+
+- type: kink
+  id: voice
+  name: "Voice"
+  description: "Voice, accents and verbal delivery."
+  category: fetish
+
+- type: kink
+  id: smoking
+  name: "Smoking"
+  description: "Smoking as a focus."
+  category: fetish
+
+- type: kink
+  id: food
+  name: "Food Play"
+  description: "Food used in scenes."
+  category: fetish
+
+# ---- scenario ----
+- type: kink
+  id: public
+  name: "Public and Semi-Public"
+  description: "Encounters where discovery is possible."
+  category: scenario
+
+- type: kink
+  id: maintenance
+  name: "Maintenance Tunnels"
+  description: "Scenes in maintenance."
+  category: scenario
+
+- type: kink
+  id: dorms
+  name: "Dorms"
+  description: "Scenes in crew quarters."
+  category: scenario
+
+- type: kink
+  id: workplace
+  name: "On Duty"
+  description: "Scenes during a shift."
+  category: scenario
+
+- type: kink
+  id: after_hours
+  name: "After Hours"
+  description: "Scenes in the quiet of late shift."
+  category: scenario
+
+- type: kink
+  id: medical
+  name: "Medical Play"
+  description: "Examination and procedure roleplay."
+  category: scenario
+
+- type: kink
+  id: interrogation
+  name: "Interrogation"
+  description: "Questioning under pressure."
+  category: scenario
+
+- type: kink
+  id: prisoner
+  name: "Prisoner and Guard"
+  description: "Detention dynamics. Fits Security play."
+  category: scenario
+
+- type: kink
+  id: kidnapping
+  name: "Capture"
+  description: "Capture and abduction framing."
+  category: scenario
+
+- type: kink
+  id: noncon
+  name: "Consensual Non-Consent"
+  description: "Pre-negotiated non-consent scenes."
+  category: scenario
+
+- type: kink
+  id: dubcon
+  name: "Dubious Consent"
+  description: "Deliberately ambiguous consent framing."
+  category: scenario
+
+- type: kink
+  id: hypnosis
+  name: "Hypnosis"
+  description: "Trance and suggestion."
+  category: scenario
+
+- type: kink
+  id: mind_control
+  name: "Mind Control"
+  description: "Direct control of a partner’s actions."
+  category: scenario
+
+- type: kink
+  id: corruption
+  name: "Corruption"
+  description: "Gradual moral or mental change."
+  category: scenario
+
+- type: kink
+  id: drugged
+  name: "Intoxication"
+  description: "Scenes involving chems or aphrodisiacs."
+  category: scenario
+
+- type: kink
+  id: group
+  name: "Group"
+  description: "Three or more participants."
+  category: scenario
+
+- type: kink
+  id: gangbang
+  name: "Group (Many)"
+  description: "One participant with several partners."
+  category: scenario
+
+- type: kink
+  id: threesome
+  name: "Threesome"
+  description: "Exactly three participants."
+  category: scenario
+
+- type: kink
+  id: cheating
+  name: "Infidelity"
+  description: "Scenes framed around betrayal."
+  category: scenario
+
+- type: kink
+  id: cuckold
+  name: "Compersion and Cuckolding"
+  description: "Watching a partner with someone else."
+  category: scenario
+
+- type: kink
+  id: rivalry
+  name: "Rivalry"
+  description: "Competitive, antagonistic tension."
+  category: scenario
+
+- type: kink
+  id: seduction
+  name: "Seduction"
+  description: "Deliberate pursuit and persuasion."
+  category: scenario
+
+- type: kink
+  id: blackmail
+  name: "Leverage"
+  description: "Coercion through held information."
+  category: scenario
+
+- type: kink
+  id: stranger
+  name: "Strangers"
+  description: "Encounters with no prior relationship."
+  category: scenario
+
+- type: kink
+  id: secret
+  name: "Secret Relationship"
+  description: "Hidden from the rest of the crew."
+  category: scenario
+
+- type: kink
+  id: zero_g
+  name: "Zero Gravity"
+  description: "Scenes in null-grav."
+  category: scenario
+
+- type: kink
+  id: eva
+  name: "EVA and Suits"
+  description: "Scenes involving hardsuits or vacuum."
+  category: scenario
+
+- type: kink
+  id: ghost
+  name: "Post-Mortem Roleplay"
+  description: "Scenes involving ghosts or revival."
+  category: scenario
+
+- type: kink
+  id: antag
+  name: "Antagonist Scenes"
+  description: "Scenes tied to antag roles."
+  category: scenario
+
+# ---- transformation ----
+- type: kink
+  id: transformation
+  name: "Transformation"
+  description: "Being changed into another form."
+  category: transformation
+
+- type: kink
+  id: tf_species
+  name: "Species Change"
+  description: "Becoming a different species."
+  category: transformation
+
+- type: kink
+  id: tf_gender
+  name: "Gender Change"
+  description: "Changing physical sex characteristics."
+  category: transformation
+
+- type: kink
+  id: tf_partial
+  name: "Partial Transformation"
+  description: "Gaining isolated features."
+  category: transformation
+
+- type: kink
+  id: tf_slow
+  name: "Gradual Transformation"
+  description: "Change occurring over time."
+  category: transformation
+
+- type: kink
+  id: tf_forced
+  name: "Involuntary Transformation"
+  description: "Change against the character’s will."
+  category: transformation
+
+- type: kink
+  id: tf_voluntary
+  name: "Voluntary Transformation"
+  description: "Change sought deliberately."
+  category: transformation
+
+- type: kink
+  id: tf_permanent
+  name: "Permanent Transformation"
+  description: "Change that persists."
+  category: transformation
+
+- type: kink
+  id: tf_mental
+  name: "Mental Transformation"
+  description: "Personality or memory change."
+  category: transformation
+
+- type: kink
+  id: tf_object
+  name: "Inanimate Transformation"
+  description: "Becoming an object."
+  category: transformation
+
+- type: kink
+  id: tf_feral
+  name: "Feralisation"
+  description: "Loss of sapience through change."
+  category: transformation
+
+- type: kink
+  id: tf_slime
+  name: "Slimification"
+  description: "Becoming slime-based."
+  category: transformation
+
+- type: kink
+  id: tf_synthetic
+  name: "Roboticisation"
+  description: "Becoming synthetic or borged."
+  category: transformation
+
+- type: kink
+  id: tf_plant
+  name: "Plant Transformation"
+  description: "Becoming plant-based."
+  category: transformation
+
+- type: kink
+  id: possession
+  name: "Possession"
+  description: "Another mind taking control."
+  category: transformation
+
+- type: kink
+  id: bodyswap
+  name: "Body Swap"
+  description: "Exchanging bodies with another."
+  category: transformation
+
+# ---- size ----
+- type: kink
+  id: macro
+  name: "Macro"
+  description: "Very large characters."
+  category: size
+
+- type: kink
+  id: micro
+  name: "Micro"
+  description: "Very small characters."
+  category: size
+
+- type: kink
+  id: size_difference
+  name: "Size Difference"
+  description: "Notable height or mass gaps."
+  category: size
+
+- type: kink
+  id: growth
+  name: "Growth"
+  description: "Becoming larger during a scene."
+  category: size
+
+- type: kink
+  id: shrinking
+  name: "Shrinking"
+  description: "Becoming smaller during a scene."
+  category: size
+
+- type: kink
+  id: size_shifting
+  name: "Size Shifting"
+  description: "Changing size at will."
+  category: size
+
+- type: kink
+  id: handheld
+  name: "Handheld"
+  description: "Being small enough to be held."
+  category: size
+
+- type: kink
+  id: pocketed
+  name: "Pocketed"
+  description: "Being carried in clothing."
+  category: size
+
+- type: kink
+  id: underfoot
+  name: "Underfoot"
+  description: "Being beneath a much larger character."
+  category: size
+
+- type: kink
+  id: crushing
+  name: "Crushing"
+  description: "Weight and pressure from a larger partner."
+  category: size
+
+- type: kink
+  id: giantess
+  name: "Towering Partners"
+  description: "Partners of overwhelming scale."
+  category: size
+
+- type: kink
+  id: tiny_care
+  name: "Caretaking"
+  description: "Protective handling of a tiny character."
+  category: size
+
+- type: kink
+  id: size_nonfatal
+  name: "Non-fatal Size Play"
+  description: "Size play with no lasting harm."
+  category: size
+
+- type: kink
+  id: size_fatal
+  name: "Fatal Size Play"
+  description: "Size play where the smaller may not survive."
+  category: size
+
+# ---- vore ----
+- type: kink
+  id: vore
+  name: "Vore (General)"
+  description: "Being swallowed whole, or swallowing."
+  category: vore
+
+- type: kink
+  id: vore_pred
+  name: "Vore (Predator)"
+  description: "Taking the predator role."
+  category: vore
+
+- type: kink
+  id: vore_prey
+  name: "Vore (Prey)"
+  description: "Taking the prey role."
+  category: vore
+
+- type: kink
+  id: vore_soft
+  name: "Soft Vore"
+  description: "Swallowing without harm."
+  category: vore
+
+- type: kink
+  id: vore_hard
+  name: "Hard Vore"
+  description: "Vore involving injury."
+  category: vore
+
+- type: kink
+  id: vore_oral
+  name: "Oral Vore"
+  description: "Swallowing by mouth."
+  category: vore
+
+- type: kink
+  id: vore_tail
+  name: "Tail Vore"
+  description: "Consumption via tail."
+  category: vore
+
+- type: kink
+  id: vore_absorb
+  name: "Absorption"
+  description: "Prey absorbed into the predator."
+  category: vore
+
+- type: kink
+  id: unbirth
+  name: "Unbirth"
+  description: "Unbirth scenarios."
+  category: vore
+
+- type: kink
+  id: vore_digest
+  name: "Digestion"
+  description: "Digestion as an outcome."
+  category: vore
+
+- type: kink
+  id: vore_nondigest
+  name: "Endosoma"
+  description: "Safe containment with no digestion."
+  category: vore
+
+- type: kink
+  id: vore_reform
+  name: "Reformation"
+  description: "Prey reforming afterwards."
+  category: vore
+
+- type: kink
+  id: vore_struggle
+  name: "Struggling"
+  description: "Active resistance from prey."
+  category: vore
+
+- type: kink
+  id: vore_willing
+  name: "Willing Prey"
+  description: "Prey entering by choice."
+  category: vore
+
+- type: kink
+  id: vore_unwilling
+  name: "Unwilling Prey"
+  description: "Prey taken against their will."
+  category: vore
+
+- type: kink
+  id: vore_multiple
+  name: "Multiple Prey"
+  description: "More than one prey at once."
+  category: vore
+
+- type: kink
+  id: vore_stuffing
+  name: "Stuffing"
+  description: "Visible fullness after consumption."
+  category: vore
+
+- type: kink
+  id: vore_transfer
+  name: "Transfer"
+  description: "Prey passed between predators."
+  category: vore
+
+# ---- breeding ----
+- type: kink
+  id: pregnancy
+  name: "Pregnancy"
+  description: "Pregnancy as a theme."
+  category: breeding
+
+- type: kink
+  id: impregnation
+  name: "Impregnation"
+  description: "Conception as the focus."
+  category: breeding
+
+- type: kink
+  id: breeding_kink
+  name: "Breeding"
+  description: "Framing around reproduction."
+  category: breeding
+
+- type: kink
+  id: oviposition
+  name: "Oviposition"
+  description: "Egg-laying."
+  category: breeding
+
+- type: kink
+  id: egg_carrying
+  name: "Egg Carrying"
+  description: "Carrying eggs internally."
+  category: breeding
+
+- type: kink
+  id: birth
+  name: "Birth"
+  description: "Birth scenes."
+  category: breeding
+
+- type: kink
+  id: rapid_pregnancy
+  name: "Accelerated Pregnancy"
+  description: "Compressed gestation."
+  category: breeding
+
+- type: kink
+  id: multiple_birth
+  name: "Multiples"
+  description: "Large or multiple broods."
+  category: breeding
+
+- type: kink
+  id: inflation
+  name: "Inflation"
+  description: "Body inflation."
+  category: breeding
+
+- type: kink
+  id: belly
+  name: "Belly Focus"
+  description: "Fullness and belly as a focus."
+  category: breeding
+
+- type: kink
+  id: lactation
+  name: "Lactation"
+  description: "Milk production."
+  category: breeding
+
+- type: kink
+  id: nursing
+  name: "Nursing"
+  description: "Feeding from a partner."
+  category: breeding
+
+- type: kink
+  id: hybrid_offspring
+  name: "Hybrid Offspring"
+  description: "Cross-species young."
+  category: breeding
+
+- type: kink
+  id: parasitic
+  name: "Parasitic Breeding"
+  description: "Implantation by another organism."
+  category: breeding
+
+# ---- fluids ----
+- type: kink
+  id: fluids_general
+  name: "Fluids"
+  description: "Bodily fluids as a focus."
+  category: fluids
+
+- type: kink
+  id: saliva
+  name: "Saliva"
+  description: "Drool and saliva."
+  category: fluids
+
+- type: kink
+  id: sweat
+  name: "Sweat"
+  description: "Sweat as a focus."
+  category: fluids
+
+- type: kink
+  id: messy
+  name: "Messy Play"
+  description: "Scenes that get deliberately messy."
+  category: fluids
+
+- type: kink
+  id: watersports
+  name: "Watersports"
+  description: "Urine-related play."
+  category: fluids
+
+- type: kink
+  id: chemicals
+  name: "Chemical Play"
+  description: "Station reagents used in scenes."
+  category: fluids
+
+- type: kink
+  id: foam
+  name: "Foam and Spray"
+  description: "Extinguisher and spray-based play."
+  category: fluids
+
+- type: kink
+  id: oil
+  name: "Oil and Lubricant"
+  description: "Synthetic fluids and lubricants."
+  category: fluids
+
+- type: kink
+  id: blood_light
+  name: "Blood (Light)"
+  description: "Minor blood as an aesthetic."
+  category: fluids
+
+- type: kink
+  id: honey
+  name: "Sticky Substances"
+  description: "Honey, syrup and similar."
+  category: fluids
+
+- type: kink
+  id: slime_fluid
+  name: "Slime Fluids"
+  description: "Slime-based fluids."
+  category: fluids
+
+- type: kink
+  id: cleanup
+  name: "Cleanup"
+  description: "Washing down afterwards as part of the scene."
+  category: fluids
+
+# ---- medical ----
+- type: kink
+  id: med_exam
+  name: "Examination"
+  description: "Clinical examination roleplay."
+  category: medical
+
+- type: kink
+  id: med_surgery
+  name: "Surgery"
+  description: "Surgical roleplay."
+  category: medical
+
+- type: kink
+  id: med_restraint
+  name: "Medical Restraint"
+  description: "Being restrained on a table or bed."
+  category: medical
+
+- type: kink
+  id: med_injection
+  name: "Injections"
+  description: "Needles and injections."
+  category: medical
+
+- type: kink
+  id: med_sedation
+  name: "Sedation"
+  description: "Being sedated or put under."
+  category: medical
+
+- type: kink
+  id: med_implant
+  name: "Implantation"
+  description: "Surgical implants."
+  category: medical
+
+- type: kink
+  id: med_augment
+  name: "Augmentation"
+  description: "Elective cybernetic modification."
+  category: medical
+
+- type: kink
+  id: med_cloning
+  name: "Cloning"
+  description: "Clone bodies and copies."
+  category: medical
+
+- type: kink
+  id: med_experiment
+  name: "Experimentation"
+  description: "Test-subject roleplay."
+  category: medical
+
+- type: kink
+  id: med_recovery
+  name: "Recovery Care"
+  description: "Being cared for while injured."
+  category: medical
+
+# ---- extreme ----
+- type: kink
+  id: extreme_note
+  name: "— Heavier Content —"
+  description: "Items below are heavier. Mark No freely."
+  category: extreme
+
+- type: kink
+  id: gore
+  name: "Gore"
+  description: "Graphic injury."
+  category: extreme
+
+- type: kink
+  id: snuff
+  name: "Character Death"
+  description: "Scenes ending in permanent death."
+  category: extreme
+
+- type: kink
+  id: necro
+  name: "Post-Mortem"
+  description: "Scenes involving the dead."
+  category: extreme
+
+- type: kink
+  id: cannibalism
+  name: "Cannibalism"
+  description: "Consuming another character."
+  category: extreme
+
+- type: kink
+  id: amputation
+  name: "Amputation"
+  description: "Limb loss."
+  category: extreme
+
+- type: kink
+  id: torture
+  name: "Torture"
+  description: "Prolonged non-consensual harm in fiction."
+  category: extreme
+
+- type: kink
+  id: branding
+  name: "Branding"
+  description: "Permanent marking."
+  category: extreme
+
+- type: kink
+  id: asphyxiation
+  name: "Asphyxiation"
+  description: "Breath restriction to unconsciousness."
+  category: extreme
+
+- type: kink
+  id: scat
+  name: "Scat"
+  description: "Scat-related play."
+  category: extreme
+
+- type: kink
+  id: degradation_extreme
+  name: "Extreme Degradation"
+  description: "Degradation past ordinary limits."
+  category: extreme
+
+- type: kink
+  id: permanent_harm
+  name: "Permanent Harm"
+  description: "Lasting injury carried between shifts."
+  category: extreme
+
+- type: kink
+  id: slavery
+  name: "Enslavement"
+  description: "Long-term enforced ownership."
+  category: extreme
+
+- type: kink
+  id: mind_break
+  name: "Mind Break"
+  description: "Permanent mental alteration."
+  category: extreme

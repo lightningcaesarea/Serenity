@@ -1,4 +1,6 @@
 using System.Linq;
+using Content.Shared._Serenity.Consent;
+using Content.Shared._Serenity.Kinks;
 using Content.Shared.Construction.Prototypes;
 using Content.Shared.Preferences;
 using Content.Shared.Roles;
@@ -32,6 +34,8 @@ namespace Content.Client.Lobby
             _netManager.RegisterNetMessage<MsgUpdateCharacter>();
             _netManager.RegisterNetMessage<MsgDeleteCharacter>();
             _netManager.RegisterNetMessage<MsgSetCharacterEnable>();
+            _netManager.RegisterNetMessage<MsgUpdateKinkPreferences>();
+            _netManager.RegisterNetMessage<MsgUpdateConsentToggles>();
 
             _baseClient.RunLevelChanged += BaseClientOnRunLevelChanged;
         }
@@ -61,7 +65,7 @@ namespace Content.Client.Lobby
             {
                 [slot] = new HumanoidCharacterProfile(profile) {Enabled = enable},
             };
-            Preferences = new PlayerPreferences(characters, Preferences.AdminOOCColor, Preferences.ConstructionFavorites, Preferences.JobPriorities);
+            Preferences = new PlayerPreferences(characters, Preferences.AdminOOCColor, Preferences.ConstructionFavorites, Preferences.JobPriorities, Preferences.KinkPreferences, Preferences.ConsentToggles);
 
             var msg = new MsgSetCharacterEnable
             {
@@ -76,7 +80,7 @@ namespace Content.Client.Lobby
             var collection = IoCManager.Instance!;
             profile.EnsureValid(_playerManager.LocalSession!, collection);
             var characters = new Dictionary<int, HumanoidCharacterProfile>(Preferences.Characters) {[slot] = profile};
-            Preferences = new PlayerPreferences(characters, Preferences.AdminOOCColor, Preferences.ConstructionFavorites, Preferences.JobPriorities);
+            Preferences = new PlayerPreferences(characters, Preferences.AdminOOCColor, Preferences.ConstructionFavorites, Preferences.JobPriorities, Preferences.KinkPreferences, Preferences.ConsentToggles);
             var msg = new MsgUpdateCharacter
             {
                 Profile = profile,
@@ -99,7 +103,7 @@ namespace Content.Client.Lobby
 
             var l = lowest.Value;
             characters.Add(l, profile);
-            Preferences = new PlayerPreferences(characters, Preferences.AdminOOCColor, Preferences.ConstructionFavorites, Preferences.JobPriorities);
+            Preferences = new PlayerPreferences(characters, Preferences.AdminOOCColor, Preferences.ConstructionFavorites, Preferences.JobPriorities, Preferences.KinkPreferences, Preferences.ConsentToggles);
 
             UpdateCharacter(profile, l);
         }
@@ -112,7 +116,7 @@ namespace Content.Client.Lobby
         public void DeleteCharacter(int slot)
         {
             var characters = Preferences.Characters.Where(p => p.Key != slot);
-            Preferences = new PlayerPreferences(characters, Preferences.AdminOOCColor, Preferences.ConstructionFavorites, Preferences.JobPriorities);
+            Preferences = new PlayerPreferences(characters, Preferences.AdminOOCColor, Preferences.ConstructionFavorites, Preferences.JobPriorities, Preferences.KinkPreferences, Preferences.ConsentToggles);
             var msg = new MsgDeleteCharacter
             {
                 Slot = slot
@@ -129,7 +133,8 @@ namespace Content.Client.Lobby
             Preferences = new PlayerPreferences(Preferences.Characters,
                 Preferences.AdminOOCColor,
                 Preferences.ConstructionFavorites,
-                jobPriorities);
+                jobPriorities,
+                Preferences.KinkPreferences, Preferences.ConsentToggles);
             var msg = new MsgUpdateJobPriorities
             {
                 JobPriorities = jobPriorities,
@@ -139,10 +144,30 @@ namespace Content.Client.Lobby
 
         public void UpdateConstructionFavorites(List<ProtoId<ConstructionPrototype>> favorites)
         {
-            Preferences = new PlayerPreferences(Preferences.Characters, Preferences.AdminOOCColor, favorites, Preferences.JobPriorities);
+            Preferences = new PlayerPreferences(Preferences.Characters, Preferences.AdminOOCColor, favorites, Preferences.JobPriorities, Preferences.KinkPreferences, Preferences.ConsentToggles);
             var msg = new MsgUpdateConstructionFavorites
             {
                 Favorites = favorites
+            };
+            _netManager.ClientSendMessage(msg);
+        }
+
+        public void UpdateKinkPreferences(Dictionary<string, KinkPreferenceLevel> kinkPreferences)
+        {
+            Preferences = new PlayerPreferences(Preferences.Characters, Preferences.AdminOOCColor, Preferences.ConstructionFavorites, Preferences.JobPriorities, kinkPreferences, Preferences.ConsentToggles);
+            var msg = new MsgUpdateKinkPreferences
+            {
+                KinkPreferences = kinkPreferences,
+            };
+            _netManager.ClientSendMessage(msg);
+        }
+
+        public void UpdateConsentToggles(Dictionary<string, bool> consentToggles)
+        {
+            Preferences = new PlayerPreferences(Preferences.Characters, Preferences.AdminOOCColor, Preferences.ConstructionFavorites, Preferences.JobPriorities, Preferences.KinkPreferences, consentToggles);
+            var msg = new MsgUpdateConsentToggles
+            {
+                ConsentToggles = consentToggles,
             };
             _netManager.ClientSendMessage(msg);
         }

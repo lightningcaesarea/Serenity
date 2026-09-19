@@ -9,6 +9,7 @@ using Content.Shared.Administration.Logs;
 using Content.Shared.CCVar;
 using Content.Shared.Construction.Prototypes;
 using Content.Shared.Database;
+using Content.Shared._Serenity.Kinks;
 using Content.Shared.Preferences;
 using Content.Shared.Roles;
 using Microsoft.Data.Sqlite;
@@ -44,6 +45,10 @@ namespace Content.Server.Database
         Task SaveAdminOOCColorAsync(NetUserId userId, Color color);
 
         Task SaveConstructionFavoritesAsync(NetUserId userId, List<ProtoId<ConstructionPrototype>> constructionFavorites);
+
+        Task SaveKinkPreferencesAsync(NetUserId userId, Dictionary<string, KinkPreferenceLevel> kinkPreferences);
+
+        Task SaveConsentTogglesAsync(NetUserId userId, Dictionary<string, bool> consentToggles);
 
         Task<PlayerPreferences?> GetPlayerPreferencesAsync(NetUserId userId, CancellationToken cancel);
         #endregion
@@ -496,6 +501,18 @@ namespace Content.Server.Database
         {
             DbWriteOpsMetric.Inc();
             return RunDbCommand(() => _db.SaveConstructionFavoritesAsync(userId, constructionFavorites));
+        }
+
+        public Task SaveKinkPreferencesAsync(NetUserId userId, Dictionary<string, KinkPreferenceLevel> kinkPreferences)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.SaveKinkPreferencesAsync(userId, kinkPreferences));
+        }
+
+        public Task SaveConsentTogglesAsync(NetUserId userId, Dictionary<string, bool> consentToggles)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.SaveConsentTogglesAsync(userId, consentToggles));
         }
 
         public Task<PlayerPreferences?> GetPlayerPreferencesAsync(NetUserId userId, CancellationToken cancel)

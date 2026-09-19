@@ -3,6 +3,8 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Content.Server.Database;
+using Content.Shared._Serenity.Consent;
+using Content.Shared._Serenity.Kinks;
 using Content.Shared.CCVar;
 using Content.Shared.GameTicking;
 using Content.Shared.Construction.Prototypes;
@@ -49,6 +51,8 @@ namespace Content.Server.Preferences.Managers
             _netManager.RegisterNetMessage<MsgSetCharacterEnable>(HandleSetCharacterEnableMessage);
             _netManager.RegisterNetMessage<MsgUpdateJobPriorities>(HandleUpdateJobPrioritiesMessage);
             _netManager.RegisterNetMessage<MsgUpdateConstructionFavorites>(HandleUpdateConstructionFavoritesMessage);
+            _netManager.RegisterNetMessage<MsgUpdateKinkPreferences>(HandleUpdateKinkPreferencesMessage);
+            _netManager.RegisterNetMessage<MsgUpdateConsentToggles>(HandleUpdateConsentTogglesMessage);
             _sawmill = _log.GetSawmill("prefs");
         }
 
@@ -86,7 +90,7 @@ namespace Content.Server.Preferences.Managers
                 [slot] = profile
             };
 
-            prefsData.Prefs = new PlayerPreferences(profiles, curPrefs.AdminOOCColor, curPrefs.ConstructionFavorites, curPrefs.JobPriorities);
+            prefsData.Prefs = new PlayerPreferences(profiles, curPrefs.AdminOOCColor, curPrefs.ConstructionFavorites, curPrefs.JobPriorities, curPrefs.KinkPreferences, curPrefs.ConsentToggles);
 
             if (ShouldStorePrefs(session.Channel.AuthType))
                 await _db.SaveCharacterSlotAsync(userId, profile, slot);
@@ -101,7 +105,7 @@ namespace Content.Server.Preferences.Managers
             }
 
             var curPrefs = prefsData.Prefs!;
-            prefsData.Prefs = new PlayerPreferences(curPrefs.Characters, curPrefs.AdminOOCColor, favorites, curPrefs.JobPriorities);
+            prefsData.Prefs = new PlayerPreferences(curPrefs.Characters, curPrefs.AdminOOCColor, favorites, curPrefs.JobPriorities, curPrefs.KinkPreferences, curPrefs.ConsentToggles);
 
             var session = _playerManager.GetSessionById(userId);
             if (ShouldStorePrefs(session.Channel.AuthType))
@@ -122,7 +126,7 @@ namespace Content.Server.Preferences.Managers
             var curPrefs = prefsData.Prefs!;
             var session = _playerManager.GetSessionById(userId);
 
-            prefsData.Prefs = new PlayerPreferences(curPrefs.Characters, curPrefs.AdminOOCColor, curPrefs.ConstructionFavorites, jobPriorities);
+            prefsData.Prefs = new PlayerPreferences(curPrefs.Characters, curPrefs.AdminOOCColor, curPrefs.ConstructionFavorites, jobPriorities, curPrefs.KinkPreferences, curPrefs.ConsentToggles);
 
             if (ShouldStorePrefs(session.Channel.AuthType))
                 await _db.SaveJobPrioritiesAsync(userId, jobPriorities);
@@ -158,7 +162,7 @@ namespace Content.Server.Preferences.Managers
             var arr = new Dictionary<int, HumanoidCharacterProfile>(curPrefs.Characters);
             arr.Remove(slot);
 
-            prefsData.Prefs = new PlayerPreferences(arr, curPrefs.AdminOOCColor, curPrefs.ConstructionFavorites, curPrefs.JobPriorities);
+            prefsData.Prefs = new PlayerPreferences(arr, curPrefs.AdminOOCColor, curPrefs.ConstructionFavorites, curPrefs.JobPriorities, curPrefs.KinkPreferences, curPrefs.ConsentToggles);
 
             if (ShouldStorePrefs(session.AuthType))
             {
@@ -200,7 +204,7 @@ namespace Content.Server.Preferences.Managers
                 [slot] = new HumanoidCharacterProfile(profile),
             };
 
-            prefsData.Prefs = new PlayerPreferences(profiles, curPrefs.AdminOOCColor, curPrefs.ConstructionFavorites, curPrefs.JobPriorities);
+            prefsData.Prefs = new PlayerPreferences(profiles, curPrefs.AdminOOCColor, curPrefs.ConstructionFavorites, curPrefs.JobPriorities, curPrefs.KinkPreferences, curPrefs.ConsentToggles);
 
             if (ShouldStorePrefs(session.Channel.AuthType))
                 await _db.SaveCharacterSlotAsync(userId, profile, slot);
@@ -242,12 +246,63 @@ namespace Content.Server.Preferences.Managers
             }
 
             var curPrefs = prefsData.Prefs!;
-            prefsData.Prefs = new PlayerPreferences(curPrefs.Characters, curPrefs.AdminOOCColor, validatedList, curPrefs.JobPriorities);
+            prefsData.Prefs = new PlayerPreferences(curPrefs.Characters, curPrefs.AdminOOCColor, validatedList, curPrefs.JobPriorities, curPrefs.KinkPreferences, curPrefs.ConsentToggles);
 
             if (ShouldStorePrefs(message.MsgChannel.AuthType))
             {
                 await _db.SaveConstructionFavoritesAsync(userId, validatedList);
             }
+        }
+
+        private async void HandleUpdateKinkPreferencesMessage(MsgUpdateKinkPreferences message)
+        {
+            var userId = message.MsgChannel.UserId;
+            if (!_cachedPlayerPrefs.TryGetValue(userId, out var prefsData) || !prefsData.PrefsLoaded)
+            {
+                _sawmill.Warning($"User {userId} tried to modify kink preferences before they loaded.");
+                return;
+            }
+
+            var validated = new Dictionary<string, KinkPreferenceLevel>();
+            foreach (var (kinkId, level) in message.KinkPreferences)
+            {
+                if (!string.IsNullOrEmpty(kinkId) && kinkId.Length <= 128)
+                    validated[kinkId] = level;
+            }
+
+            var curPrefs = prefsData.Prefs!;
+            prefsData.Prefs = new PlayerPreferences(curPrefs.Characters, curPrefs.AdminOOCColor, curPrefs.ConstructionFavorites, curPrefs.JobPriorities, validated, curPrefs.ConsentToggles);
+
+            if (ShouldStorePrefs(message.MsgChannel.AuthType))
+                await _db.SaveKinkPreferencesAsync(userId, validated);
+        }
+
+        private async void HandleUpdateConsentTogglesMessage(MsgUpdateConsentToggles message)
+        {
+            var userId = message.MsgChannel.UserId;
+            if (!_cachedPlayerPrefs.TryGetValue(userId, out var prefsData) || !prefsData.PrefsLoaded)
+            {
+                _sawmill.Warning($"User {userId} tried to modify consent toggles before they loaded.");
+                return;
+            }
+
+            // Only accept toggles that correspond to a real prototype, so a modified client
+            // can't stuff arbitrary data into the preferences row.
+            var validated = new Dictionary<string, bool>();
+            foreach (var (toggleId, allowed) in message.ConsentToggles)
+            {
+                if (_prototypeManager.HasIndex<ConsentTogglePrototype>(toggleId))
+                    validated[toggleId] = allowed;
+            }
+
+            if (validated.Count != message.ConsentToggles.Count)
+                _sawmill.Warning($"User {userId} sent unknown consent toggle ids.");
+
+            var curPrefs = prefsData.Prefs!;
+            prefsData.Prefs = new PlayerPreferences(curPrefs.Characters, curPrefs.AdminOOCColor, curPrefs.ConstructionFavorites, curPrefs.JobPriorities, curPrefs.KinkPreferences, validated);
+
+            if (ShouldStorePrefs(message.MsgChannel.AuthType))
+                await _db.SaveConsentTogglesAsync(userId, validated);
         }
 
         // Should only be called via UserDbDataManager.
@@ -418,7 +473,7 @@ namespace Content.Server.Preferences.Managers
             return new PlayerPreferences(prefs.Characters.Select(p =>
             {
                 return new KeyValuePair<int, HumanoidCharacterProfile>(p.Key, p.Value.Validated(session, collection));
-            }), prefs.AdminOOCColor, prefs.ConstructionFavorites, priorities);
+            }), prefs.AdminOOCColor, prefs.ConstructionFavorites, priorities, prefs.KinkPreferences, prefs.ConsentToggles);
         }
 
         internal static bool ShouldStorePrefs(LoginType loginType)
