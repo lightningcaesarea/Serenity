@@ -99,7 +99,7 @@ stack-rolling-paper = rolling {$amount ->
 }
 
 stack-fulton = fulton
-stack-speso = F-Bill
+stack-speso = Federal Bill
 stack-plasma = plasma
 stack-biomass = biomass
 stack-pyrotton = pyrotton

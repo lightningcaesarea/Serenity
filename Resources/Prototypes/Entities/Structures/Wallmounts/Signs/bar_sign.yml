@@ -270,7 +270,7 @@
   parent: BaseBarSign
   id: BarSignSpacebucks
   name: Spacebucks
-  description: You can't get away from them, even in space, and even after we started calling them 'F-Bills' instead.
+  description: You can't get away from them, even in space, and even after we started calling them 'Federal Bills' instead.
   components:
   - type: BarSign
     current: Spacebucks

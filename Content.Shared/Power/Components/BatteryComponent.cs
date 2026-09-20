@@ -32,7 +32,7 @@ public sealed partial class BatteryComponent : Component
     public float MaxCharge;
 
     /// <summary>
-    /// The price per one joule. Default is 1 F-Bill for 10kJ.
+    /// The price per one joule. Default is 1 Federal Bill for 10kJ.
     /// </summary>
     [DataField]
     public float PricePerJoule = 0.0001f;

@@ -3,7 +3,7 @@ using Robust.Shared.Audio;
 namespace Content.Shared._Serenity.Economy;
 
 /// <summary>
-/// A machine that converts physical F-Bills (SpaceCash) into physical credits (NTCredit)
+/// A machine that converts physical Federal Bills (SpaceCash) into physical credits (NTCredit)
 /// and back. Operates purely on carried stacks — it never touches the station budget or
 /// a player's credit ledger.
 /// </summary>
@@ -11,7 +11,7 @@ namespace Content.Shared._Serenity.Economy;
 public sealed partial class CurrencyExchangeComponent : Component
 {
     /// <summary>
-    /// How many F-Bills one credit is worth. F-Bills are the weaker currency: station-scale
+    /// How many Federal Bills one credit is worth. Federal Bills are the weaker currency: station-scale
     /// cash finds run to thousands, while a shift's wages are tens of credits, so parity
     /// would let a single loot crate outweigh weeks of salary.
     /// The YAML key stays "spesosPerCredit" — renaming a DataField would break the prototype.

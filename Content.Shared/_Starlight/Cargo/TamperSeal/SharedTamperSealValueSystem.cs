@@ -125,7 +125,7 @@ public sealed partial class SharedTamperSealValueSystem : EntitySystem
 
         if (adjusted)
             // Because logs are for humans, we don't really want negative numbers here.
-            // It's either "rewarded 500 F-Bills" or "penalized 500 F-Bills", not "penalized -500 F-Bills" or whatever.
+            // It's either "rewarded 500 Federal Bills" or "penalized 500 Federal Bills", not "penalized -500 Federal Bills" or whatever.
             LogMutation(uid, mutation with { Amount = Math.Abs(mutation.Amount) }, action, result, user);
 
         return adjusted;
@@ -146,9 +146,9 @@ public sealed partial class SharedTamperSealValueSystem : EntitySystem
 
         if (user != null)
             _adminLogger.Add(LogType.Action, LogImpact.Medium,
-                $"{ToPrettyString(user):player} caused {accountName} to be {result} {mutation.Amount} F-Bills by {action} the seal on {ToPrettyString(uid)}");
+                $"{ToPrettyString(user):player} caused {accountName} to be {result} {mutation.Amount} Federal Bills by {action} the seal on {ToPrettyString(uid)}");
         else
             _adminLogger.Add(LogType.Action, LogImpact.Medium,
-                $"Unknown source caused {accountName} to be {result} {mutation.Amount} F-Bills by {action} the seal on {ToPrettyString(uid)}");
+                $"Unknown source caused {accountName} to be {result} {mutation.Amount} Federal Bills by {action} the seal on {ToPrettyString(uid)}");
     }
 }

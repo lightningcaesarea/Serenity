@@ -2,7 +2,7 @@
   parent: BaseComputerAiAccess
   id: CurrencyExchangeMachine
   name: currency exchange
-  description: Converts F-Bills into NanoTrasen credits and back. Takes a cut.
+  description: Converts Federal Bills into Sector Credits and back. Takes a cut.
   placement:
     mode: SnapgridCenter
     snap:
