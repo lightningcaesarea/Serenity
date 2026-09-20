@@ -7,6 +7,7 @@ using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.CustomControls;
 using Robust.Shared.Prototypes;
 using Content.Client.Lobby;
+using Content.Client.Stylesheets;
 
 namespace Content.Client._Serenity.Kinks;
 
@@ -273,7 +274,7 @@ public sealed class KinkListWindow : DefaultWindow
 
         var btnFavorite = MakePrefButton("★", ColorFavorite, KinkPreferenceLevel.Favorite);
         var btnYes = MakePrefButton("✓", ColorYes, KinkPreferenceLevel.Yes);
-        var btnMaybe = MakePrefButton("~", ColorMaybe, KinkPreferenceLevel.Maybe);
+        var btnMaybe = MakePrefButton("?", ColorMaybe, KinkPreferenceLevel.Maybe);
         var btnNo = MakePrefButton("✗", ColorNo, KinkPreferenceLevel.No);
 
         var buttons = new[] { btnFavorite, btnYes, btnMaybe, btnNo };
@@ -304,18 +305,18 @@ public sealed class KinkListWindow : DefaultWindow
 
     private static Button MakePrefButton(string text, Color color, KinkPreferenceLevel level)
     {
-        return new Button
+        // No MaxSize: clamping below the stylesheet's natural button height squeezes the glyph
+        // toward the bottom edge. Let the button size itself and centre the label instead.
+        var button = new Button
         {
             Text = text,
-            MinSize = new Vector2(28, 22),
-            MaxSize = new Vector2(28, 22),
-            // Sit flush with the top of the row rather than centring on it — centred, the
-            // glyphs drift below the kink name they belong to.
-            VerticalAlignment = VAlignment.Top,
-            Margin = new Thickness(0, -6, 0, 0),
+            MinWidth = 28,
+            StyleClasses = { StyleClass.ButtonOpenBoth },
             ToolTip = Loc.GetString($"kink-preference-{level.ToString().ToLowerInvariant()}"),
             ModulateSelfOverride = color,
         };
+        button.Label.VAlign = Label.VAlignMode.Center;
+        return button;
     }
 
     private void RefreshButtons(string kinkId, Button[] buttons)
