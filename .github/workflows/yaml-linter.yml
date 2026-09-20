@@ -5,13 +5,11 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
-#on:
-#  push:
-#    branches: [ master, staging, stable, Starlight, starlight-dev ]
-#  merge_group:
-#  pull_request:
-#    types: [ opened, reopened, synchronize, ready_for_review ]
-#  workflow_dispatch:
+# Serenity: upstream disabled this by commenting out `on:`, but a workflow with no triggers is
+# invalid and GitHub reports a failed run for it on every push. The YAML lint still runs as a
+# job inside build-test-debug.yml; keep this file manual-only so it parses without auto-running.
+on:
+  workflow_dispatch:
 
 jobs:
   build:
