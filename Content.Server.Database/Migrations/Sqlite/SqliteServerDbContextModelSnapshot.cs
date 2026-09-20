@@ -892,6 +892,10 @@ namespace Content.Server.Database.Migrations.Sqlite
                         .HasColumnType("TEXT")
                         .HasColumnName("resource");
 
+                    b.Property<string>("Reason")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("reason");
+
                     b.HasKey("Id")
                         .HasName("PK_serenity_resource_transaction");
 

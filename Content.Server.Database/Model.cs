@@ -1154,6 +1154,9 @@ namespace Content.Server.Database
         public double BalanceAfter { get; set; }
 
         public DateTime CreatedAt { get; set; }
+
+        /// <summary>Why the balance moved (e.g. "salary:Chef", "atm-deposit", "admin:Name: text"). Null for legacy rows.</summary>
+        public string? Reason { get; set; }
     }
 
     [Table("uploaded_resource_log")]

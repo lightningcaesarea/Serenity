@@ -193,7 +193,10 @@ namespace Content.Server.Database
         Task<Dictionary<string, double>> GetPlayerResources(Guid player, CancellationToken cancel = default);
 
         /// <summary>Persist the absolute value of one resource and append a ledger row for the change.</summary>
-        Task SetPlayerResource(Guid player, string resource, double value, double delta);
+        Task SetPlayerResource(Guid player, string resource, double value, double delta, string? reason);
+
+        /// <summary>Most recent ledger rows for a player, newest first.</summary>
+        Task<List<PlayerResourceTransaction>> GetPlayerResourceTransactions(Guid player, int limit, CancellationToken cancel = default);
 
         #endregion
 
@@ -657,10 +660,16 @@ namespace Content.Server.Database
             return RunDbCommand(() => _db.GetPlayerResources(player, cancel));
         }
 
-        public Task SetPlayerResource(Guid player, string resource, double value, double delta)
+        public Task SetPlayerResource(Guid player, string resource, double value, double delta, string? reason)
         {
             DbWriteOpsMetric.Inc();
-            return RunDbCommand(() => _db.SetPlayerResource(player, resource, value, delta));
+            return RunDbCommand(() => _db.SetPlayerResource(player, resource, value, delta, reason));
+        }
+
+        public Task<List<PlayerResourceTransaction>> GetPlayerResourceTransactions(Guid player, int limit, CancellationToken cancel)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetPlayerResourceTransactions(player, limit, cancel));
         }
 
         #endregion

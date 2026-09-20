@@ -16,6 +16,9 @@ using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Content.Server._Starlight.SecureTerminal;
 using Content.Shared._Starlight.Economy;
+using Content.Shared._Serenity.Economy; // Serenity
+using Content.Shared.Administration.Logs; // Serenity
+using Content.Shared.Database; // Serenity
 
 namespace Content.Server._Starlight.Economy;
 public sealed partial class SalarySystem : SharedSalarySystem
@@ -23,7 +26,8 @@ public sealed partial class SalarySystem : SharedSalarySystem
     [Dependency] private IEntityManager _entityManager = default!;
     [Dependency] private INullLinkPlayerManager _nullLinkRoles = default!;
     [Dependency] private IPlayerRolesManager _playerRolesManager = default!;
-    [Dependency] private ISharedNullLinkPlayerResourcesManager _playerResources = default!;
+    [Dependency] private ISerenityPlayerResourcesManager _playerResources = default!; // Serenity: reason-carrying variant
+    [Dependency] private ISharedAdminLogManager _adminLogger = default!; // Serenity
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private IGameTiming _time = default!;
     [Dependency] private IPrototypeManager _prototypes = default!;
@@ -85,7 +89,9 @@ public sealed partial class SalarySystem : SharedSalarySystem
                             var amount = CalculateSalaryWithBonuses(salary, query.Current.Session);
                             var sender = _salaries.Sender.GetValueOrDefault(role.Prototype, "NanoTrasen");
 
-                            _playerResources.TryUpdateResource(query.Current.Session, "credits", amount);
+                            _playerResources.TryUpdateResource(query.Current.Session, "credits", amount, $"salary:{role.Prototype}"); // Serenity
+                            _adminLogger.Add(LogType.Economy, LogImpact.Low,
+                                $"Salary of {amount} Sector Credits paid to {query.Current.Session.Name} for {role.Prototype} by {sender}"); // Serenity
                             var message = Loc.GetString("economy-chat-salary-message", ("amount", amount), ("sender", sender));
                             var wrappedMessage = Loc.GetString("economy-chat-salary-wrapped-message", ("amount", amount), ("sender", sender), ("senderColor", "#2384CE"));
                             _chat.ChatMessageToOne(ChatChannel.Notifications, message, wrappedMessage, default, false, query.Current.Session.Channel, Color.FromHex("#57A3F7"));
@@ -128,7 +134,9 @@ public sealed partial class SalarySystem : SharedSalarySystem
         if (!_playerResources.TryGetResource(session, "credits", out var balance))
             return;
 
-        _playerResources.TryUpdateResource(session, "credits", amount);
+        _playerResources.TryUpdateResource(session, "credits", amount, "donate"); // Serenity
+        _adminLogger.Add(LogType.Economy, LogImpact.Medium,
+            $"Donation credit of {amount} Sector Credits granted to {session.Name}"); // Serenity
 
         // We need to make a prototype
         var i = _random.Next(0, 20);

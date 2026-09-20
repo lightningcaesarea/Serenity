@@ -761,7 +761,18 @@ namespace Content.Server.Database
         /// Writes the absolute new value of one resource and appends a ledger row for the change.
         /// Callers serialize writes per player, so a plain read-modify-write is sufficient here.
         /// </summary>
-        public async Task SetPlayerResource(Guid player, string resource, double value, double delta)
+        public async Task<List<PlayerResourceTransaction>> GetPlayerResourceTransactions(Guid player, int limit, CancellationToken cancel)
+        {
+            await using var db = await GetDb(cancel);
+
+            return await db.DbContext.PlayerResourceTransaction
+                .Where(t => t.PlayerId == player)
+                .OrderByDescending(t => t.Id)
+                .Take(limit)
+                .ToListAsync(cancel);
+        }
+
+        public async Task SetPlayerResource(Guid player, string resource, double value, double delta, string? reason)
         {
             await using var db = await GetDb();
 
@@ -785,6 +796,7 @@ namespace Content.Server.Database
                 Delta = delta,
                 BalanceAfter = value,
                 CreatedAt = now,
+                Reason = reason,
             });
 
             await db.DbContext.SaveChangesAsync();
