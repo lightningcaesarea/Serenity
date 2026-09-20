@@ -2,13 +2,8 @@
 # Anything that can happen TO a player without their own input defaults to false.
 
 # ---- visibility ----
-- type: consentToggle
-  id: NSFWDescriptions
-  name: "Show explicit descriptions"
-  description: "See other players' explicit examine text. Leaving this off hides it from you."
-  category: visibility
-  default: false
-
+# No opt-out for seeing explicit text: the server is 18+ and NSFW consent is taken at signup,
+# so every player here has already agreed to see it. Toggles cover what happens TO a character.
 - type: consentToggle
   id: ShowKinkList
   name: "Publish my kink list"
