@@ -13,6 +13,7 @@ public sealed partial class CharacterInspectWindow : FancyWindow
         InspectTabs.SetTabTitle(0, Loc.GetString("character-info-ic"));
         InspectTabs.SetTabTitle(1, Loc.GetString("character-info-ooc"));
         InspectTabs.SetTabTitle(2, Loc.GetString("character-info-background"));
+        InspectTabs.SetTabTitle(3, Loc.GetString("character-info-kinks")); // Serenity
         OnClose += ClearCharacter;
     }
 
@@ -21,6 +22,7 @@ public sealed partial class CharacterInspectWindow : FancyWindow
         ICInfo.SetCharacter(entityUid, entityManager, viewer);
         OOCInfo.SetCharacter(entityUid, entityManager, viewer);
         BackgroundInfo.SetCharacter(entityUid, entityManager, viewer);
+        KinksInfo.SetCharacter(entityUid, entityManager); // Serenity
     }
 
     public void ClearCharacter()
@@ -28,5 +30,6 @@ public sealed partial class CharacterInspectWindow : FancyWindow
         ICInfo.ClearCharacter();
         OOCInfo.ClearCharacter();
         BackgroundInfo.ClearCharacter();
+        KinksInfo.ClearCharacter(); // Serenity
     }
 }

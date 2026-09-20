@@ -12,6 +12,7 @@ using Content.Client.UserInterface.Systems.Sandbox;
 using Content.Client._Starlight.UserInterface.Systems.Language; // Starlight
 using Content.Client._Starlight.UserInterface.Systems.BugReport; // Starlight
 using Content.Client._Starlight.Achievement; // Starlight
+using Content.Client._Serenity.Consent; // Serenity
 using Robust.Client.UserInterface.Controllers;
 
 namespace Content.Client.UserInterface.Systems.MenuBar;
@@ -30,6 +31,7 @@ public sealed partial class GameTopMenuBarUIController : UIController
     [Dependency] private LanguageMenuUIController _language = default!; // Starlight
     [Dependency] private BugReportUIController _bug = default!; // Starlight
     [Dependency] private AchievementUIController _achievement = default!; // Starlight
+    [Dependency] private ConsentUIController _consent = default!; // Serenity
 
     private GameTopMenuBar? GameTopMenuBar => UIManager.GetActiveUIWidgetOrNull<GameTopMenuBar>();
 
@@ -56,6 +58,7 @@ public sealed partial class GameTopMenuBarUIController : UIController
         _language.UnloadButton(); // Starlight
         _bug.UnloadButton(); // Starlight
         _achievement.UnloadButton(); // Starlight
+        _consent.UnloadButton(); // Serenity
     }
 
     public void LoadButtons()
@@ -72,5 +75,6 @@ public sealed partial class GameTopMenuBarUIController : UIController
         _language.LoadButton(); // Starlight
         _bug.LoadButton(); // Starlight
         _achievement.LoadButton(); // Starlight
+        _consent.LoadButton(); // Serenity
     }
 }

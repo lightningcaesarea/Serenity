@@ -43,6 +43,17 @@
         HorizontalExpand="True"
         AppendStyleClass="{x:Static style:StyleClass.ButtonSquare}"
         />
+    <!-- Serenity-start: Kinks & Consent -->
+    <ui:MenuButton
+        Name="ConsentButton"
+        Access="Internal"
+        Icon="{xe:Tex '/Textures/Interface/Nano/lock.svg.192dpi.png'}"
+        ToolTip="{Loc 'game-hud-open-consent-menu-button-tooltip'}"
+        MinSize="42 64"
+        HorizontalExpand="True"
+        AppendStyleClass="{x:Static style:StyleClass.ButtonSquare}"
+        />
+    <!-- Serenity-end -->
     <ui:MenuButton
         Name="EmotesButton"
         Access="Internal"
