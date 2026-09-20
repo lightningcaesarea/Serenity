@@ -946,6 +946,10 @@ namespace Content.Server.Database.Migrations.Postgres
                         .HasColumnType("text")
                         .HasColumnName("resource");
 
+                    b.Property<string>("Reason")
+                        .HasColumnType("text")
+                        .HasColumnName("reason");
+
                     b.HasKey("Id")
                         .HasName("PK_serenity_resource_transaction");
 

@@ -2,6 +2,7 @@ using System.Threading.Channels;
 using System.Threading.Tasks;
 using Content.Server.Database;
 using Content.Shared._NullLink;
+using Content.Shared._Serenity.Economy;
 using Content.Shared._Starlight;
 using Robust.Server.Player;
 using Robust.Shared.Enums;
@@ -30,11 +31,14 @@ namespace Content.Server._Serenity.Economy;
 /// top of the loaded values, and only start being persisted once the load has landed — otherwise a
 /// salary paid during that window would be counted twice.
 /// </remarks>
-public sealed partial class SerenityPlayerResourcesManager : SharedNullLinkPlayerResourcesManager, IPostInjectInit
+public sealed partial class SerenityPlayerResourcesManager : SharedNullLinkPlayerResourcesManager, ISerenityPlayerResourcesManager, IPostInjectInit
 {
     [Dependency] private IServerDbManager _db = default!;
     [Dependency] private IPlayerManager _players = default!;
     [Dependency] private ISharedPlayersRoleManager _playersRole = default!;
+
+    private const string ReasonUnspecified = "unspecified";
+    private const string ReasonLoadMerge = "load-merge";
 
     private bool _initialized;
 
@@ -42,7 +46,7 @@ public sealed partial class SerenityPlayerResourcesManager : SharedNullLinkPlaye
     // so hook IoC's post-injection callback to guarantee we start.
     void IPostInjectInit.PostInject() => Initialize();
 
-    private readonly record struct ResourceWrite(Guid User, string Resource, double Value, double Delta);
+    private readonly record struct ResourceWrite(Guid User, string Resource, double Value, double Delta, string Reason);
 
     private readonly Channel<ResourceWrite> _writes = Channel.CreateUnbounded<ResourceWrite>(
         new UnboundedChannelOptions { SingleReader = true, SingleWriter = true });
@@ -110,41 +114,61 @@ public sealed partial class SerenityPlayerResourcesManager : SharedNullLinkPlaye
         {
             stored.TryGetValue(resource, out var before);
             if (value != before)
-                Enqueue(session.UserId, resource, value, value - before);
+                Enqueue(session.UserId, resource, value, value - before, ReasonLoadMerge);
         }
     }
 
+    #region Starlight interface (no reason available)
+
     public override bool TryUpdateResource(ICommonSession session, string id, double value, bool skipNullLink = false)
+        => UpdateCore(session, id, value, ReasonUnspecified);
+
+    public override bool TrySetResource(ICommonSession session, string id, double value, bool skipNullLink = false)
+        => SetCore(session, id, value, ReasonUnspecified);
+
+    #endregion
+
+    #region Serenity interface (reason recorded in the ledger)
+
+    public bool TryUpdateResource(ICommonSession session, string id, double delta, string reason)
+        => UpdateCore(session, id, delta, reason);
+
+    public bool TrySetResource(ICommonSession session, string id, double value, string reason)
+        => SetCore(session, id, value, reason);
+
+    #endregion
+
+    private bool UpdateCore(ICommonSession session, string id, double delta, string reason)
     {
         // Match the stock manager: a zero delta is not a change and must not spam the ledger.
-        if (value == 0 || !base.TryUpdateResource(session, id, value, skipNullLink))
+        if (delta == 0 || !base.TryUpdateResource(session, id, delta))
             return false;
 
         if (_loaded.Contains(session.UserId) && _playersRole.GetPlayerData(session) is { } data)
-            Enqueue(session.UserId, id, data.Resources[id], value);
+            Enqueue(session.UserId, id, data.Resources[id], delta, reason);
 
         return true;
     }
 
-    public override bool TrySetResource(ICommonSession session, string id, double value, bool skipNullLink = false)
+    private bool SetCore(ICommonSession session, string id, double value, string reason)
     {
         if (_playersRole.GetPlayerData(session) is not { } data)
             return false;
 
         data.Resources.TryGetValue(id, out var before);
 
-        if (!base.TrySetResource(session, id, value, skipNullLink))
+        if (!base.TrySetResource(session, id, value))
             return false;
 
         if (_loaded.Contains(session.UserId))
-            Enqueue(session.UserId, id, value, value - before);
+            Enqueue(session.UserId, id, value, value - before, reason);
 
         return true;
     }
 
-    private void Enqueue(NetUserId user, string resource, double value, double delta)
+    private void Enqueue(NetUserId user, string resource, double value, double delta, string reason)
     {
-        if (!_writes.Writer.TryWrite(new ResourceWrite(user.UserId, resource, value, delta)))
+        if (!_writes.Writer.TryWrite(new ResourceWrite(user.UserId, resource, value, delta, reason)))
             _sawmill.Error($"Dropped resource write for {user}: {resource} -> {value}");
     }
 
@@ -154,7 +178,7 @@ public sealed partial class SerenityPlayerResourcesManager : SharedNullLinkPlaye
         {
             try
             {
-                await _db.SetPlayerResource(write.User, write.Resource, write.Value, write.Delta);
+                await _db.SetPlayerResource(write.User, write.Resource, write.Value, write.Delta, write.Reason);
             }
             catch (Exception ex)
             {

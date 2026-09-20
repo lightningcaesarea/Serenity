@@ -84,7 +84,7 @@ public sealed partial class CurrencyExchangeSystem : EntitySystem
         _audio.PlayPvs(ent.Comp.ExchangeSound, ent);
 
         _adminLogger.Add(
-            LogType.Action,
+            LogType.Economy,
             LogImpact.Low,
             $"{ToPrettyString(args.User):player} exchanged {inputCount} {stack.StackTypeId} for {amount} {output} at {ToPrettyString(ent):entity}");
     }

@@ -322,6 +322,8 @@ public sealed partial class SecureCommandTerminalSystem : EntitySystem
             }
 
             _playerResources.TryUpdateResource(actor, "credits", -proto.Fee);
+            _adminLog.Add(LogType.Economy, LogImpact.Medium,
+                $"{ToPrettyString(actor):player} was charged a {proto.Fee} Sector Credit fee for terminal proposal {proto.ID}"); // Serenity
             _popup.PopupCursor($"Held {proto.Fee}\u20a1 pending authorization.", actor, PopupType.Medium);
         }
 

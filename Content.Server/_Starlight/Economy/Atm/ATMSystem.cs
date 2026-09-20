@@ -18,7 +18,7 @@ namespace Content.Server._Starlight.Economy.Atm;
 public sealed partial class ATMSystem : SharedATMSystem
 {
     [Dependency] private IPlayerRolesManager _playerRolesManager = default!;
-    [Dependency] private ISharedNullLinkPlayerResourcesManager _playerResources = default!;
+    [Dependency] private Content.Shared._Serenity.Economy.ISerenityPlayerResourcesManager _playerResources = default!; // Serenity: reason-carrying variant
     [Dependency] private UserInterfaceSystem _uiSystem = default!;
     [Dependency] private HandsSystem _hands = default!;
     [Dependency] private StackSystem _stack = default!;
@@ -46,15 +46,21 @@ public sealed partial class ATMSystem : SharedATMSystem
         if (!_playerResources.TryGetResource(args.Actor, "credits", out var balance) || balance < args.Amount || args.Amount <= 0)
             return;
 
+        if (!_players.TryGetSessionByEntity(args.Actor, out var actorSession))
+            return;
+
         var newBalance = balance - args.Amount;
 
-        _playerResources.TryUpdateResource(args.Actor, "credits", -args.Amount);
+        _playerResources.TryUpdateResource(actorSession, "credits", -args.Amount, "atm-withdraw"); // Serenity
         var cash = SpawnAtPosition(_cash, Transform(uid).Coordinates);
         var stack = EnsureComp<StackComponent>(cash);
         _stack.SetCount((cash, stack), args.Amount);
         _hands.TryPickup(args.Actor, cash);
         _uiSystem.SetUiState(uid, ATMUIKey.Key, new ATMBuiState() { Balance = (int)newBalance });
         _audioSystem.PlayPvs(component.WithdrawSound, uid);
+
+        _adminLogger.Add(LogType.Economy, LogImpact.Low,
+            $"{ToPrettyString(args.Actor):player} withdrew {args.Amount} Sector Credits at {ToPrettyString(uid):entity} (balance {newBalance})"); // Serenity
     }
 
     private void OnAfterInteract(Entity<NTCashComponent> ent, ref AfterInteractEvent args)
@@ -69,10 +75,16 @@ public sealed partial class ATMSystem : SharedATMSystem
             // skimmed; charging again here would double-tax cash that has already been converted.
             var diff = stack.Count;
             var newBalance = balance += diff;
-            _playerResources.TryUpdateResource(args.User, "credits", diff);
+            if (_players.TryGetSessionByEntity(args.User, out var userSession))
+                _playerResources.TryUpdateResource(userSession, "credits", diff, "atm-deposit"); // Serenity
+            else
+                _playerResources.TryUpdateResource(args.User, "credits", diff);
             QueueDel(ent);
             _uiSystem.SetUiState(args.Target.Value, ATMUIKey.Key, new ATMBuiState() { Balance = (int)newBalance! });
             _audioSystem.PlayPvs(atm.DepositSound, args.Target.Value);
+
+            _adminLogger.Add(LogType.Economy, LogImpact.Low,
+                $"{ToPrettyString(args.User):player} deposited {diff} Sector Credits at {ToPrettyString(args.Target.Value):entity} (balance {newBalance})"); // Serenity
         }
     }
 

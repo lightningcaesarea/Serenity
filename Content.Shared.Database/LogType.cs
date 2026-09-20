@@ -399,6 +399,12 @@ public enum LogType
     ChatRateLimited = 87,
 
     /// <summary>
+    /// Serenity: money moved — salary, ATM deposit/withdraw/transfer, currency exchange, terminal fees,
+    /// admin balance adjustments. Serenity values start at 500 to stay clear of upstream and Starlight.
+    /// </summary>
+    Economy = 500,
+
+    /// <summary>
     /// A player changed temperature on atmos device.
     /// </summary>
     AtmosTemperatureChanged = 88,
