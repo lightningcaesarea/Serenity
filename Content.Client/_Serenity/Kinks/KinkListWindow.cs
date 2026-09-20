@@ -21,10 +21,11 @@ public sealed class KinkListWindow : DefaultWindow
     private readonly LineEdit _search;
     private readonly BoxContainer _categoriesBox;
 
-    private static readonly Color ColorFavorite = Color.FromHex("#d4a017");
-    private static readonly Color ColorYes = Color.FromHex("#4caf50");
-    private static readonly Color ColorMaybe = Color.FromHex("#2196f3");
-    private static readonly Color ColorNo = Color.FromHex("#f44336");
+    // Shared with CharacterKinksInfoControl so the read-only view matches the editor.
+    internal static readonly Color ColorFavorite = Color.FromHex("#d4a017");
+    internal static readonly Color ColorYes = Color.FromHex("#4caf50");
+    internal static readonly Color ColorMaybe = Color.FromHex("#2196f3");
+    internal static readonly Color ColorNo = Color.FromHex("#f44336");
     private static readonly Color ColorUnset = Color.FromHex("#555555");
 
     public KinkListWindow(IClientPreferencesManager prefs, IPrototypeManager proto)

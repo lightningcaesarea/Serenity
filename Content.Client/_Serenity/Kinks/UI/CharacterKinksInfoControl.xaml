@@ -1,0 +1,12 @@
+<ui:CharacterKinksInfoControl
+    xmlns="https://spacestation14.io"
+    xmlns:ui="clr-namespace:Content.Client._Serenity.Kinks.UI">
+    <BoxContainer Orientation="Vertical" VerticalExpand="True">
+        <Label VerticalAlignment="Top" Margin="0 6 0 10" HorizontalAlignment="Center" StyleClasses="LabelHeading"
+               Text="{Loc 'kinks-info-heading'}"/>
+        <Label Name="UnpublishedLabel" Access="Public" HorizontalAlignment="Center" Margin="10"
+               Text="{Loc 'kinks-info-unpublished'}"/>
+        <BoxContainer Name="Levels" Access="Public" Orientation="Vertical" VerticalExpand="True" Margin="10 0"
+                      SeparationOverride="8"/>
+    </BoxContainer>
+</ui:CharacterKinksInfoControl>

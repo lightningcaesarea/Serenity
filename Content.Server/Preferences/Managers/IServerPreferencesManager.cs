@@ -19,6 +19,11 @@ namespace Content.Server.Preferences.Managers
         /// </summary>
         event Action<NetUserId>? ConsentTogglesChanged;
 
+        /// <summary>
+        /// Serenity: fired after a player's kink preferences have been validated and stored.
+        /// </summary>
+        event Action<NetUserId>? KinkPreferencesChanged;
+
         Task LoadData(ICommonSession session, CancellationToken cancel);
         void FinishLoad(ICommonSession session);
         void OnClientDisconnected(ICommonSession session);

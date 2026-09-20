@@ -27,6 +27,7 @@ namespace Content.Server.Preferences.Managers
     public sealed partial class ServerPreferencesManager : IServerPreferencesManager, IPostInjectInit
     {
         public event Action<NetUserId>? ConsentTogglesChanged; // Serenity
+        public event Action<NetUserId>? KinkPreferencesChanged; // Serenity
 
         [Dependency] private IServerNetManager _netManager = default!;
         [Dependency] private IConfigurationManager _cfg = default!;
@@ -277,6 +278,8 @@ namespace Content.Server.Preferences.Managers
 
             if (ShouldStorePrefs(message.MsgChannel.AuthType))
                 await _db.SaveKinkPreferencesAsync(userId, validated);
+
+            KinkPreferencesChanged?.Invoke(userId); // Serenity
         }
 
         private async void HandleUpdateConsentTogglesMessage(MsgUpdateConsentToggles message)

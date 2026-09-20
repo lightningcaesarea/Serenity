@@ -1,6 +1,7 @@
 ﻿<ui:CharacterInspectWindow
     xmlns="https://spacestation14.io"
     xmlns:ui="clr-namespace:Content.Client._Starlight.Character.Info.UI"
+    xmlns:kinks="clr-namespace:Content.Client._Serenity.Kinks.UI"
     MinSize="400 545"
 >
     <ScrollContainer HScrollEnabled="False">
@@ -13,6 +14,10 @@
             </BoxContainer>
             <BoxContainer Orientation="Vertical">
                 <ui:CharacterBackgroundInfoControl Access="Public" Name="BackgroundInfo"/>
+            </BoxContainer>
+            <!-- Serenity: published kink list -->
+            <BoxContainer Orientation="Vertical">
+                <kinks:CharacterKinksInfoControl Access="Public" Name="KinksInfo"/>
             </BoxContainer>
         </TabContainer>
 
