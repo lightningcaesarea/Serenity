@@ -29,7 +29,7 @@ public sealed partial class ClimaxSystem : EntitySystem
         if (!_consent.Allows(ent, SharedIntimacySystem.AutoClimaxToggle))
             return;
 
-        TryClimax(ent, true);
+        TryClimax(ent.Owner, true);
     }
 
     public bool CanClimax(Entity<ClimaxComponent?> mob, bool automatic)

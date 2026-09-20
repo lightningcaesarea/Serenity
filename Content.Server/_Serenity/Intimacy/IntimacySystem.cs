@@ -112,7 +112,7 @@ public sealed partial class IntimacySystem : SharedIntimacySystem
         if (args.Actor != actor.Owner)
             return;
 
-        if (!_climax.TryClimax(actor, false))
+        if (!_climax.TryClimax(actor.Owner, false))
             _popup.PopupEntity(Loc.GetString("intimacy-fail-climax"), actor, actor);
 
         RefreshWindow(actor);
@@ -184,7 +184,7 @@ public sealed partial class IntimacySystem : SharedIntimacySystem
             TargetName = Identity.Name(target, EntityManager, actor),
             ActorStats = new Dictionary<string, float>(actor.Comp.Stats),
             TargetStats = new Dictionary<string, float>(Comp<IntimacyParticipantComponent>(target).Stats),
-            CanClimax = _climax.CanClimax(actor, false),
+            CanClimax = _climax.CanClimax(actor.Owner, false),
         };
 
         foreach (var act in AvailableActs(actor, target))
