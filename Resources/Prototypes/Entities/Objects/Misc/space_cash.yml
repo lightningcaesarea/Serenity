@@ -1,8 +1,8 @@
 - type: entity
   parent: BaseItem
   id: SpaceCash
-  name: F-Bills
-  description: You gotta have money.
+  name: Federal Bills
+  description: The universal currency used for everything outside the sector, and some things in sector too.
   components:
   - type: Cash
   - type: Item
@@ -61,7 +61,7 @@
 
 - type: material
   id: Credit
-  name: F-Bill
+  name: Federal Bill
   unit: materials-unit-bill
   stackEntity: SpaceCash
   icon: { sprite: /Textures/Objects/Economy/cash.rsi, state: cash }

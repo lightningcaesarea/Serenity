@@ -9,7 +9,7 @@
   parent: BaseItem
   id: NTCredit
   name: Sector Credit
-  description: You gotta have real money. Exchangeable for F-Bills at a currency exchange, for a fee.
+  description: A specialised local proprietary currency with several unique identifiers to prevent forgery.
   components:
   - type: NTCash
   - type: Cash

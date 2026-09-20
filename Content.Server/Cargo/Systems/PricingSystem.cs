@@ -78,11 +78,11 @@ public sealed partial class PricingSystem : EntitySystem
                     mostValuable.Pop();
             });
 
-            shell.WriteLine($"Grid {gid} appraised to {value} F-Bills.");
+            shell.WriteLine($"Grid {gid} appraised to {value} Federal Bills.");
             shell.WriteLine($"The top most valuable items were:");
             foreach (var (price, ent) in mostValuable)
             {
-                shell.WriteLine($"- {ToPrettyString(ent)} @ {price} F-Bills");
+                shell.WriteLine($"- {ToPrettyString(ent)} @ {price} Federal Bills");
             }
         }
     }

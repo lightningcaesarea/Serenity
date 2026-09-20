@@ -20,7 +20,7 @@ paper-too-quiet-need-chaos-few = Do you feel like this shift has been way too qu
 
                                  For the glory of NanoTrasen
 
-doc-text-printer-station-location = Hello, I am not supposed to be telling you this, but we accidentally bluespaced your station into NT aligned space. We have left enough F-Bills in your QM's locker for a nice Pizza party.                                                                                                             [color=white].[/color]                                   - NTCC Corrections Officer "Envy"
+doc-text-printer-station-location = Hello, I am not supposed to be telling you this, but we accidentally bluespaced your station into NT aligned space. We have left enough Federal Bills in your QM's locker for a nice Pizza party.                                                                                                             [color=white].[/color]                                   - NTCC Corrections Officer "Envy"
 
 doc-text-printer-endymion-memorial = {" "}
                                      {"[color=blue][head=1][bold]Endymion Memorial Unveiled[/bold][/head][/color]"}

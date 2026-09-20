@@ -9,7 +9,7 @@ thief-backpack-category-communicator-description-starlight =
     Money is power, and secrets are money. Use your silver tongue
     and wealth to subvert the station.
     Includes: Master key for all station channels, a binary key,
-    a CyberSun pen, voice mask implanter, and 20k F-Bills inside
+    a CyberSun pen, voice mask implanter, and 20k Federal Bills inside
     a briefcase.
 
 thief-backpack-category-sleeper-description-starlight =

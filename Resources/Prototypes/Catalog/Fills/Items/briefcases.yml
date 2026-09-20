@@ -28,7 +28,7 @@
 - type: entity
   id: BriefcaseSyndieLobbyingBundleFilled
   parent: BriefcaseSyndie
-  suffix: Syndicate, F-Bills
+  suffix: Syndicate, Federal Bills
   components:
   - type: EntityTableContainerFill
     containers:
@@ -47,7 +47,7 @@
 - type: entity
   id: BriefcaseThiefBribingBundleFilled
   parent: BriefcaseSyndie
-  suffix: Thief, F-Bills
+  suffix: Thief, Federal Bills
   components:
   - type: EntityTableContainerFill
     containers:
