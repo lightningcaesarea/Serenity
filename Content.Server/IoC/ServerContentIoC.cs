@@ -123,7 +123,8 @@ internal static class ServerContentIoC
         deps.Register<INullLinkPlayTimeManager, NullLinkPlayTimeManager>();
         deps.Register<INullLinkEventBusManager, NullLinkEventBusManager>();
         deps.Register<ISharedNullLinkPlayerRolesReqManager, PlayerRolesReqManager>();
-        deps.Register<ISharedNullLinkPlayerResourcesManager, NullLinkPlayerResourcesManager>();
+        // Serenity: DB-backed resources instead of NullLink, which we have no access to.
+        deps.Register<ISharedNullLinkPlayerResourcesManager, _Serenity.Economy.SerenityPlayerResourcesManager>();
 
         // nulllink end
     }

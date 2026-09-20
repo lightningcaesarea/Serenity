@@ -187,6 +187,16 @@ namespace Content.Server.Database
 
         #endregion
 
+        #region Serenity player resources
+
+        /// <summary>Every persisted resource for a player, keyed by resource id (e.g. "credits").</summary>
+        Task<Dictionary<string, double>> GetPlayerResources(Guid player, CancellationToken cancel = default);
+
+        /// <summary>Persist the absolute value of one resource and append a ledger row for the change.</summary>
+        Task SetPlayerResource(Guid player, string resource, double value, double delta);
+
+        #endregion
+
         #region Player Records
         Task UpdatePlayerRecordAsync(
             NetUserId userId,
@@ -639,6 +649,18 @@ namespace Content.Server.Database
         {
             DbWriteOpsMetric.Inc();
             return RunDbCommand(() => _db.UpdatePlayTimes(updates));
+        }
+
+        public Task<Dictionary<string, double>> GetPlayerResources(Guid player, CancellationToken cancel)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetPlayerResources(player, cancel));
+        }
+
+        public Task SetPlayerResource(Guid player, string resource, double value, double delta)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.SetPlayerResource(player, resource, value, delta));
         }
 
         #endregion

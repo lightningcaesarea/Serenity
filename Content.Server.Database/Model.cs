@@ -46,6 +46,9 @@ namespace Content.Server.Database
         public DbSet<RoleWhitelist> RoleWhitelists { get; set; } = null!;
         public DbSet<BanTemplate> BanTemplate { get; set; } = null!;
         public DbSet<IPIntelCache> IPIntelCache { get; set; } = null!;
+        // Serenity: DB-backed player resources (Sector Credits) + audit ledger.
+        public DbSet<PlayerResource> PlayerResource { get; set; } = null!;
+        public DbSet<PlayerResourceTransaction> PlayerResourceTransaction { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -169,6 +172,14 @@ namespace Content.Server.Database
             modelBuilder.Entity<PlayTime>()
                 .HasIndex(v => new { v.PlayerId, Role = v.Tracker })
                 .IsUnique();
+
+            // Serenity
+            modelBuilder.Entity<PlayerResource>()
+                .HasIndex(r => new { r.PlayerId, r.Resource })
+                .IsUnique();
+
+            modelBuilder.Entity<PlayerResourceTransaction>()
+                .HasIndex(t => t.PlayerId);
 
             modelBuilder.Entity<AdminLogPlayer>()
                 .HasOne(player => player.Player)
@@ -1100,6 +1111,49 @@ namespace Content.Server.Database
         public string Tracker { get; set; } = null!;
 
         public TimeSpan TimeSpent { get; set; }
+    }
+
+    /// <summary>
+    /// Serenity: one row per (player, resource key). Backs <c>ISharedNullLinkPlayerResourcesManager</c>
+    /// so Sector Credits survive disconnects and restarts without NullLink.
+    /// </summary>
+    [Table("serenity_player_resource")]
+    public sealed class PlayerResource
+    {
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
+
+        [Required]
+        public Guid PlayerId { get; set; }
+
+        [Required]
+        public string Resource { get; set; } = null!;
+
+        public double Value { get; set; }
+
+        public DateTime UpdatedAt { get; set; }
+    }
+
+    /// <summary>
+    /// Serenity: append-only ledger of every resource change, for admin disputes and exploit forensics.
+    /// </summary>
+    [Table("serenity_resource_transaction")]
+    public sealed class PlayerResourceTransaction
+    {
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
+
+        [Required]
+        public Guid PlayerId { get; set; }
+
+        [Required]
+        public string Resource { get; set; } = null!;
+
+        public double Delta { get; set; }
+
+        public double BalanceAfter { get; set; }
+
+        public DateTime CreatedAt { get; set; }
     }
 
     [Table("uploaded_resource_log")]

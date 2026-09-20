@@ -831,6 +831,75 @@ namespace Content.Server.Database.Migrations.Sqlite
                     b.ToTable("player", (string)null);
                 });
 
+            modelBuilder.Entity("Content.Server.Database.PlayerResource", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("serenity_player_resource_id");
+
+                    b.Property<Guid>("PlayerId")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("player_id");
+
+                    b.Property<string>("Resource")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("resource");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("updated_at");
+
+                    b.Property<double>("Value")
+                        .HasColumnType("REAL")
+                        .HasColumnName("value");
+
+                    b.HasKey("Id")
+                        .HasName("PK_serenity_player_resource");
+
+                    b.HasIndex("PlayerId", "Resource")
+                        .IsUnique();
+
+                    b.ToTable("serenity_player_resource", (string)null);
+                });
+
+            modelBuilder.Entity("Content.Server.Database.PlayerResourceTransaction", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("serenity_resource_transaction_id");
+
+                    b.Property<double>("BalanceAfter")
+                        .HasColumnType("REAL")
+                        .HasColumnName("balance_after");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("created_at");
+
+                    b.Property<double>("Delta")
+                        .HasColumnType("REAL")
+                        .HasColumnName("delta");
+
+                    b.Property<Guid>("PlayerId")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("player_id");
+
+                    b.Property<string>("Resource")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("resource");
+
+                    b.HasKey("Id")
+                        .HasName("PK_serenity_resource_transaction");
+
+                    b.HasIndex("PlayerId");
+
+                    b.ToTable("serenity_resource_transaction", (string)null);
+                });
+
             modelBuilder.Entity("Content.Server.Database.Preference", b =>
                 {
                     b.Property<int>("Id")
