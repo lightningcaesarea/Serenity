@@ -4,7 +4,7 @@
     sprite: Structures/Shuttles/thruster.rsi
     state: base
   product: CrateEngineeringThruster
-  cost: 2250
+  cost: 4500
   category: cargoproduct-category-name-shuttle
   group: market
 
@@ -14,7 +14,7 @@
     sprite: Structures/Shuttles/gyroscope.rsi
     state: base
   product: CrateEngineeringGyroscope
-  cost: 6000
+  cost: 12000
   category: cargoproduct-category-name-shuttle
   group: market
 

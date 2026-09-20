@@ -4,6 +4,6 @@
     sprite: Clothing/OuterClothing/Armor/armor_reflec.rsi
     state: icon
   product: CrateSecurityReflectiveArmor
-  cost: 9000
+  cost: 18000
   category: cargoproduct-category-name-security
   group: market

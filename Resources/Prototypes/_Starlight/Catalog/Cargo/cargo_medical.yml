@@ -4,6 +4,6 @@
     sprite: Objects/Tanks/anesthetic.rsi
     state: icon
   product: CrateMedicalSedative
-  cost: 1500
+  cost: 3000
   category: cargoproduct-category-name-medical
   group: market
