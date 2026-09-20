@@ -4,7 +4,7 @@
     sprite: Objects/Specific/Janitorial/spray_bottle.rsi
     state: cleaner
   product: CrateServiceJanitorialSupplies
-  cost: 840
+  cost: 1680
   category: cargoproduct-category-name-service
   group: market
 
@@ -14,7 +14,7 @@
     sprite: Objects/Weapons/Grenades/janitor.rsi
     state: icon
   product: CrateServiceCleanerGrenades
-  cost: 600
+  cost: 1200
   category: cargoproduct-category-name-service
   group: market
 
@@ -24,7 +24,7 @@
     sprite: Objects/Power/light_bulb.rsi
     state: normal
   product: CrateServiceReplacementLights
-  cost: 900
+  cost: 1800
   category: cargoproduct-category-name-service
   group: market
 
@@ -34,7 +34,7 @@
     sprite: Objects/Power/light_bulb.rsi
     state: normal
   product: CrateServiceHolidayLights
-  cost: 1200
+  cost: 2400
   category: cargoproduct-category-name-service
   group: market
 
@@ -44,7 +44,7 @@
     sprite: Objects/Power/light_bulb.rsi
     state: normal
   product: CrateServiceColorfulLights
-  cost: 1200
+  cost: 2400
   category: cargoproduct-category-name-service
   group: market
 
@@ -54,7 +54,7 @@
     sprite: Objects/Devices/mousetrap.rsi
     state: mousetrap
   product: CrateMousetrapBoxes
-  cost: 750
+  cost: 1500
   category: cargoproduct-category-name-service
   group: market
 
@@ -64,7 +64,7 @@
     sprite: Clothing/Mask/mime.rsi
     state: icon
   product: CrateServiceTheatre
-  cost: 2700
+  cost: 5400
   category: cargoproduct-category-name-service
   group: market
 
@@ -74,7 +74,7 @@
     sprite: Objects/Consumable/Smokeables/Cigarettes/Cartons/green.rsi
     state: icon
   product: CrateServiceSmokeables
-  cost: 2250
+  cost: 4500
   category: cargoproduct-category-name-service
   group: market
 
@@ -84,7 +84,7 @@
     sprite: Objects/Consumable/Smokeables/Cigarettes/Cartons/green.rsi
     state: icon
   product: BoxServiceCustomSmokable #Funky change boxification
-  cost: 1500
+  cost: 3000
   category: cargoproduct-category-name-service
   group: market
 
@@ -94,7 +94,7 @@
     sprite: Objects/Misc/pens.rsi
     state: pen
   product: CrateServiceBureaucracy
-  cost: 1500
+  cost: 3000
   category: cargoproduct-category-name-service
   group: market
 
@@ -104,7 +104,7 @@
     sprite: Structures/Machines/fax_machine.rsi
     state: icon
   product: CrateServiceFaxMachine
-  cost: 3000
+  cost: 6000
   category: cargoproduct-category-name-service
   group: market
 
@@ -114,7 +114,7 @@
     sprite: Objects/Misc/id_cards.rsi
     state: default
   product: CrateServicePersonnel
-  cost: 1500
+  cost: 3000
   category: cargoproduct-category-name-service
   group: market
 
@@ -124,7 +124,7 @@
     sprite: Objects/Misc/books.rsi
     state: book_icon
   product: BoxServiceBlankBooks #Funky change boxification
-  cost: 1500
+  cost: 3000
   category: cargoproduct-category-name-service
   group: market
 
@@ -134,7 +134,7 @@
     sprite: Objects/Misc/books.rsi
     state: book_icon
   product: BoxServiceGuidebooks #Funky change boxification
-  cost: 1950
+  cost: 3900
   category: cargoproduct-category-name-service
   group: market
 
@@ -144,7 +144,7 @@
     sprite: Objects/Consumable/Drinks/generic_jug.rsi
     state: icon
   product: CrateServiceSodaDispenser
-  cost: 1275
+  cost: 2550
   category: cargoproduct-category-name-service
   group: market
 
@@ -154,7 +154,7 @@
     sprite: Objects/Consumable/Drinks/generic_jug.rsi
     state: icon
   product: CrateServiceBoozeDispenser
-  cost: 1125
+  cost: 2250
   category: cargoproduct-category-name-service
   group: market
 
@@ -164,7 +164,7 @@
     sprite: Objects/Storage/boxes.rsi
     state: box
   product: CrateServiceBox
-  cost: 600
+  cost: 1200
   category: cargoproduct-category-name-service
   group: market
 
@@ -174,7 +174,7 @@
     sprite: Clothing/Head/Hoods/Bio/janitor.rsi
     state: icon
   product: CrateJanitorBiosuit
-  cost: 1200
+  cost: 2400
   category: cargoproduct-category-name-service
   group: market
 
@@ -184,7 +184,7 @@
     sprite: Objects/Specific/Kitchen/food_carts.rsi
     state: icon-hot
   product: FoodCartHot
-  cost: 3000
+  cost: 6000
   category: cargoproduct-category-name-service
   group: market
 
@@ -194,7 +194,7 @@
     sprite: Objects/Specific/Kitchen/food_carts.rsi
     state: icon-cold
   product: FoodCartCold
-  cost: 3000
+  cost: 6000
   category: cargoproduct-category-name-service
   group: market
 
@@ -204,7 +204,7 @@
     sprite: Objects/Storage/petcarrier.rsi
     state: icon
   product: PetCarrier
-  cost: 750
+  cost: 1500
   category: cargoproduct-category-name-service
   group: market
 
@@ -214,7 +214,7 @@
     sprite: Clothing/Head/Helmets/janitor_bombsuit.rsi
     state: icon
   product: ClosetJanitorBombFilled
-  cost: 1500
+  cost: 3000
   category: cargoproduct-category-name-service
   group: market
 
@@ -224,7 +224,7 @@
     sprite: Objects/Specific/Janitorial/janitorial_cart.rsi
     state: icon-cart
   product: JanitorialTrolley
-  cost: 450
+  cost: 900
   category: cargoproduct-category-name-service
   group: market
 
@@ -234,6 +234,6 @@
     sprite: Objects/Misc/candles.rsi
     state: candle-big
   product: CrateCandles
-  cost: 750
+  cost: 1500
   category: cargoproduct-category-name-service
   group: market

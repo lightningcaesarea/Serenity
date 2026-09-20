@@ -4,7 +4,7 @@
     sprite: Objects/Fun/crayons.rsi
     state: box
   product: CrateFunArtSupplies
-  cost: 750
+  cost: 1500
   category: cargoproduct-category-name-fun
   group: market
 
@@ -14,7 +14,7 @@
     sprite: Objects/Consumable/Food/Baked/cake.rsi
     state: birthday
   product: CrateFunParty
-  cost: 1500
+  cost: 3000
   category: cargoproduct-category-name-fun
   group: market
 
@@ -24,7 +24,7 @@
     sprite: Objects/Weapons/Guns/Pistols/water_pistol.rsi
     state: display
   product: CrateFunWaterGuns
-  cost: 1125
+  cost: 2250
   category: cargoproduct-category-name-fun
   group: market
 
@@ -34,7 +34,7 @@
     sprite: Objects/Fun/Foam/foam_rifle.rsi
     state: icon
   product: CrateFunFoamGuns
-  cost: 4500
+  cost: 9000
   category: cargoproduct-category-name-fun
   group: market
 
@@ -44,7 +44,7 @@
     sprite: Objects/Fun/Plushies/human.rsi
     state: icon
   product: CrateFunPlushie
-  cost: 1500
+  cost: 3000
   category: cargoproduct-category-name-fun
   group: market
 
@@ -54,7 +54,7 @@
     sprite: Objects/Fun/Plushies/lizard.rsi
     state: icon
   product: BoxFunLizardPlushieBulk #Funky change boxification
-  cost: 750
+  cost: 1500
   category: cargoproduct-category-name-fun
   group: market
 
@@ -64,7 +64,7 @@
     sprite: Objects/Fun/Plushies/shark.rsi
     state: blue
   product: BoxFunSharkPlushieBulk #Funky change boxification
-  cost: 750
+  cost: 1500
   category: cargoproduct-category-name-fun
   group: market
 
@@ -74,7 +74,7 @@
     sprite: Objects/Fun/dice.rsi
     state: d6_6
   product: CrateFunBoardGames
-  cost: 2250
+  cost: 4500
   category: cargoproduct-category-name-fun
   group: market
 
@@ -84,7 +84,7 @@
     sprite: Objects/Specific/Medical/implanter.rsi
     state: implanter0
   product: CrateFunSadTromboneImplants
-  cost: 1500
+  cost: 3000
   category: cargoproduct-category-name-fun
   group: market
 
@@ -94,7 +94,7 @@
     sprite: Objects/Specific/Medical/implanter.rsi
     state: implanter0
   product: CrateFunLightImplants
-  cost: 1500
+  cost: 3000
   category: cargoproduct-category-name-fun
   group: market
 
@@ -104,7 +104,7 @@
     sprite: Clothing/Hands/Gloves/Boxing/boxingred.rsi
     state: icon
   product: BoxFunBoxing #Funky change boxification
-  cost: 750
+  cost: 1500
   category: cargoproduct-category-name-fun
   group: market
 
@@ -114,7 +114,7 @@
     sprite: Structures/Storage/Crates/piratechest.rsi
     state: crate_icon
   product: CrateFunPirate
-  cost: 600
+  cost: 1200
   category: cargoproduct-category-name-fun
   group: market
 
@@ -124,7 +124,7 @@
     sprite: Structures/Storage/Crates/toybox.rsi
     state: crate_icon
   product: CrateFunToyBox
-  cost: 1350
+  cost: 2700
   category: cargoproduct-category-name-fun
   group: market
 
@@ -134,7 +134,7 @@
     sprite: Objects/Specific/Medical/implanter.rsi
     state: implanter0
   product: CrateFunBikeHornImplants
-  cost: 1500
+  cost: 3000
   category: cargoproduct-category-name-fun
   group: market
 
@@ -144,7 +144,7 @@
     sprite: Objects/Fun/figurines.rsi
     state: fig_box
   product: CrateFunMysteryFigurines
-  cost: 6000
+  cost: 12000
   category: cargoproduct-category-name-fun
   group: market
 
@@ -154,7 +154,7 @@
     sprite: Objects/Fun/Darts/dart_red.rsi
     state: icon
   product: CrateFunDartsSet
-  cost: 1350
+  cost: 2700
   category: cargoproduct-category-name-fun
   group: market
 
@@ -164,7 +164,7 @@
     sprite: Structures/Wallmounts/posters.rsi
     state: poster55_legit
   product: CrateFunScurret
-  cost: 7500 # You will surely not regret buying this ## SL EDIT: Made scurrets 7.5k
+  cost: 22500 # You will surely not regret buying this ## SL EDIT: Made scurrets 7.5k
   category: cargoproduct-category-name-fun
   group: market
 
@@ -174,7 +174,7 @@
     sprite: Objects/Economy/cash.rsi
     state: cash_1000000
   product: CrateCargoGambling
-  cost: 15000
+  cost: 30000
   category: cargoproduct-category-name-fun
   group: market
 
@@ -184,7 +184,7 @@
     sprite: Structures/Furniture/potted_plants.rsi
     state: random
   product: CratePlants
-  cost: 1500
+  cost: 3000
   category: cargoproduct-category-name-fun
   group: market
 
@@ -194,6 +194,6 @@
     sprite: Objects/Fun/Instruments/structureinstruments.rsi
     state: drum
   product: BigDrumsInstrument
-  cost: 750 # Starlight, make it consistent with the others
+  cost: 2250 # Starlight, make it consistent with the others
   category: cargoproduct-category-name-instruments # Starlight, consistent with the others
   group: market

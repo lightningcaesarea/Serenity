@@ -4,7 +4,7 @@
     sprite: _Starlight/Structures/Storage/canister-ui.rsi
     state: water_vapor
   product: WaterVaporCanister
-  cost: 900 # PR #5127
+  cost: 2700 # PR #5127
   category: cargoproduct-category-name-atmospherics
   group: market
 
@@ -19,7 +19,7 @@
     state: oxygen
   gasType: Oxygen
   gasMoles: 1000
-  cost: 225
+  cost: 450
   category: cargoproduct-category-name-atmospherics
   group: market
 
@@ -33,7 +33,7 @@
   gasType: Oxygen
   gasMoles: 1000
   gasTemperature: &liquidTemp 72.0
-  cost: 240
+  cost: 480
   category: cargoproduct-category-name-atmospherics
   group: market
 
@@ -46,7 +46,7 @@
     state: nitrogen
   gasType: Nitrogen
   gasMoles: 1000
-  cost: 188
+  cost: 375
   category: cargoproduct-category-name-atmospherics
   group: market
 
@@ -60,7 +60,7 @@
   gasType: Nitrogen
   gasMoles: 1000
   gasTemperature: *liquidTemp
-  cost: 203
+  cost: 405
   category: cargoproduct-category-name-atmospherics
   group: market
 
@@ -73,7 +73,7 @@
     state: carbon
   gasType: CarbonDioxide
   gasMoles: 1000
-  cost: 263
+  cost: 525
   category: cargoproduct-category-name-atmospherics
   group: market
 
@@ -87,7 +87,7 @@
   gasType: CarbonDioxide
   gasMoles: 1000
   gasTemperature: *liquidTemp
-  cost: 285
+  cost: 570
   category: cargoproduct-category-name-atmospherics
   group: market
 
@@ -100,7 +100,7 @@
     state: water_vapor
   gasType: WaterVapor
   gasMoles: 1000
-  cost: 300
+  cost: 600
   category: cargoproduct-category-name-atmospherics
   group: market
 
@@ -113,7 +113,7 @@
     state: plasma
   gasType: Plasma
   gasMoles: 1000
-  cost: 2100
+  cost: 4200
   category: cargoproduct-category-name-atmospherics
   group: market
 
@@ -127,7 +127,7 @@
   gasType: Plasma
   gasMoles: 1000
   gasTemperature: *liquidTemp
-  cost: 3000
+  cost: 6000
   category: cargoproduct-category-name-atmospherics
   group: market
 
@@ -140,7 +140,7 @@
     state: bz
   gasType: BZ
   gasMoles: 1000
-  cost: 2700
+  cost: 5400
   category: cargoproduct-category-name-atmospherics
   group: market
 

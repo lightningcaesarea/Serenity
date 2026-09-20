@@ -4,7 +4,7 @@
     sprite: _Starlight/Objects/Fun/Pinatas/clown.rsi
     state: pinata
   product: CrateFunPinata
-  cost: 1200
+  cost: 2400
   category: cargoproduct-category-name-fun
   group: market
 
@@ -14,7 +14,7 @@
     sprite: _Starlight/Objects/Storage/boxes.rsi
     state: box-twinpointer
   product: CrateFunTwinPointer
-  cost: 3000
+  cost: 6000
   category: cargoproduct-category-name-fun
   group: market
 
@@ -24,7 +24,7 @@
     sprite: _Starlight/Objects/Fun/Plushies/large_soft_shark_plushie.rsi
     state: icon
   product: CrateFunMegaShark
-  cost: 3750
+  cost: 7500
   category: cargoproduct-category-name-fun
   group: market
 
@@ -34,7 +34,7 @@
     sprite: _Starlight/Objects/Specific/supermatter.rsi
     state: supermatter
   product: CrateSaltLamp
-  cost: 3000
+  cost: 6000
   category: cargoproduct-category-name-fun
   group: market
 
@@ -44,6 +44,6 @@
     sprite: Mobs/Animals/mothroach/moproach.rsi
     state: icon
   product: CrateFunMoproach
-  cost: 3000
+  cost: 6000
   category: cargoproduct-category-name-fun
   group: market

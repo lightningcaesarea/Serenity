@@ -4,6 +4,6 @@
     sprite: _Funkystation/Mobs/Animals/meowl.rsi
     state: icon
   product: CrateNPCMeowl
-  cost: 7500
+  cost: 15000
   category: cargoproduct-category-name-livestock
   group: market
