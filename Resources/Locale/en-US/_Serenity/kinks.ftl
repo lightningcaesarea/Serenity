@@ -1,6 +1,9 @@
 ## Lobby
 lobby-kink-list-button = Kinks & Consent
 
+## In-game top bar
+game-hud-open-consent-menu-button-tooltip = Kinks & Consent
+
 ## Window
 kink-list-window-title = Kinks & Consent
 kink-list-search-placeholder = Search kinks...
