@@ -32,6 +32,20 @@
   default: false
 
 - type: consentToggle
+  id: LewdSounds
+  name: "Hear lewd sounds"
+  description: "Play the sound effects that accompany adult interactions near you."
+  category: interaction
+  default: false
+
+- type: consentToggle
+  id: AutoClimax
+  name: "Automatic climax"
+  description: "Let your character climax on their own when pleasure peaks, instead of only when you press the button."
+  category: interaction
+  default: false
+
+- type: consentToggle
   id: LewdContainerFillByOthers
   name: "Container interactions by others"
   description: "Allow other players to initiate milking or filling interactions using containers."

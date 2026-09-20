@@ -26,6 +26,8 @@ namespace Content.Server.Preferences.Managers
     /// </summary>
     public sealed partial class ServerPreferencesManager : IServerPreferencesManager, IPostInjectInit
     {
+        public event Action<NetUserId>? ConsentTogglesChanged; // Serenity
+
         [Dependency] private IServerNetManager _netManager = default!;
         [Dependency] private IConfigurationManager _cfg = default!;
         [Dependency] private IServerDbManager _db = default!;
@@ -303,6 +305,8 @@ namespace Content.Server.Preferences.Managers
 
             if (ShouldStorePrefs(message.MsgChannel.AuthType))
                 await _db.SaveConsentTogglesAsync(userId, validated);
+
+            ConsentTogglesChanged?.Invoke(userId); // Serenity
         }
 
         // Should only be called via UserDbDataManager.

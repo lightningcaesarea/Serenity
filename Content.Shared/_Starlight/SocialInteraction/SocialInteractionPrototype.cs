@@ -1,3 +1,4 @@
+using Content.Shared._Serenity.Consent;
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
 
@@ -71,4 +72,12 @@ public sealed partial class SocialInteractionPrototype : IPrototype
     /// </summary>
     [DataField("isPhysical")]
     public bool IsPhysical = true;
+
+    // Serenity: start
+    /// <summary>
+    /// Consent toggles both the user and the target must allow for this interaction to be offered.
+    /// </summary>
+    [DataField]
+    public List<ProtoId<ConsentTogglePrototype>> RequiredConsent = new();
+    // Serenity: end
 }

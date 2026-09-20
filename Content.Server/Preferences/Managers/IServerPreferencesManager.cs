@@ -14,6 +14,11 @@ namespace Content.Server.Preferences.Managers
     {
         void Init();
 
+        /// <summary>
+        /// Serenity: fired after a player's consent toggles have been validated and stored.
+        /// </summary>
+        event Action<NetUserId>? ConsentTogglesChanged;
+
         Task LoadData(ICommonSession session, CancellationToken cancel);
         void FinishLoad(ICommonSession session);
         void OnClientDisconnected(ICommonSession session);
