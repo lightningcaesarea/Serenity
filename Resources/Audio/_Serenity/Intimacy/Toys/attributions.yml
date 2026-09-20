@@ -1,0 +1,17 @@
+# Copied from Afterlight (Resources/Audio/_Afterlight/Lewd) with their attribution rows. All CC-BY-SA-3.0.
+# Files with parentheses in their names were renamed for path safety; sources are unchanged.
+
+- files: ["bzzz-loop-1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from S.P.L.U.R.T-tg"
+  source: "https://github.com/SPLURT-Station/S.P.L.U.R.T-tg/blob/a702f9bd9f68c9e8f679b15ad5b36e3f3a2439af/modular_skyrat/modules/modular_items/lewd_items/sounds/bzzz-loop-1.ogg"
+
+- files: ["latex.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from S.P.L.U.R.T-tg"
+  source: "https://github.com/SPLURT-Station/S.P.L.U.R.T-tg/blob/a702f9bd9f68c9e8f679b15ad5b36e3f3a2439af/modular_skyrat/modules/modular_items/lewd_items/sounds/latex.ogg"
+
+- files: ["vibrate.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from S.P.L.U.R.T-tg"
+  source: "https://github.com/SPLURT-Station/S.P.L.U.R.T-tg/blob/a702f9bd9f68c9e8f679b15ad5b36e3f3a2439af/modular_skyrat/modules/modular_items/lewd_items/sounds/vibrate.ogg"

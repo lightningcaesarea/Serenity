@@ -1,0 +1,153 @@
+# Sound collections for the intimacy loop. Files live under Resources/Audio/_Serenity/Intimacy and
+# are CC-BY-SA-3.0 (originally S.P.L.U.R.T-tg, via Afterlight); see each folder's attributions.yml.
+
+# ---- Act sounds ----
+- type: soundCollection
+  id: IntimacyKiss
+  files:
+  - /Audio/_Serenity/Intimacy/Interactions/kiss1.ogg
+  - /Audio/_Serenity/Intimacy/Interactions/kiss2.ogg
+  - /Audio/_Serenity/Intimacy/Interactions/kiss3.ogg
+  - /Audio/_Serenity/Intimacy/Interactions/kiss4.ogg
+  - /Audio/_Serenity/Intimacy/Interactions/kiss5.ogg
+
+- type: soundCollection
+  id: IntimacySquelch
+  files:
+  - /Audio/_Serenity/Intimacy/Interactions/squelch1.ogg
+  - /Audio/_Serenity/Intimacy/Interactions/squelch2.ogg
+  - /Audio/_Serenity/Intimacy/Interactions/squelch3.ogg
+
+- type: soundCollection
+  id: IntimacyOral
+  files:
+  - /Audio/_Serenity/Intimacy/Interactions/oral1.ogg
+  - /Audio/_Serenity/Intimacy/Interactions/oral2.ogg
+
+- type: soundCollection
+  id: IntimacyChamp
+  files:
+  - /Audio/_Serenity/Intimacy/Interactions/champ1.ogg
+  - /Audio/_Serenity/Intimacy/Interactions/champ2.ogg
+
+- type: soundCollection
+  id: IntimacyBang
+  files:
+  - /Audio/_Serenity/Intimacy/Interactions/bang1.ogg
+  - /Audio/_Serenity/Intimacy/Interactions/bang2.ogg
+  - /Audio/_Serenity/Intimacy/Interactions/bang3.ogg
+  - /Audio/_Serenity/Intimacy/Interactions/bang4.ogg
+  - /Audio/_Serenity/Intimacy/Interactions/bang5.ogg
+  - /Audio/_Serenity/Intimacy/Interactions/bang6.ogg
+
+- type: soundCollection
+  id: IntimacyBlowjob
+  files:
+  - /Audio/_Serenity/Intimacy/Interactions/bj1.ogg
+  - /Audio/_Serenity/Intimacy/Interactions/bj2.ogg
+  - /Audio/_Serenity/Intimacy/Interactions/bj3.ogg
+  - /Audio/_Serenity/Intimacy/Interactions/bj4.ogg
+  - /Audio/_Serenity/Intimacy/Interactions/bj5.ogg
+  - /Audio/_Serenity/Intimacy/Interactions/bj6.ogg
+  - /Audio/_Serenity/Intimacy/Interactions/bj7.ogg
+  - /Audio/_Serenity/Intimacy/Interactions/bj8.ogg
+  - /Audio/_Serenity/Intimacy/Interactions/bj9.ogg
+  - /Audio/_Serenity/Intimacy/Interactions/bj10.ogg
+  - /Audio/_Serenity/Intimacy/Interactions/bj11.ogg
+
+- type: soundCollection
+  id: IntimacyFootDry
+  files:
+  - /Audio/_Serenity/Intimacy/Interactions/foot_dry1.ogg
+  - /Audio/_Serenity/Intimacy/Interactions/foot_dry2.ogg
+  - /Audio/_Serenity/Intimacy/Interactions/foot_dry3.ogg
+  - /Audio/_Serenity/Intimacy/Interactions/foot_dry4.ogg
+
+- type: soundCollection
+  id: IntimacyFootWet
+  files:
+  - /Audio/_Serenity/Intimacy/Interactions/foot_wet1.ogg
+  - /Audio/_Serenity/Intimacy/Interactions/foot_wet2.ogg
+  - /Audio/_Serenity/Intimacy/Interactions/foot_wet3.ogg
+
+# ---- Vocalisations (see IntimacyVocalComponent) ----
+- type: soundCollection
+  id: IntimacyMoanMale
+  files:
+  - /Audio/_Serenity/Intimacy/Voice/moan_m1.ogg
+  - /Audio/_Serenity/Intimacy/Voice/moan_m2.ogg
+  - /Audio/_Serenity/Intimacy/Voice/moan_m3.ogg
+
+- type: soundCollection
+  id: IntimacyMoanFemale
+  files:
+  - /Audio/_Serenity/Intimacy/Voice/moan_f1.ogg
+  - /Audio/_Serenity/Intimacy/Voice/moan_f2.ogg
+  - /Audio/_Serenity/Intimacy/Voice/moan_f3.ogg
+  - /Audio/_Serenity/Intimacy/Voice/moan_f4.ogg
+  - /Audio/_Serenity/Intimacy/Voice/moan_f5.ogg
+  - /Audio/_Serenity/Intimacy/Voice/moan_f6.ogg
+  - /Audio/_Serenity/Intimacy/Voice/moan_f7.ogg
+
+- type: soundCollection
+  id: IntimacyMoanFemaleLight
+  files:
+  - /Audio/_Serenity/Intimacy/Voice/moan_f_light7.ogg
+  - /Audio/_Serenity/Intimacy/Voice/moan_f_light8.ogg
+  - /Audio/_Serenity/Intimacy/Voice/moan_f_light9.ogg
+  - /Audio/_Serenity/Intimacy/Voice/moan_f_light10.ogg
+  - /Audio/_Serenity/Intimacy/Voice/moan_f_light11.ogg
+  - /Audio/_Serenity/Intimacy/Voice/moan_f_light12.ogg
+  - /Audio/_Serenity/Intimacy/Voice/moan_f_light13.ogg
+
+- type: soundCollection
+  id: IntimacyMoanFemaleHigh
+  files:
+  - /Audio/_Serenity/Intimacy/Voice/moan_f_high8.ogg
+  - /Audio/_Serenity/Intimacy/Voice/moan_f_high9.ogg
+  - /Audio/_Serenity/Intimacy/Voice/moan_f_high10.ogg
+  - /Audio/_Serenity/Intimacy/Voice/moan_f_high11.ogg
+  - /Audio/_Serenity/Intimacy/Voice/moan_f_high12.ogg
+  - /Audio/_Serenity/Intimacy/Voice/moan_f_high13.ogg
+  - /Audio/_Serenity/Intimacy/Voice/moan_f_high14.ogg
+  - /Audio/_Serenity/Intimacy/Voice/moan_f_high15.ogg
+
+- type: soundCollection
+  id: IntimacyPainMale
+  files:
+  - /Audio/_Serenity/Intimacy/Voice/pain_m1.ogg
+  - /Audio/_Serenity/Intimacy/Voice/pain_m2.ogg
+  - /Audio/_Serenity/Intimacy/Voice/pain_m3.ogg
+  - /Audio/_Serenity/Intimacy/Voice/pain_m4.ogg
+  - /Audio/_Serenity/Intimacy/Voice/pain_m5.ogg
+
+- type: soundCollection
+  id: IntimacyPainFemale
+  files:
+  - /Audio/_Serenity/Intimacy/Voice/pain_f1.ogg
+  - /Audio/_Serenity/Intimacy/Voice/pain_f2.ogg
+  - /Audio/_Serenity/Intimacy/Voice/pain_f3.ogg
+  - /Audio/_Serenity/Intimacy/Voice/pain_f4.ogg
+  - /Audio/_Serenity/Intimacy/Voice/pain_f5.ogg
+  - /Audio/_Serenity/Intimacy/Voice/pain_f6.ogg
+  - /Audio/_Serenity/Intimacy/Voice/pain_f7.ogg
+  - /Audio/_Serenity/Intimacy/Voice/pain_f8.ogg
+
+- type: soundCollection
+  id: IntimacyClimaxMale
+  files:
+  - /Audio/_Serenity/Intimacy/Interactions/final_m1.ogg
+  - /Audio/_Serenity/Intimacy/Interactions/final_m2.ogg
+  - /Audio/_Serenity/Intimacy/Interactions/final_m3.ogg
+
+- type: soundCollection
+  id: IntimacyClimaxFemale
+  files:
+  - /Audio/_Serenity/Intimacy/Interactions/final_f1.ogg
+  - /Audio/_Serenity/Intimacy/Interactions/final_f2.ogg
+  - /Audio/_Serenity/Intimacy/Interactions/final_f3.ogg
+
+- type: soundCollection
+  id: IntimacyBlush
+  files:
+  - /Audio/_Serenity/Intimacy/Emotes/blush.ogg

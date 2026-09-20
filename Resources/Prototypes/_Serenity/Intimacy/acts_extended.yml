@@ -1,0 +1,166 @@
+# Second set of acts, added with the Afterlight-inspired sound pass. Anatomy-gated acts use the
+# feature tags IntimacyFeaturesSystem derives from the character: Tail, Male, Female.
+# Genital-dependent acts are deliberately absent until a genitals system exists.
+
+# ---- Affection ----
+- type: intimacyAct
+  id: BellyRub
+  name: intimacy-act-belly-rub
+  category: Affection
+  actorStats: { Arousal: 2, Pleasure: 2 }
+  targetStats: { Arousal: 3, Pleasure: 5 }
+  messages:
+  - intimacy-msg-belly-rub-1
+  - intimacy-msg-belly-rub-2
+  sound: /Audio/Effects/thudswoosh.ogg
+
+- type: intimacyAct
+  id: Massage
+  name: intimacy-act-massage
+  category: Affection
+  cooldown: 3
+  actorStats: { Arousal: 2, Pleasure: 2 }
+  targetStats: { Arousal: 4, Pleasure: 6, Pain: -8 }
+  messages:
+  - intimacy-msg-massage-1
+  - intimacy-msg-massage-2
+
+- type: intimacyAct
+  id: TailPet
+  name: intimacy-act-tail-pet
+  category: Affection
+  targetNeeds: [ Tail ]
+  actorStats: { Arousal: 1, Pleasure: 2 }
+  targetStats: { Arousal: 3, Pleasure: 5 }
+  messages:
+  - intimacy-msg-tail-pet-1
+  - intimacy-msg-tail-pet-2
+  sound: /Audio/Effects/thudswoosh.ogg
+
+- type: intimacyAct
+  id: TailHug
+  name: intimacy-act-tail-hug
+  category: Affection
+  actorNeeds: [ Tail ]
+  actorStats: { Arousal: 2, Pleasure: 3 }
+  targetStats: { Arousal: 2, Pleasure: 4 }
+  messages:
+  - intimacy-msg-tail-hug-1
+  - intimacy-msg-tail-hug-2
+  sound: /Audio/Effects/thudswoosh.ogg
+
+- type: intimacyAct
+  id: TailIntertwine
+  name: intimacy-act-tail-intertwine
+  category: Affection
+  actorNeeds: [ Tail ]
+  targetNeeds: [ Tail ]
+  actorStats: { Arousal: 3, Pleasure: 4 }
+  targetStats: { Arousal: 3, Pleasure: 4 }
+  messages:
+  - intimacy-msg-tail-intertwine-1
+  - intimacy-msg-tail-intertwine-2
+
+# ---- Sensual ----
+- type: intimacyAct
+  id: BellyKiss
+  name: intimacy-act-belly-kiss
+  category: Sensual
+  actorStats: { Arousal: 3, Pleasure: 2 }
+  targetStats: { Arousal: 5, Pleasure: 4 }
+  messages:
+  - intimacy-msg-belly-kiss-1
+  - intimacy-msg-belly-kiss-2
+  sound:
+    collection: IntimacyKiss
+
+- type: intimacyAct
+  id: TailLick
+  name: intimacy-act-tail-lick
+  category: Sensual
+  targetNeeds: [ Tail ]
+  actorStats: { Arousal: 3, Pleasure: 2 }
+  targetStats: { Arousal: 5, Pleasure: 4 }
+  messages:
+  - intimacy-msg-tail-lick-1
+  - intimacy-msg-tail-lick-2
+  sound:
+    collection: IntimacySquelch
+
+- type: intimacyAct
+  id: Worship
+  name: intimacy-act-worship
+  category: Sensual
+  cooldown: 3
+  actorStats: { Arousal: 5, Pleasure: 2 }
+  targetStats: { Arousal: 5, Pleasure: 5 }
+  messages:
+  - intimacy-msg-worship-1
+  - intimacy-msg-worship-2
+  - intimacy-msg-worship-3
+
+- type: intimacyAct
+  id: Smother
+  name: intimacy-act-smother
+  category: Sensual
+  actorStats: { Arousal: 4, Pleasure: 2 }
+  targetStats: { Arousal: 6, Pleasure: 3 }
+  messages:
+  - intimacy-msg-smother-1
+  - intimacy-msg-smother-2
+
+# ---- Rough ----
+- type: intimacyAct
+  id: Slap
+  name: intimacy-act-slap
+  category: Rough
+  actorStats: { Arousal: 2 }
+  targetStats: { Arousal: 2, Pain: 12 }
+  messages:
+  - intimacy-msg-slap-1
+  - intimacy-msg-slap-2
+  sound: /Audio/_Serenity/Intimacy/Interactions/slap.ogg
+
+- type: intimacyAct
+  id: Choke
+  name: intimacy-act-choke
+  category: Rough
+  cooldown: 3
+  actorStats: { Arousal: 4 }
+  targetStats: { Arousal: 4, Pain: 10 }
+  messages:
+  - intimacy-msg-choke-1
+  - intimacy-msg-choke-2
+
+- type: intimacyAct
+  id: TailPull
+  name: intimacy-act-tail-pull
+  category: Rough
+  targetNeeds: [ Tail ]
+  actorStats: { Arousal: 3 }
+  targetStats: { Arousal: 4, Pain: 10 }
+  messages:
+  - intimacy-msg-tail-pull-1
+  - intimacy-msg-tail-pull-2
+
+# ---- Solo ----
+- type: intimacyAct
+  id: RubBelly
+  name: intimacy-act-rub-belly
+  category: Solo
+  selfOnly: true
+  actorStats: { Arousal: 4, Pleasure: 2 }
+  selfMessages:
+  - intimacy-msg-rub-belly-1
+  - intimacy-msg-rub-belly-2
+
+- type: intimacyAct
+  id: SlapSelf
+  name: intimacy-act-slap-self
+  category: Solo
+  selfOnly: true
+  actorStats: { Arousal: 3, Pain: 10 }
+  selfMessages:
+  - intimacy-msg-slap-self-1
+  - intimacy-msg-slap-self-2
+  sound: /Audio/_Serenity/Intimacy/Interactions/slap.ogg
