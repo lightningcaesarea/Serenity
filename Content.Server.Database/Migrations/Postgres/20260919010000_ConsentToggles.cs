@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
@@ -5,6 +6,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Content.Server.Database.Migrations.Postgres
 {
     /// <inheritdoc />
+    [DbContext(typeof(PostgresServerDbContext))]
+    [Migration("20260919010000_ConsentToggles")]
     public partial class ConsentToggles : Migration
     {
         /// <inheritdoc />

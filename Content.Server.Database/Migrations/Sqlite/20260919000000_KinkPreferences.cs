@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
@@ -5,6 +6,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Content.Server.Database.Migrations.Sqlite
 {
     /// <inheritdoc />
+    [DbContext(typeof(SqliteServerDbContext))]
+    [Migration("20260919000000_KinkPreferences")]
     public partial class KinkPreferences : Migration
     {
         /// <inheritdoc />

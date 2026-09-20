@@ -881,6 +881,79 @@ namespace Content.Server.Database.Migrations.Postgres
                         });
                 });
 
+            modelBuilder.Entity("Content.Server.Database.PlayerResource", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("serenity_player_resource_id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<Guid>("PlayerId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("player_id");
+
+                    b.Property<string>("Resource")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("resource");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated_at");
+
+                    b.Property<double>("Value")
+                        .HasColumnType("double precision")
+                        .HasColumnName("value");
+
+                    b.HasKey("Id")
+                        .HasName("PK_serenity_player_resource");
+
+                    b.HasIndex("PlayerId", "Resource")
+                        .IsUnique();
+
+                    b.ToTable("serenity_player_resource", (string)null);
+                });
+
+            modelBuilder.Entity("Content.Server.Database.PlayerResourceTransaction", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("serenity_resource_transaction_id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<double>("BalanceAfter")
+                        .HasColumnType("double precision")
+                        .HasColumnName("balance_after");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
+
+                    b.Property<double>("Delta")
+                        .HasColumnType("double precision")
+                        .HasColumnName("delta");
+
+                    b.Property<Guid>("PlayerId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("player_id");
+
+                    b.Property<string>("Resource")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("resource");
+
+                    b.HasKey("Id")
+                        .HasName("PK_serenity_resource_transaction");
+
+                    b.HasIndex("PlayerId");
+
+                    b.ToTable("serenity_resource_transaction", (string)null);
+                });
+
             modelBuilder.Entity("Content.Server.Database.Preference", b =>
                 {
                     b.Property<int>("Id")

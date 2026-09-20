@@ -746,6 +746,52 @@ namespace Content.Server.Database
                 .ToListAsync(cancel);
         }
 
+        #region Serenity player resources
+
+        public async Task<Dictionary<string, double>> GetPlayerResources(Guid player, CancellationToken cancel)
+        {
+            await using var db = await GetDb(cancel);
+
+            return await db.DbContext.PlayerResource
+                .Where(r => r.PlayerId == player)
+                .ToDictionaryAsync(r => r.Resource, r => r.Value, cancel);
+        }
+
+        /// <summary>
+        /// Writes the absolute new value of one resource and appends a ledger row for the change.
+        /// Callers serialize writes per player, so a plain read-modify-write is sufficient here.
+        /// </summary>
+        public async Task SetPlayerResource(Guid player, string resource, double value, double delta)
+        {
+            await using var db = await GetDb();
+
+            var now = DateTime.UtcNow;
+            var row = await db.DbContext.PlayerResource
+                .SingleOrDefaultAsync(r => r.PlayerId == player && r.Resource == resource);
+
+            if (row == null)
+            {
+                row = new PlayerResource { PlayerId = player, Resource = resource };
+                db.DbContext.PlayerResource.Add(row);
+            }
+
+            row.Value = value;
+            row.UpdatedAt = now;
+
+            db.DbContext.PlayerResourceTransaction.Add(new PlayerResourceTransaction
+            {
+                PlayerId = player,
+                Resource = resource,
+                Delta = delta,
+                BalanceAfter = value,
+                CreatedAt = now,
+            });
+
+            await db.DbContext.SaveChangesAsync();
+        }
+
+        #endregion
+
         public async Task UpdatePlayTimes(IReadOnlyCollection<PlayTimeUpdate> updates)
         {
             await using var db = await GetDb();
