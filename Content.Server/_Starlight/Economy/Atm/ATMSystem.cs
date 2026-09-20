@@ -65,7 +65,9 @@ public sealed partial class ATMSystem : SharedATMSystem
             && _playerResources.TryGetResource(args.User, "credits", out var balance))
         {
             args.Handled = true; // If we don't do this - debug assert and crash at the dev build.
-            var diff = (int)Math.Floor(stack.Count * 0.9);
+            // Serenity: no deposit fee. The currency exchange machine is the only place value is
+            // skimmed; charging again here would double-tax cash that has already been converted.
+            var diff = stack.Count;
             var newBalance = balance += diff;
             _playerResources.TryUpdateResource(args.User, "credits", diff);
             QueueDel(ent);
