@@ -10,6 +10,7 @@ on:
     types: [opened, synchronize, reopened, edited]
 
 permissions:
+  contents: read # Serenity: private repo — checkout fails with "Repository not found" without this
   pull-requests: read
 
 jobs:
