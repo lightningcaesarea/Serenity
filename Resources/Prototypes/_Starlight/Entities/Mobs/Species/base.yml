@@ -277,6 +277,14 @@
         requireInputValidation: false
       enum.ScentSniffUiKey.Key: # Starlight
         type: ScentSniffBoundUserInterface
+      enum.IntimacyUiKey.Key: # Serenity
+        type: IntimacyBoundUserInterface
+  - type: IntimacyParticipant # Serenity
+  - type: Climax # Serenity
+    messages:
+    - intimacy-msg-climax-1
+    - intimacy-msg-climax-2
+    - intimacy-msg-climax-3
   - type: Barotrauma
     damage:
       types:

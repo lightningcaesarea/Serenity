@@ -1,0 +1,174 @@
+# First set of acts. None of these need anatomy features yet; the genitals system will add
+# acts with actorNeeds / targetNeeds later.
+
+# ---- Affection ----
+- type: intimacyAct
+  id: Hug
+  name: intimacy-act-hug
+  category: Affection
+  allowSelf: false
+  actorStats: { Arousal: 2, Pleasure: 3 }
+  targetStats: { Arousal: 2, Pleasure: 4 }
+  messages:
+  - intimacy-msg-hug-1
+  - intimacy-msg-hug-2
+  sound: /Audio/Effects/thudswoosh.ogg
+
+- type: intimacyAct
+  id: Kiss
+  name: intimacy-act-kiss
+  category: Affection
+  actorStats: { Arousal: 5, Pleasure: 5 }
+  targetStats: { Arousal: 5, Pleasure: 5 }
+  messages:
+  - intimacy-msg-kiss-1
+  - intimacy-msg-kiss-2
+  - intimacy-msg-kiss-3
+
+- type: intimacyAct
+  id: Caress
+  name: intimacy-act-caress
+  category: Affection
+  actorStats: { Arousal: 3, Pleasure: 2 }
+  targetStats: { Arousal: 4, Pleasure: 5 }
+  messages:
+  - intimacy-msg-caress-1
+  - intimacy-msg-caress-2
+
+- type: intimacyAct
+  id: Nuzzle
+  name: intimacy-act-nuzzle
+  category: Affection
+  actorStats: { Arousal: 2, Pleasure: 3 }
+  targetStats: { Arousal: 2, Pleasure: 3 }
+  messages:
+  - intimacy-msg-nuzzle-1
+  - intimacy-msg-nuzzle-2
+
+- type: intimacyAct
+  id: HoldHands
+  name: intimacy-act-hold-hands
+  category: Affection
+  cooldown: 4
+  actorStats: { Pleasure: 2 }
+  targetStats: { Pleasure: 2 }
+  messages:
+  - intimacy-msg-hold-hands-1
+
+# ---- Sensual ----
+- type: intimacyAct
+  id: Grope
+  name: intimacy-act-grope
+  category: Sensual
+  actorStats: { Arousal: 6, Pleasure: 4 }
+  targetStats: { Arousal: 8, Pleasure: 6 }
+  messages:
+  - intimacy-msg-grope-1
+  - intimacy-msg-grope-2
+
+- type: intimacyAct
+  id: Lick
+  name: intimacy-act-lick
+  category: Sensual
+  actorStats: { Arousal: 5, Pleasure: 3 }
+  targetStats: { Arousal: 7, Pleasure: 5 }
+  messages:
+  - intimacy-msg-lick-1
+  - intimacy-msg-lick-2
+
+- type: intimacyAct
+  id: Nibble
+  name: intimacy-act-nibble
+  category: Sensual
+  actorStats: { Arousal: 4, Pleasure: 3 }
+  targetStats: { Arousal: 6, Pleasure: 4, Pain: 2 }
+  messages:
+  - intimacy-msg-nibble-1
+  - intimacy-msg-nibble-2
+
+- type: intimacyAct
+  id: Tease
+  name: intimacy-act-tease
+  category: Sensual
+  range: 2.5
+  actorStats: { Arousal: 4 }
+  targetStats: { Arousal: 9 }
+  messages:
+  - intimacy-msg-tease-1
+  - intimacy-msg-tease-2
+  - intimacy-msg-tease-3
+
+- type: intimacyAct
+  id: Grind
+  name: intimacy-act-grind
+  category: Sensual
+  cooldown: 3
+  actorStats: { Arousal: 8, Pleasure: 8 }
+  targetStats: { Arousal: 8, Pleasure: 8 }
+  messages:
+  - intimacy-msg-grind-1
+  - intimacy-msg-grind-2
+
+# ---- Rough ----
+- type: intimacyAct
+  id: Spank
+  name: intimacy-act-spank
+  category: Rough
+  actorStats: { Arousal: 5, Pleasure: 4 }
+  targetStats: { Arousal: 6, Pleasure: 4, Pain: 8 }
+  messages:
+  - intimacy-msg-spank-1
+  - intimacy-msg-spank-2
+  sound: /Audio/Effects/Footsteps/meatslap.ogg
+
+- type: intimacyAct
+  id: Bite
+  name: intimacy-act-bite
+  category: Rough
+  actorStats: { Arousal: 5, Pleasure: 3 }
+  targetStats: { Arousal: 6, Pleasure: 3, Pain: 12 }
+  messages:
+  - intimacy-msg-bite-1
+  - intimacy-msg-bite-2
+
+- type: intimacyAct
+  id: HairPull
+  name: intimacy-act-hair-pull
+  category: Rough
+  actorStats: { Arousal: 5, Pleasure: 3 }
+  targetStats: { Arousal: 7, Pleasure: 2, Pain: 6 }
+  messages:
+  - intimacy-msg-hair-pull-1
+
+- type: intimacyAct
+  id: Pin
+  name: intimacy-act-pin
+  category: Rough
+  cooldown: 4
+  actorStats: { Arousal: 7, Pleasure: 3 }
+  targetStats: { Arousal: 9, Pleasure: 3, Pain: 3 }
+  messages:
+  - intimacy-msg-pin-1
+  - intimacy-msg-pin-2
+
+# ---- Solo ----
+- type: intimacyAct
+  id: TouchSelf
+  name: intimacy-act-touch-self
+  category: Solo
+  selfOnly: true
+  cooldown: 3
+  actorStats: { Arousal: 6, Pleasure: 9 }
+  selfMessages:
+  - intimacy-msg-touch-self-1
+  - intimacy-msg-touch-self-2
+
+- type: intimacyAct
+  id: Squirm
+  name: intimacy-act-squirm
+  category: Solo
+  selfOnly: true
+  actorStats: { Arousal: 3, Pleasure: 1 }
+  selfMessages:
+  - intimacy-msg-squirm-1
+  - intimacy-msg-squirm-2

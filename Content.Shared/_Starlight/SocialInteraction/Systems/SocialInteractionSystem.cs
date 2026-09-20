@@ -1,3 +1,4 @@
+using Content.Shared._Serenity.Consent; // Serenity
 using Content.Shared._Starlight.SocialInteraction.Components;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Bed.Sleep;
@@ -28,6 +29,7 @@ public sealed partial class SocialInteractionSystem : EntitySystem
     [Dependency] private SharedChatSystem _chatSystem = default!;
     [Dependency] private MobStateSystem _mobStateSystem = default!;
     [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedConsentSystem _consent = default!; // Serenity
 
     public override void Initialize()
     {
@@ -60,6 +62,10 @@ public sealed partial class SocialInteractionSystem : EntitySystem
 
             // check if this interaction allows self-targeting
             if (!proto.AllowSelfTarget && args.User == args.Target)
+                continue;
+
+            // Serenity: both parties must consent
+            if (!_consent.Mutual(args.User, args.Target, proto.RequiredConsent))
                 continue;
 
             //make a verb for each one
@@ -120,6 +126,10 @@ public sealed partial class SocialInteractionSystem : EntitySystem
 
         // check if interaction needs physical contact
         if (proto.IsPhysical && !CheckInteractable(args.User, args.Target))
+            return;
+
+        // Serenity: re-check consent at execution time
+        if (!_consent.Mutual(args.User, args.Target, proto.RequiredConsent))
             return;
 
         if (!TryComp<SocialInteractionGiverComponent>(args.User, out var giverComp))

@@ -1,0 +1,24 @@
+# Tracked values on every intimacy participant. Add a new entry here to add a new bar.
+- type: intimacyStat
+  id: Arousal
+  name: intimacy-stat-arousal
+  color: "#d94f8a"
+  max: 100
+  decayPerSecond: 0.15
+  order: 0
+
+- type: intimacyStat
+  id: Pleasure
+  name: intimacy-stat-pleasure
+  color: "#f2b134"
+  max: 100
+  decayPerSecond: 0.6
+  order: 1
+
+- type: intimacyStat
+  id: Pain
+  name: intimacy-stat-pain
+  color: "#b23a3a"
+  max: 100
+  decayPerSecond: 0.8
+  order: 2

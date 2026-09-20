@@ -1,0 +1,25 @@
+# Tabs in the intimacy window. The LewdInteractions toggle is always required; list extra
+# toggles under `consent` and both parties must allow every one of them.
+- type: intimacyCategory
+  id: Affection
+  name: intimacy-category-affection
+  color: "#f7c9d9"
+  order: 0
+
+- type: intimacyCategory
+  id: Sensual
+  name: intimacy-category-sensual
+  color: "#e58cb0"
+  order: 1
+
+- type: intimacyCategory
+  id: Rough
+  name: intimacy-category-rough
+  color: "#d46a6a"
+  order: 2
+
+- type: intimacyCategory
+  id: Solo
+  name: intimacy-category-solo
+  color: "#c9a3e5"
+  order: 3
