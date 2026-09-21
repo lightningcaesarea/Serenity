@@ -1,0 +1,19 @@
+<controls:FancyWindow xmlns="https://spacestation14.io"
+                      xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+                      Title="{Loc 'contraband-exchange-menu-title'}"
+                      SetSize="320 220"
+                      MinSize="320 220">
+    <BoxContainer Orientation="Vertical" Margin="5 0 5 0">
+        <BoxContainer Orientation="Horizontal" SetHeight="24">
+            <Label Text="{Loc 'contraband-exchange-appraisal-label'}" StyleClasses="LabelKeyText" />
+            <Label Name="AppraisalLabel" Text="{Loc 'contraband-exchange-no-goods'}" />
+        </BoxContainer>
+        <BoxContainer Orientation="Horizontal" SetHeight="24">
+            <Label Text="{Loc 'contraband-exchange-count-label'}" StyleClasses="LabelKeyText" />
+            <Label Name="CountLabel" Text="0" />
+        </BoxContainer>
+        <RichTextLabel Name="Disclaimer" StyleClasses="LabelSubText" Margin="0 4 0 8" />
+        <Button Name="AppraiseButton" Text="{Loc 'contraband-exchange-appraise-button'}" />
+        <Button Name="SellButton" Text="{Loc 'contraband-exchange-sell-button'}" />
+    </BoxContainer>
+</controls:FancyWindow>

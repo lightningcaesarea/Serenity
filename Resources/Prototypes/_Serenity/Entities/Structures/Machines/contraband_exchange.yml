@@ -1,0 +1,51 @@
+# Contraband exchange: a fence that buys contraband for Federal Bills.
+# Ported from Frontier Station 14 (MIT, 5be37d18c2). Sprites reuse upstream's sell pallet and cargo
+# computer; Frontier's own pallet art is CC-BY-NC-SA and was not taken.
+
+- type: entity
+  id: ContrabandExchangePallet
+  name: contraband exchange pallet
+  description: Marks where a fence's scanner looks for goods. Anything illegal left on it can be sold at the exchange console.
+  parent: BaseCargoPallet
+  components:
+  - type: ContrabandExchangePallet
+  - type: Sprite
+    sprite: Structures/cargo_pallets.rsi
+    color: "#d04848"
+  - type: Icon
+    sprite: Structures/cargo_pallets.rsi
+    state: cargo_pallet_sell
+  - type: IconSmooth
+    key: contraband_exchange_pallet
+    base: cargo_pallet_sell_
+
+- type: entity
+  parent: BaseComputer
+  id: ComputerContrabandExchange
+  name: contraband exchange computer
+  description: Appraises and buys whatever illegal goods sit on the exchange pallets. No questions asked, no receipts given.
+  components:
+  - type: Sprite
+    layers:
+    - map: ["computerLayerBody"]
+      state: computer
+    - map: ["computerLayerKeyboard"]
+      state: generic_keyboard
+    - map: ["computerLayerScreen"]
+      state: transfer
+      color: "#ff6060"
+    - map: ["computerLayerKeys"]
+      state: tech_key
+    - map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
+      state: generic_panel_open
+  - type: ContrabandExchangeConsole
+  - type: ActivatableUI
+    key: enum.ContrabandExchangeUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.ContrabandExchangeUiKey.Key:
+        type: ContrabandExchangeBoundUserInterface
+  - type: PointLight
+    radius: 1.5
+    energy: 1.6
+    color: "#c03030"
