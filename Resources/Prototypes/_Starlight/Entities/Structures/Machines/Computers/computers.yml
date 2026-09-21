@@ -806,16 +806,34 @@
         state: generic_keys
       - map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
         state: generic_panel_open
+  # Serenity-start: Frontier-derived shipyard — ships are bought with the buyer's own Sector Credits,
+  # deeded to the ID card in the slot, and can be sold back. Anyone may use it; the deed is the key.
   - type: ShipyardConsole
-  - type: AccessReader
-    access:
-    - [ Captain ]
+    groups: [ Civilian, Cargo, Command ]
+    targetIdSlot:
+      name: id-card-console-target-id
+      ejectSound: /Audio/Machines/id_swipe.ogg
+      insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+      ejectOnBreak: true
+      swap: true
+      whitelist:
+        components:
+        - IdCard
   - type: ActivatableUI
+    singleUser: true
     key: enum.ShipyardConsoleUiKey.Shipyard
   - type: UserInterface
     interfaces:
       enum.ShipyardConsoleUiKey.Shipyard:
         type: ShipyardConsoleBoundUserInterface
+  - type: ItemSlots
+  - type: ContainerContainer
+    containers:
+      board: !type:Container
+      disk_slot: !type:ContainerSlot
+      pai_slot: !type:ContainerSlot
+      ShipyardConsole-targetId: !type:ContainerSlot
+  # Serenity-end
   - type: Computer
     board: ShipyardComputerCircuitboard
   - type: PointLight

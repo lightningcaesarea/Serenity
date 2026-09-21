@@ -405,6 +405,11 @@ public enum LogType
     Economy = 500,
 
     /// <summary>
+    /// Serenity: a ship was bought, sold or renamed at a shipyard console.
+    /// </summary>
+    Shipyard = 501,
+
+    /// <summary>
     /// A player changed temperature on atmos device.
     /// </summary>
     AtmosTemperatureChanged = 88,

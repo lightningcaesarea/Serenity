@@ -4,22 +4,21 @@
     <BoxContainer Orientation="Horizontal"
                   HorizontalExpand="True">
         <Button Name="Purchase"
-            Access="Public"
-            ToolTip=""
-            Text="{Loc 'shipyard-console-purchase'}"
-            StyleClasses="LabelSubText" />
+                Access="Public"
+                ToolTip=""
+                Text="{Loc 'shipyard-console-purchase'}"
+                StyleClasses="LabelSubText" />
         <Label Name="VesselName"
-            Access="Public"
-            HorizontalExpand="True" />
+               Access="Public"
+               HorizontalExpand="True" />
         <PanelContainer>
             <PanelContainer.PanelOverride>
                 <gfx:StyleBoxFlat BackgroundColor="#25252A" />
             </PanelContainer.PanelOverride>
-
             <Label Name="Price"
-                Access="Public"
-                MinSize="52 32"
-                Align="Right" />
+                   Access="Public"
+                   MinSize="52 32"
+                   Align="Right" />
         </PanelContainer>
     </BoxContainer>
 </PanelContainer>
