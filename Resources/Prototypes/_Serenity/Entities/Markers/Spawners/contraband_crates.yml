@@ -1,0 +1,24 @@
+# Cargo of a smuggler dead-drop pod (see /Maps/_Serenity/Shuttles/deaddrop.yml).
+- type: entity
+  id: SerenityContrabandCrateSpawner
+  name: contraband crate spawner
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+    - sprite: Structures/Storage/Crates/generic.rsi
+      state: icon
+  - type: RandomSpawner
+    prototypes:
+    - CrateContrabandStorageSecure
+    - CrateContrabandStorageSecure
+    - CrateSyndicate
+    - CrateArmoryLaser
+    - CrateFunPlushie
+    - LandMineExplosive
+    - BannerSyndicate
+    rarePrototypes:
+    - CrateSyndicateSurplusBundle
+    - CrateCargoLuxuryHardsuit
+    rareChance: 0.05
