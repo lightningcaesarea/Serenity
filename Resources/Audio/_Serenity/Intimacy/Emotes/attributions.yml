@@ -1,0 +1,7 @@
+# Copied from Afterlight (Resources/Audio/_Afterlight/Emotes) with their attribution rows. All CC-BY-SA-3.0.
+# Files with parentheses in their names were renamed for path safety; sources are unchanged.
+
+- files: ["blush.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from S.P.L.U.R.T-tg"
+  source: "https://github.com/SPLURT-Station/S.P.L.U.R.T-tg/blob/fdad3a1022632b6200ca41affe7f0dd47f86b7ac/modular_skyrat/modules/emotes/sound/emotes/blush.ogg"

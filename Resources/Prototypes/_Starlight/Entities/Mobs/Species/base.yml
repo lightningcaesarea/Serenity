@@ -285,6 +285,7 @@
     - intimacy-msg-climax-1
     - intimacy-msg-climax-2
     - intimacy-msg-climax-3
+  - type: IntimacyVocal # Serenity
   - type: Barotrauma
     damage:
       types:

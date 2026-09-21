@@ -1,0 +1,227 @@
+# Copied from Afterlight (Resources/Audio/_Afterlight/Interactions) with their attribution rows. All CC-BY-SA-3.0.
+# Files with parentheses in their names were renamed for path safety; sources are unchanged.
+
+- files: ["bang1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from S.P.L.U.R.T-tg"
+  source: "https://github.com/SPLURT-Station/S.P.L.U.R.T-tg/blob/2896a11f5b5dbc81def22f09c0432fea19722b99/modular_zzplurt/sound/interactions/bang1.ogg"
+
+- files: ["bang2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from S.P.L.U.R.T-tg"
+  source: "https://github.com/SPLURT-Station/S.P.L.U.R.T-tg/blob/2896a11f5b5dbc81def22f09c0432fea19722b99/modular_zzplurt/sound/interactions/bang2.ogg"
+
+- files: ["bang3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from S.P.L.U.R.T-tg"
+  source: "https://github.com/SPLURT-Station/S.P.L.U.R.T-tg/blob/2896a11f5b5dbc81def22f09c0432fea19722b99/modular_zzplurt/sound/interactions/bang3.ogg"
+
+- files: ["bang4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from S.P.L.U.R.T-tg"
+  source: "https://github.com/SPLURT-Station/S.P.L.U.R.T-tg/blob/2896a11f5b5dbc81def22f09c0432fea19722b99/modular_zzplurt/sound/interactions/bang4.ogg"
+
+- files: ["bang5.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from S.P.L.U.R.T-tg"
+  source: "https://github.com/SPLURT-Station/S.P.L.U.R.T-tg/blob/2896a11f5b5dbc81def22f09c0432fea19722b99/modular_zzplurt/sound/interactions/bang5.ogg"
+
+- files: ["bang6.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from S.P.L.U.R.T-tg"
+  source: "https://github.com/SPLURT-Station/S.P.L.U.R.T-tg/blob/2896a11f5b5dbc81def22f09c0432fea19722b99/modular_zzplurt/sound/interactions/bang6.ogg"
+
+- files: ["bj1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from S.P.L.U.R.T-tg"
+  source: "https://github.com/SPLURT-Station/S.P.L.U.R.T-tg/blob/2896a11f5b5dbc81def22f09c0432fea19722b99/modular_zzplurt/sound/interactions/bj1.ogg"
+
+- files: ["bj2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from S.P.L.U.R.T-tg"
+  source: "https://github.com/SPLURT-Station/S.P.L.U.R.T-tg/blob/2896a11f5b5dbc81def22f09c0432fea19722b99/modular_zzplurt/sound/interactions/bj2.ogg"
+
+- files: ["bj3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from S.P.L.U.R.T-tg"
+  source: "https://github.com/SPLURT-Station/S.P.L.U.R.T-tg/blob/2896a11f5b5dbc81def22f09c0432fea19722b99/modular_zzplurt/sound/interactions/bj3.ogg"
+
+- files: ["bj4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from S.P.L.U.R.T-tg"
+  source: "https://github.com/SPLURT-Station/S.P.L.U.R.T-tg/blob/2896a11f5b5dbc81def22f09c0432fea19722b99/modular_zzplurt/sound/interactions/bj4.ogg"
+
+- files: ["bj5.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from S.P.L.U.R.T-tg"
+  source: "https://github.com/SPLURT-Station/S.P.L.U.R.T-tg/blob/2896a11f5b5dbc81def22f09c0432fea19722b99/modular_zzplurt/sound/interactions/bj5.ogg"
+
+- files: ["bj6.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from S.P.L.U.R.T-tg"
+  source: "https://github.com/SPLURT-Station/S.P.L.U.R.T-tg/blob/2896a11f5b5dbc81def22f09c0432fea19722b99/modular_zzplurt/sound/interactions/bj6.ogg"
+
+- files: ["bj7.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from S.P.L.U.R.T-tg"
+  source: "https://github.com/SPLURT-Station/S.P.L.U.R.T-tg/blob/2896a11f5b5dbc81def22f09c0432fea19722b99/modular_zzplurt/sound/interactions/bj7.ogg"
+
+- files: ["bj8.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from S.P.L.U.R.T-tg"
+  source: "https://github.com/SPLURT-Station/S.P.L.U.R.T-tg/blob/2896a11f5b5dbc81def22f09c0432fea19722b99/modular_zzplurt/sound/interactions/bj8.ogg"
+
+- files: ["bj9.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from S.P.L.U.R.T-tg"
+  source: "https://github.com/SPLURT-Station/S.P.L.U.R.T-tg/blob/2896a11f5b5dbc81def22f09c0432fea19722b99/modular_zzplurt/sound/interactions/bj9.ogg"
+
+- files: ["bj10.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from S.P.L.U.R.T-tg"
+  source: "https://github.com/SPLURT-Station/S.P.L.U.R.T-tg/blob/2896a11f5b5dbc81def22f09c0432fea19722b99/modular_zzplurt/sound/interactions/bj10.ogg"
+
+- files: ["bj11.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from S.P.L.U.R.T-tg"
+  source: "https://github.com/SPLURT-Station/S.P.L.U.R.T-tg/blob/2896a11f5b5dbc81def22f09c0432fea19722b99/modular_zzplurt/sound/interactions/bj11.ogg"
+
+- files: ["champ1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from S.P.L.U.R.T-tg"
+  source: "https://github.com/SPLURT-Station/S.P.L.U.R.T-tg/blob/2896a11f5b5dbc81def22f09c0432fea19722b99/modular_zzplurt/sound/interactions/champ1.ogg"
+
+- files: ["champ2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from S.P.L.U.R.T-tg"
+  source: "https://github.com/SPLURT-Station/S.P.L.U.R.T-tg/blob/2896a11f5b5dbc81def22f09c0432fea19722b99/modular_zzplurt/sound/interactions/champ2.ogg"
+
+- files: ["champ_fingering.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from S.P.L.U.R.T-tg"
+  source: "https://github.com/SPLURT-Station/S.P.L.U.R.T-tg/blob/2896a11f5b5dbc81def22f09c0432fea19722b99/modular_zzplurt/sound/interactions/champ_fingering.ogg"
+
+- files: ["end.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from S.P.L.U.R.T-tg"
+  source: "https://github.com/SPLURT-Station/S.P.L.U.R.T-tg/blob/47477e52c08547863432d278bfebf80139ec0e79/modular_zzplurt/sound/interactions/end.ogg"
+
+- files: ["final_f1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from S.P.L.U.R.T-tg"
+  source: "https://github.com/SPLURT-Station/S.P.L.U.R.T-tg/blob/2896a11f5b5dbc81def22f09c0432fea19722b99/modular_zzplurt/sound/interactions/final_f1.ogg"
+
+- files: ["final_f2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from S.P.L.U.R.T-tg"
+  source: "https://github.com/SPLURT-Station/S.P.L.U.R.T-tg/blob/2896a11f5b5dbc81def22f09c0432fea19722b99/modular_zzplurt/sound/interactions/final_f2.ogg"
+
+- files: ["final_f3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from S.P.L.U.R.T-tg"
+  source: "https://github.com/SPLURT-Station/S.P.L.U.R.T-tg/blob/2896a11f5b5dbc81def22f09c0432fea19722b99/modular_zzplurt/sound/interactions/final_f3.ogg"
+
+- files: ["final_m1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from S.P.L.U.R.T-tg"
+  source: "https://github.com/SPLURT-Station/S.P.L.U.R.T-tg/blob/2896a11f5b5dbc81def22f09c0432fea19722b99/modular_zzplurt/sound/interactions/final_m1.ogg"
+
+- files: ["final_m2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from S.P.L.U.R.T-tg"
+  source: "https://github.com/SPLURT-Station/S.P.L.U.R.T-tg/blob/2896a11f5b5dbc81def22f09c0432fea19722b99/modular_zzplurt/sound/interactions/final_m2.ogg"
+
+- files: ["final_m3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from S.P.L.U.R.T-tg"
+  source: "https://github.com/SPLURT-Station/S.P.L.U.R.T-tg/blob/2896a11f5b5dbc81def22f09c0432fea19722b99/modular_zzplurt/sound/interactions/final_m3.ogg"
+
+- files: ["foot_dry1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from S.P.L.U.R.T-tg"
+  source: "https://github.com/SPLURT-Station/S.P.L.U.R.T-tg/blob/2896a11f5b5dbc81def22f09c0432fea19722b99/modular_zzplurt/sound/interactions/foot_dry1.ogg"
+
+- files: ["foot_dry2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from S.P.L.U.R.T-tg"
+  source: "https://github.com/SPLURT-Station/S.P.L.U.R.T-tg/blob/2896a11f5b5dbc81def22f09c0432fea19722b99/modular_zzplurt/sound/interactions/foot_dry2.ogg"
+
+- files: ["foot_dry3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from S.P.L.U.R.T-tg"
+  source: "https://github.com/SPLURT-Station/S.P.L.U.R.T-tg/blob/2896a11f5b5dbc81def22f09c0432fea19722b99/modular_zzplurt/sound/interactions/foot_dry3.ogg"
+
+- files: ["foot_dry4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from S.P.L.U.R.T-tg"
+  source: "https://github.com/SPLURT-Station/S.P.L.U.R.T-tg/blob/2896a11f5b5dbc81def22f09c0432fea19722b99/modular_zzplurt/sound/interactions/foot_dry4.ogg"
+
+- files: ["foot_wet1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from S.P.L.U.R.T-tg"
+  source: "https://github.com/SPLURT-Station/S.P.L.U.R.T-tg/blob/2896a11f5b5dbc81def22f09c0432fea19722b99/modular_zzplurt/sound/interactions/foot_wet1.ogg"
+
+- files: ["foot_wet2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from S.P.L.U.R.T-tg"
+  source: "https://github.com/SPLURT-Station/S.P.L.U.R.T-tg/blob/2896a11f5b5dbc81def22f09c0432fea19722b99/modular_zzplurt/sound/interactions/foot_wet2.ogg"
+
+- files: ["foot_wet3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from S.P.L.U.R.T-tg"
+  source: "https://github.com/SPLURT-Station/S.P.L.U.R.T-tg/blob/2896a11f5b5dbc81def22f09c0432fea19722b99/modular_zzplurt/sound/interactions/foot_wet3.ogg"
+
+- files: ["kiss1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from S.P.L.U.R.T-tg"
+  source: "https://github.com/SPLURT-Station/S.P.L.U.R.T-tg/blob/2896a11f5b5dbc81def22f09c0432fea19722b99/modular_zzplurt/sound/interactions/kiss1.ogg"
+
+- files: ["kiss2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from S.P.L.U.R.T-tg"
+  source: "https://github.com/SPLURT-Station/S.P.L.U.R.T-tg/blob/2896a11f5b5dbc81def22f09c0432fea19722b99/modular_zzplurt/sound/interactions/kiss2.ogg"
+
+- files: ["kiss3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from S.P.L.U.R.T-tg"
+  source: "https://github.com/SPLURT-Station/S.P.L.U.R.T-tg/blob/2896a11f5b5dbc81def22f09c0432fea19722b99/modular_zzplurt/sound/interactions/kiss3.ogg"
+
+- files: ["kiss4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from S.P.L.U.R.T-tg"
+  source: "https://github.com/SPLURT-Station/S.P.L.U.R.T-tg/blob/2896a11f5b5dbc81def22f09c0432fea19722b99/modular_zzplurt/sound/interactions/kiss4.ogg"
+
+- files: ["kiss5.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from S.P.L.U.R.T-tg"
+  source: "https://github.com/SPLURT-Station/S.P.L.U.R.T-tg/blob/2896a11f5b5dbc81def22f09c0432fea19722b99/modular_zzplurt/sound/interactions/kiss5.ogg"
+
+- files: ["oral1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from S.P.L.U.R.T-tg"
+  source: "https://github.com/SPLURT-Station/S.P.L.U.R.T-tg/blob/2896a11f5b5dbc81def22f09c0432fea19722b99/modular_zzplurt/sound/interactions/oral1.ogg"
+
+- files: ["oral2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from S.P.L.U.R.T-tg"
+  source: "https://github.com/SPLURT-Station/S.P.L.U.R.T-tg/blob/2896a11f5b5dbc81def22f09c0432fea19722b99/modular_zzplurt/sound/interactions/oral2.ogg"
+
+- files: ["slap.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from S.P.L.U.R.T-tg"
+  source: "https://github.com/SPLURT-Station/S.P.L.U.R.T-tg/blob/2896a11f5b5dbc81def22f09c0432fea19722b99/modular_zzplurt/sound/interactions/slap.ogg"
+
+- files: ["squelch1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from S.P.L.U.R.T-tg"
+  source: "https://github.com/SPLURT-Station/S.P.L.U.R.T-tg/blob/2896a11f5b5dbc81def22f09c0432fea19722b99/modular_zzplurt/sound/interactions/squelch1.ogg"
+
+- files: ["squelch2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from S.P.L.U.R.T-tg"
+  source: "https://github.com/SPLURT-Station/S.P.L.U.R.T-tg/blob/2896a11f5b5dbc81def22f09c0432fea19722b99/modular_zzplurt/sound/interactions/squelch2.ogg"
+
+- files: ["squelch3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from S.P.L.U.R.T-tg"
+  source: "https://github.com/SPLURT-Station/S.P.L.U.R.T-tg/blob/2896a11f5b5dbc81def22f09c0432fea19722b99/modular_zzplurt/sound/interactions/squelch3.ogg"

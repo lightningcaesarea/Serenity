@@ -24,6 +24,8 @@
   - intimacy-msg-kiss-1
   - intimacy-msg-kiss-2
   - intimacy-msg-kiss-3
+  sound:
+    collection: IntimacyKiss
 
 - type: intimacyAct
   id: Caress
@@ -119,7 +121,7 @@
   messages:
   - intimacy-msg-spank-1
   - intimacy-msg-spank-2
-  sound: /Audio/Effects/Footsteps/meatslap.ogg
+  sound: /Audio/_Serenity/Intimacy/Interactions/slap.ogg
 
 - type: intimacyAct
   id: Bite
@@ -130,6 +132,7 @@
   messages:
   - intimacy-msg-bite-1
   - intimacy-msg-bite-2
+  sound: /Audio/Effects/bite.ogg
 
 - type: intimacyAct
   id: HairPull
