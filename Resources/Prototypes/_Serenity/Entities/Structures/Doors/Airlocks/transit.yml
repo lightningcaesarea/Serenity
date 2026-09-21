@@ -1,0 +1,8 @@
+# Docking airlock the public transit bus prefers. Put one on the bus and one at each stop.
+- type: entity
+  parent: AirlockGlassShuttle
+  id: AirlockExternalGlassShuttleTransit
+  suffix: External, Transit, Glass, Docking
+  components:
+  - type: PriorityDock
+    tag: DockTransit
