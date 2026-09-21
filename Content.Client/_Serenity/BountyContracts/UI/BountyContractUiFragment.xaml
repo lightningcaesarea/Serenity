@@ -1,0 +1,5 @@
+<ui:BountyContractUiFragment xmlns:ui="clr-namespace:Content.Client._Serenity.BountyContracts.UI"
+                             xmlns="https://spacestation14.io"
+                             VerticalExpand="True" HorizontalExpand="True">
+    <!-- The list or create submenu is added by code -->
+</ui:BountyContractUiFragment>
