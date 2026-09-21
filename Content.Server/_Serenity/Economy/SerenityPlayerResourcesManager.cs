@@ -94,10 +94,29 @@ public sealed partial class SerenityPlayerResourcesManager : SharedNullLinkPlaye
             return;
         }
 
-        // The player may have left while the query was in flight.
-        if (session.Status is SessionStatus.Disconnected or SessionStatus.Zombie
-            || _playersRole.GetPlayerData(session) is not { } data)
+        // Starlight's PlayerRolesManager creates the in-memory PlayerData asynchronously after the
+        // same Connected event, so it may not exist yet when our query returns. Wait for it instead of
+        // giving up: giving up here silently disables persistence for the whole session.
+        PlayerData? data = null;
+        for (var attempt = 0; attempt < 600; attempt++)
+        {
+            if (session.Status is SessionStatus.Disconnected or SessionStatus.Zombie)
+                return;
+
+            if (_playersRole.GetPlayerData(session) is { } found)
+            {
+                data = found;
+                break;
+            }
+
+            await Task.Delay(100);
+        }
+
+        if (data == null)
+        {
+            _sawmill.Error($"Player data for {session.Name} ({session.UserId}) never appeared; resources will not persist this session.");
             return;
+        }
 
         // Anything already in memory accrued since connect (salary, purchases) and has not been
         // persisted yet; merge it on top of the stored value rather than discarding either side.
