@@ -183,7 +183,7 @@
                                     Name="HeightSlider"
                                     Margin="10,0,5,0"
                                     HorizontalExpand="True"
-                                    MaxValue="1.5"
+                                    MaxValue="2.0"
                                     MinValue="0.5"
                                     Value="1" />
                                 <Button Name="HeightResetButton" Text="{Loc 'humanoid-profile-editor-slider-reset'}" />

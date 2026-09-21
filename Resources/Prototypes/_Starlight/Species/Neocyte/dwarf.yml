@@ -14,9 +14,9 @@
   subspeciesOf: Neocyte
   subspeciesName: subspecies-name-neodwarf
   loadout: NeocyteLoadout
-  minHeight: 0.8
+  minHeight: 0.5
   defaultHeight: 0.8
-  maxHeight: 0.85
+  maxHeight: 1.2
   minAge: 30
   youngAge: 50
   oldAge: 130

@@ -16,9 +16,9 @@
   subspeciesOf: Neocyte
   subspeciesName: subspecies-name-neocyclorite
   loadout: NeocyteLoadout
-  minHeight: 0.9
+  minHeight: 0.5
   defaultHeight: 1
-  maxHeight: 1.2
+  maxHeight: 2.0
   standardSize: 170
   standardWeight: 100
   standardDensity: 110
