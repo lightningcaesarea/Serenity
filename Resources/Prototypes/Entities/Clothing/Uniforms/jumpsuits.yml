@@ -336,16 +336,10 @@
     inhandVisuals:
       left:
       - state: inhand-left
-        color: "#C12D30"
-        sprite: Clothing/Uniforms/Jumpsuit/color.rsi
-      - state: overlay-inhand-left
-        sprite: Clothing/Uniforms/Jumpsuit/hos.rsi
+        sprite: _Serenity/Clothing/Uniforms/Jumpsuit/hos_dv.rsi
       right:
       - state: inhand-right
-        color: "#C12D30"
-        sprite: Clothing/Uniforms/Jumpsuit/color.rsi
-      - state: overlay-inhand-right
-        sprite: Clothing/Uniforms/Jumpsuit/hos.rsi
+        sprite: _Serenity/Clothing/Uniforms/Jumpsuit/hos_dv.rsi
 
 - type: entity
   parent: [ClothingUniformBase, BaseCommandContraband]
@@ -612,16 +606,10 @@
     inhandVisuals:
       left:
       - state: inhand-left
-        color: "#C12D30"
-        sprite: Clothing/Uniforms/Jumpsuit/color.rsi
-      - state: overlay-inhand-left
-        sprite: Clothing/Uniforms/Jumpsuit/security.rsi
+        sprite: _Serenity/Clothing/Uniforms/Jumpsuit/security_dv.rsi
       right:
       - state: inhand-right
-        color: "#C12D30"
-        sprite: Clothing/Uniforms/Jumpsuit/color.rsi
-      - state: overlay-inhand-right
-        sprite: Clothing/Uniforms/Jumpsuit/security.rsi
+        sprite: _Serenity/Clothing/Uniforms/Jumpsuit/security_dv.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -670,16 +658,10 @@
     inhandVisuals:
       left:
       - state: inhand-left
-        color: "#C12D30"
-        sprite: Clothing/Uniforms/Jumpsuit/color.rsi
-      - state: overlay-inhand-left
-        sprite: Clothing/Uniforms/Jumpsuit/warden.rsi
+        sprite: _Serenity/Clothing/Uniforms/Jumpsuit/warden_dv.rsi
       right:
       - state: inhand-right
-        color: "#C12D30"
-        sprite: Clothing/Uniforms/Jumpsuit/color.rsi
-      - state: overlay-inhand-right
-        sprite: Clothing/Uniforms/Jumpsuit/warden.rsi
+        sprite: _Serenity/Clothing/Uniforms/Jumpsuit/warden_dv.rsi
 
 - type: entity
   parent: ClothingUniformBase
