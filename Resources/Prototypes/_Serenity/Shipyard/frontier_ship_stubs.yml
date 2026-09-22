@@ -1,0 +1,218 @@
+# Stub prototypes for Frontier NF entities referenced by the ported ship maps,
+# for which real ported definitions were not practical (missing dependency
+# components/prototypes upstream in the same family, or the exact Frontier
+# behaviour doesn't map onto anything Serenity has). See frontier_ship_entities.yml
+# for the entities that DID get real ports — those IDs have been removed from here.
+# Each entry below is a thin alias that inherits a Serenity/SS14 equivalent so ship
+# maps still load without errors.
+
+# ── Ship Core ─────────────────────────────────────────────────────────────────
+
+- type: entity
+  id: SpawnPointPilot        # 21 files — "Pilot" job prototype doesn't exist in Serenity
+  parent: SpawnPointLatejoin
+  name: spawn point (pilot)
+
+- type: entity
+  id: SpawnPointMercenary    # 4 files — "Mercenary" job prototype doesn't exist in Serenity
+  parent: SpawnPointLatejoin
+  name: spawn point (mercenary)
+
+# ── Computers / Consoles ─────────────────────────────────────────────────────
+
+- type: entity
+  id: ComputerWallmountWithdrawBankATM  # 26 files — needs 3 missing NF base prototypes
+  parent: ATM
+  name: automated teller machine
+
+# ── Gameplay Items ────────────────────────────────────────────────────────────
+
+- type: entity
+  id: MachineCryoSleepPod  # 2 files — Frontier's CryoSleep component doesn't exist;
+  parent: CryoPod          # Serenity uses upstream Cryostorage instead (see #22 in project memory)
+  name: cryo sleep pod
+
+- type: entity
+  id: LockerPilotFilled    # 3 files — parent LockerPilot doesn't exist in Serenity
+  parent: LockerBase
+  name: pilot's locker
+
+- type: entity
+  id: LockerMercenaryFilled  # 3 files — parent LockerMercenary doesn't exist in Serenity
+  parent: LockerBase
+  name: mercenary locker
+
+- type: entity
+  id: GunSafeShuttleT2Spawner  # 2 files — depends on GunSafeShuttleT2, also not ported
+  parent: GunSafePistolMk58
+  name: weapon safe
+
+# ── Lighting ─────────────────────────────────────────────────────────────────
+# Depend on colored light-tube items (ColoredLightTubeRed etc.) not in Serenity.
+
+- type: entity
+  id: PoweredlightColoredRed       # 7 files
+  parent: PoweredlightRed
+
+- type: entity
+  id: PoweredlightColoredBlack     # 4 files
+  parent: PoweredlightBlack
+
+- type: entity
+  id: PoweredlightColoredFrostyBlue  # 3 files
+  parent: PoweredlightBlue
+
+# ── Decorations / Misc Items ─────────────────────────────────────────────────
+# Cosmetic one/two-ship items; either their real NF base prototype is missing
+# (BaseOilJar, BaseFoodCondimentSqueezeBottle) or porting cost outweighed the
+# single-ship payoff. Kept as functional aliases.
+
+- type: entity
+  id: OilJarOlive           # 3 files
+  parent: FoodCondimentBottleKetchup
+  name: olive oil jar
+
+- type: entity
+  id: OilJarCorn            # 3 files
+  parent: FoodCondimentBottleKetchup
+  name: corn oil jar
+
+- type: entity
+  id: OilJarGhee            # 3 files
+  parent: FoodCondimentBottleKetchup
+  name: ghee jar
+
+- type: entity
+  id: FoodCondimentSqueezeBottleKetchup  # 4 files — squeeze bottle variant
+  parent: FoodCondimentBottleKetchup
+  name: ketchup
+
+- type: entity
+  id: FoodCondimentSqueezeBottleMustard  # 3 files
+  parent: FoodCondimentBottleHotsauce
+  name: mustard
+
+- type: entity
+  id: RandomBook            # 3 files
+  parent: BookBase
+  name: book
+
+- type: entity
+  id: ToySpawner            # 2 files
+  parent: PlushieSpawner50
+
+- type: entity
+  id: PlushieMoffRandom     # 2 files — random moff (moth) plushie
+  parent: PlushieCarp
+  name: plushie
+
+- type: entity
+  id: PaintingFireaxeCabinet  # 2 files — decorative painting
+  parent: PosterBase
+  name: painting
+
+- type: entity
+  id: BoxMailCapsulePrimed  # 2 files — primed mail capsule
+  parent: BoxCardboard
+  name: mail capsule
+
+- type: entity
+  id: BoxPaperOffice        # 2 files — office paper box
+  parent: BoxCardboard
+  name: paper box
+
+- type: entity
+  id: HandheldHealthAnalyzerUnpowered  # 2 files
+  parent: HandheldHealthAnalyzer
+  name: health analyzer
+
+- type: entity
+  id: ClothingBackpackMessengerMailCarrier  # 2 files
+  parent: ClothingBackpack
+  name: mail carrier messenger bag
+
+- type: entity
+  id: WeaponMailLake        # 2 files — Frontier mail-carrier pistol
+  parent: WeaponDisabler
+  name: lake pistol
+
+- type: entity
+  id: CrateNPCEmotionalSupportSafe  # 2 files — crate with a "pet" safe inside
+  parent: CrateGenericSteel
+  name: emotional support safe
+
+# ── Machine Parts (Frontier-specific tier names) ──────────────────────────────
+
+- type: entity
+  id: CapacitorStockPart    # 2 files
+  parent: BaseStockPart
+  name: capacitor
+
+- type: entity
+  id: MatterBinStockPart    # 2 files
+  parent: BaseStockPart
+  name: matter bin
+
+# ── Posters (PosterLegitSM* series — safety/medical posters) ─────────────────
+
+- type: entity
+  id: PosterLegitSMHardhats   # 4 files
+  parent: PosterBase
+
+- type: entity
+  id: PosterLegitSMFires      # 4 files
+  parent: PosterBase
+
+- type: entity
+  id: PosterLegitSMAnomalies  # 2 files
+  parent: PosterBase
+
+- type: entity
+  id: PosterLegitSMPoisoning  # 2 files
+  parent: PosterBase
+
+- type: entity
+  id: PosterLegitSMEpi        # 2 files
+  parent: PosterBase
+
+- type: entity
+  id: PosterLegitSMPills      # 2 files
+  parent: PosterBase
+
+- type: entity
+  id: PosterLegitMedicate     # 2 files
+  parent: PosterBase
+
+# ── Single-file ship-specific entities ───────────────────────────────────────
+# Unique to one ship each (info boards, mothership consoles, etc.). Not worth
+# the individual verification cost yet — functional aliases for now.
+
+- type: entity
+  id: ShipyardLanternInfo
+  parent: NoticeBoard
+  name: lantern crew information
+
+- type: entity
+  id: ShipyardHarbormasterInfo
+  parent: NoticeBoard
+  name: harbormaster crew information
+
+- type: entity
+  id: ShipyardLiquidatorInfo
+  parent: NoticeBoard
+  name: liquidator crew information
+
+- type: entity
+  id: CrescentMothershipComputer
+  parent: ComputerPersonalDesktop
+  name: crescent mothership computer
+
+- type: entity
+  id: McCargoMothershipComputer
+  parent: ComputerPersonalDesktop
+  name: McCargo mothership computer
+
+- type: entity
+  id: CaduceusMothershipComputer
+  parent: ComputerPersonalDesktop
+  name: caduceus mothership computer
