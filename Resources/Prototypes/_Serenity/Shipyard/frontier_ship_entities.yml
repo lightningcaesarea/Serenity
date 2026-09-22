@@ -454,7 +454,7 @@
 # Suit fills not already present in Serenity's own suit_storage.yml. Serenity
 # substitutes for the 3 clothing items Serenity doesn't have: ClothingMaskGasMerc
 # for the missing ClothingMaskGasMercenary, ClothingOuterHardsuitSpatio for the
-# missing ClothingOuterHardsuitPilot, and ClothingOuterEVASuitBase for the
+# missing ClothingOuterHardsuitPilot, and ClothingOuterHardsuitEVA for the
 # missing ClothingOuterEVASuitMailman.
 
 - type: entity
@@ -508,7 +508,7 @@
   - type: StorageFill
     contents:
         - id: AirTankFilled
-        - id: ClothingOuterEVASuitBase  # Serenity: substitute for ClothingOuterEVASuitMailman
+        - id: ClothingOuterHardsuitEVA  # Serenity: substitute for ClothingOuterEVASuitMailman (ClothingOuterEVASuitBase is abstract)
         - id: ClothingMaskBreath
         - id: JetpackMiniFilled
         - id: HandheldGPSBasic
