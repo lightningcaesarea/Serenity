@@ -149,7 +149,7 @@
   id: ClothingHeadHatHoodStirling
   parent: ClothingHeadHatHoodWinterBase
   name: Stirling coat hood
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Serenity/Clothing/Head/Hoods/Coat/arcadia.rsi
@@ -175,7 +175,7 @@
   id: ClothingHeadEVAHelmetStirling
   parent: ClothingHeadEVAHelmetBase
   name: Stirling EVA helmet
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Serenity/Clothing/Head/Helmets/eva_color.rsi
