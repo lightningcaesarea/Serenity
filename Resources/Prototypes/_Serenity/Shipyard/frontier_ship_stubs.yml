@@ -147,11 +147,17 @@
   id: CapacitorStockPart    # 2 files
   parent: BaseStockPart
   name: capacitor
+  components:
+  - type: Sprite
+    state: capacitor
 
 - type: entity
   id: MatterBinStockPart    # 2 files
   parent: BaseStockPart
   name: matter bin
+  components:
+  - type: Sprite
+    state: matter_bin
 
 # ── Posters (PosterLegitSM* series — safety/medical posters) ─────────────────
 
