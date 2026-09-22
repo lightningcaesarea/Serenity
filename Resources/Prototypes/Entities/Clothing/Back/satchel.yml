@@ -132,11 +132,11 @@
 - type: entity
   parent: [ClothingBackpackSatchel, BaseSecurityContraband]
   id: ClothingBackpackSatchelBrigmedic
-  name: brigmedic satchel
+  name: corpsman satchel
   description: A sterile satchel for medical related needs.
   components:
   - type: Sprite
-    sprite: Clothing/Back/Satchels/brigmedic.rsi
+    sprite: _Serenity/Clothing/Back/Satchels/corpsman_dv.rsi
 
 - type: entity
   parent: [ClothingBackpackSatchel, BaseCommandContraband]

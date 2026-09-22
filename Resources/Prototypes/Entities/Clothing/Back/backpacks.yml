@@ -78,11 +78,11 @@
 - type: entity
   parent: [ClothingBackpack, BaseSecurityContraband]
   id: ClothingBackpackBrigmedic
-  name: brigmedic backpack
+  name: corpsman backpack
   description: It's a very sterile backpack.
   components:
   - type: Sprite
-    sprite: Clothing/Back/Backpacks/brigmedic.rsi
+    sprite: _Serenity/Clothing/Back/Backpacks/corpsman_dv.rsi
 
 - type: entity
   parent: ClothingBackpack

@@ -462,13 +462,13 @@
 - type: entity
   parent: ClothingUniformBase
   id: ClothingUniformJumpsuitBrigmedic
-  name: brigmedic jumpsuit
+  name: corpsman jumpsuit
   description: This uniform is issued to qualified personnel who have been trained. No one cares that the training took half a day.
   components:
   - type: Sprite
-    sprite: Clothing/Uniforms/Jumpsuit/brigmedic.rsi
+    sprite: _Serenity/Clothing/Uniforms/Jumpsuit/brigmedic_dv.rsi
   - type: Clothing
-    sprite: Clothing/Uniforms/Jumpsuit/brigmedic.rsi
+    sprite: _Serenity/Clothing/Uniforms/Jumpsuit/brigmedic_dv.rsi
   - type: Armor # Starlight start, so zombification resistance shows up
     modifiers:
       coefficients: { }

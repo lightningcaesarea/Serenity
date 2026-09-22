@@ -242,7 +242,7 @@
   parent: JobIcon
   id: JobIconBrigmedic
   icon:
-    sprite: *icon-rsi
+    sprite: /Textures/_Serenity/Interface/Misc/job_icons_security_dv.rsi
     state: Brigmedic
   jobName: job-name-brigmedic
   tags: # Starlight-edit: makes the icon visable on the player accessible ID card computer.

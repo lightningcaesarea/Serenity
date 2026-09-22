@@ -81,11 +81,11 @@
 - type: entity
   parent: [ClothingBackpackDuffel, BaseSecurityContraband]
   id: ClothingBackpackDuffelBrigmedic
-  name: brigmedic duffel bag
+  name: corpsman duffel bag
   description: A large duffel bag for holding extra medical related goods.
   components:
   - type: Sprite
-    sprite: Clothing/Back/Duffels/brigmedic.rsi
+    sprite: _Serenity/Clothing/Back/Duffels/corpsman_dv.rsi
 
 - type: entity
   parent: ClothingBackpackDuffel
