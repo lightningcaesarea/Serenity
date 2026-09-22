@@ -38,7 +38,7 @@
     channels:
     - Security
   - type: Sprite
-    sprite: Objects/Devices/securityhandy.rsi
+    sprite: _Serenity/Objects/Devices/securityhandy.rsi
   - type: Item
-    sprite: Objects/Devices/securityhandy.rsi
-    heldPrefix: walkietalkie
+    sprite: _Serenity/Objects/Devices/securityhandy.rsi
+    heldPrefix: null # DV art has no directional inhand states; fall back to the static icon

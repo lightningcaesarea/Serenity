@@ -35,9 +35,11 @@
   description: Standard security gear. Protects the head from impacts.
   components:
   - type: Sprite
-    sprite: Clothing/Head/Helmets/security.rsi
+    sprite: _Serenity/Clothing/Head/Helmets/security_dv.rsi
+    layers:
+    - state: icon
   - type: Clothing
-    sprite: Clothing/Head/Helmets/security.rsi
+    sprite: _Serenity/Clothing/Head/Helmets/security_dv.rsi
     clothingVisuals:
       head:
       - state: light-equipped-HELMET

@@ -405,9 +405,9 @@
   description: A sturdy, utilitarian winter coat designed to protect a head of security from any brig-bound threats and hypothermic events.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/WinterCoats/coathosarmored.rsi
+    sprite: _Serenity/Clothing/OuterClothing/WinterCoats/hosgreatcoat.rsi
   - type: Clothing
-    sprite: Clothing/OuterClothing/WinterCoats/coathosarmored.rsi
+    sprite: _Serenity/Clothing/OuterClothing/WinterCoats/hosgreatcoat.rsi
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHatHoodWinterHOS
   - type: ContainerContainer
@@ -808,9 +808,9 @@
   description: A sturdy, utilitarian winter coat designed to protect a warden from any brig-bound threats and hypothermic events.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/WinterCoats/coatwardenarmored.rsi
+    sprite: _Serenity/Clothing/OuterClothing/WinterCoats/armourercoat.rsi
   - type: Clothing
-    sprite: Clothing/OuterClothing/WinterCoats/coatwardenarmored.rsi
+    sprite: _Serenity/Clothing/OuterClothing/WinterCoats/armourercoat.rsi
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHatHoodWinterWarden
   - type: Armor # Starlight start

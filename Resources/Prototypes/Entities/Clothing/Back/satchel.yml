@@ -127,7 +127,7 @@
   description: A robust satchel for security related needs.
   components:
   - type: Sprite
-    sprite: Clothing/Back/Satchels/security.rsi
+    sprite: _Serenity/Clothing/Back/Satchels/security_dv.rsi
 
 - type: entity
   parent: [ClothingBackpackSatchel, BaseSecurityContraband]

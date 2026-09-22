@@ -5,5 +5,5 @@
   description: A sign, pointing out where the evidence storage room is.
   components:
   - type: Sprite
-    sprite: _Starlight/Structures/Wallmounts/signs.rsi #SL Edit
+    sprite: _Serenity/Structures/Wallmounts/signs_security_dv.rsi
     state: evidence

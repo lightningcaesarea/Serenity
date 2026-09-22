@@ -110,7 +110,7 @@
   suffix: Security
   components:
   - type: Sprite
-    sprite: Structures/Doors/Airlocks/Standard/security.rsi
+    sprite: _Serenity/Structures/Doors/Airlocks/Standard/security_dv.rsi
   - type: Wires
     layoutId: AirlockSecurity
 
@@ -319,7 +319,7 @@
   suffix: Security
   components:
   - type: Sprite
-    sprite: Structures/Doors/Airlocks/Glass/security.rsi
+    sprite: _Serenity/Structures/Doors/Airlocks/Glass/security_dv.rsi
   - type: Wires
     layoutId: AirlockSecurity
 

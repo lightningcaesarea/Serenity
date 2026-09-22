@@ -443,9 +443,9 @@
   description: Armored hardsuit helmet for security needs.
   components:
   - type: Sprite
-    sprite: _Starlight/Clothing/Head/Hardsuits/security.rsi #Starlight
+    sprite: _Serenity/Clothing/Head/Hardsuits/Combat/officer.rsi
   - type: Clothing
-    sprite: _Starlight/Clothing/Head/Hardsuits/security.rsi #Starlight
+    sprite: _Serenity/Clothing/Head/Hardsuits/Combat/officer.rsi
   - type: PointLight
     color: "#ffeead"
   - type: PressureProtection
@@ -503,9 +503,9 @@
   description: A modified riot helmet. Oddly comfortable.
   components:
   - type: Sprite
-    sprite: _Starlight/Clothing/Head/Hardsuits/security-warden.rsi #Starlight
+    sprite: _Serenity/Clothing/Head/Hardsuits/Combat/warden.rsi
   - type: Clothing
-    sprite: _Starlight/Clothing/Head/Hardsuits/security-warden.rsi #Starlight
+    sprite: _Serenity/Clothing/Head/Hardsuits/Combat/warden.rsi
   - type: PointLight
     color: "#dddddd" # Starlight
   - type: PressureProtection
@@ -683,9 +683,9 @@
   description: Security hardsuit helmet with the latest top secret NT-HUD software. Belongs to the HoS.
   components:
   - type: Sprite
-    sprite: _Starlight/Clothing/Head/Hardsuits/security-red.rsi #Starlight
+    sprite: _Serenity/Clothing/Head/Hardsuits/Combat/hos.rsi
   - type: Clothing
-    sprite: _Starlight/Clothing/Head/Hardsuits/security-red.rsi #Starlight
+    sprite: _Serenity/Clothing/Head/Hardsuits/Combat/hos.rsi
   - type: PointLight
     color: "#ffdddd" # Starlight
   - type: PressureProtection

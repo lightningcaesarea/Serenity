@@ -1039,7 +1039,7 @@
   - type: SpeakOnUIClosed
     pack: SecTechGoodbyes
   - type: Sprite
-    sprite: Structures/Machines/VendingMachines/sec.rsi
+    sprite: _Serenity/Structures/Machines/VendingMachines/sec_dv.rsi
     layers:
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]
@@ -1698,7 +1698,7 @@
   - type: SpeakOnUIClosed
     pack: GenericVendGoodbyes
   - type: Sprite
-    sprite: Structures/Machines/VendingMachines/secdrobe.rsi
+    sprite: _Serenity/Structures/Machines/VendingMachines/secdrobe_dv.rsi
     layers:
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]

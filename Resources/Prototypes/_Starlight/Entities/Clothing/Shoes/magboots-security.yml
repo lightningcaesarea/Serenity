@@ -5,10 +5,10 @@
   description: A pair of standard magnetic boots, issued alongside the Security Hardsuit.
   components:
   - type: Sprite
-    sprite: _Starlight/Clothing/Shoes/Boots/magboots-security.rsi
+    sprite: _Serenity/Clothing/Shoes/Boots/magboots-security.rsi
     state: icon
   - type: Clothing
-    sprite: _Starlight/Clothing/Shoes/Boots/magboots-security.rsi
+    sprite: _Serenity/Clothing/Shoes/Boots/magboots-security.rsi
   - type: ClothingSpeedModifier
     walkModifier: 0.85
     sprintModifier: 0.8

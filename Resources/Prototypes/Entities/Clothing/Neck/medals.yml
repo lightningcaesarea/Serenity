@@ -98,9 +98,9 @@
   description: Given for the best work in the security department.
   components:
   - type: Sprite
-    sprite: Clothing/Neck/Medals/securitymedal.rsi
+    sprite: _Serenity/Clothing/Neck/Medals/securitymedal_dv.rsi
   - type: Clothing
-    sprite: Clothing/Neck/Medals/securitymedal.rsi
+    sprite: _Serenity/Clothing/Neck/Medals/securitymedal_dv.rsi
   - type: Tag
     tags:
       - Medal

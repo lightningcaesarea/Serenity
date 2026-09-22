@@ -73,7 +73,7 @@
   description: It's a very robust backpack.
   components:
   - type: Sprite
-    sprite: Clothing/Back/Backpacks/security.rsi
+    sprite: _Serenity/Clothing/Back/Backpacks/security_dv.rsi
 
 - type: entity
   parent: [ClothingBackpack, BaseSecurityContraband]

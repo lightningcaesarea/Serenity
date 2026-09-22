@@ -218,7 +218,7 @@
     belt: ClothingBeltSecurityFilled
     back: ClothingBackpackSatchelSecurity
     eyes: ClothingEyesGlassesSecurity
-    outerClothing: ClothingOuterSecurityBomber
+    outerClothing: ClothingOuterSecurityBomberDV
     pocket1: WeaponPistolEnforcer
     pocket2: FlashlightSeclite
     suitstorage: WeaponAdvancedTaser

@@ -278,9 +278,9 @@
   description: A special suit that protects against hazardous, low pressure environments. Has an additional layer of armor.
   components:
   - type: Sprite
-    sprite: _Starlight/Clothing/OuterClothing/Hardsuits/security.rsi #Starlight
+    sprite: _Serenity/Clothing/OuterClothing/Hardsuits/Combat/officer.rsi
   - type: Clothing
-    sprite: _Starlight/Clothing/OuterClothing/Hardsuits/security.rsi #Starlight
+    sprite: _Serenity/Clothing/OuterClothing/Hardsuits/Combat/officer.rsi
   - type: PressureProtection
     highPressureMultiplier: 0.5
     lowPressureMultiplier: 1000
@@ -362,9 +362,9 @@
   description: A specialized, heavy riot suit geared to combat low pressure environments.
   components:
   - type: Sprite
-    sprite: _Starlight/Clothing/OuterClothing/Hardsuits/security-warden.rsi #Starlight
+    sprite: _Serenity/Clothing/OuterClothing/Hardsuits/Combat/warden.rsi
   - type: Clothing
-    sprite: _Starlight/Clothing/OuterClothing/Hardsuits/security-warden.rsi #Starlight
+    sprite: _Serenity/Clothing/OuterClothing/Hardsuits/Combat/warden.rsi
   - type: PressureProtection
     highPressureMultiplier: 0.5
     lowPressureMultiplier: 1000
@@ -573,9 +573,9 @@
   description: A special suit that protects against hazardous, low pressure environments. Has an additional layer of armor.
   components:
   - type: Sprite
-    sprite: _Starlight/Clothing/OuterClothing/Hardsuits/security-red.rsi #Starlight
+    sprite: _Serenity/Clothing/OuterClothing/Hardsuits/Combat/hos.rsi
   - type: Clothing
-    sprite: _Starlight/Clothing/OuterClothing/Hardsuits/security-red.rsi #Starlight
+    sprite: _Serenity/Clothing/OuterClothing/Hardsuits/Combat/hos.rsi
   - type: PressureProtection
     highPressureMultiplier: 0.45
     lowPressureMultiplier: 1000

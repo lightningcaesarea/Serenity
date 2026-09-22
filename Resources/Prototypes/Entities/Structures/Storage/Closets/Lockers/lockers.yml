@@ -353,6 +353,39 @@
   name: warden's locker
   components:
   - type: Appearance
+  - type: Sprite
+    sprite: _Serenity/Structures/Storage/closet_security_dv.rsi
+    noRot: true
+    layers:
+    - state: warden
+      map: ["enum.StorageVisualLayers.Base"]
+    - state: warden_door
+      map: ["enum.StorageVisualLayers.Door"]
+    - state: locked
+      map: ["enum.LockVisualLayers.Lock"]
+      shader: unshaded
+    - state: welded
+      visible: false
+      map: ["enum.WeldableLayers.BaseWelded"]
+    - state: paper
+      visible: false
+      sprite: Structures/Storage/closet_labels.rsi
+      offset: "-0.065,0"
+      map: ["enum.PaperLabelVisuals.Layer"]
+    - state: panel_open
+      sprite: Structures/Storage/closet.rsi
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+      visible: false
+    - state: electrified_ai
+      sprite: Interface/Misc/ai_hud.rsi
+      shader: unshaded
+      visible: false
+      map: ["enum.ElectrifiedLayers.HUD"]
+    - state: electrified
+      sprite: Effects/electricity.rsi
+      shader: unshaded
+      visible: false
+      map: ["enum.ElectrifiedLayers.Sparks"]
   - type: EntityStorageVisuals
     stateBaseClosed: warden
     stateDoorOpen: warden_open
@@ -383,6 +416,39 @@
   name: security officer's locker
   components:
   - type: Appearance
+  - type: Sprite
+    sprite: _Serenity/Structures/Storage/closet_security_dv.rsi
+    noRot: true
+    layers:
+    - state: sec
+      map: ["enum.StorageVisualLayers.Base"]
+    - state: sec_door
+      map: ["enum.StorageVisualLayers.Door"]
+    - state: locked
+      map: ["enum.LockVisualLayers.Lock"]
+      shader: unshaded
+    - state: welded
+      visible: false
+      map: ["enum.WeldableLayers.BaseWelded"]
+    - state: paper
+      visible: false
+      sprite: Structures/Storage/closet_labels.rsi
+      offset: "-0.065,0"
+      map: ["enum.PaperLabelVisuals.Layer"]
+    - state: panel_open
+      sprite: Structures/Storage/closet.rsi
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+      visible: false
+    - state: electrified_ai
+      sprite: Interface/Misc/ai_hud.rsi
+      shader: unshaded
+      visible: false
+      map: ["enum.ElectrifiedLayers.HUD"]
+    - state: electrified
+      sprite: Effects/electricity.rsi
+      shader: unshaded
+      visible: false
+      map: ["enum.ElectrifiedLayers.Sparks"]
   - type: EntityStorageVisuals
     stateBaseClosed: sec
     stateDoorOpen: sec_open

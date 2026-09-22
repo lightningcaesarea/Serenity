@@ -1672,9 +1672,15 @@
   id: SecurityCadetJumpsuit
   name: loadout-group-security-cadet-jumpsuit
   loadouts:
-  - RedJumpsuit
-  - RedJumpskirt
-  - SecurityCadetTshirt # Starlight
+  - SecurityCadetUniformDV # DV, replaces RedJumpsuit
+  - SecurityCadetSkirtDV # DV, replaces RedJumpskirt
+
+- type: loadoutGroup
+  id: SecurityCadetHead
+  name: loadout-group-security-cadet-head
+  minLimit: 0
+  loadouts:
+  - SecurityCadetBeretDV # DV
 
 #- type: loadoutGroup
 #  id: SecurityCadetJobTrinkets

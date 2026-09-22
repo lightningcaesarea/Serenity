@@ -275,6 +275,17 @@
   name: security cap
 
 - type: entity
+  parent: ClothingHeadBaseButcherable
+  id: ClothingHeadHatSecsoftDV
+  name: security cap
+  description: A baseball cap colored to match security's uniforms.
+  components:
+  - type: Sprite
+    sprite: _Serenity/Clothing/Head/Hats/cap_sec.rsi
+  - type: Clothing
+    sprite: _Serenity/Clothing/Head/Hats/cap_sec.rsi
+
+- type: entity
   parent: ClothingHeadHeadHatBaseFlippable
   id: ClothingHeadHatYellowsoft
   name: yellow cap

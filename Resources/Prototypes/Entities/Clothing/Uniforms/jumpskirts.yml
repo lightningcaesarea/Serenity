@@ -181,9 +181,9 @@
   description: It's bright red and rather crisp, much like security's victims tend to be.
   components:
   - type: Sprite
-    sprite: Clothing/Uniforms/Jumpskirt/hos.rsi
+    sprite: _Serenity/Clothing/Uniforms/Jumpskirt/hos_dv.rsi
   - type: Clothing
-    sprite: Clothing/Uniforms/Jumpskirt/hos.rsi
+    sprite: _Serenity/Clothing/Uniforms/Jumpskirt/hos_dv.rsi
   - type: Item
     inhandVisuals:
       left:
@@ -206,9 +206,9 @@
   description: It's a turtleneck worn by those strong and disciplined enough to achieve the position of Head of Security.
   components:
   - type: Sprite
-    sprite: Clothing/Uniforms/Jumpskirt/hos_alt.rsi
+    sprite: _Serenity/Clothing/Uniforms/Jumpskirt/hos_alt_dv.rsi
   - type: Clothing
-    sprite: Clothing/Uniforms/Jumpskirt/hos_alt.rsi
+    sprite: _Serenity/Clothing/Uniforms/Jumpskirt/hos_alt_dv.rsi
 
 - type: entity
   parent: [ClothingUniformSkirtBase, BaseCommandContraband]
@@ -405,9 +405,9 @@
   description: A jumpskirt made of strong material, providing robust protection.
   components:
   - type: Sprite
-    sprite: Clothing/Uniforms/Jumpskirt/security.rsi
+    sprite: _Serenity/Clothing/Uniforms/Jumpskirt/security_dv.rsi
   - type: Clothing
-    sprite: Clothing/Uniforms/Jumpskirt/security.rsi
+    sprite: _Serenity/Clothing/Uniforms/Jumpskirt/security_dv.rsi
   - type: Item
     inhandVisuals:
       left:
@@ -431,9 +431,9 @@
   description: A formal security suit for officers complete with NanoTrasen belt buckle. # SL
   components:
   - type: Sprite
-    sprite: Clothing/Uniforms/Jumpskirt/warden.rsi
+    sprite: _Serenity/Clothing/Uniforms/Jumpskirt/warden_dv.rsi
   - type: Clothing
-    sprite: Clothing/Uniforms/Jumpskirt/warden.rsi
+    sprite: _Serenity/Clothing/Uniforms/Jumpskirt/warden_dv.rsi
   - type: Item
     inhandVisuals:
       left:
@@ -721,9 +721,9 @@
   description: A tactical relic of years past before NanoTrasen decided it was cheaper to dye the suits red instead of washing out the blood. # SL
   components:
   - type: Sprite
-    sprite: Clothing/Uniforms/Jumpskirt/security_grey.rsi
+    sprite: _Serenity/Clothing/Uniforms/Jumpskirt/security_grey_dv.rsi
   - type: Clothing
-    sprite: Clothing/Uniforms/Jumpskirt/security_grey.rsi
+    sprite: _Serenity/Clothing/Uniforms/Jumpskirt/security_grey_dv.rsi
 
 - type: entity
   parent: [ClothingUniformSkirtBase, BaseSlicingRefinable]

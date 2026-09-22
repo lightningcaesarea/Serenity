@@ -1,0 +1,236 @@
+# Delta-V security-department items with no existing Serenity counterpart.
+# Sprites: CC0-1.0 or CC-BY-SA-3.0 (see individual _Serenity/Clothing/... meta.json files), ported from Delta-V (_DV).
+
+# ── Uniforms ────────────────────────────────────────────────────────────────
+
+- type: entity
+  parent: [ClothingUniformBase, BaseSecurityContraband]
+  id: ClothingUniformJumpsuitSecurityCadetDV
+  name: security cadet's jumpsuit
+  description: A jumpsuit worn by security cadets still earning their stripes.
+  components:
+  - type: Sprite
+    sprite: _Serenity/Clothing/Uniforms/Jumpsuit/securitycadet.rsi
+  - type: Clothing
+    sprite: _Serenity/Clothing/Uniforms/Jumpsuit/securitycadet.rsi
+
+- type: entity
+  parent: [ClothingUniformSkirtBase, BaseSecurityContraband]
+  id: ClothingUniformJumpskirtSecurityCadetDV
+  name: security cadet's jumpskirt
+  description: A jumpskirt worn by security cadets still earning their stripes.
+  components:
+  - type: Sprite
+    sprite: _Serenity/Clothing/Uniforms/Jumpskirt/securitycadet.rsi
+  - type: Clothing
+    sprite: _Serenity/Clothing/Uniforms/Jumpskirt/securitycadet.rsi
+
+- type: entity
+  parent: [ClothingUniformBase, BaseSecurityContraband]
+  id: ClothingUniformJumpsuitSecFormalDV
+  name: formal security uniform
+  description: A dress uniform worn by security officers for ceremonial occasions.
+  components:
+  - type: Sprite
+    sprite: _Serenity/Clothing/Uniforms/Jumpsuit/secformalsuit.rsi
+  - type: Clothing
+    sprite: _Serenity/Clothing/Uniforms/Jumpsuit/secformalsuit.rsi
+
+- type: entity
+  parent: [ClothingUniformSkirtBase, BaseSecurityContraband]
+  id: ClothingUniformJumpskirtSecFormalDV
+  name: formal security dress
+  description: A dress uniform worn by security officers for ceremonial occasions.
+  components:
+  - type: Sprite
+    sprite: _Serenity/Clothing/Uniforms/Jumpskirt/secformalskirt.rsi
+  - type: Clothing
+    sprite: _Serenity/Clothing/Uniforms/Jumpskirt/secformalskirt.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitProsecutorDV
+  name: prosecutor's suit
+  description: A sharp red suit worn by the station's legal prosecutor.
+  components:
+  - type: Sprite
+    sprite: _Serenity/Clothing/Uniforms/Jumpsuit/prosecutorred.rsi
+  - type: Clothing
+    sprite: _Serenity/Clothing/Uniforms/Jumpsuit/prosecutorred.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformJumpskirtProsecutorDV
+  name: prosecutor's dress
+  description: A sharp red dress worn by the station's legal prosecutor.
+  components:
+  - type: Sprite
+    sprite: _Serenity/Clothing/Uniforms/Jumpskirt/prosecutorred.rsi
+  - type: Clothing
+    sprite: _Serenity/Clothing/Uniforms/Jumpskirt/prosecutorred.rsi
+
+# ── Head ─────────────────────────────────────────────────────────────────────
+
+- type: entity
+  parent: ClothingHeadBaseButcherable
+  id: ClothingHeadHatBeretCadetDV
+  name: cadet beret
+  description: A beret marking the wearer as a security cadet.
+  components:
+  - type: Sprite
+    sprite: _Serenity/Clothing/Head/Hats/beret_cadet.rsi
+  - type: Clothing
+    sprite: _Serenity/Clothing/Head/Hats/beret_cadet.rsi
+
+- type: entity
+  parent: ClothingHeadBaseButcherable
+  id: ClothingHeadHatBeretSecurityGreyDV
+  name: grey security beret
+  description: A grey beret with the security department's insignia.
+  components:
+  - type: Sprite
+    sprite: _Serenity/Clothing/Head/Hats/beret_security_grey.rsi
+  - type: Clothing
+    sprite: _Serenity/Clothing/Head/Hats/beret_security_grey.rsi
+
+# ── Eyes ─────────────────────────────────────────────────────────────────────
+
+- type: entity
+  parent: [ClothingEyesHudBase, ShowSecurityIcons, BaseSecurityContraband]
+  id: ClothingEyesHudSecurityPrescriptionDV
+  name: prescription security hud
+  description: A heads-up display that scans the humanoids in view and provides accurate data about their ID status and security records, with a built-in vision correction lens.
+  components:
+  - type: Sprite
+    sprite: _Serenity/Clothing/Eyes/Hud/prescsechud.rsi
+  - type: Clothing
+    sprite: _Serenity/Clothing/Eyes/Hud/prescsechud.rsi
+  - type: VisionCorrection
+  - type: Tag
+    tags:
+    - HudSecurity
+    - PetWearable
+    - WhitelistChameleon
+
+# ── Hardsuits ────────────────────────────────────────────────────────────────
+
+- type: entity
+  parent: [ BaseCentcommContraband, ClothingOuterHardsuitSyndieElite ]
+  id: ClothingOuterHardsuitERTSecurityEliteDV
+  name: elite ERT security hardsuit
+  description: A reinforced hardsuit worn by elite security officers of an emergency response team.
+  components:
+  - type: Sprite
+    sprite: _Serenity/Clothing/OuterClothing/Hardsuits/ERTSuits/eliteertsecurity.rsi
+  - type: Clothing
+    sprite: _Serenity/Clothing/OuterClothing/Hardsuits/ERTSuits/eliteertsecurity.rsi
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHelmetHardsuitERTSecurityEliteDV
+  - type: Tag
+    tags:
+    - Hardsuit
+    - WhitelistChameleon
+    - CorgiWearable
+
+- type: entity
+  parent: [ BaseCentcommContraband, ClothingHeadLightParamsProfessional, ClothingHeadHelmetHardsuitSyndie ]
+  id: ClothingHeadHelmetHardsuitERTSecurityEliteDV
+  name: elite ERT security hardsuit helmet
+  description: A reinforced hardsuit helmet worn by elite members of an emergency response team.
+  components:
+  - type: Sprite
+    sprite: _Serenity/Clothing/Head/Hardsuits/ERThelmets/eliteertsecurity.rsi
+  - type: Clothing
+    sprite: _Serenity/Clothing/Head/Hardsuits/ERThelmets/eliteertsecurity.rsi
+  - type: PointLight
+    color: "#ffadc6"
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+    - CorgiWearable
+
+# ── Neck ─────────────────────────────────────────────────────────────────────
+
+- type: entity
+  parent: [ClothingNeckBase, BaseSecurityContraband]
+  id: ClothingNeckTieClipSecurityDV
+  name: security tie clip
+  description: A polished tie clip bearing the security department's insignia.
+  components:
+  - type: Sprite
+    sprite: _Serenity/Clothing/Neck/Misc/cwpsec.rsi
+  - type: Clothing
+    sprite: _Serenity/Clothing/Neck/Misc/cwpsec.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckProsecutorBadgeDV
+  name: prosecutor's badge
+  description: A badge identifying the wearer as the station's legal prosecutor.
+  components:
+  - type: Sprite
+    sprite: _Serenity/Clothing/Neck/Misc/prosecutorbadge.rsi
+  - type: Clothing
+    sprite: _Serenity/Clothing/Neck/Misc/prosecutorbadge.rsi
+
+# ── Outer clothing ───────────────────────────────────────────────────────────
+
+- type: entity
+  parent: [ClothingOuterStorageFoldableBase, ClothingOuterBaseWinter, AllowSuitStorageClothing, BaseSecurityContraband]
+  id: ClothingOuterWinterStaSecGreatcoatDV
+  name: station security greatcoat
+  description: A heavy department greatcoat worn by station security personnel.
+  components:
+  - type: Sprite
+    sprite: _Serenity/Clothing/OuterClothing/WinterCoats/stasecgreatcoat.rsi
+  - type: Clothing
+    sprite: _Serenity/Clothing/OuterClothing/WinterCoats/stasecgreatcoat.rsi
+
+- type: entity
+  parent: [ClothingOuterBaseWinter, AllowSuitStorageClothing, BaseSecurityContraband]
+  id: ClothingOuterStaSecSweaterDV
+  name: station security sweater
+  description: A comfortable department sweater worn by station security personnel.
+  components:
+  - type: Sprite
+    sprite: _Serenity/Clothing/OuterClothing/WinterCoats/stasecsweater.rsi
+  - type: Clothing
+    sprite: _Serenity/Clothing/OuterClothing/WinterCoats/stasecsweater.rsi
+
+# ── Shoes ────────────────────────────────────────────────────────────────────
+
+- type: entity
+  parent: [ClothingShoesBaseWinterBoots, ClothingShoesMilitaryBase, BaseSecurityContraband]
+  id: ClothingShoesBootsWinterHoSDV
+  name: head of security's winter boots
+  description: Insulated boots issued to the head of security.
+  components:
+  - type: Sprite
+    sprite: _Serenity/Clothing/Shoes/Boots/winterbootshos.rsi
+  - type: Clothing
+    sprite: _Serenity/Clothing/Shoes/Boots/winterbootshos.rsi
+
+- type: entity
+  parent: [ClothingShoesBaseWinterBoots, ClothingShoesMilitaryBase, BaseSecurityContraband]
+  id: ClothingShoesBootsWinterWardenDV
+  name: warden's winter boots
+  description: Insulated boots issued to the warden.
+  components:
+  - type: Sprite
+    sprite: _Serenity/Clothing/Shoes/Boots/winterbootswarden.rsi
+  - type: Clothing
+    sprite: _Serenity/Clothing/Shoes/Boots/winterbootswarden.rsi
+
+# ── Back ─────────────────────────────────────────────────────────────────────
+
+- type: entity
+  parent: [ClothingBackpack, BaseCentcommContraband]
+  id: ClothingBackpackERTSecurityDV
+  name: ERT security backpack
+  description: A spacious backpack with lots of pockets, worn by security officers of an emergency response team.
+  components:
+  - type: Sprite
+    sprite: _Serenity/Clothing/Back/Backpacks/ertsecreduced.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Serenity/Clothing/Back/Backpacks/ertsecreduced.rsi

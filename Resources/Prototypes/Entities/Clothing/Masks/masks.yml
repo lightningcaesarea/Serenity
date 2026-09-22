@@ -29,9 +29,9 @@
   - type: Item
     size: Tiny
   - type: Sprite
-    sprite: Clothing/Mask/gassecurity.rsi
+    sprite: _Serenity/Clothing/Mask/gassecurityDV.rsi
   - type: Clothing
-    sprite: Clothing/Mask/gassecurity.rsi
+    sprite: _Serenity/Clothing/Mask/gassecurityDV.rsi
   - type: Pierceable
     level: Metal
   - type: Armor
