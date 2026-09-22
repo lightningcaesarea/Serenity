@@ -358,7 +358,7 @@
 - type: entity
   parent: [ClothingOuterHardsuitBase, BaseSecurityContraband]
   id: ClothingOuterHardsuitWarden
-  name: armourer's hardsuit
+  name: warden's hardsuit
   description: A specialized, heavy riot suit geared to combat low pressure environments.
   components:
   - type: Sprite

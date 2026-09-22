@@ -499,7 +499,7 @@
 - type: entity
   parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase, ClothingHeadLightParamsAdvanced ] # Starlight
   id: ClothingHeadHelmetHardsuitWarden
-  name: armourer's hardsuit helmet
+  name: warden's hardsuit helmet
   description: A modified riot helmet. Oddly comfortable.
   components:
   - type: Sprite
