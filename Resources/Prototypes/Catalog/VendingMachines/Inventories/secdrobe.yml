@@ -7,17 +7,14 @@
     ClothingUniformJumpsuitSec: 3
     ClothingShoesBootsJack: 3
     ClothingHeadHatBeretSecurity: 3
-    ClothingHeadHatSecsoft: 3
-    ClothingHeadBandRed: 3
-    ClothingMaskNeckGaiterRed: 3
-    ClothingHandsGlovesSecurityRed: 3
-    ClothingHandsGlovesSecurityFingerlessRed: 3
-    ClothingHandsMittensSecurityRed: 3 # SL
+    ClothingHeadHatSecsoftDV: 3
+    ClothingHeadBandBlue: 3
+    ClothingMaskNeckGaiter: 3
+    ClothingHandsGlovesFingerless: 5
     ClothingUniformJumpskirtSec: 3
     ClothingUniformJumpsuitSecGrey: 3
     ClothingUniformJumpskirtSecGrey: 3
     ClothingUniformJumpsuitSecBlue: 3
-    ClothingUniformSecurityTshirt: 3 #SL Edit
     ClothingHeadsetSecurity: 3
     ClothingOuterWinterSec: 2
     ClothingOuterArmorBasic: 2
@@ -28,13 +25,28 @@
     ClothingHeadHelmetPlate: 2
     ClothingHeadHelmetStabproof: 2
     ClothingHeadHelmetHeatAbsorbent: 2
-    ClothingNeckScarfStripedRed: 3
+    ClothingNeckScarfStripedBlue: 3
     ClothingEyesBlindfold: 1
     ClothingShoesBootsCombat: 1
     ClothingShoesBootsWinterSec: 2
-    ClothingOuterSecurityBomber: 2 #SL Edit
+    ClothingOuterSecurityBomberDV: 2 #SL Edit, DV resprite
     ClothingOuterWindbreakerSecurity: 2 #Starlight
     ClothingHeadHelmetJustice: 1
+    ClothingUniformJumpsuitSecurityCadetDV: 2 #DV
+    ClothingUniformJumpskirtSecurityCadetDV: 2 #DV
+    ClothingUniformJumpsuitSecFormalDV: 1 #DV
+    ClothingUniformJumpskirtSecFormalDV: 1 #DV
+    ClothingHeadHatBeretCadetDV: 2 #DV
+    ClothingHeadHatBeretSecurityGreyDV: 2 #DV
+    ClothingEyesHudSecurityPrescriptionDV: 2 #DV
+    ClothingNeckTieClipSecurityDV: 2 #DV
+    ClothingOuterWinterStaSecGreatcoatDV: 2 #DV
+    ClothingOuterStaSecSweaterDV: 2 #DV
+    ClothingShoesBootsWinterHoSDV: 1 #DV
+    ClothingShoesBootsWinterWardenDV: 1 #DV
+    ClothingUniformJumpsuitProsecutorDV: 1 #DV
+    ClothingUniformJumpskirtProsecutorDV: 1 #DV
+    ClothingNeckProsecutorBadgeDV: 1 #DV
   contrabandInventory:
     ClothingMaskClownSecurity: 1
     ClothingMaskMimeSecurity: 1

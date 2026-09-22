@@ -340,6 +340,36 @@
   id: ClothingOuterSecurityBomberOpened
   name: security bomber
 
+# Security Bomber (Delta-V sprite)
+- type: entity
+  parent: [ClothingOuterStorageFoldableBase, ClothingOuterBaseWinter, AllowSuitStorageClothing, BaseSecurityContraband]
+  id: ClothingOuterSecurityBomberDV
+  name: security bomber
+  description: A regular bomber, but with armored inserts.
+  components:
+  - type: Sprite
+    sprite: _Serenity/Clothing/OuterClothing/Coats/Bombers/security_dv.rsi
+  - type: Clothing
+    sprite: _Serenity/Clothing/OuterClothing/Coats/Bombers/security_dv.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.85
+        Slash: 0.75
+        Piercing: 0.90
+        Heat: 0.85
+        Cold: 0.80 # Sec can get a little more
+  - type: ExplosionResistance
+    damageCoefficient: 0.60 # Incredibly niche explosion resist armor; it's half a joke about having "bomb" in the name, but also gives it something...
+
+- type: entity
+  parent: [ClothingOuterStorageFoldableBaseOpened, ClothingOuterSecurityBomberDV]
+  id: ClothingOuterSecurityBomberDVOpened
+  name: security bomber
+  components:
+  - type: Item
+    heldPrefix: null # Delta-V sprite has no open-inhand-* states; fall back to the closed inhand art
+
 # Security Windbreaker
 - type: entity
   parent: [ClothingOuterStorageFoldableBase, ClothingOuterBaseWinter, AllowSuitStorageClothing, BaseSecurityContraband]

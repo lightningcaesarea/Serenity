@@ -329,21 +329,17 @@
   components:
   - type: RollUpSleeves
   - type: Sprite
-    sprite: Clothing/Uniforms/Jumpsuit/hos.rsi
+    sprite: _Serenity/Clothing/Uniforms/Jumpsuit/hos_dv.rsi
   - type: Clothing
-    sprite: Clothing/Uniforms/Jumpsuit/hos.rsi
+    sprite: _Serenity/Clothing/Uniforms/Jumpsuit/hos_dv.rsi
   - type: Item
     inhandVisuals:
       left:
       - state: inhand-left
-        color: "#C12D30"
-        sprite: Clothing/Uniforms/Jumpsuit/color.rsi
-      - state: overlay-inhand-left
+        sprite: _Serenity/Clothing/Uniforms/Jumpsuit/hos_dv.rsi
       right:
       - state: inhand-right
-        color: "#C12D30"
-        sprite: Clothing/Uniforms/Jumpsuit/color.rsi
-      - state: overlay-inhand-right
+        sprite: _Serenity/Clothing/Uniforms/Jumpsuit/hos_dv.rsi
 
 - type: entity
   parent: [ClothingUniformBase, BaseCommandContraband]
@@ -352,9 +348,9 @@
   description: It's a turtleneck worn by those strong and disciplined enough to achieve the position of Head of Security.
   components:
   - type: Sprite
-    sprite: Clothing/Uniforms/Jumpsuit/hos_alt.rsi
+    sprite: _Serenity/Clothing/Uniforms/Jumpsuit/hos_alt_dv.rsi
   - type: Clothing
-    sprite: Clothing/Uniforms/Jumpsuit/hos_alt.rsi
+    sprite: _Serenity/Clothing/Uniforms/Jumpsuit/hos_alt_dv.rsi
 
 - type: entity
   parent: [ClothingUniformBase, BaseCommandContraband]
@@ -363,9 +359,9 @@
   description: A blue jumpsuit of Head of Security.
   components:
   - type: Sprite
-    sprite: Clothing/Uniforms/Jumpsuit/hos_blue.rsi
+    sprite: _Serenity/Clothing/Uniforms/Jumpsuit/hos_grey_dv.rsi
   - type: Clothing
-    sprite: Clothing/Uniforms/Jumpsuit/hos_blue.rsi
+    sprite: _Serenity/Clothing/Uniforms/Jumpsuit/hos_grey_dv.rsi
 
 - type: entity
   parent: [ClothingUniformBase, BaseCommandContraband]
@@ -374,9 +370,9 @@
   description: A grey jumpsuit of Head of Security, which make him look somewhat like a assistant.
   components:
   - type: Sprite
-    sprite: Clothing/Uniforms/Jumpsuit/hos_grey.rsi
+    sprite: _Serenity/Clothing/Uniforms/Jumpsuit/hos_grey_dv.rsi
   - type: Clothing
-    sprite: Clothing/Uniforms/Jumpsuit/hos_grey.rsi
+    sprite: _Serenity/Clothing/Uniforms/Jumpsuit/hos_grey_dv.rsi
 
 - type: entity
   parent: [ClothingUniformBase, BaseCommandContraband]
@@ -603,19 +599,17 @@
   components:
   - type: RollUpSleeves
   - type: Sprite
-    sprite: Clothing/Uniforms/Jumpsuit/security.rsi
+    sprite: _Serenity/Clothing/Uniforms/Jumpsuit/security_dv.rsi
+  - type: Clothing
+    sprite: _Serenity/Clothing/Uniforms/Jumpsuit/security_dv.rsi
   - type: Item
     inhandVisuals:
       left:
       - state: inhand-left
-        color: "#C12D30"
-        sprite: Clothing/Uniforms/Jumpsuit/color.rsi
-      - state: overlay-inhand-left
+        sprite: _Serenity/Clothing/Uniforms/Jumpsuit/security_dv.rsi
       right:
       - state: inhand-right
-        color: "#C12D30"
-        sprite: Clothing/Uniforms/Jumpsuit/color.rsi
-      - state: overlay-inhand-right
+        sprite: _Serenity/Clothing/Uniforms/Jumpsuit/security_dv.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -635,9 +629,9 @@
   description: A tactical relic of years past before NanoTrasen decided it was cheaper to dye the suits red instead of washing out the blood. # SL
   components:
   - type: Sprite
-    sprite: Clothing/Uniforms/Jumpsuit/security_grey.rsi
+    sprite: _Serenity/Clothing/Uniforms/Jumpsuit/security_grey_dv.rsi
   - type: Clothing
-    sprite: Clothing/Uniforms/Jumpsuit/security_grey.rsi
+    sprite: _Serenity/Clothing/Uniforms/Jumpsuit/security_grey_dv.rsi
 
 - type: entity
   parent: [ClothingUniformBase, BaseSecurityContraband]
@@ -657,21 +651,17 @@
   description: A formal security suit for officers complete with NanoTrasen belt buckle. # SL
   components:
   - type: Sprite
-    sprite: Clothing/Uniforms/Jumpsuit/warden.rsi
+    sprite: _Serenity/Clothing/Uniforms/Jumpsuit/warden_dv.rsi
   - type: Clothing
-    sprite: Clothing/Uniforms/Jumpsuit/warden.rsi
+    sprite: _Serenity/Clothing/Uniforms/Jumpsuit/warden_dv.rsi
   - type: Item
     inhandVisuals:
       left:
       - state: inhand-left
-        color: "#C12D30"
-        sprite: Clothing/Uniforms/Jumpsuit/color.rsi
-      - state: overlay-inhand-left
+        sprite: _Serenity/Clothing/Uniforms/Jumpsuit/warden_dv.rsi
       right:
       - state: inhand-right
-        color: "#C12D30"
-        sprite: Clothing/Uniforms/Jumpsuit/color.rsi
-      - state: overlay-inhand-right
+        sprite: _Serenity/Clothing/Uniforms/Jumpsuit/warden_dv.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -834,9 +824,9 @@
   description: A suit for special occasions.
   components:
   - type: Sprite
-    sprite: Clothing/Uniforms/Jumpsuit/hosformal.rsi
+    sprite: _Serenity/Clothing/Uniforms/Jumpsuit/hosformal_dv.rsi
   - type: Clothing
-    sprite: Clothing/Uniforms/Jumpsuit/hosformal.rsi
+    sprite: _Serenity/Clothing/Uniforms/Jumpsuit/hosformal_dv.rsi
 
 - type: entity
   parent: [UnsensoredClothingUniformBase, BaseSyndicateContraband]

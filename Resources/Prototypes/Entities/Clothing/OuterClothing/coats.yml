@@ -108,9 +108,17 @@
   description: A greatcoat enhanced with a special alloy for some extra protection and style for those with a commanding presence.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Coats/hos_trenchcoat.rsi
+    sprite: _Serenity/Clothing/OuterClothing/Coats/hos_trenchcoat_dv.rsi
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        sprite: _Serenity/Clothing/OuterClothing/Coats/hos_trenchcoat_dv.rsi
+      right:
+      - state: inhand-right
+        sprite: _Serenity/Clothing/OuterClothing/Coats/hos_trenchcoat_dv.rsi
   - type: Clothing
-    sprite: Clothing/OuterClothing/Coats/hos_trenchcoat.rsi
+    sprite: _Serenity/Clothing/OuterClothing/Coats/hos_trenchcoat_dv.rsi
 
 - type: entity
   parent: [ClothingOuterStorageToggleableBase, ClothingOuterBaseWarm] # Starlight
@@ -363,9 +371,17 @@
   description: A sturdy, utilitarian jacket designed to protect a warden from any brig-bound threats.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Coats/warden.rsi
+    sprite: _Serenity/Clothing/OuterClothing/Coats/armourergreatcoat.rsi
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        sprite: _Serenity/Clothing/OuterClothing/Coats/armourergreatcoat.rsi
+      right:
+      - state: inhand-right
+        sprite: _Serenity/Clothing/OuterClothing/Coats/armourergreatcoat.rsi
   - type: Clothing
-    sprite: Clothing/OuterClothing/Coats/warden.rsi
+    sprite: _Serenity/Clothing/OuterClothing/Coats/armourergreatcoat.rsi
 
 - type: entity
   parent: [ClothingOuterStorageBase, ClothingOuterBaseWarm] # Starlight

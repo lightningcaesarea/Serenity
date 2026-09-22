@@ -76,7 +76,7 @@
   description: A large duffel bag for holding extra security related goods.
   components:
   - type: Sprite
-    sprite: Clothing/Back/Duffels/security.rsi
+    sprite: _Serenity/Clothing/Back/Duffels/security_dv.rsi
 
 - type: entity
   parent: [ClothingBackpackDuffel, BaseSecurityContraband]

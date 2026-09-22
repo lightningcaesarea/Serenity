@@ -182,29 +182,24 @@
 - type: loadout
   id: SecurityBomber
   equipment:
-    outerClothing: ClothingOuterSecurityBomber
+    outerClothing: ClothingOuterSecurityBomberDV
 
 #Eyewear
 - type: loadout
   id: SecurityGlassesPrescription
   equipment:
-    eyes: ClothingEyeGlassesSecurityPrescription
+    eyes: ClothingEyeGlassesSecurityPrescriptionDV
 
 # Gloves
 - type: loadout
   id: SecGloves
   equipment:
-    gloves: ClothingHandsGlovesSecurityRed
+    gloves: ClothingHandsGlovesFingerless
 
 - type: loadout
   id: SecGlovesFingerless
   equipment:
-    gloves: ClothingHandsGlovesSecurityFingerlessRed
-
-- type: loadout
-  id: SecMittens
-  equipment:
-    gloves: ClothingHandsMittensSecurityRed
+    gloves: ClothingHandsGlovesFingerless
 
 # Helmets
 - type: loadout

@@ -182,7 +182,7 @@
     signProto: HolosignSecurity
     chargeUse: 90
   - type: Sprite
-    sprite: Objects/Devices/Holoprojectors/security.rsi
+    sprite: _Serenity/Objects/Devices/Holoprojectors/security_dv.rsi
     state: icon
   - type: Tag
     tags:

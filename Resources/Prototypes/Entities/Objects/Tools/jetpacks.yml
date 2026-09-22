@@ -256,11 +256,11 @@
   suffix: Empty
   components:
   - type: Item
-    sprite: _Starlight/Objects/Tanks/Jetpacks/security_mini.rsi # Starlight - mini jetpack textures
+    sprite: _Serenity/Objects/Tanks/Jetpacks/security_dv.rsi
   - type: Sprite
-    sprite: _Starlight/Objects/Tanks/Jetpacks/security_mini.rsi # Starlight - mini jetpack textures
+    sprite: _Serenity/Objects/Tanks/Jetpacks/security_dv.rsi
   - type: Clothing
-    sprite: _Starlight/Objects/Tanks/Jetpacks/security_mini.rsi # Starlight - mini jetpack textures
+    sprite: _Serenity/Objects/Tanks/Jetpacks/security_dv.rsi
 
 #Filled security
 - type: entity

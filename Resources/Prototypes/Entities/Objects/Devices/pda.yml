@@ -11,7 +11,7 @@
        !type:String
        pda
   - type: Sprite
-    sprite: Objects/Devices/pda.rsi
+    sprite: _Serenity/Objects/Devices/pda_dv.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
       state: "pda"
@@ -24,7 +24,7 @@
       shader: "unshaded"
       visible: false
   - type: Icon
-    sprite: Objects/Devices/pda.rsi
+    sprite: _Serenity/Objects/Devices/pda_dv.rsi
     state: pda
   - type: Pda
     paiSlot:
@@ -145,6 +145,9 @@
       map: [ "enum.PdaVisualLayers.IdLight" ]
       shader: "unshaded"
       visible: false
+  - type: Icon
+    sprite: Objects/Devices/pda.rsi
+    state: pda
 
 - type: entity
   parent: BasePDA
@@ -1181,7 +1184,10 @@
      enum.PdaVisuals.PdaType:
        !type:String
        pda-syndi-operative
+  - type: Sprite
+    sprite: Objects/Devices/pda.rsi
   - type: Icon
+    sprite: Objects/Devices/pda.rsi
     state: pda-syndi-operative
 
 - type: entity
@@ -1593,7 +1599,10 @@
   - type: PdaBorderColor
     borderColor: "#e39751"
     accentVColor: "#DFDFDF"
+  - type: Sprite
+    sprite: Objects/Devices/pda.rsi
   - type: Icon
+    sprite: Objects/Devices/pda.rsi
     state: pda-seniorcourier
 
 - type: entity

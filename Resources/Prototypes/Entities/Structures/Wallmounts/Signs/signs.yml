@@ -51,6 +51,7 @@
   description: A direction sign, pointing out which way the Brig is.
   components:
   - type: Sprite
+    sprite: _Serenity/Structures/Wallmounts/signs_security_dv.rsi
     state: direction_brig
 
 - type: entity
@@ -221,6 +222,7 @@
   description: A direction sign, pointing out which way Security is.
   components:
   - type: Sprite
+    sprite: _Serenity/Structures/Wallmounts/signs_security_dv.rsi
     state: direction_sec
 
 - type: entity
@@ -295,6 +297,7 @@
   description: A sign indicating the armory.
   components:
   - type: Sprite
+    sprite: _Serenity/Structures/Wallmounts/signs_security_dv.rsi
     state: armory
 
 - type: entity
@@ -630,6 +633,7 @@
   description: A sign indicating an interrogation room.
   components:
   - type: Sprite
+    sprite: _Serenity/Structures/Wallmounts/signs_security_dv.rsi
     state: interrogation
 
 - type: entity
@@ -722,6 +726,7 @@
   description: A sign indicating the genpop prison.
   components:
   - type: Sprite
+    sprite: _Serenity/Structures/Wallmounts/signs_security_dv.rsi
     state: genpop
 
 - type: entity
@@ -1265,6 +1270,7 @@
   description: A sign depicting the security insignia.
   components:
   - type: Sprite
+    sprite: _Serenity/Structures/Wallmounts/signs_security_dv.rsi
     state: security
 
 - type: entity

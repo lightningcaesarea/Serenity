@@ -562,6 +562,7 @@
   groups:
   - SecurityMask # Starlight
   - SecurityCadetJumpsuit
+  - SecurityCadetHead # DV
   - SecurityBackpack
   - SecurityNonLethalWeapon
   - SecurityEyewear
