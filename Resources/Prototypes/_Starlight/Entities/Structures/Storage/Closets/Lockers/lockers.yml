@@ -29,7 +29,7 @@
 - type: entity
   id: LockerBrigmedicLarge
   parent: LockerLargeBaseSecure
-  name: large brigmedic's locker
+  name: large corpsman's locker
   components:
   - type: Appearance
   - type: EntityStorageVisuals

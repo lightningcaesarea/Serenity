@@ -103,7 +103,7 @@
 - type: entity
   parent: [ClothingHeadBase, BaseSecurityContraband]
   id: ClothingHeadNurseHatBrigmedic
-  name: brigmedic's medbay hat
+  name: corpsman's medbay hat
   description: For those long nights on the shift.
   components:
     - type: Sprite

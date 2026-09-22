@@ -67,8 +67,8 @@
 - type: entity
   parent: [ClothingEyesBase, ShowSecurityIcons, BaseSecurityContraband]
   id: ClothingEyesHudBrigmedic
-  name: brigmedic hud
-  description: Tamashi-upgraded HUDs. Yes. Brigmedic ones.
+  name: corpsman hud
+  description: Tamashi-upgraded HUDs. Yes. Corpsman ones.
   components:
     - type: Sprite
       sprite: _Starlight/Clothing/Eyes/Hud/brigmedichud.rsi
@@ -91,8 +91,8 @@
 - type: entity
   parent: [ClothingEyesHudBrigmedic, ClothingHeadEyeBaseFlippable]
   id: ClothingEyesEyepatchHudBrigmedic
-  name: brigmedic hud eyepatch
-  description: Tamashi-upgraded HUDs for true patriots. Yes. Brigmedic ones.
+  name: corpsman hud eyepatch
+  description: Tamashi-upgraded HUDs for true patriots. Yes. Corpsman ones.
   components:
     - type: Sprite
       sprite: _Starlight/Clothing/Eyes/Hud/brigmedpatch.rsi
@@ -107,7 +107,7 @@
 - type: entity
   parent: [ClothingEyesEyepatchHudBrigmedic, ClothingHeadEyeBaseFlipped]
   id: ClothingEyesEyepatchHudBrigmedicFlipped
-  name: brigmedic hud eyepatch
+  name: corpsman hud eyepatch
 
 - type: entity
   parent: [ClothingEyesBase, ShowSecurityIcons, BaseSecurityContraband]

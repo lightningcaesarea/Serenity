@@ -564,7 +564,7 @@
 
 
 - type: entity
-  name: fake brigmedic's rubber stamp
+  name: fake corpsman's rubber stamp
   parent: RubberStampBaseFake
   id: RubberStampBrigmedicFake
   description: A rubber stamp for forging important documents. Hopefully they don't look too closely.

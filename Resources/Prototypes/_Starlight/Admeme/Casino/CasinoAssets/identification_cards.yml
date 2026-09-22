@@ -83,7 +83,7 @@
 - type: entity
   parent: CasinoIDCard
   id: CasinoIDCardBrigmed
-  name: Gamorrah brigmedic ID card
+  name: Gamorrah corpsman ID card
   components:
     - type: Sprite
       layers:

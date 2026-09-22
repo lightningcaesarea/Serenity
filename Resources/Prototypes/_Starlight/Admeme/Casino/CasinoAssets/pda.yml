@@ -81,7 +81,7 @@
 - type: entity
   parent: CasinoPDA
   id: CasinoPDABrigmed
-  name: Gamorrah brigmedic PDA
+  name: Gamorrah corpsman PDA
   description: Patch them up, send them back to the tables. The house always wins.
   components:
     - type: Pda

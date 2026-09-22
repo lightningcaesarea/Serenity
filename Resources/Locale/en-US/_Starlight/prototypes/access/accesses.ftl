@@ -19,7 +19,7 @@ id-card-access-level-shuttle = Shuttle
 id-card-access-level-robotics = Robotics
 
 # Security
-id-card-access-level-brigmedic = Brigmedic
+id-card-access-level-brigmedic = Corpsman
 id-card-access-level-cadet = Cadet
 
 # Service

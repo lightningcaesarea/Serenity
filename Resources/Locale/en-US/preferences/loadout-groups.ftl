@@ -169,12 +169,12 @@ loadout-group-security-id = Security ID
 loadout-group-security-weapon = Security Weapon
 loadout-group-security-eyewear = Security eyewear
 
-loadout-group-brigmedic-head = Brigmedic head
-loadout-group-brigmedic-jumpsuit = Brigmedic jumpsuit
-loadout-group-brigmedic-backpack = Brigmedic backpack
-loadout-group-brigmedic-belt = Brigmedic belt
-loadout-group-brigmedic-outerclothing = Brigmedic outer clothing
-loadout-group-brigmedic-eyewear = Brigmedic eyewear
+loadout-group-brigmedic-head = Corpsman head
+loadout-group-brigmedic-jumpsuit = Corpsman jumpsuit
+loadout-group-brigmedic-backpack = Corpsman backpack
+loadout-group-brigmedic-belt = Corpsman belt
+loadout-group-brigmedic-outerclothing = Corpsman outer clothing
+loadout-group-brigmedic-eyewear = Corpsman eyewear
 
 loadout-group-detective-head = Detective head
 loadout-group-detective-neck = Detective neck
@@ -182,6 +182,7 @@ loadout-group-detective-jumpsuit = Detective jumpsuit
 loadout-group-detective-outerclothing = Detective outer clothing
 
 loadout-group-security-cadet-jumpsuit = Security cadet jumpsuit
+loadout-group-security-cadet-head = Security cadet headwear
 loadout-group-security-star = Security Star
 
 # Medical

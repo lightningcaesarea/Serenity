@@ -412,7 +412,7 @@
 - type: entity
   id: BedsheetBrigmedic
   parent: BedsheetBase
-  name: brigmedic's bedsheet
+  name: corpsman's bedsheet
   description: Not worse than cotton.
   components:
   - type: Sprite

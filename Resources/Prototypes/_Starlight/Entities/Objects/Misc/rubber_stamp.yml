@@ -61,7 +61,7 @@
 
 # Brigmedic stamp
 - type: entity
-  name: brigmedic's rubber stamp
+  name: corpsman's rubber stamp
   parent: RubberStampBase
   id: RubberStampBrigmedic
   description: A rubber stamp for stamping important documents. No authority, yet you will still stamp every single document you can.

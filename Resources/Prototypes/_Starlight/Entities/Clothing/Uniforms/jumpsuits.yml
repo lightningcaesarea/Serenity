@@ -185,8 +185,8 @@
 - type: entity
   parent: [ClothingUniformBase, BaseSecurityContraband]
   id: ClothingUniformJumpsuitFormalBrigmedic
-  name: formal brigmedic jumpsuit
-  description: A formal suit for the brigmedic.
+  name: formal corpsman jumpsuit
+  description: A formal suit for the corpsman.
   components:
   - type: Sprite
     sprite: _Starlight/Clothing/Uniforms/Jumpsuit/brigmedic_alt.rsi
@@ -201,8 +201,8 @@
 - type: entity
   parent: [ClothingUniformBase, BaseSecurityContraband]
   id: ClothingUniformJumpsuitSeniorBrigmedic
-  name: senior formal brigmedic jumpsuit
-  description: A formal suit for the seasoned brigmedic.
+  name: senior formal corpsman jumpsuit
+  description: A formal suit for the seasoned corpsman.
   components:
   - type: Sprite
     sprite: _Starlight/Clothing/Uniforms/Jumpsuit/brigmedic_senior.rsi

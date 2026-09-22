@@ -51,13 +51,13 @@ loadout-group-security-tie = Security tie
 loadout-group-security-mask = Security mask
 loadout-group-security-mask-elite = Elite Security mask
 
-loadout-group-brigmedic-gloves = Brigmedic gloves
+loadout-group-brigmedic-gloves = Corpsman gloves
 loadout-group-security-non-lethal-weapon = Security Non-Lethal Weapon
 loadout-group-security-sidearm = Security Sidearm
 loadout-group-detective-shoes = Detective shoes
-loadout-group-brigmedic-id = Brigmedic ID
-loadout-group-brigmedic-beaker = Brigmedic beaker
-loadout-group-brigmedic-mask = Brigmedic mask
+loadout-group-brigmedic-id = Corpsman ID
+loadout-group-brigmedic-beaker = Corpsman beaker
+loadout-group-brigmedic-mask = Corpsman mask
 
 loadout-group-dutyofficer-head = Duty officer head
 loadout-group-dutyofficer-jumpsuit = Duty officer jumpsuit

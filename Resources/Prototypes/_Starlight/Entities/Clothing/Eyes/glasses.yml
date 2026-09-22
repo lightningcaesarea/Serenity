@@ -1,7 +1,7 @@
 - type: entity
   parent: [ClothingEyesBase, ShowSecurityIcons, BaseSecurityContraband]
   id: ClothingEyesGlassesBrigmedic
-  name: brigmedic glasses
+  name: corpsman glasses
   description: High-quality hud that can protect against flashes. Tamashi-style!
   components:
   - type: Sprite
@@ -214,8 +214,8 @@
 - type: entity
   parent: [ClothingEyesBase, ShowSecurityIcons, BaseSecurityContraband]
   id: ClothingEyesGlassesBrigmedicPrescription
-  name: prescription brigmedic glasses
-  description: A set of unshielded prescription glasses for Brigmedics.
+  name: prescription corpsman glasses
+  description: A set of unshielded prescription glasses for corpsmen.
   components:
   - type: Sprite
     sprite: _Starlight/Clothing/Eyes/Glasses/prescriptionbrigmedicglasses.rsi

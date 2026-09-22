@@ -70,7 +70,7 @@
   components:
     - type: FaxMachine
       group: FaxGroupSecurity
-      name: "Brigmedic"
+      name: "Corpsman"
       order: 500
 
 - type: entity

@@ -1,5 +1,5 @@
 - type: entity
-  name: brigmedic defibrillator battery
+  name: corpsman defibrillator battery
   description: You are fairly certain this is a AA battery in disguse..
   id: PowerCellTiny
   suffix: Full

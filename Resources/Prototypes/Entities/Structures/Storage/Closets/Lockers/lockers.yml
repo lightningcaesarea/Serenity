@@ -399,7 +399,7 @@
 - type: entity
   id: LockerBrigmedic
   parent: LockerBaseSecure
-  name: brigmedic locker
+  name: corpsman locker
   components:
   - type: Appearance
   - type: EntityStorageVisuals
