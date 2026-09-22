@@ -44,9 +44,6 @@
     ClothingOuterStaSecSweaterDV: 2 #DV
     ClothingShoesBootsWinterHoSDV: 1 #DV
     ClothingShoesBootsWinterWardenDV: 1 #DV
-    ClothingUniformJumpsuitProsecutorDV: 1 #DV
-    ClothingUniformJumpskirtProsecutorDV: 1 #DV
-    ClothingNeckProsecutorBadgeDV: 1 #DV
   contrabandInventory:
     ClothingMaskClownSecurity: 1
     ClothingMaskMimeSecurity: 1
