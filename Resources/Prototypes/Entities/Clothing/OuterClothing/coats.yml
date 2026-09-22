@@ -367,7 +367,7 @@
 - type: entity
   parent: [ClothingOuterArmorWarden, ClothingOuterBaseWarm, BaseSecurityContraband] # Starlight
   id: ClothingOuterCoatWarden
-  name: warden's armored jacket
+  name: armourer's armored jacket
   description: A sturdy, utilitarian jacket designed to protect a warden from any brig-bound threats.
   components:
   - type: Sprite

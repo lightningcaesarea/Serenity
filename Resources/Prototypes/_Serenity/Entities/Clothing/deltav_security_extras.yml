@@ -218,7 +218,7 @@
 - type: entity
   parent: [ClothingShoesBaseWinterBoots, ClothingShoesMilitaryBase, BaseSecurityContraband]
   id: ClothingShoesBootsWinterWardenDV
-  name: warden's winter boots
+  name: armourer's winter boots
   description: Insulated boots issued to the warden.
   components:
   - type: Sprite
