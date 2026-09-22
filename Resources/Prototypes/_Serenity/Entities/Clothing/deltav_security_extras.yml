@@ -226,16 +226,3 @@
   - type: Clothing
     sprite: _Serenity/Clothing/Shoes/Boots/winterbootswarden.rsi
 
-# ── Back ─────────────────────────────────────────────────────────────────────
-
-- type: entity
-  parent: [ClothingBackpack, BaseCentcommContraband]
-  id: ClothingBackpackERTSecurityDV
-  name: ERT security backpack
-  description: A spacious backpack with lots of pockets, worn by security officers of an emergency response team.
-  components:
-  - type: Sprite
-    sprite: _Serenity/Clothing/Back/Backpacks/ertsecreduced.rsi
-    state: icon
-  - type: Clothing
-    sprite: _Serenity/Clothing/Back/Backpacks/ertsecreduced.rsi
