@@ -1,0 +1,12 @@
+# Cargo Depot: ported from Frontier Station 14's MIT-era map (5be37d18c2, /Maps/_NF/POI/cargodepot.yml),
+# reskinned to Serenity's own lore. Not a station — no late-join, just a market destination worth
+# flying to: pallet consoles to sell salvage, cargo furniture, basic power. Four Frontier-only computer
+# variants (a market-modifier pallet console, three "tabletop" reskins) were swapped for their plain
+# equivalents since neither exists in Serenity.
+- type: serenityPointOfInterest
+  id: CargoDepot
+  name: Sector Cargo Depot
+  gridPath: /Maps/_Serenity/POI/cargodepot.yml
+  minimumDistance: 3500
+  maximumDistance: 6000
+  iffColor: "#37c837"
