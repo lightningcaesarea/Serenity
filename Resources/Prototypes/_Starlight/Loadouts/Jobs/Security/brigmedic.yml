@@ -21,6 +21,9 @@
 # Head
 - type: loadout
   id: BrigmedicNurseHat
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: VeteranBrigmedic
   equipment:
     head: ClothingHeadNurseHatBrigmedic
 
@@ -42,6 +45,9 @@
 
 - type: loadout
   id: BrigmedicBeret
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: VeteranBrigmedic
   equipment:
     head: ClothingHeadHatBeretBrigmedic
 
@@ -151,16 +157,25 @@
 # Back
 - type: loadout
   id: CorpsmanBackpack
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: VeteranBrigmedic
   equipment:
     back: ClothingBackpackCorpsman
 
 - type: loadout
   id: CorpsmanSatchel
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: VeteranBrigmedic
   equipment:
     back: ClothingBackpackSatchelCorpsman
 
 - type: loadout
   id: CorpsmanDuffel
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: VeteranBrigmedic
   equipment:
     back: ClothingBackpackDuffelCorpsman
 
@@ -192,6 +207,9 @@
 
 - type: loadout
   id: CorpsmanBelt
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: VeteranBrigmedic
   equipment:
     belt: ClothingBeltCorpsmanFilled
 
@@ -209,6 +227,9 @@
 # Outer clothing
 - type: loadout
   id: BrigmedicLabCoat
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: VeteranBrigmedic
   equipment:
     outerClothing: ClothingOuterCoatLabBrigmedic
 
@@ -227,16 +248,25 @@
 
 - type: loadout
   id: CorpsmanCoat
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: VeteranBrigmedic
   equipment:
     outerClothing: ClothingOuterCoatCorpsman
 
 - type: loadout
   id: BrigmedicGlasses
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: VeteranBrigmedic
   equipment:
     eyes: ClothingEyesGlassesBrigmedic
 
 - type: loadout
   id: BrigmedicHud
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: VeteranBrigmedic
   equipment:
     eyes: ClothingEyesHudBrigmedic
 
@@ -252,16 +282,25 @@
 
 - type: loadout
   id: BrigmeicGlassesPrescription
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: VeteranBrigmedic
   equipment:
     eyes: ClothingEyesGlassesBrigmedicPrescription
 
 - type: loadout
   id: CorpsmanGlasses
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: VeteranBrigmedic
   equipment:
     eyes: ClothingEyesGlassesCorpsman
 
 - type: loadout
   id: CorpsmanHud
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: VeteranBrigmedic
   equipment:
     eyes: ClothingEyesHudCorpsman
 
