@@ -273,9 +273,9 @@
       - EncryptionKeySecurity
       - EncryptionKeyCommon
   - type: Sprite
-    sprite: Clothing/Ears/Headsets/security.rsi
+    sprite: _Serenity/Clothing/Ears/Headsets/security_dv.rsi
   - type: Clothing
-    sprite: Clothing/Ears/Headsets/security.rsi
+    sprite: _Serenity/Clothing/Ears/Headsets/security_dv.rsi
   - type: RadioChime
     sound:
       path: /Audio/_Starlight/Effects/Radio/secoff.ogg
