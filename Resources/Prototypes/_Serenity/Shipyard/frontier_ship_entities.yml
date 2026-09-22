@@ -1,0 +1,1332 @@
+# Ported from Frontier Station 14 at commit 5be37d18c2 (2024-07-01), MIT licensed.
+# Copyright (c) 2017-2024 New Frontiers. Adapted for Serenity.
+# Source: https://github.com/new-frontiers-14/frontier-station-14
+#
+# Real entity definitions for prototypes referenced by the ported Frontier ship maps,
+# replacing the stand-in aliases that used to live in frontier_ship_stubs.yml.
+# Component data and balance numbers are kept as upstream wrote them. Where an entity's
+# original parent chain referenced a prototype or component Serenity doesn't have
+# (mostly other Frontier-only bases), that piece was dropped rather than invented —
+# noted inline with "# Serenity:".
+
+# ── Ship Core ─────────────────────────────────────────────────────────────────
+
+- type: entity
+  id: WarpPointShip
+  parent: WarpPoint
+  suffix: ship
+  # Serenity: useStationName dropped, WarpPointComponent has no such field here.
+
+- type: entity
+  id: SmallThruster
+  parent: Thruster
+  name: small thruster
+  components:
+  - type: Thruster
+    baseThrust: 33
+    thrust: 33
+    damage:
+      types:
+        Heat: 40
+  - type: ApcPowerReceiver
+    powerLoad: 500
+  - type: Sprite
+    scale: 0.8, 0.8
+    sprite: Structures/Shuttles/thruster.rsi
+    layers:
+    - state: base
+      map: ["enum.ThrusterVisualLayers.Base"]
+    - state: thrust
+      map: ["enum.ThrusterVisualLayers.ThrustOn"]
+      shader: unshaded
+      visible: false
+    - state: thrust_burn_unshaded
+      map: ["enum.ThrusterVisualLayers.ThrustingUnshaded"]
+      shader: unshaded
+      visible: false
+      offset: 0, 1
+  - type: StaticPrice
+    price: 100
+
+- type: entity
+  id: SmallGyroscope
+  parent: Gyroscope
+  name: small gyroscope
+  components:
+  - type: Thruster
+    thrusterType: Angular
+    requireSpace: false
+    baseThrust: 250
+    thrust: 250
+  - type: ApcPowerReceiver
+    powerLoad: 200
+  - type: Sprite
+    scale: 0.8, 0.8
+    sprite: Structures/Shuttles/gyroscope.rsi
+    snapCardinals: true
+    layers:
+    - state: base
+      map: ["enum.ThrusterVisualLayers.Base"]
+    - state: thrust
+      map: ["enum.ThrusterVisualLayers.ThrustOn"]
+      shader: unshaded
+      visible: false
+    - state: thrust_burn_unshaded
+      map: ["enum.ThrusterVisualLayers.ThrustingUnshaded"]
+      shader: unshaded
+      visible: false
+  - type: StaticPrice
+    price: 100
+
+- type: entity
+  id: PortableGeneratorPacmanShuttle
+  parent: PortableGeneratorPacman
+  suffix: Plasma, 5 kW, Ship
+  components:
+    - type: FuelGenerator
+      on: true
+    - type: Transform
+      anchored: true
+    - type: MaterialStorage
+      storage:
+        Plasma: 300
+    # Serenity: startOnMapInit dropped, PortableGeneratorComponent has no such
+    # field here; FuelGenerator.on above already starts it running.
+
+- type: entity
+  id: PortableGeneratorSuperPacmanShuttle
+  parent: PortableGeneratorSuperPacman
+  suffix: Uranium, 30 kW, Ship
+  components:
+    - type: FuelGenerator
+      on: true
+    - type: Transform
+      anchored: true
+    - type: MaterialStorage
+      storage:
+        Uranium: 1000
+    # Serenity: PortableGenerator.startOnMapInit dropped, no such field;
+    # FuelGenerator.on above already starts it running.
+
+- type: entity
+  name: Atmos Fix Oxygen Marker
+  suffix: Shuttle
+  id: AtmosFixShuttleOxygenMarker
+  description: "Oxygen at lower presure"
+  parent: MarkerBase
+  components:
+    - type: Sprite
+      layers:
+        - sprite: Markers/atmos.rsi
+          state: base
+          shader: unshaded
+        - sprite: Markers/atmos.rsi
+          shader: unshaded
+          state: oxygen
+    - type: AtmosFixMarker
+      mode: 7
+
+- type: entity
+  name: Atmos Fix Nitrogen Marker
+  suffix: Shuttle
+  id: AtmosFixShuttleNitrogenMarker
+  description: "Nitrogen at lower presure"
+  parent: MarkerBase
+  components:
+    - type: Sprite
+      layers:
+        - sprite: Markers/atmos.rsi
+          state: base
+          shader: unshaded
+        - sprite: Markers/atmos.rsi
+          shader: unshaded
+          state: nitrogen
+    - type: AtmosFixMarker
+      mode: 8
+
+- type: entity
+  name: Atmos Fix Plasma Marker
+  suffix: Shuttle
+  id: AtmosFixShuttlePlasmaMarker
+  description: "Plasma at lower presure"
+  parent: MarkerBase
+  components:
+    - type: Sprite
+      layers:
+        - sprite: Markers/atmos.rsi
+          state: base
+          shader: unshaded
+        - sprite: Markers/atmos.rsi
+          shader: unshaded
+          state: plasma
+    - type: AtmosFixMarker
+      mode: 9
+
+# ── Communications ────────────────────────────────────────────────────────────
+
+- type: entity
+  parent: FaxMachineBase
+  id: FaxMachineShip
+  suffix: Ship
+  components:
+    # Serenity: useStationName dropped, FaxMachineComponent has no such field here.
+    - type: PowerSwitch
+
+- type: entity
+  parent: TelecomServer
+  id: TelecomServerFilledShuttle
+  suffix: Ship
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - EncryptionKeyCommon
+      - EncryptionKeyCargo
+      - EncryptionKeyEngineering
+      - EncryptionKeyMedical
+      - EncryptionKeyScience
+      - EncryptionKeyService
+      # Serenity: EncryptionKeyTraffic dropped, Frontier-only key Serenity doesn't have.
+
+# ── Tabletop Computers ───────────────────────────────────────────────────────
+# Serenity: dropped `BaseStructureComputerTabletop` from the parent list — it only
+# provided tabletop-specific physics/collision-layer tags Serenity doesn't define.
+# Function and sprite (tabletop look) are otherwise identical to upstream.
+
+- type: entity
+  parent: ComputerShuttle
+  id: ComputerTabletopShuttle
+  components:
+  - type: Sprite
+    drawdepth: SmallObjects
+    layers:
+    - map: ["computerLayerBody"]
+      sprite: _NF/Structures/Machines/computer_tabletop.rsi
+      state: computer_tabletop
+    - map: ["computerLayerKeyboard"]
+      sprite: _NF/Structures/Machines/computer_tabletop.rsi
+      state: generic_keyboard_tabletop
+    - map: ["computerLayerScreen"]
+      sprite: Structures/Machines/computers.rsi
+      state: shuttle
+    - map: ["computerLayerKeys"]
+      sprite: Structures/Machines/computers.rsi
+      state: generic_keys
+
+- type: entity
+  parent: ComputerPowerMonitoring
+  id: ComputerTabletopPowerMonitoring
+  components:
+  - type: Sprite
+    drawdepth: SmallObjects
+    layers:
+    - map: ["computerLayerBody"]
+      sprite: _NF/Structures/Machines/computer_tabletop.rsi
+      state: computer_tabletop
+    - map: ["computerLayerKeyboard"]
+      sprite: _NF/Structures/Machines/computer_tabletop.rsi
+      state: generic_keyboard_tabletop
+    - map: ["computerLayerScreen"]
+      sprite: Structures/Machines/computers.rsi
+      state: power_monitor
+    - map: ["computerLayerKeys"]
+      sprite: Structures/Machines/computers.rsi
+      state: power_key
+
+- type: entity
+  parent: ComputerStationRecords
+  id: ComputerTabletopStationRecords
+  components:
+  - type: Sprite
+    drawdepth: SmallObjects
+    layers:
+    - map: ["computerLayerBody"]
+      sprite: _NF/Structures/Machines/computer_tabletop.rsi
+      state: computer_tabletop
+    - map: ["computerLayerKeyboard"]
+      sprite: _NF/Structures/Machines/computer_tabletop.rsi
+      state: generic_keyboard_tabletop
+    - map: ["computerLayerScreen"]
+      sprite: Structures/Machines/computers.rsi
+      state: generic
+    - map: ["computerLayerKeys"]
+      sprite: Structures/Machines/computers.rsi
+      state: generic_keys
+
+- type: entity
+  parent: ComputerCrewMonitoring
+  id: ComputerTabletopCrewMonitoring
+  components:
+  - type: Sprite
+    drawdepth: SmallObjects
+    layers:
+    - map: ["computerLayerBody"]
+      sprite: _NF/Structures/Machines/computer_tabletop.rsi
+      state: computer_tabletop
+    - map: ["computerLayerKeyboard"]
+      sprite: _NF/Structures/Machines/computer_tabletop.rsi
+      state: generic_keyboard_tabletop
+    - map: ["computerLayerScreen"]
+      sprite: Structures/Machines/computers.rsi
+      state: crew
+    - map: ["computerLayerKeys"]
+      sprite: Structures/Machines/computers.rsi
+      state: med_key
+
+- type: entity
+  parent: ComputerResearchAndDevelopment
+  id: ComputerTabletopResearchAndDevelopment
+  components:
+  - type: Sprite
+    drawdepth: SmallObjects
+    layers:
+    - map: ["computerLayerBody"]
+      sprite: _NF/Structures/Machines/computer_tabletop.rsi
+      state: computer_tabletop
+    - map: ["computerLayerKeyboard"]
+      sprite: _NF/Structures/Machines/computer_tabletop.rsi
+      state: generic_keyboard_tabletop
+    - map: ["computerLayerScreen"]
+      sprite: Structures/Machines/computers.rsi
+      state: rdcomp
+    - map: ["computerLayerKeys"]
+      sprite: Structures/Machines/computers.rsi
+      state: rd_key
+
+- type: entity
+  parent: ComputerAnalysisConsole
+  id: ComputerTabletopAnalysisConsole
+  components:
+  - type: Sprite
+    drawdepth: SmallObjects
+    layers:
+    - map: ["computerLayerBody"]
+      sprite: _NF/Structures/Machines/computer_tabletop.rsi
+      state: computer_tabletop
+    - map: ["computerLayerKeyboard"]
+      sprite: _NF/Structures/Machines/computer_tabletop.rsi
+      state: generic_keyboard_tabletop
+    - map: ["computerLayerScreen"]
+      sprite: Structures/Machines/computers.rsi
+      state: artifact
+    - map: ["computerLayerKeys"]
+      sprite: Structures/Machines/computers.rsi
+      state: tech_key
+
+- type: entity
+  parent: ComputerSolarControl
+  id: ComputerTabletopSolarControl
+  components:
+  - type: Sprite
+    drawdepth: SmallObjects
+    layers:
+    - map: ["computerLayerBody"]
+      sprite: _NF/Structures/Machines/computer_tabletop.rsi
+      state: computer_tabletop
+    - map: ["computerLayerKeyboard"]
+      sprite: _NF/Structures/Machines/computer_tabletop.rsi
+      state: generic_keyboard_tabletop
+    - map: ["computerLayerScreen"]
+      sprite: Structures/Machines/computers.rsi
+      state: solar_screen
+    - map: ["computerLayerKeys"]
+      sprite: Structures/Machines/computers.rsi
+      state: generic_keys
+
+- type: entity
+  parent: ComputerRadar
+  id: ComputerTabletopRadar
+  components:
+  - type: Sprite
+    drawdepth: SmallObjects
+    layers:
+    - map: ["computerLayerBody"]
+      sprite: _NF/Structures/Machines/computer_tabletop.rsi
+      state: computer_tabletop
+    - map: ["computerLayerKeyboard"]
+      sprite: _NF/Structures/Machines/computer_tabletop.rsi
+      state: generic_keyboard_tabletop
+    - map: ["computerLayerScreen"]
+      sprite: Structures/Machines/computers.rsi
+      state: solar_screen
+    - map: ["computerLayerKeys"]
+      sprite: Structures/Machines/computers.rsi
+      state: generic_keys
+
+- type: entity
+  parent: ComputerSurveillanceCameraMonitor
+  id: ComputerTabletopSurveillanceCameraMonitor
+  components:
+  - type: Sprite
+    drawdepth: SmallObjects
+    layers:
+    - map: ["computerLayerBody"]
+      sprite: _NF/Structures/Machines/computer_tabletop.rsi
+      state: computer_tabletop
+    - map: ["computerLayerKeyboard"]
+      sprite: _NF/Structures/Machines/computer_tabletop.rsi
+      state: generic_keyboard_tabletop
+    - map: ["computerLayerScreen"]
+      sprite: Structures/Machines/computers.rsi
+      state: cameras
+    - map: ["computerLayerKeys"]
+      sprite: Structures/Machines/computers.rsi
+      state: tech_key
+
+- type: entity
+  parent: ComputerMassMedia
+  id: ComputerTabletopMassMedia
+  components:
+  - type: Sprite
+    drawdepth: SmallObjects
+    layers:
+    - map: ["computerLayerBody"]
+      sprite: _NF/Structures/Machines/computer_tabletop.rsi
+      state: computer_tabletop
+    - map: ["computerLayerKeyboard"]
+      sprite: _NF/Structures/Machines/computer_tabletop.rsi
+      state: generic_keyboard_tabletop
+    - map: ["computerLayerScreen"]
+      sprite: Structures/Machines/computers.rsi
+      state: service
+    - map: ["computerLayerKeys"]
+      sprite: Structures/Machines/computers.rsi
+      state: service_keys
+
+# ── Suit Storage ─────────────────────────────────────────────────────────────
+
+- type: entity
+  id: SuitStorageBasic
+  parent: SuitStorageBase
+  suffix: Basic Hardsuit
+  components:
+  - type: StorageFill
+    contents:
+        - id: AirTankFilled
+        - id: ClothingOuterHardsuitSpatio  # Serenity: substitute for the missing ClothingOuterHardsuitBasic
+        - id: ClothingMaskBreath
+
+- type: entity
+  id: SuitStorageQuartermaster
+  parent: SuitStorageBase
+  suffix: Quartermaster
+  components:
+  - type: StorageFill
+    contents:
+        - id: ClothingShoesBootsMag
+        - id: ClothingOuterHardsuitLuxury
+        - id: ClothingMaskGasExplorer
+  - type: AccessReader
+
+# Wall-mounted suit closet base. Serenity: BaseWallCloset + SuitStorageBase both
+# exist as-is, so this ports unmodified from _NF/Entities/Structures/Storage/
+# Closets/suit_storage_wall.yml.
+
+- type: entity
+  id: SuitStorageWallmount
+  parent: [BaseWallCloset, SuitStorageBase]
+  name: suit wallstorage unit
+  components:
+  - type: Sprite
+    sprite: _NF/Structures/Storage/suit_storage_wall.rsi
+    layers:
+    - state: generic
+      map: ["enum.StorageVisualLayers.Base"]
+    - state: generic_door
+      map: ["enum.StorageVisualLayers.Door"]
+    - state: locked
+      map: ["enum.LockVisualLayers.Lock"]
+      shader: unshaded
+  - type: EntityStorageVisuals
+    stateBaseClosed: generic
+    stateDoorOpen: generic_open
+    stateDoorClosed: generic_door
+    # Serenity: stateBase/stateLocked/stateUnlocked dropped, no such fields here.
+  - type: EntityStorage
+    closeSound:
+      path: /Audio/Machines/windoor_open.ogg
+    openSound:
+      path: /Audio/Machines/windoor_open.ogg
+    # Serenity: denySound dropped, EntityStorageComponent has no such field here.
+  - type: Fixtures
+    fixtures: {}
+
+# Suit fills not already present in Serenity's own suit_storage.yml. Serenity
+# substitutes for the 3 clothing items Serenity doesn't have: ClothingMaskGasMerc
+# for the missing ClothingMaskGasMercenary, ClothingOuterHardsuitSpatio for the
+# missing ClothingOuterHardsuitPilot, and ClothingOuterHardsuitEVA for the
+# missing ClothingOuterEVASuitMailman.
+
+- type: entity
+  id: SuitStorageParamedic
+  parent: SuitStorageBase
+  suffix: Paramedic
+  components:
+  - type: StorageFill
+    contents:
+        - id: AirTankFilled
+        - id: ClothingOuterHardsuitVoidParamed
+        - id: ClothingMaskBreathMedical
+        - id: JetpackMiniFilled
+        - id: HandheldGPSBasic
+  - type: AccessReader
+
+- type: entity
+  id: SuitStorageMercenary
+  parent: SuitStorageBase
+  suffix: Mercenary
+  components:
+  - type: StorageFill
+    contents:
+        - id: AirTankFilled
+        - id: ClothingOuterHardsuitMercenary
+        - id: ClothingMaskGasMerc  # Serenity: substitute for ClothingMaskGasMercenary
+        - id: JetpackMiniFilled
+        - id: HandheldGPSBasic
+  - type: AccessReader
+    access: [["Captain"]] # Serenity: dropped the Mercenary access level, doesn't exist here
+
+- type: entity
+  id: SuitStoragePilot
+  parent: SuitStorageBase
+  suffix: Pilot
+  components:
+  - type: StorageFill
+    contents:
+        - id: AirTankFilled
+        - id: ClothingOuterHardsuitSpatio  # Serenity: substitute for ClothingOuterHardsuitPilot
+        - id: ClothingMaskBreath
+        - id: JetpackMiniFilled
+        - id: HandheldGPSBasic
+  - type: AccessReader
+
+- type: entity
+  id: SuitStorageMailCarrier
+  parent: SuitStorageBase
+  suffix: Mail Carrier
+  components:
+  - type: StorageFill
+    contents:
+        - id: AirTankFilled
+        - id: ClothingOuterHardsuitEVA  # Serenity: substitute for ClothingOuterEVASuitMailman (ClothingOuterEVASuitBase is abstract)
+        - id: ClothingMaskBreath
+        - id: JetpackMiniFilled
+        - id: HandheldGPSBasic
+  - type: AccessReader
+
+# Wallmount variants — combine the wallmount closet base with a fill (all real,
+# no aliasing needed now that SuitStorageWallmount is ported).
+
+- type: entity
+  id: SuitStorageWallmountEVA
+  parent: [SuitStorageWallmount, SuitStorageEVA]
+
+- type: entity
+  id: SuitStorageWallmountEVAAlternate
+  parent: [SuitStorageWallmount, SuitStorageEVAAlternate]
+
+- type: entity
+  id: SuitStorageWallmountEVAEmergency
+  parent: [SuitStorageWallmount, SuitStorageEVAEmergency]
+
+- type: entity
+  id: SuitStorageWallmountCaptain
+  parent: [SuitStorageWallmount, SuitStorageCaptain]
+
+- type: entity
+  id: SuitStorageWallmountParamedic
+  parent: [SuitStorageWallmount, SuitStorageParamedic]
+
+- type: entity
+  id: SuitStorageWallmountMercenary
+  parent: [SuitStorageWallmount, SuitStorageMercenary]
+
+- type: entity
+  id: SuitStorageWallmountPilot
+  parent: [SuitStorageWallmount, SuitStoragePilot]
+
+- type: entity
+  id: SuitStorageWallmountMailCarrier
+  parent: [SuitStorageWallmount, SuitStorageMailCarrier]
+
+# ── Gameplay Items ────────────────────────────────────────────────────────────
+# Serenity: dropped the Frontier-only MaterialReclaimerMagnetPickup component;
+# the base MaterialReclaimer component/entity is standard SS14.
+
+- type: entity
+  parent: [ BaseMachinePowered, ConstructibleMachine ]
+  id: MaterialReclaimer
+  name: material reclaimer
+  description: Cannot reclaim immaterial things, like motivation.
+  components:
+  - type: Sprite
+    sprite: Structures/Machines/material_reclaimer.rsi
+    snapCardinals: true
+    layers:
+    - state: icon
+      map: ["enum.LatheVisualLayers.IsRunning"]
+    - state: gear-active
+      map: ["enum.DamageStateVisualLayers.Base"]
+    - state: unlit
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+    - state: fill-6
+      map: ["enum.SolutionContainerLayers.Fill"]
+      visible: false
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: Appearance
+  - type: SolutionContainerVisuals
+    maxFillLevels: 6
+    fillBaseName: fill-
+  - type: WiresVisuals
+  - type: GenericVisualizer
+    visuals:
+      enum.PowerDeviceVisuals.Powered:
+        enum.DamageStateVisualLayers.Base:
+          True: { state: gear-active}
+          False: { state: gear-idle }
+        enum.PowerDeviceVisualLayers.Powered:
+          True: { visible: true }
+          False: { visible: false }
+  - type: LitOnPowered
+  - type: PointLight
+    radius: 1.5
+    energy: 1.6
+    enabled: false
+    color: "#da824d"
+    mask: /Textures/Effects/LightMasks/cone.png
+    autoRot: true
+    offset: "0, 0.4"
+    castShadows: false
+  - type: PowerSwitch
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalGlassBreak
+      - !type:ChangeConstructionNodeBehavior
+        node: machineFrame
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: Machine
+    # Serenity: board dropped, MaterialReclaimerMachineCircuitboard doesn't exist here.
+  - type: WiresPanel
+  - type: MaterialReclaimer
+    whitelist:
+      components:
+      - PhysicalComposition
+      - SpaceGarbage
+      tags:
+      - Trash
+      - Recyclable
+    blacklist:
+      components:
+      - Material
+      - Pda
+      - IdCard
+      - Brain
+      tags:
+      - HighRiskItem
+    soundCooldown: 0
+    # Serenity: sound dropped, crushing.ogg doesn't exist and MaterialReclaimer.sound is optional.
+  - type: MaterialStorage
+    insertOnInteract: false
+  - type: ContainerContainer
+    containers:
+      active-material-reclaimer-container: !type:Container
+      machine_board: !type:Container
+      machine_parts: !type:Container
+  - type: SolutionContainerManager
+    solutions:
+      output:
+        maxVol: 1000
+  - type: DrainableSolution
+    solution: output
+  - type: ExaminableSolution
+    solution: output
+  - type: StaticPrice
+    price: 500
+  - type: ApcPowerReceiver
+    powerLoad: 500
+
+- type: entity
+  id: LockerJanitorFilled
+  suffix: Filled
+  parent: LockerJanitor
+  components:
+  - type: StorageFill
+    contents:
+      - id: ClothingBeltJanitorFilled
+      - id: ClothingHeadsetService
+      - id: MopItem
+      - id: BoxMousetrap
+      - id: BoxTrashbag
+      - id: BoxLightMixed
+      - id: Plunger
+
+- type: entity
+  parent: GunSafe
+  id: GunSafeShuttleCaptain
+  name: shuttle safe
+  suffix: Empty, Captain
+  components:
+  - type: AccessReader
+    access: [["Captain"]]
+
+# ── Furniture / Benches ──────────────────────────────────────────────────────
+# Ported from Frontier's _Park/benches.yml (an upstream community contribution,
+# MIT-licensed same as the rest of this commit). Construction-graph linkage
+# (crafting a bench in-round) was dropped — these spawn on ship maps only.
+
+- type: entity
+  name: sofa
+  id: BenchSofaMiddle
+  parent: SeatBase
+  description: Multiple seats spanning a single object. Truly a marvel of science.
+  components:
+  - type: Transform
+    anchored: true
+  - type: Rotatable
+  - type: Sprite
+    sprite: SimpleStation14/Structures/Furniture/Benches/sofa.rsi
+    state: middle
+
+- type: entity
+  id: BenchSofaLeft
+  suffix: Left
+  parent: BenchSofaMiddle
+  components:
+  - type: Sprite
+    state: left
+
+- type: entity
+  id: BenchSofaRight
+  suffix: Right
+  parent: BenchSofaMiddle
+  components:
+  - type: Sprite
+    state: right
+
+- type: entity
+  name: sofa
+  id: BenchSofaCorner
+  suffix: Corner
+  components:
+  - type: Transform
+    anchored: true
+  - type: Rotatable
+  - type: Sprite
+    sprite: SimpleStation14/Structures/Furniture/Benches/sofa.rsi
+    state: corner
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Physics
+    bodyType: Dynamic
+  - type: Pullable
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+
+- type: entity
+  name: grey sofa
+  id: BenchSofaCorpMiddle
+  parent: BenchSofaMiddle
+  components:
+  - type: Sprite
+    sprite: SimpleStation14/Structures/Furniture/Benches/sofa_corp.rsi
+    state: middle
+
+- type: entity
+  id: BenchSofaCorpLeft
+  suffix: Left
+  parent: BenchSofaCorpMiddle
+  components:
+  - type: Sprite
+    state: left
+
+- type: entity
+  id: BenchSofaCorpRight
+  suffix: Right
+  parent: BenchSofaCorpMiddle
+  components:
+  - type: Sprite
+    state: right
+
+- type: entity
+  name: grey sofa
+  id: BenchSofaCorpCorner
+  suffix: Corner
+  components:
+  - type: Transform
+    anchored: true
+  - type: Rotatable
+  - type: Sprite
+    sprite: SimpleStation14/Structures/Furniture/Benches/sofa_corp.rsi
+    state: corner
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Physics
+    bodyType: Dynamic
+  - type: Pullable
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+
+- type: entity
+  name: white steel bench
+  id: BenchSteelWhiteMiddle
+  parent: SeatBase
+  description: Multiple seats spanning a single object. Truly a marvel of science.
+  components:
+  - type: Transform
+    anchored: true
+  - type: Rotatable
+  - type: Sprite
+    sprite: SimpleStation14/Structures/Furniture/Benches/steel_bench_white.rsi
+    state: middle
+
+- type: entity
+  id: BenchSteelWhiteLeft
+  suffix: Left
+  parent: BenchSteelWhiteMiddle
+  components:
+  - type: Sprite
+    state: left
+
+- type: entity
+  id: BenchSteelWhiteRight
+  suffix: Right
+  parent: BenchSteelWhiteMiddle
+  components:
+  - type: Sprite
+    state: right
+
+- type: entity
+  id: TableWoodReinforced
+  parent: TableBase
+  name: reinforced wood table
+  description: A classic wooden table. Extra robust.
+  components:
+  - type: Sprite
+    sprite: Nyanotrasen/Structures/Furniture/Tables/rwood.rsi
+  - type: Icon
+    sprite: Nyanotrasen/Structures/Furniture/Tables/rwood.rsi
+  - type: Damageable
+    damageModifierSet: Wood
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 75
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WoodDestroy
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          MaterialWoodPlank:
+            min: 2
+            max: 2
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Tag
+    tags:
+    - Wooden
+  - type: Bonkable
+    bonkDamage:
+      types:
+        Blunt: 8
+    bonkTime: 3
+
+# ── Signs ────────────────────────────────────────────────────────────────────
+
+- type: entity
+  parent: BaseSign
+  id: SignAtmosMinsky
+  name: atmospherics sign
+  description: A sign indicating the atmospherics area.
+  components:
+  - type: Sprite
+    sprite: _Serenity/Structures/Wallmounts/signs_frontier.rsi
+    state: atmominsky
+
+- type: entity
+  parent: BaseSign
+  id: SignChemistry1
+  name: chemistry sign
+  description: A sign indicating the chemistry lab.
+  components:
+  - type: Sprite
+    sprite: _Serenity/Structures/Wallmounts/signs_frontier.rsi
+    state: chemistry1
+
+- type: entity
+  parent: BaseSign
+  id: SignHydro3
+  name: hydro sign
+  description: A sign indicating a hydroponics area.
+  components:
+  - type: Sprite
+    sprite: _Serenity/Structures/Wallmounts/signs_frontier.rsi
+    state: hydro3
+
+- type: entity
+  parent: BaseSign
+  id: SignMinerDock
+  name: miner dock sign
+  description: A sign indicating the miner dock.
+  components:
+  - type: Sprite
+    sprite: _Serenity/Structures/Wallmounts/signs_frontier.rsi
+    state: miner_dock
+
+- type: entity
+  parent: BaseSign
+  id: SignScience1
+  name: science sign
+  description: A sign indicating the science area.
+  components:
+  - type: Sprite
+    sprite: _Serenity/Structures/Wallmounts/signs_frontier.rsi
+    state: science1
+
+- type: entity
+  parent: BaseSign
+  id: SignLastIdiot
+  name: Zero Days Since Last Idiot
+  description: Must be an Engineering joke.
+  components:
+  - type: Sprite
+    sprite: Nyanotrasen/Structures/Wallmounts/last_idiot.rsi
+    state: icon
+    offset: "0.5,0"
+
+- type: entity
+  parent: BaseSign
+  id: SignConspiracyBoard
+  name: conspiracy board
+  description: Perfect for tracking the multiple layers of criminal activities.
+  components:
+  - type: Sprite
+    sprite: Nyanotrasen/Structures/Wallmounts/conspiracy_board.rsi
+    state: icon
+    offset: "0.5,0"
+
+# ── Hydroponics / Dispensers / Machines ──────────────────────────────────────
+# Serenity: hydroponicsTrayAnchored dropped BaseStructureDisableToolUse from its
+# parent list (missing); it inherits from the base hydroponics tray alone.
+
+- type: entity
+  name: hydroponics tray
+  parent: hydroponicsTray
+  id: hydroponicsTrayAnchored
+  suffix: anchored
+  description: An anchored interstellar-grade space farmplot allowing for rapid growth and selective breeding of crops. Stronger than your average hydroponics tray but can still be broken with force.
+  components:
+  - type: Sprite
+    layers:
+      - sprite: _NF/Structures/Hydroponics/containers.rsi
+        state: hydrotrayanchored
+      - sprite: Structures/Hydroponics/overlays.rsi
+        state: lowhealth3
+        map: [ "health_alert" ]
+        visible: false
+      - sprite: Structures/Hydroponics/overlays.rsi
+        state: lowwater3
+        map: [ "water_alert" ]
+        visible: false
+      - sprite: Structures/Hydroponics/overlays.rsi
+        state: lownutri3
+        map: [ "nutri_alert" ]
+        visible: false
+      - sprite: Structures/Hydroponics/overlays.rsi
+        state: alert3
+        map: [ "undefined_alert" ]
+        visible: false
+      - sprite: Structures/Hydroponics/overlays.rsi
+        state: harvest3
+        map: [ "harvest_alert" ]
+        visible: false
+  - type: Machine
+    board: Null
+
+- type: entity
+  id: soda_dispenser
+  name: soda dispenser
+  suffix: Filled
+  parent: ReagentDispenserBase
+  description: A beverage dispenser with a selection of soda and several other common beverages. Has a single fill slot for containers.
+  components:
+  - type: Rotatable
+  - type: Sprite
+    sprite: Structures/smalldispensers.rsi
+    drawdepth: SmallObjects
+    state: soda
+  - type: ReagentDispenser
+    # Serenity: storageWhitelist/pack dropped, not real ReagentDispenserComponent fields.
+  - type: Transform
+    noRot: false
+  - type: Machine
+    board: SodaDispenserMachineCircuitboard
+  - type: GuideHelp
+    guides:
+    - Bartender
+
+- type: entity
+  id: chem_master
+  parent: [ BaseMachinePowered, ConstructibleMachine ]
+  name: ChemMaster 4000
+  description: An industrial grade chemical manipulator with pill and bottle production included.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: Structures/Machines/mixer.rsi
+    snapCardinals: true
+    layers:
+    - state: mixer_empty
+    - state: mixer_screens
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+  - type: Icon
+    sprite: Structures/Machines/mixer.rsi
+    state: mixer_loaded
+  - type: ChemMaster
+    pillDosageLimit: 20
+    patchDosageLimit: 20
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.4,0.25,0.4"
+        density: 190
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalGlassBreak
+      - !type:ChangeConstructionNodeBehavior
+        node: machineFrame
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: ActivatableUI
+    key: enum.ChemMasterUiKey.Key
+  - type: ActivatableUIRequiresPower
+  - type: UserInterface
+    interfaces:
+      enum.ChemMasterUiKey.Key:
+        type: ChemMasterBoundUserInterface
+  - type: ApcPowerReceiver
+    powerLoad: 250
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.PowerDeviceVisuals.Powered:
+        enum.PowerDeviceVisualLayers.Powered:
+          True: { visible: true }
+          False: { visible: false }
+  - type: WiresPanel
+  - type: Machine
+    board: ChemMasterMachineCircuitboard
+  - type: ContainerContainer
+    containers:
+      beakerSlot: !type:ContainerSlot
+      outputSlot: !type:ContainerSlot
+      machine_board: !type:Container
+      machine_parts: !type:Container
+  - type: ItemSlots
+    slots:
+      beakerSlot:
+        whitelist:
+          components:
+          - FitsInDispenser
+      outputSlot:
+        whitelistFailPopup: chem-master-component-cannot-put-entity-message
+        whitelist:
+          tags:
+          - Bottle
+          - PillCanister
+  - type: SolutionContainerManager
+    solutions:
+      buffer: {}
+  - type: DumpableSolution
+    solution: buffer
+    unlimited: true
+  - type: GuideHelp
+    guides:
+    - Chemicals
+    - Chemist
+
+# ── Airlocks & Walls ─────────────────────────────────────────────────────────
+# Serenity: AirlockMercenaryGlass drops PaintableAirlock (Serenity has no
+# paint-group system for airlocks yet) — it keeps its fixed mercenary sprite.
+
+- type: entity
+  parent: AirlockGlass
+  id: AirlockMercenaryGlass
+  suffix: Mercenary
+  components:
+  - type: Sprite
+    sprite: _NF/Structures/Doors/Airlocks/Glass/mercenary.rsi
+  - type: Wires
+    layoutId: AirlockSecurity
+
+- type: entity
+  parent: WallSolid
+  id: WallShuttleInterior
+  name: shuttle wall
+  suffix: Interior
+  components:
+  - type: Sprite
+    sprite: Structures/Walls/shuttleinterior.rsi
+  - type: Icon
+    sprite: Structures/Walls/shuttleinterior.rsi
+  - type: IconSmooth
+    key: walls
+    base: state
+
+# ── Vending Machines ─────────────────────────────────────────────────────────
+# Serenity: dropped BaseStructureUnanchorable (missing) from the parent list and
+# the Advertise/MarketModifier components (Frontier-only ad-bark and price-mod
+# systems Serenity doesn't have) — otherwise fully functional vendors.
+
+- type: entity
+  parent: VendingMachine
+  id: VendingMachineCuddlyCritterVend
+  name: CuddlyCritterVend
+  description: Step into the world of wonder and warmth with Cuddly Critters Vending Machine, a haven for plushie and toy enthusiasts alike.
+  components:
+  - type: VendingMachine
+    pack: VendomatInventory
+    offState: off
+    brokenState: broken
+    normalState: normal-unshaded
+  - type: Sprite
+    sprite: _NF/Structures/Machines/VendingMachines/cuddlycritter.rsi
+    layers:
+    - state: "off"
+      map: ["enum.VendingMachineVisualLayers.Base"]
+    - state: "off"
+      map: ["enum.VendingMachineVisualLayers.BaseUnshaded"]
+      shader: unshaded
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: PointLight
+    radius: 1.5
+    energy: 1.6
+    color: "#4b93ad"
+
+- type: entity
+  parent: VendingMachine
+  id: VendingMachineAutoTuneVend
+  name: AutoTune
+  description: feeling BASSed? time to TUNE into AutoVend! Take NOTES and let your audience TREBLE
+  components:
+  - type: VendingMachine
+    pack: VendomatInventory
+    offState: off
+    brokenState: broken
+    normalState: normal-unshaded
+    ejectState: eject-unshaded
+    denyState: deny-unshaded
+  - type: Sprite
+    sprite: _NF/Structures/Machines/VendingMachines/autotunevend.rsi
+    layers:
+    - state: "off"
+      map: ["enum.VendingMachineVisualLayers.Base"]
+    - state: "off"
+      map: ["enum.VendingMachineVisualLayers.BaseUnshaded"]
+      shader: unshaded
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: PointLight
+    radius: 1.5
+    energy: 1.6
+    color: "#4b93ad"
+  - type: UserInterface
+    interfaces:
+      enum.VendingMachineUiKey.Key:
+        type: VendingMachineBoundUserInterface
+      enum.WiresUiKey.Key:
+        type: WiresBoundUserInterface
+      enum.InstrumentUiKey.Key:
+        type: InstrumentBoundUserInterface
+  - type: Instrument
+    allowPercussion: true
+    allowProgramChange: true
+    handheld: false
+
+# ── Decorations ──────────────────────────────────────────────────────────────
+
+- type: entity
+  name: ashtray
+  id: NFAshtray
+  parent: BaseStorageItem
+  components:
+  - type: Sprite
+    scale: 0.5, 0.5
+    sprite: _NF/Objects/Misc/ashtray.rsi
+    layers:
+      - state: icon-0
+        map: ["enum.StorageFillLayers.Fill"]
+  - type: Storage
+    maxItemSize: Tiny
+    grid:
+    - 0,0,3,3
+    quickInsert: true
+    areaInsert: true
+    storageInsertSound:
+      collection: trashBagRustle
+    whitelist:
+      tags:
+        - Cigar
+        - Cigarette
+  - type: Appearance
+  - type: StorageFillVisualizer
+    maxFillLevels: 4
+    fillBaseName: icon
+  - type: Dumpable
+  - type: Item
+    size: Small
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: DamageOnLand
+    damage:
+      types:
+        Blunt: 1
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 1
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: GlassBreak
+      - !type:EmptyAllContainersBehaviour
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  id: NoticeBoardNF
+  name: notice board
+  suffix: Frontier
+  description: You wish you could wear this on your back but alas.
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wallmount
+  components:
+  - type: WallMount
+    arc: 200
+  - type: Rotatable
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb {}
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Wood
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 75
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WoodDestroy
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          MaterialWoodPlank:
+            min: 1
+            max: 2
+  - type: Sprite
+    drawdepth: WallTops
+    sprite: _NF/Structures/Wallmounts/notice_board.rsi
+    snapCardinals: false
+    state: base
+    layers:
+    - state: base
+    - map: [ "enum.StorageContainerVisualLayers.Fill" ]
+      visible: false
+  - type: Icon
+    sprite: _NF/Structures/Wallmounts/notice_board.rsi
+    state: icon
+  - type: Appearance
+  - type: StorageContainerVisuals
+    maxFillLevels: 8
+    fillBaseName: notices-
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,5,3
+    whitelist:
+      tags:
+      - Folder
+      - Document
+      - Write
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+        ents: []
+  - type: UserInterface
+    interfaces:
+      enum.StorageUiKey.Key:
+        type: StorageBoundUserInterface
+  - type: StaticPrice
+    price: 20

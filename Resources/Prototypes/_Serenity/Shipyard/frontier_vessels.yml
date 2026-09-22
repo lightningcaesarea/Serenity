@@ -1,0 +1,492 @@
+# Frontier Station 14 ships — ported from commit 5be37d18c2 (2024-07-01), MIT licensed.
+# Copyright (c) 2017-2024 New Frontiers. Adapted for Serenity.
+# Source: https://github.com/new-frontiers-14/frontier-station-14
+# Maps: Resources/Maps/_Serenity/Shuttles/Shipyard/
+# Groups: ShipyardService | ShipyardSalvage | ShipyardMedical | ShipyardScience | ShipyardSecurity
+
+# ── Salvage / Mining / Cargo ──────────────────────────────────────────────────
+
+- type: vessel
+  id: NFBarge
+  name: NC Barge
+  description: A medium shipping vessel repurposed into a salvage bar.
+  price: 42300
+  category: Medium
+  group: ShipyardSalvage
+  shuttlePath: /Maps/_Serenity/Shuttles/Shipyard/barge.yml
+
+- type: vessel
+  id: Bulker
+  name: KL Bulker
+  description: A medium mining vessel designed for deep space missions.
+  price: 39750
+  category: Medium
+  group: ShipyardSalvage
+  shuttlePath: /Maps/_Serenity/Shuttles/Shipyard/bulker.yml
+
+- type: vessel
+  id: Chisel
+  name: ICR Chisel
+  description: Standard small size multipurpose vessel, originally meant to aid in ship scrapping.
+  price: 34615
+  category: Small
+  group: ShipyardSalvage
+  shuttlePath: /Maps/_Serenity/Shuttles/Shipyard/chisel.yml
+
+- type: vessel
+  id: NFComet
+  name: NT Comet
+  description: A mining and construction vessel intended to help build or repair quickly.
+  price: 55000
+  category: Medium
+  group: ShipyardSalvage
+  shuttlePath: /Maps/_Serenity/Shuttles/Shipyard/comet.yml
+
+- type: vessel
+  id: Construct
+  name: NT Construct
+  description: A technically spacefaring vessel. No livery.
+  price: 12075
+  category: Small
+  group: ShipyardSalvage
+  shuttlePath: /Maps/_Serenity/Shuttles/Shipyard/construct.yml
+
+- type: vessel
+  id: hauler
+  name: NC Hauler
+  description: A medium sized vessel specializing in long-haul salvage, mining, and cargo operations.
+  price: 60000
+  category: Medium
+  group: ShipyardSalvage
+  shuttlePath: /Maps/_Serenity/Shuttles/Shipyard/hauler.yml
+
+- type: vessel
+  id: Investigator
+  name: NR Investigator
+  description: A small salvage shuttle designed for researching artifacts, fitted with a small bar for long-distance travel.
+  price: 46000
+  category: Small
+  group: ShipyardSalvage
+  shuttlePath: /Maps/_Serenity/Shuttles/Shipyard/investigator.yml
+
+- type: vessel
+  id: Loader
+  name: NC Loader
+  description: A compact cargo ship designed for hauling shipments.
+  price: 18000
+  category: Small
+  group: ShipyardSalvage
+  shuttlePath: /Maps/_Serenity/Shuttles/Shipyard/loader.yml
+
+- type: vessel
+  id: McCargo
+  name: DC McCargo
+  description: Your very own McCargo franchisee! Comes fully stocked and ready for production of McCargo meals.
+  price: 70000
+  category: Medium
+  group: ShipyardSalvage
+  shuttlePath: /Maps/_Serenity/Shuttles/Shipyard/mccargo.yml
+
+- type: vessel
+  id: McDelivery
+  name: DC McDelivery
+  description: Fast food fast ship, bring the McCargo meals to the people.
+  price: 8500
+  category: Small
+  group: ShipyardSalvage
+  shuttlePath: /Maps/_Serenity/Shuttles/Shipyard/mcdelivery.yml
+
+- type: vessel
+  id: NFPioneer
+  name: NC Pioneer
+  description: A cargo container outfitted to be space-capable and equipped for salvaging and mining.
+  price: 12200
+  category: Small
+  group: ShipyardSalvage
+  shuttlePath: /Maps/_Serenity/Shuttles/Shipyard/pioneer.yml
+
+- type: vessel
+  id: NFProspector
+  name: NC Prospector
+  description: A small mining vessel designed to assist salvage operations.
+  price: 23000
+  category: Small
+  group: ShipyardSalvage
+  shuttlePath: /Maps/_Serenity/Shuttles/Shipyard/prospector.yml
+
+- type: vessel
+  id: RosebudMKI
+  name: NT Rosebud MKI
+  description: A medium-sized luxury salvaging and mining vessel perfectly suited for a small crew.
+  price: 92115
+  category: Medium
+  group: ShipyardSalvage
+  shuttlePath: /Maps/_Serenity/Shuttles/Shipyard/rosebudmki.yml
+
+- type: vessel
+  id: Vagabond
+  name: NT Vagabond
+  description: An adaptable long-haul industrial freighter that pilots have adapted to many different purposes.
+  price: 60000
+  category: Medium
+  group: ShipyardSalvage
+  shuttlePath: /Maps/_Serenity/Shuttles/Shipyard/vagabond.yml
+
+# ── Service ───────────────────────────────────────────────────────────────────
+
+- type: vessel
+  id: Bazaar
+  name: SLI Bazaar
+  description: A personal service vessel designed to provide a platform for merchants to sell their goods.
+  price: 65000
+  category: Medium
+  group: ShipyardService
+  shuttlePath: /Maps/_Serenity/Shuttles/Shipyard/bazaar.yml
+
+- type: vessel
+  id: Bocadillo
+  name: NC Bocadillo
+  description: A tiny food truck perfect for a solo chef.
+  price: 19780
+  category: Small
+  group: ShipyardService
+  shuttlePath: /Maps/_Serenity/Shuttles/Shipyard/bocadillo.yml
+
+- type: vessel
+  id: Bookworm
+  name: SBB Bookworm
+  description: A cozy medium-size library for travellers who wish to relax with a book or perhaps a board game.
+  price: 28000
+  category: Medium
+  group: ShipyardService
+  shuttlePath: /Maps/_Serenity/Shuttles/Shipyard/bookworm.yml
+
+- type: vessel
+  id: Ceres
+  name: SBB Ceres
+  description: A medium-size, high-class restaurant ship with ample seating, integrated botany and a dining room for VIP guests.
+  price: 49500
+  category: Medium
+  group: ShipyardService
+  shuttlePath: /Maps/_Serenity/Shuttles/Shipyard/ceres.yml
+
+- type: vessel
+  id: Cleithro
+  name: DC Cleithro
+  description: A simple psychologist ship, ready to help anyone in need.
+  price: 30000
+  category: Medium
+  group: ShipyardService
+  shuttlePath: /Maps/_Serenity/Shuttles/Shipyard/cleithro.yml
+
+- type: vessel
+  id: Esquire
+  name: NT Esquire
+  description: A classy mid-sized vessel equipped with a lawyer's office and prisoner handling area.
+  price: 38500
+  category: Medium
+  group: ShipyardService
+  shuttlePath: /Maps/_Serenity/Shuttles/Shipyard/esquire.yml
+
+- type: vessel
+  id: Garden
+  name: HS Garden
+  description: A small botany vessel dedicated to horticultural experimentation.
+  price: 24750
+  category: Small
+  group: ShipyardService
+  shuttlePath: /Maps/_Serenity/Shuttles/Shipyard/garden.yml
+
+- type: vessel
+  id: harbormaster
+  name: NC Harbormaster
+  description: A small tugboat.
+  price: 28300
+  category: Small
+  group: ShipyardService
+  shuttlePath: /Maps/_Serenity/Shuttles/Shipyard/harbormaster.yml
+
+- type: vessel
+  id: Honker
+  name: NT Honker
+  description: HONK HONK HONK HONK HONK HONK.
+  price: 22500
+  category: Small
+  group: ShipyardService
+  shuttlePath: /Maps/_Serenity/Shuttles/Shipyard/honker.yml
+
+- type: vessel
+  id: kilderkin
+  name: NC Kilderkin
+  description: Spaceworthy bar and microbrewery with everything one needs to facilitate poor life choices.
+  price: 45900
+  category: Medium
+  group: ShipyardService
+  shuttlePath: /Maps/_Serenity/Shuttles/Shipyard/kilderkin.yml
+
+- type: vessel
+  id: KnuckleVerse
+  name: SSC KnuckleVerse
+  description: A ship for organizing box matches. Has a boxing ring and a bar.
+  price: 36500
+  category: Medium
+  group: ShipyardService
+  shuttlePath: /Maps/_Serenity/Shuttles/Shipyard/knuckleverse.yml
+
+- type: vessel
+  id: lantern
+  name: NC Lantern
+  description: A medium-sized chapel-vessel equipped with everything a chaplain might need.
+  price: 34125
+  category: Medium
+  group: ShipyardService
+  shuttlePath: /Maps/_Serenity/Shuttles/Shipyard/lantern.yml
+
+- type: vessel
+  id: Legman
+  name: NC Legman
+  description: A small maneuverable shuttle with low operational costs for reporters.
+  price: 10670
+  category: Small
+  group: ShipyardService
+  shuttlePath: /Maps/_Serenity/Shuttles/Shipyard/legman.yml
+
+- type: vessel
+  id: Liquidator
+  name: NT Liquidator
+  description: A small vessel equipped with everything you need to make even the dirtiest ship squeaky clean.
+  price: 35000
+  category: Small
+  group: ShipyardService
+  shuttlePath: /Maps/_Serenity/Shuttles/Shipyard/liquidator.yml
+
+- type: vessel
+  id: MailPod
+  name: NC Mail Pod
+  description: A cramped yet reliable shuttle for delivering packages.
+  price: 12000
+  category: Small
+  group: ShipyardService
+  shuttlePath: /Maps/_Serenity/Shuttles/Shipyard/mailpod.yml
+
+- type: vessel
+  id: MailTruck
+  name: NC Mail Truck
+  description: A cramped yet reliable shuttle for delivering packages. Slightly larger than the Mail Pod.
+  price: 16000
+  category: Small
+  group: ShipyardService
+  shuttlePath: /Maps/_Serenity/Shuttles/Shipyard/mailtruck.yml
+
+- type: vessel
+  id: Mission
+  name: NC Mission
+  description: A mobile religious chapel with crematorium and full janitorial services.
+  price: 19000
+  category: Small
+  group: ShipyardService
+  shuttlePath: /Maps/_Serenity/Shuttles/Shipyard/mission.yml
+
+- type: vessel
+  id: Piecrust
+  name: NC Piecrust
+  description: A combination animal ranch and pie bakery.
+  price: 27500
+  category: Small
+  group: ShipyardService
+  shuttlePath: /Maps/_Serenity/Shuttles/Shipyard/piecrust.yml
+
+- type: vessel
+  id: Placebo
+  name: NC Placebo
+  description: A small psychology vessel. Named after the famous Placebo effect.
+  price: 20000
+  category: Small
+  group: ShipyardService
+  shuttlePath: /Maps/_Serenity/Shuttles/Shipyard/placebo.yml
+
+- type: vessel
+  id: NFPTS
+  name: NC Personal Transport
+  description: A small transport shuttle with space for 5 passengers.
+  price: 13900
+  category: Small
+  group: ShipyardService
+  shuttlePath: /Maps/_Serenity/Shuttles/Shipyard/pts.yml
+
+- type: vessel
+  id: Skipper
+  name: NC Skipper
+  description: A small service ship with a full service kitchen and hydroponics garden.
+  price: 37500
+  category: Small
+  group: ShipyardService
+  shuttlePath: /Maps/_Serenity/Shuttles/Shipyard/skipper.yml
+
+- type: vessel
+  id: Stellaris
+  name: NT Stellaris
+  description: A mobile theatre perfect for putting on any show.
+  price: 45000
+  category: Medium
+  group: ShipyardService
+  shuttlePath: /Maps/_Serenity/Shuttles/Shipyard/stellaris.yml
+
+- type: vessel
+  id: WaveShot
+  name: NC WaveShot
+  description: A mobile reporting studio fit for broadcasting the news.
+  price: 37500
+  category: Small
+  group: ShipyardService
+  shuttlePath: /Maps/_Serenity/Shuttles/Shipyard/waveshot.yml
+
+# ── Medical ───────────────────────────────────────────────────────────────────
+
+- type: vessel
+  id: caduceus
+  name: NM Caduceus
+  description: A former humanitarian vessel, the Caduceus now works as the best mobile hospital money can buy.
+  price: 105000
+  category: Large
+  group: ShipyardMedical
+  shuttlePath: /Maps/_Serenity/Shuttles/Shipyard/caduceus.yml
+
+- type: vessel
+  id: Crescent
+  name: KC Crescent
+  description: A vessel focused on providing service, medical aide, and scientific breakthroughs for smaller vessels.
+  price: 208020
+  category: Large
+  group: ShipyardMedical
+  shuttlePath: /Maps/_Serenity/Shuttles/Shipyard/crescent.yml
+
+- type: vessel
+  id: Eagle
+  name: NM Eagle
+  description: A modern, medium-sized medical and engineering vessel. 'Recover, Restore, Repair!'
+  price: 57550
+  category: Medium
+  group: ShipyardMedical
+  shuttlePath: /Maps/_Serenity/Shuttles/Shipyard/eagle.yml
+
+- type: vessel
+  id: Helix
+  name: NM Helix
+  description: A medium-sized medical vessel equipped for patient care and treatment during extended operations.
+  price: 44600
+  category: Medium
+  group: ShipyardMedical
+  shuttlePath: /Maps/_Serenity/Shuttles/Shipyard/helix.yml
+
+- type: vessel
+  id: Pulse
+  name: NM Pulse
+  description: A small rapid response medical ship.
+  price: 20500
+  category: Small
+  group: ShipyardMedical
+  shuttlePath: /Maps/_Serenity/Shuttles/Shipyard/pulse.yml
+
+- type: vessel
+  id: Searchlight
+  name: NM Searchlight
+  description: A small vessel outfitted for the search and recovery of wounded personnel.
+  price: 29050
+  category: Small
+  group: ShipyardMedical
+  shuttlePath: /Maps/_Serenity/Shuttles/Shipyard/searchlight.yml
+
+- type: vessel
+  id: Spirit
+  name: NM Spirit
+  description: A tiny medical search and rescue shuttle, as nimble as it is cramped.
+  price: 15500
+  category: Small
+  group: ShipyardMedical
+  shuttlePath: /Maps/_Serenity/Shuttles/Shipyard/spirit.yml
+
+# ── Science ───────────────────────────────────────────────────────────────────
+
+- type: vessel
+  id: Beaker
+  name: SBI Beaker
+  description: A fully functional Chemistry Lab. Perfect for the prospecting chemist or high school chemistry teachers. Yeah, Science!
+  price: 65000
+  category: Small
+  group: ShipyardScience
+  shuttlePath: /Maps/_Serenity/Shuttles/Shipyard/beaker.yml
+
+- type: vessel
+  id: Condor
+  name: NR Condor
+  description: A combined research and engineering vessel suited for xeno-archeological expeditions.
+  price: 72890
+  category: Medium
+  group: ShipyardScience
+  shuttlePath: /Maps/_Serenity/Shuttles/Shipyard/condor.yml
+
+- type: vessel
+  id: Lyrae
+  name: SBB Lyrae
+  description: A medium size science vessel with laboratories for anomalous and xenoarchaeology research.
+  price: 51000
+  category: Medium
+  group: ShipyardScience
+  shuttlePath: /Maps/_Serenity/Shuttles/Shipyard/lyrae.yml
+
+- type: vessel
+  id: Metastable
+  name: TC Metastable
+  description: An incredibly compressed variation of a standard Nanotrasen station.
+  price: 95000
+  category: Medium
+  group: ShipyardScience
+  shuttlePath: /Maps/_Serenity/Shuttles/Shipyard/metastable.yml
+
+- type: vessel
+  id: phoenix
+  name: NR Phoenix
+  description: A research and salvage vessel designed for deep space exploration.
+  price: 60000
+  category: Medium
+  group: ShipyardScience
+  shuttlePath: /Maps/_Serenity/Shuttles/Shipyard/phoenix.yml
+
+- type: vessel
+  id: Sparrow
+  name: NR Sparrow
+  description: A small research and engineering vessel.
+  price: 37000
+  category: Small
+  group: ShipyardScience
+  shuttlePath: /Maps/_Serenity/Shuttles/Shipyard/sparrow.yml
+
+- type: vessel
+  id: Spectre
+  name: NR Spectre
+  description: A large, attractive but dated vessel with a pure focus on research and development. Capable of generating anomalies.
+  price: 185000
+  category: Large
+  group: ShipyardScience
+  shuttlePath: /Maps/_Serenity/Shuttles/Shipyard/spectre.yml
+
+- type: vessel
+  id: Stratos
+  name: NR Stratos
+  description: A medium sized research operations ship with salvage area and a bar.
+  price: 90000
+  category: Medium
+  group: ShipyardScience
+  shuttlePath: /Maps/_Serenity/Shuttles/Shipyard/stratos.yml
+
+# ── Security ──────────────────────────────────────────────────────────────────
+
+- type: vessel
+  id: Crown
+  name: SBI Crown
+  description: A refurbished and repainted older model of the NSF Templar for civilian and mercenary use.
+  price: 20000
+  category: Small
+  group: ShipyardSecurity
+  shuttlePath: /Maps/_Serenity/Shuttles/Shipyard/crown.yml
