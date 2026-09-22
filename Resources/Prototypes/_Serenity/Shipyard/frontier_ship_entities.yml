@@ -15,9 +15,7 @@
   id: WarpPointShip
   parent: WarpPoint
   suffix: ship
-  components:
-    - type: WarpPoint
-      useStationName: true
+  # Serenity: useStationName dropped, WarpPointComponent has no such field here.
 
 - type: entity
   id: SmallThruster
@@ -92,8 +90,8 @@
     - type: MaterialStorage
       storage:
         Plasma: 300
-    - type: PortableGenerator
-      startOnMapInit: true
+    # Serenity: startOnMapInit dropped, PortableGeneratorComponent has no such
+    # field here; FuelGenerator.on above already starts it running.
 
 - type: entity
   id: PortableGeneratorSuperPacmanShuttle
@@ -107,8 +105,8 @@
     - type: MaterialStorage
       storage:
         Uranium: 1000
-    - type: PortableGenerator
-      startOnMapInit: true
+    # Serenity: PortableGenerator.startOnMapInit dropped, no such field;
+    # FuelGenerator.on above already starts it running.
 
 - type: entity
   name: Atmos Fix Oxygen Marker
@@ -171,8 +169,7 @@
   id: FaxMachineShip
   suffix: Ship
   components:
-    - type: FaxMachine
-      useStationName: true
+    # Serenity: useStationName dropped, FaxMachineComponent has no such field here.
     - type: PowerSwitch
 
 - type: entity
@@ -189,7 +186,7 @@
       - EncryptionKeyMedical
       - EncryptionKeyScience
       - EncryptionKeyService
-      - EncryptionKeyTraffic
+      # Serenity: EncryptionKeyTraffic dropped, Frontier-only key Serenity doesn't have.
 
 # ── Tabletop Computers ───────────────────────────────────────────────────────
 # Serenity: dropped `BaseStructureComputerTabletop` from the parent list — it only
@@ -406,7 +403,7 @@
   - type: StorageFill
     contents:
         - id: AirTankFilled
-        - id: ClothingOuterHardsuitBasic
+        - id: ClothingOuterHardsuitSpatio  # Serenity: substitute for the missing ClothingOuterHardsuitBasic
         - id: ClothingMaskBreath
 
 - type: entity
@@ -441,25 +438,22 @@
       map: ["enum.LockVisualLayers.Lock"]
       shader: unshaded
   - type: EntityStorageVisuals
-    stateBase: generic
     stateBaseClosed: generic
     stateDoorOpen: generic_open
     stateDoorClosed: generic_door
-    stateLocked: locked
-    stateUnlocked: unlocked
+    # Serenity: stateBase/stateLocked/stateUnlocked dropped, no such fields here.
   - type: EntityStorage
     closeSound:
       path: /Audio/Machines/windoor_open.ogg
     openSound:
       path: /Audio/Machines/windoor_open.ogg
-    denySound:
-      path: /Audio/Machines/airlock_deny.ogg
+    # Serenity: denySound dropped, EntityStorageComponent has no such field here.
   - type: Fixtures
     fixtures: {}
 
 # Suit fills not already present in Serenity's own suit_storage.yml. Serenity
 # substitutes for the 3 clothing items Serenity doesn't have: ClothingMaskGasMerc
-# for the missing ClothingMaskGasMercenary, ClothingOuterHardsuitBasic for the
+# for the missing ClothingMaskGasMercenary, ClothingOuterHardsuitSpatio for the
 # missing ClothingOuterHardsuitPilot, and ClothingOuterEVASuitBase for the
 # missing ClothingOuterEVASuitMailman.
 
@@ -490,7 +484,7 @@
         - id: JetpackMiniFilled
         - id: HandheldGPSBasic
   - type: AccessReader
-    access: [["Captain"], ["Mercenary"]]
+    access: [["Captain"]] # Serenity: dropped the Mercenary access level, doesn't exist here
 
 - type: entity
   id: SuitStoragePilot
@@ -500,7 +494,7 @@
   - type: StorageFill
     contents:
         - id: AirTankFilled
-        - id: ClothingOuterHardsuitBasic  # Serenity: substitute for ClothingOuterHardsuitPilot
+        - id: ClothingOuterHardsuitSpatio  # Serenity: substitute for ClothingOuterHardsuitPilot
         - id: ClothingMaskBreath
         - id: JetpackMiniFilled
         - id: HandheldGPSBasic
@@ -620,7 +614,7 @@
       - !type:DoActsBehavior
         acts: ["Destruction"]
   - type: Machine
-    board: MaterialReclaimerMachineCircuitboard
+    # Serenity: board dropped, MaterialReclaimerMachineCircuitboard doesn't exist here.
   - type: WiresPanel
   - type: MaterialReclaimer
     whitelist:
@@ -639,12 +633,7 @@
       tags:
       - HighRiskItem
     soundCooldown: 0
-    sound:
-      path: /Audio/Ambience/Objects/crushing.ogg
-      params:
-        volume: 5
-        maxDistance: 5
-        loop: true
+    # Serenity: sound dropped, crushing.ogg doesn't exist and MaterialReclaimer.sound is optional.
   - type: MaterialStorage
     insertOnInteract: false
   - type: ContainerContainer
@@ -1007,10 +996,7 @@
     drawdepth: SmallObjects
     state: soda
   - type: ReagentDispenser
-    storageWhitelist:
-      tags:
-      - DrinkBottle
-    pack: SodaDispenserInventory
+    # Serenity: storageWhitelist/pack dropped, not real ReagentDispenserComponent fields.
   - type: Transform
     noRot: false
   - type: Machine
@@ -1155,7 +1141,7 @@
   description: Step into the world of wonder and warmth with Cuddly Critters Vending Machine, a haven for plushie and toy enthusiasts alike.
   components:
   - type: VendingMachine
-    pack: CuddlyCritterVendInventory
+    pack: VendomatInventory
     offState: off
     brokenState: broken
     normalState: normal-unshaded
@@ -1181,7 +1167,7 @@
   description: feeling BASSed? time to TUNE into AutoVend! Take NOTES and let your audience TREBLE
   components:
   - type: VendingMachine
-    pack: AutoTuneVendInventory
+    pack: VendomatInventory
     offState: off
     brokenState: broken
     normalState: normal-unshaded
@@ -1239,8 +1225,6 @@
       tags:
         - Cigar
         - Cigarette
-        - Ash
-        - Burnt
   - type: Appearance
   - type: StorageFillVisualizer
     maxFillLevels: 4
