@@ -1,0 +1,328 @@
+# Stirling Synthetics clothing line
+# Sprites: CC-BY-SA-3.0, originally from tgstation/Baystation12/CEV-Eris, resprited by AjexRose/erhardsteinhauer/RustyRed for New Frontiers 14
+# Ported from New Frontiers 14 (MIT commit 5be37d18c2 + AGPL era, design reference only for post-MIT items)
+
+# ── Uniforms ────────────────────────────────────────────────────────────────
+
+- type: entity
+  id: ClothingUniformJumpsuitStirling
+  parent: ClothingUniformBase
+  name: Stirling jumpsuit
+  description: A jumpsuit produced by Stirling Synthetics. Designed to reduce chaffing between the legs for the comfort of skin, slime, scales, fluff, and wood.
+  components:
+  - type: Sprite
+    sprite: _Serenity/Clothing/Uniforms/Jumpsuit/arcadia.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Serenity/Clothing/Uniforms/Jumpsuit/arcadia.rsi
+
+- type: entity
+  id: ClothingUniformJumpskirtStirling
+  parent: ClothingUniformSkirtBase
+  name: Stirling jumpskirt
+  description: A jumpskirt produced by Stirling Synthetics. Designed to reduce chaffing between the legs for the comfort of skin, slime, scales, fluff, and wood.
+  components:
+  - type: Sprite
+    sprite: _Serenity/Clothing/Uniforms/Jumpskirt/arcadia.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Serenity/Clothing/Uniforms/Jumpskirt/arcadia.rsi
+
+# ── Outer clothing ───────────────────────────────────────────────────────────
+
+- type: entity
+  id: ClothingOuterWinterStirling
+  parent: ClothingOuterWinterSci
+  name: Stirling winter coat
+  description: A coat produced by Stirling Synthetics, seems soft.
+  components:
+  - type: Sprite
+    sprite: _Serenity/Clothing/OuterClothing/WinterCoats/arcadia.rsi
+    layers:
+    - state: icon
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+      right:
+      - state: inhand-right
+  - type: Clothing
+    sprite: _Serenity/Clothing/OuterClothing/WinterCoats/arcadia.rsi
+    clothingVisuals:
+      outerClothing:
+      - state: equipped-OUTERCLOTHING
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHatHoodStirling
+
+- type: entity
+  id: ClothingOuterCoatStirlingTrench
+  parent: ClothingOuterStorageFoldableBase
+  name: Stirling flak trenchcoat
+  description: A flak trenchcoat produced by Stirling Synthetics, enhanced with a bulletproof alloy for some extra protection.
+  components:
+  - type: Sprite
+    sprite: _Serenity/Clothing/OuterClothing/Coats/arcadia_trench.rsi
+  - type: Clothing
+    sprite: _Serenity/Clothing/OuterClothing/Coats/arcadia_trench.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.9
+        Slash: 0.9
+        Piercing: 0.4
+        Heat: 0.9
+        Caustic: 0.75
+  - type: ExplosionResistance
+    damageCoefficient: 0.50
+
+- type: entity
+  id: ClothingOuterEVASuitStirling
+  parent: ClothingOuterEVASuitBase
+  name: Stirling EVA suit
+  description: An EVA suit with a built-in helmet commonly issued to Stirling Synthetics personnel.
+  components:
+  - type: Sprite
+    sprite: _Serenity/Clothing/OuterClothing/Suits/eva_color.rsi
+    layers:
+    - state: equipped-base
+      color: "#ffffff"
+    - state: equipped-decals-01
+      color: "#8f1717"
+    - state: equipped-reinforced-points
+      color: "#3e3e48"
+    - sprite: _Serenity/Clothing/OuterClothing/Armor/bulletproof_vest_procedural.rsi
+      state: decor_base_OuterClothing_armor_02
+      color: "#8f1717"
+    - state: equipped-breathing-gear
+    - state: equipped-unshaded
+      shader: unshaded
+    - sprite: _Serenity/Clothing/OuterClothing/Armor/bulletproof_vest_procedural.rsi
+      state: decor_base_OuterClothing_armor_05
+      color: "#8f1717"
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left-base
+        color: "#ffffff"
+      - state: inhand-left-decals-01
+        color: "#8f1717"
+      - state: inhand-left-reinforced-points
+        color: "#3e3e48"
+      - state: inhand-left-breathing-gear
+      - state: inhand-left-unshaded
+        shader: unshaded
+      right:
+      - state: inhand-right-base
+        color: "#ffffff"
+      - state: inhand-right-decals-01
+        color: "#8f1717"
+      - state: inhand-right-reinforced-points
+        color: "#3e3e48"
+      - state: inhand-right-breathing-gear
+      - state: inhand-right-unshaded
+        shader: unshaded
+  - type: Clothing
+    sprite: _Serenity/Clothing/OuterClothing/Suits/eva_color.rsi
+    clothingVisuals:
+      outerClothing:
+      - state: equipped-base
+        color: "#ffffff"
+      - state: equipped-decals-01
+        color: "#8f1717"
+      - state: equipped-reinforced-points
+        color: "#3e3e48"
+      - sprite: _Serenity/Clothing/OuterClothing/Armor/bulletproof_vest_procedural.rsi
+        state: decor_base_OuterClothing_armor_02
+        color: "#8f1717"
+      - state: equipped-breathing-gear
+      - state: equipped-unshaded
+        shader: unshaded
+      - sprite: _Serenity/Clothing/OuterClothing/Armor/bulletproof_vest_procedural.rsi
+        state: decor_base_OuterClothing_armor_05
+        color: "#8f1717"
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadEVAHelmetStirling
+
+# ── Head ─────────────────────────────────────────────────────────────────────
+
+- type: entity
+  id: ClothingHeadHatHoodStirling
+  parent: ClothingHeadHatHoodWinterBase
+  name: Stirling coat hood
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Serenity/Clothing/Head/Hoods/Coat/arcadia.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Serenity/Clothing/Head/Hoods/Coat/arcadia.rsi
+
+- type: entity
+  id: ClothingHeadHatStirlingBeret
+  parent: ClothingHeadBaseButcherable
+  name: Stirling beret
+  description: A beret produced by Stirling Synthetics.
+  components:
+  - type: Sprite
+    sprite: _Serenity/Clothing/Head/Hats/beret_arcadia.rsi
+  - type: Clothing
+    sprite: _Serenity/Clothing/Head/Hats/beret_arcadia.rsi
+  - type: Tag
+    tags:
+    - HamsterWearable
+
+- type: entity
+  id: ClothingHeadEVAHelmetStirling
+  parent: ClothingHeadEVAHelmetBase
+  name: Stirling EVA helmet
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Serenity/Clothing/Head/Helmets/eva_color.rsi
+    layers:
+    - state: icon-base
+      color: "#ffffff"
+    - state: icon-decals-01
+      color: "#8f1717"
+    - state: icon-reinforced-points
+      color: "#3e3e48"
+    - state: icon-visor
+      color: "#8f1717"
+  - type: Clothing
+    sprite: _Serenity/Clothing/Head/Helmets/eva_color.rsi
+    clothingVisuals:
+      head:
+      - state: equipped-head-base
+        color: "#ffffff"
+      - state: equipped-head-decals-01
+        color: "#8f1717"
+      - state: equipped-head-reinforced-points
+        color: "#3e3e48"
+      - state: equipped-head-visor
+        color: "#8f1717"
+
+# ── Mask ─────────────────────────────────────────────────────────────────────
+
+- type: entity
+  id: ClothingMaskStirling
+  parent: ClothingMaskGasExplorer
+  name: Stirling battle mask
+  description: A close-fitting high tech mask designed by Stirling Synthetics for space faring battlers.
+  components:
+  - type: Sprite
+    sprite: _Serenity/Clothing/Mask/arcadia.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Serenity/Clothing/Mask/arcadia.rsi
+  - type: Tag
+    tags:
+    - ClothMade
+    - HidesHair
+
+# ── Eyes ─────────────────────────────────────────────────────────────────────
+
+- type: entity
+  id: ClothingEyesStirlingVisor
+  parent: ClothingEyesBase
+  name: Stirling visor
+  description: A visor produced by Stirling Synthetics, with some high tech optics systems built in.
+  components:
+  - type: Sprite
+    sprite: _Serenity/Clothing/Eyes/Glasses/arcadia.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Serenity/Clothing/Eyes/Glasses/arcadia.rsi
+  - type: FlashImmunity
+  - type: EyeProtection
+  - type: VisionCorrection
+  - type: IdentityBlocker
+
+# ── Ears ─────────────────────────────────────────────────────────────────────
+
+- type: entity
+  id: ClothingHeadsetStirling
+  parent: ClothingHeadsetAlt
+  name: Stirling over-ear headset
+  description: A dashing and attractive headset produced by Stirling Synthetics.
+  components:
+  - type: Sprite
+    sprite: _Serenity/Clothing/Ears/Headsets/arcadia.rsi
+  - type: Clothing
+    sprite: _Serenity/Clothing/Ears/Headsets/arcadia.rsi
+
+# ── Hands ─────────────────────────────────────────────────────────────────────
+
+- type: entity
+  id: ClothingHandsGlovesStirlingCombat
+  parent: ClothingHandsGlovesCombat
+  name: Stirling combat gloves
+  description: Combat gloves produced by Stirling Synthetics.
+  components:
+  - type: Sprite
+    sprite: _Serenity/Clothing/Hands/Gloves/arcadia.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Serenity/Clothing/Hands/Gloves/arcadia.rsi
+
+# ── Belt ─────────────────────────────────────────────────────────────────────
+
+- type: entity
+  id: ClothingBeltStirling
+  parent: ClothingBeltStorageBase
+  name: Stirling webbing
+  description: A webbing created by Stirling Synthetics. Seems very capable of fitting many items.
+  components:
+  - type: Sprite
+    sprite: _Serenity/Clothing/Belt/arcadia_webbing.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Serenity/Clothing/Belt/arcadia_webbing.rsi
+
+- type: entity
+  id: ClothingOuterVestWebStirling
+  parent: ClothingOuterVestWebMerc
+  name: Stirling web vest
+  description: A high-quality armored vest produced by Stirling Synthetics. Synthetic hard-plating over a flexible mesh frame — surprisingly light for what it stops.
+  components:
+  - type: Sprite
+    sprite: _Serenity/Clothing/OuterClothing/Vests/mercenary_webvest_black.rsi
+  - type: Clothing
+    sprite: _Serenity/Clothing/OuterClothing/Vests/mercenary_webvest_black.rsi
+
+# ── Back ─────────────────────────────────────────────────────────────────────
+
+- type: entity
+  id: ClothingBackpackStirling
+  parent: ClothingBackpack
+  name: Stirling backpack
+  description: A backpack produced by Stirling Synthetics.
+  components:
+  - type: Sprite
+    sprite: _Serenity/Clothing/Back/Backpacks/arcadia.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Serenity/Clothing/Back/Backpacks/arcadia.rsi
+
+- type: entity
+  id: ClothingBackpackSatchelStirling
+  parent: ClothingBackpackSatchel
+  name: Stirling satchel
+  description: A satchel produced by Stirling Synthetics.
+  components:
+  - type: Sprite
+    sprite: _Serenity/Clothing/Back/Satchels/arcadia.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Serenity/Clothing/Back/Satchels/arcadia.rsi
+
+- type: entity
+  id: ClothingBackpackDuffelStirling
+  parent: ClothingBackpackDuffel
+  name: Stirling duffel
+  description: A duffelbag produced by Stirling Synthetics.
+  components:
+  - type: Sprite
+    sprite: _Serenity/Clothing/Back/Duffels/arcadia.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Serenity/Clothing/Back/Duffels/arcadia.rsi
