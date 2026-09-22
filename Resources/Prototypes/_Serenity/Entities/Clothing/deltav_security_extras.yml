@@ -154,8 +154,8 @@
 - type: entity
   parent: [ClothingNeckBase, BaseSecurityContraband]
   id: ClothingNeckTieClipSecurityDV
-  name: security tie clip
-  description: A polished tie clip bearing the security department's insignia.
+  name: security permit badge
+  description: A polished badge identifying the wearer as a licensed member of station security.
   components:
   - type: Sprite
     sprite: _Serenity/Clothing/Neck/Misc/cwpsec.rsi
