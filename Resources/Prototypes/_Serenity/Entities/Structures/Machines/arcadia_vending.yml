@@ -1,0 +1,22 @@
+# StirlingDrobe vending machine
+# Sprite: CC-BY-SA-3.0, taken from tgstation commit a879151, modified by Potato1234x and AjexRose for New Frontiers 14
+
+- type: entity
+  id: VendingMachineStirling
+  parent: SLVendingMachine
+  name: StirlingDrobe
+  description: Outfitting the crew of tomorrow, today.
+  components:
+  - type: Sprite
+    sprite: _Serenity/Structures/Machines/VendingMachines/arcadiadrobe.rsi
+    snapCardinals: true
+    layers:
+    - state: "off"
+      map: ["enum.VendingMachineVisualLayers.Base"]
+    - state: normal-unshaded
+      map: ["enum.VendingMachineVisualLayers.BaseUnshaded"]
+      shader: unshaded
+  - type: Store
+    name: vendor-stirling-drobe
+    categories:
+    - SLStirling

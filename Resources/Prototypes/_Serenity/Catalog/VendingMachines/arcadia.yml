@@ -1,0 +1,121 @@
+# Stirling Synthetics StirlingDrobe vending machine listings
+
+- type: listing
+  id: SLStirlingJumpsuit
+  productEntity: ClothingUniformJumpsuitStirling
+  cost:
+    NTCredit: 600
+  categories:
+  - SLStirling
+
+- type: listing
+  id: SLStirlingJumpskirt
+  productEntity: ClothingUniformJumpskirtStirling
+  cost:
+    NTCredit: 600
+  categories:
+  - SLStirling
+
+- type: listing
+  id: SLStirlingWinterCoat
+  productEntity: ClothingOuterWinterStirling
+  cost:
+    NTCredit: 900
+  categories:
+  - SLStirling
+
+- type: listing
+  id: SLStirlingTrenchcoat
+  productEntity: ClothingOuterCoatStirlingTrench
+  cost:
+    NTCredit: 1200
+  categories:
+  - SLStirling
+
+- type: listing
+  id: SLStirlingEVASuit
+  productEntity: ClothingOuterEVASuitStirling
+  cost:
+    NTCredit: 2500
+  categories:
+  - SLStirling
+
+- type: listing
+  id: SLStirlingBeret
+  productEntity: ClothingHeadHatStirlingBeret
+  cost:
+    NTCredit: 350
+  categories:
+  - SLStirling
+
+- type: listing
+  id: SLStirlingMask
+  productEntity: ClothingMaskStirling
+  cost:
+    NTCredit: 450
+  categories:
+  - SLStirling
+
+- type: listing
+  id: SLStirlingVisor
+  productEntity: ClothingEyesStirlingVisor
+  cost:
+    NTCredit: 700
+  categories:
+  - SLStirling
+
+- type: listing
+  id: SLStirlingHeadset
+  productEntity: ClothingHeadsetStirling
+  cost:
+    NTCredit: 500
+  categories:
+  - SLStirling
+
+- type: listing
+  id: SLStirlingCombatGloves
+  productEntity: ClothingHandsGlovesStirlingCombat
+  cost:
+    NTCredit: 500
+  categories:
+  - SLStirling
+
+- type: listing
+  id: SLStirlingBelt
+  productEntity: ClothingBeltStirling
+  cost:
+    NTCredit: 450
+  categories:
+  - SLStirling
+
+- type: listing
+  id: SLStirlingWebVest
+  productEntity: ClothingOuterVestWebStirling
+  cost:
+    NTCredit: 1500
+  categories:
+  - SLStirling
+
+- type: listing
+  id: SLStirlingBackpack
+  productEntity: ClothingBackpackStirling
+  cost:
+    NTCredit: 500
+  categories:
+  - SLStirling
+
+- type: listing
+  id: SLStirlineSatchel
+  productEntity: ClothingBackpackSatchelStirling
+  cost:
+    NTCredit: 500
+  categories:
+  - SLStirling
+
+- type: listing
+  id: SLStirlingDuffel
+  productEntity: ClothingBackpackDuffelStirling
+  cost:
+    NTCredit: 500
+  categories:
+  - SLStirling
