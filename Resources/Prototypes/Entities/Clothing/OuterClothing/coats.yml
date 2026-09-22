@@ -109,6 +109,14 @@
   components:
   - type: Sprite
     sprite: _Serenity/Clothing/OuterClothing/Coats/hos_trenchcoat_dv.rsi
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        sprite: _Serenity/Clothing/OuterClothing/Coats/hos_trenchcoat_dv.rsi
+      right:
+      - state: inhand-right
+        sprite: _Serenity/Clothing/OuterClothing/Coats/hos_trenchcoat_dv.rsi
   - type: Clothing
     sprite: _Serenity/Clothing/OuterClothing/Coats/hos_trenchcoat_dv.rsi
 
@@ -364,6 +372,14 @@
   components:
   - type: Sprite
     sprite: _Serenity/Clothing/OuterClothing/Coats/armourergreatcoat.rsi
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        sprite: _Serenity/Clothing/OuterClothing/Coats/armourergreatcoat.rsi
+      right:
+      - state: inhand-right
+        sprite: _Serenity/Clothing/OuterClothing/Coats/armourergreatcoat.rsi
   - type: Clothing
     sprite: _Serenity/Clothing/OuterClothing/Coats/armourergreatcoat.rsi
 

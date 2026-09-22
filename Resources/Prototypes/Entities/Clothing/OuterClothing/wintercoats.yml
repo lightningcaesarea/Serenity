@@ -406,6 +406,14 @@
   components:
   - type: Sprite
     sprite: _Serenity/Clothing/OuterClothing/WinterCoats/hosgreatcoat.rsi
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        sprite: _Serenity/Clothing/OuterClothing/WinterCoats/hosgreatcoat.rsi
+      right:
+      - state: inhand-right
+        sprite: _Serenity/Clothing/OuterClothing/WinterCoats/hosgreatcoat.rsi
   - type: Clothing
     sprite: _Serenity/Clothing/OuterClothing/WinterCoats/hosgreatcoat.rsi
   - type: ToggleableClothing
@@ -809,6 +817,14 @@
   components:
   - type: Sprite
     sprite: _Serenity/Clothing/OuterClothing/WinterCoats/armourercoat.rsi
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        sprite: _Serenity/Clothing/OuterClothing/WinterCoats/armourercoat.rsi
+      right:
+      - state: inhand-right
+        sprite: _Serenity/Clothing/OuterClothing/WinterCoats/armourercoat.rsi
   - type: Clothing
     sprite: _Serenity/Clothing/OuterClothing/WinterCoats/armourercoat.rsi
   - type: ToggleableClothing
