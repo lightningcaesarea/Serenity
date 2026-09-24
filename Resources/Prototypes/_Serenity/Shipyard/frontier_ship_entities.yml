@@ -737,9 +737,11 @@
   - type: Clickable
   - type: InteractionOutline
   - type: Physics
-    bodyType: Dynamic
-    # Serenity: no Fixtures declared, so there is nothing to collide with; the physics system
-    # already reports this as non-colliding at runtime, so say so explicitly.
+    # Serenity: AnchorPrototypeTest requires every anchored entity to declare a Static body; this
+    # is also what the anchor system actually leaves it as at runtime.
+    bodyType: Static
+    # No Fixtures declared, so there is nothing to collide with; the physics system already
+    # reports this as non-colliding at runtime, so say so explicitly.
     canCollide: false
   - type: Pullable
   - type: Damageable
@@ -796,9 +798,11 @@
   - type: Clickable
   - type: InteractionOutline
   - type: Physics
-    bodyType: Dynamic
-    # Serenity: no Fixtures declared, so there is nothing to collide with; the physics system
-    # already reports this as non-colliding at runtime, so say so explicitly.
+    # Serenity: AnchorPrototypeTest requires every anchored entity to declare a Static body; this
+    # is also what the anchor system actually leaves it as at runtime.
+    bodyType: Static
+    # No Fixtures declared, so there is nothing to collide with; the physics system already
+    # reports this as non-colliding at runtime, so say so explicitly.
     canCollide: false
   - type: Pullable
   - type: Damageable
