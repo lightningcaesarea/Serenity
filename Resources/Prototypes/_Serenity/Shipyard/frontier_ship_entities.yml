@@ -83,30 +83,37 @@
   parent: PortableGeneratorPacman
   suffix: Plasma, 5 kW, Ship
   components:
-    - type: FuelGenerator
-      on: true
     - type: Transform
       anchored: true
+    # Serenity: base declares Dynamic; anchoring on spawn makes it Static at runtime regardless
+    # (same as the ship's anchored bench furniture) - declare that explicitly.
+    - type: Physics
+      bodyType: Static
     - type: MaterialStorage
       storage:
         Plasma: 300
-    # Serenity: startOnMapInit dropped, PortableGeneratorComponent has no such
-    # field here; FuelGenerator.on above already starts it running.
+    # Serenity: startOnMapInit dropped (PortableGeneratorComponent has no such field here), and the
+    # FuelGenerator.on: true this used to carry never actually took effect - GeneratorSystem forces
+    # it back off the moment the entity anchors on spawn, so it always starts off like any other
+    # portable generator. Players turn it on after undocking.
 
 - type: entity
   id: PortableGeneratorSuperPacmanShuttle
   parent: PortableGeneratorSuperPacman
   suffix: Uranium, 30 kW, Ship
   components:
-    - type: FuelGenerator
-      on: true
     - type: Transform
       anchored: true
+    # Serenity: see PortableGeneratorPacmanShuttle above - same anchored-Dynamic-becomes-Static
+    # mismatch.
+    - type: Physics
+      bodyType: Static
     - type: MaterialStorage
       storage:
         Uranium: 1000
-    # Serenity: PortableGenerator.startOnMapInit dropped, no such field;
-    # FuelGenerator.on above already starts it running.
+    # Serenity: startOnMapInit dropped (no such field), and FuelGenerator.on: true this used to
+    # carry never actually took effect - GeneratorSystem forces it back off the moment the entity
+    # anchors on spawn. Starts off like any other portable generator; players turn it on.
 
 - type: entity
   name: Atmos Fix Oxygen Marker
@@ -695,6 +702,10 @@
   - type: Sprite
     sprite: SimpleStation14/Structures/Furniture/Benches/sofa.rsi
     state: middle
+  # Serenity: SeatBase declares bodyType: Dynamic, but anchoring this on spawn makes it Static at
+  # runtime regardless — declare that explicitly so the prototype-save test sees a match.
+  - type: Physics
+    bodyType: Static
 
 - type: entity
   id: BenchSofaLeft
@@ -727,6 +738,9 @@
   - type: InteractionOutline
   - type: Physics
     bodyType: Dynamic
+    # Serenity: no Fixtures declared, so there is nothing to collide with; the physics system
+    # already reports this as non-colliding at runtime, so say so explicitly.
+    canCollide: false
   - type: Pullable
   - type: Damageable
     damageContainer: Inorganic
@@ -783,6 +797,9 @@
   - type: InteractionOutline
   - type: Physics
     bodyType: Dynamic
+    # Serenity: no Fixtures declared, so there is nothing to collide with; the physics system
+    # already reports this as non-colliding at runtime, so say so explicitly.
+    canCollide: false
   - type: Pullable
   - type: Damageable
     damageContainer: Inorganic
@@ -811,6 +828,9 @@
   - type: Sprite
     sprite: SimpleStation14/Structures/Furniture/Benches/steel_bench_white.rsi
     state: middle
+  # Serenity: see BenchSofaMiddle above — same anchored-Dynamic-becomes-Static mismatch.
+  - type: Physics
+    bodyType: Static
 
 - type: entity
   id: BenchSteelWhiteLeft
