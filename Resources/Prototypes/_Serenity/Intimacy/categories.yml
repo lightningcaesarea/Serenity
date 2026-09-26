@@ -23,3 +23,10 @@
   name: intimacy-category-solo
   color: "#c9a3e5"
   order: 3
+
+# Acts that need the parties' bodies uncovered; every one of them lists the anatomy it needs.
+- type: intimacyCategory
+  id: Explicit
+  name: intimacy-category-explicit
+  color: "#b03a48"
+  order: 4

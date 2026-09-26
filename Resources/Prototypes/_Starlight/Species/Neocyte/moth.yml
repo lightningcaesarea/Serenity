@@ -28,6 +28,11 @@
     Head: MobMothHead
     Snout: MobHumanoidAnyMarking
     UndergarmentTop: MobHumanoidAnyMarking
+    Butt: MobHumanoidAnyMarking
+    Vagina: MobHumanoidAnyMarking
+    Testicles: MobHumanoidAnyMarking
+    Penis: MobHumanoidAnyMarking
+    Breasts: MobHumanoidAnyMarking
     UndergarmentBottom: MobHumanoidAnyMarking
     Chest: MobMothTorso
     HeadTop: MobHumanoidAnyMarking
