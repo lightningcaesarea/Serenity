@@ -21,6 +21,11 @@
     Hair: MobSlimeMarkingAlfa
     FacialHair: MobSlimeMarkingFollowSkin
     UndergarmentTop: MobHumanoidAnyMarking
+    Butt: MobHumanoidAnyMarking
+    Vagina: MobHumanoidAnyMarking
+    Testicles: MobHumanoidAnyMarking
+    Penis: MobHumanoidAnyMarking
+    Breasts: MobHumanoidAnyMarking
     UndergarmentBottom: MobHumanoidAnyMarking
     Chest: MobSlimeTorso
     Eyes: MobHumanoidAnyMarking # Starlight

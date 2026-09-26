@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from S.P.L.U.R.T-tg at https://github.com/SPLURT-Station/S.P.L.U.R.T-tg/blob/e0bc23ac6694e9ee74d2b8c623f795099e7d93d8/modular_zzplurt/icons/mob/human/genitals/butt.dmi.  Resomi variants were created by CaptainFothel by modifying the sprites taken from S.P.L.U.R.T. (subset of states copied into Serenity from the Afterlight-14 fork)",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "m_butt_pair_2_adj_primary",
+      "directions": 4
+    },
+    {
+      "name": "m_butt_pair_4_adj_primary",
+      "directions": 4
+    },
+    {
+      "name": "m_butt_pair_6_adj_primary",
+      "directions": 4
+    },
+    {
+      "name": "m_butt_pair_8_adj_primary",
+      "directions": 4
+    }
+  ]
+}

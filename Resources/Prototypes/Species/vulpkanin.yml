@@ -30,6 +30,11 @@
     Snout: MobHumanoidAnyMarking
     SnoutCover: MobHumanoidAnyMarking
     UndergarmentTop: MobHumanoidAnyMarking
+    Butt: MobHumanoidAnyMarking
+    Vagina: MobHumanoidAnyMarking
+    Testicles: MobHumanoidAnyMarking
+    Penis: MobHumanoidAnyMarking
+    Breasts: MobHumanoidAnyMarking
     UndergarmentBottom: MobHumanoidAnyMarking
     Chest: MobVulpkaninTorso
     HeadTop: MobHumanoidAnyMarking

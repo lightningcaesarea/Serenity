@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from S.P.L.U.R.T-tg at https://github.com/SPLURT-Station/S.P.L.U.R.T-tg/blob/3e0ff3db8289e01766c6c9f796e1b74e9582754e/modular_zzplurt/icons/mob/sprite_accessories/genitals/testicles_onmob.dmi (subset of states copied into Serenity from the Afterlight-14 fork)",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "m_testicles_pair_2_adj",
+      "directions": 4
+    },
+    {
+      "name": "m_testicles_pair_4_adj",
+      "directions": 4
+    },
+    {
+      "name": "m_testicles_pair_6_adj",
+      "directions": 4
+    }
+  ]
+}

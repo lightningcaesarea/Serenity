@@ -29,6 +29,11 @@
     HeadTop: MobHumanoidAnyMarking
     HeadSide: MobHumanoidAnyMarking
     UndergarmentTop: MobHumanoidAnyMarking
+    Butt: MobHumanoidAnyMarking
+    Vagina: MobHumanoidAnyMarking
+    Testicles: MobHumanoidAnyMarking
+    Penis: MobHumanoidAnyMarking
+    Breasts: MobHumanoidAnyMarking
     UndergarmentBottom: MobHumanoidAnyMarking
     Chest: MobDionaTorso
     Eyes: MobDionaEyes

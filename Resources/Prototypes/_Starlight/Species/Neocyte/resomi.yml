@@ -36,6 +36,11 @@
     Head: MobResomiHead
     Snout: MobHumanoidAnyMarking
     UndergarmentTop: MobHumanoidAnyMarking
+    Butt: MobHumanoidAnyMarking
+    Vagina: MobHumanoidAnyMarking
+    Testicles: MobHumanoidAnyMarking
+    Penis: MobHumanoidAnyMarking
+    Breasts: MobHumanoidAnyMarking
     UndergarmentBottom: MobHumanoidAnyMarking
     Chest: MobResomiTorso
     HeadTop: MobHumanoidAnyMarking
