@@ -24,6 +24,18 @@
 #Starlight End
         - id: AsteroidDebrisLarger
           prob: 0.4
+# Serenity Start — ore-rich variants already exist as prototypes (AsteroidSalvage*) but were never
+# added to the roll; Frontier Station 14's MIT-era asteroid biome included their equivalent at these
+# weights, so wire them in the same way instead of leaving them unused.
+        - id: AsteroidSalvageSmall
+          prob: 0.15
+        - id: AsteroidSalvageMedium
+          prob: 0.08
+        - id: AsteroidSalvageLarge
+          prob: 0.04
+        - id: AsteroidSalvageHuge
+          prob: 0.015
+# Serenity End
     - type: NoiseDrivenDebrisSelector
       noiseChannel: Wreck
       debrisTable:
