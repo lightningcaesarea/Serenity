@@ -70,11 +70,16 @@ public sealed class AnatomyFeaturesTest
         {
             var markings = server.ResolveDependency<MarkingManager>();
 
-            foreach (var category in new[]
-                     {
-                         MarkingCategories.Breasts, MarkingCategories.Penis, MarkingCategories.Testicles,
-                         MarkingCategories.Vagina, MarkingCategories.Butt,
-                     })
+            var categories = new[]
+            {
+                MarkingCategories.Breasts,
+                MarkingCategories.Penis,
+                MarkingCategories.Testicles,
+                MarkingCategories.Vagina,
+                MarkingCategories.Butt,
+            };
+
+            foreach (var category in categories)
             {
                 foreach (var sex in new[] { Sex.Male, Sex.Female, Sex.Unsexed })
                 {
