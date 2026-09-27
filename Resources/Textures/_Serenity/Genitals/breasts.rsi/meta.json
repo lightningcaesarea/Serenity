@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from S.P.L.U.R.T-tg at https://github.com/SPLURT-Station/S.P.L.U.R.T-tg/blob/dc9e6242c8781b17f307f65755fd8b0cec7aebf0/modular_zzplurt/icons/mob/sprite_accessories/genitals/breasts_onmob.dmi. Resomi variants were created by CaptainFothel by modifying the sprites taken from S.P.L.U.R.T. (subset of states copied into Serenity from the Afterlight-14 fork)",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "m_breasts_pair_2_front_primary",
+      "directions": 4
+    },
+    {
+      "name": "m_breasts_pair_5_front_primary",
+      "directions": 4
+    },
+    {
+      "name": "m_breasts_pair_8_front_primary",
+      "directions": 4
+    },
+    {
+      "name": "m_breasts_pair_12_front_primary",
+      "directions": 4
+    },
+    {
+      "name": "m_breasts_pair_16_front_primary",
+      "directions": 4
+    }
+  ]
+}

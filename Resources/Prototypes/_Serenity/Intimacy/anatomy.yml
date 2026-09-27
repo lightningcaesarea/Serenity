@@ -1,0 +1,34 @@
+# Which marking categories count as anatomy for the intimacy engine, and what hides them.
+# A character with a marking in `category` exposes the tag `feature`; while nothing is worn in any of
+# `coveringSlots` they also expose `<feature>Accessible`. Acts list these tags in actorNeeds / targetNeeds.
+# To add a part: give it a marking category, then an entry here.
+
+- type: intimacyAnatomy
+  id: Breasts
+  category: Breasts
+  feature: Breasts
+  coveringSlots: [ jumpsuit, outerClothing ]
+
+- type: intimacyAnatomy
+  id: Penis
+  category: Penis
+  feature: Penis
+  coveringSlots: [ jumpsuit, outerClothing ]
+
+- type: intimacyAnatomy
+  id: Testicles
+  category: Testicles
+  feature: Testicles
+  coveringSlots: [ jumpsuit, outerClothing ]
+
+- type: intimacyAnatomy
+  id: Vagina
+  category: Vagina
+  feature: Vagina
+  coveringSlots: [ jumpsuit, outerClothing ]
+
+- type: intimacyAnatomy
+  id: Butt
+  category: Butt
+  feature: Butt
+  coveringSlots: [ jumpsuit, outerClothing ]

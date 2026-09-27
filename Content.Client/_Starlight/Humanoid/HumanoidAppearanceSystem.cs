@@ -328,6 +328,10 @@ public sealed partial class HumanoidAppearanceSystem : SharedHumanoidAppearanceS
             {
                 if (_markingManager.TryGetMarking(marking, out var markingPrototype))
                 {
+                    // Serenity: the nudity-censor accessibility option also hides the adult anatomy categories.
+                    if (censorNudity && IsAdultAnatomy(markingPrototype.MarkingCategory))
+                        continue;
+
                     ApplyMarking(markingPrototype, marking.MarkingColors, marking.IsGlowing, marking.Visible, entity); //starlight, glowing
                     if (markingPrototype.BodyPart == HumanoidVisualLayers.UndergarmentTop)
                         applyUndergarmentTop = false;
@@ -340,6 +344,13 @@ public sealed partial class HumanoidAppearanceSystem : SharedHumanoidAppearanceS
         humanoid.ClientOldMarkings = new MarkingSet(humanoid.MarkingSet);
 
         AddUndergarments(entity, applyUndergarmentTop, applyUndergarmentBottom);
+    }
+
+    // Serenity
+    private static bool IsAdultAnatomy(MarkingCategories category)
+    {
+        return category is MarkingCategories.Breasts or MarkingCategories.Penis or MarkingCategories.Testicles
+            or MarkingCategories.Vagina or MarkingCategories.Butt;
     }
 
     private void ClearAllMarkings(Entity<HumanoidAppearanceComponent, SpriteComponent> entity)

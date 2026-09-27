@@ -1,0 +1,203 @@
+# Acts that depend on anatomy (see anatomy.yml). Needs are feature tags: "<Part>Accessible" means the
+# character has that part AND nothing is worn over it, so undressing is what unlocks these.
+
+# ---- Sensual ----
+- type: intimacyAct
+  id: GropeBreasts
+  name: intimacy-act-grope-breasts
+  category: Sensual
+  targetNeeds: [ BreastsAccessible ]
+  actorStats: { Arousal: 3, Pleasure: 3 }
+  targetStats: { Arousal: 6, Pleasure: 5 }
+  messages:
+  - intimacy-msg-grope-breasts-1
+  - intimacy-msg-grope-breasts-2
+
+- type: intimacyAct
+  id: SuckBreasts
+  name: intimacy-act-suck-breasts
+  category: Sensual
+  targetNeeds: [ BreastsAccessible ]
+  actorStats: { Arousal: 4, Pleasure: 3 }
+  targetStats: { Arousal: 8, Pleasure: 7 }
+  messages:
+  - intimacy-msg-suck-breasts-1
+  - intimacy-msg-suck-breasts-2
+  sound:
+    collection: IntimacyChamp
+
+- type: intimacyAct
+  id: SqueezeButt
+  name: intimacy-act-squeeze-butt
+  category: Sensual
+  targetNeeds: [ ButtAccessible ]
+  actorStats: { Arousal: 3, Pleasure: 2 }
+  targetStats: { Arousal: 5, Pleasure: 4 }
+  messages:
+  - intimacy-msg-squeeze-butt-1
+  - intimacy-msg-squeeze-butt-2
+
+- type: intimacyAct
+  id: FondleTesticles
+  name: intimacy-act-fondle-testicles
+  category: Sensual
+  targetNeeds: [ TesticlesAccessible ]
+  actorStats: { Arousal: 3, Pleasure: 3 }
+  targetStats: { Arousal: 7, Pleasure: 6 }
+  messages:
+  - intimacy-msg-fondle-testicles-1
+  - intimacy-msg-fondle-testicles-2
+
+- type: intimacyAct
+  id: TouchVagina
+  name: intimacy-act-touch-vagina
+  category: Sensual
+  targetNeeds: [ VaginaAccessible ]
+  actorStats: { Arousal: 4, Pleasure: 3 }
+  targetStats: { Arousal: 8, Pleasure: 8 }
+  messages:
+  - intimacy-msg-touch-vagina-1
+  - intimacy-msg-touch-vagina-2
+  sound:
+    collection: IntimacySquelch
+
+# ---- Explicit ----
+- type: intimacyAct
+  id: StrokePenis
+  name: intimacy-act-stroke-penis
+  category: Explicit
+  targetNeeds: [ PenisAccessible ]
+  actorStats: { Arousal: 4, Pleasure: 3 }
+  targetStats: { Arousal: 9, Pleasure: 9 }
+  messages:
+  - intimacy-msg-stroke-penis-1
+  - intimacy-msg-stroke-penis-2
+  sound:
+    collection: IntimacySquelch
+
+- type: intimacyAct
+  id: OralPenis
+  name: intimacy-act-oral-penis
+  category: Explicit
+  targetNeeds: [ PenisAccessible ]
+  actorStats: { Arousal: 6, Pleasure: 4 }
+  targetStats: { Arousal: 11, Pleasure: 12 }
+  messages:
+  - intimacy-msg-oral-penis-1
+  - intimacy-msg-oral-penis-2
+  sound:
+    collection: IntimacyBlowjob
+
+- type: intimacyAct
+  id: OralVagina
+  name: intimacy-act-oral-vagina
+  category: Explicit
+  targetNeeds: [ VaginaAccessible ]
+  actorStats: { Arousal: 6, Pleasure: 4 }
+  targetStats: { Arousal: 11, Pleasure: 12 }
+  messages:
+  - intimacy-msg-oral-vagina-1
+  - intimacy-msg-oral-vagina-2
+  sound:
+    collection: IntimacyOral
+
+- type: intimacyAct
+  id: Breastfuck
+  name: intimacy-act-breastfuck
+  category: Explicit
+  actorNeeds: [ PenisAccessible ]
+  targetNeeds: [ BreastsAccessible ]
+  actorStats: { Arousal: 9, Pleasure: 9 }
+  targetStats: { Arousal: 5, Pleasure: 4 }
+  messages:
+  - intimacy-msg-breastfuck-1
+  - intimacy-msg-breastfuck-2
+  sound:
+    collection: IntimacySquelch
+
+- type: intimacyAct
+  id: VaginalSex
+  name: intimacy-act-vaginal-sex
+  category: Explicit
+  cooldown: 3
+  actorNeeds: [ PenisAccessible ]
+  targetNeeds: [ VaginaAccessible ]
+  actorStats: { Arousal: 10, Pleasure: 12 }
+  targetStats: { Arousal: 10, Pleasure: 11, Pain: 1 }
+  messages:
+  - intimacy-msg-vaginal-sex-1
+  - intimacy-msg-vaginal-sex-2
+  - intimacy-msg-vaginal-sex-3
+  sound:
+    collection: IntimacyBang
+
+- type: intimacyAct
+  id: AnalSex
+  name: intimacy-act-anal-sex
+  category: Explicit
+  cooldown: 3
+  actorNeeds: [ PenisAccessible ]
+  targetNeeds: [ ButtAccessible ]
+  actorStats: { Arousal: 10, Pleasure: 12 }
+  targetStats: { Arousal: 8, Pleasure: 8, Pain: 3 }
+  messages:
+  - intimacy-msg-anal-sex-1
+  - intimacy-msg-anal-sex-2
+  sound:
+    collection: IntimacyBang
+
+- type: intimacyAct
+  id: RidePenis
+  name: intimacy-act-ride-penis
+  category: Explicit
+  cooldown: 3
+  actorNeeds: [ VaginaAccessible ]
+  targetNeeds: [ PenisAccessible ]
+  actorStats: { Arousal: 10, Pleasure: 11 }
+  targetStats: { Arousal: 10, Pleasure: 12 }
+  messages:
+  - intimacy-msg-ride-penis-1
+  - intimacy-msg-ride-penis-2
+  sound:
+    collection: IntimacyBang
+
+# ---- Solo ----
+- type: intimacyAct
+  id: StrokeSelf
+  name: intimacy-act-stroke-self
+  category: Solo
+  selfOnly: true
+  cooldown: 3
+  actorNeeds: [ PenisAccessible ]
+  actorStats: { Arousal: 7, Pleasure: 10 }
+  selfMessages:
+  - intimacy-msg-stroke-self-1
+  - intimacy-msg-stroke-self-2
+  sound:
+    collection: IntimacySquelch
+
+- type: intimacyAct
+  id: TouchSelfVagina
+  name: intimacy-act-touch-self-vagina
+  category: Solo
+  selfOnly: true
+  cooldown: 3
+  actorNeeds: [ VaginaAccessible ]
+  actorStats: { Arousal: 7, Pleasure: 10 }
+  selfMessages:
+  - intimacy-msg-touch-self-vagina-1
+  - intimacy-msg-touch-self-vagina-2
+  sound:
+    collection: IntimacySquelch
+
+- type: intimacyAct
+  id: FondleOwnBreasts
+  name: intimacy-act-fondle-own-breasts
+  category: Solo
+  selfOnly: true
+  cooldown: 3
+  actorNeeds: [ BreastsAccessible ]
+  actorStats: { Arousal: 5, Pleasure: 7 }
+  selfMessages:
+  - intimacy-msg-fondle-own-breasts-1
+  - intimacy-msg-fondle-own-breasts-2

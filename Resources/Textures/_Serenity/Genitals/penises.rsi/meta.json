@@ -1,0 +1,155 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from S.P.L.U.R.T-tg at https://github.com/SPLURT-Station/S.P.L.U.R.T-tg/blob/87ccfc28731a1a8cb15b1968682319c3fa3fcd9c/modular_zzplurt/icons/mob/sprite_accessories/genitals/penis_onmob.dmi (subset of states copied into Serenity from the Afterlight-14 fork)",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "m_penis_human_2_0_front",
+      "directions": 4
+    },
+    {
+      "name": "m_penis_human_2_1_front",
+      "directions": 4
+    },
+    {
+      "name": "m_penis_human_4_0_front",
+      "directions": 4
+    },
+    {
+      "name": "m_penis_human_4_1_front",
+      "directions": 4
+    },
+    {
+      "name": "m_penis_human_6_0_front",
+      "directions": 4
+    },
+    {
+      "name": "m_penis_human_6_1_front",
+      "directions": 4
+    },
+    {
+      "name": "m_penis_knotted_2_0_front_primary",
+      "directions": 4
+    },
+    {
+      "name": "m_penis_knotted_2_1_front_primary",
+      "directions": 4
+    },
+    {
+      "name": "m_penis_knotted_4_0_front_primary",
+      "directions": 4
+    },
+    {
+      "name": "m_penis_knotted_4_1_front_primary",
+      "directions": 4
+    },
+    {
+      "name": "m_penis_knotted_6_0_front_primary",
+      "directions": 4
+    },
+    {
+      "name": "m_penis_knotted_6_1_front_primary",
+      "directions": 4
+    },
+    {
+      "name": "m_penis_flared_2_0_front_primary",
+      "directions": 4
+    },
+    {
+      "name": "m_penis_flared_2_1_front_primary",
+      "directions": 4
+    },
+    {
+      "name": "m_penis_flared_4_0_front_primary",
+      "directions": 4
+    },
+    {
+      "name": "m_penis_flared_4_1_front_primary",
+      "directions": 4
+    },
+    {
+      "name": "m_penis_flared_6_0_front_primary",
+      "directions": 4
+    },
+    {
+      "name": "m_penis_flared_6_1_front_primary",
+      "directions": 4
+    },
+    {
+      "name": "m_penis_tapered_2_0_front_primary",
+      "directions": 4
+    },
+    {
+      "name": "m_penis_tapered_2_1_front_primary",
+      "directions": 4
+    },
+    {
+      "name": "m_penis_tapered_4_0_front_primary",
+      "directions": 4
+    },
+    {
+      "name": "m_penis_tapered_4_1_front_primary",
+      "directions": 4
+    },
+    {
+      "name": "m_penis_tapered_6_0_front_primary",
+      "directions": 4
+    },
+    {
+      "name": "m_penis_tapered_6_1_front_primary",
+      "directions": 4
+    },
+    {
+      "name": "m_penis_hemi_2_0_front_primary",
+      "directions": 4
+    },
+    {
+      "name": "m_penis_hemi_2_1_front_primary",
+      "directions": 4
+    },
+    {
+      "name": "m_penis_hemi_4_0_front_primary",
+      "directions": 4
+    },
+    {
+      "name": "m_penis_hemi_4_1_front_primary",
+      "directions": 4
+    },
+    {
+      "name": "m_penis_hemi_6_0_front_primary",
+      "directions": 4
+    },
+    {
+      "name": "m_penis_hemi_6_1_front_primary",
+      "directions": 4
+    },
+    {
+      "name": "m_penis_nondescript_2_0_front_primary",
+      "directions": 4
+    },
+    {
+      "name": "m_penis_nondescript_2_1_front_primary",
+      "directions": 4
+    },
+    {
+      "name": "m_penis_nondescript_4_0_front_primary",
+      "directions": 4
+    },
+    {
+      "name": "m_penis_nondescript_4_1_front_primary",
+      "directions": 4
+    },
+    {
+      "name": "m_penis_nondescript_6_0_front_primary",
+      "directions": 4
+    },
+    {
+      "name": "m_penis_nondescript_6_1_front_primary",
+      "directions": 4
+    }
+  ]
+}

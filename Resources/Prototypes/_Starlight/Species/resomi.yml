@@ -35,6 +35,11 @@
     LHand: MobResomiLHand
     RHand: MobResomiRHand
     UndergarmentTop: MobHumanoidAnyMarking
+    Butt: MobHumanoidAnyMarking
+    Vagina: MobHumanoidAnyMarking
+    Testicles: MobHumanoidAnyMarking
+    Penis: MobHumanoidAnyMarking
+    Breasts: MobHumanoidAnyMarking
     UndergarmentBottom: MobHumanoidAnyMarking
     LLeg: MobResomiLLeg
     RLeg: MobResomiRLeg

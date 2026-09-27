@@ -37,6 +37,12 @@ namespace Content.Shared.Humanoid
         FaceCoverCover, // Far Horizons
         BodyCover, // Far Horizons
         BodyCoverCover, // Far Horizons
-        Other
+        Other,
+        // Serenity: adult anatomy layers, appended after Other so existing values stay stable
+        Breasts,
+        Penis,
+        Testicles,
+        Vagina,
+        Butt
     }
 }

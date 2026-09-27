@@ -25,7 +25,13 @@ namespace Content.Shared.Humanoid.Markings
         FaceCover, // Far Horizons
         FaceCoverCover, // Far Horizons
         BodyCover, // Far Horizons
-        BodyCoverCover // Far Horizons
+        BodyCoverCover, // Far Horizons
+        // Serenity: adult anatomy, appended so existing numeric values stay stable
+        Breasts,
+        Penis,
+        Testicles,
+        Vagina,
+        Butt
     }
 
     public static class MarkingCategoriesConversion
@@ -58,6 +64,11 @@ namespace Content.Shared.Humanoid.Markings
                 HumanoidVisualLayers.FaceCoverCover => MarkingCategories.FaceCoverCover, // Far Horizons
                 HumanoidVisualLayers.BodyCover => MarkingCategories.BodyCover, // Far Horizons
                 HumanoidVisualLayers.BodyCoverCover => MarkingCategories.BodyCoverCover, // Far Horizons
+                HumanoidVisualLayers.Breasts => MarkingCategories.Breasts, // Serenity
+                HumanoidVisualLayers.Penis => MarkingCategories.Penis, // Serenity
+                HumanoidVisualLayers.Testicles => MarkingCategories.Testicles, // Serenity
+                HumanoidVisualLayers.Vagina => MarkingCategories.Vagina, // Serenity
+                HumanoidVisualLayers.Butt => MarkingCategories.Butt, // Serenity
                 HumanoidVisualLayers.Tail => MarkingCategories.Tail,
                 _ => MarkingCategories.Overlay
             };

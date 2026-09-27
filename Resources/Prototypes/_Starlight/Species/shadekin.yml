@@ -23,6 +23,11 @@
   sprites:
     Head: MobShadekinHead
     UndergarmentTop: MobHumanoidAnyMarking
+    Butt: MobHumanoidAnyMarking
+    Vagina: MobHumanoidAnyMarking
+    Testicles: MobHumanoidAnyMarking
+    Penis: MobHumanoidAnyMarking
+    Breasts: MobHumanoidAnyMarking
     UndergarmentBottom: MobHumanoidAnyMarking
     Snout: MobShadekinAnyMarkingFollowSkin
     Hair: MobHumanoidAnyMarking
