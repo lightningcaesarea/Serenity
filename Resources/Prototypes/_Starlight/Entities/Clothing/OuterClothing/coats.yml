@@ -369,6 +369,11 @@
   components:
   - type: Item
     heldPrefix: null # Delta-V sprite has no open-inhand-* states; fall back to the closed inhand art
+  # Serenity: the line above alone never took effect - FoldableClothingSystem re-applies
+  # FoldableClothing.foldedHeldPrefix ("open", inherited from ClothingOuterStorageFoldableBase) on
+  # spawn and stomps the Item override. Null it here too so the fold-sync has nothing to apply.
+  - type: FoldableClothing
+    foldedHeldPrefix: null
 
 # Security Windbreaker
 - type: entity

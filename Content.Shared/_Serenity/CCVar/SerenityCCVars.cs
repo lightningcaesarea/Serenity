@@ -32,4 +32,10 @@ public sealed partial class SerenityCCVars
     /// </summary>
     public static readonly CVarDef<float> PublicTransitFlyTime =
         CVarDef.Create("serenity.publictransit.fly_time", 145f, CVar.SERVERONLY);
+
+    /// <summary>
+    /// Whether points of interest are loaded onto the default map at round start.
+    /// </summary>
+    public static readonly CVarDef<bool> PoiSpawnerEnabled =
+        CVarDef.Create("serenity.poi.enabled", true, CVar.SERVERONLY);
 }

@@ -37,11 +37,15 @@ public sealed partial class DeadDropSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<DeadDropComponent, ComponentStartup>(OnStartup);
+        SubscribeLocalEvent<DeadDropComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<DeadDropComponent, GetVerbsEvent<InteractionVerb>>(AddSearchVerb);
     }
 
-    private void OnStartup(EntityUid uid, DeadDropComponent component, ComponentStartup args)
+    // MapInit, not ComponentStartup: the latter also fires when the prototype-save integration test
+    // spawns an uninitialized copy of the entity to check nothing mutates away from its declared
+    // defaults, and a randomized cooldown rolled there fails that check. MapInit only fires once the
+    // entity is actually placed onto a real map, which is what "next drop available at" should mean.
+    private void OnMapInit(EntityUid uid, DeadDropComponent component, MapInitEvent args)
     {
         component.NextDrop ??= _timing.CurTime + TimeSpan.FromSeconds(_random.Next(component.MinimumCoolDown, component.MaximumCoolDown));
     }

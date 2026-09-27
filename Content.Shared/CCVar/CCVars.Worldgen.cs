@@ -8,7 +8,7 @@ public sealed partial class CCVars
     ///     Whether or not world generation is enabled.
     /// </summary>
     public static readonly CVarDef<bool> WorldgenEnabled =
-        CVarDef.Create("worldgen.enabled", false, CVar.SERVERONLY);
+        CVarDef.Create("worldgen.enabled", true, CVar.SERVERONLY); // Serenity: on by default — the asteroid biome and its content are already fully built, there was just nothing turning it on
 
     /// <summary>
     ///     The worldgen config to use.
