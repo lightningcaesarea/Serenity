@@ -92,7 +92,7 @@
   name: skill-robotics-name
   description: skill-robotics-desc
   category: skill-category-science
-  requires: [ Electrical ]
+  requires: [ Research ]
 
 # Service
 

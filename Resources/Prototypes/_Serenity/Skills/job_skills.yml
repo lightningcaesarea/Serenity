@@ -11,6 +11,10 @@
   skills: [ Engineering, Atmospherics ]
 
 - type: jobSkills
+  id: TechnicalAssistant
+  skills: [ Engineering ]
+
+- type: jobSkills
   id: ChiefEngineer
   skills: [ Engineering, Electrical, Atmospherics ]
 
@@ -22,6 +26,10 @@
 - type: jobSkills
   id: Surgeon
   skills: [ Medicine, Surgery, AdvancedSurgery ]
+
+- type: jobSkills
+  id: MedicalIntern
+  skills: [ Medicine ]
 
 - type: jobSkills
   id: Paramedic
@@ -45,12 +53,16 @@
   skills: [ Research, Xenoarchaeology ]
 
 - type: jobSkills
+  id: ResearchAssistant
+  skills: [ Research, Xenoarchaeology ]
+
+- type: jobSkills
   id: Roboticist
-  skills: [ Research, Engineering, Electrical, Robotics ]
+  skills: [ Research, Xenoarchaeology, Robotics, Engineering, Electrical ]
 
 - type: jobSkills
   id: ResearchDirector
-  skills: [ Research, Xenoarchaeology, Engineering, Electrical, Robotics ]
+  skills: [ Research, Xenoarchaeology, Robotics, Engineering, Electrical ]
 
 # Security
 - type: jobSkills
