@@ -351,6 +351,8 @@
   name: exosuit fabricator
   description: Creates parts for robotics and other mechanical needs.
   components:
+  - type: SkillRequired # Serenity
+    skills: [ Robotics ]
   - type: Sprite
     sprite: Structures/Machines/exosuit_fabricator.rsi
     layers:

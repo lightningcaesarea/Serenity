@@ -2,6 +2,9 @@
   id: SurgeryBase
   categories:
   - HideSpawnMenu
+  components:
+  - type: SkillRequired # Serenity
+    skills: [ Surgery ]
 
 - type: entity
   parent: SurgeryBase
@@ -252,6 +255,8 @@
   id: SurgeryExtractLiver
   name: Extract Liver
   components:
+  - type: SkillRequired # Serenity
+    skills: [ AdvancedSurgery ]
   - type: Surgery
     requirement:
     - SurgeryOpenAbdomen
@@ -279,6 +284,8 @@
   id: SurgeryImplantLiver
   name: Implant Liver
   components:
+  - type: SkillRequired # Serenity
+    skills: [ AdvancedSurgery ]
   - type: Surgery
     requirement:
     - SurgeryOpenAbdomen
@@ -308,6 +315,8 @@
   id: SurgeryExtractAppendix
   name: Extract Appendix
   components:
+  - type: SkillRequired # Serenity
+    skills: [ AdvancedSurgery ]
   - type: Surgery
     requirement:
     - SurgeryOpenAbdomen
@@ -335,6 +344,8 @@
   id: SurgeryExtractKidneys
   name: Extract Kidneys
   components:
+  - type: SkillRequired # Serenity
+    skills: [ AdvancedSurgery ]
   - type: Surgery
     requirement:
     - SurgeryOpenAbdomen
@@ -364,6 +375,8 @@
   id: SurgeryImplantKidneys
   name: Implant Kidneys
   components:
+  - type: SkillRequired # Serenity
+    skills: [ AdvancedSurgery ]
   - type: Surgery
     requirement:
     - SurgeryOpenAbdomen
@@ -395,6 +408,8 @@
   id: SurgeryExtractStomach
   name: Extract Stomach
   components:
+  - type: SkillRequired # Serenity
+    skills: [ AdvancedSurgery ]
   - type: Surgery
     requirement:
     - SurgeryOpenAbdomen
@@ -422,6 +437,8 @@
   id: SurgeryImplantStomach
   name: Implant Stomach
   components:
+  - type: SkillRequired # Serenity
+    skills: [ AdvancedSurgery ]
   - type: Surgery
     requirement:
     - SurgeryOpenAbdomen
@@ -451,6 +468,8 @@
   id: SurgeryExtractLungs
   name: Extract Lungs
   components:
+  - type: SkillRequired # Serenity
+    skills: [ AdvancedSurgery ]
   - type: Surgery
     requirement:
     - SurgeryOpenRibcage
@@ -480,6 +499,8 @@
   id: SurgeryImplantLungs
   name: Implant Lungs
   components:
+  - type: SkillRequired # Serenity
+    skills: [ AdvancedSurgery ]
   - type: Surgery
     requirement:
     - SurgeryOpenRibcage
@@ -509,6 +530,8 @@
   id: SurgeryExtractLungsSlime
   name: Extract Lungs
   components:
+  - type: SkillRequired # Serenity
+    skills: [ AdvancedSurgery ]
   - type: Surgery
     requirement:
     - SurgeryOpenAbdomen
@@ -538,6 +561,8 @@
   id: SurgeryImplantLungsSlime
   name: Implant Lungs
   components:
+  - type: SkillRequired # Serenity
+    skills: [ AdvancedSurgery ]
   - type: Surgery
     requirement:
     - SurgeryOpenAbdomen
@@ -567,6 +592,8 @@
   id: SurgeryExtractHeart
   name: Extract Heart
   components:
+  - type: SkillRequired # Serenity
+    skills: [ AdvancedSurgery ]
   - type: Surgery
     requirement:
     - SurgeryOpenRibcage
@@ -594,6 +621,8 @@
   id: SurgeryImplantHeart
   name: Implant Heart
   components:
+  - type: SkillRequired # Serenity
+    skills: [ AdvancedSurgery ]
   - type: Surgery
     requirement:
     - SurgeryOpenRibcage
@@ -620,6 +649,8 @@
   parent: SurgeryExtractHeart
   id: SurgeryExtractHeartSlime
   components:
+  - type: SkillRequired # Serenity
+    skills: [ AdvancedSurgery ]
   - type: Surgery
     requirement:
     - SurgeryOpenAbdomen
@@ -646,6 +677,8 @@
   parent: SurgeryImplantHeart
   id: SurgeryImplantHeartSlime
   components:
+  - type: SkillRequired # Serenity
+    skills: [ AdvancedSurgery ]
   - type: Surgery
     requirement:
     - SurgeryOpenAbdomen
@@ -673,6 +706,8 @@
   id: SurgeryExtractEyes
   name: Extract Eyes
   components:
+  - type: SkillRequired # Serenity
+    skills: [ AdvancedSurgery ]
   - type: Surgery
     requirement:
     - SurgeryOpenIncision
@@ -702,6 +737,8 @@
   id: SurgeryImplantEyes
   name: Implant Eyes
   components:
+  - type: SkillRequired # Serenity
+    skills: [ AdvancedSurgery ]
   - type: Surgery
     requirement:
     - SurgeryOpenIncision
@@ -731,6 +768,8 @@
   id: SurgeryExtractEyeImplant
   name: Extract Eye Implant
   components:
+  - type: SkillRequired # Serenity
+    skills: [ AdvancedSurgery ]
   - type: Surgery
     requirement:
     - SurgeryOpenIncision
@@ -759,6 +798,8 @@
   id: SurgeryImplantEyeImplant
   name: Implant Eye Implant
   components:
+  - type: SkillRequired # Serenity
+    skills: [ AdvancedSurgery ]
   - type: Surgery
     requirement:
     - SurgeryOpenIncision
@@ -789,6 +830,8 @@
   id: SurgeryExtractNoseImplant
   name: Extract Nose Implant
   components:
+  - type: SkillRequired # Serenity
+    skills: [ AdvancedSurgery ]
   - type: Surgery
     requirement:
     - SurgeryOpenIncision
@@ -820,6 +863,8 @@
   id: SurgeryImplantNoseImplant
   name: Implant Nose Implant
   components:
+  - type: SkillRequired # Serenity
+    skills: [ AdvancedSurgery ]
   - type: Surgery
     requirement:
     - SurgeryOpenIncision
@@ -850,6 +895,8 @@
   id: SurgeryExtractHandImplant
   name: Extract Hand Implant
   components:
+  - type: SkillRequired # Serenity
+    skills: [ AdvancedSurgery ]
   - type: Surgery
     requirement:
     - SurgeryOpenIncision
@@ -878,6 +925,8 @@
   id: SurgeryImplantHandImplant
   name: Implant Hand Implant
   components:
+  - type: SkillRequired # Serenity
+    skills: [ AdvancedSurgery ]
   - type: Surgery
     requirement:
     - SurgeryOpenIncision
@@ -907,6 +956,8 @@
   id: SurgeryExtractBrainImplant
   name: Extract Brain Implant
   components:
+  - type: SkillRequired # Serenity
+    skills: [ AdvancedSurgery ]
   - type: Surgery
     requirement:
     - SurgeryOpenIncision
@@ -952,6 +1003,8 @@
   id: SurgeryImplantBrainImplant
   name: Implant Brain Implant
   components:
+  - type: SkillRequired # Serenity
+    skills: [ AdvancedSurgery ]
   - type: Surgery
     requirement:
     - SurgeryOpenIncision
@@ -995,6 +1048,8 @@
   id: SurgeryExtractBrainImplantSlime
   name: Extract Core Implant
   components:
+  - type: SkillRequired # Serenity
+    skills: [ AdvancedSurgery ]
   - type: Surgery
     requirement:
     - SurgeryOpenAbdomen
@@ -1026,6 +1081,8 @@
   id: SurgeryImplantBrainImplantSlime
   name: Implant Core Implant
   components:
+  - type: SkillRequired # Serenity
+    skills: [ AdvancedSurgery ]
   - type: Surgery
     requirement:
     - SurgeryOpenAbdomen
@@ -1059,6 +1116,8 @@
   id: SurgeryExtractTongue
   name: Extract Tongue
   components:
+  - type: SkillRequired # Serenity
+    skills: [ AdvancedSurgery ]
   - type: Surgery
     steps:
     - SurgeryStepGrabTongue
@@ -1081,6 +1140,8 @@
   id: SurgeryImplantTongue
   name: Implant Tongue
   components:
+  - type: SkillRequired # Serenity
+    skills: [ AdvancedSurgery ]
   - type: Surgery
     steps:
     - SurgeryStepPrepareImplantSiteTongue
@@ -1104,6 +1165,8 @@
   id: SurgeryExtractBrain
   name: Extract Brain
   components:
+  - type: SkillRequired # Serenity
+    skills: [ AdvancedSurgery ]
   - type: Surgery
     requirement:
     - SurgeryOpenIncision
@@ -1142,6 +1205,8 @@
   id: SurgeryImplantBrain
   name: Implant Brain
   components:
+  - type: SkillRequired # Serenity
+    skills: [ AdvancedSurgery ]
   - type: Surgery
     requirement:
     - SurgeryOpenIncision
@@ -1186,6 +1251,8 @@
   id: SurgeryExtractCore
   name: Extract Core
   components:
+  - type: SkillRequired # Serenity
+    skills: [ AdvancedSurgery ]
   - type: Surgery
     requirement:
     - SurgeryOpenAbdomen
@@ -1215,6 +1282,8 @@
   id: SurgeryImplantCore
   name: Implant Core
   components:
+  - type: SkillRequired # Serenity
+    skills: [ AdvancedSurgery ]
   - type: Surgery
     requirement:
     - SurgeryOpenAbdomen
@@ -1246,6 +1315,8 @@
   id: SurgeryExtractEgg
   name: Extract Egg
   components:
+  - type: SkillRequired # Serenity
+    skills: [ AdvancedSurgery ]
   - type: Surgery
     requirement:
     - SurgeryOpenAbdomen
@@ -1267,6 +1338,8 @@
   id: SurgeryExtractCavityItem
   name: Extract Item
   components:
+  - type: SkillRequired # Serenity
+    skills: [ AdvancedSurgery ]
   - type: Surgery
     requirement:
     - SurgeryOpenAbdomen
@@ -1294,6 +1367,8 @@
   id: SurgeryImplantCavityItem
   name: Implant Item
   components:
+  - type: SkillRequired # Serenity
+    skills: [ AdvancedSurgery ]
   - type: Surgery
     requirement:
     - SurgeryOpenAbdomen
@@ -1349,6 +1424,8 @@
   id: SurgeryImplantShadekinCore
   name: Implant Core
   components:
+  - type: SkillRequired # Serenity
+    skills: [ AdvancedSurgery ]
   - type: Surgery
     requirement:
     - SurgeryOpenRibcage

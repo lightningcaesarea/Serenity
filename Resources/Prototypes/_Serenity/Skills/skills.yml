@@ -1,0 +1,128 @@
+# Skills are known or unknown. Jobs grant them (job_skills.yml), perks grant a few root skills,
+# and skill books teach one at a time once its prerequisites (requires) are known.
+# Do-after multipliers: below 1 is faster. For each skill only the first matching rule applies.
+
+# Engineering
+
+- type: skill
+  id: Engineering
+  name: skill-engineering-name
+  description: skill-engineering-desc
+  category: skill-category-engineering
+  doAfters:
+  - toolQualities: [ Prying, Screwing, Anchoring, Welding, Cutting ]
+    skilled: 0.75
+
+- type: skill
+  id: Electrical
+  name: skill-electrical-name
+  description: skill-electrical-desc
+  category: skill-category-engineering
+  requires: [ Engineering ]
+  doAfters:
+  - events: [ WireDoAfterEvent, WirePanelDoAfterEvent ]
+    skilled: 0.6
+    unskilled: 1.5
+
+- type: skill
+  id: Atmospherics
+  name: skill-atmospherics-name
+  description: skill-atmospherics-desc
+  category: skill-category-engineering
+  requires: [ Engineering ]
+  doAfters:
+  - toolQualities: [ Anchoring, Welding ]
+    target:
+      components: [ AtmosPipeLayers ]
+    skilled: 0.6
+
+- type: skill
+  id: Robotics
+  name: skill-robotics-name
+  description: skill-robotics-desc
+  category: skill-category-engineering
+  requires: [ Electrical ]
+
+# Medical
+
+- type: skill
+  id: Medicine
+  name: skill-medicine-name
+  description: skill-medicine-desc
+  category: skill-category-medical
+  doAfters:
+  - events: [ HealingDoAfterEvent ]
+    skilled: 0.75
+    unskilled: 1.25
+
+- type: skill
+  id: Surgery
+  name: skill-surgery-name
+  description: skill-surgery-desc
+  category: skill-category-medical
+  requires: [ Medicine ]
+  doAfters:
+  - events: [ SurgeryDoAfterEvent ]
+    skilled: 0.85
+
+- type: skill
+  id: AdvancedSurgery
+  name: skill-advanced-surgery-name
+  description: skill-advanced-surgery-desc
+  category: skill-category-medical
+  requires: [ Surgery ]
+
+- type: skill
+  id: Chemistry
+  name: skill-chemistry-name
+  description: skill-chemistry-desc
+  category: skill-category-medical
+  requires: [ Medicine ]
+
+# Science
+
+- type: skill
+  id: Research
+  name: skill-research-name
+  description: skill-research-desc
+  category: skill-category-science
+
+- type: skill
+  id: Xenoarchaeology
+  name: skill-xenoarchaeology-name
+  description: skill-xenoarchaeology-desc
+  category: skill-category-science
+  requires: [ Research ]
+
+# Service
+
+- type: skill
+  id: Botany
+  name: skill-botany-name
+  description: skill-botany-desc
+  category: skill-category-service
+  doAfters:
+  - events: [ HarvestEvent, BotanySwabDoAfterEvent ]
+    skilled: 0.5
+
+- type: skill
+  id: Cooking
+  name: skill-cooking-name
+  description: skill-cooking-desc
+  category: skill-category-service
+  doAfters:
+  - events: [ SpikeButcherDoAfterEvent ]
+    skilled: 0.5
+    unskilled: 1.5
+
+# Security
+
+- type: skill
+  id: SecurityTraining
+  name: skill-security-training-name
+  description: skill-security-training-desc
+  category: skill-category-security
+  doAfters:
+  - events: [ AddCuffDoAfterEvent ]
+    skilled: 0.7
+    unskilled: 1.3

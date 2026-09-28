@@ -1,0 +1,68 @@
+# Perks anyone can pick, up to three. Skill perks only grant skills with no prerequisites.
+
+- type: traitCategory
+  id: SerenityPerks
+  name: trait-category-perks
+  priority: 15
+  maxTraits: 3
+  accentColor: "#22c55e" # green
+
+- type: trait
+  id: PerkHobbyistMechanic
+  name: trait-perk-hobbyist-mechanic-name
+  description: trait-perk-hobbyist-mechanic-desc
+  category: SerenityPerks
+  cost: 0
+  effects:
+  - !type:GrantSkillsEffect
+    skills: [ Engineering ]
+
+- type: trait
+  id: PerkFirstAidCertified
+  name: trait-perk-first-aid-name
+  description: trait-perk-first-aid-desc
+  category: SerenityPerks
+  cost: 0
+  effects:
+  - !type:GrantSkillsEffect
+    skills: [ Medicine ]
+
+- type: trait
+  id: PerkGreenThumb
+  name: trait-perk-green-thumb-name
+  description: trait-perk-green-thumb-desc
+  category: SerenityPerks
+  cost: 0
+  effects:
+  - !type:GrantSkillsEffect
+    skills: [ Botany ]
+
+- type: trait
+  id: PerkHomeCook
+  name: trait-perk-home-cook-name
+  description: trait-perk-home-cook-desc
+  category: SerenityPerks
+  cost: 0
+  effects:
+  - !type:GrantSkillsEffect
+    skills: [ Cooking ]
+
+- type: trait
+  id: PerkSelfDefenseCourse
+  name: trait-perk-self-defense-name
+  description: trait-perk-self-defense-desc
+  category: SerenityPerks
+  cost: 0
+  effects:
+  - !type:GrantSkillsEffect
+    skills: [ SecurityTraining ]
+
+- type: trait
+  id: PerkAmateurScientist
+  name: trait-perk-amateur-scientist-name
+  description: trait-perk-amateur-scientist-desc
+  category: SerenityPerks
+  cost: 0
+  effects:
+  - !type:GrantSkillsEffect
+    skills: [ Research ]

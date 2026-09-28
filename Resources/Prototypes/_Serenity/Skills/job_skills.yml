@@ -1,0 +1,122 @@
+# Skills each job starts with. The id is the job id. Every skill's prerequisites must be listed too
+# (SkillPrototypeTest enforces this). Jobs without an entry start with no skills.
+
+# Engineering
+- type: jobSkills
+  id: StationEngineer
+  skills: [ Engineering, Electrical ]
+
+- type: jobSkills
+  id: AtmosphericTechnician
+  skills: [ Engineering, Atmospherics ]
+
+- type: jobSkills
+  id: ChiefEngineer
+  skills: [ Engineering, Electrical, Atmospherics ]
+
+# Medical
+- type: jobSkills
+  id: MedicalDoctor
+  skills: [ Medicine, Surgery ]
+
+- type: jobSkills
+  id: Surgeon
+  skills: [ Medicine, Surgery, AdvancedSurgery ]
+
+- type: jobSkills
+  id: Paramedic
+  skills: [ Medicine ]
+
+- type: jobSkills
+  id: Chemist
+  skills: [ Medicine, Chemistry ]
+
+- type: jobSkills
+  id: ChiefMedicalOfficer
+  skills: [ Medicine, Surgery, AdvancedSurgery, Chemistry ]
+
+- type: jobSkills
+  id: Brigmedic
+  skills: [ Medicine, SecurityTraining ]
+
+# Science
+- type: jobSkills
+  id: Scientist
+  skills: [ Research, Xenoarchaeology ]
+
+- type: jobSkills
+  id: Roboticist
+  skills: [ Research, Engineering, Electrical, Robotics ]
+
+- type: jobSkills
+  id: ResearchDirector
+  skills: [ Research, Xenoarchaeology, Engineering, Electrical, Robotics ]
+
+# Security
+- type: jobSkills
+  id: SecurityCadet
+  skills: [ SecurityTraining ]
+
+- type: jobSkills
+  id: SecurityOfficer
+  skills: [ SecurityTraining ]
+
+- type: jobSkills
+  id: Warden
+  skills: [ SecurityTraining ]
+
+- type: jobSkills
+  id: Detective
+  skills: [ SecurityTraining ]
+
+- type: jobSkills
+  id: HeadOfSecurity
+  skills: [ SecurityTraining ]
+
+# Command
+- type: jobSkills
+  id: Captain
+  skills: [ SecurityTraining ]
+
+# Service
+- type: jobSkills
+  id: Botanist
+  skills: [ Botany ]
+
+- type: jobSkills
+  id: Chef
+  skills: [ Cooking ]
+
+- type: jobSkills
+  id: CentCommChef
+  skills: [ Cooking ]
+
+# Central Command / response teams
+- type: jobSkills
+  id: ERTEngineer
+  skills: [ Engineering, Electrical, Atmospherics ]
+
+- type: jobSkills
+  id: ERTMedical
+  skills: [ Medicine, Surgery, AdvancedSurgery, Chemistry ]
+
+- type: jobSkills
+  id: ERTSecurity
+  skills: [ SecurityTraining, Medicine ]
+
+- type: jobSkills
+  id: ERTLeader
+  skills: [ SecurityTraining, Medicine, Engineering ]
+
+- type: jobSkills
+  id: DeathSquad
+  skills: [ SecurityTraining, Medicine, Surgery, Engineering, Electrical ]
+
+- type: jobSkills
+  id: CBURN
+  skills: [ SecurityTraining, Medicine, Chemistry ]
+
+# Silicons: borgs come with their modules' training. A borged crew member keeps their own skills too.
+- type: jobSkills
+  id: Borg
+  skills: [ Engineering, Electrical, Medicine, Surgery ]

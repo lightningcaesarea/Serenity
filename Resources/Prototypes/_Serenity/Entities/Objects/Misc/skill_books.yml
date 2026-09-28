@@ -1,0 +1,278 @@
+# Skill books teach one skill when read (use in hand) and are used up.
+# Book restrictions (departments/jobs) keep advanced skills within their department.
+
+- type: entity
+  abstract: true
+  parent: BaseItem
+  id: SkillBookBase
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/books.rsi
+    layers:
+    - state: paper
+    - state: cover_strong
+      map: [ "cover" ]
+    - state: decor_wingette
+      color: "#e5e7eb"
+    - state: icon_text
+      map: [ "icon" ]
+  - type: Item
+    size: Small
+  - type: Tag
+    tags:
+    - Book
+
+- type: entity
+  parent: SkillBookBase
+  id: SkillBookEngineering
+  name: Basic Engineering Manual
+  description: A dense training manual. Reading it cover to cover teaches its subject, but it won't survive being studied that hard.
+  components:
+  - type: Sprite
+    layers:
+    - state: paper
+    - state: cover_strong
+      color: "#b45309"
+      map: [ "cover" ]
+    - state: decor_wingette
+      color: "#e5e7eb"
+    - state: icon_wrench
+      map: [ "icon" ]
+  - type: SkillBook
+    skill: Engineering
+
+- type: entity
+  parent: SkillBookBase
+  id: SkillBookElectrical
+  name: Station Wiring and Power
+  description: A dense training manual. Reading it cover to cover teaches its subject, but it won't survive being studied that hard.
+  components:
+  - type: Sprite
+    layers:
+    - state: paper
+    - state: cover_strong
+      color: "#ca8a04"
+      map: [ "cover" ]
+    - state: decor_wingette
+      color: "#e5e7eb"
+    - state: icon_lightning
+      map: [ "icon" ]
+  - type: SkillBook
+    skill: Electrical
+    departments: [ Engineering, Science ]
+
+- type: entity
+  parent: SkillBookBase
+  id: SkillBookAtmospherics
+  name: Atmospherics for Technicians
+  description: A dense training manual. Reading it cover to cover teaches its subject, but it won't survive being studied that hard.
+  components:
+  - type: Sprite
+    layers:
+    - state: paper
+    - state: cover_strong
+      color: "#0369a1"
+      map: [ "cover" ]
+    - state: decor_wingette
+      color: "#e5e7eb"
+    - state: icon_atmos
+      map: [ "icon" ]
+  - type: SkillBook
+    skill: Atmospherics
+    departments: [ Engineering ]
+
+- type: entity
+  parent: SkillBookBase
+  id: SkillBookRobotics
+  name: Applied Robotics
+  description: A dense training manual. Reading it cover to cover teaches its subject, but it won't survive being studied that hard.
+  components:
+  - type: Sprite
+    layers:
+    - state: paper
+    - state: cover_strong
+      color: "#6d28d9"
+      map: [ "cover" ]
+    - state: decor_wingette
+      color: "#e5e7eb"
+    - state: icon_borg
+      map: [ "icon" ]
+  - type: SkillBook
+    skill: Robotics
+    departments: [ Science ]
+
+- type: entity
+  parent: SkillBookBase
+  id: SkillBookMedicine
+  name: Field Medicine Handbook
+  description: A dense training manual. Reading it cover to cover teaches its subject, but it won't survive being studied that hard.
+  components:
+  - type: Sprite
+    layers:
+    - state: paper
+    - state: cover_strong
+      color: "#1d4ed8"
+      map: [ "cover" ]
+    - state: decor_wingette
+      color: "#e5e7eb"
+    - state: icon_medical_cross
+      map: [ "icon" ]
+  - type: SkillBook
+    skill: Medicine
+
+- type: entity
+  parent: SkillBookBase
+  id: SkillBookSurgery
+  name: Principles of Surgery
+  description: A dense training manual. Reading it cover to cover teaches its subject, but it won't survive being studied that hard.
+  components:
+  - type: Sprite
+    layers:
+    - state: paper
+    - state: cover_strong
+      color: "#0e7490"
+      map: [ "cover" ]
+    - state: decor_wingette
+      color: "#e5e7eb"
+    - state: icon_medical
+      map: [ "icon" ]
+  - type: SkillBook
+    skill: Surgery
+    departments: [ Medical ]
+
+- type: entity
+  parent: SkillBookBase
+  id: SkillBookAdvancedSurgery
+  name: Advanced Surgical Procedures
+  description: A dense training manual. Reading it cover to cover teaches its subject, but it won't survive being studied that hard.
+  components:
+  - type: Sprite
+    layers:
+    - state: paper
+    - state: cover_strong
+      color: "#155e75"
+      map: [ "cover" ]
+    - state: decor_wingette
+      color: "#e5e7eb"
+    - state: icon_dna
+      map: [ "icon" ]
+  - type: SkillBook
+    skill: AdvancedSurgery
+    departments: [ Medical ]
+
+- type: entity
+  parent: SkillBookBase
+  id: SkillBookChemistry
+  name: Practical Chemistry
+  description: A dense training manual. Reading it cover to cover teaches its subject, but it won't survive being studied that hard.
+  components:
+  - type: Sprite
+    layers:
+    - state: paper
+    - state: cover_strong
+      color: "#c2410c"
+      map: [ "cover" ]
+    - state: decor_wingette
+      color: "#e5e7eb"
+    - state: icon_chemical
+      map: [ "icon" ]
+  - type: SkillBook
+    skill: Chemistry
+    departments: [ Medical ]
+
+- type: entity
+  parent: SkillBookBase
+  id: SkillBookResearch
+  name: Introduction to Research
+  description: A dense training manual. Reading it cover to cover teaches its subject, but it won't survive being studied that hard.
+  components:
+  - type: Sprite
+    layers:
+    - state: paper
+    - state: cover_strong
+      color: "#7c3aed"
+      map: [ "cover" ]
+    - state: decor_wingette
+      color: "#e5e7eb"
+    - state: icon_magnifier
+      map: [ "icon" ]
+  - type: SkillBook
+    skill: Research
+
+- type: entity
+  parent: SkillBookBase
+  id: SkillBookXenoarchaeology
+  name: Xenoarchaeology Field Guide
+  description: A dense training manual. Reading it cover to cover teaches its subject, but it won't survive being studied that hard.
+  components:
+  - type: Sprite
+    layers:
+    - state: paper
+    - state: cover_strong
+      color: "#4c1d95"
+      map: [ "cover" ]
+    - state: decor_wingette
+      color: "#e5e7eb"
+    - state: icon_planet
+      map: [ "icon" ]
+  - type: SkillBook
+    skill: Xenoarchaeology
+    departments: [ Science ]
+
+- type: entity
+  parent: SkillBookBase
+  id: SkillBookBotany
+  name: Hydroponics Basics
+  description: A dense training manual. Reading it cover to cover teaches its subject, but it won't survive being studied that hard.
+  components:
+  - type: Sprite
+    layers:
+    - state: paper
+    - state: cover_strong
+      color: "#15803d"
+      map: [ "cover" ]
+    - state: decor_wingette
+      color: "#e5e7eb"
+    - state: icon_tree
+      map: [ "icon" ]
+  - type: SkillBook
+    skill: Botany
+
+- type: entity
+  parent: SkillBookBase
+  id: SkillBookCooking
+  name: Galley Cookbook
+  description: A dense training manual. Reading it cover to cover teaches its subject, but it won't survive being studied that hard.
+  components:
+  - type: Sprite
+    layers:
+    - state: paper
+    - state: cover_strong
+      color: "#b91c1c"
+      map: [ "cover" ]
+    - state: decor_wingette
+      color: "#e5e7eb"
+    - state: icon_apple
+      map: [ "icon" ]
+  - type: SkillBook
+    skill: Cooking
+
+- type: entity
+  parent: SkillBookBase
+  id: SkillBookSecurityTraining
+  name: Restraint and Detention Procedures
+  description: A dense training manual. Reading it cover to cover teaches its subject, but it won't survive being studied that hard.
+  components:
+  - type: Sprite
+    layers:
+    - state: paper
+    - state: cover_strong
+      color: "#991b1b"
+      map: [ "cover" ]
+    - state: decor_wingette
+      color: "#e5e7eb"
+    - state: icon_stunbaton
+      map: [ "icon" ]
+  - type: SkillBook
+    skill: SecurityTraining
+    departments: [ Security ]

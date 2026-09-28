@@ -6,6 +6,8 @@
   placement:
     mode: SnapgridCenter
   components:
+  - type: SkillRequired # Serenity
+    skills: [ Chemistry ]
   # Starlight-start: Make ChemMaster rotatable.
   - type: Transform
     noRot: false

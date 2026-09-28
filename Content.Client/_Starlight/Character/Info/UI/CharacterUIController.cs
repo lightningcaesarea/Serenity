@@ -49,6 +49,7 @@ public sealed partial class CharacterUIController
         _window.InfoIC.ClearCharacter();
         _window.InfoOOC.ClearCharacter();
         _window.InfoBackground.ClearCharacter();
+        _window.InfoSkills.ClearCharacter(); // Serenity
     }
 
     private void SLSetSelfCharacterInfo()
@@ -61,11 +62,13 @@ public sealed partial class CharacterUIController
             _window.InfoIC.ClearCharacter();
             _window.InfoOOC.ClearCharacter();
             _window.InfoBackground.ClearCharacter();
+            _window.InfoSkills.ClearCharacter(); // Serenity
             return;
         }
 
         _window.InfoIC.SetCharacter(ent, EntityManager, ent.Value);
         _window.InfoOOC.SetCharacter(ent, EntityManager, ent);
         _window.InfoBackground.SetCharacter(ent, EntityManager, ent);
+        _window.InfoSkills.SetCharacter(ent); // Serenity
     }
 }
