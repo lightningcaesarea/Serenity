@@ -16,8 +16,8 @@ RELEASE_DIR = "release"
 # CONFIGURATION PARAMETERS
 # Forks should change these to publish to their own infrastructure.
 #
-ROBUST_CDN_URL = "https://cdn.starlight.network/"
-FORK_ID = os.environ.get("FORK_ID", "starlight")
+ROBUST_CDN_URL = os.environ.get("ROBUST_CDN_URL", "https://serenity-ss14.duckdns.org/")  # Serenity
+FORK_ID = os.environ.get("FORK_ID", "serenity")  # Serenity
 
 def main():
     parser = argparse.ArgumentParser()
