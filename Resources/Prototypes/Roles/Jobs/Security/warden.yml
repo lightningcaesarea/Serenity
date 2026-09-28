@@ -7,9 +7,7 @@
     - !type:RoleTimeRequirement
       role: JobSecurityOfficer
       time: 15h # Starlight
-    - !type:RoleTimeRequirement # Starlight
-      role: JobDutyOfficer # Starlight
-      time: 5h # Starlight
+    # Serenity: Duty Officer requirement removed, the role is disabled.
     - !type:RoleTimeRequirement
       role: JobDetective # Starlight
       time: 1h # Starlight

@@ -3,6 +3,7 @@
   name: job-name-dutyofficer
   description: job-description-dutyofficer
   playTimeTracker: JobDutyOfficer
+  setPreference: false # Serenity: role disabled
   requirements:
     - !type:RoleTimeRequirement
       role: JobSecurityOfficer

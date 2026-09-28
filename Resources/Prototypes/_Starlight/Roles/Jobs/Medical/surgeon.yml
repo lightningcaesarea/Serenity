@@ -3,6 +3,7 @@
   name: job-name-surgeon
   description: job-description-surgeon
   playTimeTracker: JobSurgeon
+  setPreference: false # Serenity: role disabled
   requirements:
     - !type:DepartmentTimeRequirement
       department: Medical

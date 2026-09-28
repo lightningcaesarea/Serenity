@@ -499,7 +499,7 @@
     - !type:JobRequirementLoadoutEffect
       requirement:
         !type:RoleTimeRequirement
-        role: JobSurgeon
+        role: JobMedicalDoctor # Serenity: Surgeon is disabled
         time: 72000 # 20 hours of turning her into a papa johns
   storage:
     back:

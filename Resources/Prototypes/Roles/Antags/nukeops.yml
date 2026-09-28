@@ -38,7 +38,7 @@
     role: JobChemist
     time: 6h
   - !type:RoleTimeRequirement
-    role: JobSurgeon
+    role: JobMedicalDoctor # Serenity: Surgeon is disabled; doctors do all surgery
     time: 3h
   - !type:RoleTimeRequirement
     role: JobBrigmedic # Brigmedic is commonly used as Nukie Corpsman practice. With Brigmed being changed away from a chemist soon, this ensures you know how to operate medical in a high stress enviroment. This also accounts for your Security time.

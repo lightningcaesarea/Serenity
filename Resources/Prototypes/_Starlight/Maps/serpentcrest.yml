@@ -49,7 +49,6 @@
             Chemist: [ 3, 3 ]
             MedicalDoctor: [ 5, 6 ]
             Paramedic: [ 2, 2 ]
-            Surgeon: [ 2, 2 ]
             MedicalIntern: [ 3, 4 ] #intern, not counted
             #science (5)
             Scientist: [ 6, 7 ]
@@ -57,12 +56,10 @@
             ResearchAssistant: [ 4, 4 ] #intern, not counted
             #security
             Warden: [ 1, 1 ]
-            DutyOfficer: [ 1, 2 ]
             SecurityOfficer: [ 6, 8 ]
             SecurityCadet: [ 3, 4 ] #intern, not counted
             Brigmedic: [ 1, 1 ]
             Detective: [ 1, 1 ]
-            K9: [ 2, 2 ]
             #supply
             SalvageLead: [ 1, 1 ]
             SalvageSpecialist: [ 3, 3 ]

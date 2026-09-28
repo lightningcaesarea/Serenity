@@ -47,7 +47,6 @@
             Chemist: [ 2, 2 ]
             MedicalDoctor: [ 3, 3 ]
             Paramedic: [ 2, 2 ]
-            Surgeon: [ 1, 2 ]
             MedicalIntern: [ 4, 4 ] #intern, not counted
             Psychologist: [ 1, 1 ]
             #science (4)
@@ -56,12 +55,10 @@
             ResearchAssistant: [ 4, 4 ] #intern, not counted
             #security (12 - 14)
             Warden: [ 1, 1 ]
-            DutyOfficer: [ 1, 1 ]
             SecurityOfficer: [ 4, 6 ]
             SecurityCadet: [ 2, 3 ] #intern, not counted
             Brigmedic: [ 1, 1 ]
             Detective: [ 1, 2 ] #good cop, bad cop
-            K9: [ 1, 1 ]
             #supply (12 - 15)
             SalvageLead: [ 1, 1 ]
             SalvageSpecialist: [ 3, 3 ] #the salvagers yearn for the mines

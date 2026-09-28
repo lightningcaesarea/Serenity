@@ -48,14 +48,12 @@
             MedicalIntern: [ 3, 4 ]
             Paramedic: [ 2, 2 ]
             Psychologist: [ 1, 1 ]
-            Surgeon: [ 1, 1 ]
             #science
             Scientist: [ 3, 4 ]
             ResearchAssistant: [ 2, 3 ]
             Roboticist: [ 2, 2 ]
             #security
             Warden: [ 1, 1 ]
-            DutyOfficer: [ 1, 1 ]
             SecurityOfficer: [ 4, 6 ]
             SecurityCadet: [ 2, 3 ]
             Brigmedic: [ 1, 1 ]
