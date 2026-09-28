@@ -1,0 +1,44 @@
+# Landing marker for medical recovery — a real constructible machine (frame + circuitboard +
+# parts, like any other station machine), but deliberately given no collision shape so it never
+# blocks foot traffic despite being anchored to the floor. Its only job is being a destination
+# coordinate for MedicalRecoverySystem.CompleteRecovery to teleport bodies onto.
+#
+# Link a MedicalRecoveryConsole to one by placing both on the same grid — the console auto-links
+# to the nearest unlinked pad on MapInit.
+
+- type: entity
+  parent: [ BaseMachinePowered, ConstructibleMachine ]
+  id: MedicalRecoveryPad
+  name: medical recovery pad
+  description: A marked landing zone for bodies recalled by the medical recovery system. Deliberately unobstructive — you can walk straight through it.
+  components:
+  - type: Transform
+    anchored: true
+  # Deliberately no Fixtures/collision shape — players and entities must be able to walk through
+  # freely, since bodies land here and shouldn't be physically blocked from being moved off it.
+  - type: ApcPowerReceiver
+    powerLoad: 5
+  - type: Sprite
+    sprite: Structures/Wallmounts/signs.rsi
+    state: medbay
+    drawdepth: FloorObjects
+    noRot: true
+    layers:
+    - state: medbay
+    - map: [ "enum.PowerDeviceVisualLayers.Powered" ]
+      state: medbay
+      shader: unshaded
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.PowerDeviceVisuals.Powered:
+        enum.PowerDeviceVisualLayers.Powered:
+          True: { visible: true }
+          False: { visible: false }
+  - type: Machine
+    board: MedicalRecoveryPadMachineCircuitboard
+  - type: MedicalRecoveryPad
+  - type: PointLight
+    radius: 1.5
+    energy: 1.2
+    color: "#c9962e"

@@ -1,0 +1,35 @@
+# Stationary recovery console — click to scan for Critical/Dead carriers of a medical recovery implant
+# within range and recall the nearest one to this console's linked pad. See medical_recovery_pad.yml for
+# the pad it links to and MedicalRecoverySystem for the scan/recall logic.
+
+- type: entity
+  parent: BaseComputer
+  id: MedicalRecoveryConsole
+  name: medical recovery console
+  description: Scans for critically wounded or dead crew carrying a medical recovery implant and recalls them to its linked recovery pad.
+  components:
+  - type: Sprite
+    layers:
+    - map: ["computerLayerBody"]
+      state: computer
+    - map: ["computerLayerKeyboard"]
+      state: generic_keyboard
+    - map: ["computerLayerScreen"]
+      state: request
+    - map: ["computerLayerKeys"]
+      state: generic_keys
+    - map: ["enum.WiresVisualLayers.MaintenancePanel"]
+      state: generic_panel_open
+  - type: MedicalRecoveryConsole
+  - type: ItemSlots
+  - type: ContainerContainer
+    containers:
+      board: !type:Container
+      disk_slot: !type:ContainerSlot
+      pai_slot: !type:ContainerSlot
+  - type: Computer
+    board: MedicalRecoveryConsoleCircuitboard
+  - type: PointLight
+    radius: 1.5
+    energy: 1.6
+    color: "#c9962e"

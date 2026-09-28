@@ -1,0 +1,26 @@
+# Paramedic tool: remotely triggers a medical recovery implant on a dead body within range,
+# without needing to physically reach it. See medical_recovery_implant.yml and MedicalRecoverySystem.
+
+- type: entity
+  parent: BaseItem
+  id: MedicalRecoveryBeacon
+  name: medical recovery beacon
+  description: A paramedic's field device. Activating it near a body implanted with a medical recovery implant recalls it to the station.
+  components:
+  - type: Sprite
+    sprite: Objects/Devices/pinpointer.rsi
+    layers:
+    - state: pinpointer-station
+      map: ["enum.PinpointerLayers.Base"]
+  - type: Item
+    size: Small
+    inhandVisuals:
+      left:
+      - state: inhand-left-base
+        color: "#c9962e"
+      right:
+      - state: inhand-right-base
+        color: "#c9962e"
+  - type: MedicalRecoveryBeacon
+  - type: StaticPrice
+    price: 150
