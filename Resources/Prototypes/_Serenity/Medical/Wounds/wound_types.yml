@@ -1,0 +1,68 @@
+# Ported from HellWatcher/honksquad-ss14 (MIT-licensed fork of space-wizards/space-station-14),
+# https://github.com/HellWatcher/honksquad-ss14 — RussStation namespace, adapted for Serenity.
+
+- type: woundType
+  id: BluntFracture
+  category: Fracture
+  damageType: Blunt
+  thresholds: [15, 25, 40]
+
+  names:
+    1: Hairline Fracture
+    2: Compound Fracture
+    3: Shattered Bone
+
+- type: woundType
+  id: HeatBurn
+  category: Burn
+  damageType: Heat
+  thresholds: [10, 20, 35]
+
+  names:
+    1: Moderate Burn
+    2: Severe Burn
+    3: Catastrophic Burn
+
+- type: woundType
+  id: ColdBurn
+  category: Burn
+  damageType: Cold
+  thresholds: [10, 20, 35]
+
+  names:
+    1: Mild Frostbite
+    2: Severe Frostbite
+    3: Deep Frostbite
+
+- type: woundType
+  id: ShockBurn
+  category: Burn
+  damageType: Shock
+  thresholds: [10, 20, 35]
+
+  names:
+    1: Minor Shock Burn
+    2: Severe Shock Burn
+    3: Catastrophic Shock Burn
+
+- type: woundType
+  id: CausticBurn
+  category: Burn
+  damageType: Caustic
+  thresholds: [10, 20, 35]
+
+  names:
+    1: Minor Chemical Burn
+    2: Severe Chemical Burn
+    3: Catastrophic Chemical Burn
+
+- type: woundType
+  id: RadiationBurn
+  category: Burn
+  damageType: Radiation
+  thresholds: [10, 20, 35]
+
+  names:
+    1: Minor Radiation Burn
+    2: Severe Radiation Burn
+    3: Catastrophic Radiation Burn

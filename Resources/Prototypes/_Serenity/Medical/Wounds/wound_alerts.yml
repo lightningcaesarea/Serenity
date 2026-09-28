@@ -1,0 +1,26 @@
+# Wound HUD alerts - shown when player has active fracture or burn wounds.
+# Same icon for all severity tiers; tooltip text changes per tier via {$severity} parameter.
+
+- type: alert
+  id: Fracture
+  name: alerts-wound-fracture-name
+  description: alerts-wound-fracture-desc
+  icons:
+    - sprite: /Textures/_Serenity/Interface/Alerts/Wounds/wounds.rsi
+      state: brute_icon
+    - sprite: /Textures/_Serenity/Interface/Alerts/Wounds/wounds.rsi
+      state: brute_icon
+    - sprite: /Textures/_Serenity/Interface/Alerts/Wounds/wounds.rsi
+      state: brute_icon
+
+- type: alert
+  id: Burn
+  name: alerts-wound-burn-name
+  description: alerts-wound-burn-desc
+  icons:
+    - sprite: /Textures/_Serenity/Interface/Alerts/Wounds/wounds.rsi
+      state: burn_icon
+    - sprite: /Textures/_Serenity/Interface/Alerts/Wounds/wounds.rsi
+      state: burn_icon
+    - sprite: /Textures/_Serenity/Interface/Alerts/Wounds/wounds.rsi
+      state: burn_icon
