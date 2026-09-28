@@ -1,5 +1,6 @@
 ﻿using Content.Server.Hands.Systems;
 using Content.Server.Stack;
+using Content.Shared.Cargo.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Stacks;
 using Content.Shared.UserInterface;
@@ -27,12 +28,12 @@ public sealed partial class ATMSystem : SharedATMSystem
     [Dependency] private MindSystem _mind = default!;
     [Dependency] private ISharedAdminLogManager _adminLogger = default!;
 
-    private static readonly EntProtoId<StackComponent> _cash = "NTCredit";
+    private static readonly EntProtoId<StackComponent> _cash = "SpaceCash"; // Serenity: was NTCredit
     private readonly object _transferLock = new();
     public override void Initialize()
     {
         SubscribeLocalEvent<ATMComponent, BeforeActivatableUIOpenEvent>(OnBeforeActivatableUIOpen);
-        SubscribeLocalEvent<NTCashComponent, AfterInteractEvent>(OnAfterInteract);
+        SubscribeLocalEvent<CashComponent, AfterInteractEvent>(OnAfterInteract); // Serenity: was NTCashComponent
         Subs.BuiEvents<ATMComponent>(ATMUIKey.Key, subs =>
         {
             subs.Event<ATMWithdrawBuiMsg>(OnWithdraw);
@@ -60,19 +61,19 @@ public sealed partial class ATMSystem : SharedATMSystem
         _audioSystem.PlayPvs(component.WithdrawSound, uid);
 
         _adminLogger.Add(LogType.Economy, LogImpact.Low,
-            $"{ToPrettyString(args.Actor):player} withdrew {args.Amount} Sector Credits at {ToPrettyString(uid):entity} (balance {newBalance})"); // Serenity
+            $"{ToPrettyString(args.Actor):player} withdrew {args.Amount} Federal Bills at {ToPrettyString(uid):entity} (balance {newBalance})"); // Serenity
     }
 
-    private void OnAfterInteract(Entity<NTCashComponent> ent, ref AfterInteractEvent args)
+    private void OnAfterInteract(Entity<CashComponent> ent, ref AfterInteractEvent args)
     {
         if (TryComp<StackComponent>(ent.Owner, out var stack)
+            && stack.StackTypeId == "Credit" // Serenity: only Federal Bills (SpaceCash) deposit; ignore other cash-flagged stacks
             && args.Target.HasValue
             && TryComp<ATMComponent>(args.Target, out var atm)
             && _playerResources.TryGetResource(args.User, "credits", out var balance))
         {
             args.Handled = true; // If we don't do this - debug assert and crash at the dev build.
-            // Serenity: no deposit fee. The currency exchange machine is the only place value is
-            // skimmed; charging again here would double-tax cash that has already been converted.
+            // Serenity: no deposit fee.
             var diff = stack.Count;
             var newBalance = balance += diff;
             if (_players.TryGetSessionByEntity(args.User, out var userSession))
@@ -84,7 +85,7 @@ public sealed partial class ATMSystem : SharedATMSystem
             _audioSystem.PlayPvs(atm.DepositSound, args.Target.Value);
 
             _adminLogger.Add(LogType.Economy, LogImpact.Low,
-                $"{ToPrettyString(args.User):player} deposited {diff} Sector Credits at {ToPrettyString(args.Target.Value):entity} (balance {newBalance})"); // Serenity
+                $"{ToPrettyString(args.User):player} deposited {diff} Federal Bills at {ToPrettyString(args.Target.Value):entity} (balance {newBalance})"); // Serenity
         }
     }
 

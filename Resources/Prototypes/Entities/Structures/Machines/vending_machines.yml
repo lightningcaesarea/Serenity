@@ -118,6 +118,20 @@
     price: 100
   - type: Appearance
   - type: WiresVisuals
+  # Serenity: physical Federal Bills payment slot. Priced items require inserting bills here
+  # before they'll eject — see SharedVendingMachineSystem.TryEjectVendorItem.
+  - type: ItemSlots
+    slots:
+      billSlot:
+        name: vending-machine-bill-slot
+        whitelist:
+          components:
+          - Cash
+        swap: false
+        ejectOnInteract: true
+  - type: ContainerContainer
+    containers:
+      billSlot: !type:ContainerSlot
 
 # Vending machines
 
