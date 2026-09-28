@@ -30,8 +30,8 @@ skill-botany-name = Botany
 skill-botany-desc = Harvesting and swabbing plants is twice as fast.
 skill-cooking-name = Cooking
 skill-cooking-desc = Butchering on a meat spike is twice as fast; the untrained are slower.
-skill-security-training-name = Security Training
-skill-security-training-desc = Restraint and search techniques. Cuffing, uncuffing and searching people is faster; the untrained are slower at cuffing.
+skill-advanced-security-training-name = Advanced Security Training
+skill-advanced-security-training-desc = Senior restraint and search techniques. Cuffing, uncuffing and searching people is faster. Security department only.
 
 ## Locks
 
@@ -85,7 +85,5 @@ trait-perk-green-thumb-name = Green Thumb
 trait-perk-green-thumb-desc = Plants just like you. Grants the Botany skill.
 trait-perk-home-cook-name = Home Cook
 trait-perk-home-cook-desc = You know your way around a kitchen. Grants the Cooking skill.
-trait-perk-self-defense-name = Self-Defense Course
-trait-perk-self-defense-desc = You learned how to restrain someone. Grants the Security Training skill.
 trait-perk-amateur-scientist-name = Amateur Scientist
 trait-perk-amateur-scientist-desc = You read the journals for fun. Grants the Research skill.

@@ -239,8 +239,8 @@
 
 - type: entity
   parent: SkillBookBase
-  id: SkillBookSecurityTraining
-  name: Restraint and Detention Procedures
+  id: SkillBookAdvancedSecurityTraining
+  name: Advanced Restraint and Detention Procedures
   description: A dense training manual. Reading it cover to cover teaches its subject, but it won't survive being studied that hard.
   components:
   - type: Sprite
@@ -254,5 +254,5 @@
     - state: icon_stunbaton
       map: [ "icon" ]
   - type: SkillBook
-    skill: SecurityTraining
+    skill: AdvancedSecurityTraining
     departments: [ Security ]

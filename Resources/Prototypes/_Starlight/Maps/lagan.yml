@@ -67,6 +67,7 @@
             K9: [ 2, 2 ]
             Brigmedic: [ 2, 2 ]
             SecurityOfficer: [ 12, 12 ]
+            SeniorOfficer: [ 1, 1 ] # Serenity
             SecurityCadet: [ 6, 6 ]
 
             # Cargo

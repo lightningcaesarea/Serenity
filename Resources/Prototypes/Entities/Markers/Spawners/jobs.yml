@@ -509,6 +509,7 @@
   components:
   - type: SpawnPoint
     job_id: SecurityOfficer
+    additionalJobs: [ SeniorOfficer ] # Serenity
   - type: Sprite
     layers:
       - state: green

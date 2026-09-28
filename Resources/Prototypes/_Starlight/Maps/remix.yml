@@ -53,6 +53,7 @@
             DutyOfficer: [ 1, 1 ]
             K9: [ 2, 2 ]
             SecurityOfficer: [ 3, 3 ]
+            SeniorOfficer: [ 1, 1 ] # Serenity
             SecurityCadet: [ 2, 2 ]
             Detective: [ 1, 1 ]
             Brigmedic: [ 1, 1 ]

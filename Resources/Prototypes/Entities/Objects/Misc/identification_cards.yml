@@ -527,6 +527,8 @@
   id: SeniorOfficerIDCard
   name: senior officer ID card
   components:
+  - type: PresetIdCard # Serenity: Senior Officer is a job
+    job: SeniorOfficer
   - type: Sprite
     layers:
     - state: default

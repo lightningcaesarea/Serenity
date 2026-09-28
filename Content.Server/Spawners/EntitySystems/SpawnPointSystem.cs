@@ -39,7 +39,7 @@ public sealed partial class SpawnPointSystem : EntitySystem
 
             if (_gameTicker.RunLevel != GameRunLevel.InRound &&
                 spawnPoint.SpawnType == SpawnPointType.Job &&
-                (args.Job == null || spawnPoint.Job == null || spawnPoint.Job == args.Job))
+                spawnPoint.AllowsJob(args.Job)) // Serenity: also honours AdditionalJobs
             {
                 possiblePositions.Add(xform.Coordinates);
             }

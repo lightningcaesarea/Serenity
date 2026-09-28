@@ -41,7 +41,7 @@
 
 - type: jobSkills
   id: Brigmedic
-  skills: [ Medicine, SecurityTraining ]
+  skills: [ Medicine ]
 
 # Science
 - type: jobSkills
@@ -60,39 +60,18 @@
   id: ResearchDirector
   skills: [ Research, Xenoarchaeology, Robotics, Engineering, Electrical ]
 
-# Security
-- type: jobSkills
-  id: SecurityCadet
-  skills: [ SecurityTraining ]
-
-- type: jobSkills
-  id: SecurityOfficer
-  skills: [ SecurityTraining ]
-
+# Security (Warden is displayed as Armourer)
 - type: jobSkills
   id: Warden
-  skills: [ SecurityTraining ]
+  skills: [ AdvancedSecurityTraining ]
 
 - type: jobSkills
-  id: Detective
-  skills: [ SecurityTraining ]
+  id: SeniorOfficer
+  skills: [ AdvancedSecurityTraining ]
 
 - type: jobSkills
   id: HeadOfSecurity
-  skills: [ SecurityTraining ]
-
-- type: jobSkills
-  id: DutyOfficer
-  skills: [ SecurityTraining ]
-
-- type: jobSkills
-  id: K9
-  skills: [ SecurityTraining ]
-
-# Command
-- type: jobSkills
-  id: Captain
-  skills: [ SecurityTraining ]
+  skills: [ AdvancedSecurityTraining ]
 
 # Service
 - type: jobSkills
@@ -118,19 +97,19 @@
 
 - type: jobSkills
   id: ERTSecurity
-  skills: [ SecurityTraining, Medicine ]
+  skills: [ Medicine ]
 
 - type: jobSkills
   id: ERTLeader
-  skills: [ SecurityTraining, Medicine, Engineering ]
+  skills: [ Medicine, Engineering ]
 
 - type: jobSkills
   id: DeathSquad
-  skills: [ SecurityTraining, Medicine, Surgery, Engineering, Electrical ]
+  skills: [ Medicine, Surgery, Engineering, Electrical ]
 
 - type: jobSkills
   id: CBURN
-  skills: [ SecurityTraining, Medicine, Chemistry ]
+  skills: [ Medicine, Chemistry ]
 
 # Silicons: borgs come with their modules' training. A borged crew member keeps their own skills too.
 - type: jobSkills

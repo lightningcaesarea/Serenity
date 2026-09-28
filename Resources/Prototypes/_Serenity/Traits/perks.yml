@@ -48,16 +48,6 @@
     skills: [ Cooking ]
 
 - type: trait
-  id: PerkSelfDefenseCourse
-  name: trait-perk-self-defense-name
-  description: trait-perk-self-defense-desc
-  category: SerenityPerks
-  cost: 0
-  effects:
-  - !type:GrantSkillsEffect
-    skills: [ SecurityTraining ]
-
-- type: trait
   id: PerkAmateurScientist
   name: trait-perk-amateur-scientist-name
   description: trait-perk-amateur-scientist-desc
