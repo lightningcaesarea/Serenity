@@ -228,7 +228,7 @@ namespace Content.Server.VendingMachines
                 _throwingSystem.TryThrow(ent, direction, vendComponent.NonLimitedEjectForce);
             }
 
-             // Starlight-start, Serenity-edit:
+            // Starlight-start, Serenity-edit:
             // Serenity: payment now happens up-front as physical Federal Bills inserted into the
             // machine's bill slot (see SharedVendingMachineSystem.TryEjectVendorItem) rather than
             // a post-hoc digital debit here. All that's left to do after spawning is crediting the
