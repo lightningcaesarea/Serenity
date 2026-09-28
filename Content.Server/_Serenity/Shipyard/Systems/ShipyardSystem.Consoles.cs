@@ -1,6 +1,6 @@
 // Ported from Frontier Station 14 at commit 5be37d18c2 (2024-07-01), MIT licensed.
-// Copyright (c) 2017-2024 New Frontiers. Adapted for Serenity: buyers pay in Sector Credits from their
-// persistent balance, sales tax goes to the station's cargo account, everything is admin-logged.
+// Copyright (c) 2017-2024 New Frontiers. Adapted for Serenity: buyers pay with Federal Bills (SpaceCash)
+// inserted into the console's bill slot; sale proceeds are spawned back at the console.
 
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -9,8 +9,8 @@ using Content.Server.Chat.Systems;
 using Content.Server.Mind;
 using Content.Server.Popups;
 using Content.Server.Radio.EntitySystems;
+using Content.Server.Stack;
 using Content.Server.StationRecords.Systems;
-using Content.Shared._Serenity.Economy;
 using Content.Shared._Serenity.Shipyard;
 using Content.Shared._Serenity.Shipyard.BUI;
 using Content.Shared._Serenity.Shipyard.Components;
@@ -26,25 +26,24 @@ using Content.Shared.Database;
 using Content.Shared.Maps;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.StationRecords;
+using Content.Shared.Stacks;
 using Content.Shared.UserInterface;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
+using Robust.Shared.Player;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
-using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 
 namespace Content.Server._Serenity.Shipyard.Systems;
 
 public sealed partial class ShipyardSystem
 {
-    private const string CreditsResource = "credits";
     private static readonly Regex ParentheticalRegex = new(@"\s*\([^()]*\)", RegexOptions.Compiled);
 
     [Dependency] private IAdminLogManager _adminLogger = default!;
     [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private ISharedPlayerManager _players = default!;
-    [Dependency] private ISerenityPlayerResourcesManager _resources = default!;
     [Dependency] private AccessReaderSystem _accessReader = default!;
     [Dependency] private SharedAccessSystem _access = default!;
     [Dependency] private SharedIdCardSystem _idCard = default!;
@@ -57,6 +56,7 @@ public sealed partial class ShipyardSystem
     [Dependency] private MobStateSystem _mobState = default!;
     [Dependency] private MindSystem _mind = default!;
     [Dependency] private StationRecordsSystem _records = default!;
+    [Dependency] private StackSystem _stackSystem = default!;
 
     private void InitializeConsole()
     {
@@ -118,13 +118,14 @@ public sealed partial class ShipyardSystem
             return;
         }
 
-        if (!TryGetBalance(player, out var session, out var balance))
+        var billBalance = GetBillBalance(uid, component);
+        if (billBalance <= 0)
         {
-            Deny(uid, component, player, "shipyard-console-no-bank");
+            Deny(uid, component, player, "shipyard-console-no-bills");
             return;
         }
 
-        if (balance < vessel.Price)
+        if (billBalance < vessel.Price)
         {
             Deny(uid, component, player, "cargo-console-insufficient-funds", ("cost", vessel.Price));
             return;
@@ -136,13 +137,10 @@ public sealed partial class ShipyardSystem
             return;
         }
 
-        if (!_resources.TryUpdateResource(session, CreditsResource, -vessel.Price, $"shipyard-purchase:{vessel.ID}"))
-        {
-            Log.Error($"Shipyard: charged nothing for {vessel.ID} bought by {ToPrettyString(player)}, deleting the ship.");
-            Del(shuttle.Value);
-            Deny(uid, component, player, "shipyard-console-no-bank");
-            return;
-        }
+        // Consume F-Bills from the slot; change stays in the slot if overpaid.
+        var billEnt = component.BillSlot.ContainerSlot!.ContainedEntity!.Value;
+        _stackSystem.SetCount(billEnt, billBalance - vessel.Price);
+        // (SetCount to 0 auto-deletes the stack entity.)
 
         var name = vessel.Name;
 
@@ -162,7 +160,8 @@ public sealed partial class ShipyardSystem
             _access.TrySetTags(targetId, tags, access);
         }
 
-        var userId = session.UserId;
+        _players.TryGetSessionByEntity(player, out var playerSession);
+        var userId = playerSession!.UserId;
         AssignDeed(EnsureComp<ShuttleDeedComponent>(targetId), shuttle.Value, name, player, userId);
         AssignDeed(EnsureComp<ShuttleDeedComponent>(shuttle.Value), shuttle.Value, name, player, userId);
         Dirty(targetId, Comp<ShuttleDeedComponent>(targetId));
@@ -182,9 +181,9 @@ public sealed partial class ShipyardSystem
 
         PlayConfirmSound(uid, component);
         _adminLogger.Add(LogType.Shipyard, LogImpact.Medium,
-            $"{ToPrettyString(player):player} bought {vessel.ID} ({ToPrettyString(shuttle.Value):ship}) for {vessel.Price} Sector Credits at {ToPrettyString(uid):console}");
+            $"{ToPrettyString(player):player} bought {vessel.ID} ({ToPrettyString(shuttle.Value):ship}) for {vessel.Price} Federal Bills at {ToPrettyString(uid):console}");
         _adminLogger.Add(LogType.Economy, LogImpact.Low,
-            $"{ToPrettyString(player):player} paid {vessel.Price} Sector Credits for ship {vessel.ID} (balance {balance - vessel.Price})");
+            $"{ToPrettyString(player):player} paid {vessel.Price} Federal Bills for ship {vessel.ID} (change {billBalance - vessel.Price})");
 
         RefreshState(uid, component, player);
     }
@@ -205,12 +204,6 @@ public sealed partial class ShipyardSystem
         {
             RemComp<ShuttleDeedComponent>(targetId);
             Deny(uid, component, player, "shipyard-console-no-deed");
-            return;
-        }
-
-        if (!TryGetBalance(player, out var session, out _))
-        {
-            Deny(uid, component, player, "shipyard-console-no-bank");
             return;
         }
 
@@ -242,7 +235,14 @@ public sealed partial class ShipyardSystem
             bill -= tax;
         }
 
-        _resources.TryUpdateResource(session, CreditsResource, bill, $"shipyard-sale:{shipName}");
+        // Spawn sale proceeds as Federal Bills at the console.
+        if (bill > 0)
+        {
+            var cashEnt = Spawn("SpaceCash", Transform(uid).Coordinates);
+            if (TryComp<StackComponent>(cashEnt, out var cashStack))
+                _stackSystem.SetCount(cashEnt, bill, cashStack);
+        }
+
         PlayConfirmSound(uid, component);
 
         Announce(uid, component.ShipyardChannel, Loc.GetString("shipyard-console-leaving",
@@ -251,9 +251,9 @@ public sealed partial class ShipyardSystem
             Announce(uid, secret, Loc.GetString("shipyard-console-leaving-secret"));
 
         _adminLogger.Add(LogType.Shipyard, LogImpact.Medium,
-            $"{ToPrettyString(player):player} sold {shipPretty} for {bill} Sector Credits (tax {tax}) at {ToPrettyString(uid):console}");
+            $"{ToPrettyString(player):player} sold {shipPretty} for {bill} Federal Bills (tax {tax}) at {ToPrettyString(uid):console}");
         _adminLogger.Add(LogType.Economy, LogImpact.Low,
-            $"{ToPrettyString(player):player} received {bill} Sector Credits for selling ship {shipName}");
+            $"{ToPrettyString(player):player} received {bill} Federal Bills for selling ship {shipName}");
 
         RefreshState(uid, component, player);
     }
@@ -266,7 +266,8 @@ public sealed partial class ShipyardSystem
 
     private void OnItemSlotChanged(EntityUid uid, ShipyardConsoleComponent component, ContainerModifiedMessage args)
     {
-        if (args.Container.ID != ShipyardConsoleComponent.TargetIdCardSlotId)
+        if (args.Container.ID != ShipyardConsoleComponent.TargetIdCardSlotId
+            && args.Container.ID != ShipyardConsoleComponent.BillSlotId)
             return;
 
         foreach (var actor in _ui.GetActors(uid, ShipyardConsoleUiKey.Shipyard))
@@ -293,7 +294,7 @@ public sealed partial class ShipyardSystem
             }
         }
 
-        TryGetBalance(player, out _, out var balance);
+        var balance = GetBillBalance(uid, component);
         var access = !TryComp<AccessReaderComponent>(uid, out var reader) || !reader.Enabled || _accessReader.IsAllowed(player, uid, reader);
 
         var state = new ShipyardConsoleInterfaceState(
@@ -335,17 +336,17 @@ public sealed partial class ShipyardSystem
         return result;
     }
 
-    private bool TryGetBalance(EntityUid player, [System.Diagnostics.CodeAnalysis.NotNullWhen(true)] out ICommonSession? session, out double balance)
+    /// <summary>
+    /// Returns the total Federal Bill count in the console's bill slot.
+    /// </summary>
+    private int GetBillBalance(EntityUid _, ShipyardConsoleComponent component)
     {
-        balance = 0;
-        if (!_players.TryGetSessionByEntity(player, out session))
-            return false;
-
-        if (!_resources.TryGetResource(session, CreditsResource, out var value))
-            return false;
-
-        balance = value.Value;
-        return true;
+        var entity = component.BillSlot.ContainerSlot?.ContainedEntity;
+        if (entity is not { Valid: true } billEnt)
+            return 0;
+        if (!TryComp<StackComponent>(billEnt, out var stack))
+            return 0;
+        return stack.Count;
     }
 
     private void CopyRecordToStation(EntityUid idCard, EntityUid station, EntityUid? onlyFrom = null)

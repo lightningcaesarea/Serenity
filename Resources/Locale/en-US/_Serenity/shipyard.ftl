@@ -11,12 +11,16 @@ shipyard-console-category-medium = Medium
 shipyard-console-category-large = Large
 shipyard-console-category-humongous = Humongous
 
+## Item slot names
+shipyard-console-bills-slot = Federal Bills
+
 ## Popups
 shipyard-console-no-idcard = No ID card inserted.
 shipyard-console-already-deeded = That ID card already holds a ship deed.
 shipyard-console-invalid-vessel = That vessel is not for sale here.
 shipyard-console-invalid-price = That vessel has no price.
 shipyard-console-invalid-station = This console is not attached to a station.
+shipyard-console-no-bills = No Federal Bills inserted into the console.
 shipyard-console-no-bank = No Sector Credit account found.
 shipyard-console-no-deed = No ship deed on this card.
 shipyard-console-sale-reqs = The ship must be docked to the station with nobody aboard.
