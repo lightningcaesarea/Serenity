@@ -70331,7 +70331,7 @@ entities:
         volume: 0
         moles: {}
         immutable: False
-- proto: NTCredit
+- proto: SpaceCash
   entities:
   - uid: 10327
     components:
@@ -70363,7 +70363,7 @@ entities:
     - type: Transform
       parent: 2
       pos: 3.8815188,90.60793
-- proto: NTCredit10
+- proto: SpaceCash10
   entities:
   - uid: 10333
     components:

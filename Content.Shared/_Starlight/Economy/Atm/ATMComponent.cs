@@ -26,11 +26,6 @@ public sealed class ATMBuiState : BoundUserInterfaceState
     public string? Message { get; init; }
     public bool IsError { get; init; }
 }
-[RegisterComponent, NetworkedComponent]
-public sealed partial class NTCashComponent : Component
-{
-
-}
 [Serializable, NetSerializable]
 public sealed class ATMWithdrawBuiMsg : BoundUserInterfaceMessage
 {

@@ -158412,7 +158412,7 @@ entities:
       pos: -1.5,-57.5
     - type: Fixtures
       fixtures: {}
-- proto: NTCredit100
+- proto: SpaceCash100
   entities:
   - uid: 23523
     components:

@@ -1,3 +1,12 @@
+# Serenity: StoreSystem currency definition for generic listing-based vendors (event shops,
+# arcade prize machines, etc.) that used to price against the now-removed Sector Credits (NTCredit).
+- type: currency
+  id: Credit
+  displayName: materials-unit-credits
+  cash:
+    1: SpaceCash
+  canWithdraw: true
+
 - type: entity
   parent: BaseItem
   id: SpaceCash
@@ -5,6 +14,9 @@
   description: The universal currency used for everything outside the sector, and some things in sector too.
   components:
   - type: Cash
+  - type: Currency # Serenity
+    price:
+      Credit: 1
   - type: Item
     shape:
     - 0,0,1,0

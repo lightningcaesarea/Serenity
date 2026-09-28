@@ -22,7 +22,11 @@ using Robust.Shared.Timing;
 #region Starlight
 using Content.Shared._Starlight.IoC;
 using Content.Shared._Starlight.VendingMachines;
+using Content.Shared._Starlight.Economy;
 #endregion
+using Content.Shared.Cargo.Components;
+using Content.Shared.Containers.ItemSlots;
+using Content.Shared.Stacks;
 
 namespace Content.Shared.VendingMachines;
 
@@ -45,6 +49,10 @@ public abstract partial class SharedVendingMachineSystem : EntitySystem
     // Starlight
     [Dependency] private INetManager _net = default!;
     [Dependency] private SharedSLIoCSystem _slIoc = default!;
+
+    // Serenity: physical Federal Bills payment
+    [Dependency] private   ItemSlotsSystem _itemSlots = default!;
+    [Dependency] private   SharedStackSystem _stack = default!;
 
     public override void Initialize()
     {
@@ -309,6 +317,29 @@ public abstract partial class SharedVendingMachineSystem : EntitySystem
             Popup.PopupClient(Loc.GetString("vending-machine-component-try-eject-out-of-stock"), uid);
             Deny((uid, vendComponent));
             return;
+        }
+
+        // Serenity: require physical Federal Bills payment before dispensing a priced item.
+        if (!HasComp<EmaggedComponent>(uid))
+        {
+            if (vendComponent.ShowPrices
+                && PrototypeManager.TryIndex<EntityPrototype>(entry.ID, out var itemProto)
+                && itemProto.TryGetComponent<ItemPriceComponent>(out var priceComp, EntityManager.ComponentFactory)
+                && priceComp.FallbackPrice > 0)
+            {
+                var price = priceComp.FallbackPrice;
+                var billItem = _itemSlots.GetItemOrNull(uid, "billSlot");
+                if (billItem == null
+                    || !TryComp(billItem.Value, out StackComponent? billStack)
+                    || billStack.Count < price)
+                {
+                    Popup.PopupClient(Loc.GetString("vending-machine-component-insufficient-bills", ("price", price)), uid);
+                    Deny((uid, vendComponent), user);
+                    return;
+                }
+
+                _stack.SetCount(billItem.Value, billStack.Count - price);
+            }
         }
 
         // Starlight-edit start:

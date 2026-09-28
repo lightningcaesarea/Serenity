@@ -4,7 +4,7 @@
   id: SLStirlingJumpsuit
   productEntity: ClothingUniformJumpsuitStirling
   cost:
-    NTCredit: 600
+    Credit: 600
   categories:
   - SLStirling
 
@@ -12,7 +12,7 @@
   id: SLStirlingJumpskirt
   productEntity: ClothingUniformJumpskirtStirling
   cost:
-    NTCredit: 600
+    Credit: 600
   categories:
   - SLStirling
 
@@ -20,7 +20,7 @@
   id: SLStirlingWinterCoat
   productEntity: ClothingOuterWinterStirling
   cost:
-    NTCredit: 900
+    Credit: 900
   categories:
   - SLStirling
 
@@ -28,7 +28,7 @@
   id: SLStirlingTrenchcoat
   productEntity: ClothingOuterCoatStirlingTrench
   cost:
-    NTCredit: 1200
+    Credit: 1200
   categories:
   - SLStirling
 
@@ -36,7 +36,7 @@
   id: SLStirlingEVASuit
   productEntity: ClothingOuterEVASuitStirling
   cost:
-    NTCredit: 2500
+    Credit: 2500
   categories:
   - SLStirling
 
@@ -44,7 +44,7 @@
   id: SLStirlingBeret
   productEntity: ClothingHeadHatStirlingBeret
   cost:
-    NTCredit: 350
+    Credit: 350
   categories:
   - SLStirling
 
@@ -52,7 +52,7 @@
   id: SLStirlingMask
   productEntity: ClothingMaskStirling
   cost:
-    NTCredit: 450
+    Credit: 450
   categories:
   - SLStirling
 
@@ -60,7 +60,7 @@
   id: SLStirlingVisor
   productEntity: ClothingEyesStirlingVisor
   cost:
-    NTCredit: 700
+    Credit: 700
   categories:
   - SLStirling
 
@@ -68,7 +68,7 @@
   id: SLStirlingHeadset
   productEntity: ClothingHeadsetStirling
   cost:
-    NTCredit: 500
+    Credit: 500
   categories:
   - SLStirling
 
@@ -76,7 +76,7 @@
   id: SLStirlingCombatGloves
   productEntity: ClothingHandsGlovesStirlingCombat
   cost:
-    NTCredit: 500
+    Credit: 500
   categories:
   - SLStirling
 
@@ -84,7 +84,7 @@
   id: SLStirlingBelt
   productEntity: ClothingBeltStirling
   cost:
-    NTCredit: 450
+    Credit: 450
   categories:
   - SLStirling
 
@@ -92,7 +92,7 @@
   id: SLStirlingWebVest
   productEntity: ClothingOuterVestWebStirling
   cost:
-    NTCredit: 1500
+    Credit: 1500
   categories:
   - SLStirling
 
@@ -100,7 +100,7 @@
   id: SLStirlingBackpack
   productEntity: ClothingBackpackStirling
   cost:
-    NTCredit: 500
+    Credit: 500
   categories:
   - SLStirling
 
@@ -108,7 +108,7 @@
   id: SLStirlineSatchel
   productEntity: ClothingBackpackSatchelStirling
   cost:
-    NTCredit: 500
+    Credit: 500
   categories:
   - SLStirling
 
@@ -116,6 +116,6 @@
   id: SLStirlingDuffel
   productEntity: ClothingBackpackDuffelStirling
   cost:
-    NTCredit: 500
+    Credit: 500
   categories:
   - SLStirling

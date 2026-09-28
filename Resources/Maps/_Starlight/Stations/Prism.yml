@@ -125196,7 +125196,7 @@ entities:
           occludes: True
     - type: Fixtures
       fixtures: {}
-- proto: NTCredit10
+- proto: SpaceCash10
   entities:
   - uid: 17945
     components:

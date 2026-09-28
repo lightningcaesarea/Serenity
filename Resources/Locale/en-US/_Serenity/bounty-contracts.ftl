@@ -15,7 +15,7 @@ bounty-contracts-program-name = Bounty Contracts
 
 ## Announcements
 bounty-contracts-radio-name = Sector Contracts Board
-bounty-contracts-radio-create = New bounty posted on "{$target}". Reward: {$reward} Sector Credits.
+bounty-contracts-radio-create = New bounty posted on "{$target}". Reward: {$reward} Federal Bills.
 
 ## UI - list
 bounty-contracts-ui-list-no-contracts = No bounties posted yet...
@@ -37,7 +37,7 @@ bounty-contracts-ui-create-vessel = Vessel:{" "}
 bounty-contracts-ui-create-vessel-unknown = Unknown
 bounty-contracts-ui-create-vessel-placeholder = Vessel name...
 bounty-contracts-ui-create-reward = Reward:{" "}
-bounty-contracts-ui-create-reward-currency = Sector Credits
+bounty-contracts-ui-create-reward-currency = Federal Bills
 bounty-contracts-ui-create-description = Description:
 bounty-contracts-ui-create-description-placeholder = Additional details...
 bounty-contracts-ui-create-button-cancel = Cancel

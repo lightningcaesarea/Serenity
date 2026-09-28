@@ -228,32 +228,28 @@ namespace Content.Server.VendingMachines
                 _throwingSystem.TryThrow(ent, direction, vendComponent.NonLimitedEjectForce);
             }
 
-             // Starlight-start
-            // Perform idempotent debit and cargo credit after the item is spawned
-            // Only charge if prices are shown, not emagged, we have a buyer, and not charged yet this operation
-            var buyer = vendComponent.LastBuyer;
+            // Starlight-start, Serenity-edit:
+            // Serenity: payment now happens up-front as physical Federal Bills inserted into the
+            // machine's bill slot (see SharedVendingMachineSystem.TryEjectVendorItem) rather than
+            // a post-hoc digital debit here. All that's left to do after spawning is crediting the
+            // station's cargo budget, same as before.
             var isEmagged = HasComp<EmaggedComponent>(uid);
 
-            if (!isEmagged && vendComponent.ShowPrices && buyer is { } buyerUid && !vendComponent.DebitApplied && itemProto != null)
+            if (!isEmagged && vendComponent.ShowPrices && itemProto != null)
             {
                 var entry = GetEntry(uid, itemProto, vendComponent.CurrentItemType, vendComponent);
                 var price = entry?.Price ?? 0;
                 if (price > 0)
                 {
-                    if (_playerResources.TryGetResource(buyerUid, "credits", out var balance) && balance >= price) // Double-check sufficient funds
+                    // Credit cargo 10x price — Serenity: skip if the item opts out via
+                    // ItemPriceComponent.CreditStationCargo (defaults true, unaffected for
+                    // every existing vending item).
+                    var creditsCargo = !PrototypeManager.TryIndex<EntityPrototype>(itemProto, out var priceProto)
+                        || !priceProto.TryGetComponent<ItemPriceComponent>(out var priceComp, _componentFactory)
+                        || priceComp.CreditStationCargo;
+
+                    if (creditsCargo)
                     {
-                        _playerResources.TryUpdateResource(buyerUid, "credits", -price);
-                        vendComponent.DebitApplied = true;
-                        Popup.PopupEntity($"Debited {price}\u20a1. Balance: {balance -= price}\u20a1", uid, buyerUid);
-                        SendBalanceUpdate(uid, buyerUid, (int)(balance -= price)!);
-
-                        // Alogs
-                        _adminLogger.Add(
-                            LogType.Action,
-                            LogImpact.Medium,
-                            $"{ToPrettyString(buyerUid):player} bought {ToPrettyString(ent):entity} for {price}₡ from {ToPrettyString(uid):entity} Balance left: {balance}₡");
-
-                        // Credit cargo 10x price
                         var stationUid = _stationSystem.GetOwningStation(uid);
 
                         if (stationUid != null && TryComp<StationBankAccountComponent>(stationUid, out var bank))
@@ -264,8 +260,6 @@ namespace Content.Server.VendingMachines
                                 _cargoSystem.UpdateBankAccount((stationUid.Value, bank), toCredit, bank.PrimaryAccount);
                         }
                     }
-                    else
-                        Popup.PopupEntity($"Insufficient funds. Required: {price}\u20a1", uid, buyerUid);
                 }
             }
             // Starlight-end
