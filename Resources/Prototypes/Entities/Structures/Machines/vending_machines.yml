@@ -129,9 +129,6 @@
           - Cash
         swap: false
         ejectOnInteract: true
-  - type: ContainerContainer
-    containers:
-      billSlot: !type:ContainerSlot
 
 # Vending machines
 
