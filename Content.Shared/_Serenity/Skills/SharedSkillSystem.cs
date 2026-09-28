@@ -209,6 +209,9 @@ public abstract partial class SharedSkillSystem : EntitySystem
         if (rule.Events.Count > 0 && !rule.Events.Contains(eventName))
             return false;
 
+        if (!rule.IncludeSelf && args.Target == args.User)
+            return false;
+
         if (rule.ToolQualities.Count > 0
             && (!TryComp<ToolComponent>(args.Used, out var tool) || !rule.ToolQualities.Any(q => _tools.HasQuality(args.Used.Value, q, tool))))
             return false;

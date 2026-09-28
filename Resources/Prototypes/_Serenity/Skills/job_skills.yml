@@ -73,6 +73,14 @@
   id: HeadOfSecurity
   skills: [ SecurityTraining ]
 
+- type: jobSkills
+  id: DutyOfficer
+  skills: [ SecurityTraining ]
+
+- type: jobSkills
+  id: K9
+  skills: [ SecurityTraining ]
+
 # Command
 - type: jobSkills
   id: Captain

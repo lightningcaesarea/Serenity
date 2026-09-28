@@ -65,6 +65,12 @@ public sealed partial class SkillDoAfterRule
     public EntityWhitelist? Target;
 
     /// <summary>
+    /// Whether the rule also matches do-afters the user performs on themselves, e.g. breaking out of cuffs.
+    /// </summary>
+    [DataField]
+    public bool IncludeSelf = true;
+
+    /// <summary>
     /// Duration multiplier when the user knows the skill.
     /// </summary>
     [DataField]

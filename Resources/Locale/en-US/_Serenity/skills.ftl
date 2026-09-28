@@ -33,7 +33,7 @@ skill-botany-desc = Harvesting and swabbing plants is twice as fast.
 skill-cooking-name = Cooking
 skill-cooking-desc = Butchering on a meat spike is twice as fast; the untrained are slower.
 skill-security-training-name = Security Training
-skill-security-training-desc = Restraint techniques. Cuffing people is faster; the untrained are slower.
+skill-security-training-desc = Restraint and search techniques. Cuffing, uncuffing and searching people is faster; the untrained are slower at cuffing.
 
 ## Locks
 

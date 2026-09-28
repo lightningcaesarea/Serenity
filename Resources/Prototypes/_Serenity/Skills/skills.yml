@@ -126,3 +126,11 @@
   - events: [ AddCuffDoAfterEvent ]
     skilled: 0.7
     unskilled: 1.3
+  # Uncuffing someone else; breaking out of your own cuffs is unaffected.
+  - events: [ UnCuffDoAfterEvent ]
+    includeSelf: false
+    skilled: 0.7
+  # Strip menu: taking items off someone (searching) or putting them on.
+  - events: [ StrippableDoAfterEvent ]
+    includeSelf: false
+    skilled: 0.7
