@@ -29,9 +29,10 @@ public sealed partial class CCVars
 
     /// <summary>
     ///     Whether the arrivals shuttle is enabled.
+    ///     Serenity: off, and the arrivals terminal/shuttle maps are removed. Late joiners use station spawn points.
     /// </summary>
     public static readonly CVarDef<bool> ArrivalsShuttles =
-        CVarDef.Create("shuttle.arrivals", true, CVar.SERVERONLY);
+        CVarDef.Create("shuttle.arrivals", false, CVar.SERVERONLY);
 
     /// <summary>
     ///     The map to use for the arrivals station.
