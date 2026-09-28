@@ -39,8 +39,6 @@
         - IdCard
     billSlot:
       name: shipyard-console-bills-slot
-      ejectSound: /Audio/Effects/Cargo/coin.ogg
-      insertSound: /Audio/Effects/Cargo/coin.ogg
       ejectOnBreak: true
       whitelist:
         components:
@@ -81,8 +79,6 @@
         - IdCard
     billSlot:
       name: shipyard-console-bills-slot
-      ejectSound: /Audio/Effects/Cargo/coin.ogg
-      insertSound: /Audio/Effects/Cargo/coin.ogg
       ejectOnBreak: true
       whitelist:
         components:
@@ -123,8 +119,6 @@
         - IdCard
     billSlot:
       name: shipyard-console-bills-slot
-      ejectSound: /Audio/Effects/Cargo/coin.ogg
-      insertSound: /Audio/Effects/Cargo/coin.ogg
       ejectOnBreak: true
       whitelist:
         components:
@@ -165,8 +159,6 @@
         - IdCard
     billSlot:
       name: shipyard-console-bills-slot
-      ejectSound: /Audio/Effects/Cargo/coin.ogg
-      insertSound: /Audio/Effects/Cargo/coin.ogg
       ejectOnBreak: true
       whitelist:
         components:
@@ -207,8 +199,6 @@
         - IdCard
     billSlot:
       name: shipyard-console-bills-slot
-      ejectSound: /Audio/Effects/Cargo/coin.ogg
-      insertSound: /Audio/Effects/Cargo/coin.ogg
       ejectOnBreak: true
       whitelist:
         components:
@@ -250,8 +240,6 @@
         - IdCard
     billSlot:
       name: shipyard-console-bills-slot
-      ejectSound: /Audio/Effects/Cargo/coin.ogg
-      insertSound: /Audio/Effects/Cargo/coin.ogg
       ejectOnBreak: true
       whitelist:
         components:
