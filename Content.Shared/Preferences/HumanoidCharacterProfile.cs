@@ -719,7 +719,10 @@ namespace Content.Shared.Preferences
             _antagPreferences.UnionWith(antags);
 
             _traitPreferences.Clear();
-            _traitPreferences.UnionWith(GetValidTraits(traits, prototypeManager));
+            _traitPreferences.UnionWith(GetValidTraits(traits, prototypeManager)
+                .Take(configManager.GetCVar(StarlightCCVars.MaxTraitCount))); // Serenity - enforce the count at save, not just at spawn
+
+            EnsureValidLongText(); // Serenity
 
             // Checks prototypes exist for all loadouts and dump / set to default if not.
             var toRemove = new ValueList<string>();
