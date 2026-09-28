@@ -129,6 +129,15 @@
           - Cash
         swap: false
         ejectOnInteract: true
+  - type: ContainerContainer
+    containers:
+      billSlot: !type:ContainerSlot ""
+      # Serenity: ConstructibleMachine (a parent of this entity) declares these same two
+      # containers itself, but its dictionary doesn't merge with this one across the
+      # multi-parent inheritance chain — so they're repeated here verbatim (see
+      # base_structuremachines.yml) to keep PrototypeSaveTest.UninitializedSaveTest happy.
+      machine_board: !type:Container
+      machine_parts: !type:Container
 
 # Vending machines
 
