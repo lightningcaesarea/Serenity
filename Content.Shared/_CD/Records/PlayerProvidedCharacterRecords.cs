@@ -20,6 +20,7 @@ public sealed partial class PlayerProvidedCharacterRecords
 {
     public const int TextMedLen = 64;
     public const int TextVeryLargeLen = 4096;
+    public const int MaxEntriesPerType = 50; // Serenity
 
     /* Basic info */
 
@@ -265,6 +266,10 @@ public sealed partial class PlayerProvidedCharacterRecords
 
     private static void EnsureValidEntries(List<RecordEntry> entries)
     {
+        // Serenity - cap the entry count; every entry is a database row of up to ~4 KB.
+        if (entries.Count > MaxEntriesPerType)
+            entries.RemoveRange(MaxEntriesPerType, entries.Count - MaxEntriesPerType);
+
         foreach (var entry in entries)
         {
             entry.EnsureValid();

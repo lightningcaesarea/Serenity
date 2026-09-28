@@ -41,6 +41,31 @@ public sealed partial class HumanoidCharacterProfile
         set => PhysicalDescription = value;
     }
 
+    /// <summary>
+    /// Serenity - length of the sl_character_info varchar columns. Anything longer made the whole
+    /// character save fail in the database instead of being cut short.
+    /// </summary>
+    public const int MaxLongTextLength = 4096;
+
+    /// <summary>
+    /// Serenity - truncates the free-text character info fields to what the database can hold.
+    /// PhysicalDescription is already capped by the flavor text limit.
+    /// </summary>
+    private void EnsureValidLongText()
+    {
+        PersonalityDescription = ClampLongText(PersonalityDescription);
+        PersonalNotes = ClampLongText(PersonalNotes);
+        OOCNotes = ClampLongText(OOCNotes);
+        Secrets = ClampLongText(Secrets);
+        ExploitableInfo = ClampLongText(ExploitableInfo);
+    }
+
+    private static string ClampLongText(string? value)
+    {
+        value ??= string.Empty;
+        return value.Length <= MaxLongTextLength ? value : value[..MaxLongTextLength];
+    }
+
     public HumanoidCharacterProfile WithPhysicalDesc(string physicalDesc)
     {
         return new(this) { PhysicalDescription = physicalDesc };

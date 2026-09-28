@@ -126,6 +126,21 @@ namespace Content.Server.Preferences.Managers
                 return;
             }
 
+            // Serenity - only keep real jobs with a real priority, so a modified client can't stuff
+            // arbitrary rows into job_priority_entry. Hidden jobs are kept: Assistant is hidden but
+            // still takes a priority.
+            var validated = new Dictionary<ProtoId<JobPrototype>, JobPriority>();
+            foreach (var (jobId, priority) in jobPriorities)
+            {
+                if (Enum.IsDefined(priority) && _prototypeManager.HasIndex(jobId))
+                    validated[jobId] = priority;
+            }
+
+            if (validated.Count != jobPriorities.Count)
+                _sawmill.Warning($"User {userId} sent invalid job priorities.");
+
+            jobPriorities = validated;
+
             var curPrefs = prefsData.Prefs!;
             var session = _playerManager.GetSessionById(userId);
 
@@ -266,12 +281,19 @@ namespace Content.Server.Preferences.Managers
                 return;
             }
 
+            // Only accept preferences for real kinks with a real level, so a modified client
+            // can't stuff arbitrary data into the preferences row.
             var validated = new Dictionary<string, KinkPreferenceLevel>();
             foreach (var (kinkId, level) in message.KinkPreferences)
             {
-                if (!string.IsNullOrEmpty(kinkId) && kinkId.Length <= 128)
+                if (!string.IsNullOrEmpty(kinkId)
+                    && Enum.IsDefined(level)
+                    && _prototypeManager.HasIndex<KinkPrototype>(kinkId))
                     validated[kinkId] = level;
             }
+
+            if (validated.Count != message.KinkPreferences.Count)
+                _sawmill.Warning($"User {userId} sent unknown kink ids.");
 
             var curPrefs = prefsData.Prefs!;
             prefsData.Prefs = new PlayerPreferences(curPrefs.Characters, curPrefs.AdminOOCColor, curPrefs.ConstructionFavorites, curPrefs.JobPriorities, validated, curPrefs.ConsentToggles);
