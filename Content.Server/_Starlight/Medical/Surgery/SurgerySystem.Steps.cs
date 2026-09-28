@@ -14,6 +14,8 @@ using Content.Shared.Damage.Components;
 using Content.Shared._Starlight.Medical.Body.Systems;
 using Content.Shared._Starlight;
 using Content.Shared._Starlight.Medical.Surgery.Components;
+using Content.Shared._Serenity.Medical.Wounds;
+using Content.Shared._Serenity.Medical.Wounds.Systems;
 
 namespace Content.Server._Starlight.Medical.Surgery;
 // Based on the RMC14.
@@ -28,6 +30,7 @@ public sealed partial class SurgerySystem : SharedSurgerySystem
     [Dependency] private LimbSystem _limbSystem = default!;
     [Dependency] private StarlightEntitySystem _entity = default!;
     [Dependency] private SharedBloodstreamSystem _bloodstreamSystem = default!;
+    [Dependency] private SharedWoundSystem _wounds = default!; // Serenity
 
     public void InitializeSteps()
     {
@@ -35,6 +38,7 @@ public sealed partial class SurgerySystem : SharedSurgerySystem
         SubscribeLocalEvent<SurgeryClampBleedEffectComponent, SurgeryStepEvent>(OnStepClampBleedComplete);
         SubscribeLocalEvent<SurgeryStepEmoteEffectComponent, SurgeryStepEvent>(OnStepEmoteEffectComplete);
         SubscribeLocalEvent<SurgeryStepSpawnEffectComponent, SurgeryStepEvent>(OnStepSpawnComplete);
+        SubscribeLocalEvent<SurgeryStepClearWoundEffectComponent, SurgeryStepEvent>(OnStepClearWoundComplete); // Serenity
 
         SubscribeLocalEvent<SurgeryStepOrganExtractComponent, SurgeryStepEvent>(OnStepOrganExtractComplete);
         SubscribeLocalEvent<SurgeryStepOrganInsertComponent, SurgeryStepEvent>(OnStepOrganInsertComplete);
@@ -89,6 +93,14 @@ public sealed partial class SurgerySystem : SharedSurgerySystem
 
     private void OnStepClampBleedComplete(Entity<SurgeryClampBleedEffectComponent> ent, ref SurgeryStepEvent args)
     {
+    }
+
+    // Serenity: resolves wounds tracked by the Wounds system (see Content.Shared._Serenity.Medical.Wounds)
+    // when a step tagged with this effect completes — e.g. bone-setting clears Fracture wounds,
+    // cauterizing clears Burn wounds.
+    private void OnStepClearWoundComplete(Entity<SurgeryStepClearWoundEffectComponent> ent, ref SurgeryStepEvent args)
+    {
+        _wounds.ClearWoundsByCategory(args.Body, ent.Comp.Category);
     }
 
     private void OnStepOrganInsertComplete(Entity<SurgeryStepOrganInsertComponent> ent, ref SurgeryStepEvent args)

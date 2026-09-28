@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-4.0",
+  "copyright": "Katyes, via HellWatcher/honksquad-ss14 (https://github.com/HellWatcher/honksquad-ss14)",
+  "size": {
+    "x": 16,
+    "y": 16
+  },
+  "states": [
+    {
+      "name": "brute_icon"
+    },
+    {
+      "name": "burn_icon"
+    }
+  ]
+}
