@@ -3,6 +3,7 @@
   name: job-name-k9
   description: job-description-k9
   playTimeTracker: JobK9
+  setPreference: false # Serenity: role disabled
   requirements:
   - !type:DepartmentTimeRequirement
     department: Security

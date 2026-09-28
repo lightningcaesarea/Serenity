@@ -55,7 +55,6 @@
             Roboticist: [ 2, 2 ]
             #security
             Warden: [ 1, 1 ]
-            DutyOfficer: [ 1, 1 ]
             SecurityOfficer: [ 4, 6 ]
             SecurityCadet: [ 2, 3 ]
             Brigmedic: [ 1, 1 ]
