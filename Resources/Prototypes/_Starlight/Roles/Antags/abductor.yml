@@ -8,7 +8,7 @@
     role: JobSecurityOfficer
     time: 3h
   - !type:RoleTimeRequirement
-    role: JobSurgeon
+    role: JobMedicalDoctor # Serenity: Surgeon is disabled; doctors do all surgery
     time: 3h
   playTimeTracker: AntagLoneAbductor
 

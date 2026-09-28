@@ -48,7 +48,6 @@
             MedicalIntern: [ 3, 4 ]
             Paramedic: [ 2, 2 ]
             Psychologist: [ 1, 1 ]
-            Surgeon: [ 1, 1 ]
             #science
             Scientist: [ 3, 4 ]
             ResearchAssistant: [ 2, 3 ]
