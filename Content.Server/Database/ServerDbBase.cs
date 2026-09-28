@@ -746,6 +746,86 @@ namespace Content.Server.Database
                 .ToListAsync(cancel);
         }
 
+        #region Serenity Discord links
+
+        public async Task<SerenityDiscordLink?> GetDiscordLinkByPlayer(Guid player, CancellationToken cancel)
+        {
+            await using var db = await GetDb(cancel);
+
+            return await db.DbContext.SerenityDiscordLink
+                .AsNoTracking()
+                .SingleOrDefaultAsync(l => l.PlayerUserId == player, cancel);
+        }
+
+        public async Task<SerenityDiscordLink?> GetDiscordLinkByDiscord(ulong discordId, CancellationToken cancel)
+        {
+            await using var db = await GetDb(cancel);
+
+            var id = unchecked((long) discordId);
+            return await db.DbContext.SerenityDiscordLink
+                .AsNoTracking()
+                .SingleOrDefaultAsync(l => l.DiscordId == id, cancel);
+        }
+
+        /// <summary>
+        /// Inserts a link. Returns false without writing if either side is already linked.
+        /// </summary>
+        public async Task<bool> AddDiscordLink(Guid player, ulong discordId, string? discordUsername)
+        {
+            await using var db = await GetDb();
+
+            var id = unchecked((long) discordId);
+            if (await db.DbContext.SerenityDiscordLink.AnyAsync(l => l.PlayerUserId == player || l.DiscordId == id))
+                return false;
+
+            db.DbContext.SerenityDiscordLink.Add(new SerenityDiscordLink
+            {
+                PlayerUserId = player,
+                DiscordId = id,
+                DiscordUsername = discordUsername,
+                LinkedAt = DateTime.UtcNow,
+            });
+
+            try
+            {
+                await db.DbContext.SaveChangesAsync();
+            }
+            catch (DbUpdateException)
+            {
+                // Lost a race against another link for the same account; the unique indexes held.
+                return false;
+            }
+
+            return true;
+        }
+
+        public async Task UpdateDiscordUsername(Guid player, string discordUsername)
+        {
+            await using var db = await GetDb();
+
+            var row = await db.DbContext.SerenityDiscordLink.SingleOrDefaultAsync(l => l.PlayerUserId == player);
+            if (row == null || row.DiscordUsername == discordUsername)
+                return;
+
+            row.DiscordUsername = discordUsername;
+            await db.DbContext.SaveChangesAsync();
+        }
+
+        public async Task<bool> RemoveDiscordLink(Guid player)
+        {
+            await using var db = await GetDb();
+
+            var row = await db.DbContext.SerenityDiscordLink.SingleOrDefaultAsync(l => l.PlayerUserId == player);
+            if (row == null)
+                return false;
+
+            db.DbContext.SerenityDiscordLink.Remove(row);
+            await db.DbContext.SaveChangesAsync();
+            return true;
+        }
+
+        #endregion
+
         #region Serenity player resources
 
         public async Task<Dictionary<string, double>> GetPlayerResources(Guid player, CancellationToken cancel)

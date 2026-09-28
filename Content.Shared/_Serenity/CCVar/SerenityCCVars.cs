@@ -38,4 +38,42 @@ public sealed partial class SerenityCCVars
     /// </summary>
     public static readonly CVarDef<bool> PoiSpawnerEnabled =
         CVarDef.Create("serenity.poi.enabled", true, CVar.SERVERONLY);
+
+    /// <summary>
+    /// Refuse connections from accounts that are not linked to a Discord account that is still in the guild.
+    /// Needs the Discord bot configured (discord.token, discord.guild_id, discord.prefix). Admins are exempt.
+    /// </summary>
+    public static readonly CVarDef<bool> DiscordLinkRequired =
+        CVarDef.Create("serenity.discord_link.required", false, CVar.SERVERONLY);
+
+    /// <summary>
+    /// Invite shown to players who need to join or link, e.g. https://discord.gg/abc.
+    /// </summary>
+    public static readonly CVarDef<string> DiscordLinkInvite =
+        CVarDef.Create("serenity.discord_link.invite", "", CVar.SERVERONLY);
+
+    /// <summary>
+    /// Minutes a link code stays valid.
+    /// </summary>
+    public static readonly CVarDef<int> DiscordLinkCodeMinutes =
+        CVarDef.Create("serenity.discord_link.code_minutes", 15, CVar.SERVERONLY);
+
+    /// <summary>
+    /// Discord role ID allowed to run the bot's staff commands (link panel, whois). Empty disables them.
+    /// </summary>
+    public static readonly CVarDef<string> DiscordLinkStaffRole =
+        CVarDef.Create("serenity.discord_link.staff_role", "", CVar.SERVERONLY);
+
+    /// <summary>
+    /// Discord channel ID that receives link, unlink and removal notices. Empty disables them.
+    /// </summary>
+    public static readonly CVarDef<string> DiscordLinkLogChannel =
+        CVarDef.Create("serenity.discord_link.log_channel", "", CVar.SERVERONLY | CVar.CONFIDENTIAL);
+
+    /// <summary>
+    /// When Discord can't be reached, let already-linked players in (true) or refuse everyone (false).
+    /// Unlinked players are always refused while linking is required.
+    /// </summary>
+    public static readonly CVarDef<bool> DiscordLinkFailOpen =
+        CVarDef.Create("serenity.discord_link.fail_open", true, CVar.SERVERONLY);
 }
