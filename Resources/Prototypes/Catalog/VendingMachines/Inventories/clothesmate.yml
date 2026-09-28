@@ -6,6 +6,12 @@
     ClothingBackpackDuffel: 5
     ClothingBackpackSatchel: 3
     ClothingBackpackSatchelLeather: 2
+    ClothingBackpackDuffelColorRed: 2
+    ClothingBackpackDuffelColorBlue: 2
+    ClothingBackpackDuffelColorGreen: 2
+    ClothingBackpackDuffelColorBlack: 2
+    ClothingBackpackDuffelColorWhite: 2
+    ClothingBackpackDuffelColorRandom: 3
     ClothingRandomSpawner: 8
     ClothingOuterCoatRandom: 8 # Starlight
     ClothingUniformRandomShorts: 4
