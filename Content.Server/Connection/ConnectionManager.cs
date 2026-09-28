@@ -70,6 +70,7 @@ namespace Content.Server.Connection
         [Dependency] private IActorRouter _actors = default!; // NullLink
         [Dependency] private INullLinkPlayerManager _nullLinkPlayerManager = default!; // NullLink
         [Dependency] private IBanManager _banManager = default!; // NullLink-edit: move to general method at Manager
+        [Dependency] private Content.Server._Serenity.DiscordLinking.DiscordAccountLinkManager _discordAccountLinks = default!; // Serenity
         [Dependency] private IPlayerManager _plyMgr = default!;
         [Dependency] private IServerNetManager _netMgr = default!;
         [Dependency] private IServerDbManager _db = default!;
@@ -458,6 +459,11 @@ namespace Content.Server.Connection
                     break;
                 }
             }
+
+            // Serenity start: accounts must be linked to a Discord account that's still in the guild. Admins are exempt.
+            if (adminData is null && await _discordAccountLinks.CheckConnection(userId, e.UserName) is { } discordDeny)
+                return (ConnectionDenyReason.Whitelist, discordDeny, null);
+            // Serenity end
 
             // ALWAYS keep this at the end, to preserve the API limit.
             if (_cfg.GetCVar(CCVars.GameIPIntelEnabled) && adminData == null)

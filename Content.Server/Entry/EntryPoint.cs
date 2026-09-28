@@ -56,6 +56,7 @@ namespace Content.Server.Entry
         [Dependency] private ContentNetworkResourceManager _netResMan = default!;
         [Dependency] private DiscordChatLink _discordChatLink = default!;
         [Dependency] private DiscordLink _discordLink = default!;
+        [Dependency] private Content.Server._Serenity.DiscordLinking.DiscordAccountLinkManager _discordAccountLinks = default!; // Serenity
         [Dependency] private EuiManager _euiManager = default!;
         [Dependency] private GhostKickManager _ghostKick = default!;
         [Dependency] private IAdminManager _admin = default!;
@@ -195,6 +196,7 @@ namespace Content.Server.Entry
             _rules.Initialize();
             _discordLink.Initialize();
             _discordChatLink.Initialize();
+            _discordAccountLinks.Initialize(); // Serenity
             _euiManager.Initialize();
             _gameMap.Initialize();
             _entSys.GetEntitySystem<GameTicker>().PostInitialize();
@@ -248,6 +250,7 @@ namespace Content.Server.Entry
             // We don't care when or how this finishes, just spin the task off into the void.
             _ = _discordLink.Shutdown();
             _discordChatLink.Shutdown();
+            _discordAccountLinks.Shutdown(); // Serenity
             // Nullink start
             _nullLinkPlayerManager.Shutdown();
             _nullLinkEventBus.Shutdown();

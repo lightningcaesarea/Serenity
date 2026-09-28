@@ -21,7 +21,7 @@ namespace Content.Server.Database.Migrations.Postgres
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "10.0.0")
+                .HasAnnotation("ProductVersion", "10.0.6")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -941,14 +941,14 @@ namespace Content.Server.Database.Migrations.Postgres
                         .HasColumnType("uuid")
                         .HasColumnName("player_id");
 
+                    b.Property<string>("Reason")
+                        .HasColumnType("text")
+                        .HasColumnName("reason");
+
                     b.Property<string>("Resource")
                         .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("resource");
-
-                    b.Property<string>("Reason")
-                        .HasColumnType("text")
-                        .HasColumnName("reason");
 
                     b.HasKey("Id")
                         .HasName("PK_serenity_resource_transaction");
@@ -972,15 +972,15 @@ namespace Content.Server.Database.Migrations.Postgres
                         .HasColumnType("text")
                         .HasColumnName("admin_ooc_color");
 
-                    b.PrimitiveCollection<List<string>>("ConstructionFavorites")
-                        .IsRequired()
-                        .HasColumnType("text[]")
-                        .HasColumnName("construction_favorites");
-
                     b.PrimitiveCollection<List<string>>("ConsentToggles")
                         .IsRequired()
                         .HasColumnType("text[]")
                         .HasColumnName("consent_toggles");
+
+                    b.PrimitiveCollection<List<string>>("ConstructionFavorites")
+                        .IsRequired()
+                        .HasColumnType("text[]")
+                        .HasColumnName("construction_favorites");
 
                     b.PrimitiveCollection<List<string>>("KinkPreferences")
                         .IsRequired()
@@ -1247,6 +1247,33 @@ namespace Content.Server.Database.Migrations.Postgres
                     b.HasIndex("StartDate");
 
                     b.ToTable("round", (string)null);
+                });
+
+            modelBuilder.Entity("Content.Server.Database.SerenityDiscordLink", b =>
+                {
+                    b.Property<Guid>("PlayerUserId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("player_user_id");
+
+                    b.Property<long>("DiscordId")
+                        .HasColumnType("bigint")
+                        .HasColumnName("discord_id");
+
+                    b.Property<string>("DiscordUsername")
+                        .HasColumnType("text")
+                        .HasColumnName("discord_username");
+
+                    b.Property<DateTime>("LinkedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("linked_at");
+
+                    b.HasKey("PlayerUserId")
+                        .HasName("PK_serenity_discord_link");
+
+                    b.HasIndex("DiscordId")
+                        .IsUnique();
+
+                    b.ToTable("serenity_discord_link", (string)null);
                 });
 
             modelBuilder.Entity("Content.Server.Database.Server", b =>

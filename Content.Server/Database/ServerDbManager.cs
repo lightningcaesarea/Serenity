@@ -187,6 +187,22 @@ namespace Content.Server.Database
 
         #endregion
 
+        #region Serenity Discord links
+
+        Task<SerenityDiscordLink?> GetDiscordLinkByPlayer(Guid player, CancellationToken cancel = default);
+
+        Task<SerenityDiscordLink?> GetDiscordLinkByDiscord(ulong discordId, CancellationToken cancel = default);
+
+        /// <summary>Links the two accounts. False if either one is already linked.</summary>
+        Task<bool> AddDiscordLink(Guid player, ulong discordId, string? discordUsername);
+
+        Task UpdateDiscordUsername(Guid player, string discordUsername);
+
+        /// <summary>False if the player had no link.</summary>
+        Task<bool> RemoveDiscordLink(Guid player);
+
+        #endregion
+
         #region Serenity player resources
 
         /// <summary>Every persisted resource for a player, keyed by resource id (e.g. "credits").</summary>
@@ -652,6 +668,36 @@ namespace Content.Server.Database
         {
             DbWriteOpsMetric.Inc();
             return RunDbCommand(() => _db.UpdatePlayTimes(updates));
+        }
+
+        public Task<SerenityDiscordLink?> GetDiscordLinkByPlayer(Guid player, CancellationToken cancel)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetDiscordLinkByPlayer(player, cancel));
+        }
+
+        public Task<SerenityDiscordLink?> GetDiscordLinkByDiscord(ulong discordId, CancellationToken cancel)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetDiscordLinkByDiscord(discordId, cancel));
+        }
+
+        public Task<bool> AddDiscordLink(Guid player, ulong discordId, string? discordUsername)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.AddDiscordLink(player, discordId, discordUsername));
+        }
+
+        public Task UpdateDiscordUsername(Guid player, string discordUsername)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.UpdateDiscordUsername(player, discordUsername));
+        }
+
+        public Task<bool> RemoveDiscordLink(Guid player)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.RemoveDiscordLink(player));
         }
 
         public Task<Dictionary<string, double>> GetPlayerResources(Guid player, CancellationToken cancel)

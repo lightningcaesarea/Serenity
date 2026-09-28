@@ -1,10 +1,12 @@
 ﻿using System.Threading.Tasks;
+using System.Threading; // Serenity
 using Content.Shared.CCVar;
 using NetCord;
 using NetCord.Gateway;
 using NetCord.Rest;
 using Robust.Shared.Configuration;
 using Robust.Shared.Utility;
+using DiscordInteraction = NetCord.Interaction; // Serenity
 
 namespace Content.Server.Discord.DiscordLink;
 
@@ -74,6 +76,18 @@ public sealed partial class DiscordLink : IPostInjectInit
     /// </summary>
     public event Action<Message>? OnMessageReceived;
 
+    // Serenity start: account linking needs button/modal interactions and member-removal notices.
+    /// <summary>
+    ///     Raised for every interaction (button presses, modal submissions). Handlers must respond themselves.
+    /// </summary>
+    public event Func<DiscordInteraction, ValueTask>? OnInteractionReceived;
+
+    /// <summary>
+    ///     Raised with the Discord user ID when someone leaves, is kicked from, or is banned from the configured guild.
+    /// </summary>
+    public event Action<ulong>? OnGuildUserRemoved;
+    // Serenity end
+
     // TODO: consider implementing this in a way where we can unregister it in a similar way
     public void RegisterCommandCallback(Action<CommandReceivedEventArgs> callback, string command)
     {
@@ -118,6 +132,8 @@ public sealed partial class DiscordLink : IPostInjectInit
         });
         _client.MessageCreate += OnCommandReceivedInternal;
         _client.MessageCreate += OnMessageReceivedInternal;
+        _client.InteractionCreate += OnInteractionReceivedInternal; // Serenity
+        _client.GuildUserRemove += OnGuildUserRemoveInternal; // Serenity
 
         _botToken = token;
         // Since you cannot change the token while the server is running / the DiscordLink is initialized,
@@ -152,6 +168,8 @@ public sealed partial class DiscordLink : IPostInjectInit
             // Unsubscribe from the events.
             _client.MessageCreate -= OnCommandReceivedInternal;
             _client.MessageCreate -= OnMessageReceivedInternal;
+            _client.InteractionCreate -= OnInteractionReceivedInternal; // Serenity
+            _client.GuildUserRemove -= OnGuildUserRemoveInternal; // Serenity
 
             await _client.CloseAsync();
             _client.Dispose();
@@ -222,7 +240,88 @@ public sealed partial class DiscordLink : IPostInjectInit
         return ValueTask.CompletedTask;
     }
 
+    // Serenity start
+    private async ValueTask OnInteractionReceivedInternal(DiscordInteraction interaction)
+    {
+        if (OnInteractionReceived is not { } handler)
+            return;
+
+        try
+        {
+            await handler(interaction);
+        }
+        catch (Exception e)
+        {
+            _sawmill.Error($"Error handling Discord interaction: {e}");
+        }
+    }
+
+    private ValueTask OnGuildUserRemoveInternal(GuildUserRemoveEventArgs args)
+    {
+        if (args.GuildId == _guildId)
+            OnGuildUserRemoved?.Invoke(args.User.Id);
+
+        return ValueTask.CompletedTask;
+    }
+    // Serenity end
+
     #region Proxy methods
+
+    // Serenity start
+    /// <summary>
+    ///     The configured guild's member with this ID, or null if they aren't a member.
+    ///     Throws if Discord can't be reached or the bot isn't connected.
+    /// </summary>
+    public async Task<GuildUser?> GetGuildUserAsync(ulong userId, CancellationToken cancel = default)
+    {
+        if (_client == null)
+            throw new InvalidOperationException("Discord bot is not connected.");
+
+        try
+        {
+            return await _client.Rest.GetGuildUserAsync(_guildId, userId, cancellationToken: cancel);
+        }
+        catch (RestException e) when (e.StatusCode == System.Net.HttpStatusCode.NotFound)
+        {
+            return null;
+        }
+    }
+
+    /// <summary>
+    ///     Whether this user is banned from the configured guild. Needs the Ban Members permission;
+    ///     returns null if the bot can't tell.
+    /// </summary>
+    public async Task<bool?> IsBannedAsync(ulong userId, CancellationToken cancel = default)
+    {
+        if (_client == null)
+            return null;
+
+        try
+        {
+            await _client.Rest.GetGuildBanAsync(_guildId, userId, cancellationToken: cancel);
+            return true;
+        }
+        catch (RestException e) when (e.StatusCode == System.Net.HttpStatusCode.NotFound)
+        {
+            return false;
+        }
+        catch (RestException)
+        {
+            return null;
+        }
+    }
+
+    /// <summary>
+    ///     Sends a message with full properties (components, embeds) to a channel.
+    /// </summary>
+    public async Task SendMessageAsync(ulong channelId, MessageProperties message)
+    {
+        if (_client == null)
+            return;
+
+        await _client.Rest.SendMessageAsync(channelId, message);
+    }
+    // Serenity end
 
     /// <summary>
     /// Sends a message to a Discord channel with the specified ID. Without any mentions.

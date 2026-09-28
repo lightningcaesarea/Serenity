@@ -49,6 +49,8 @@ namespace Content.Server.Database
         // Serenity: DB-backed player resources (Sector Credits) + audit ledger.
         public DbSet<PlayerResource> PlayerResource { get; set; } = null!;
         public DbSet<PlayerResourceTransaction> PlayerResourceTransaction { get; set; } = null!;
+        // Serenity: one-to-one SS14 account <-> Discord account links.
+        public DbSet<SerenityDiscordLink> SerenityDiscordLink { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -180,6 +182,10 @@ namespace Content.Server.Database
 
             modelBuilder.Entity<PlayerResourceTransaction>()
                 .HasIndex(t => t.PlayerId);
+
+            modelBuilder.Entity<SerenityDiscordLink>()
+                .HasIndex(l => l.DiscordId)
+                .IsUnique();
 
             modelBuilder.Entity<AdminLogPlayer>()
                 .HasOne(player => player.Player)
@@ -1157,6 +1163,25 @@ namespace Content.Server.Database
 
         /// <summary>Why the balance moved (e.g. "salary:Chef", "atm-deposit", "admin:Name: text"). Null for legacy rows.</summary>
         public string? Reason { get; set; }
+    }
+
+    /// <summary>
+    /// Serenity: links one SS14 account to one Discord account. Both sides are unique,
+    /// so a Discord account can never vouch for more than one SS14 account.
+    /// </summary>
+    [Table("serenity_discord_link")]
+    public sealed class SerenityDiscordLink
+    {
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public Guid PlayerUserId { get; set; }
+
+        /// <summary>Discord snowflake. Stored signed; snowflakes stay below 2^63.</summary>
+        public long DiscordId { get; set; }
+
+        /// <summary>Discord username as of the last successful check, for admin lookups.</summary>
+        public string? DiscordUsername { get; set; }
+
+        public DateTime LinkedAt { get; set; }
     }
 
     [Table("uploaded_resource_log")]
