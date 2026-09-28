@@ -601,6 +601,8 @@
   name: R&D computer
   description: A computer used to interface with R&D tools.
   components:
+  - type: SkillRequired # Serenity
+    skills: [ Research ]
   - type: Sprite
     layers:
     - map: ["computerLayerBody"]
@@ -654,6 +656,8 @@
   name: analysis console
   description: A computer used to interface with the artifact analyzer.
   components:
+  - type: SkillRequired # Serenity
+    skills: [ Xenoarchaeology ]
   - type: Sprite
     layers:
     - map: ["computerLayerBody"]

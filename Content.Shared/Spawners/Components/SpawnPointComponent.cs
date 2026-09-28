@@ -14,6 +14,21 @@ public sealed partial class SpawnPointComponent : Component, ISpawnPoint
     [DataField("job_id")]
     public ProtoId<JobPrototype>? Job;
 
+    // Serenity start
+    /// <summary>
+    /// Further jobs that may also spawn here, so a new job can share an existing job's spawn points
+    /// without placing new markers on every map.
+    /// </summary>
+    [DataField]
+    public List<ProtoId<JobPrototype>> AdditionalJobs = new();
+
+    /// <summary>
+    /// Whether <paramref name="job"/> may spawn here. A null job, or a spawn point with no job, matches anything.
+    /// </summary>
+    public bool AllowsJob(ProtoId<JobPrototype>? job)
+        => job == null || Job == null || Job == job || AdditionalJobs.Contains(job.Value);
+    // Serenity end
+
     /// <summary>
     /// The type of spawn point.
     /// </summary>

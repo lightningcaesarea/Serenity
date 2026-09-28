@@ -1,0 +1,77 @@
+# Senior Officer: a real job built from upstream's senior-officer loadout assets (PDA, ID card, icon,
+# uniforms). Same playtime gate as upstream's SeniorOfficer loadout group. Spawns at Security Officer
+# spawn points (SpawnPointSecurityOfficer lists it in additionalJobs).
+
+- type: playTimeTracker
+  id: JobSeniorOfficer
+
+- type: job
+  id: SeniorOfficer
+  name: job-name-senior-officer
+  description: job-description-senior-officer
+  playTimeTracker: JobSeniorOfficer
+  requirements:
+  - !type:RoleTimeRequirement
+    role: JobWarden
+    time: 6h
+  - !type:DepartmentTimeRequirement
+    department: Security
+    time: 60h
+  startingGear: SecurityOfficerGear
+  icon: "JobIconSeniorOfficer"
+  supervisors: job-supervisors-hos
+  access:
+  - Security
+  - Brig
+  - Maintenance
+  - External
+  - Cryogenics
+  special:
+  - !type:AddImplantSpecial
+    implants: [ MindShieldImplant ]
+
+- type: chameleonOutfit
+  id: SeniorOfficerChameleonOutfit
+  job: SeniorOfficer
+  hasMindShield: true
+  equipment:
+    head: ClothingHeadHatBeretSecurity
+    mask: ClothingMaskGasSecurity
+    neck: Dinkystar
+    gloves: ClothingHandsGlovesColorBlack
+
+- type: roleLoadout
+  id: JobSeniorOfficer
+  groups:
+  - SecurityHead
+  - SecurityMask
+  - SecurityJumpsuit
+  - SecurityBackpack
+  - SecurityEyewear
+  - SecurityOuterClothing
+  - SecurityGloves
+  - SecurityShoes
+  - SeniorOfficerPDA
+  - SecurityBelt
+  - SecurityTie
+  - SecurityNonLethalWeapon
+  - SecuritySidearm
+  - SurvivalExtended
+  - Trinkets
+  - Scarves
+  - Pins
+  - Pens
+  - SecurityJobTrinkets
+  - GroupSpeciesBreathToolSecurity
+
+- type: loadoutGroup
+  id: SeniorOfficerPDA
+  name: loadout-group-security-id
+  loadouts:
+  - SeniorOfficerPDAJob
+
+# The job carries its own playtime gate, so its PDA needs no loadout effect.
+- type: loadout
+  id: SeniorOfficerPDAJob
+  equipment:
+    id: SeniorOfficerPDA

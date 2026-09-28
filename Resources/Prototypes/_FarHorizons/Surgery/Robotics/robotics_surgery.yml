@@ -4,6 +4,8 @@
   name: Remove Outer Plating
   description: Removes the protective outer plating.
   components:
+  - type: SkillRequired # Serenity
+    skills: [ Robotics ]
   - type: Surgery
     priority: -100
     steps:
@@ -21,6 +23,8 @@
   name: Restore Outer Plating
   description: Restores the protective outer plating.
   components:
+  - type: SkillRequired # Serenity
+    skills: [ Robotics ]
   - type: Surgery
     priority: 100
     requirement:
@@ -40,6 +44,8 @@
   name: Amputation
   description: Surgical removal of a limb.
   components:
+  - type: SkillRequired # Serenity
+    skills: [ Robotics ]
   - type: Surgery
     requirement:
     - SurgeryRemovePlating
@@ -68,6 +74,8 @@
   name: Amputation
   description: Surgical removal of a head.
   components:
+  - type: SkillRequired # Serenity
+    skills: [ Robotics ]
   - type: Surgery
     requirement:
     - SurgeryRemovePlating
@@ -91,6 +99,8 @@
   name: Limb Attachment Head
   description: Surgical attachment of a limb.
   components:
+  - type: SkillRequired # Serenity
+    skills: [ Robotics ]
   - type: Surgery
     requirement:
     - SurgeryRemovePlating
@@ -117,6 +127,8 @@
   name: Limb Attachment Left Arm
   description: Surgical attachment of a limb.
   components:
+  - type: SkillRequired # Serenity
+    skills: [ Robotics ]
   - type: SurgeryLimbSlotCondition
     slot: left arm
 
@@ -126,6 +138,8 @@
   name: Limb Attachment Left Hand
   description: Surgical attachment of a limb.
   components:
+  - type: SkillRequired # Serenity
+    skills: [ Robotics ]
   - type: SurgeryLimbSlotCondition
     slot: left hand
 
@@ -135,6 +149,8 @@
   name: Limb Attachment Right Arm
   description: Surgical attachment of a limb.
   components:
+  - type: SkillRequired # Serenity
+    skills: [ Robotics ]
   - type: SurgeryLimbSlotCondition
     slot: right arm
 
@@ -144,6 +160,8 @@
   name: Limb Attachment Right Hand
   description: Surgical attachment of a limb.
   components:
+  - type: SkillRequired # Serenity
+    skills: [ Robotics ]
   - type: SurgeryLimbSlotCondition
     slot: right hand
 
@@ -153,6 +171,8 @@
   name: Limb Attachment Left Leg
   description: Surgical attachment of a limb.
   components:
+  - type: SkillRequired # Serenity
+    skills: [ Robotics ]
   - type: SurgeryLimbSlotCondition
     slot: left leg
 
@@ -162,6 +182,8 @@
   name: Limb Attachment Left Foot
   description: Surgical attachment of a limb.
   components:
+  - type: SkillRequired # Serenity
+    skills: [ Robotics ]
   - type: SurgeryLimbSlotCondition
     slot: left foot
 
@@ -171,6 +193,8 @@
   name: Limb Attachment Right Leg
   description: Surgical attachment of a limb.
   components:
+  - type: SkillRequired # Serenity
+    skills: [ Robotics ]
   - type: SurgeryLimbSlotCondition
     slot: right leg
 
@@ -180,6 +204,8 @@
   name: Limb Attachment Right Foot
   description: Surgical attachment of a limb.
   components:
+  - type: SkillRequired # Serenity
+    skills: [ Robotics ]
   - type: SurgeryLimbSlotCondition
     slot: right foot
 
@@ -188,6 +214,8 @@
   id: SurgeryExtractCavityItemRobot
   name: Extract Item
   components:
+  - type: SkillRequired # Serenity
+    skills: [ Robotics ]
   - type: Surgery
     requirement:
     - SurgeryRemovePlating
@@ -214,6 +242,8 @@
   id: SurgeryImplantCavityItemRobot
   name: Implant Item
   components:
+  - type: SkillRequired # Serenity
+    skills: [ Robotics ]
   - type: Surgery
     requirement:
     - SurgeryRemovePlating
@@ -240,6 +270,8 @@
   id: SurgeryExtractEyeImplantRobot
   name: Extract Eye Implant
   components:
+  - type: SkillRequired # Serenity
+    skills: [ Robotics ]
   - type: Surgery
     requirement:
     - SurgeryRemovePlating
@@ -267,6 +299,8 @@
   id: SurgeryImplantEyeImplantRobot
   name: Implant Eye Implant
   components:
+  - type: SkillRequired # Serenity
+    skills: [ Robotics ]
   - type: Surgery
     requirement:
     - SurgeryRemovePlating
@@ -294,6 +328,8 @@
   id: SurgeryExtractEyesRobot
   name: Extract Eyes
   components:
+  - type: SkillRequired # Serenity
+    skills: [ Robotics ]
   - type: Surgery
     requirement:
     - SurgeryRemovePlating
@@ -322,6 +358,8 @@
   id: SurgeryImplantEyesRobot
   name: Implant Eyes
   components:
+  - type: SkillRequired # Serenity
+    skills: [ Robotics ]
   - type: Surgery
     requirement:
     - SurgeryRemovePlating
@@ -350,6 +388,8 @@
   id: SurgeryExtractModulator
   name: Extract Voice Modulator
   components:
+  - type: SkillRequired # Serenity
+    skills: [ Robotics ]
   - type: Surgery
     requirement:
     - SurgeryRemovePlating
@@ -375,6 +415,8 @@
   id: SurgeryImplantModulator
   name: Implant Voice Modulator
   components:
+  - type: SkillRequired # Serenity
+    skills: [ Robotics ]
   - type: Surgery
     requirement:
     - SurgeryRemovePlating

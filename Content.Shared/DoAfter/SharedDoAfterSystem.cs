@@ -217,6 +217,19 @@ public abstract partial class SharedDoAfterSystem : EntitySystem
             return false;
         }
 
+        // Serenity start: let skills (and anything else) scale or refuse a do-after before it begins.
+        var starting = new Content.Shared._Serenity.DoAfter.DoAfterStartingEvent(args);
+        RaiseLocalEvent(args.User, ref starting);
+        if (starting.Cancelled)
+        {
+            id = null;
+            return false;
+        }
+
+        if (starting.DelayMultiplier != 1f)
+            args.Delay *= starting.DelayMultiplier;
+        // Serenity end
+
         id = new DoAfterId(args.User, comp.NextId++);
         var doAfter = new DoAfter(id.Value.Index, args, GameTiming.CurTime);
 

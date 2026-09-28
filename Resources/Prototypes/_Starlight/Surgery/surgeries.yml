@@ -2,6 +2,9 @@
   id: SurgeryBase
   categories:
   - HideSpawnMenu
+  components:
+  - type: SkillRequired # Serenity
+    skills: [ Surgery ]
 
 - type: entity
   parent: SurgeryBase

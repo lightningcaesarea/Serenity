@@ -3,6 +3,8 @@
   id: SurgeryExtractHandImplantRobot
   name: Extract Hand Implant
   components:
+  - type: SkillRequired # Serenity
+    skills: [ Robotics ]
   - type: Surgery
     requirement:
     - SurgeryRemovePlating
@@ -29,6 +31,8 @@
   id: SurgeryImplantHandImplantRobot
   name: Implant Hand Implant
   components:
+  - type: SkillRequired # Serenity
+    skills: [ Robotics ]
   - type: Surgery
     requirement:
     - SurgeryRemovePlating
@@ -57,6 +61,8 @@
   id: SurgeryExtractBrainImplantRobot
   name: Extract Brain Implant
   components:
+  - type: SkillRequired # Serenity
+    skills: [ Robotics ]
   - type: Surgery
     requirement:
     - SurgeryRemovePlating
@@ -90,6 +96,8 @@
   id: SurgeryImplantBrainImplantRobot
   name: Implant Brain Implant
   components:
+  - type: SkillRequired # Serenity
+    skills: [ Robotics ]
   - type: Surgery
     requirement:
     - SurgeryRemovePlating

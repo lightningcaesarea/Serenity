@@ -46,4 +46,4 @@ job-description-security = Catch criminals and enemies of the station, enforce t
 job-description-serviceworker = Learn the basics of bartending, cooking, and growing plants. Attend to the crew, and serve them well.
 job-description-station-ai = Follow your laws, serve the crew.
 job-description-visitor = Enjoy your visit to the station.
-job-description-warden = Patrol the Security department, ensure that no one is stealing from the armory, and make sure that all prisoners are processed and let out when their time is up.
+job-description-warden = Run the armoury and the brig: issue and account for weapons, make sure nothing walks out of the armoury, and see that every prisoner is processed and released when their time is up.

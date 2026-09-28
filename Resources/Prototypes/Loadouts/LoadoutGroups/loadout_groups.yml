@@ -1618,7 +1618,7 @@
   name: loadout-group-security-id
   loadouts:
   - SecurityPDA
-  - SeniorOfficerPDA
+  # Serenity: SeniorOfficerPDA moved to the Senior Officer job
 
 - type: loadoutGroup
   id: SecurityJobTrinkets

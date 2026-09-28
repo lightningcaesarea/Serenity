@@ -2,6 +2,7 @@
     xmlns="https://spacestation14.io"
     xmlns:windows="clr-namespace:Content.Client.UserInterface.Systems.Character.Windows"
     xmlns:ui="clr-namespace:Content.Client._Starlight.Character.Info.UI"
+    xmlns:skills="clr-namespace:Content.Client._Serenity.Skills.UI"
     Title="{Loc 'character-info-title'}"
     MinWidth="400"
     MinHeight="545">
@@ -12,6 +13,7 @@
             <ui:CharacterICInfoControl Name="InfoIC" Access="Public"/>
             <ui:CharacterOOCInfoControl Name="InfoOOC" Access="Public"/>
             <ui:CharacterBackgroundInfoControl Name="InfoBackground" Access="Public"/>
+            <skills:CharacterSkillsControl Name="InfoSkills" Access="Public"/> <!-- Serenity -->
         </TabContainer>
     </ScrollContainer>
 </windows:CharacterWindow>

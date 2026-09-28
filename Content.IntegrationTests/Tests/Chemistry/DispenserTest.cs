@@ -1,4 +1,5 @@
 using Content.Client.Chemistry.UI;
+using Content.Server._Serenity.Skills; // Serenity
 using Content.IntegrationTests.Tests.Interaction;
 using Content.Shared.Chemistry;
 using Content.Shared.Containers.ItemSlots;
@@ -15,6 +16,10 @@ public sealed class DispenserTest : InteractionTest
     {
         await SpawnTarget("ChemDispenser");
         ToggleNeedPower();
+
+        // Serenity: the dispenser needs the Chemistry skill.
+        await Server.WaitPost(() => SEntMan.System<SkillSystem>().GrantSkill(SEntMan.GetEntity(Player), "Chemistry"));
+        await RunTicks(5);
 
         // Insert beaker
         await InteractUsing("Beaker");
