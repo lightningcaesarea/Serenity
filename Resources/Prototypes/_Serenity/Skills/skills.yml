@@ -36,13 +36,6 @@
       components: [ AtmosPipeLayers ]
     skilled: 0.6
 
-- type: skill
-  id: Robotics
-  name: skill-robotics-name
-  description: skill-robotics-desc
-  category: skill-category-engineering
-  requires: [ Electrical ]
-
 # Medical
 
 - type: skill
@@ -93,6 +86,13 @@
   description: skill-xenoarchaeology-desc
   category: skill-category-science
   requires: [ Research ]
+
+- type: skill
+  id: Robotics
+  name: skill-robotics-name
+  description: skill-robotics-desc
+  category: skill-category-science
+  requires: [ Electrical ]
 
 # Service
 
