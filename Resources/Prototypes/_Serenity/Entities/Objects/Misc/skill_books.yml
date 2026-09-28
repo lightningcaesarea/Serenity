@@ -142,26 +142,6 @@
 
 - type: entity
   parent: SkillBookBase
-  id: SkillBookAdvancedSurgery
-  name: Advanced Surgical Procedures
-  description: A dense training manual. Reading it cover to cover teaches its subject, but it won't survive being studied that hard.
-  components:
-  - type: Sprite
-    layers:
-    - state: paper
-    - state: cover_strong
-      color: "#155e75"
-      map: [ "cover" ]
-    - state: decor_wingette
-      color: "#e5e7eb"
-    - state: icon_dna
-      map: [ "icon" ]
-  - type: SkillBook
-    skill: AdvancedSurgery
-    departments: [ Medical ]
-
-- type: entity
-  parent: SkillBookBase
   id: SkillBookChemistry
   name: Practical Chemistry
   description: A dense training manual. Reading it cover to cover teaches its subject, but it won't survive being studied that hard.

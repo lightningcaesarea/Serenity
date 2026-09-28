@@ -59,13 +59,6 @@
     skilled: 0.85
 
 - type: skill
-  id: AdvancedSurgery
-  name: skill-advanced-surgery-name
-  description: skill-advanced-surgery-desc
-  category: skill-category-medical
-  requires: [ Surgery ]
-
-- type: skill
   id: Chemistry
   name: skill-chemistry-name
   description: skill-chemistry-desc

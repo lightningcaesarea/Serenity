@@ -125,7 +125,7 @@ public sealed class SkillPrototypeTest
             Assert.That(skillSys.GrantSkill(body, "Medicine"));
             Assert.That(skillSys.HasSkill(body, "Medicine"), "a mindless body reads its pending skills");
             Assert.That(skillSys.GetMissingPrerequisites(body, "Surgery"), Is.Empty);
-            Assert.That(skillSys.GetMissingPrerequisites(body, "AdvancedSurgery"), Does.Contain(new ProtoId<SkillPrototype>("Surgery")));
+            Assert.That(skillSys.GetMissingPrerequisites(body, "Xenoarchaeology"), Does.Contain(new ProtoId<SkillPrototype>("Research")));
 
             var mind = mindSys.CreateMind(null);
             mindSys.TransferTo(mind, body, mind: mind);

@@ -4,8 +4,6 @@
   name: Amputation
   description: Surgical removal of a limb.
   components:
-  - type: SkillRequired # Serenity
-    skills: [ AdvancedSurgery ]
   - type: Surgery
     requirement:
     - SurgeryOpenIncision

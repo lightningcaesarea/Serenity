@@ -24,10 +24,6 @@
   skills: [ Medicine, Surgery ]
 
 - type: jobSkills
-  id: Surgeon
-  skills: [ Medicine, Surgery, AdvancedSurgery ]
-
-- type: jobSkills
   id: MedicalIntern
   skills: [ Medicine ]
 
@@ -41,7 +37,7 @@
 
 - type: jobSkills
   id: ChiefMedicalOfficer
-  skills: [ Medicine, Surgery, AdvancedSurgery, Chemistry ]
+  skills: [ Medicine, Surgery, Chemistry ]
 
 - type: jobSkills
   id: Brigmedic
@@ -118,7 +114,7 @@
 
 - type: jobSkills
   id: ERTMedical
-  skills: [ Medicine, Surgery, AdvancedSurgery, Chemistry ]
+  skills: [ Medicine, Surgery, Chemistry ]
 
 - type: jobSkills
   id: ERTSecurity
