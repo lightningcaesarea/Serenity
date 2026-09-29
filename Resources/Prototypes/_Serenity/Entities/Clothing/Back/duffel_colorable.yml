@@ -1,0 +1,324 @@
+# Colorable duffel system — recreates the layered-sprite-tinting mechanic Frontier
+# Station 14 uses for its departmental duffels, built fresh for Serenity (their
+# current entity/YAML wiring is AGPL post-2024-07-01 and not portable; this is an
+# original re-implementation of the mechanic, not a copy of their code).
+#
+# The shared texture (color.rsi) is CC-BY-SA-3.0, originally from tgstation, via
+# Frontier Station 14 — see its meta.json for full provenance. Five independently
+# tintable regions: base, sling, straps, handle, zipper. Each colored variant below
+# just overrides the `color:` on each layer/state — no new art needed per color.
+
+- type: entity
+  parent: ClothingBackpackDuffel
+  id: ClothingBackpackDuffelColorable
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _Serenity/Clothing/Back/Duffels/color.rsi
+    layers:
+    - state: icon-base
+      map: ["duffelBase"]
+    - state: icon-sling
+      map: ["duffelSling"]
+    - state: icon-decal-straps
+      map: ["duffelStraps"]
+    - state: icon-handle
+      map: ["duffelHandle"]
+    - state: icon-zipper
+      map: ["duffelZipper"]
+  - type: Clothing
+    sprite: _Serenity/Clothing/Back/Duffels/color.rsi
+    clothingVisuals:
+      back:
+      - state: equipped-BACKPACK-base
+        map: ["duffelBase"]
+      - state: equipped-BACKPACK-sling
+        map: ["duffelSling"]
+      - state: equipped-BACKPACK-decal-straps
+        map: ["duffelStraps"]
+      - state: equipped-BACKPACK-handle
+        map: ["duffelHandle"]
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left-base
+        map: ["duffelBase"]
+      - state: inhand-left-sling
+        map: ["duffelSling"]
+      - state: inhand-left-decal-straps
+        map: ["duffelStraps"]
+      - state: inhand-left-handle
+        map: ["duffelHandle"]
+      - state: inhand-left-zipper
+        map: ["duffelZipper"]
+      right:
+      - state: inhand-right-base
+        map: ["duffelBase"]
+      - state: inhand-right-sling
+        map: ["duffelSling"]
+      - state: inhand-right-decal-straps
+        map: ["duffelStraps"]
+      - state: inhand-right-handle
+        map: ["duffelHandle"]
+      - state: inhand-right-zipper
+        map: ["duffelZipper"]
+
+# ── Fixed color variants ──────────────────────────────────────────────────────
+# Each overrides the color of every layer via LayerData shorthand. "Base" is the
+# main body color, the rest (sling/straps/handle) form the accent/trim color.
+
+- type: entity
+  parent: ClothingBackpackDuffelColorable
+  id: ClothingBackpackDuffelColorRed
+  name: red duffel bag
+  description: A large duffel bag with a bold red finish.
+  components:
+  - type: Sprite
+    layers:
+    - state: icon-base
+      color: "#a83232"
+    - state: icon-sling
+      color: "#3a3a3a"
+    - state: icon-decal-straps
+      color: "#3a3a3a"
+    - state: icon-handle
+      color: "#3a3a3a"
+    - state: icon-zipper
+  - type: Clothing
+    clothingVisuals:
+      back:
+      - state: equipped-BACKPACK-base
+        color: "#a83232"
+      - state: equipped-BACKPACK-sling
+        color: "#3a3a3a"
+      - state: equipped-BACKPACK-decal-straps
+        color: "#3a3a3a"
+      - state: equipped-BACKPACK-handle
+        color: "#3a3a3a"
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left-base
+        color: "#a83232"
+      - state: inhand-left-sling
+        color: "#3a3a3a"
+      - state: inhand-left-decal-straps
+        color: "#3a3a3a"
+      - state: inhand-left-handle
+        color: "#3a3a3a"
+      - state: inhand-left-zipper
+      right:
+      - state: inhand-right-base
+        color: "#a83232"
+      - state: inhand-right-sling
+        color: "#3a3a3a"
+      - state: inhand-right-decal-straps
+        color: "#3a3a3a"
+      - state: inhand-right-handle
+        color: "#3a3a3a"
+      - state: inhand-right-zipper
+
+- type: entity
+  parent: ClothingBackpackDuffelColorable
+  id: ClothingBackpackDuffelColorBlue
+  name: blue duffel bag
+  description: A large duffel bag with a deep blue finish.
+  components:
+  - type: Sprite
+    layers:
+    - state: icon-base
+      color: "#2f4f8f"
+    - state: icon-sling
+      color: "#1c1c1c"
+    - state: icon-decal-straps
+      color: "#1c1c1c"
+    - state: icon-handle
+      color: "#1c1c1c"
+    - state: icon-zipper
+  - type: Clothing
+    clothingVisuals:
+      back:
+      - state: equipped-BACKPACK-base
+        color: "#2f4f8f"
+      - state: equipped-BACKPACK-sling
+        color: "#1c1c1c"
+      - state: equipped-BACKPACK-decal-straps
+        color: "#1c1c1c"
+      - state: equipped-BACKPACK-handle
+        color: "#1c1c1c"
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left-base
+        color: "#2f4f8f"
+      - state: inhand-left-sling
+        color: "#1c1c1c"
+      - state: inhand-left-decal-straps
+        color: "#1c1c1c"
+      - state: inhand-left-handle
+        color: "#1c1c1c"
+      - state: inhand-left-zipper
+      right:
+      - state: inhand-right-base
+        color: "#2f4f8f"
+      - state: inhand-right-sling
+        color: "#1c1c1c"
+      - state: inhand-right-decal-straps
+        color: "#1c1c1c"
+      - state: inhand-right-handle
+        color: "#1c1c1c"
+      - state: inhand-right-zipper
+
+- type: entity
+  parent: ClothingBackpackDuffelColorable
+  id: ClothingBackpackDuffelColorGreen
+  name: green duffel bag
+  description: A large duffel bag with an olive-green finish.
+  components:
+  - type: Sprite
+    layers:
+    - state: icon-base
+      color: "#3f5c34"
+    - state: icon-sling
+      color: "#26311f"
+    - state: icon-decal-straps
+      color: "#26311f"
+    - state: icon-handle
+      color: "#26311f"
+    - state: icon-zipper
+  - type: Clothing
+    clothingVisuals:
+      back:
+      - state: equipped-BACKPACK-base
+        color: "#3f5c34"
+      - state: equipped-BACKPACK-sling
+        color: "#26311f"
+      - state: equipped-BACKPACK-decal-straps
+        color: "#26311f"
+      - state: equipped-BACKPACK-handle
+        color: "#26311f"
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left-base
+        color: "#3f5c34"
+      - state: inhand-left-sling
+        color: "#26311f"
+      - state: inhand-left-decal-straps
+        color: "#26311f"
+      - state: inhand-left-handle
+        color: "#26311f"
+      - state: inhand-left-zipper
+      right:
+      - state: inhand-right-base
+        color: "#3f5c34"
+      - state: inhand-right-sling
+        color: "#26311f"
+      - state: inhand-right-decal-straps
+        color: "#26311f"
+      - state: inhand-right-handle
+        color: "#26311f"
+      - state: inhand-right-zipper
+
+- type: entity
+  parent: ClothingBackpackDuffelColorable
+  id: ClothingBackpackDuffelColorBlack
+  name: black duffel bag
+  description: A large duffel bag in matte black.
+  components:
+  - type: Sprite
+    layers:
+    - state: icon-base
+      color: "#1e1e1e"
+    - state: icon-sling
+      color: "#4a4a4a"
+    - state: icon-decal-straps
+      color: "#4a4a4a"
+    - state: icon-handle
+      color: "#4a4a4a"
+    - state: icon-zipper
+  - type: Clothing
+    clothingVisuals:
+      back:
+      - state: equipped-BACKPACK-base
+        color: "#1e1e1e"
+      - state: equipped-BACKPACK-sling
+        color: "#4a4a4a"
+      - state: equipped-BACKPACK-decal-straps
+        color: "#4a4a4a"
+      - state: equipped-BACKPACK-handle
+        color: "#4a4a4a"
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left-base
+        color: "#1e1e1e"
+      - state: inhand-left-sling
+        color: "#4a4a4a"
+      - state: inhand-left-decal-straps
+        color: "#4a4a4a"
+      - state: inhand-left-handle
+        color: "#4a4a4a"
+      - state: inhand-left-zipper
+      right:
+      - state: inhand-right-base
+        color: "#1e1e1e"
+      - state: inhand-right-sling
+        color: "#4a4a4a"
+      - state: inhand-right-decal-straps
+        color: "#4a4a4a"
+      - state: inhand-right-handle
+        color: "#4a4a4a"
+      - state: inhand-right-zipper
+
+- type: entity
+  parent: ClothingBackpackDuffelColorable
+  id: ClothingBackpackDuffelColorWhite
+  name: white duffel bag
+  description: A large duffel bag in a clean white finish.
+  components:
+  - type: Sprite
+    layers:
+    - state: icon-base
+      color: "#e8e8e8"
+    - state: icon-sling
+      color: "#9c9c9c"
+    - state: icon-decal-straps
+      color: "#9c9c9c"
+    - state: icon-handle
+      color: "#9c9c9c"
+    - state: icon-zipper
+  - type: Clothing
+    clothingVisuals:
+      back:
+      - state: equipped-BACKPACK-base
+        color: "#e8e8e8"
+      - state: equipped-BACKPACK-sling
+        color: "#9c9c9c"
+      - state: equipped-BACKPACK-decal-straps
+        color: "#9c9c9c"
+      - state: equipped-BACKPACK-handle
+        color: "#9c9c9c"
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left-base
+        color: "#e8e8e8"
+      - state: inhand-left-sling
+        color: "#9c9c9c"
+      - state: inhand-left-decal-straps
+        color: "#9c9c9c"
+      - state: inhand-left-handle
+        color: "#9c9c9c"
+      - state: inhand-left-zipper
+      right:
+      - state: inhand-right-base
+        color: "#e8e8e8"
+      - state: inhand-right-sling
+        color: "#9c9c9c"
+      - state: inhand-right-decal-straps
+        color: "#9c9c9c"
+      - state: inhand-right-handle
+        color: "#9c9c9c"
+      - state: inhand-right-zipper
+
