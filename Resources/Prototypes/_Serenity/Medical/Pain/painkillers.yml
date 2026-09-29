@@ -1,0 +1,150 @@
+- type: reagent
+  id: Analgesin
+  name: reagent-name-analgesin
+  group: Medicine
+  desc: reagent-desc-analgesin
+  physicalDesc: reagent-physical-desc-powdery
+  flavor: bitter
+  color: "#e8e4d0"
+  metabolisms:
+    Bloodstream:
+      effects:
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectPainkillerLight
+        time: 45
+        type: Update
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentCondition
+          reagent: Analgesin
+          min: 30
+        damage:
+          types:
+            Poison: 1
+
+- type: reagent
+  id: Antiflam
+  name: reagent-name-antiflam
+  group: Medicine
+  desc: reagent-desc-antiflam
+  physicalDesc: reagent-physical-desc-powdery
+  flavor: medicine
+  color: "#f4b3a0"
+  metabolisms:
+    Bloodstream:
+      effects:
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectPainkillerAntiInflammatory
+        time: 45
+        type: Update
+      # Thins the blood: it eases inflammatory pain but makes open wounds bleed worse.
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectAnticoagulant
+        time: 30
+        type: Update
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentCondition
+          reagent: Antiflam
+          min: 30
+        damage:
+          types:
+            Poison: 1
+
+- type: reagent
+  id: Dolorphine
+  name: reagent-name-dolorphine
+  group: Medicine
+  desc: reagent-desc-dolorphine
+  physicalDesc: reagent-physical-desc-syrupy
+  flavor: bitter
+  color: "#7d5a9e"
+  metabolisms:
+    Bloodstream:
+      effects:
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectPainkillerOpioid
+        time: 60
+        type: Update
+      # Side effects
+      - !type:ModifyStatusEffect
+        conditions:
+        - !type:ReagentCondition
+          reagent: Dolorphine
+          min: 10
+        effectProto: StatusEffectDrowsiness
+        time: 10
+        type: Update
+      # Overdose: breathing slows dangerously.
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentCondition
+          reagent: Dolorphine
+          min: 20
+        damage:
+          types:
+            Asphyxiation: 1.5
+
+# Skin-level numbing. Does nothing for a broken bone.
+- type: reagent
+  id: Lidonol
+  name: reagent-name-lidonol
+  group: Medicine
+  desc: reagent-desc-lidonol
+  physicalDesc: reagent-physical-desc-viscous
+  flavor: medicine
+  color: "#a6d8e0"
+  metabolisms:
+    Bloodstream:
+      effects:
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectPainkillerTopical
+        time: 40
+        type: Update
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentCondition
+          reagent: Lidonol
+          min: 25
+        damage:
+          types:
+            Poison: 1
+
+# Surgical anesthetic: blocks all pain and puts the patient under.
+- type: reagent
+  id: Somnacaine
+  name: reagent-name-somnacaine
+  group: Medicine
+  desc: reagent-desc-somnacaine
+  physicalDesc: reagent-physical-desc-opaque
+  flavor: medicine
+  color: "#3c5a88"
+  metabolisms:
+    Bloodstream:
+      effects:
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectPainNumbness
+        time: 10
+        type: Update
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectPainkillerAnesthetic
+        time: 10
+        type: Update
+      - !type:ModifyStatusEffect
+        conditions:
+        - !type:ReagentCondition
+          reagent: Somnacaine
+          min: 5
+        effectProto: StatusEffectForcedSleeping
+        time: 10
+        delay: 4
+        type: Update
+      # Overdose: respiratory depression.
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentCondition
+          reagent: Somnacaine
+          min: 25
+        damage:
+          types:
+            Asphyxiation: 2

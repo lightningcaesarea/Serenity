@@ -1,0 +1,60 @@
+# Status effects applied by the painkiller reagents. Each masks raw pain (see PainkillerStatusEffectComponent)
+# without healing anything; the wounds stay and the pain returns when the effect ends.
+
+- type: entity
+  parent: MobStatusEffectBase
+  id: StatusEffectPainkillerBase
+  abstract: true
+  components:
+  - type: StatusEffect
+    whitelist:
+      components:
+      - Pain
+
+- type: entity
+  parent: StatusEffectPainkillerBase
+  id: StatusEffectPainkillerLight
+  name: mild analgesia
+  components:
+  - type: PainkillerStatusEffect
+    strength: 15
+
+- type: entity
+  parent: StatusEffectPainkillerBase
+  id: StatusEffectPainkillerAntiInflammatory
+  name: reduced inflammation
+  components:
+  - type: PainkillerStatusEffect
+    strength: 25
+    scope:
+    - Fracture
+    - Burn
+
+- type: entity
+  parent: StatusEffectPainkillerBase
+  id: StatusEffectPainkillerOpioid
+  name: opioid analgesia
+  components:
+  - type: PainkillerStatusEffect
+    strength: 60
+
+# Numbs skin-level injuries only; a broken bone still hurts.
+- type: entity
+  parent: StatusEffectPainkillerBase
+  id: StatusEffectPainkillerTopical
+  name: local numbness
+  components:
+  - type: PainkillerStatusEffect
+    strength: 40
+    scope:
+    - Bleeding
+    - Burn
+
+# Surgical anesthesia: total pain block. Applied alongside PainNumbness so pain updates the moment it lands.
+- type: entity
+  parent: StatusEffectPainkillerBase
+  id: StatusEffectPainkillerAnesthetic
+  name: anesthesia
+  components:
+  - type: PainkillerStatusEffect
+    strength: 100

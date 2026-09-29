@@ -1,0 +1,61 @@
+- type: reaction
+  id: Analgesin
+  reactants:
+    Phenol:
+      amount: 1
+    Acetone:
+      amount: 1
+    Water:
+      amount: 1
+  products:
+    Analgesin: 3
+
+- type: reaction
+  id: Antiflam
+  reactants:
+    Phenol:
+      amount: 1
+    Sulfur:
+      amount: 1
+    Carbon:
+      amount: 1
+  products:
+    Antiflam: 2
+
+- type: reaction
+  id: Dolorphine
+  reactants:
+    Analgesin:
+      amount: 1
+    Ethanol:
+      amount: 1
+    Nitrogen:
+      amount: 1
+    Carbon:
+      amount: 1
+  products:
+    Dolorphine: 2
+
+- type: reaction
+  id: Lidonol
+  reactants:
+    Analgesin:
+      amount: 1
+    Chlorine:
+      amount: 1
+    Ethanol:
+      amount: 1
+  products:
+    Lidonol: 2
+
+- type: reaction
+  id: Somnacaine
+  reactants:
+    Dolorphine:
+      amount: 1
+    Lidonol:
+      amount: 1
+    Oxygen:
+      amount: 1
+  products:
+    Somnacaine: 2
