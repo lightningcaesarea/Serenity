@@ -18,9 +18,17 @@ namespace Content.Shared._Serenity.Shipyard.Components;
 public sealed partial class ShipyardConsoleComponent : Component
 {
     public const string TargetIdCardSlotId = "ShipyardConsole-targetId";
+    public const string BillSlotId = "ShipyardConsole-bills";
 
     [DataField("targetIdSlot")]
     public ItemSlot TargetIdSlot = new();
+
+    /// <summary>
+    /// Slot for Federal Bills (SpaceCash). The stack inserted here pays for ship purchases;
+    /// sale proceeds are spawned at the console and the slot is left empty.
+    /// </summary>
+    [DataField("billSlot")]
+    public ItemSlot BillSlot = new();
 
     [DataField("soundError")]
     public SoundSpecifier ErrorSound = new SoundPathSpecifier("/Audio/Effects/Cargo/buzz_sigh.ogg");

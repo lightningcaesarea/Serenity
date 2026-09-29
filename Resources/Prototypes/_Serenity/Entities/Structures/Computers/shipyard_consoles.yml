@@ -1,0 +1,250 @@
+# Specialised shipyard consoles — one per vessel category.
+# All inherit from ComputerShipyard (Starlight) for plumbing; only sprite, groups, and light differ.
+# Screen states borrow from the cargo request console RSI to match the station's visual language.
+# Salvage/Cargo:  request      | gold   #b89f25
+# Service:        request-srv  | green  #afe837
+# Medical:        request-med  | cyan   #41e0fc
+# Science:        request-sci  | purple #b53ca1
+# Security:       request-sec  | red    #d11d00
+# Command:        shipyard     | yellow #c9c042 (Starlight RSI)
+
+- type: entity
+  id: ComputerShipyardSalvage
+  parent: ComputerShipyard
+  name: salvage & cargo shipyard
+  description: Used to purchase salvage, mining, and cargo vessels.
+  components:
+  - type: Sprite
+    layers:
+    - map: ["computerLayerBody"]
+      state: computer
+    - map: ["computerLayerKeyboard"]
+      state: generic_keyboard
+    - map: ["computerLayerScreen"]
+      state: request
+    - map: ["computerLayerKeys"]
+      state: generic_keys
+    - map: ["enum.WiresVisualLayers.MaintenancePanel"]
+      state: generic_panel_open
+  - type: ShipyardConsole
+    groups: [ ShipyardSalvage ]
+    targetIdSlot:
+      name: id-card-console-target-id
+      ejectSound: /Audio/Machines/id_swipe.ogg
+      insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+      ejectOnBreak: true
+      swap: true
+      whitelist:
+        components:
+        - IdCard
+    billSlot:
+      name: shipyard-console-bills-slot
+      ejectOnBreak: true
+      whitelist:
+        components:
+        - Cash
+  - type: PointLight
+    radius: 1.5
+    energy: 1.6
+    color: "#b89f25"
+
+- type: entity
+  id: ComputerShipyardService
+  parent: ComputerShipyard
+  name: service vessel shipyard
+  description: Used to purchase service, hospitality, and transport vessels.
+  components:
+  - type: Sprite
+    layers:
+    - map: ["computerLayerBody"]
+      state: computer
+    - map: ["computerLayerKeyboard"]
+      state: generic_keyboard
+    - map: ["computerLayerScreen"]
+      state: request-srv
+    - map: ["computerLayerKeys"]
+      state: generic_keys
+    - map: ["enum.WiresVisualLayers.MaintenancePanel"]
+      state: generic_panel_open
+  - type: ShipyardConsole
+    groups: [ ShipyardService ]
+    targetIdSlot:
+      name: id-card-console-target-id
+      ejectSound: /Audio/Machines/id_swipe.ogg
+      insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+      ejectOnBreak: true
+      swap: true
+      whitelist:
+        components:
+        - IdCard
+    billSlot:
+      name: shipyard-console-bills-slot
+      ejectOnBreak: true
+      whitelist:
+        components:
+        - Cash
+  - type: PointLight
+    radius: 1.5
+    energy: 1.6
+    color: "#afe837"
+
+- type: entity
+  id: ComputerShipyardMedical
+  parent: ComputerShipyard
+  name: medical vessel shipyard
+  description: Used to purchase medical and search-and-rescue vessels.
+  components:
+  - type: Sprite
+    layers:
+    - map: ["computerLayerBody"]
+      state: computer
+    - map: ["computerLayerKeyboard"]
+      state: generic_keyboard
+    - map: ["computerLayerScreen"]
+      state: request-med
+    - map: ["computerLayerKeys"]
+      state: generic_keys
+    - map: ["enum.WiresVisualLayers.MaintenancePanel"]
+      state: generic_panel_open
+  - type: ShipyardConsole
+    groups: [ ShipyardMedical ]
+    targetIdSlot:
+      name: id-card-console-target-id
+      ejectSound: /Audio/Machines/id_swipe.ogg
+      insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+      ejectOnBreak: true
+      swap: true
+      whitelist:
+        components:
+        - IdCard
+    billSlot:
+      name: shipyard-console-bills-slot
+      ejectOnBreak: true
+      whitelist:
+        components:
+        - Cash
+  - type: PointLight
+    radius: 1.5
+    energy: 1.6
+    color: "#41e0fc"
+
+- type: entity
+  id: ComputerShipyardScience
+  parent: ComputerShipyard
+  name: science vessel shipyard
+  description: Used to purchase research, engineering, and exploration vessels.
+  components:
+  - type: Sprite
+    layers:
+    - map: ["computerLayerBody"]
+      state: computer
+    - map: ["computerLayerKeyboard"]
+      state: generic_keyboard
+    - map: ["computerLayerScreen"]
+      state: request-sci
+    - map: ["computerLayerKeys"]
+      state: generic_keys
+    - map: ["enum.WiresVisualLayers.MaintenancePanel"]
+      state: generic_panel_open
+  - type: ShipyardConsole
+    groups: [ ShipyardScience ]
+    targetIdSlot:
+      name: id-card-console-target-id
+      ejectSound: /Audio/Machines/id_swipe.ogg
+      insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+      ejectOnBreak: true
+      swap: true
+      whitelist:
+        components:
+        - IdCard
+    billSlot:
+      name: shipyard-console-bills-slot
+      ejectOnBreak: true
+      whitelist:
+        components:
+        - Cash
+  - type: PointLight
+    radius: 1.5
+    energy: 1.6
+    color: "#b53ca1"
+
+- type: entity
+  id: ComputerShipyardSecurity
+  parent: ComputerShipyard
+  name: security vessel shipyard
+  description: Used to purchase security and combat-capable vessels.
+  components:
+  - type: Sprite
+    layers:
+    - map: ["computerLayerBody"]
+      state: computer
+    - map: ["computerLayerKeyboard"]
+      state: generic_keyboard
+    - map: ["computerLayerScreen"]
+      state: request-sec
+    - map: ["computerLayerKeys"]
+      state: generic_keys
+    - map: ["enum.WiresVisualLayers.MaintenancePanel"]
+      state: generic_panel_open
+  - type: ShipyardConsole
+    groups: [ ShipyardSecurity ]
+    targetIdSlot:
+      name: id-card-console-target-id
+      ejectSound: /Audio/Machines/id_swipe.ogg
+      insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+      ejectOnBreak: true
+      swap: true
+      whitelist:
+        components:
+        - IdCard
+    billSlot:
+      name: shipyard-console-bills-slot
+      ejectOnBreak: true
+      whitelist:
+        components:
+        - Cash
+  - type: PointLight
+    radius: 1.5
+    energy: 1.6
+    color: "#d11d00"
+
+- type: entity
+  id: ComputerShipyardCommand
+  parent: ComputerShipyard
+  name: command vessel shipyard
+  description: Used to purchase large command and flagship vessels.
+  components:
+  - type: Sprite
+    layers:
+    - map: ["computerLayerBody"]
+      state: computer
+    - map: ["computerLayerKeyboard"]
+      state: generic_keyboard
+    - map: ["computerLayerScreen"]
+      state: shipyard
+      sprite: _Starlight/Structures/Machines/computers.rsi
+    - map: ["computerLayerKeys"]
+      state: generic_keys
+    - map: ["enum.WiresVisualLayers.MaintenancePanel"]
+      state: generic_panel_open
+  - type: ShipyardConsole
+    groups: [ ShipyardCommand, ShipyardMedical, ShipyardSecurity ]
+    targetIdSlot:
+      name: id-card-console-target-id
+      ejectSound: /Audio/Machines/id_swipe.ogg
+      insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+      ejectOnBreak: true
+      swap: true
+      whitelist:
+        components:
+        - IdCard
+    billSlot:
+      name: shipyard-console-bills-slot
+      ejectOnBreak: true
+      whitelist:
+        components:
+        - Cash
+  - type: PointLight
+    radius: 1.5
+    energy: 1.6
+    color: "#c9c042"
