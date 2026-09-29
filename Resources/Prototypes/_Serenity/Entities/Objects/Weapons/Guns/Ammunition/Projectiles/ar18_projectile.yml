@@ -24,4 +24,4 @@
     damage:
       types:
         Piercing: 22
-    armorPenetrationRatio: 0.5
+    penetrationThreshold: 20
