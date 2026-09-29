@@ -35,6 +35,12 @@ public sealed partial class PainComponent : Component
     [DataField, AutoNetworkedField]
     public bool Masked;
 
+    /// <summary>
+    /// Tuning for how this mob feels and reacts to pain.
+    /// </summary>
+    [DataField]
+    public ProtoId<PainConfigPrototype> Config = PainConfigPrototype.DefaultId;
+
     [DataField]
     public ProtoId<AlertPrototype> Alert = "Pain";
 }

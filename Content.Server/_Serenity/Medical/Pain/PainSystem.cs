@@ -2,6 +2,7 @@ using Content.Shared._Serenity.Medical.Pain;
 using Content.Shared.Popups;
 using Robust.Shared.GameObjects;
 using Robust.Shared.IoC;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server._Serenity.Medical.Pain;
 
@@ -12,6 +13,7 @@ namespace Content.Server._Serenity.Medical.Pain;
 public sealed partial class PainSystem : SharedPainSystem
 {
     [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!;
 
     private TimeSpan _nextTick;
 
@@ -19,7 +21,7 @@ public sealed partial class PainSystem : SharedPainSystem
     {
         base.Initialize();
         SubscribeLocalEvent<PainComponent, PainLevelChangedEvent>(OnLevelChanged);
-        _nextTick = _timing.CurTime + TimeSpan.FromSeconds(PainConstants.TickSeconds);
+        _nextTick = _timing.CurTime + TimeSpan.FromSeconds(_prototypes.Index<PainConfigPrototype>(PainConfigPrototype.DefaultId).TickSeconds);
     }
 
     public override void Update(float frameTime)
@@ -29,7 +31,7 @@ public sealed partial class PainSystem : SharedPainSystem
         if (_timing.CurTime < _nextTick)
             return;
 
-        _nextTick = _timing.CurTime + TimeSpan.FromSeconds(PainConstants.TickSeconds);
+        _nextTick = _timing.CurTime + TimeSpan.FromSeconds(_prototypes.Index<PainConfigPrototype>(PainConfigPrototype.DefaultId).TickSeconds);
 
         var query = EntityQueryEnumerator<PainComponent>();
         while (query.MoveNext(out var uid, out var comp))

@@ -1,0 +1,45 @@
+# Tuning for the medical system. Edit these values instead of code. Entities pick a config through the
+# `config` field on their Wound / Pain component, so a species can define its own (e.g. a pain-resistant one).
+# What triggers a wound (damage thresholds, tier names) lives in wound_types.yml; painkiller drugs are in painkillers.yml.
+
+- type: woundConfig
+  id: DefaultWounds
+  regenTickSeconds: 10
+  # Seconds an untreated wound sits at tier 1 / 2 / 3 before dropping a tier (tier 1 then heals fully).
+  tierDecaySeconds: [300, 180, 120]
+  # Fractures and burns at this tier or worse slow movement.
+  movementSlowTier: 2
+  movementSlowMultiplier: 0.7
+  # Fractures at this tier or worse can make the patient drop what they hold when hit.
+  fractureDropTier: 3
+  fractureDropChance: 0.5
+  maxStackedWoundsPerType: 3
+
+- type: painConfig
+  id: DefaultPain
+  maxPain: 100
+  tickSeconds: 2
+  # Every painkiller after the strongest counts for this fraction of its strength.
+  secondaryPainkillerFactor: 0.25
+  # Masked pain below this is not reported as "masked" on examine.
+  maskedReportThreshold: 5
+  # Raw pain per wound tier (tier 1 / 2 / 3).
+  woundWeights:
+    Fracture: [10, 25, 45]
+    Burn: [8, 20, 40]
+    Bleeding: [5, 12, 25]
+  # Felt-pain bands. `threshold` is where the band starts; speedMultiplier and dropChance apply while in it.
+  levels:
+    Mild:
+      threshold: 10
+    Moderate:
+      threshold: 25
+      speedMultiplier: 0.9
+    Severe:
+      threshold: 50
+      speedMultiplier: 0.75
+      dropChance: 0.25
+    Agonizing:
+      threshold: 75
+      speedMultiplier: 0.6
+      dropChance: 0.5

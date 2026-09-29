@@ -38,6 +38,7 @@ public sealed class PainTest
         var wounds = entMan.System<SharedWoundSystem>();
         var pain = entMan.System<SharedPainSystem>();
         var effects = entMan.System<StatusEffectsSystem>();
+        var config = server.ProtoMan.Index<PainConfigPrototype>(PainConfigPrototype.DefaultId);
 
         EntityUid patient = default;
         WoundComponent woundComp = default!;
@@ -55,7 +56,7 @@ public sealed class PainTest
             // A shattered bone: tier 3 fracture.
             wounds.AddWound(woundComp, new WoundEntry("BluntFracture", 3));
             pain.Recalculate((patient, painComp));
-            Assert.That(painComp.RawPain, Is.EqualTo(PainConstants.WoundWeight(WoundCategory.Fracture, 3)));
+            Assert.That(painComp.RawPain, Is.EqualTo(config.WoundWeight(WoundCategory.Fracture, 3)));
             Assert.That(painComp.Level, Is.GreaterThanOrEqualTo(PainLevel.Moderate));
             Assert.That(painComp.Masked, Is.False);
 

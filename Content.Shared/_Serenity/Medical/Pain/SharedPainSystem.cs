@@ -105,12 +105,7 @@ public abstract partial class SharedPainSystem : EntitySystem
         if (_timing.ApplyingState || !_net.IsServer || !args.DamageIncreased)
             return;
 
-        var chance = ent.Comp.Level switch
-        {
-            PainLevel.Agonizing => PainConstants.AgonizingDropChance,
-            PainLevel.Severe => PainConstants.SevereDropChance,
-            _ => 0f,
-        };
+        var chance = _proto.Index(ent.Comp.Config).DropChance(ent.Comp.Level);
 
         if (chance <= 0f || !_random.Prob(chance))
             return;
@@ -121,7 +116,7 @@ public abstract partial class SharedPainSystem : EntitySystem
 
     private void OnRefreshSpeed(Entity<PainComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
     {
-        var multiplier = PainConstants.SpeedMultiplier(ent.Comp.Level);
+        var multiplier = _proto.Index(ent.Comp.Config).SpeedMultiplier(ent.Comp.Level);
         if (multiplier < 1f)
             args.ModifySpeed(multiplier);
     }
@@ -159,6 +154,7 @@ public abstract partial class SharedPainSystem : EntitySystem
             return;
 
         var pain = (ent.Owner, ent.Comp);
+        var config = _proto.Index(ent.Comp.Config);
 
         if (_mobState.IsDead(ent.Owner))
         {
@@ -173,7 +169,7 @@ public abstract partial class SharedPainSystem : EntitySystem
         if (TryComp<WoundComponent>(ent.Owner, out var wounds))
         {
             if (TryComp<BloodstreamComponent>(ent.Owner, out var blood))
-                bleed = PainConstants.WoundWeight(WoundCategory.Bleeding, _woundDisplay.GetBleedTier(wounds, blood));
+                bleed = config.WoundWeight(WoundCategory.Bleeding, _woundDisplay.GetBleedTier(wounds, blood));
 
             foreach (var wound in wounds.ActiveWounds)
             {
@@ -183,16 +179,16 @@ public abstract partial class SharedPainSystem : EntitySystem
                 switch (proto.Category)
                 {
                     case WoundCategory.Fracture:
-                        fracture += PainConstants.WoundWeight(WoundCategory.Fracture, wound.Tier);
+                        fracture += config.WoundWeight(WoundCategory.Fracture, wound.Tier);
                         break;
                     case WoundCategory.Burn:
-                        burn += PainConstants.WoundWeight(WoundCategory.Burn, wound.Tier);
+                        burn += config.WoundWeight(WoundCategory.Burn, wound.Tier);
                         break;
                 }
             }
         }
 
-        var raw = Math.Min(bleed + fracture + burn, PainConstants.MaxPain);
+        var raw = Math.Min(bleed + fracture + burn, config.MaxPain);
 
         if (raw <= 0f)
         {
@@ -233,13 +229,13 @@ public abstract partial class SharedPainSystem : EntitySystem
             for (var i = 0; i < painkillers.Count; i++)
             {
                 var (strength, scopePain) = painkillers[i];
-                var factor = i == 0 ? 1f : PainConstants.SecondaryPainkillerFactor;
+                var factor = i == 0 ? 1f : config.SecondaryPainkillerFactor;
                 masked += Math.Min(strength * factor, scopePain);
             }
         }
 
         masked = Math.Min(masked, raw);
-        SetPain(pain, raw, raw - masked, masked >= PainConstants.MaskedReportThreshold);
+        SetPain(pain, raw, raw - masked, masked >= config.MaskedReportThreshold);
     }
 
     private bool HasActiveEffect<T>(EntityUid uid, EntityUid? exclude) where T : IComponent
@@ -263,7 +259,7 @@ public abstract partial class SharedPainSystem : EntitySystem
 
         var comp = ent.Comp;
         var oldLevel = comp.Level;
-        var newLevel = PainConstants.LevelFor(effective);
+        var newLevel = _proto.Index(comp.Config).LevelFor(effective);
 
         var changed = oldLevel != newLevel
             || comp.Masked != masked
