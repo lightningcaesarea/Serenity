@@ -96,6 +96,7 @@
     PillCanisterIron: 1 # Starlight
     PillCanisterCopper: 1 # Starlight
     PillCanisterPotassiumIodide: 1 # Starlight
+    MedicalRecoveryImplanter: 3 # Serenity — priced via ItemPriceComponent, see medical_recovery_implant.yml
   contrabandInventory:
     PillCanisterRandom: 1
     PillSpaceDrugs: 3

@@ -8,6 +8,9 @@
   supervisors: job-supervisors-assistantmanager # Starlight
   access:
   - Maintenance
+  special:
+  - !type:AddImplantSpecial
+    implants: [ MedicalRecoveryImplant ]
 
 - type: job # Just ignore it. It’s a database workaround.
   id: Passenger
@@ -21,6 +24,9 @@
   supervisors: job-supervisors-everyone
   access:
   - Maintenance
+  special:
+  - !type:AddImplantSpecial
+    implants: [ MedicalRecoveryImplant ]
 
 - type: startingGear
   id: AssistantGear

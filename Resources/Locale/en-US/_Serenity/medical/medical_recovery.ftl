@@ -1,0 +1,9 @@
+medical-recovery-beacon-no-target = No recoverable body found in range.
+medical-recovery-beacon-target-found = Signal locked on { $target }.
+medical-recovery-launching = A balloon inflates rapidly from beneath the body!
+medical-recovery-announce-launch = Medical recovery implant activated for { $name }. Recall in progress.
+medical-recovery-announce-arrived = { $name } has been recovered to the station.
+medical-recovery-announce-no-pad = Medical recovery for { $name } failed to complete — no recovery pad found on station. Notify an administrator.
+medical-recovery-console-no-target = No critical or deceased crew carrying a medical recovery implant detected in range.
+medical-recovery-console-no-pad-linked = This console has no linked recovery pad. Build a medical recovery pad on the same grid.
+medical-recovery-console-target-found = Signal locked on { $target }. Recall in progress.

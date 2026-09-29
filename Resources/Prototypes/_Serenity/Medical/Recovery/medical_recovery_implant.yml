@@ -1,0 +1,39 @@
+# Medical recovery implant.
+#
+# Auto-triggers recovery if the carrier dies off the round's default station map. If they die ON
+# the main map, a paramedic must trigger it manually with a MedicalRecoveryBeacon (see
+# medical_recovery_beacon.yml), or a medical staffer can use a MedicalRecoveryConsole (see
+# medical_recovery_console.yml). See Content.Shared/_Serenity/Medical/Recovery for the system.
+
+- type: entity
+  parent: BaseSubdermalImplant
+  id: MedicalRecoveryImplant
+  name: medical recovery implant
+  description: A subdermal implant that automatically recalls the carrier's body to the station if they die somewhere else — a shuttle, a debris field, an away site. Single use; a fresh implant must be installed to restore it.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SubdermalImplant
+    whitelist:
+      components:
+      - MobState
+  - type: TriggerOnMobstateChange
+    mobState:
+    - Dead
+  - type: MedicalRecoveryOnTrigger
+  - type: MedicalRecovery
+
+- type: entity
+  parent: BaseImplanter
+  id: MedicalRecoveryImplanter
+  name: medical recovery implanter
+  description: Contains a single medical recovery implant.
+  components:
+  - type: Implanter
+    implant: MedicalRecoveryImplant
+  # Serenity: priced for sale from NanoMed Civilian (see medical_recovery_console.yml's
+  # sibling file, Catalog/VendingMachines/Inventories/medical.yml's NanoMedCivilianInventory).
+  # Vending items have no native per-item price field — Starlight's vending price system reads
+  # ItemPriceComponent.FallbackPrice instead and auto-debits the buyer's Sector Credits on pickup.
+  - type: ItemPrice
+    fallbackPrice: 10000
+    creditStationCargo: false # Serenity: this purchase shouldn't fund the station's cargo budget

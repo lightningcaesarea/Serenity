@@ -1,0 +1,21 @@
+- type: entity
+  id: MedicalRecoveryPadMachineCircuitboard
+  parent: BaseMachineCircuitboard
+  name: medical recovery pad machine board
+  description: A machine printed circuit board for a medical recovery pad.
+  components:
+  - type: MachineBoard
+    prototype: MedicalRecoveryPad
+    stackRequirements:
+      Manipulator: 2
+      Cable: 4
+      Glass: 2
+
+- type: entity
+  id: MedicalRecoveryConsoleCircuitboard
+  parent: BaseComputerCircuitboard
+  name: medical recovery console board
+  description: A machine printed circuit board for a medical recovery console.
+  components:
+  - type: ComputerBoard
+    prototype: MedicalRecoveryConsole
