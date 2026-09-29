@@ -1,0 +1,27 @@
+# AR-18 Kauser carbine — 10x24mm caseless projectiles
+# Ported from TGMC (TerraGov Marine Corps) under CC-BY-NC.
+# Source: https://github.com/tgstation/TerraGov-Marine-Corps
+# Original TGMC stats: rifle bullet dmg 25 pen 5 / HV variant dmg 20 pen 20
+
+- type: entity
+  parent: BaseBullet
+  id: BulletRifleAR18
+  categories: [ HideSpawnMenu ]
+  name: bullet (10x24mm caseless)
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 25
+
+- type: entity
+  parent: BaseBullet
+  id: BulletRifleAR18AP
+  categories: [ HideSpawnMenu ]
+  name: bullet (10x24mm caseless AP)
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 22
+    penetrationThreshold: 20

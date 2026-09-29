@@ -1,0 +1,50 @@
+# AR-18 Kauser carbine — 10x24mm caseless cartridges
+# Ported from TGMC (TerraGov Marine Corps) under CC-BY-NC.
+# Source: https://github.com/tgstation/TerraGov-Marine-Corps
+# Caseless: deleteOnSpawn = true so no brass case drops on firing.
+
+- type: entity
+  abstract: true
+  parent: BaseCartridge
+  id: BaseCartridgeRifleAR18
+  name: cartridge (10x24mm caseless)
+  components:
+  - type: Tag
+    tags:
+      - CartridgeRifleAR18
+  - type: CartridgeAmmo
+    proto: BulletRifleAR18
+    deleteOnSpawn: true
+  - type: Sprite
+    noRot: false
+    sprite: Objects/Weapons/Guns/Ammunition/Casings/ammo_casing.rsi
+    layers:
+    - state: base
+      map: [ "enum.AmmoVisualLayers.Base" ]
+  - type: Appearance
+  - type: SpentAmmoVisuals
+  - type: StaticPrice
+    price: 10
+
+- type: entity
+  parent: BaseCartridgeRifleAR18
+  id: CartridgeRifleAR18
+  name: cartridge (10x24mm caseless)
+  description: A standard 10x24mm caseless round. The propellant is embedded in the projectile itself, leaving no brass to eject. General-purpose kinetic ammunition.
+
+- type: entity
+  parent: BaseCartridgeRifleAR18
+  id: CartridgeRifleAR18AP
+  name: cartridge (10x24mm caseless AP)
+  description: A 10x24mm caseless armor-piercing round with a hardened penetrator core. Trades a little stopping power for improved performance against armored targets.
+  components:
+  - type: CartridgeAmmo
+    proto: BulletRifleAR18AP
+    deleteOnSpawn: true
+  - type: Sprite
+    layers:
+    - state: base
+      map: [ "enum.AmmoVisualLayers.Base" ]
+    - state: tip
+      map: [ "enum.AmmoVisualLayers.Tip" ]
+      color: "#3a7d44"

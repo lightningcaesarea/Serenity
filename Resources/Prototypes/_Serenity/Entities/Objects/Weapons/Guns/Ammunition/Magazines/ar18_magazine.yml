@@ -1,0 +1,56 @@
+# AR-18 Kauser carbine — magazines
+# Ported from TGMC (TerraGov Marine Corps) under CC-BY-NC.
+# Source: https://github.com/tgstation/TerraGov-Marine-Corps
+# TGMC: 36-round 10x24mm caseless magazine (standard and AP variants)
+
+- type: entity
+  abstract: true
+  parent: BaseItem
+  id: BaseMagazineRifleAR18
+  name: magazine (10x24mm caseless)
+  components:
+  - type: Tag
+    tags:
+      - MagazineRifleAR18
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    whitelist:
+      tags:
+        - CartridgeRifleAR18
+    proto: CartridgeRifleAR18
+    capacity: 36
+  - type: Item
+    size: Small
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Ammunition/Magazine/ar18_mag.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: false
+  - type: Appearance
+
+- type: entity
+  parent: BaseMagazineRifleAR18
+  id: MagazineRifleAR18
+  name: AR-18 magazine (10x24mm caseless)
+  description: A 36-round double-stack magazine for the AR-18 Kauser carbine. Loaded with standard 10x24mm caseless kinetic rounds.
+
+- type: entity
+  parent: BaseMagazineRifleAR18
+  id: MagazineRifleAR18AP
+  name: AR-18 AP magazine (10x24mm caseless)
+  description: A 36-round double-stack magazine for the AR-18 Kauser carbine. Loaded with armor-piercing 10x24mm caseless rounds.
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeRifleAR18AP
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Ammunition/Magazine/ar18_mag.rsi
+    layers:
+    - state: base-ap
+      map: [ "enum.GunVisualLayers.Base" ]

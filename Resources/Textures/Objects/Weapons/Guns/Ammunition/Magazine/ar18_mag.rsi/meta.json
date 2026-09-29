@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "license": "CC-BY-NC-4.0",
+  "copyright": "Taken from TerraGov Marine Corps (https://github.com/tgstation/TerraGov-Marine-Corps). © TerraGov Marine Corps contributors. License: CC-BY-NC.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "base",
+      "directions": 1,
+      "flags": {}
+    },
+    {
+      "name": "base-ap",
+      "directions": 1,
+      "flags": {}
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+# AR-18 Kauser carbine
+# Ported from TGMC (TerraGov Marine Corps) under CC-BY-NC.
+# Source: https://github.com/tgstation/TerraGov-Marine-Corps
+# TGMC stats: fire_delay 0.2s, burst 4-round / 0.1s delay, scatter 0, accuracy_mult 1.05
+# TODO: create ar18.rsi by porting icons/obj/weapons/guns/rifles.dmi (icon_state t18) from TGMC
+
+- type: entity
+  name: AR-18 Kauser carbine
+  parent: [ BaseWeaponRifle ]
+  id: WeaponRifleAR18
+  description: A light carbine preferred by scouts and skirmishers. Fires 10x24mm caseless rounds from a 36-round magazine. Its electronically-triggered action delivers tight 4-round bursts at close range.
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Rifles/ar18.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
+      visible: false
+  - type: Clothing
+    sprite: Objects/Weapons/Guns/Rifles/ar18.rsi
+  - type: Gun
+    fireRate: 5
+    burstFireRate: 10
+    shotsPerBurst: 4
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    - Burst
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/rifle2.ogg
+  - type: ChamberMagazineAmmoProvider
+    soundRack:
+      path: /Audio/Weapons/Guns/Cock/ltrifle_cock.ogg
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: MagazineRifleAR18
+        insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+            - MagazineRifleAR18
+        whitelistFailPopup: gun-magazine-whitelist-fail
+      gun_chamber:
+        name: Chamber
+        priority: 1
+        whitelist:
+          tags:
+            - CartridgeRifleAR18
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot ""
+      gun_chamber: !type:ContainerSlot ""
+      firing_pin: !type:Container
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: true
+  - type: Appearance
+  - type: StaticPrice
+    price: 600

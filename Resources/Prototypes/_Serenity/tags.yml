@@ -1,0 +1,8 @@
+# Serenity-specific tags
+
+# AR-18 Kauser carbine ammo tags (10x24mm caseless)
+- type: Tag
+  id: CartridgeRifleAR18 # WeaponRifleAR18
+
+- type: Tag
+  id: MagazineRifleAR18 # WeaponRifleAR18
