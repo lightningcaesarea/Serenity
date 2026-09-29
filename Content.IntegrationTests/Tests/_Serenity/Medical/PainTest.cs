@@ -14,6 +14,15 @@ public sealed class PainTest
 {
     private static readonly TimeSpan Duration = TimeSpan.FromMinutes(1);
 
+    private static readonly string[] PainkillerEffects =
+    [
+        "StatusEffectPainkillerLight",
+        "StatusEffectPainkillerAntiInflammatory",
+        "StatusEffectPainkillerOpioid",
+        "StatusEffectPainkillerTopical",
+        "StatusEffectPainkillerAnesthetic",
+    ];
+
     /// <summary>
     /// Wounds create pain, painkillers hide it without touching the wound, a topical painkiller only covers the
     /// injuries in its scope, and the pain returns when the drug is removed.
@@ -98,12 +107,7 @@ public sealed class PainTest
 
         await server.WaitAssertion(() =>
         {
-            foreach (var id in new[]
-                     {
-                         "StatusEffectPainkillerLight", "StatusEffectPainkillerAntiInflammatory",
-                         "StatusEffectPainkillerOpioid", "StatusEffectPainkillerTopical",
-                         "StatusEffectPainkillerAnesthetic",
-                     })
+            foreach (var id in PainkillerEffects)
             {
                 var entity = proto.Index<EntityPrototype>(id);
                 Assert.That(entity.TryGetComponent<PainkillerStatusEffectComponent>(out var comp, factory), $"{id} lacks a painkiller component");
