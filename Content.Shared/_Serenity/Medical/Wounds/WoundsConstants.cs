@@ -13,6 +13,13 @@ public static class WoundsConstants
     public const float DefaultThresholdMultiplier = 1f;
 
     /// <summary>
+    /// Bounds for <see cref="WoundComponent.ThresholdMultiplier"/> as used when checking thresholds.
+    /// </summary>
+    public const float MinThresholdMultiplier = 0.1f;
+
+    public const float MaxThresholdMultiplier = 10f;
+
+    /// <summary>
     /// 1-based tier offset applied to a zero-based threshold-array index
     /// so tier "1" maps to <c>Thresholds[0]</c>, tier "2" to <c>Thresholds[1]</c>, …
     /// </summary>
