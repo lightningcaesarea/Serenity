@@ -1,0 +1,94 @@
+# Surgeries that treat the injuries tracked by the Wounds system (see Medical/Wounds). Each one is only offered
+# while the patient has that kind of wound (SurgeryWoundCondition), and clears it when its last step completes.
+# Wounds aren't per limb, so they are offered on the torso. They inherit the Surgery skill lock from SurgeryBase.
+#
+# To add one for a new wound category: add its steps to wound_surgery_steps.yml (the last one with
+# SurgeryStepClearWoundEffect) and a surgery here.
+
+# Fractures need the incision open first, like organ work.
+- type: entity
+  parent: SurgeryBase
+  id: SurgeryTreatFractures
+  name: Set Broken Bones
+  components:
+  - type: Surgery
+    requirement:
+    - SurgeryOpenIncision
+    steps:
+    - SurgeryStepSetFracture
+    - SurgeryStepMendFracture
+  - type: SurgeryWoundCondition
+    category: Fracture
+  - type: SurgeryPartCondition
+    parts:
+    - Torso
+  - type: SurgerySpeciesCondition
+    speciesBlacklist:
+    - SlimePerson
+    - NeoSlimePerson
+    - IPC
+    - Doll
+
+- type: entity
+  parent: SurgeryBase
+  id: SurgeryTreatBurns
+  name: Treat Burns
+  components:
+  - type: Surgery
+    steps:
+    - SurgeryStepDebrideBurns
+    - SurgeryStepClearBurnDebris
+  - type: SurgeryWoundCondition
+    category: Burn
+  - type: SurgeryPartCondition
+    parts:
+    - Torso
+  - type: SurgerySpeciesCondition
+    speciesBlacklist:
+    - SlimePerson
+    - NeoSlimePerson
+    - IPC
+    - Doll
+
+- type: entity
+  parent: SurgeryBase
+  id: SurgeryTreatLacerations
+  name: Repair Lacerations
+  components:
+  - type: Surgery
+    steps:
+    - SurgeryStepClampTornVessels
+    - SurgeryStepSutureLaceration
+  - type: SurgeryWoundCondition
+    category: Laceration
+  - type: SurgeryPartCondition
+    parts:
+    - Torso
+  - type: SurgerySpeciesCondition
+    speciesBlacklist:
+    - SlimePerson
+    - NeoSlimePerson
+    - IPC
+    - Doll
+
+- type: entity
+  parent: SurgeryBase
+  id: SurgeryTreatPunctures
+  name: Repair Puncture Wounds
+  components:
+  - type: Surgery
+    steps:
+    - SurgeryStepExplorePuncture
+    - SurgeryStepClampTornVessels
+    - SurgeryStepSuturePuncture
+  - type: SurgeryWoundCondition
+    category: Puncture
+  - type: SurgeryPartCondition
+    parts:
+    - Torso
+  - type: SurgerySpeciesCondition
+    speciesBlacklist:
+    - SlimePerson
+    - NeoSlimePerson
+    - IPC
+    - Doll

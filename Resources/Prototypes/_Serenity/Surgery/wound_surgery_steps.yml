@@ -1,0 +1,116 @@
+# Steps for the wound-treating surgeries in wound_surgeries.yml. The final step of each procedure carries
+# SurgeryStepClearWoundEffect, which resolves that category of wound on the patient when it completes.
+
+# Fractures
+- type: entity
+  parent: SurgeryStepBase
+  id: SurgeryStepSetFracture
+  name: Set the broken bones
+  components:
+  - type: SurgeryStep
+    duration: 5
+    tools:
+    - type: BoneSetter
+  - type: Sprite
+    sprite: _Starlight/Objects/Specific/Medical/scissors.rsi
+    state: setter
+  - type: SurgeryStepEmoteEffect
+
+- type: entity
+  parent: SurgeryStepBase
+  id: SurgeryStepMendFracture
+  name: Mend the bones with bone gel
+  components:
+  - type: SurgeryStep
+    tools:
+    - type: BoneGel
+  - type: Sprite
+    sprite: Objects/Specific/Medical/Surgery/bone_gel.rsi
+    state: bone-gel
+  - type: SurgeryStepClearWoundEffect
+    category: Fracture
+
+# Burns
+- type: entity
+  parent: SurgeryStepBase
+  id: SurgeryStepDebrideBurns
+  name: Cut away the dead tissue
+  components:
+  - type: SurgeryStep
+    duration: 4
+    tools:
+    - type: Scalpel
+  - type: Sprite
+    sprite: Objects/Specific/Medical/Surgery/scalpel.rsi
+    state: scalpel
+  - type: SurgeryStepEmoteEffect
+
+- type: entity
+  parent: SurgeryStepBase
+  id: SurgeryStepClearBurnDebris
+  name: Clear the wound of debris
+  components:
+  - type: SurgeryStep
+    tools:
+    - type: Hemostat
+  - type: Sprite
+    sprite: _Starlight/Objects/Specific/Medical/scissors.rsi
+    state: hemostat
+  - type: SurgeryStepClearWoundEffect
+    category: Burn
+
+# Lacerations and punctures
+- type: entity
+  parent: SurgeryStepBase
+  id: SurgeryStepClampTornVessels
+  name: Clamp the torn vessels
+  components:
+  - type: SurgeryStep
+    tools:
+    - type: Hemostat
+  - type: Sprite
+    sprite: _Starlight/Objects/Specific/Medical/scissors.rsi
+    state: hemostat
+
+- type: entity
+  parent: SurgeryStepBase
+  id: SurgeryStepSutureLaceration
+  name: Suture the wound closed
+  components:
+  - type: SurgeryStep
+    duration: 4
+    tools:
+    - type: Cautery
+  - type: Sprite
+    sprite: Objects/Specific/Medical/Surgery/cautery.rsi
+    state: cautery
+  - type: SurgeryStepClearWoundEffect
+    category: Laceration
+
+- type: entity
+  parent: SurgeryStepBase
+  id: SurgeryStepExplorePuncture
+  name: Open up the puncture wound
+  components:
+  - type: SurgeryStep
+    tools:
+    - type: Retractor
+  - type: Sprite
+    sprite: _Starlight/Objects/Specific/Medical/scissors.rsi
+    state: retractor
+  - type: SurgeryStepEmoteEffect
+
+- type: entity
+  parent: SurgeryStepBase
+  id: SurgeryStepSuturePuncture
+  name: Suture the puncture closed
+  components:
+  - type: SurgeryStep
+    duration: 4
+    tools:
+    - type: Cautery
+  - type: Sprite
+    sprite: Objects/Specific/Medical/Surgery/cautery.rsi
+    state: cautery
+  - type: SurgeryStepClearWoundEffect
+    category: Puncture
