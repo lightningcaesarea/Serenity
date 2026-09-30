@@ -13,4 +13,4 @@ surgery-cleaning = You start cleaning { THE($target) }.
 surgery-unsterile-warning = Your dirty tools and gloves are making the patient sick!
 
 reagent-name-antibiox = antibiox
-reagent-desc-antibiox = An antibiotic. Holds an infection back and slowly clears it, and protects against new ones while it lasts. Harmful in large doses.
+reagent-desc-antibiox = A broad-spectrum antibiotic. Needs no diagnosis: it blocks new infections and freezes an existing one where it is, but it does not cure it, and the infection resumes when the drug wears off. Wipes out helpful gut bacteria, leaving the patient weak, and is harmful in large doses.

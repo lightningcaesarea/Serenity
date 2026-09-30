@@ -115,12 +115,6 @@ public sealed partial class SterilityConfigPrototype : IPrototype
     public float[] EscalationSeconds = [150f, 150f, 0f];
 
     /// <summary>
-    /// Seconds per tier an infection takes to get better while an antibiotic is active.
-    /// </summary>
-    [DataField]
-    public float RegressionSeconds = 60f;
-
-    /// <summary>
     /// Poison damage per infection update at infection tier 1, 2 and 3.
     /// </summary>
     [DataField]
