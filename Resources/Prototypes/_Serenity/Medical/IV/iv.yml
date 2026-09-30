@@ -1,0 +1,169 @@
+# IV stand and bags. A stand holds one bag; a bag can also be held and hooked to a patient directly.
+# The stand folds flat like a folding chair: unfolded it stays put and works, folded it is a huge item to carry.
+# Setting up a line or switching injecting/drawing needs the Medicine skill (skills.yml, iv-verb-toggle).
+# Fluid goes into the bloodstream, so a drug in a bag is metabolised like any other injection.
+
+- type: entity
+  parent: [ BaseStructureDynamic, StructureWheeled ]
+  id: IVStand
+  name: IV stand
+  description: Holds an IV bag upright, running a line to a patient to give them fluids or draw their blood. Drag it onto someone to set the line, or onto yourself to fold it flat and carry it.
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _Serenity/Structures/Machines/Medical/iv_stand.rsi
+    layers:
+    - state: empty
+      map: [ "enum.IVVisualLayers.Base" ]
+    - state: reagent0
+      map: [ "enum.IVVisualLayers.Reagent" ]
+      visible: false
+    - state: flatpack
+      map: [ "foldedLayer" ]
+      visible: false
+  - type: Transform
+    noRot: true
+  - type: Foldable
+  - type: DeployFoldable
+  - type: Item
+    size: Huge
+  - type: Appearance
+  - type: InteractionOutline
+  - type: Pullable
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.25,0.25,0.25"
+        density: 60
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: IVLine
+    lineOriginOffset: "0.19, 0.16"
+    ripDamage:
+      types:
+        Piercing: 3
+  - type: IVStand
+    reagentStates:
+    - 0: reagent0
+    - 10: reagent10
+    - 25: reagent25
+    - 50: reagent50
+    - 75: reagent75
+    - 80: reagent80
+    - 100: reagent100
+  - type: ItemSlots
+    slots:
+      pack:
+        whitelist:
+          components:
+          - IVBag
+  - type: ContainerContainer
+    containers:
+      pack: !type:ContainerSlot {}
+
+# The bag is its own solution entity, like a beaker; the legacy SolutionContainerManager is broken here.
+- type: entity
+  parent: IVStand
+  id: IVStandFolded
+  suffix: Folded
+  components:
+  - type: Foldable
+    folded: true
+
+- type: entity
+  abstract: true
+  parent: Solution
+  id: SolutionIVBag
+  components:
+  - type: Solution
+    id: pack
+    solution:
+      maxVol: 100
+
+- type: entity
+  parent: [ SolutionIVBag, BaseItem ]
+  id: IVBag
+  name: IV bag
+  description: A bag for fluids, hung on an IV stand or held up by hand and hooked to a patient.
+  suffix: Empty
+  components:
+  - type: Sprite
+    sprite: _Serenity/Objects/Medical/iv_bag.rsi
+    layers:
+    - state: bloodpack1
+      map: [ "enum.IVVisualLayers.Reagent" ]
+      visible: false
+    - state: bloodpack
+    - state: blank
+  - type: Item
+    size: Small
+    sprite: _Serenity/Objects/Medical/iv_bag.rsi
+  - type: Tag
+    tags:
+    - Bloodpack
+  - type: Appearance
+  - type: IVLine
+    transferAmount: 2
+    transferDelay: 1
+    attachDelay: 4
+    ripDamage:
+      types:
+        Piercing: 3
+  - type: IVBag
+  - type: ExaminableSolution
+    solution: pack
+  - type: FitsInDispenser
+    solution: pack
+  - type: SolutionTransfer
+    canChangeTransferAmount: true
+  - type: DrawableSolution
+    solution: pack
+  - type: InjectableSolution
+    solution: pack
+  - type: RefillableSolution
+    solution: pack
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Glass
+  - type: DamageOnHighSpeedImpact
+    minimumSpeed: 2
+    damage:
+      types:
+        Blunt: 5
+  - type: Destructible
+    thresholds:
+    - trigger: !type:DamageTrigger
+        damage: 5
+      behaviors:
+      - !type:SpillBehavior
+        solution: pack
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: StaticPrice
+    price: 30
+
+- type: entity
+  parent: IVBag
+  id: IVBagSaline
+  suffix: Saline
+  components:
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Saline
+        Quantity: 100
+
+- type: entity
+  parent: IVBag
+  id: IVBagBlood
+  suffix: Blood
+  components:
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Blood
+        Quantity: 100
