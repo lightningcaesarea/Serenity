@@ -39,6 +39,9 @@ public abstract partial class SharedPainSystem : EntitySystem
     [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private IRobustRandom _random = default!;
 
+    // Reused by every recalculation (the system is single-threaded) to avoid allocating per mob per tick.
+    private readonly Dictionary<ProtoId<WoundCategoryPrototype>, float> _categoryPain = new();
+
     public override void Initialize()
     {
         base.Initialize();
@@ -162,33 +165,31 @@ public abstract partial class SharedPainSystem : EntitySystem
             return;
         }
 
-        var bleed = 0f;
-        var fracture = 0f;
-        var burn = 0f;
+        // Pain from each wound category (bleeding is derived from the bloodstream, the rest from wound entries)
+        var total = 0f;
+        _categoryPain.Clear();
 
         if (TryComp<WoundComponent>(ent.Owner, out var wounds))
         {
             if (TryComp<BloodstreamComponent>(ent.Owner, out var blood))
-                bleed = config.WoundWeight(WoundCategory.Bleeding, _woundDisplay.GetBleedTier(wounds, blood));
+            {
+                var bleed = config.WoundWeight(WoundCategoryIds.Bleeding, _woundDisplay.GetBleedTier(wounds, blood));
+                _categoryPain[WoundCategoryIds.Bleeding] = bleed;
+                total += bleed;
+            }
 
             foreach (var wound in wounds.ActiveWounds)
             {
                 if (!_proto.TryIndex(wound.WoundTypeId, out var proto))
                     continue;
 
-                switch (proto.Category)
-                {
-                    case WoundCategory.Fracture:
-                        fracture += config.WoundWeight(WoundCategory.Fracture, wound.Tier);
-                        break;
-                    case WoundCategory.Burn:
-                        burn += config.WoundWeight(WoundCategory.Burn, wound.Tier);
-                        break;
-                }
+                var weight = config.WoundWeight(proto.Category, wound.Tier);
+                _categoryPain[proto.Category] = _categoryPain.GetValueOrDefault(proto.Category) + weight;
+                total += weight;
             }
         }
 
-        var raw = Math.Min(bleed + fracture + burn, config.MaxPain);
+        var raw = Math.Min(total, config.MaxPain);
 
         if (raw <= 0f)
         {
@@ -216,9 +217,11 @@ public abstract partial class SharedPainSystem : EntitySystem
                 var scopePain = raw;
                 if (effect.Comp1.Scope is { } scope)
                 {
-                    scopePain = (scope.Contains(WoundCategory.Bleeding) ? bleed : 0f)
-                        + (scope.Contains(WoundCategory.Fracture) ? fracture : 0f)
-                        + (scope.Contains(WoundCategory.Burn) ? burn : 0f);
+                    scopePain = 0f;
+                    foreach (var category in scope)
+                    {
+                        scopePain += _categoryPain.GetValueOrDefault(category);
+                    }
                 }
 
                 painkillers.Add((effect.Comp1.Strength, scopePain));

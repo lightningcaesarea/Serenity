@@ -26,7 +26,7 @@ public sealed partial class PainConfigPrototype : IPrototype
     /// Raw pain each wound category adds per wound tier; index 0 is tier 1. Categories not listed add nothing.
     /// </summary>
     [DataField]
-    public Dictionary<WoundCategory, float[]> WoundWeights = new();
+    public Dictionary<ProtoId<WoundCategoryPrototype>, float[]> WoundWeights = new();
 
     /// <summary>
     /// Thresholds and effects for each pain band above None. Bands not listed are skipped.
@@ -81,7 +81,7 @@ public sealed partial class PainConfigPrototype : IPrototype
     /// <summary>
     /// Raw pain contributed by one wound (or bleed) of the given category and tier.
     /// </summary>
-    public float WoundWeight(WoundCategory category, int tier)
+    public float WoundWeight(ProtoId<WoundCategoryPrototype> category, int tier)
     {
         if (tier <= 0 || !WoundWeights.TryGetValue(category, out var weights) || weights.Length == 0)
             return 0f;

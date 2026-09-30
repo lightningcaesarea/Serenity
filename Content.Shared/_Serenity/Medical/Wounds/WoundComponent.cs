@@ -1,4 +1,3 @@
-using Content.Shared.Alert;
 using Content.Shared._Serenity.Medical.Wounds.Systems;
 using Robust.Shared.GameObjects;
 using Robust.Shared.GameStates;
@@ -44,12 +43,6 @@ public sealed partial class WoundComponent : Component
     /// </summary>
     [DataField]
     public ProtoId<WoundConfigPrototype> Config = WoundConfigPrototype.DefaultId;
-
-    [DataField]
-    public ProtoId<AlertPrototype> FractureAlert = "Fracture";
-
-    [DataField]
-    public ProtoId<AlertPrototype> BurnAlert = "Burn";
 
     /// <summary>
     /// Scales the effective spike amount checked against wound thresholds.

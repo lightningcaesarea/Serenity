@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Content.Shared._Serenity.Medical.Pain;
 using Content.Shared._Serenity.Medical.Wounds;
 using Content.Shared.Alert;
@@ -11,7 +12,7 @@ namespace Content.IntegrationTests.Tests._Serenity.Medical;
 
 /// <summary>
 /// Catches YAML and locale mistakes in the wound and pain data that would otherwise fail silently in game:
-/// arrays that don't match the tier count, pain bands out of order, damage types that don't exist,
+/// arrays that don't match the tier count, pain bands out of order, damage types or categories that don't exist,
 /// and locale keys that are built by string interpolation at runtime.
 /// </summary>
 [TestFixture]
@@ -19,8 +20,10 @@ public sealed class MedicalDataTest
 {
     private const int TierCount = WoundsConstants.MaxWoundTier;
 
+    private static readonly ProtoId<AlertPrototype> PainAlert = "Pain";
+
     [Test]
-    public async Task WoundTypesAreConsistent()
+    public async Task CategoriesAndWoundTypesAreConsistent()
     {
         await using var pair = await PoolManager.GetServerClient();
         var server = pair.Server;
@@ -31,26 +34,54 @@ public sealed class MedicalDataTest
         {
             Assert.Multiple(() =>
             {
-                foreach (var wound in proto.EnumeratePrototypes<WoundTypePrototype>())
+                // The categories code refers to directly must exist
+                foreach (var id in new[]
+                         {
+                             WoundCategoryIds.Bleeding, WoundCategoryIds.Fracture, WoundCategoryIds.Burn,
+                             WoundCategoryIds.Laceration, WoundCategoryIds.Puncture,
+                         })
                 {
-                    Assert.That(wound.Thresholds, Has.Length.EqualTo(TierCount), $"{wound.ID} needs {TierCount} thresholds");
-                    Assert.That(wound.Thresholds, Is.Ordered.Ascending, $"{wound.ID} thresholds must increase with tier");
-                    Assert.That(proto.HasIndex<DamageTypePrototype>(wound.DamageType), $"{wound.ID} uses unknown damage type {wound.DamageType}");
+                    Assert.That(proto.HasIndex(id), $"wound category {id} is missing");
+                }
 
-                    for (var tier = 1; tier <= TierCount; tier++)
+                foreach (var category in proto.EnumeratePrototypes<WoundCategoryPrototype>())
+                {
+                    if (category.Alert is { } alert)
                     {
-                        Assert.That(wound.Names.ContainsKey(tier), $"{wound.ID} has no name for tier {tier}");
-                        RequireLoc(loc, $"wound-{wound.ID.ToLowerInvariant()}-{tier}");
+                        Assert.That(proto.TryIndex<AlertPrototype>(alert, out var alertProto), $"{category.ID} uses unknown alert {alert}");
+                        if (alertProto != null)
+                            Assert.That(alertProto.Icons, Has.Count.EqualTo(TierCount), $"alert {alert} needs {TierCount} icons, one per tier");
+                    }
+
+                    if (category.ExamineLoc is { } prefix)
+                    {
+                        for (var tier = 1; tier <= TierCount; tier++)
+                        {
+                            RequireLoc(loc, $"{prefix}-{tier}");
+                        }
                     }
                 }
 
-                // Keys the wound display and examine code builds at runtime
-                for (var tier = 1; tier <= TierCount; tier++)
+                foreach (var wound in proto.EnumeratePrototypes<WoundTypePrototype>())
                 {
-                    RequireLoc(loc, $"wound-bleed-slash-{tier}");
-                    RequireLoc(loc, $"wound-bleed-piercing-{tier}");
-                    RequireLoc(loc, $"wound-examine-fracture-{tier}");
-                    RequireLoc(loc, $"wound-examine-burn-{tier}");
+                    Assert.That(proto.TryIndex(wound.Category, out var category), $"{wound.ID} uses unknown category {wound.Category}");
+                    if (category != null)
+                        Assert.That(category.Derived, Is.False, $"{wound.ID} is in derived category {category.ID}, which can't hold wound entries");
+
+                    Assert.That(wound.Damage, Is.Not.Empty, $"{wound.ID} is caused by no damage type");
+                    foreach (var (type, weight) in wound.Damage)
+                    {
+                        Assert.That(proto.HasIndex<DamageTypePrototype>(type), $"{wound.ID} uses unknown damage type {type}");
+                        Assert.That(weight, Is.GreaterThan(0f), $"{wound.ID} weight for {type} must be positive");
+                    }
+
+                    Assert.That(wound.Thresholds, Has.Length.EqualTo(TierCount), $"{wound.ID} needs {TierCount} thresholds");
+                    Assert.That(wound.Thresholds, Is.Ordered.Ascending, $"{wound.ID} thresholds must increase with tier");
+
+                    for (var tier = 1; tier <= TierCount; tier++)
+                    {
+                        RequireLoc(loc, $"wound-{wound.ID.ToLowerInvariant()}-{tier}");
+                    }
                 }
             });
         });
@@ -71,11 +102,7 @@ public sealed class MedicalDataTest
             Assert.That(proto.HasIndex<WoundConfigPrototype>(WoundConfigPrototype.DefaultId), "the default wound config is missing");
             Assert.That(proto.HasIndex<PainConfigPrototype>(PainConfigPrototype.DefaultId), "the default pain config is missing");
 
-            var woundCategories = new HashSet<WoundCategory> { WoundCategory.Bleeding };
-            foreach (var wound in proto.EnumeratePrototypes<WoundTypePrototype>())
-            {
-                woundCategories.Add(wound.Category);
-            }
+            var categories = proto.EnumeratePrototypes<WoundCategoryPrototype>().Select(c => c.ID).ToHashSet();
 
             Assert.Multiple(() =>
             {
@@ -84,10 +111,28 @@ public sealed class MedicalDataTest
                     Assert.That(config.TierDecaySeconds, Has.Length.EqualTo(TierCount), $"{config.ID} needs {TierCount} decay times");
                     Assert.That(config.TierDecaySeconds, Has.All.GreaterThan(0f), $"{config.ID} decay times must be positive");
                     Assert.That(config.RegenTickSeconds, Is.GreaterThan(0f), $"{config.ID} regen tick must be positive");
-                    Assert.That(config.MovementSlowTier, Is.InRange(1, TierCount), $"{config.ID} movement slow tier");
-                    Assert.That(config.FractureDropTier, Is.InRange(1, TierCount), $"{config.ID} fracture drop tier");
                     Assert.That(config.MaxStackedWoundsPerType, Is.GreaterThanOrEqualTo(1), $"{config.ID} stack cap");
-                    Assert.That(config.FractureDropChance, Is.InRange(0f, 1f), $"{config.ID} fracture drop chance");
+                    Assert.That(config.BleedSources, Is.Not.Empty, $"{config.ID} lists no bleed sources");
+
+                    foreach (var source in config.BleedSources)
+                    {
+                        Assert.That(proto.HasIndex<DamageTypePrototype>(source), $"{config.ID} bleed source {source} is not a damage type");
+
+                        // The health analyzer builds wound-bleed-<type>-<tier> from the recorded source
+                        for (var tier = 1; tier <= TierCount; tier++)
+                        {
+                            RequireLoc(loc, $"wound-bleed-{source.Id.ToLowerInvariant()}-{tier}");
+                        }
+                    }
+
+                    foreach (var (category, effects) in config.Categories)
+                    {
+                        Assert.That(categories, Does.Contain(category.Id), $"{config.ID} configures unknown category {category}");
+                        Assert.That(effects.SlowTier, Is.InRange(0, TierCount), $"{config.ID} {category} slow tier");
+                        Assert.That(effects.DropTier, Is.InRange(0, TierCount), $"{config.ID} {category} drop tier");
+                        Assert.That(effects.SlowMultiplier, Is.InRange(0.01f, 1f), $"{config.ID} {category} slow multiplier");
+                        Assert.That(effects.DropChance, Is.InRange(0f, 1f), $"{config.ID} {category} drop chance");
+                    }
                 }
 
                 foreach (var config in proto.EnumeratePrototypes<PainConfigPrototype>())
@@ -114,7 +159,8 @@ public sealed class MedicalDataTest
 
                     Assert.That(config.Levels.Keys, Has.None.EqualTo(PainLevel.None), $"{config.ID} must not configure the None band");
 
-                    foreach (var category in woundCategories)
+                    // Every category, including derived ones like bleeding, must say how much pain it causes
+                    foreach (var category in categories)
                     {
                         if (!config.WoundWeights.TryGetValue(category, out var weights))
                         {
@@ -125,6 +171,11 @@ public sealed class MedicalDataTest
                         Assert.That(weights, Has.Length.EqualTo(TierCount), $"{config.ID} {category} needs {TierCount} weights");
                         Assert.That(weights, Is.Ordered.Ascending, $"{config.ID} {category} weights");
                         Assert.That(weights, Has.All.GreaterThanOrEqualTo(0f), $"{config.ID} {category} weights must not be negative");
+                    }
+
+                    foreach (var category in config.WoundWeights.Keys)
+                    {
+                        Assert.That(categories, Does.Contain(category.Id), $"{config.ID} has weights for unknown category {category}");
                     }
                 }
 
@@ -158,12 +209,14 @@ public sealed class MedicalDataTest
 
         await server.WaitAssertion(() =>
         {
+            var categories = proto.EnumeratePrototypes<WoundCategoryPrototype>().Select(c => c.ID).ToHashSet();
+
             Assert.Multiple(() =>
             {
-                // Fracture and burn alerts take a severity per tier; pain has one per band above None.
-                AssertIcons(proto, "Fracture", TierCount);
-                AssertIcons(proto, "Burn", TierCount);
-                AssertIcons(proto, "Pain", (int) PainLevel.Agonizing);
+                // Pain has one alert severity per band above None
+                Assert.That(proto.TryIndex(PainAlert, out var pain), "the Pain alert is missing");
+                if (pain != null)
+                    Assert.That(pain.Icons, Has.Count.EqualTo((int) PainLevel.Agonizing), "the Pain alert needs one icon per pain band");
 
                 var painkillers = 0;
                 foreach (var entity in proto.EnumeratePrototypes<EntityPrototype>())
@@ -177,6 +230,10 @@ public sealed class MedicalDataTest
                     if (painkiller.Scope is { } scope)
                     {
                         Assert.That(scope, Is.Not.Empty, $"{entity.ID} has an empty scope, so it masks nothing");
+                        foreach (var category in scope)
+                        {
+                            Assert.That(categories, Does.Contain(category.Id), $"{entity.ID} scope names unknown category {category}");
+                        }
                     }
                 }
 
@@ -188,17 +245,6 @@ public sealed class MedicalDataTest
         });
 
         await pair.CleanReturnAsync();
-    }
-
-    private static void AssertIcons(IPrototypeManager proto, string alertId, int expected)
-    {
-        if (!proto.TryIndex<AlertPrototype>(alertId, out var alert))
-        {
-            Assert.Fail($"alert {alertId} is missing");
-            return;
-        }
-
-        Assert.That(alert.Icons, Has.Count.EqualTo(expected), $"alert {alertId} needs {expected} icons, one per severity");
     }
 
     private static void RequireLoc(ILocalizationManager loc, string key)

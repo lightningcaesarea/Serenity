@@ -1,3 +1,4 @@
+using Content.Shared.Damage.Prototypes;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.Manager.Attributes;
 
@@ -30,22 +31,17 @@ public sealed partial class WoundConfigPrototype : IPrototype
     public float[] TierDecaySeconds = [300f, 180f, 120f];
 
     /// <summary>
-    /// Fractures and burns at this tier or worse slow movement by <see cref="MovementSlowMultiplier"/>.
+    /// Effects of each wound category on this mob (movement slow, item drops). Categories not listed have none.
     /// </summary>
     [DataField]
-    public int MovementSlowTier = 2;
-
-    [DataField]
-    public float MovementSlowMultiplier = 0.7f;
+    public Dictionary<ProtoId<WoundCategoryPrototype>, WoundCategoryEffects> Categories = new();
 
     /// <summary>
-    /// A fracture at this tier or worse can make the patient drop a held item when hit.
+    /// Damage types that make a mob bleed, for the bleed-source shown on the health analyzer. Earlier entries win:
+    /// a later type never replaces an earlier one already recorded.
     /// </summary>
     [DataField]
-    public int FractureDropTier = 3;
-
-    [DataField]
-    public float FractureDropChance = 0.5f;
+    public List<ProtoId<DamageTypePrototype>> BleedSources = new();
 
     /// <summary>
     /// How many wounds of one type can be active at once.
@@ -64,4 +60,33 @@ public sealed partial class WoundConfigPrototype : IPrototype
 
         return TimeSpan.FromSeconds(TierDecaySeconds[tier - 1]);
     }
+
+    public WoundCategoryEffects EffectsFor(ProtoId<WoundCategoryPrototype> category)
+    {
+        return Categories.TryGetValue(category, out var effects) ? effects : WoundCategoryEffects.None;
+    }
+}
+
+[DataDefinition]
+public sealed partial class WoundCategoryEffects
+{
+    public static readonly WoundCategoryEffects None = new();
+
+    /// <summary>
+    /// Wounds of this category at this tier or worse slow the mob by <see cref="SlowMultiplier"/>. 0 means never.
+    /// </summary>
+    [DataField]
+    public int SlowTier;
+
+    [DataField]
+    public float SlowMultiplier = 1f;
+
+    /// <summary>
+    /// Wounds of this category at this tier or worse can make the mob drop a held item when hit. 0 means never.
+    /// </summary>
+    [DataField]
+    public int DropTier;
+
+    [DataField]
+    public float DropChance;
 }

@@ -1,4 +1,5 @@
 using Content.Shared.Damage;
+using Content.Shared.FixedPoint;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Rejuvenate;
 using Content.Shared._Serenity.Medical.Damage;
@@ -16,6 +17,12 @@ public abstract partial class SharedWoundSystem : EntitySystem
     [Dependency] private WoundDisplaySystem _display = default!;
 
     private readonly List<WoundTypePrototype> _woundTypes = new();
+    private readonly List<WoundCategoryPrototype> _categories = new();
+
+    /// <summary>
+    /// Every wound category, for systems that treat injuries by kind.
+    /// </summary>
+    public IReadOnlyList<WoundCategoryPrototype> Categories => _categories;
 
     public override void Initialize()
     {
@@ -28,13 +35,19 @@ public abstract partial class SharedWoundSystem : EntitySystem
 
     private void OnPrototypesReloaded(PrototypesReloadedEventArgs args)
     {
-        if (args.WasModified<WoundTypePrototype>())
+        if (args.WasModified<WoundTypePrototype>() || args.WasModified<WoundCategoryPrototype>())
             CacheWoundTypes();
     }
 
     private void CacheWoundTypes()
     {
         _woundTypes.Clear();
+        _categories.Clear();
+        foreach (var category in _proto.EnumeratePrototypes<WoundCategoryPrototype>())
+        {
+            _categories.Add(category);
+        }
+
         foreach (var proto in _proto.EnumeratePrototypes<WoundTypePrototype>())
         {
             _woundTypes.Add(proto);
@@ -62,36 +75,22 @@ public abstract partial class SharedWoundSystem : EntitySystem
 
         var changed = false;
 
+        // Remember which damage type made the mob bleed, for the health analyzer.
         foreach (var (damageType, amount) in args.DamageDelta.DamageDict)
         {
-            var amountFloat = amount.Float();
-            if (amountFloat <= 0)
-                continue;
+            if (amount > FixedPoint2.Zero)
+                changed |= _display.UpdateBleedSource(comp, damageType);
+        }
 
-            var typeStr = damageType;
-
-            // Track bleed source damage type for display
-            if (typeStr == DamageTypeIds.Slash || typeStr == DamageTypeIds.Piercing)
-            {
-                changed |= _display.UpdateBleedSource(comp, typeStr, amountFloat);
-                continue; // Bleeding wounds are display-only, not wound entries
-            }
-
-            // Check spike thresholds for fracture/burn wound types.
-            // Divide by ThresholdMultiplier so a multiplier > 1 effectively raises thresholds.
-            var effectiveAmount = amountFloat / ClampThresholdMultiplier(comp.ThresholdMultiplier);
-
-            foreach (var woundProto in _woundTypes)
-            {
-                if (woundProto.DamageType != typeStr)
-                    continue;
-
-                var tier = GetTierFromSpike(woundProto, effectiveAmount);
-                if (tier <= 0)
-                    continue;
-
+        // Every wound type scores the whole hit, so several damage types in one hit combine and a wound type
+        // can respond to more than one kind of damage. Dividing by ThresholdMultiplier means a multiplier
+        // above 1 effectively raises the thresholds.
+        var multiplier = ClampThresholdMultiplier(comp.ThresholdMultiplier);
+        foreach (var woundProto in _woundTypes)
+        {
+            var tier = woundProto.TierFor(woundProto.Score(args.DamageDelta) / multiplier);
+            if (tier > 0)
                 changed |= ApplyWound(comp, woundProto, tier);
-            }
         }
 
         if (!changed)
@@ -99,17 +98,6 @@ public abstract partial class SharedWoundSystem : EntitySystem
 
         Dirty(uid, comp);
         RaiseLocalEvent(uid, new WoundsDamagedEvent());
-    }
-
-    private static int GetTierFromSpike(WoundTypePrototype proto, float amount)
-    {
-        var tier = 0;
-        for (var i = 0; i < proto.Thresholds.Length; i++)
-        {
-            if (amount >= proto.Thresholds[i])
-                tier = i + WoundsConstants.TierIndexToTierOffset;
-        }
-        return tier;
     }
 
     private bool ApplyWound(WoundComponent comp, WoundTypePrototype proto, int tier)
@@ -154,7 +142,7 @@ public abstract partial class SharedWoundSystem : EntitySystem
     /// <summary>
     /// Removes all wounds of the given category. Used by surgery.
     /// </summary>
-    public void ClearWoundsByCategory(EntityUid uid, WoundCategory category, WoundComponent? comp = null)
+    public void ClearWoundsByCategory(EntityUid uid, ProtoId<WoundCategoryPrototype> category, WoundComponent? comp = null)
     {
         if (!Resolve(uid, ref comp, false))
             return;
@@ -240,7 +228,7 @@ public abstract partial class SharedWoundSystem : EntitySystem
     /// Gets the highest tier among active wounds of a given category.
     /// Returns 0 if no wounds of that category exist.
     /// </summary>
-    public int GetWorstTier(WoundComponent comp, WoundCategory category)
+    public int GetWorstTier(WoundComponent comp, ProtoId<WoundCategoryPrototype> category)
     {
         var worst = 0;
         foreach (var wound in comp.ActiveWounds)

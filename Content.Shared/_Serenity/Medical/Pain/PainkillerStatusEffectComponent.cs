@@ -1,5 +1,6 @@
 using Content.Shared._Serenity.Medical.Wounds;
 using Robust.Shared.GameObjects;
+using Robust.Shared.Prototypes;
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization.Manager.Attributes;
 
@@ -23,5 +24,5 @@ public sealed partial class PainkillerStatusEffectComponent : Component
     /// a topical numbs only skin-level injuries and does nothing for a broken bone.
     /// </summary>
     [DataField]
-    public HashSet<WoundCategory>? Scope;
+    public HashSet<ProtoId<WoundCategoryPrototype>>? Scope;
 }

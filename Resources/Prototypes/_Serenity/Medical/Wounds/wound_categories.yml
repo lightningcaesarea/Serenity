@@ -1,0 +1,28 @@
+# The kinds of injury. Everything that treats wounds by kind (pain weights, painkiller scope, surgery steps,
+# examine text, HUD alerts, slow and item-drop effects in medical_config.yml) refers to these ids.
+# To add a kind: add a woundCategory here, wound types in wound_types.yml that use it, its pain weights in
+# medical_config.yml, and its locale keys. No code changes.
+
+# Computed from the bloodstream, not stored as wound entries. Its examine line comes from the bloodstream system.
+- type: woundCategory
+  id: Bleeding
+  derived: true
+
+- type: woundCategory
+  id: Fracture
+  alert: Fracture
+  examineLoc: wound-examine-fracture
+
+- type: woundCategory
+  id: Burn
+  alert: Burn
+  examineLoc: wound-examine-burn
+
+# No HUD alert yet: there is no icon art for these.
+- type: woundCategory
+  id: Laceration
+  examineLoc: wound-examine-laceration
+
+- type: woundCategory
+  id: Puncture
+  examineLoc: wound-examine-puncture
