@@ -98,3 +98,9 @@ wound-infection-3 = Septic Infection
 wound-examine-infection-1 = [color=#C8D27A]{ CAPITALIZE(POSS-ADJ($target)) } skin is flushed and warm around an old wound.[/color]
 wound-examine-infection-2 = [color=#B9C24A]{ CAPITALIZE(SUBJECT($target)) } { CONJUGATE-HAVE($target) } a feverish sheen and an angry, swollen wound.[/color]
 wound-examine-infection-3 = [color=#8FA01E]{ CAPITALIZE(SUBJECT($target)) } { CONJUGATE-BE($target) } gravely ill, sweating and septic.[/color]
+
+# Health analyzer (advanced readout)
+health-analyzer-wounds-title = Injuries
+health-analyzer-wound-tier = (tier { $tier })
+health-analyzer-infection-suppressed = An antibiotic is holding the infection back.
+health-analyzer-infection-detected = [color=#b9c24a]Infection detected.[/color]

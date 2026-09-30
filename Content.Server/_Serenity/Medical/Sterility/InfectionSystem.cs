@@ -81,6 +81,14 @@ public sealed partial class InfectionSystem : EntitySystem
     }
 
     /// <summary>
+    /// Whether the mob currently has an infection.
+    /// </summary>
+    public bool IsInfected(WoundComponent comp)
+    {
+        return GetInfection(comp) != null;
+    }
+
+    /// <summary>
     /// Gives the mob a tier 1 infection, unless it already has one. Returns true if it was added.
     /// </summary>
     public bool TryInfect(EntityUid uid, WoundComponent comp)

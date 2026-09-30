@@ -58,6 +58,20 @@
   - events: [ SurgeryDoAfterEvent ]
     skilled: 0.85
 
+# Reading an advanced health analyzer takes training: the advanced readout (chemicals, wound and infection detail)
+# is locked behind this skill, and the scan refuses to start without it.
+- type: skill
+  id: Diagnostics
+  name: skill-diagnostics-name
+  description: skill-diagnostics-desc
+  category: skill-category-medical
+  requires: [ Medicine ]
+  doAfters:
+  - events: [ HealthAnalyzerDoAfterEvent ]
+    used:
+      components: [ AdvancedHealthAnalyzer ]
+    required: true
+
 - type: skill
   id: Chemistry
   name: skill-chemistry-name

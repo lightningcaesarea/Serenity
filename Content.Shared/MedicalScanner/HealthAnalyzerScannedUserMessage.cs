@@ -37,6 +37,8 @@ public struct HealthAnalyzerUiState
     public bool? ScanMode;
     public bool? Bleeding;
     public bool? Unrevivable;
+    public bool? InfectionDetected; // Serenity: every analyzer reports this and nothing more about an infection
+    public Content.Shared._Serenity.Medical.Analyzer.HealthAnalyzerWoundReadout? Wounds; // Serenity: advanced analyzers only
     public List<(string ReagentId, FixedPoint2 Quantity, FixedPoint2 StomachQuantity)>? Chemicals; // Starlight - merged bloodstream and stomach reagents
 
     public HealthAnalyzerUiState() {}

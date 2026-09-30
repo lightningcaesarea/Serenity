@@ -21,7 +21,7 @@
 # Medical
 - type: jobSkills
   id: MedicalDoctor
-  skills: [ Medicine, Surgery ]
+  skills: [ Medicine, Surgery, Diagnostics ]
 
 - type: jobSkills
   id: MedicalIntern
@@ -29,7 +29,7 @@
 
 - type: jobSkills
   id: Paramedic
-  skills: [ Medicine ]
+  skills: [ Medicine, Diagnostics ]
 
 - type: jobSkills
   id: Chemist
@@ -37,7 +37,7 @@
 
 - type: jobSkills
   id: ChiefMedicalOfficer
-  skills: [ Medicine, Surgery, Chemistry ]
+  skills: [ Medicine, Surgery, Chemistry, Diagnostics ]
 
 - type: jobSkills
   id: Brigmedic
