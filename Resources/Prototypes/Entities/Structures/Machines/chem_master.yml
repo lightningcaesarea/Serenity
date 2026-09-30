@@ -6,8 +6,6 @@
   placement:
     mode: SnapgridCenter
   components:
-  - type: SkillRequired # Serenity
-    skills: [ Chemistry ]
   # Starlight-start: Make ChemMaster rotatable.
   - type: Transform
     noRot: false
@@ -38,8 +36,52 @@
           components:
           - FitsInDispenser
   - type: ChemMaster
-    pillDosageLimit: 20
-    patchDosageLimit: 20
+  # Serenity: data-driven packaging with its own buffer, independent of the main buffer.
+  - type: SolutionManager
+    solutions:
+    - SolutionChemMasterPackagingBuffer
+  - type: ChemMasterPackaging
+    sections:
+    - name: Bottles
+      packaging:
+      - ChemistryEmptyBottle01
+      - ChemistryEmptyBottle02
+      - ChemistryEmptyBottle03
+      - ChemistryEmptyBottle04
+    - name: Pills
+      container: PillCanister
+      containerPressed: true
+      packaging:
+      - ChemMasterPill1
+      - ChemMasterPill2
+      - ChemMasterPill3
+      - ChemMasterPill4
+      - ChemMasterPill5
+      - ChemMasterPill6
+      - ChemMasterPill7
+      - ChemMasterPill8
+      - ChemMasterPill9
+      - ChemMasterPill10
+      - ChemMasterPill11
+      - ChemMasterPill12
+      - ChemMasterPill13
+      - ChemMasterPill14
+      - ChemMasterPill15
+      - ChemMasterPill16
+      - ChemMasterPill17
+      - ChemMasterPill18
+      - ChemMasterPill19
+      - ChemMasterPill20
+    - name: Patches
+      container: PatchPack
+      containerPressed: true
+      packaging:
+      - ChemMasterPatchBlank
+      - ChemMasterPatchBrute
+      - ChemMasterPatchBurn
+      - ChemMasterPatchBurnSmall
+      - ChemMasterPatchMedical
+      - ChemMasterPatchClown
   - type: Physics
     bodyType: Static
   - type: Fixtures

@@ -4,23 +4,6 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared.Chemistry
 {
-    [Serializable, NetSerializable]
-    public sealed class ChemMasterCreatePatchesMessage : BoundUserInterfaceMessage
-    {
-        public readonly uint Dosage;
-        public readonly uint Number;
-        public readonly string Label;
-        public readonly string? ContainerLabel;
-
-        public ChemMasterCreatePatchesMessage(uint dosage, uint number, string label, string containerLabel)
-        {
-            Dosage = dosage;
-            Number = number;
-            Label = label;
-            ContainerLabel = containerLabel;
-        }
-    }
-
     // Plumbing valve toggle
     [Serializable, NetSerializable]
     public sealed class ChemMasterToggleValveMessage : BoundUserInterfaceMessage
@@ -58,8 +41,6 @@ namespace Content.Shared.Chemistry
 
     public sealed partial class ChemMasterBoundUserInterfaceState : BoundUserInterfaceState
     {
-        public readonly uint PatchDosageLimit;
-
         public readonly bool ValveOpen;
     }
 

@@ -1,3 +1,4 @@
+using Content.Shared._Serenity.Chemistry;
 using Content.Shared.Chemistry;
 using Content.Shared.Containers.ItemSlots;
 using JetBrains.Annotations;
@@ -33,10 +34,6 @@ public sealed class ModernChemMasterBui(EntityUid owner, Enum uiKey) : BoundUser
             new ItemSlotButtonPressedEvent(SharedChemMaster.InputSlotName));
         _window.InputEjectButtonClassic.OnPressed += _ => SendMessage(
             new ItemSlotButtonPressedEvent(SharedChemMaster.InputSlotName));
-        _window.OutputEjectButton.OnPressed += _ => SendMessage(
-            new ItemSlotButtonPressedEvent(SharedChemMaster.OutputSlotName));
-        _window.OutputEjectButtonClassic.OnPressed += _ => SendMessage(
-            new ItemSlotButtonPressedEvent(SharedChemMaster.OutputSlotName));
         _window.BufferTransferButton.OnPressed += _ => SendMessage(
             new ChemMasterSetModeMessage(ChemMasterMode.Transfer));
         _window.BufferTransferButtonClassic.OnPressed += _ => SendMessage(
@@ -45,54 +42,21 @@ public sealed class ModernChemMasterBui(EntityUid owner, Enum uiKey) : BoundUser
             new ChemMasterSetModeMessage(ChemMasterMode.Discard));
         _window.BufferDiscardButtonClassic.OnPressed += _ => SendMessage(
             new ChemMasterSetModeMessage(ChemMasterMode.Discard));
-        _window.CreatePillButton.OnPressed += _ => SendMessage(
-            new ChemMasterCreatePillsMessage(
-                (uint) _window.PillDosage.Value,
-                (uint) _window.PillNumber.Value,
-                _window.LabelLine,
-                _window.ContainerLabelLine));
-        _window.CreatePillButtonClassic.OnPressed += _ => SendMessage(
-            new ChemMasterCreatePillsMessage(
-                (uint) _window.PillDosageClassic.Value,
-                (uint) _window.PillNumberClassic.Value,
-                _window.LabelLine,
-                _window.ContainerLabelLine));
-        _window.CreatePatchButton.OnPressed += _ => SendMessage(
-            new ChemMasterCreatePatchesMessage(
-                (uint) _window.PatchDosage.Value,
-                (uint) _window.PatchNumber.Value,
-                _window.LabelLine,
-                _window.ContainerLabelLine));
-        _window.CreateBottleButton.OnPressed += _ => SendMessage(
-            new ChemMasterOutputToBottleMessage(
-                (uint) _window.BottleDosage.Value, _window.LabelLine));
-        _window.CreateBottleButtonClassic.OnPressed += _ => SendMessage(
-            new ChemMasterOutputToBottleMessage(
-                (uint) _window.BottleDosageClassic.Value, _window.LabelLine));
-        _window.CreatePatchButtonClassic.OnPressed += _ => SendMessage(
-            new ChemMasterCreatePatchesMessage(
-                (uint) _window.PatchDosageClassic.Value,
-                (uint) _window.PatchNumberClassic.Value,
-                _window.LabelLine,
-                _window.ContainerLabelLine));
         _window.BufferSortButton.OnPressed += _ => SendMessage(
             new ChemMasterSortingTypeCycleMessage());
         _window.BufferSortButtonClassic.OnPressed += _ => SendMessage(
             new ChemMasterSortingTypeCycleMessage());
-        _window.OutputBufferDraw.OnPressed += _ => SendMessage(
-            new ChemMasterOutputDrawSourceMessage(ChemMasterDrawSource.Internal));
-        _window.OutputBufferDrawClassic.OnPressed += _ => SendMessage(
-            new ChemMasterOutputDrawSourceMessage(ChemMasterDrawSource.Internal));
-        _window.OutputBeakerDraw.OnPressed += _ => SendMessage(
-            new ChemMasterOutputDrawSourceMessage(ChemMasterDrawSource.External));
-        _window.OutputBeakerDrawClassic.OnPressed += _ => SendMessage(
-            new ChemMasterOutputDrawSourceMessage(ChemMasterDrawSource.External));
-
-        for (uint i = 0; i < _window.PillTypeButtons.Length; i++)
+        // Serenity: packaging tab (one panel per layout, both wired identically).
+        foreach (var panel in new[] { _window.PackagingPanel, _window.PackagingPanelClassic })
         {
-            var pillType = i;
-            _window.PillTypeButtons[i].OnPressed += _ => SendMessage(new ChemMasterSetPillTypeMessage(pillType));
-            _window.PillTypeButtonsClassic[i].OnPressed += _ => SendMessage(new ChemMasterSetPillTypeMessage(pillType));
+            panel.OnTransfer += (reagent, amount, fromBeaker) =>
+                SendMessage(new ChemMasterPackagingTransferMessage(reagent, amount, fromBeaker));
+            panel.OnToggleDiscard += () => SendMessage(new ChemMasterPackagingToggleDiscardMessage());
+            panel.OnSelect += (index, packaging) => SendMessage(new ChemMasterPackagingSelectMessage(index, packaging));
+            panel.OnUseContainer += (index, use) => SendMessage(new ChemMasterPackagingUseContainerMessage(index, use));
+            panel.OnSetAmount += amount => SendMessage(new ChemMasterPackagingSetAmountMessage(amount));
+            panel.OnPrint += name => SendMessage(new ChemMasterPackagingPrintMessage(name));
+            panel.OnEjectOutput += () => SendMessage(new ItemSlotButtonPressedEvent(SharedChemMaster.OutputSlotName));
         }
 
         _window.OnReagentButtonPressed += (_, button) => SendMessage(new ChemMasterReagentAmountButtonMessage(button.Id, button.Amount, button.IsBuffer));
