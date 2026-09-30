@@ -89,7 +89,7 @@ public sealed partial class SalarySystem : SharedSalarySystem
                             var amount = CalculateSalaryWithBonuses(salary, query.Current.Session);
                             var sender = _salaries.Sender.GetValueOrDefault(role.Prototype, "NanoTrasen");
 
-                            _playerResources.TryUpdateResource(query.Current.Session, "credits", amount, $"salary:{role.Prototype}"); // Serenity
+                            _playerResources.TryUpdateResource(query.Current.Session, "credits", amount, LedgerReasons.Salary(role.Prototype)); // Serenity
                             _adminLogger.Add(LogType.Economy, LogImpact.Low,
                                 $"Salary of {amount} Sector Credits paid to {query.Current.Session.Name} for {role.Prototype} by {sender}"); // Serenity
                             var message = Loc.GetString("economy-chat-salary-message", ("amount", amount), ("sender", sender));
@@ -134,7 +134,7 @@ public sealed partial class SalarySystem : SharedSalarySystem
         if (!_playerResources.TryGetResource(session, "credits", out var balance))
             return;
 
-        _playerResources.TryUpdateResource(session, "credits", amount, "donate"); // Serenity
+        _playerResources.TryUpdateResource(session, "credits", amount, LedgerReasons.Donate); // Serenity
         _adminLogger.Add(LogType.Economy, LogImpact.Medium,
             $"Donation credit of {amount} Sector Credits granted to {session.Name}"); // Serenity
 

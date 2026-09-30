@@ -62,7 +62,7 @@ public sealed partial class SecureCommandTerminalSystem : EntitySystem
     [Dependency] private SharedAirlockSystem _airlock = default!;
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private AutoDiscordLogSystem _autolog = default!;
-    [Dependency] private ISharedNullLinkPlayerResourcesManager _playerResources = default!;
+    [Dependency] private Content.Shared._Serenity.Economy.ISerenityPlayerResourcesManager _playerResources = default!; // Serenity: reason-carrying variant
 
     public override void Initialize()
     {
@@ -321,7 +321,7 @@ public sealed partial class SecureCommandTerminalSystem : EntitySystem
                 return;
             }
 
-            _playerResources.TryUpdateResource(actor, "credits", -proto.Fee);
+            _playerResources.TryUpdateResource(actor, "credits", -proto.Fee, Content.Shared._Serenity.Economy.LedgerReasons.TerminalFee(proto.ID)); // Serenity
             _adminLog.Add(LogType.Economy, LogImpact.Medium,
                 $"{ToPrettyString(actor):player} was charged a {proto.Fee} Sector Credit fee for terminal proposal {proto.ID}"); // Serenity
             _popup.PopupCursor($"Held {proto.Fee}\u20a1 pending authorization.", actor, PopupType.Medium);
@@ -677,7 +677,7 @@ public sealed partial class SecureCommandTerminalSystem : EntitySystem
 
         var amount = (int)(proto.Fee * fraction);
         if (amount > 0)
-            _playerResources.TryUpdateResource(requester, "credits", amount);
+            _playerResources.TryUpdateResource(requester, "credits", amount, Content.Shared._Serenity.Economy.LedgerReasons.TerminalRefund(proto.ID)); // Serenity
     }
 
     /// <summary>Execute the prototype's configured action against the station.</summary>
