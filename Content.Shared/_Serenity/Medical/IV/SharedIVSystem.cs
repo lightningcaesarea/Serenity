@@ -4,6 +4,9 @@ using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.DragDrop;
 using Content.Shared.Examine;
+using Content.Shared.Foldable;
+using Content.Shared.Item;
+using Content.Shared.Popups;
 using Robust.Shared.Containers;
 
 namespace Content.Shared._Serenity.Medical.IV;
@@ -14,7 +17,9 @@ namespace Content.Shared._Serenity.Medical.IV;
 /// </summary>
 public abstract partial class SharedIVSystem : EntitySystem
 {
+    [Dependency] private FoldableSystem _foldable = default!;
     [Dependency] private ItemSlotsSystem _itemSlots = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedContainerSystem _containers = default!;
     [Dependency] private SharedSolutionContainerSystem _solutions = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
@@ -23,8 +28,10 @@ public abstract partial class SharedIVSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<IVStandComponent, CanDragEvent>(OnStandCanDrag);
         SubscribeLocalEvent<IVStandComponent, CanDropDraggedEvent>(OnStandCanDrop);
+        SubscribeLocalEvent<IVStandComponent, FoldAttemptEvent>(OnStandFoldAttempt);
+        SubscribeLocalEvent<IVStandComponent, GettingPickedUpAttemptEvent>(OnStandPickupAttempt);
+        SubscribeLocalEvent<IVStandComponent, ContainerIsInsertingAttemptEvent>(OnStandInsertAttempt);
         SubscribeLocalEvent<IVLineComponent, ExaminedEvent>(OnExamined);
     }
 
@@ -76,20 +83,55 @@ public abstract partial class SharedIVSystem : EntitySystem
         return first.MapId == second.MapId && first.InRange(second, range);
     }
 
-    private void OnStandCanDrag(Entity<IVStandComponent> stand, ref CanDragEvent args)
+    public bool IsFolded(EntityUid stand)
     {
-        args.Handled = true;
+        return _foldable.IsFolded(stand);
     }
 
+    // Dragging a stand onto yourself folds it (DeployFoldable); onto someone else sets the line.
     private void OnStandCanDrop(Entity<IVStandComponent> stand, ref CanDropDraggedEvent args)
     {
-        if (!TryComp<IVLineComponent>(stand, out var line)
+        if (args.User == args.Target
+            || IsFolded(stand)
+            || !TryComp<IVLineComponent>(stand, out var line)
             || !HasComp<BloodstreamComponent>(args.Target)
             || !InRange(stand, args.Target, line.Range))
             return;
 
         args.Handled = true;
         args.CanDrop = true;
+    }
+
+    /// <summary>
+    /// A stand with a bag hung on it or a line in someone has to be cleared before it folds.
+    /// </summary>
+    private void OnStandFoldAttempt(Entity<IVStandComponent> stand, ref FoldAttemptEvent args)
+    {
+        if (args.Comp.IsFolded)
+            return;
+
+        if ((TryComp<IVLineComponent>(stand, out var line) && line.AttachedTo != null) || TryGetBag(stand, out _))
+            args.Cancelled = true;
+    }
+
+    /// <summary>
+    /// An unfolded stand stays where it is; fold it to carry it.
+    /// </summary>
+    private void OnStandPickupAttempt(Entity<IVStandComponent> stand, ref GettingPickedUpAttemptEvent args)
+    {
+        if (args.Cancelled || IsFolded(stand))
+            return;
+
+        args.Cancel();
+
+        if (args.ShowPopup)
+            _popup.PopupPredictedCursor(Loc.GetString("iv-fold-first", ("iv", stand.Owner)), args.User);
+    }
+
+    private void OnStandInsertAttempt(Entity<IVStandComponent> stand, ref ContainerIsInsertingAttemptEvent args)
+    {
+        if (IsFolded(stand))
+            args.Cancel();
     }
 
     private void OnExamined(Entity<IVLineComponent> line, ref ExaminedEvent args)

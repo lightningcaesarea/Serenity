@@ -7,6 +7,8 @@ using Content.Shared.Containers.ItemSlots;
 using Content.Shared.DoAfter;
 using Content.Shared.DragDrop;
 using Content.Shared.FixedPoint;
+using Content.Shared.Foldable;
+using Content.Shared.Hands.EntitySystems;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
 
@@ -85,6 +87,7 @@ public sealed class IVTest
         {
             var entMan = server.ResolveDependency<IEntityManager>();
             Assert.That(entMan.GetComponent<IVLineComponent>(setup.Stand).AttachedTo, Is.EqualTo(setup.Patient));
+            Assert.That(entMan.System<FoldableSystem>().IsFolded(setup.Stand), Is.False, "dragging onto a patient doesn't fold the stand");
 
             // Someone who can't set a line can still take it out.
             Drag(entMan, setup, setup.Layman);
@@ -198,6 +201,53 @@ public sealed class IVTest
         {
             var entMan = server.ResolveDependency<IEntityManager>();
             Assert.That(entMan.GetComponent<IVLineComponent>(setup.Stand).AttachedTo, Is.Null, "the line came out");
+        });
+
+        await pair.CleanReturnAsync();
+    }
+
+    /// <summary>
+    /// The stand folds flat like a folding chair: only a clear, folded stand can be carried.
+    /// </summary>
+    [Test]
+    public async Task StandFoldsToBeCarried()
+    {
+        await using var pair = await PoolManager.GetServerClient();
+        var server = pair.Server;
+        var map = await pair.CreateTestMap();
+        await server.WaitIdleAsync();
+
+        await server.WaitAssertion(() =>
+        {
+            var entMan = server.ResolveDependency<IEntityManager>();
+            var setup = Build(entMan, map.GridCoords, "IVBagSaline");
+            var foldable = entMan.System<FoldableSystem>();
+            var hands = entMan.System<SharedHandsSystem>();
+            var stand = setup.Stand;
+            var comp = entMan.GetComponent<FoldableComponent>(stand);
+
+            Assert.That(hands.TryPickup(setup.Medic, stand), Is.False, "an unfolded stand stays put");
+            Assert.That(foldable.TrySetFolded(stand, comp, true, setup.Medic), Is.False, "a stand with a bag hung on it won't fold");
+
+            var slots = entMan.System<ItemSlotsSystem>();
+            Assert.That(slots.TryEject(stand, "pack", null, out _));
+
+            // Dropped on yourself, the stand folds and comes with you.
+            var ev = new DragDropDraggedEvent(setup.Medic, setup.Medic);
+            entMan.EventBus.RaiseLocalEvent(stand, ref ev);
+            Assert.That(foldable.IsFolded(stand), "dragging it onto yourself folds it");
+            Assert.That(hands.IsHolding(setup.Medic, stand), "and the folded stand is carried");
+
+            Assert.That(slots.TryInsert(stand, "pack", setup.Bag, null), Is.False, "a folded stand takes no bag");
+
+            // It only unfolds on the floor, not in a hand.
+            Assert.That(foldable.TrySetFolded(stand, comp, false, setup.Medic), Is.False, "a held stand won't unfold");
+            Assert.That(hands.TryDrop(setup.Medic, stand));
+
+            // Unfolding needs a free tile, which the medic's own is not.
+            entMan.System<SharedTransformSystem>().SetCoordinates(stand, setup.Origin);
+            Assert.That(foldable.TrySetFolded(stand, comp, false, setup.Medic));
+            Assert.That(slots.TryInsert(stand, "pack", setup.Bag, null), "unfolded again it does");
         });
 
         await pair.CleanReturnAsync();
