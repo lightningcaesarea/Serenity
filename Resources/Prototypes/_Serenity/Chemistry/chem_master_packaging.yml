@@ -1,0 +1,274 @@
+# Packaging for the ChemMaster's Packaging tab. Sizes come from each prototype's own solution,
+# so pills/patches/bottles here are just the selectable looks.
+
+# The packaging buffer is a separate solution from the ChemMaster's main (plumbing) buffer.
+- type: entity
+  parent: Solution
+  id: SolutionChemMasterPackagingBuffer
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Solution
+    id: packagingBuffer
+    solution:
+      maxVol: 1000
+      canReact: false
+
+- type: entity
+  abstract: true
+  parent: Pill
+  id: ChemMasterPillBase
+  categories: [ HideSpawnMenu ]
+
+- type: entity
+  parent: ChemMasterPillBase
+  id: ChemMasterPill1
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: pill1
+  - type: Pill
+    pillType: 0
+
+- type: entity
+  parent: ChemMasterPillBase
+  id: ChemMasterPill2
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: pill2
+  - type: Pill
+    pillType: 1
+
+- type: entity
+  parent: ChemMasterPillBase
+  id: ChemMasterPill3
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: pill3
+  - type: Pill
+    pillType: 2
+
+- type: entity
+  parent: ChemMasterPillBase
+  id: ChemMasterPill4
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: pill4
+  - type: Pill
+    pillType: 3
+
+- type: entity
+  parent: ChemMasterPillBase
+  id: ChemMasterPill5
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: pill5
+  - type: Pill
+    pillType: 4
+
+- type: entity
+  parent: ChemMasterPillBase
+  id: ChemMasterPill6
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: pill6
+  - type: Pill
+    pillType: 5
+
+- type: entity
+  parent: ChemMasterPillBase
+  id: ChemMasterPill7
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: pill7
+  - type: Pill
+    pillType: 6
+
+- type: entity
+  parent: ChemMasterPillBase
+  id: ChemMasterPill8
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: pill8
+  - type: Pill
+    pillType: 7
+
+- type: entity
+  parent: ChemMasterPillBase
+  id: ChemMasterPill9
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: pill9
+  - type: Pill
+    pillType: 8
+
+- type: entity
+  parent: ChemMasterPillBase
+  id: ChemMasterPill10
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: pill10
+  - type: Pill
+    pillType: 9
+
+- type: entity
+  parent: ChemMasterPillBase
+  id: ChemMasterPill11
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: pill11
+  - type: Pill
+    pillType: 10
+
+- type: entity
+  parent: ChemMasterPillBase
+  id: ChemMasterPill12
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: pill12
+  - type: Pill
+    pillType: 11
+
+- type: entity
+  parent: ChemMasterPillBase
+  id: ChemMasterPill13
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: pill13
+  - type: Pill
+    pillType: 12
+
+- type: entity
+  parent: ChemMasterPillBase
+  id: ChemMasterPill14
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: pill14
+  - type: Pill
+    pillType: 13
+
+- type: entity
+  parent: ChemMasterPillBase
+  id: ChemMasterPill15
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: pill15
+  - type: Pill
+    pillType: 14
+
+- type: entity
+  parent: ChemMasterPillBase
+  id: ChemMasterPill16
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: pill16
+  - type: Pill
+    pillType: 15
+
+- type: entity
+  parent: ChemMasterPillBase
+  id: ChemMasterPill17
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: pill17
+  - type: Pill
+    pillType: 16
+
+- type: entity
+  parent: ChemMasterPillBase
+  id: ChemMasterPill18
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: pill18
+  - type: Pill
+    pillType: 17
+
+- type: entity
+  parent: ChemMasterPillBase
+  id: ChemMasterPill19
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: pill19
+  - type: Pill
+    pillType: 18
+
+- type: entity
+  parent: ChemMasterPillBase
+  id: ChemMasterPill20
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: pill20
+  - type: Pill
+    pillType: 19
+
+- type: entity
+  parent: BasePatch
+  id: ChemMasterPatchBlank
+  name: patch
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: bandaid
+
+- type: entity
+  parent: BasePatch
+  id: ChemMasterPatchBrute
+  name: patch
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: bandaid-brute
+
+- type: entity
+  parent: BasePatch
+  id: ChemMasterPatchBurn
+  name: patch
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: bandaid-burn
+
+- type: entity
+  parent: BasePatch
+  id: ChemMasterPatchBurnSmall
+  name: patch
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: bandaid-burn-small
+
+- type: entity
+  parent: BasePatch
+  id: ChemMasterPatchMedical
+  name: patch
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: bandaid-med
+
+- type: entity
+  parent: BasePatch
+  id: ChemMasterPatchClown
+  name: patch
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: bandaid-clown

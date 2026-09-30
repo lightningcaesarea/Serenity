@@ -12,30 +12,21 @@ namespace Content.Server.Chemistry.Components
     [Access(typeof(ChemMasterSystem))]
     public sealed partial class ChemMasterComponent : Component
     {
-        [DataField("pillType"), ViewVariables(VVAccess.ReadWrite)]
-        public uint PillType = 0;
-
         [DataField("mode"), ViewVariables(VVAccess.ReadWrite)]
         public ChemMasterMode Mode = ChemMasterMode.Transfer;
 
         [DataField]
         public ChemMasterSortingType SortingType = ChemMasterSortingType.None;
 
-        [DataField("pillDosageLimit", required: true), ViewVariables(VVAccess.ReadWrite)]
+        // Serenity: packaging sizes now come from the packaging prototypes (see ChemMasterPackagingComponent).
+        // These stay only so older map files that still serialize them keep loading.
+        [DataField("pillDosageLimit")]
         public uint PillDosageLimit;
 
-        //Starlight-start
-        [DataField("patchDosageLimit", required: true), ViewVariables(VVAccess.ReadWrite)]
+        [DataField("patchDosageLimit")]
         public uint PatchDosageLimit;
-        //Starlight-end
 
         [DataField("clickSound"), ViewVariables(VVAccess.ReadWrite)]
         public SoundSpecifier ClickSound = new SoundPathSpecifier("/Audio/Machines/machine_switch.ogg");
-
-        /// <summary>
-        /// Which source the chem master should draw from when making pills/bottles.
-        /// </summary>
-        [DataField]
-        public ChemMasterDrawSource DrawSource = ChemMasterDrawSource.External; ///Starlight edit
     }
 }

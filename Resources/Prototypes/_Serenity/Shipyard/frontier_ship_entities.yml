@@ -1049,8 +1049,48 @@
     sprite: Structures/Machines/mixer.rsi
     state: mixer_loaded
   - type: ChemMaster
-    pillDosageLimit: 20
-    patchDosageLimit: 20
+  - type: ChemMasterPackaging
+    sections:
+    - name: Bottles
+      packaging:
+      - ChemistryEmptyBottle01
+      - ChemistryEmptyBottle02
+      - ChemistryEmptyBottle03
+      - ChemistryEmptyBottle04
+    - name: Pills
+      container: PillCanister
+      containerPressed: true
+      packaging:
+      - ChemMasterPill1
+      - ChemMasterPill2
+      - ChemMasterPill3
+      - ChemMasterPill4
+      - ChemMasterPill5
+      - ChemMasterPill6
+      - ChemMasterPill7
+      - ChemMasterPill8
+      - ChemMasterPill9
+      - ChemMasterPill10
+      - ChemMasterPill11
+      - ChemMasterPill12
+      - ChemMasterPill13
+      - ChemMasterPill14
+      - ChemMasterPill15
+      - ChemMasterPill16
+      - ChemMasterPill17
+      - ChemMasterPill18
+      - ChemMasterPill19
+      - ChemMasterPill20
+    - name: Patches
+      container: PatchPack
+      containerPressed: true
+      packaging:
+      - ChemMasterPatchBlank
+      - ChemMasterPatchBrute
+      - ChemMasterPatchBurn
+      - ChemMasterPatchBurnSmall
+      - ChemMasterPatchMedical
+      - ChemMasterPatchClown
   - type: Physics
     bodyType: Static
   - type: Fixtures
@@ -1083,7 +1123,7 @@
   - type: UserInterface
     interfaces:
       enum.ChemMasterUiKey.Key:
-        type: ChemMasterBoundUserInterface
+        type: ModernChemMasterBui
   - type: ApcPowerReceiver
     powerLoad: 250
   - type: Appearance
@@ -1117,6 +1157,9 @@
   - type: SolutionContainerManager
     solutions:
       buffer: {}
+      packagingBuffer:
+        maxVol: 1000
+        canReact: false
   - type: DumpableSolution
     solution: buffer
     unlimited: true
