@@ -1,0 +1,96 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Taken from Delta-V (https://github.com/DeltaV-Station/Delta-v) Resources/Textures/_DV/Effects/speech.rsi. Felinid sprites made by Adrian16199 (Github); radio sprites by Nikovnik (Github: nkokic); OOC, emote and whispering sprites made by Nesoryo (Discord); radio/ooc/emote/whisper idle states modified from default states by kotobdev (GitHub)",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "felinid0",
+            "delays": [
+                [
+                    0.2,
+                    0.3,
+                    0.3,
+                    0.5
+                ]
+            ]
+        },
+        {
+            "name": "felinid1"
+        },
+        {
+            "name": "felinid2"
+        },
+        {
+            "name": "emote0",
+            "delays": [
+                [
+                    0.3,
+                    0.2,
+                    0.3,
+                    0.2
+                ]
+            ]
+        },
+        {
+            "name": "emote1",
+            "delays": [
+                [
+                    0.5,
+                    0.5
+                ]
+            ]
+        },
+        {
+            "name": "ooc0",
+            "delays": [
+                [
+                    0.2,
+                    0.3,
+                    0.3,
+                    0.5
+                ]
+            ]
+        },
+        {
+            "name": "ooc1"
+        },
+        {
+            "name": "whisper0",
+            "delays": [
+                [
+                    0.2,
+                    0.3,
+                    0.3,
+                    0.5
+                ]
+            ]
+        },
+        {
+            "name": "whisper1"
+        },
+        {
+            "name": "radio0",
+            "delays": [
+                [
+                    0.2,
+                    0.3,
+                    0.3,
+                    0.5
+                ]
+            ]
+        },
+        {
+            "name": "radio1",
+            "delays": [
+                [
+                    0.5,
+                    0.5
+                ]
+            ]
+        }
+    ]
+}

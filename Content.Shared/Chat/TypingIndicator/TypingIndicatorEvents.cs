@@ -14,9 +14,17 @@ public sealed class TypingChangedEvent : EntityEventArgs
 {
     public readonly TypingIndicatorState State;
 
-    public TypingChangedEvent(TypingIndicatorState state)
+    /// <summary>
+    ///     Serenity: bubble to show instead of the species default while typing in a special channel
+    ///     (whisper, emote, OOC, radio). Must be one listed by a <see cref="Content.Shared._Serenity.Chat.TypingIndicator.TypingChannelIndicatorPrototype"/>,
+    ///     otherwise the server ignores it.
+    /// </summary>
+    public readonly ProtoId<TypingIndicatorPrototype>? ChannelIndicator;
+
+    public TypingChangedEvent(TypingIndicatorState state, ProtoId<TypingIndicatorPrototype>? channelIndicator = null)
     {
         State = state;
+        ChannelIndicator = channelIndicator;
     }
 }
 
