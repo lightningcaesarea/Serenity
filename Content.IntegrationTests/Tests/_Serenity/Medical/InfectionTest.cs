@@ -4,6 +4,8 @@ using Content.Server._Serenity.Medical.Wounds;
 using Content.Shared._Serenity.Medical.Sterility;
 using Content.Shared._Serenity.Medical.Wounds;
 using Content.Shared._Serenity.Medical.Wounds.Systems;
+using Content.Shared.Chemistry.Reagent;
+using Content.Shared.EntityEffects.Effects.StatusEffects;
 using Content.Shared.Damage.Components;
 using Content.Shared.StatusEffectNew;
 using Robust.Shared.GameObjects;
@@ -17,6 +19,7 @@ namespace Content.IntegrationTests.Tests._Serenity.Medical;
 public sealed class InfectionTest
 {
     private static readonly ProtoId<WoundTypePrototype> InfectionWound = "Infection";
+    private static readonly ProtoId<ReagentPrototype> Antibiox = "Antibiox";
 
     private static float Poison(IEntityManager entMan, EntityUid uid)
     {
@@ -287,6 +290,39 @@ public sealed class InfectionTest
                     Assert.That(risk.ChancePerTier, Is.InRange(0f, 1f));
                 }
             }
+        });
+
+        await pair.CleanReturnAsync();
+    }
+
+    /// <summary>
+    /// A single 15u dose of Antibiox (what an auto-injector holds) protects for about seven minutes: how long it
+    /// takes to metabolize plus how long the antibiotic effect lingers afterwards. The dysbiosis debuff outlasts it.
+    /// </summary>
+    [Test]
+    public async Task FifteenUnitsOfAntibioxProtectForAboutSevenMinutes()
+    {
+        await using var pair = await PoolManager.GetServerClient();
+        var proto = pair.Server.ProtoMan;
+        var reagent = proto.Index(Antibiox);
+
+        Assert.That(reagent.Metabolisms, Is.Not.Null);
+        var entry = reagent.Metabolisms!.Metabolisms.Single(m => m.Key.Id == "Bloodstream").Value;
+
+        TimeSpan? Effect(string effectProto) => entry.Effects
+            .OfType<ModifyStatusEffect>()
+            .Single(e => e.EffectProto == effectProto).Time;
+
+        // Metabolizing runs once a second and removes the rate's worth each time
+        const float dose = 15f;
+        var inBlood = dose / entry.MetabolismRate.Float();
+        var antibiotic = inBlood + Effect(InfectionSystem.AntibioticEffect)!.Value.TotalSeconds;
+        var dysbiosis = inBlood + Effect("StatusEffectDysbiosis")!.Value.TotalSeconds;
+
+        Assert.Multiple(() =>
+        {
+            Assert.That(antibiotic, Is.EqualTo(7 * 60).Within(15), "15u should protect for about 7 minutes");
+            Assert.That(dysbiosis, Is.GreaterThan(antibiotic), "the dysbiosis debuff outlasts the protection");
         });
 
         await pair.CleanReturnAsync();

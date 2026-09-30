@@ -32,15 +32,19 @@
   color: "#c9e6a3"
   metabolisms:
     Bloodstream:
+      # Slow to metabolize, so a single 15u dose (an auto-injector) protects for about 7 minutes: it stays in the
+      # blood for 15 / 0.05 = 300 s and the antibiotic effect lingers 120 s after the last of it is gone.
+      # Metabolizing runs once a second and the effects don't weaken with a lower rate.
+      metabolismRate: 0.05
       effects:
       - !type:ModifyStatusEffect
         effectProto: StatusEffectAntibiotic
-        time: 90
+        time: 120
         type: Update
       # Broad-spectrum drugs wipe out helpful bacteria too; it lingers a while after the drug is gone
       - !type:ModifyStatusEffect
         effectProto: StatusEffectDysbiosis
-        time: 180
+        time: 240
         type: Update
       # Overdose
       - !type:HealthChange
