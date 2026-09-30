@@ -837,10 +837,6 @@ namespace Content.Server.Database
                 .ToDictionaryAsync(r => r.Resource, r => r.Value, cancel);
         }
 
-        /// <summary>
-        /// Writes the absolute new value of one resource and appends a ledger row for the change.
-        /// Callers serialize writes per player, so a plain read-modify-write is sufficient here.
-        /// </summary>
         public async Task<List<PlayerResourceTransaction>> GetPlayerResourceTransactions(Guid player, int limit, CancellationToken cancel)
         {
             await using var db = await GetDb(cancel);
@@ -852,13 +848,25 @@ namespace Content.Server.Database
                 .ToListAsync(cancel);
         }
 
-        public async Task SetPlayerResource(Guid player, string resource, double value, double delta, string? reason)
+        private const int MaxResourceReasonLength = 256;
+
+        private static string? TrimReason(string? reason)
+            => reason is { Length: > MaxResourceReasonLength } ? reason[..MaxResourceReasonLength] : reason;
+
+        /// <summary>
+        /// Sets one resource to an absolute value and appends a ledger row. The ledger delta is computed
+        /// from the stored value inside the same transaction, so it is always the real change.
+        /// </summary>
+        public async Task SetPlayerResource(Guid player, string resource, double value, string? reason)
         {
             await using var db = await GetDb();
+            await using var tx = await db.DbContext.Database.BeginTransactionAsync();
 
             var now = DateTime.UtcNow;
             var row = await db.DbContext.PlayerResource
                 .SingleOrDefaultAsync(r => r.PlayerId == player && r.Resource == resource);
+
+            var before = row?.Value ?? 0;
 
             if (row == null)
             {
@@ -873,13 +881,75 @@ namespace Content.Server.Database
             {
                 PlayerId = player,
                 Resource = resource,
-                Delta = delta,
+                Delta = value - before,
                 BalanceAfter = value,
                 CreatedAt = now,
-                Reason = reason,
+                Reason = TrimReason(reason),
             });
 
             await db.DbContext.SaveChangesAsync();
+            await tx.CommitAsync();
+        }
+
+        /// <summary>
+        /// Adds <paramref name="delta"/> to one resource and appends a ledger row, returning the new balance.
+        /// The addition happens in SQL (<c>Value = Value + delta</c>), so it composes with any other writer
+        /// instead of overwriting it with a value read earlier. Use this for every additive change.
+        /// </summary>
+        public async Task<double> AdjustPlayerResource(Guid player, string resource, double delta, string? reason)
+        {
+            // The only way to fail the insert below is another writer creating the row first; the retry then
+            // takes the update path.
+            for (var attempt = 0; ; attempt++)
+            {
+                await using var db = await GetDb();
+                await using var tx = await db.DbContext.Database.BeginTransactionAsync();
+
+                try
+                {
+                    var now = DateTime.UtcNow;
+                    var updated = await db.DbContext.PlayerResource
+                        .Where(r => r.PlayerId == player && r.Resource == resource)
+                        .ExecuteUpdateAsync(s => s
+                            .SetProperty(r => r.Value, r => r.Value + delta)
+                            .SetProperty(r => r.UpdatedAt, now));
+
+                    if (updated == 0)
+                    {
+                        db.DbContext.PlayerResource.Add(new PlayerResource
+                        {
+                            PlayerId = player,
+                            Resource = resource,
+                            Value = delta,
+                            UpdatedAt = now,
+                        });
+                        await db.DbContext.SaveChangesAsync();
+                    }
+
+                    var value = await db.DbContext.PlayerResource
+                        .Where(r => r.PlayerId == player && r.Resource == resource)
+                        .Select(r => r.Value)
+                        .SingleAsync();
+
+                    db.DbContext.PlayerResourceTransaction.Add(new PlayerResourceTransaction
+                    {
+                        PlayerId = player,
+                        Resource = resource,
+                        Delta = delta,
+                        BalanceAfter = value,
+                        CreatedAt = now,
+                        Reason = TrimReason(reason),
+                    });
+
+                    await db.DbContext.SaveChangesAsync();
+                    await tx.CommitAsync();
+                    return value;
+                }
+                catch (DbUpdateException) when (attempt == 0)
+                {
+                    // fall through to one retry on a fresh context
+                }
+            }
         }
 
         #endregion

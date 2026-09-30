@@ -13,6 +13,7 @@ using Content.Server.Mind;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
 using Content.Shared._NullLink;
+using Content.Shared._Serenity.Economy; // Serenity
 using Content.Shared._Starlight.Economy.Atm;
 
 namespace Content.Server._Starlight.Economy.Atm;
@@ -52,7 +53,7 @@ public sealed partial class ATMSystem : SharedATMSystem
 
         var newBalance = balance - args.Amount;
 
-        _playerResources.TryUpdateResource(actorSession, "credits", -args.Amount, "atm-withdraw"); // Serenity
+        _playerResources.TryUpdateResource(actorSession, "credits", -args.Amount, LedgerReasons.AtmWithdraw); // Serenity
         var cash = SpawnAtPosition(_cash, Transform(uid).Coordinates);
         var stack = EnsureComp<StackComponent>(cash);
         _stack.SetCount((cash, stack), args.Amount);
@@ -77,9 +78,9 @@ public sealed partial class ATMSystem : SharedATMSystem
             var diff = stack.Count;
             var newBalance = balance += diff;
             if (_players.TryGetSessionByEntity(args.User, out var userSession))
-                _playerResources.TryUpdateResource(userSession, "credits", diff, "atm-deposit"); // Serenity
+                _playerResources.TryUpdateResource(userSession, "credits", diff, LedgerReasons.AtmDeposit); // Serenity
             else
-                _playerResources.TryUpdateResource(args.User, "credits", diff);
+                _playerResources.TryUpdateResource(args.User, "credits", diff, LedgerReasons.AtmDeposit); // Serenity
             QueueDel(ent);
             _uiSystem.SetUiState(args.Target.Value, ATMUIKey.Key, new ATMBuiState() { Balance = (int)newBalance! });
             _audioSystem.PlayPvs(atm.DepositSound, args.Target.Value);
@@ -171,8 +172,9 @@ public sealed partial class ATMSystem : SharedATMSystem
 
             var newBalance = balance -= args.Amount;
 
-            _playerResources.TryUpdateResource(recipientSession, "credits", args.Amount);
-            _playerResources.TryUpdateResource(args.Actor, "credits", -args.Amount);
+            // Serenity: each side names the other, so the two ledger rows of a transfer can be matched up
+            _playerResources.TryUpdateResource(recipientSession, "credits", args.Amount, LedgerReasons.TransferIn(senderSession.UserId.UserId));
+            _playerResources.TryUpdateResource(args.Actor, "credits", -args.Amount, LedgerReasons.TransferOut(recipientSession.UserId.UserId));
 
             var recipientName = _mind.TryGetMind(recipientSession.UserId, out _, out var rMind)
                 ? rMind.CharacterName ?? recipientSession.Name

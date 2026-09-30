@@ -1,4 +1,4 @@
-﻿using Content.Shared.Chat.TypingIndicator;
+using Content.Shared.Chat.TypingIndicator;
 using Robust.Client.GameObjects;
 using Robust.Shared.Prototypes;
 using Content.Shared.Inventory;
@@ -26,6 +26,10 @@ public sealed partial class TypingIndicatorVisualizerSystem : VisualizerSystem<T
 
         if (overrideIndicator != null)
             currentTypingIndicator = overrideIndicator.Value;
+
+        // Serenity: the bubble for the channel being typed in beats both the species and clothing indicators
+        if (component.ChannelIndicator != null)
+            currentTypingIndicator = component.ChannelIndicator.Value;
 
         if (!_prototypeManager.Resolve(currentTypingIndicator, out var proto))
         {
