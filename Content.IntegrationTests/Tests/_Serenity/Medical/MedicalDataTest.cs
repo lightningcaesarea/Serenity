@@ -20,6 +20,15 @@ public sealed class MedicalDataTest
 {
     private const int TierCount = WoundsConstants.MaxWoundTier;
 
+    private static readonly ProtoId<WoundCategoryPrototype>[] BuiltInCategories =
+    [
+        WoundCategoryIds.Bleeding,
+        WoundCategoryIds.Fracture,
+        WoundCategoryIds.Burn,
+        WoundCategoryIds.Laceration,
+        WoundCategoryIds.Puncture,
+    ];
+
     private static readonly ProtoId<AlertPrototype> PainAlert = "Pain";
 
     [Test]
@@ -35,11 +44,7 @@ public sealed class MedicalDataTest
             Assert.Multiple(() =>
             {
                 // The categories code refers to directly must exist
-                foreach (var id in new[]
-                         {
-                             WoundCategoryIds.Bleeding, WoundCategoryIds.Fracture, WoundCategoryIds.Burn,
-                             WoundCategoryIds.Laceration, WoundCategoryIds.Puncture,
-                         })
+                foreach (var id in BuiltInCategories)
                 {
                     Assert.That(proto.HasIndex(id), $"wound category {id} is missing");
                 }
