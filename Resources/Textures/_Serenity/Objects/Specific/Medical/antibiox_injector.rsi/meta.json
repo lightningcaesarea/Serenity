@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Recoloured from medipen.rsi bicpen/bicpen_empty (tgstation at 986af32e22a88dae14fd147d812a5a4d27c1bc30; resprited by joshepvodka) for Serenity",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "antibiox"
+    },
+    {
+      "name": "antibiox_empty"
+    }
+  ]
+}

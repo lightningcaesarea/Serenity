@@ -1,0 +1,81 @@
+<Document>
+# Wounds, Pain and Surgery
+
+Serious injuries leave a lasting [color=#ff8787]wound[/color] behind, on top of the damage they deal. Healing the damage with bandages, ointment or chemicals does [bold]not[/bold] remove the wound. Wounds wear off slowly on their own, or a surgeon can clear them for good.
+
+## How wounds are made
+A single hit is scored by how much damage it does. If the score passes a threshold, the patient gets a wound of tier 1, 2 or 3. A worse hit upgrades an existing wound of the same kind; at tier 3 further hits can stack up to three wounds of that kind.
+
+- [color=#5b97bc]Fracture[/color] comes from Blunt damage (hit score 15 / 25 / 40 for tiers 1 / 2 / 3).
+- [color=#5b97bc]Burn[/color] comes from Heat, Cold, Shock, Caustic or Radiation (10 / 20 / 35).
+- [color=#5b97bc]Laceration[/color] comes from Slash damage (12 / 22 / 35).
+- [color=#5b97bc]Puncture[/color] comes from Piercing damage (10 / 18 / 30).
+- [color=#5b97bc]Bleeding[/color] is not stored as a wound. It is read from the patient's bloodstream and only comes from Slash and Piercing damage.
+- [color=#5b97bc]Infection[/color] never comes from damage. See [bold]Infection and Sterility[/bold].
+
+## What wounds do
+- [bold]Fracture:[/bold] at tier 2 or worse the patient moves at 70% speed. At tier 3 every hit they take has a 50% chance to make them drop what they hold.
+- [bold]Burn:[/bold] at tier 2 or worse the patient moves at 70% speed.
+- [bold]Laceration and Puncture:[/bold] no slowdown, but they hurt, and open ones can become infected.
+- Every wound adds [bold]pain[/bold].
+
+Untreated wounds fade by themselves: a wound waits 5 minutes at tier 1, 3 minutes at tier 2 or 2 minutes at tier 3, then drops a tier. A tier 1 wound then heals completely. Infections never fade by themselves.
+
+## Pain
+Every wound adds pain, more for higher tiers. The patient's [italic]felt[/italic] pain decides how they are affected.
+
+- [color=yellow]Mild[/color] (10 and up): only a message.
+- [color=yellow]Moderate[/color] (25 and up): moves at 90% speed.
+- [color=orange]Severe[/color] (50 and up): 75% speed, and a hit has a 25% chance to make them drop what they hold.
+- [color=red]Agonizing[/color] (75 and up): 60% speed, and a 50% chance to drop things.
+
+Examining a patient tells you when they are in moderate pain or worse, and whether they look numbed by drugs.
+
+[bold]Painkillers mask pain, they never heal anything.[/bold] When they wear off the pain returns. Only the strongest painkiller in the blood works at full strength; any others count for a quarter.
+
+<GuideReagentEmbed Reagent="Analgesin"/>
+<GuideReagentEmbed Reagent="Antiflam"/>
+<GuideReagentEmbed Reagent="Lidonol"/>
+<GuideReagentEmbed Reagent="Dolorphine"/>
+<GuideReagentEmbed Reagent="Somnacaine"/>
+
+- [bold]Analgesin[/bold] masks up to 15 pain of any kind. A mild, long-lasting choice.
+- [bold]Antiflam[/bold] masks up to 25, but only for Fractures and Burns. It thins the blood, so open wounds bleed more.
+- [bold]Lidonol[/bold] masks up to 40, but only for Bleeding and Burns. It does nothing for broken bones.
+- [bold]Dolorphine[/bold] masks up to 60 of any kind. It causes drowsiness, and an overdose slows breathing.
+- [bold]Somnacaine[/bold] blocks all pain and puts the patient to sleep. Overdoses suppress breathing. It is the surgical anesthetic.
+
+## Treating wounds: surgery
+Bandages and ointment mend damage. [bold]Only surgery clears a wound.[/bold] Finishing the right surgery removes every wound of that kind, at every tier, at once.
+
+All surgery needs the [color=#5b97bc]Surgery[/color] skill (Medical Doctors and the Chief Medical Officer start with it; it can be learned from the Principles of Surgery book). Skilled surgeons work about 15% faster.
+
+<Box>
+    <GuideEntityEmbed Entity="Scalpel"/>
+    <GuideEntityEmbed Entity="Hemostat"/>
+    <GuideEntityEmbed Entity="Retractor"/>
+    <GuideEntityEmbed Entity="Cautery"/>
+    <GuideEntityEmbed Entity="BoneSetter"/>
+    <GuideEntityEmbed Entity="BoneGel"/>
+</Box>
+
+Each surgery is only offered on the torso, and only while the patient has a wound of that kind.
+
+- [bold]Set Broken Bones[/bold] (Fractures). Needs an open incision first. Set the bones with a bone setter, then mend them with bone gel.
+- [bold]Treat Burns[/bold] (Burns). Cut away the dead tissue with a scalpel, then clear the debris with a hemostat.
+- [bold]Repair Lacerations[/bold] (Lacerations). Clamp the torn vessels with a hemostat, then suture the wound closed with a cautery.
+- [bold]Repair Puncture Wounds[/bold] (Punctures). Open the wound with a retractor, clamp the torn vessels with a hemostat, then suture with a cautery.
+- [bold]Drain Infection[/bold] (Infection). Needs an open incision first. See [bold]Infection and Sterility[/bold].
+
+[color=yellow]Keep your tools clean.[/color] Every step dirties your tools and gloves, and a dirty operation can poison or infect the patient.
+
+## Reading a patient
+The basic [bold]health analyzer[/bold] shows damage, and warns when the patient is infected.
+
+<Box>
+    <GuideEntityEmbed Entity="HandheldHealthAnalyzer"/>
+    <GuideEntityEmbed Entity="AdvancedHealthAnalyzer"/>
+</Box>
+
+The [bold]advanced health analyzer[/bold] also lists the chemicals in the blood and an [bold]Injuries[/bold] section with every wound and its tier, worst first. It needs the [color=#5b97bc]Diagnostics[/color] skill to use, and can be built at a medical lathe. It does not show the patient's pain.
+</Document>

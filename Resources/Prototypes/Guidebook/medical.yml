@@ -7,6 +7,9 @@
   - Chemist
   - Cloning
   - Cryogenics
+  - MedicalWounds
+  - MedicalInfection
+  - MedicalRecovery
 
 - type: guideEntry
   id: MedicalDoctor
@@ -50,3 +53,19 @@
   id: AdvancedBrute
   name: guide-entry-brute
   text: "/ServerInfo/Guidebook/Medical/AdvancedBrute.xml"
+
+# Serenity
+- type: guideEntry
+  id: MedicalWounds
+  name: guide-entry-medical-wounds
+  text: "/ServerInfo/Guidebook/Medical/Wounds.xml"
+
+- type: guideEntry
+  id: MedicalInfection
+  name: guide-entry-medical-infection
+  text: "/ServerInfo/Guidebook/Medical/Infection.xml"
+
+- type: guideEntry
+  id: MedicalRecovery
+  name: guide-entry-medical-recovery
+  text: "/ServerInfo/Guidebook/Medical/Recovery.xml"

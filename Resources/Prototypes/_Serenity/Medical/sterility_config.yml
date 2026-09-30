@@ -27,6 +27,8 @@
   surgeryInfectionThreshold: 30
   surgeryInfectionChancePerDirt: 0.01
   surgeryInfectionMaxChance: 0.9
+  # While overdosed on an antibiotic, infections escalate this many times faster (and the antibiotic stops protecting).
+  overdoseProgressionMultiplier: 3
   # Untreated open wounds can get infected: each update, a wound at minTier or worse adds chancePerTier * tier.
   openWounds:
     Laceration:
