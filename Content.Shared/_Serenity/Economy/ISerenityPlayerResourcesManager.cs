@@ -14,6 +14,9 @@ public interface ISerenityPlayerResourcesManager : ISharedNullLinkPlayerResource
     /// <summary>Add <paramref name="delta"/> to a resource and record <paramref name="reason"/> in the ledger.</summary>
     bool TryUpdateResource(ICommonSession session, string id, double delta, string reason);
 
+    /// <summary>Same as the session overload, for callers that only have the player's entity.</summary>
+    bool TryUpdateResource(EntityUid uid, string id, double delta, string reason);
+
     /// <summary>Set a resource to an absolute value and record <paramref name="reason"/> in the ledger.</summary>
     bool TrySetResource(ICommonSession session, string id, double value, string reason);
 }
