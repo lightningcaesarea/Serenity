@@ -79,9 +79,7 @@ public abstract partial class SharedWoundSystem : EntitySystem
 
             // Check spike thresholds for fracture/burn wound types.
             // Divide by ThresholdMultiplier so a multiplier > 1 effectively raises thresholds.
-            var effectiveAmount = comp.ThresholdMultiplier > 0f
-                ? amountFloat / comp.ThresholdMultiplier
-                : amountFloat;
+            var effectiveAmount = amountFloat / ClampThresholdMultiplier(comp.ThresholdMultiplier);
 
             foreach (var woundProto in _woundTypes)
             {
@@ -175,21 +173,37 @@ public abstract partial class SharedWoundSystem : EntitySystem
         if (!Resolve(uid, ref comp, false))
             return;
 
-        comp.ActiveWounds.RemoveAll(w =>
+        var removed = comp.ActiveWounds.RemoveAll(w =>
         {
             if (!_proto.TryIndex(w.WoundTypeId, out var proto))
                 return true;
             return proto.Category == category;
         });
 
+        // Nothing to clear (e.g. a surgery step on a patient without that kind of wound):
+        // don't dirty the component or make listeners recompute for no reason.
+        if (removed == 0)
+            return;
+
         Dirty(uid, comp);
         RaiseLocalEvent(uid, new WoundsClearedEvent());
     }
 
     /// <summary>
-    /// Appends a wound entry directly. Bypasses the damage-spike pipeline in
-    /// <see cref="OnDamageChanged"/>, so it's the right entry point for tests
-    /// and for external systems that already decided a wound should exist.
+    /// Appends a wound entry directly, syncs it to clients and lets listeners (alerts, movement, pain) react.
+    /// Bypasses the damage-spike pipeline in <see cref="OnDamageChanged"/>, so it's the right entry point for
+    /// external systems that already decided a wound should exist.
+    /// </summary>
+    public void AddWound(EntityUid uid, WoundComponent comp, WoundEntry entry)
+    {
+        comp.ActiveWounds.Add(entry);
+        Dirty(uid, comp);
+        RaiseLocalEvent(uid, new WoundsDamagedEvent());
+    }
+
+    /// <summary>
+    /// Appends a wound entry without networking it or notifying listeners. Low-level: the caller must
+    /// <see cref="SharedEntitySystem.Dirty"/> the component afterwards. Prefer the overload that takes the entity.
     /// </summary>
     public void AddWound(WoundComponent comp, WoundEntry entry)
     {
@@ -224,7 +238,16 @@ public abstract partial class SharedWoundSystem : EntitySystem
         if (!Resolve(uid, ref comp, false))
             return;
 
-        comp.ThresholdMultiplier *= factor;
+        comp.ThresholdMultiplier = ClampThresholdMultiplier(comp.ThresholdMultiplier * factor);
+    }
+
+    /// <summary>
+    /// Keeps a threshold multiplier in a sane range, so a bad YAML value or a stack of trait factors can't make
+    /// a mob unwoundable (huge or negative) or divide by zero.
+    /// </summary>
+    private static float ClampThresholdMultiplier(float multiplier)
+    {
+        return Math.Clamp(multiplier, WoundsConstants.MinThresholdMultiplier, WoundsConstants.MaxThresholdMultiplier);
     }
 
     /// <summary>
