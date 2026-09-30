@@ -60,6 +60,7 @@ public sealed partial class HealthAnalyzerSystem : EntitySystem
     // Starlight-end
 
     [Dependency] private ChatSystem _chat = default!; // Starlight-edit
+    [Dependency] private Content.Server._Serenity.Medical.Analyzer.AnalyzerReadoutSystem _serenityReadout = default!; // Serenity
 
     public override void Initialize()
     {
@@ -272,6 +273,7 @@ public sealed partial class HealthAnalyzerSystem : EntitySystem
             return;
 
         var uiState = GetHealthAnalyzerUiState(target);
+        _serenityReadout.ApplyReadout(healthAnalyzer, target, ref uiState); // Serenity: basic vs advanced readout
         // Starlight-start: Printable health reports.
         uiState.CanPrint = TryComp<HealthAnalyzerComponent>(healthAnalyzer, out var analyzerComp)
             && analyzerComp.ScannedEntity == target
@@ -404,7 +406,7 @@ public sealed partial class HealthAnalyzerSystem : EntitySystem
     #region Starlight
     private void PrintPatientReport(Entity<HealthAnalyzerComponent> analyzer, EntityUid user, EntityUid patient)
     {
-        var snapshot = BuildPatientSnapshot(patient);
+        var snapshot = BuildPatientSnapshot(patient, analyzer); // Serenity
         var paper = Spawn("Paper", Transform(user).Coordinates);
 
         if (!TryComp<PaperComponent>(paper, out var paperComp))
@@ -421,9 +423,10 @@ public sealed partial class HealthAnalyzerSystem : EntitySystem
         analyzer.Comp.PrintReadyAt = _timing.CurTime + analyzer.Comp.PrintCooldown;
     }
 
-    private HealthAnalyzerPatientSnapshot BuildPatientSnapshot(EntityUid patient)
+    private HealthAnalyzerPatientSnapshot BuildPatientSnapshot(EntityUid patient, EntityUid analyzer)
     {
         var uiState = GetHealthAnalyzerUiState(patient);
+        _serenityReadout.ApplyReadout(analyzer, patient, ref uiState); // Serenity: a report shows what the analyzer shows
         var (shiftTime, _) = _timeSystem.GetStationTime();
         var entityName = HasComp<MetaDataComponent>(patient)
             ? Identity.Name(patient, EntityManager)

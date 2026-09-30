@@ -67,6 +67,8 @@ public sealed partial class HealthAnalyzerControl : BoxContainer
             ChemicalsDivider.Visible = false;
             ChemicalsContainer.Visible = false;
             // Starlight end
+            WoundsDivider.Visible = false; // Serenity
+            WoundsContainer.Visible = false; // Serenity
             return;
         }
 
@@ -119,7 +121,7 @@ public sealed partial class HealthAnalyzerControl : BoxContainer
 
         // Alerts
 
-        var showAlerts = state.Unrevivable == true || state.Bleeding == true;
+        var showAlerts = state.Unrevivable == true || state.Bleeding == true || state.InfectionDetected == true; // Serenity
 
         AlertsDivider.Visible = showAlerts;
         AlertsContainer.Visible = showAlerts;
@@ -143,6 +145,14 @@ public sealed partial class HealthAnalyzerControl : BoxContainer
                 MaxWidth = 300
             });
 
+        if (state.InfectionDetected == true) // Serenity
+            AlertsContainer.AddChild(new RichTextLabel
+            {
+                Text = Loc.GetString("health-analyzer-infection-detected"),
+                Margin = new Thickness(0, 4),
+                MaxWidth = 300
+            });
+
         // Damage Groups
         /* Starlight begin - old damage group sorting by highest damage
         var damageSortedGroups =
@@ -157,6 +167,7 @@ public sealed partial class HealthAnalyzerControl : BoxContainer
             .ToDictionary(g => g.Key, g => g.Value);
 
         DrawChemicals(state.Chemicals);
+        DrawWounds(state.Wounds); // Serenity
         // Starlight end
         DrawDiagnosticGroups(sortedGroups, damagePerType);
     }

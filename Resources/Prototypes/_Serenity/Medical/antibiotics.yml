@@ -63,3 +63,36 @@
       amount: 1
   products:
     Antibiox: 2
+
+- type: entity
+  parent: ChemicalMedipen
+  id: AntibioxAutoInjector
+  name: antibiox auto-injector
+  description: A single-dose, non-refillable medipen containing antibiox, a broad-spectrum antibiotic. It holds an infection at bay but does not cure it, and leaves the patient's gut flora depleted for a while.
+  components:
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: base-needle-inhand-left
+      - state: base-colorA-inhand-left
+        color: "#3b7d3a"
+      - state: base-colorB-inhand-left
+      right:
+      - state: base-needle-inhand-right
+      - state: base-colorA-inhand-right
+        color: "#3b7d3a"
+      - state: base-colorB-inhand-right
+  - type: Sprite
+    sprite: _Serenity/Objects/Specific/Medical/antibiox_injector.rsi
+    layers:
+    - state: antibiox
+      map: ["enum.SolutionContainerLayers.Fill"]
+  - type: SolutionContainerVisuals
+    maxFillLevels: 1
+    changeColor: false
+    emptySpriteName: antibiox_empty
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Antibiox
+        Quantity: 15

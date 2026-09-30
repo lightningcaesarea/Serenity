@@ -1,0 +1,14 @@
+# The basic health analyzer (HandheldHealthAnalyzer) shows the damage breakdown and only says whether the patient is
+# infected. This one also reads metabolising chemicals and the detail of wounds and infection, and takes the
+# Diagnostics skill to use (see skills.yml).
+- type: entity
+  parent: HandheldHealthAnalyzer
+  id: AdvancedHealthAnalyzer
+  name: advanced health analyzer
+  description: A hand-held diagnostic scanner that reads chemicals, injuries and infection in detail. Takes training to interpret.
+  components:
+  - type: Sprite
+    color: "#b8e6ff"
+  - type: AdvancedHealthAnalyzer
+  - type: ItemPrice
+    fallbackPrice: 400

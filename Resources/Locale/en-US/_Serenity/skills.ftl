@@ -87,3 +87,5 @@ trait-perk-home-cook-name = Home Cook
 trait-perk-home-cook-desc = You know your way around a kitchen. Grants the Cooking skill.
 trait-perk-amateur-scientist-name = Amateur Scientist
 trait-perk-amateur-scientist-desc = You read the journals for fun. Grants the Research skill.
+skill-diagnostics-name = Diagnostics
+skill-diagnostics-desc = Needed to read an advanced health analyzer, which shows chemicals, injuries and infection in detail.

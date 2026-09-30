@@ -142,6 +142,26 @@
 
 - type: entity
   parent: SkillBookBase
+  id: SkillBookDiagnostics
+  name: Clinical Diagnostics
+  description: A dense training manual. Reading it cover to cover teaches its subject, but it won't survive being studied that hard.
+  components:
+  - type: Sprite
+    layers:
+    - state: paper
+    - state: cover_strong
+      color: "#0e7490"
+      map: [ "cover" ]
+    - state: decor_wingette
+      color: "#e5e7eb"
+    - state: icon_medical
+      map: [ "icon" ]
+  - type: SkillBook
+    skill: Diagnostics
+    departments: [ Medical ]
+
+- type: entity
+  parent: SkillBookBase
   id: SkillBookChemistry
   name: Practical Chemistry
   description: A dense training manual. Reading it cover to cover teaches its subject, but it won't survive being studied that hard.
