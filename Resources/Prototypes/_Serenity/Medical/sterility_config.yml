@@ -1,0 +1,21 @@
+# Tuning for surgical sterility. Dirtiness is 0 (sterile) to maxDirtiness on every surgical tool and pair of
+# gloves. Each completed surgery step dirties the tools used and the surgeon's gloves; once the operation's total
+# dirtiness passes sepsisThreshold each step poisons the patient. Wipe items with soap to clean them.
+
+- type: sterilityConfig
+  id: DefaultSterility
+  maxDirtiness: 100
+  # Dirt one step adds to each surgical tool / to the gloves (a step can override this with surgeryStepDirtiness).
+  stepToolDirt: 4
+  stepGloveDirt: 4
+  # Counted as dirt when the surgeon wears no gloves / no mask.
+  missingGlovesDirt: 25
+  missingMaskDirt: 10
+  # Dirt added per other patient whose DNA is on the tools or gloves.
+  crossContaminationDirt: 60
+  # Harm per step over the threshold: sepsisBaseDamage + excess^2 / sepsisDamageDivisor, capped at sepsisMaxDamage.
+  sepsisThreshold: 40
+  sepsisBaseDamage: 1
+  sepsisDamageDivisor: 200
+  sepsisMaxDamage: 12
+  sepsisDamageType: Poison

@@ -9,6 +9,7 @@
   - type: Tag
     tags:
     - Soap
+  - type: SurgeryCleansDirt # Serenity: soap wipes dirt off surgical tools and gloves
   - type: Sprite
     sprite: Objects/Specific/Janitorial/soap.rsi
   - type: SolutionContainerVisuals
