@@ -15,6 +15,7 @@ public abstract partial class SharedTypingIndicatorSystem : EntitySystem
     [Dependency] private ActionBlockerSystem _actionBlocker = default!;
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IPrototypeManager _proto = default!; // Serenity
 
     /// <summary>
     ///     Default ID of <see cref="TypingIndicatorPrototype"/>
@@ -32,6 +33,8 @@ public abstract partial class SharedTypingIndicatorSystem : EntitySystem
         SubscribeLocalEvent<TypingIndicatorClothingComponent, InventoryRelayedEvent<BeforeShowTypingIndicatorEvent>>(BeforeShow);
 
         SubscribeAllEvent<TypingChangedEvent>(OnTypingChanged);
+        SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded); // Serenity
+        CacheChannelIndicators(); // Serenity
     }
 
     private void OnPlayerAttached(PlayerAttachedEvent ev)
@@ -46,6 +49,7 @@ public abstract partial class SharedTypingIndicatorSystem : EntitySystem
     {
         // player left entity body - hide typing indicator
         SetTypingIndicatorState(uid, TypingIndicatorState.None);
+        SetChannelIndicator(uid, TypingIndicatorState.None, null); // Serenity
     }
 
     private void OnGotEquipped(Entity<TypingIndicatorClothingComponent> entity, ref ClothingGotEquippedEvent args)
@@ -81,6 +85,46 @@ public abstract partial class SharedTypingIndicatorSystem : EntitySystem
         }
 
         SetTypingIndicatorState(uid.Value, ev.State);
+        SetChannelIndicator(uid.Value, ev.State, ev.ChannelIndicator); // Serenity
+    }
+
+    // Serenity: per-channel typing bubbles
+
+    private readonly HashSet<ProtoId<TypingIndicatorPrototype>> _channelIndicators = new();
+
+    private void OnPrototypesReloaded(PrototypesReloadedEventArgs args)
+    {
+        if (args.WasModified<Content.Shared._Serenity.Chat.TypingIndicator.TypingChannelIndicatorPrototype>())
+            CacheChannelIndicators();
+    }
+
+    private void CacheChannelIndicators()
+    {
+        _channelIndicators.Clear();
+        foreach (var proto in _proto.EnumeratePrototypes<Content.Shared._Serenity.Chat.TypingIndicator.TypingChannelIndicatorPrototype>())
+        {
+            _channelIndicators.Add(proto.Indicator);
+        }
+    }
+
+    /// <summary>
+    ///     Stores the channel bubble the client asked for, but only if a channel mapping lists it, so a client
+    ///     can't pick an arbitrary indicator (e.g. an antagonist one) for itself. Cleared when typing stops.
+    /// </summary>
+    private void SetChannelIndicator(EntityUid uid, TypingIndicatorState state, ProtoId<TypingIndicatorPrototype>? requested)
+    {
+        if (!TryComp<TypingIndicatorComponent>(uid, out var comp))
+            return;
+
+        var indicator = state != TypingIndicatorState.None && requested is { } id && _channelIndicators.Contains(id)
+            ? requested
+            : null;
+
+        if (comp.ChannelIndicator == indicator)
+            return;
+
+        comp.ChannelIndicator = indicator;
+        Dirty(uid, comp);
     }
 
     private void SetTypingIndicatorState(EntityUid uid, TypingIndicatorState state, AppearanceComponent? appearance = null)

@@ -225,7 +225,7 @@ public partial class ChatBox : UIWidget
         _controller.UpdateLanguageNotifier(this); // Starlight
 
         // Warn typing indicator about change
-        _controller.NotifyChatTextChange();
+        _controller.NotifyChatTextChange(SelectedChannel);
     }
 
     private void OnFocusEnter(LineEditEventArgs args)
