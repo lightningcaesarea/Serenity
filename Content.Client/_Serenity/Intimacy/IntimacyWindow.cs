@@ -10,8 +10,9 @@ using Robust.Shared.Prototypes;
 namespace Content.Client._Serenity.Intimacy;
 
 /// <summary>
-/// The intimacy window: your stats and the target's on top, one tab of acts per category,
-/// and a climax button at the bottom.
+/// The intimacy window: a soft header, stat bars with their numbers laid right over the fill, one
+/// searchable list of acts per category tab (instead of a button grid), and a climax button at the
+/// bottom. Own layout, loosely inspired by Afterlight's mob-interaction window.
 /// </summary>
 public sealed partial class IntimacyWindow : DefaultWindow
 {
@@ -20,74 +21,147 @@ public sealed partial class IntimacyWindow : DefaultWindow
     public event Action<string>? OnActPressed;
     public event Action? OnClimaxPressed;
 
+    private static readonly Color AccentColor = Color.FromHex("#c97bb0");
+    private static readonly Color DimTextColor = Color.FromHex("#9a9a9a");
+
     private readonly Label _targetLabel;
-    private readonly BoxContainer _actorBars;
-    private readonly BoxContainer _targetBars;
     private readonly TabContainer _tabs;
     private readonly Button _climaxButton;
 
     private readonly Dictionary<string, ProgressBar> _actorBarByStat = new();
+    private readonly Dictionary<string, Label> _actorValueByStat = new();
     private readonly Dictionary<string, ProgressBar> _targetBarByStat = new();
+    private readonly Dictionary<string, Label> _targetValueByStat = new();
     private readonly Dictionary<string, Button> _actButtons = new();
+
+    /// <summary>
+    /// Every act row and its lowercased name, so a tab's search box can show/hide rows without
+    /// touching which acts are actually available.
+    /// </summary>
+    private readonly List<(Control Row, string LowerName)> _actRows = new();
 
     public IntimacyWindow()
     {
         IoCManager.InjectDependencies(this);
 
         Title = Loc.GetString("intimacy-window-title");
-        SetSize = new Vector2(520, 560);
-        MinSize = new Vector2(420, 400);
+        SetSize = new Vector2(560, 620);
+        MinSize = new Vector2(460, 460);
 
-        var root = new BoxContainer { Orientation = BoxContainer.LayoutOrientation.Vertical };
+        var root = new BoxContainer
+        {
+            Orientation = BoxContainer.LayoutOrientation.Vertical,
+            Margin = new Thickness(6, 6),
+        };
         Contents.AddChild(root);
 
-        _targetLabel = new Label { StyleClasses = { "LabelHeading" }, Margin = new Thickness(0, 0, 0, 6) };
-        root.AddChild(_targetLabel);
+        var header = new PanelContainer();
+        header.AddStyleClass("BackgroundPanel");
+        _targetLabel = new Label { StyleClasses = { "LabelHeading" }, Margin = new Thickness(8, 4) };
+        header.AddChild(_targetLabel);
+        root.AddChild(header);
 
-        var stats = new BoxContainer { Orientation = BoxContainer.LayoutOrientation.Horizontal, HorizontalExpand = true };
+        root.AddChild(MakeAccentRule(new Thickness(0, 6, 0, 8)));
+
+        var stats = new BoxContainer
+        {
+            Orientation = BoxContainer.LayoutOrientation.Horizontal,
+            HorizontalExpand = true,
+            SeparationOverride = 10,
+        };
         root.AddChild(stats);
 
-        _actorBars = BuildStatColumn(Loc.GetString("intimacy-column-you"), _actorBarByStat);
-        _targetBars = BuildStatColumn(Loc.GetString("intimacy-column-them"), _targetBarByStat);
-        stats.AddChild(_actorBars);
-        stats.AddChild(_targetBars);
+        stats.AddChild(BuildStatColumn(Loc.GetString("intimacy-column-you"), _actorBarByStat, _actorValueByStat));
+        stats.AddChild(BuildStatColumn(Loc.GetString("intimacy-column-them"), _targetBarByStat, _targetValueByStat));
 
-        _tabs = new TabContainer { VerticalExpand = true, Margin = new Thickness(0, 8, 0, 8) };
+        _tabs = new TabContainer { VerticalExpand = true, Margin = new Thickness(0, 10, 0, 8) };
         root.AddChild(_tabs);
         BuildTabs();
 
-        _climaxButton = new Button { Text = Loc.GetString("intimacy-climax-button"), Disabled = true };
+        _climaxButton = new Button
+        {
+            Text = Loc.GetString("intimacy-climax-button"),
+            Disabled = true,
+            MinHeight = 34,
+            ModulateSelfOverride = AccentColor,
+        };
         _climaxButton.OnPressed += _ => OnClimaxPressed?.Invoke();
         root.AddChild(_climaxButton);
     }
 
-    private BoxContainer BuildStatColumn(string heading, Dictionary<string, ProgressBar> bars)
+    private static Control MakeAccentRule(Thickness margin)
+    {
+        return new PanelContainer
+        {
+            MinHeight = 2,
+            HorizontalExpand = true,
+            Margin = margin,
+            PanelOverride = new StyleBoxFlat { BackgroundColor = AccentColor.WithAlpha(0.55f) },
+        };
+    }
+
+    /// <summary>
+    /// A short glyph per stat so the bars read at a glance. Falls back to a plain dot for any
+    /// stat content adds later that this doesn't recognise.
+    /// </summary>
+    private static string GlyphFor(string statId) => statId switch
+    {
+        "Pleasure" => "♥",
+        "Arousal" => "✧",
+        "Pain" => "⚠",
+        _ => "●",
+    };
+
+    private BoxContainer BuildStatColumn(
+        string heading,
+        Dictionary<string, ProgressBar> bars,
+        Dictionary<string, Label> values)
     {
         var column = new BoxContainer
         {
             Orientation = BoxContainer.LayoutOrientation.Vertical,
             HorizontalExpand = true,
-            Margin = new Thickness(4, 0),
+            SeparationOverride = 4,
         };
-        column.AddChild(new Label { Text = heading });
+        column.AddChild(new Label { Text = heading, StyleClasses = { "LabelSubText" } });
 
         foreach (var stat in _proto.EnumeratePrototypes<IntimacyStatPrototype>().OrderBy(s => s.Order))
         {
-            var row = new BoxContainer { Orientation = BoxContainer.LayoutOrientation.Horizontal, HorizontalExpand = true };
-            row.AddChild(new Label { Text = Loc.GetString(stat.Name), MinWidth = 70 });
-
             var bar = new ProgressBar
             {
                 MinValue = 0,
                 MaxValue = stat.Max,
                 Value = 0,
                 HorizontalExpand = true,
-                MinHeight = 14,
-                ForegroundStyleBoxOverride = new StyleBoxFlat { BackgroundColor = stat.Color },
+                MinHeight = 22,
+                ForegroundStyleBoxOverride = new StyleBoxFlat { BackgroundColor = stat.Color.WithAlpha(0.65f) },
+                BackgroundStyleBoxOverride = new StyleBoxFlat
+                {
+                    BackgroundColor = Color.FromHex("#1b1b1b"),
+                    BorderColor = stat.Color.WithAlpha(0.8f),
+                    BorderThickness = new Thickness(1),
+                },
             };
-            row.AddChild(bar);
+
+            var nameLabel = new Label
+            {
+                Text = $"{GlyphFor(stat.ID)} {Loc.GetString(stat.Name)}",
+                HorizontalAlignment = HAlignment.Left,
+                Margin = new Thickness(6, 0, 0, 0),
+            };
+            var valueLabel = new Label
+            {
+                Text = "0",
+                HorizontalAlignment = HAlignment.Right,
+                Margin = new Thickness(0, 0, 6, 0),
+                FontColorOverride = DimTextColor,
+            };
+            bar.AddChild(nameLabel);
+            bar.AddChild(valueLabel);
+
             bars[stat.ID] = bar;
-            column.AddChild(row);
+            values[stat.ID] = valueLabel;
+            column.AddChild(bar);
         }
 
         return column;
@@ -101,27 +175,88 @@ public sealed partial class IntimacyWindow : DefaultWindow
         var index = 0;
         foreach (var category in categories)
         {
-            var scroll = new ScrollContainer { HorizontalExpand = true, VerticalExpand = true };
-            var grid = new GridContainer { Columns = 3, HorizontalExpand = true };
-            scroll.AddChild(grid);
+            var categoryActs = acts.Where(a => a.Category == category.ID)
+                .OrderBy(a => Loc.GetString(a.Name))
+                .ToList();
 
-            foreach (var act in acts.Where(a => a.Category == category.ID).OrderBy(a => Loc.GetString(a.Name)))
+            var tabRoot = new BoxContainer { Orientation = BoxContainer.LayoutOrientation.Vertical, VerticalExpand = true };
+
+            var rowsBox = new BoxContainer
             {
-                var button = new Button
+                Orientation = BoxContainer.LayoutOrientation.Vertical,
+                HorizontalExpand = true,
+                SeparationOverride = 2,
+            };
+
+            if (categoryActs.Count > 4)
+            {
+                var search = new LineEdit
                 {
-                    Text = Loc.GetString(act.Name),
+                    PlaceHolder = Loc.GetString("intimacy-search-placeholder"),
                     HorizontalExpand = true,
-                    Disabled = true,
-                    Modulate = category.Color,
+                    Margin = new Thickness(0, 0, 0, 4),
                 };
-                var id = act.ID;
-                button.OnPressed += _ => OnActPressed?.Invoke(id);
-                grid.AddChild(button);
-                _actButtons[id] = button;
+                search.OnTextChanged += args => FilterRows(rowsBox, args.Text);
+                tabRoot.AddChild(search);
             }
 
-            _tabs.AddChild(scroll);
+            var scroll = new ScrollContainer { HorizontalExpand = true, VerticalExpand = true, HScrollEnabled = false };
+            scroll.AddChild(rowsBox);
+            tabRoot.AddChild(scroll);
+
+            foreach (var act in categoryActs)
+                rowsBox.AddChild(BuildActRow(act, category.Color));
+
+            _tabs.AddChild(tabRoot);
             _tabs.SetTabTitle(index++, Loc.GetString(category.Name));
+        }
+    }
+
+    private Control BuildActRow(IntimacyActPrototype act, Color categoryColor)
+    {
+        var row = new BoxContainer
+        {
+            Orientation = BoxContainer.LayoutOrientation.Horizontal,
+            HorizontalExpand = true,
+        };
+
+        var accent = new PanelContainer
+        {
+            MinWidth = 4,
+            VerticalExpand = true,
+            PanelOverride = new StyleBoxFlat { BackgroundColor = categoryColor.WithAlpha(0.75f) },
+            Margin = new Thickness(0, 1, 4, 1),
+        };
+        row.AddChild(accent);
+
+        var button = new Button
+        {
+            Text = Loc.GetString(act.Name),
+            HorizontalExpand = true,
+            Disabled = true,
+        };
+        button.Label.HorizontalAlignment = HAlignment.Left;
+        var id = act.ID;
+        button.OnPressed += _ => OnActPressed?.Invoke(id);
+        row.AddChild(button);
+
+        _actButtons[id] = button;
+        _actRows.Add((row, Loc.GetString(act.Name).ToLowerInvariant()));
+
+        return row;
+    }
+
+    private void FilterRows(BoxContainer rowsBox, string query)
+    {
+        query = query.Trim().ToLowerInvariant();
+
+        foreach (var child in rowsBox.Children)
+        {
+            var match = _actRows.FirstOrDefault(r => ReferenceEquals(r.Row, child));
+            if (match.Row == null)
+                continue;
+
+            child.Visible = query.Length == 0 || match.LowerName.Contains(query);
         }
     }
 
@@ -130,10 +265,18 @@ public sealed partial class IntimacyWindow : DefaultWindow
         _targetLabel.Text = Loc.GetString("intimacy-window-target", ("name", state.TargetName));
 
         foreach (var (stat, bar) in _actorBarByStat)
-            bar.Value = state.ActorStats.GetValueOrDefault(stat);
+        {
+            var value = state.ActorStats.GetValueOrDefault(stat);
+            bar.Value = value;
+            _actorValueByStat[stat].Text = $"{value:0}";
+        }
 
         foreach (var (stat, bar) in _targetBarByStat)
-            bar.Value = state.TargetStats.GetValueOrDefault(stat);
+        {
+            var value = state.TargetStats.GetValueOrDefault(stat);
+            bar.Value = value;
+            _targetValueByStat[stat].Text = $"{value:0}";
+        }
 
         foreach (var (id, button) in _actButtons)
             button.Disabled = !state.Available.Contains(id);

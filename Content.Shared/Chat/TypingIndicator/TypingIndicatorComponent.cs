@@ -1,4 +1,4 @@
-﻿using Robust.Shared.GameStates;
+using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Chat.TypingIndicator;
@@ -16,4 +16,11 @@ public sealed partial class TypingIndicatorComponent : Component
     /// </summary>
     [DataField("proto"), AutoNetworkedField]
     public ProtoId<TypingIndicatorPrototype> TypingIndicatorPrototype = "default";
+
+    /// <summary>
+    ///     Serenity: bubble for the chat channel being typed in, shown in place of <see cref="TypingIndicatorPrototype"/>
+    ///     and any clothing override. Null when typing in an ordinary channel or not at all.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public ProtoId<TypingIndicatorPrototype>? ChannelIndicator;
 }

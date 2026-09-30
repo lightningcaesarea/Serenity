@@ -5,6 +5,7 @@ using Content.Client.Administration.Managers;
 using Content.Client.Chat;
 using Content.Client.Chat.Managers;
 using Content.Client.Chat.TypingIndicator;
+using Content.Shared.Chat.TypingIndicator;
 using Content.Client.Chat.UI;
 using Content.Client.Examine;
 using Content.Client.Gameplay;
@@ -188,6 +189,7 @@ public sealed partial class ChatUIController : UIController
     {
         _sawmill = Logger.GetSawmill("chat");
         _sawmill.Level = LogLevel.Info;
+        _prototypeManager.PrototypesReloaded += _ => _channelTypingIndicators = null; // Serenity
         _admin.AdminStatusUpdated += UpdateChannelPermissions;
         _manager.PermissionsUpdated += UpdateChannelPermissions;
         _player.LocalPlayerAttached += OnAttachedChanged;
@@ -1035,9 +1037,30 @@ public sealed partial class ChatUIController : UIController
         return MapLocalIfGhost(PreferredChannel);
     }
 
-    public void NotifyChatTextChange()
+    public void NotifyChatTextChange(ChatSelectChannel channel = ChatSelectChannel.None)
     {
-        _typingIndicator?.ClientChangedChatText();
+        _typingIndicator?.ClientChangedChatText(GetChannelTypingIndicator(channel));
+    }
+
+    // Serenity: the typing bubble for a channel, from the typingChannelIndicator prototypes.
+    // Built once and rebuilt when prototypes reload, since this runs on every keystroke.
+    private Dictionary<ChatSelectChannel, ProtoId<TypingIndicatorPrototype>>? _channelTypingIndicators;
+
+    private ProtoId<TypingIndicatorPrototype>? GetChannelTypingIndicator(ChatSelectChannel channel)
+    {
+        if (_channelTypingIndicators == null)
+        {
+            _channelTypingIndicators = new();
+            foreach (var proto in _prototypeManager.EnumeratePrototypes<Content.Shared._Serenity.Chat.TypingIndicator.TypingChannelIndicatorPrototype>())
+            {
+                _channelTypingIndicators.TryAdd(proto.Channel, proto.Indicator);
+            }
+        }
+
+        if (_channelTypingIndicators.TryGetValue(channel, out var indicator))
+            return indicator;
+
+        return null;
     }
 
     public void NotifyChatFocus(bool isFocused)

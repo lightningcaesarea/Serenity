@@ -61,9 +61,22 @@ public abstract partial class BaseBalanceCommand : LocalizedCommands
             return after ?? 0;
         }
 
-        var stored = await Db.GetPlayerResources(located.UserId.UserId);
-        var value = stored.GetValueOrDefault(Credits) + delta;
-        await Db.SetPlayerResource(located.UserId.UserId, Credits, value, delta, reason);
+        // The database adds the delta itself, so this can't overwrite a write that lands at the same moment
+        // (e.g. the player connecting and their own credits being loaded).
+        return await Db.AdjustPlayerResource(located.UserId.UserId, Credits, delta, reason);
+    }
+
+    /// <summary>Set the balance to an exact value online-or-offline. Returns the resulting balance.</summary>
+    protected async Task<double> SetBalance(LocatedPlayerData located, double value, string reason)
+    {
+        if (TryGetSession(located.UserId, out var session))
+        {
+            Resources.TrySetResource(session, Credits, value, reason);
+            Resources.TryGetResource(session, Credits, out var after);
+            return after ?? 0;
+        }
+
+        await Db.SetPlayerResource(located.UserId.UserId, Credits, value, reason);
         return value;
     }
 
@@ -107,7 +120,7 @@ public sealed partial class BalanceCommand : BaseBalanceCommand
     }
 
     internal static string FormatLedgerRow(PlayerResourceTransaction row)
-        => $"  {row.CreatedAt:yyyy-MM-dd HH:mm:ss}  {(row.Delta >= 0 ? "+" : "")}{Fmt(row.Delta),10}  => {Fmt(row.BalanceAfter),10}  {row.Reason ?? "unspecified"}";
+        => $"  {row.CreatedAt:yyyy-MM-dd HH:mm:ss}  {(row.Delta >= 0 ? "+" : "")}{Fmt(row.Delta),10}  => {Fmt(row.BalanceAfter),10}  {row.Reason ?? LedgerReasons.Unspecified}";
 }
 
 [AdminCommand(AdminFlags.Admin)]
@@ -170,7 +183,7 @@ public sealed partial class BalanceAdjustCommand : BaseBalanceCommand
         if (await Locate(shell, args[0]) is not { } located)
             return;
 
-        var reason = $"admin:{Actor(shell)}: {string.Join(' ', args.Skip(2))}";
+        var reason = LedgerReasons.Admin(Actor(shell), string.Join(' ', args.Skip(2)));
         var after = await Adjust(located, delta, reason);
 
         AdminLog.Add(LogType.Economy, LogImpact.High,
@@ -204,8 +217,8 @@ public sealed partial class BalanceSetCommand : BaseBalanceCommand
             return;
 
         var before = await GetBalance(located);
-        var reason = $"admin:{Actor(shell)}: {string.Join(' ', args.Skip(2))}";
-        var after = await Adjust(located, value - before, reason);
+        var reason = LedgerReasons.Admin(Actor(shell), string.Join(' ', args.Skip(2)));
+        var after = await SetBalance(located, value, reason);
 
         AdminLog.Add(LogType.Economy, LogImpact.High,
             $"{Actor(shell)} set {located.Username}'s credits to {Fmt(after)} (was {Fmt(before)}). Reason: {string.Join(' ', args.Skip(2))}");
