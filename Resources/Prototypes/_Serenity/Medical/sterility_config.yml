@@ -22,7 +22,7 @@
 
   # Infection. An operation with total dirtiness above surgeryInfectionThreshold can infect the patient, with
   # chance (dirtiness - threshold) * surgeryInfectionChancePerDirt (at most surgeryInfectionMaxChance), on top of
-  # any sepsis damage. An antibiotic prevents new infections.
+  # any sepsis damage. An antibiotic prevents new infections and freezes an existing one.
   infectionTickSeconds: 5
   surgeryInfectionThreshold: 30
   surgeryInfectionChancePerDirt: 0.01
@@ -40,7 +40,5 @@
       chancePerTier: 0.003
   # Seconds untreated at tier 1 and 2 before getting worse (the last entry is unused: tier 3 is the worst).
   escalationSeconds: [150, 150, 0]
-  # Seconds per tier to recede while an antibiotic is active.
-  regressionSeconds: 60
-  # Poison damage per update at tier 1, 2 and 3.
+  # Poison damage per update at tier 1, 2 and 3 (suppressed while an antibiotic is active).
   symptomDamage: [0, 0.25, 0.6]

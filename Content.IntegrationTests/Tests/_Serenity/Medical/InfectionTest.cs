@@ -85,10 +85,11 @@ public sealed class InfectionTest
     }
 
     /// <summary>
-    /// An antibiotic brings an infection back down tier by tier until it is gone, and stops new ones.
+    /// A broad-spectrum antibiotic freezes an infection where it is (no worsening, no symptoms) and blocks new ones,
+    /// but doesn't cure it: once it wears off the infection carries on.
     /// </summary>
     [Test]
-    public async Task AntibioticsClearInfection()
+    public async Task AntibioticsFreezeInfectionButDoNotCureIt()
     {
         await using var pair = await PoolManager.GetServerClient();
         var server = pair.Server;
@@ -100,38 +101,55 @@ public sealed class InfectionTest
         var config = server.ProtoMan.Index<SterilityConfigPrototype>(SterilityConfigPrototype.DefaultId);
         var now = server.ResolveDependency<IGameTiming>().CurTime;
 
+        EntityUid patient = default;
+        WoundComponent comp = default!;
+
         await server.WaitAssertion(() =>
         {
-            var patient = entMan.SpawnEntity("MobHuman", mapData.GridCoords);
-            var comp = entMan.GetComponent<WoundComponent>(patient);
+            patient = entMan.SpawnEntity("MobHuman", mapData.GridCoords);
+            comp = entMan.GetComponent<WoundComponent>(patient);
 
             infections.TryInfect(patient, comp);
-            Infection(comp)!.Tier = 3;
-            Infection(comp)!.NextDecayTime = TimeSpan.MaxValue;
+            Infection(comp).Tier = 2;
+            Infection(comp).NextDecayTime = now;
 
             Assert.That(effects.TryAddStatusEffectDuration(patient, InfectionSystem.AntibioticEffect, TimeSpan.FromHours(1)));
             Assert.That(infections.HasAntibiotic(patient));
 
-            // The first step down is scheduled, not instant
-            infections.Tick(patient, comp, now);
-            Assert.That(Infection(comp)!.Tier, Is.EqualTo(3));
+            // Even with its timer long past, and however much time goes by, it doesn't get worse or hurt
+            for (var i = 0; i < 20; i++)
+            {
+                now += TimeSpan.FromSeconds(config.EscalationSeconds[1] + 1);
+                infections.Tick(patient, comp, now);
+            }
 
-            var step = TimeSpan.FromSeconds(config.RegressionSeconds + 1);
-            now += step;
-            infections.Tick(patient, comp, now);
-            Assert.That(Infection(comp)!.Tier, Is.EqualTo(2));
-
-            now += step;
-            infections.Tick(patient, comp, now);
-            Assert.That(Infection(comp)!.Tier, Is.EqualTo(1));
-
-            now += step;
-            infections.Tick(patient, comp, now);
-            Assert.That(Infection(comp), Is.Null, "the infection is gone");
+            Assert.That(Infection(comp).Tier, Is.EqualTo(2), "frozen at its current tier");
+            Assert.That(Poison(entMan, patient), Is.EqualTo(0f), "symptoms are suppressed");
 
             // Protected against new ones while it lasts
             wounds.AddWound(patient, comp, new WoundEntry("SlashLaceration", 3));
             Assert.That(infections.OpenWoundInfectionChance(patient, comp), Is.EqualTo(0f));
+
+            // The drug wears off (status effects are deleted on the next tick)
+            Assert.That(effects.TryRemoveStatusEffect(patient, InfectionSystem.AntibioticEffect));
+        });
+
+        await server.WaitRunTicks(3);
+
+        await server.WaitAssertion(() =>
+        {
+            Assert.That(infections.HasAntibiotic(patient), Is.False);
+            Assert.That(Infection(comp), Is.Not.Null, "an antibiotic doesn't cure it");
+
+            // The timer was held at a full delay, so it resumes from there rather than worsening at once...
+            infections.Tick(patient, comp, now);
+            Assert.That(Infection(comp).Tier, Is.EqualTo(2));
+
+            // ...and worsens again once that delay has passed
+            now += TimeSpan.FromSeconds(config.EscalationSeconds[1] + 1);
+            infections.Tick(patient, comp, now);
+            Assert.That(Infection(comp).Tier, Is.EqualTo(3));
+            Assert.That(Poison(entMan, patient), Is.GreaterThan(0f), "symptoms return");
 
             entMan.DeleteEntity(patient);
         });
@@ -253,7 +271,6 @@ public sealed class InfectionTest
                 Assert.That(config.SymptomDamage, Has.Length.EqualTo(WoundsConstants.MaxWoundTier), $"{config.ID} symptom damage");
                 Assert.That(config.EscalationSeconds.Take(WoundsConstants.MaxWoundTier - 1), Has.All.GreaterThan(0f), $"{config.ID} escalation times must be positive");
                 Assert.That(config.SymptomDamage, Has.All.GreaterThanOrEqualTo(0f));
-                Assert.That(config.RegressionSeconds, Is.GreaterThan(0f));
                 Assert.That(config.InfectionTickSeconds, Is.GreaterThan(0f));
 
                 Assert.That(proto.TryIndex(config.InfectionWound, out var wound), $"{config.ID} infection wound {config.InfectionWound} doesn't exist");

@@ -16,8 +16,9 @@ namespace Content.Server._Serenity.Medical.Sterility;
 
 /// <summary>
 /// Infection: a wound that never heals by itself. An unsterile operation or an untreated open wound can give a
-/// patient one; left alone it gets worse tier by tier and poisons them, while an antibiotic holds it back and
-/// slowly clears it. Surgery (draining it) clears it outright. All tuning is in <see cref="SterilityConfigPrototype"/>.
+/// patient one; left alone it gets worse tier by tier and poisons them. A broad-spectrum antibiotic freezes it where
+/// it is, suppresses its symptoms and blocks new infections, but doesn't cure it: surgery (draining it) does.
+/// All tuning is in <see cref="SterilityConfigPrototype"/>.
 /// </summary>
 public sealed partial class InfectionSystem : EntitySystem
 {
@@ -132,11 +133,16 @@ public sealed partial class InfectionSystem : EntitySystem
 
         if (GetInfection(comp) is { } infection)
         {
-            Progress(uid, comp, infection, antibiotic, now, config);
+            // A broad-spectrum antibiotic freezes the infection at its current tier: its timer restarts so it can't
+            // worsen, and its symptoms are suppressed. It is not cured, so it resumes when the drug wears off.
+            if (antibiotic)
+            {
+                Freeze(infection, now, config);
+                return;
+            }
 
-            if (GetInfection(comp) is { } remaining)
-                Symptoms(uid, remaining, config);
-
+            Progress(uid, comp, infection, now, config);
+            Symptoms(uid, infection, config);
             return;
         }
 
@@ -144,31 +150,16 @@ public sealed partial class InfectionSystem : EntitySystem
             TryInfect(uid, comp);
     }
 
-    private void Progress(EntityUid uid, WoundComponent comp, WoundEntry infection, bool antibiotic, TimeSpan now, SterilityConfigPrototype config)
+    private static void Freeze(WoundEntry infection, TimeSpan now, SterilityConfigPrototype config)
     {
-        // An antibiotic brings the next change forward; nothing brings it forward otherwise
-        if (antibiotic)
-            infection.NextDecayTime = TimeSpan.FromTicks(Math.Min(infection.NextDecayTime.Ticks, (now + TimeSpan.FromSeconds(config.RegressionSeconds)).Ticks));
+        // Tier 3 never escalates, so it has no timer to hold. Only the server reads this timer, so it isn't networked.
+        if (infection.Tier < WoundsConstants.MaxWoundTier)
+            infection.NextDecayTime = now + EscalationDelay(config, infection.Tier);
+    }
 
-        if (infection.NextDecayTime > now)
-            return;
-
-        if (antibiotic)
-        {
-            infection.Tier -= 1;
-            if (infection.Tier < 1)
-            {
-                _wounds.RemoveWound(uid, comp, infection);
-                return;
-            }
-
-            infection.NextDecayTime = now + TimeSpan.FromSeconds(config.RegressionSeconds);
-            Dirty(uid, comp);
-            RaiseLocalEvent(uid, new WoundsClearedEvent());
-            return;
-        }
-
-        if (infection.Tier >= WoundsConstants.MaxWoundTier)
+    private void Progress(EntityUid uid, WoundComponent comp, WoundEntry infection, TimeSpan now, SterilityConfigPrototype config)
+    {
+        if (infection.NextDecayTime > now || infection.Tier >= WoundsConstants.MaxWoundTier)
             return;
 
         infection.Tier += 1;
