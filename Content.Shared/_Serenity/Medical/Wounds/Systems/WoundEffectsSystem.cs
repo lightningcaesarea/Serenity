@@ -5,6 +5,7 @@ using Content.Shared.HealthExaminable;
 using Content.Shared.Movement.Systems;
 using Robust.Shared.GameObjects;
 using Robust.Shared.IoC;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
@@ -22,6 +23,7 @@ public sealed partial class WoundEffectsSystem : EntitySystem
     [Dependency] private SharedWoundSystem _wounds = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
 
     public override void Initialize()
     {
@@ -44,11 +46,11 @@ public sealed partial class WoundEffectsSystem : EntitySystem
     {
         var fractureTier = _wounds.GetWorstTier(comp, WoundCategory.Fracture);
         var burnTier = _wounds.GetWorstTier(comp, WoundCategory.Burn);
+        var config = _proto.Index(comp.Config);
 
-        // Fractures: tier 2+ slows movement
-        // Burns: tier 2+ slows movement
-        if (fractureTier >= WoundsConstants.MovementSlowTier || burnTier >= WoundsConstants.MovementSlowTier)
-            args.ModifySpeed(WoundsConstants.MovementSlowMultiplier);
+        // Fractures and burns at the configured tier slow movement
+        if (fractureTier >= config.MovementSlowTier || burnTier >= config.MovementSlowTier)
+            args.ModifySpeed(config.MovementSlowMultiplier);
     }
 
     private void OnHealthExamined(EntityUid uid, WoundComponent comp, ref HealthBeingExaminedEvent args)
@@ -86,12 +88,13 @@ public sealed partial class WoundEffectsSystem : EntitySystem
 
         RefreshAlerts(uid, comp);
 
-        // Tier 3 fracture: chance to drop held items on hit
+        // Severe fracture: chance to drop held items on hit
+        var config = _proto.Index(comp.Config);
         var fractureTier = _wounds.GetWorstTier(comp, WoundCategory.Fracture);
-        if (fractureTier < WoundsConstants.FractureDropTier)
+        if (fractureTier < config.FractureDropTier)
             return;
 
-        if (!_random.Prob(WoundsConstants.FractureDropChance))
+        if (!_random.Prob(config.FractureDropChance))
             return;
 
         if (!TryComp<HandsComponent>(uid, out var hands))

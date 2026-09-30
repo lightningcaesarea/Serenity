@@ -1,0 +1,14 @@
+# Placeholder art: reuses the wound icon until dedicated pain sprites exist.
+- type: alert
+  id: Pain
+  name: alerts-pain-name
+  description: alerts-pain-desc
+  icons:
+    - sprite: /Textures/_Serenity/Interface/Alerts/Wounds/wounds.rsi
+      state: burn_icon
+    - sprite: /Textures/_Serenity/Interface/Alerts/Wounds/wounds.rsi
+      state: burn_icon
+    - sprite: /Textures/_Serenity/Interface/Alerts/Wounds/wounds.rsi
+      state: burn_icon
+    - sprite: /Textures/_Serenity/Interface/Alerts/Wounds/wounds.rsi
+      state: burn_icon

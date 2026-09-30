@@ -116,6 +116,8 @@ public abstract partial class SharedWoundSystem : EntitySystem
 
     private bool ApplyWound(WoundComponent comp, WoundTypePrototype proto, int tier)
     {
+        var config = _proto.Index(comp.Config);
+
         // Try to upgrade an existing wound of this type first
         var existingCount = 0;
         foreach (var wound in comp.ActiveWounds)
@@ -128,7 +130,7 @@ public abstract partial class SharedWoundSystem : EntitySystem
             if (wound.Tier < tier)
             {
                 wound.Tier = tier;
-                wound.NextDecayTime = _timing.CurTime + GetTierDecayDuration(tier);
+                wound.NextDecayTime = _timing.CurTime + config.GetTierDecayDuration(tier);
                 return true;
             }
 
@@ -140,31 +142,15 @@ public abstract partial class SharedWoundSystem : EntitySystem
         }
 
         // Cap stacking at 3 wounds per type
-        if (existingCount >= WoundsConstants.MaxStackedWoundsPerType)
+        if (existingCount >= config.MaxStackedWoundsPerType)
             return false;
 
         // Create new wound entry
         comp.ActiveWounds.Add(new WoundEntry(proto.ID, tier)
         {
-            NextDecayTime = _timing.CurTime + GetTierDecayDuration(tier),
+            NextDecayTime = _timing.CurTime + config.GetTierDecayDuration(tier),
         });
         return true;
-    }
-
-    /// <summary>
-    /// Seconds-until-next-drop budget for a wound at the given tier. Returns
-    /// <see cref="TimeSpan.Zero"/> for invalid tiers so the caller can treat
-    /// them as already-expired.
-    /// </summary>
-    public static TimeSpan GetTierDecayDuration(int tier)
-    {
-        return tier switch
-        {
-            3 => TimeSpan.FromSeconds(WoundsConstants.Tier3DecaySeconds),
-            2 => TimeSpan.FromSeconds(WoundsConstants.Tier2DecaySeconds),
-            1 => TimeSpan.FromSeconds(WoundsConstants.Tier1DecaySeconds),
-            _ => TimeSpan.Zero,
-        };
     }
 
     /// <summary>

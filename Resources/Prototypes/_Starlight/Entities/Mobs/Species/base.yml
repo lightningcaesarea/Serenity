@@ -292,6 +292,7 @@
     - intimacy-msg-climax-3
   - type: IntimacyVocal # Serenity
   - type: Wound # Serenity
+  - type: Pain # Serenity
   - type: Barotrauma
     damage:
       types:

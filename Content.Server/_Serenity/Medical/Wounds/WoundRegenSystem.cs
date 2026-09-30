@@ -8,7 +8,7 @@ namespace Content.Server._Serenity.Medical.Wounds;
 
 /// <summary>
 /// Server-side natural regen for <see cref="WoundComponent"/>: once per
-/// <see cref="WoundsConstants.RegenTickSeconds"/> interval, walks every
+/// <see cref="WoundConfigPrototype.RegenTickSeconds"/> interval, walks every
 /// wound whose <see cref="WoundEntry.NextDecayTime"/> has elapsed and drops
 /// its tier by one. Wounds whose tier falls below 1 are removed. Dead mobs
 /// are skipped — rotting flesh does not heal, and this matches the spec's
@@ -26,7 +26,7 @@ public sealed partial class WoundRegenSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-        _nextTick = _timing.CurTime + TimeSpan.FromSeconds(WoundsConstants.RegenTickSeconds);
+        _nextTick = _timing.CurTime + TimeSpan.FromSeconds(_proto.Index<WoundConfigPrototype>(WoundConfigPrototype.DefaultId).RegenTickSeconds);
     }
 
     public override void Update(float frameTime)
@@ -36,7 +36,7 @@ public sealed partial class WoundRegenSystem : EntitySystem
         if (_timing.CurTime < _nextTick)
             return;
 
-        _nextTick = _timing.CurTime + TimeSpan.FromSeconds(WoundsConstants.RegenTickSeconds);
+        _nextTick = _timing.CurTime + TimeSpan.FromSeconds(_proto.Index<WoundConfigPrototype>(WoundConfigPrototype.DefaultId).RegenTickSeconds);
 
         var query = EntityQueryEnumerator<WoundComponent>();
         while (query.MoveNext(out var uid, out var comp))
@@ -79,7 +79,7 @@ public sealed partial class WoundRegenSystem : EntitySystem
             }
 
             wound.Tier -= 1;
-            wound.NextDecayTime = now + SharedWoundSystem.GetTierDecayDuration(wound.Tier);
+            wound.NextDecayTime = now + _proto.Index(comp.Config).GetTierDecayDuration(wound.Tier);
             changed = true;
         }
 

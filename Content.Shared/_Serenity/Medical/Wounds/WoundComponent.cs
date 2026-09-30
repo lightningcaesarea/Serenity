@@ -39,6 +39,12 @@ public sealed partial class WoundComponent : Component
         WoundsConstants.DefaultBleedTier3Threshold,
     ];
 
+    /// <summary>
+    /// Tuning for natural regen and wound effects on this mob.
+    /// </summary>
+    [DataField]
+    public ProtoId<WoundConfigPrototype> Config = WoundConfigPrototype.DefaultId;
+
     [DataField]
     public ProtoId<AlertPrototype> FractureAlert = "Fracture";
 
