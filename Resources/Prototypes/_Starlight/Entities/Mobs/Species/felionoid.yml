@@ -12,6 +12,8 @@
     - Nekomimetic
     - Cat
   - type: Absorbable
+  - type: TypingIndicator # Serenity
+    proto: felinid
   - type: Speech
     speechVerb: Felionoid
   - type: Vocal
