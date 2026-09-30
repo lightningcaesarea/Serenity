@@ -5,6 +5,7 @@ intimacy-window-target = With { $name }
 intimacy-column-you = You
 intimacy-column-them = Them
 intimacy-climax-button = Climax
+intimacy-search-placeholder = Search this tab...
 
 ## Stats
 intimacy-stat-arousal = Arousal

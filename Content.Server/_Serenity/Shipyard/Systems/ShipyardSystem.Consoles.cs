@@ -131,6 +131,14 @@ public sealed partial class ShipyardSystem
             return;
         }
 
+        // Resolve the buyer before spending anything: the deed needs their user id, and failing after the ship
+        // has been spawned and paid for would leave them without a deed.
+        if (!_players.TryGetSessionByEntity(player, out var playerSession))
+        {
+            Deny(uid, component, player, "shipyard-console-purchase-failed");
+            return;
+        }
+
         if (!TryPurchaseShuttle(station, vessel.ShuttlePath, vessel.Delay, out var shuttle))
         {
             Deny(uid, component, player, "shipyard-console-purchase-failed");
@@ -160,8 +168,7 @@ public sealed partial class ShipyardSystem
             _access.TrySetTags(targetId, tags, access);
         }
 
-        _players.TryGetSessionByEntity(player, out var playerSession);
-        var userId = playerSession!.UserId;
+        var userId = playerSession.UserId;
         AssignDeed(EnsureComp<ShuttleDeedComponent>(targetId), shuttle.Value, name, player, userId);
         AssignDeed(EnsureComp<ShuttleDeedComponent>(shuttle.Value), shuttle.Value, name, player, userId);
         Dirty(targetId, Comp<ShuttleDeedComponent>(targetId));

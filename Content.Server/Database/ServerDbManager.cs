@@ -209,7 +209,10 @@ namespace Content.Server.Database
         Task<Dictionary<string, double>> GetPlayerResources(Guid player, CancellationToken cancel = default);
 
         /// <summary>Persist the absolute value of one resource and append a ledger row for the change.</summary>
-        Task SetPlayerResource(Guid player, string resource, double value, double delta, string? reason);
+        Task SetPlayerResource(Guid player, string resource, double value, string? reason);
+
+        /// <summary>Adds a delta atomically in the database and returns the new balance.</summary>
+        Task<double> AdjustPlayerResource(Guid player, string resource, double delta, string? reason);
 
         /// <summary>Most recent ledger rows for a player, newest first.</summary>
         Task<List<PlayerResourceTransaction>> GetPlayerResourceTransactions(Guid player, int limit, CancellationToken cancel = default);
@@ -706,10 +709,16 @@ namespace Content.Server.Database
             return RunDbCommand(() => _db.GetPlayerResources(player, cancel));
         }
 
-        public Task SetPlayerResource(Guid player, string resource, double value, double delta, string? reason)
+        public Task SetPlayerResource(Guid player, string resource, double value, string? reason)
         {
             DbWriteOpsMetric.Inc();
-            return RunDbCommand(() => _db.SetPlayerResource(player, resource, value, delta, reason));
+            return RunDbCommand(() => _db.SetPlayerResource(player, resource, value, reason));
+        }
+
+        public Task<double> AdjustPlayerResource(Guid player, string resource, double delta, string? reason)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.AdjustPlayerResource(player, resource, delta, reason));
         }
 
         public Task<List<PlayerResourceTransaction>> GetPlayerResourceTransactions(Guid player, int limit, CancellationToken cancel)

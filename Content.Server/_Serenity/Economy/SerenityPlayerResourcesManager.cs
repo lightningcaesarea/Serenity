@@ -37,8 +37,6 @@ public sealed partial class SerenityPlayerResourcesManager : SharedNullLinkPlaye
     [Dependency] private IPlayerManager _players = default!;
     [Dependency] private ISharedPlayersRoleManager _playersRole = default!;
 
-    private const string ReasonUnspecified = "unspecified";
-    private const string ReasonLoadMerge = "load-merge";
 
     private bool _initialized;
 
@@ -46,7 +44,12 @@ public sealed partial class SerenityPlayerResourcesManager : SharedNullLinkPlaye
     // so hook IoC's post-injection callback to guarantee we start.
     void IPostInjectInit.PostInject() => Initialize();
 
-    private readonly record struct ResourceWrite(Guid User, string Resource, double Value, double Delta, string Reason);
+    /// <summary>
+    /// A queued DB write. Additive changes are sent as deltas so the database adds them itself and can't
+    /// overwrite another writer (an admin adjusting an offline or just-connecting player); only an explicit
+    /// "set" sends an absolute value.
+    /// </summary>
+    private readonly record struct ResourceWrite(Guid User, string Resource, bool Absolute, double Amount, string Reason);
 
     private readonly Channel<ResourceWrite> _writes = Channel.CreateUnbounded<ResourceWrite>(
         new UnboundedChannelOptions { SingleReader = true, SingleWriter = true });
@@ -128,22 +131,23 @@ public sealed partial class SerenityPlayerResourcesManager : SharedNullLinkPlaye
 
         _loaded.Add(session.UserId);
 
-        // Persist the merged state so the accrued-during-load deltas reach the DB exactly once.
+        // Persist the accrued-during-load deltas exactly once. They go out as deltas, so if an admin changed the
+        // stored balance after we read it, that change is kept instead of overwritten.
         foreach (var (resource, value) in data.Resources)
         {
             stored.TryGetValue(resource, out var before);
             if (value != before)
-                Enqueue(session.UserId, resource, value, value - before, ReasonLoadMerge);
+                EnqueueAdjust(session.UserId, resource, value - before, LedgerReasons.LoadMerge);
         }
     }
 
     #region Starlight interface (no reason available)
 
     public override bool TryUpdateResource(ICommonSession session, string id, double value, bool skipNullLink = false)
-        => UpdateCore(session, id, value, ReasonUnspecified);
+        => UpdateCore(session, id, value, LedgerReasons.Unspecified);
 
     public override bool TrySetResource(ICommonSession session, string id, double value, bool skipNullLink = false)
-        => SetCore(session, id, value, ReasonUnspecified);
+        => SetCore(session, id, value, LedgerReasons.Unspecified);
 
     #endregion
 
@@ -151,6 +155,9 @@ public sealed partial class SerenityPlayerResourcesManager : SharedNullLinkPlaye
 
     public bool TryUpdateResource(ICommonSession session, string id, double delta, string reason)
         => UpdateCore(session, id, delta, reason);
+
+    public bool TryUpdateResource(EntityUid uid, string id, double delta, string reason)
+        => _players.TryGetSessionByEntity(uid, out var session) && UpdateCore(session, id, delta, reason);
 
     public bool TrySetResource(ICommonSession session, string id, double value, string reason)
         => SetCore(session, id, value, reason);
@@ -163,32 +170,33 @@ public sealed partial class SerenityPlayerResourcesManager : SharedNullLinkPlaye
         if (delta == 0 || !base.TryUpdateResource(session, id, delta))
             return false;
 
-        if (_loaded.Contains(session.UserId) && _playersRole.GetPlayerData(session) is { } data)
-            Enqueue(session.UserId, id, data.Resources[id], delta, reason);
+        if (_loaded.Contains(session.UserId))
+            EnqueueAdjust(session.UserId, id, delta, reason);
 
         return true;
     }
 
     private bool SetCore(ICommonSession session, string id, double value, string reason)
     {
-        if (_playersRole.GetPlayerData(session) is not { } data)
+        if (_playersRole.GetPlayerData(session) == null)
             return false;
-
-        data.Resources.TryGetValue(id, out var before);
 
         if (!base.TrySetResource(session, id, value))
             return false;
 
         if (_loaded.Contains(session.UserId))
-            Enqueue(session.UserId, id, value, value - before, reason);
+            Enqueue(new ResourceWrite(session.UserId.UserId, id, true, value, reason));
 
         return true;
     }
 
-    private void Enqueue(NetUserId user, string resource, double value, double delta, string reason)
+    private void EnqueueAdjust(NetUserId user, string resource, double delta, string reason)
+        => Enqueue(new ResourceWrite(user.UserId, resource, false, delta, reason));
+
+    private void Enqueue(ResourceWrite write)
     {
-        if (!_writes.Writer.TryWrite(new ResourceWrite(user.UserId, resource, value, delta, reason)))
-            _sawmill.Error($"Dropped resource write for {user}: {resource} -> {value}");
+        if (!_writes.Writer.TryWrite(write))
+            _sawmill.Error($"Dropped resource write for {write.User}: {write.Resource} {(write.Absolute ? "=" : "+=")} {write.Amount}");
     }
 
     private async Task ProcessWritesAsync()
@@ -197,12 +205,15 @@ public sealed partial class SerenityPlayerResourcesManager : SharedNullLinkPlaye
         {
             try
             {
-                await _db.SetPlayerResource(write.User, write.Resource, write.Value, write.Delta, write.Reason);
+                if (write.Absolute)
+                    await _db.SetPlayerResource(write.User, write.Resource, write.Amount, write.Reason);
+                else
+                    await _db.AdjustPlayerResource(write.User, write.Resource, write.Amount, write.Reason);
             }
             catch (Exception ex)
             {
                 // Never let one bad row stall the queue for every other player.
-                _sawmill.Error($"Failed to persist resource {write.Resource}={write.Value} for {write.User}: {ex}");
+                _sawmill.Error($"Failed to persist resource {write.Resource} {(write.Absolute ? "=" : "+=")} {write.Amount} for {write.User}: {ex}");
             }
         }
     }
