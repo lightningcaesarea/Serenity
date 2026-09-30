@@ -54,3 +54,8 @@
   category: Puncture
   damage: { Piercing: 1 }
   thresholds: [10, 18, 30]
+
+# Added directly by the infection system, never by damage, so it lists no damage types or thresholds.
+- type: woundType
+  id: Infection
+  category: Infection

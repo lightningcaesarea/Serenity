@@ -11,3 +11,6 @@ surgery-clean-verb-message = Wipe the dirt and traces of other patients off with
 surgery-cleaning = You start cleaning { THE($target) }.
 
 surgery-unsterile-warning = Your dirty tools and gloves are making the patient sick!
+
+reagent-name-antibiox = antibiox
+reagent-desc-antibiox = An antibiotic. Holds an infection back and slowly clears it, and protects against new ones while it lasts. Harmful in large doses.

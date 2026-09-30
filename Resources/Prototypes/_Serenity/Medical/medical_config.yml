@@ -20,6 +20,10 @@
     Burn:
       slowTier: 2
       slowMultiplier: 0.7
+    # A raging infection saps the strength
+    Infection:
+      slowTier: 3
+      slowMultiplier: 0.8
   maxStackedWoundsPerType: 3
 
 - type: painConfig
@@ -37,6 +41,7 @@
     Bleeding: [5, 12, 25]
     Laceration: [6, 14, 28]
     Puncture: [7, 16, 30]
+    Infection: [3, 8, 15]
   # Felt-pain bands. `threshold` is where the band starts; speedMultiplier and dropChance apply while in it.
   levels:
     Mild:

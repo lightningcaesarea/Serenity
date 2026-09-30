@@ -89,3 +89,12 @@ wound-examine-laceration-3 = [color=#FF2B2B]{ CAPITALIZE(POSS-ADJ($target)) } bo
 wound-examine-puncture-1 = [color=#FFB8B8]{ CAPITALIZE(SUBJECT($target)) } { CONJUGATE-HAVE($target) } a small puncture wound.[/color]
 wound-examine-puncture-2 = [color=#FF7070]{ CAPITALIZE(SUBJECT($target)) } { CONJUGATE-HAVE($target) } deep puncture wounds.[/color]
 wound-examine-puncture-3 = [color=#FF2B2B]{ CAPITALIZE(SUBJECT($target)) } { CONJUGATE-HAVE($target) } been run clean through.[/color]
+
+# Infection
+wound-infection-1 = Early Infection
+wound-infection-2 = Spreading Infection
+wound-infection-3 = Septic Infection
+
+wound-examine-infection-1 = [color=#C8D27A]{ CAPITALIZE(POSS-ADJ($target)) } skin is flushed and warm around an old wound.[/color]
+wound-examine-infection-2 = [color=#B9C24A]{ CAPITALIZE(SUBJECT($target)) } { CONJUGATE-HAVE($target) } a feverish sheen and an angry, swollen wound.[/color]
+wound-examine-infection-3 = [color=#8FA01E]{ CAPITALIZE(SUBJECT($target)) } { CONJUGATE-BE($target) } gravely ill, sweating and septic.[/color]

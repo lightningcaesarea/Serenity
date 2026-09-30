@@ -69,6 +69,14 @@ public sealed partial class WoundRegenSystem : EntitySystem
             if (wound.NextDecayTime > now)
                 continue;
 
+            // Some wounds (infection) don't heal by themselves; their own system moves them along
+            if (_proto.TryIndex(wound.WoundTypeId, out var woundType)
+                && _proto.TryIndex(woundType.Category, out var category)
+                && !category.Decays)
+            {
+                continue;
+            }
+
             if (wound.Tier <= 1)
             {
                 _wound.RemoveWoundAt(comp, i);

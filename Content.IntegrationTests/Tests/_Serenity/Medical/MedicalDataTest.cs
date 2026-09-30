@@ -27,6 +27,7 @@ public sealed class MedicalDataTest
         WoundCategoryIds.Burn,
         WoundCategoryIds.Laceration,
         WoundCategoryIds.Puncture,
+        WoundCategoryIds.Infection,
     ];
 
     private static readonly ProtoId<AlertPrototype> PainAlert = "Pain";
@@ -73,15 +74,22 @@ public sealed class MedicalDataTest
                     if (category != null)
                         Assert.That(category.Derived, Is.False, $"{wound.ID} is in derived category {category.ID}, which can't hold wound entries");
 
-                    Assert.That(wound.Damage, Is.Not.Empty, $"{wound.ID} is caused by no damage type");
-                    foreach (var (type, weight) in wound.Damage)
+                    if (category is { DamageTriggered: false })
                     {
-                        Assert.That(proto.HasIndex<DamageTypePrototype>(type), $"{wound.ID} uses unknown damage type {type}");
-                        Assert.That(weight, Is.GreaterThan(0f), $"{wound.ID} weight for {type} must be positive");
+                        Assert.That(wound.Damage, Is.Empty, $"{wound.ID} is in {category.ID}, which damage never causes, so it must list no damage types");
                     }
+                    else
+                    {
+                        Assert.That(wound.Damage, Is.Not.Empty, $"{wound.ID} is caused by no damage type");
+                        foreach (var (type, weight) in wound.Damage)
+                        {
+                            Assert.That(proto.HasIndex<DamageTypePrototype>(type), $"{wound.ID} uses unknown damage type {type}");
+                            Assert.That(weight, Is.GreaterThan(0f), $"{wound.ID} weight for {type} must be positive");
+                        }
 
-                    Assert.That(wound.Thresholds, Has.Length.EqualTo(TierCount), $"{wound.ID} needs {TierCount} thresholds");
-                    Assert.That(wound.Thresholds, Is.Ordered.Ascending, $"{wound.ID} thresholds must increase with tier");
+                        Assert.That(wound.Thresholds, Has.Length.EqualTo(TierCount), $"{wound.ID} needs {TierCount} thresholds");
+                        Assert.That(wound.Thresholds, Is.Ordered.Ascending, $"{wound.ID} thresholds must increase with tier");
+                    }
 
                     for (var tier = 1; tier <= TierCount; tier++)
                     {

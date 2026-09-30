@@ -24,6 +24,7 @@ public sealed class WoundSurgeryTest
         ("SurgeryTreatBurns", WoundCategoryIds.Burn, "HeatBurn"),
         ("SurgeryTreatLacerations", WoundCategoryIds.Laceration, "SlashLaceration"),
         ("SurgeryTreatPunctures", WoundCategoryIds.Puncture, "PiercingPuncture"),
+        ("SurgeryDrainInfection", WoundCategoryIds.Infection, "Infection"),
     ];
 
     [Test]

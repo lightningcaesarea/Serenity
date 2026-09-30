@@ -13,4 +13,5 @@ public static class WoundCategoryIds
     public static readonly ProtoId<WoundCategoryPrototype> Burn = "Burn";
     public static readonly ProtoId<WoundCategoryPrototype> Laceration = "Laceration";
     public static readonly ProtoId<WoundCategoryPrototype> Puncture = "Puncture";
+    public static readonly ProtoId<WoundCategoryPrototype> Infection = "Infection";
 }
