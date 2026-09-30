@@ -4,6 +4,7 @@
   - HideSpawnMenu
   components:
   - type: SurgeryStep
+  - type: SurgeryStepDirtiness # Serenity: every step dirties tools and gloves
 
 - type: entity
   parent: SurgeryStepBase
