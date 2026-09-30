@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "By AraiMaia for FunkyStation (funky-station/funky-station, _RMC14/Structures/Machines/Medical/iv_drip.rsi), copied into Serenity. Flatpack state omitted.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "hooked"
+    },
+    {
+      "name": "unhooked"
+    },
+    {
+      "name": "empty"
+    },
+    {
+      "name": "reagent100"
+    },
+    {
+      "name": "reagent80"
+    },
+    {
+      "name": "reagent75"
+    },
+    {
+      "name": "reagent50"
+    },
+    {
+      "name": "reagent25"
+    },
+    {
+      "name": "reagent10"
+    },
+    {
+      "name": "reagent0"
+    }
+  ]
+}

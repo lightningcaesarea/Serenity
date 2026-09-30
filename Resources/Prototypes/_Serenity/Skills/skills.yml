@@ -47,6 +47,9 @@
   - events: [ HealingDoAfterEvent ]
     skilled: 0.75
     unskilled: 1.25
+  # Setting an IV line; switching it between injecting and drawing is checked in IVSystem.
+  - events: [ IVAttachDoAfterEvent ]
+    required: true
 
 - type: skill
   id: Surgery
