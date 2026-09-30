@@ -1,3 +1,4 @@
+using Content.Shared._Serenity.Medical.Wounds;
 using Content.Shared.Damage.Prototypes;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.Manager.Attributes;
@@ -68,6 +69,74 @@ public sealed partial class SterilityConfigPrototype : IPrototype
     [DataField]
     public ProtoId<DamageTypePrototype> SepsisDamageType = "Poison";
 
+    // Infection
+
+    /// <summary>
+    /// The wound type added for an infection, and its category (whose wounds never heal by themselves).
+    /// </summary>
+    [DataField]
+    public ProtoId<WoundTypePrototype> InfectionWound = "Infection";
+
+    [DataField]
+    public ProtoId<WoundCategoryPrototype> InfectionCategory = "Infection";
+
+    /// <summary>
+    /// Seconds between infection updates on the server (progression, symptoms, new infections from open wounds).
+    /// </summary>
+    [DataField]
+    public float InfectionTickSeconds = 5f;
+
+    /// <summary>
+    /// An operation with a total dirtiness above this can infect the patient: the chance is
+    /// <c>(dirtiness - threshold) × SurgeryInfectionChancePerDirt</c>, at most <see cref="SurgeryInfectionMaxChance"/>.
+    /// Independent of the sepsis damage, so a dirty operation can do both.
+    /// </summary>
+    [DataField]
+    public float SurgeryInfectionThreshold = 30f;
+
+    [DataField]
+    public float SurgeryInfectionChancePerDirt = 0.01f;
+
+    [DataField]
+    public float SurgeryInfectionMaxChance = 0.9f;
+
+    /// <summary>
+    /// Untreated open wounds can become infected. Each update an open wound of one of these categories at
+    /// <c>minTier</c> or worse adds <c>chancePerTier × tier</c> to the chance of a new infection.
+    /// </summary>
+    [DataField]
+    public Dictionary<ProtoId<WoundCategoryPrototype>, OpenWoundInfectionRisk> OpenWounds = new();
+
+    /// <summary>
+    /// Seconds an untreated infection stays at tier 1, 2 and 3 before getting worse. The last entry is unused:
+    /// tier 3 is as bad as it gets.
+    /// </summary>
+    [DataField]
+    public float[] EscalationSeconds = [150f, 150f, 0f];
+
+    /// <summary>
+    /// Seconds per tier an infection takes to get better while an antibiotic is active.
+    /// </summary>
+    [DataField]
+    public float RegressionSeconds = 60f;
+
+    /// <summary>
+    /// Poison damage per infection update at infection tier 1, 2 and 3.
+    /// </summary>
+    [DataField]
+    public float[] SymptomDamage = [0f, 0.25f, 0.6f];
+
+    /// <summary>
+    /// Chance that an operation with this total dirtiness infects the patient.
+    /// </summary>
+    public float SurgeryInfectionChance(float totalDirtiness)
+    {
+        if (totalDirtiness <= SurgeryInfectionThreshold)
+            return 0f;
+
+        return Math.Min((totalDirtiness - SurgeryInfectionThreshold) * SurgeryInfectionChancePerDirt, SurgeryInfectionMaxChance);
+    }
+
     /// <summary>
     /// Damage done to a patient by an operation with the given total dirtiness; 0 at or below the threshold.
     /// </summary>
@@ -79,4 +148,20 @@ public sealed partial class SterilityConfigPrototype : IPrototype
         var excess = totalDirtiness - SepsisThreshold;
         return Math.Min(SepsisBaseDamage + excess * excess / SepsisDamageDivisor, SepsisMaxDamage);
     }
+}
+
+[DataDefinition]
+public sealed partial class OpenWoundInfectionRisk
+{
+    /// <summary>
+    /// Wounds below this tier are too minor to get infected.
+    /// </summary>
+    [DataField]
+    public int MinTier = 2;
+
+    /// <summary>
+    /// Chance per infection update, per tier of the wound.
+    /// </summary>
+    [DataField]
+    public float ChancePerTier = 0.004f;
 }

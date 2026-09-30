@@ -19,18 +19,19 @@ public sealed partial class WoundTypePrototype : IPrototype
     public ProtoId<WoundCategoryPrototype> Category;
 
     /// <summary>
-    /// The damage types that cause this wound, each with a weight. A hit's <em>score</em> is the sum of
+    /// The damage types that cause this wound, each with a weight. Empty for wounds of a category that damage never
+    /// causes (<see cref="WoundCategoryPrototype.DamageTriggered"/> false). A hit's <em>score</em> is the sum of
     /// <c>weight × damage dealt</c> over these types, so several damage types in one hit combine, and one wound
     /// type can respond to more than one kind of damage.
     /// </summary>
-    [DataField(required: true)]
+    [DataField]
     public Dictionary<ProtoId<DamageTypePrototype>, float> Damage = new();
 
     /// <summary>
     /// Hit score needed for tier 1, 2 and 3.
     /// </summary>
-    [DataField(required: true)]
-    public float[] Thresholds = new float[WoundsConstants.MaxWoundTier];
+    [DataField]
+    public float[] Thresholds = [];
 
     /// <summary>
     /// The score of a hit that dealt <paramref name="delta"/>: damage of a type this wound ignores adds nothing.

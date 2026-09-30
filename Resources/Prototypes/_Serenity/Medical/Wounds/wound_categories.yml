@@ -26,3 +26,11 @@
 - type: woundCategory
   id: Puncture
   examineLoc: wound-examine-puncture
+
+# Never heals by itself and is never caused by damage: it is added by unsterile surgery or by an untreated open
+# wound, and progresses (or, on an antibiotic, recedes) on its own timer. See sterility_config.yml.
+- type: woundCategory
+  id: Infection
+  decays: false
+  damageTriggered: false
+  examineLoc: wound-examine-infection

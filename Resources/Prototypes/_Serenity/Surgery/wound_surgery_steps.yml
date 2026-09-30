@@ -114,3 +114,45 @@
     state: cautery
   - type: SurgeryStepClearWoundEffect
     category: Puncture
+
+# Infection
+- type: entity
+  parent: SurgeryStepBase
+  id: SurgeryStepLanceInfection
+  name: Lance the infected tissue
+  components:
+  - type: SurgeryStep
+    duration: 4
+    tools:
+    - type: Scalpel
+  - type: Sprite
+    sprite: Objects/Specific/Medical/Surgery/scalpel.rsi
+    state: scalpel
+  - type: SurgeryStepEmoteEffect
+
+- type: entity
+  parent: SurgeryStepBase
+  id: SurgeryStepDrainInfection
+  name: Drain the infection
+  components:
+  - type: SurgeryStep
+    tools:
+    - type: Hemostat
+  - type: Sprite
+    sprite: _Starlight/Objects/Specific/Medical/scissors.rsi
+    state: hemostat
+
+- type: entity
+  parent: SurgeryStepBase
+  id: SurgeryStepCauterizeInfection
+  name: Cauterize the cleaned wound
+  components:
+  - type: SurgeryStep
+    duration: 3
+    tools:
+    - type: Cautery
+  - type: Sprite
+    sprite: Objects/Specific/Medical/Surgery/cautery.rsi
+    state: cautery
+  - type: SurgeryStepClearWoundEffect
+    category: Infection

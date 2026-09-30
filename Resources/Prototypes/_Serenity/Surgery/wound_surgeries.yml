@@ -92,3 +92,28 @@
     - NeoSlimePerson
     - IPC
     - Doll
+
+# An established infection is cut open and drained; an antibiotic only holds it back.
+- type: entity
+  parent: SurgeryBase
+  id: SurgeryDrainInfection
+  name: Drain Infection
+  components:
+  - type: Surgery
+    requirement:
+    - SurgeryOpenIncision
+    steps:
+    - SurgeryStepLanceInfection
+    - SurgeryStepDrainInfection
+    - SurgeryStepCauterizeInfection
+  - type: SurgeryWoundCondition
+    category: Infection
+  - type: SurgeryPartCondition
+    parts:
+    - Torso
+  - type: SurgerySpeciesCondition
+    speciesBlacklist:
+    - SlimePerson
+    - NeoSlimePerson
+    - IPC
+    - Doll

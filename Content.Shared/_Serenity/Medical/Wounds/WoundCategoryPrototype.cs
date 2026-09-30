@@ -23,6 +23,19 @@ public sealed partial class WoundCategoryPrototype : IPrototype
     public bool Derived;
 
     /// <summary>
+    /// False for wounds that don't heal by themselves (infection): their own system decides how they progress.
+    /// </summary>
+    [DataField]
+    public bool Decays = true;
+
+    /// <summary>
+    /// False for categories that damage never causes; their wounds are only added directly (infection from dirty
+    /// surgery or an untreated open wound). Their wound types list no damage types.
+    /// </summary>
+    [DataField]
+    public bool DamageTriggered = true;
+
+    /// <summary>
     /// HUD alert shown at the mob's worst tier in this category, one icon per tier. No alert if unset.
     /// </summary>
     [DataField]

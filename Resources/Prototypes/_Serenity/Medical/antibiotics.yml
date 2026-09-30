@@ -1,0 +1,48 @@
+# An antibiotic holds an infection back and slowly clears it, and prevents new ones while it lasts. It does not
+# cure an established tier 3 infection quickly: draining it in surgery does.
+- type: entity
+  parent: MobStatusEffectBase
+  id: StatusEffectAntibiotic
+  name: antibiotic
+  components:
+  - type: StatusEffect
+    whitelist:
+      components:
+      - Wound
+
+- type: reagent
+  id: Antibiox
+  name: reagent-name-antibiox
+  group: Medicine
+  desc: reagent-desc-antibiox
+  physicalDesc: reagent-physical-desc-powdery
+  flavor: bitter
+  color: "#c9e6a3"
+  metabolisms:
+    Bloodstream:
+      effects:
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectAntibiotic
+        time: 90
+        type: Update
+      # Overdose
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentCondition
+          reagent: Antibiox
+          min: 30
+        damage:
+          types:
+            Poison: 1
+
+- type: reaction
+  id: Antibiox
+  reactants:
+    Dylovene:
+      amount: 1
+    Sulfur:
+      amount: 1
+    Ethanol:
+      amount: 1
+  products:
+    Antibiox: 2

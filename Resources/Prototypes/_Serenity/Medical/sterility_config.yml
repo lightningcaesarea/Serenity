@@ -19,3 +19,28 @@
   sepsisDamageDivisor: 200
   sepsisMaxDamage: 12
   sepsisDamageType: Poison
+
+  # Infection. An operation with total dirtiness above surgeryInfectionThreshold can infect the patient, with
+  # chance (dirtiness - threshold) * surgeryInfectionChancePerDirt (at most surgeryInfectionMaxChance), on top of
+  # any sepsis damage. An antibiotic prevents new infections.
+  infectionTickSeconds: 5
+  surgeryInfectionThreshold: 30
+  surgeryInfectionChancePerDirt: 0.01
+  surgeryInfectionMaxChance: 0.9
+  # Untreated open wounds can get infected: each update, a wound at minTier or worse adds chancePerTier * tier.
+  openWounds:
+    Laceration:
+      minTier: 2
+      chancePerTier: 0.004
+    Puncture:
+      minTier: 2
+      chancePerTier: 0.005
+    Burn:
+      minTier: 2
+      chancePerTier: 0.003
+  # Seconds untreated at tier 1 and 2 before getting worse (the last entry is unused: tier 3 is the worst).
+  escalationSeconds: [150, 150, 0]
+  # Seconds per tier to recede while an antibiotic is active.
+  regressionSeconds: 60
+  # Poison damage per update at tier 1, 2 and 3.
+  symptomDamage: [0, 0.25, 0.6]

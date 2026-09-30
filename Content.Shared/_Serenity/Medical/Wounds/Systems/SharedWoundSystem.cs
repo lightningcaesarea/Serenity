@@ -88,6 +88,10 @@ public abstract partial class SharedWoundSystem : EntitySystem
         var multiplier = ClampThresholdMultiplier(comp.ThresholdMultiplier);
         foreach (var woundProto in _woundTypes)
         {
+            // Wounds that damage never causes (infection) have nothing to score
+            if (woundProto.Damage.Count == 0)
+                continue;
+
             var tier = woundProto.TierFor(woundProto.Score(args.DamageDelta) / multiplier);
             if (tier > 0)
                 changed |= ApplyWound(comp, woundProto, tier);
@@ -191,6 +195,20 @@ public abstract partial class SharedWoundSystem : EntitySystem
     public void SetBleedSource(WoundComponent comp, string? damageType)
     {
         comp.BleedSourceDamageType = damageType;
+    }
+
+    /// <summary>
+    /// Removes a wound entry, syncs it to clients and lets listeners (alerts, movement, pain) react.
+    /// Returns false if the mob doesn't have that entry.
+    /// </summary>
+    public bool RemoveWound(EntityUid uid, WoundComponent comp, WoundEntry entry)
+    {
+        if (!comp.ActiveWounds.Remove(entry))
+            return false;
+
+        Dirty(uid, comp);
+        RaiseLocalEvent(uid, new WoundsClearedEvent());
+        return true;
     }
 
     /// <summary>
