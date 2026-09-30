@@ -72,3 +72,20 @@ alerts-wound-burn-desc = { $severity ->
     [1] You have [color=red]severe burns[/color]. The pain is [color=yellow]slowing you down[/color].
     *[2] You're [color=red]badly burned[/color]. Every step is agony and your movement is [color=yellow]slowed[/color].
 }
+
+# Laceration and puncture wounds
+wound-slashlaceration-1 = Shallow Cut
+wound-slashlaceration-2 = Deep Laceration
+wound-slashlaceration-3 = Gaping Wound
+
+wound-piercingpuncture-1 = Puncture Wound
+wound-piercingpuncture-2 = Deep Puncture
+wound-piercingpuncture-3 = Penetrating Wound
+
+wound-examine-laceration-1 = [color=#FFB8B8]{ CAPITALIZE(SUBJECT($target)) } { CONJUGATE-HAVE($target) } a few shallow cuts.[/color]
+wound-examine-laceration-2 = [color=#FF7070]{ CAPITALIZE(SUBJECT($target)) } { CONJUGATE-HAVE($target) } deep, open lacerations.[/color]
+wound-examine-laceration-3 = [color=#FF2B2B]{ CAPITALIZE(POSS-ADJ($target)) } body is laid open by gaping wounds.[/color]
+
+wound-examine-puncture-1 = [color=#FFB8B8]{ CAPITALIZE(SUBJECT($target)) } { CONJUGATE-HAVE($target) } a small puncture wound.[/color]
+wound-examine-puncture-2 = [color=#FF7070]{ CAPITALIZE(SUBJECT($target)) } { CONJUGATE-HAVE($target) } deep puncture wounds.[/color]
+wound-examine-puncture-3 = [color=#FF2B2B]{ CAPITALIZE(SUBJECT($target)) } { CONJUGATE-HAVE($target) } been run clean through.[/color]

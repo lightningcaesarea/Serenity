@@ -1,3 +1,4 @@
+using System.Linq;
 using Content.Shared.Body.Components;
 using Content.Shared._Serenity.Medical.Damage;
 using Robust.Shared.GameObjects;
@@ -15,27 +16,27 @@ public sealed partial class WoundDisplaySystem : EntitySystem
     [Dependency] private IPrototypeManager _proto = default!;
 
     /// <summary>
-    /// Updates which damage type (Slash or Piercing) is the bleed source for display.
-    /// Prefers Slash on tie.
+    /// Records <paramref name="damageType"/> as the mob's bleed source if it is one of the config's
+    /// <see cref="WoundConfigPrototype.BleedSources"/> and doesn't rank below the source already recorded
+    /// (earlier in the list wins). Returns true if the recorded source changed.
     /// </summary>
-    public bool UpdateBleedSource(WoundComponent comp, string damageType, float amount)
+    public bool UpdateBleedSource(WoundComponent comp, string damageType)
     {
-        var prev = comp.BleedSourceDamageType;
+        var sources = _proto.Index(comp.Config).BleedSources;
+        var rank = sources.FindIndex(source => source == damageType);
+        if (rank < 0)
+            return false;
 
-        if (prev == null)
+        var previous = comp.BleedSourceDamageType;
+        if (previous != null)
         {
-            comp.BleedSourceDamageType = damageType;
-        }
-        else if (damageType == DamageTypeIds.Slash.Id)
-        {
-            comp.BleedSourceDamageType = DamageTypeIds.Slash.Id;
-        }
-        else if (prev != DamageTypeIds.Slash.Id)
-        {
-            comp.BleedSourceDamageType = damageType;
+            var previousRank = sources.FindIndex(source => source == previous);
+            if (previousRank >= 0 && previousRank < rank)
+                return false;
         }
 
-        return comp.BleedSourceDamageType != prev;
+        comp.BleedSourceDamageType = damageType;
+        return previous != damageType;
     }
 
     /// <summary>
@@ -73,9 +74,9 @@ public sealed partial class WoundDisplaySystem : EntitySystem
             var bleedTier = GetBleedTier(woundComp, bloodComp);
             if (bleedTier > 0)
             {
-                var source = woundComp.BleedSourceDamageType ?? DamageTypeIds.Slash.Id;
+                var source = woundComp.BleedSourceDamageType ?? _proto.Index(woundComp.Config).BleedSources.FirstOrDefault().Id ?? string.Empty;
                 var locKey = $"wound-bleed-{source.ToLowerInvariant()}-{bleedTier}";
-                result.Add(new WoundDisplayInfo(locKey, bleedTier, WoundCategory.Bleeding));
+                result.Add(new WoundDisplayInfo(locKey, bleedTier, WoundCategoryIds.Bleeding));
             }
         }
 
@@ -83,9 +84,6 @@ public sealed partial class WoundDisplaySystem : EntitySystem
         foreach (var wound in woundComp.ActiveWounds)
         {
             if (!_proto.TryIndex(wound.WoundTypeId, out var proto))
-                continue;
-
-            if (!proto.Names.TryGetValue(wound.Tier, out var name))
                 continue;
 
             var locKey = $"wound-{proto.ID.ToLowerInvariant()}-{wound.Tier}";
@@ -96,7 +94,7 @@ public sealed partial class WoundDisplaySystem : EntitySystem
         result.Sort((a, b) =>
         {
             var tierCmp = b.Tier.CompareTo(a.Tier);
-            return tierCmp != 0 ? tierCmp : a.Category.CompareTo(b.Category);
+            return tierCmp != 0 ? tierCmp : string.CompareOrdinal(a.Category, b.Category);
         });
 
         return result;

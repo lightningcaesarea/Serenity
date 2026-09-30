@@ -47,7 +47,7 @@ public sealed class PainTest
             // A shattered bone: tier 3 fracture.
             wounds.AddWound(woundComp, new WoundEntry("BluntFracture", 3));
             pain.Recalculate((patient, painComp));
-            Assert.That(painComp.RawPain, Is.EqualTo(config.WoundWeight(WoundCategory.Fracture, 3)));
+            Assert.That(painComp.RawPain, Is.EqualTo(config.WoundWeight(WoundCategoryIds.Fracture, 3)));
             Assert.That(painComp.Level, Is.GreaterThanOrEqualTo(PainLevel.Moderate));
             Assert.That(painComp.Masked, Is.False);
 

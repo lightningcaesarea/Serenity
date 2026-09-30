@@ -1,3 +1,4 @@
+using Robust.Shared.Prototypes;
 using Content.Shared._Starlight.Medical.Surgery;
 using Robust.Shared.GameStates;
 
@@ -14,5 +15,5 @@ namespace Content.Shared._Serenity.Medical.Wounds;
 public sealed partial class SurgeryStepClearWoundEffectComponent : Component
 {
     [DataField(required: true)]
-    public WoundCategory Category;
+    public ProtoId<WoundCategoryPrototype> Category;
 }
