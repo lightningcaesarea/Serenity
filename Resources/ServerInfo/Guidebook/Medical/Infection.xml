@@ -1,0 +1,49 @@
+<Document>
+# Infection and Sterility
+
+An infection is a wound that never heals by itself. Left alone it gets worse tier by tier and poisons the patient. Dirty surgery and untreated open wounds cause it.
+
+## Dirty tools
+Surgical tools and gloves carry a dirtiness from 0 (sterile) to 100. Examine an item to see how clean it looks, and whether it carries traces of other patients' blood.
+
+- Every surgery step adds 4 dirt to each tool used and to the surgeon's gloves, and leaves the patient's DNA on them.
+- Operating without gloves counts as 25 extra dirt, and without a mask 10 extra.
+- Every [italic]other[/italic] patient whose DNA is still on your tools or gloves counts as 60 extra dirt.
+
+Add it all up for one operation:
+- [bold]Over 40 total:[/bold] each step poisons the patient, more the dirtier it is (up to 12 per step).
+- [bold]Over 30 total:[/bold] each step can also infect the patient. The chance is 1% per point above 30, at most 90%.
+
+You will be warned: [italic]"Your dirty tools and gloves are making the patient sick!"[/italic]
+
+## Cleaning up
+Hold [bold]soap[/bold] and click the dirty tool or gloves, or use the [bold]Sanitize[/bold] verb on it. Each wipe takes 3 seconds and removes 25 dirt and one patient's DNA, and it repeats until the item is clean. You need a free hand, and moving interrupts it.
+
+## Open wounds
+An untreated Laceration, Puncture or Burn of tier 2 or worse can become infected, a small chance every 5 seconds (0.4%, 0.5% and 0.3% per tier). Fractures and bleeding do not cause infections. A patient can only have one infection at a time.
+
+## How an infection progresses
+- [bold]Early Infection[/bold] (tier 1): no symptoms. Lasts 150 seconds.
+- [bold]Spreading Infection[/bold] (tier 2): poisons the patient slowly. Lasts 150 seconds.
+- [bold]Septic Infection[/bold] (tier 3): poisons the patient faster and slows them to 80% speed. It is as bad as it gets.
+
+The patient looks flushed, then feverish, then gravely ill when examined. A health analyzer tells you if they are infected.
+
+## Treating it
+[bold]Antibiotics hold an infection back but do not cure it.[/bold] The [bold]Drain Infection[/bold] surgery cures it: after an incision, lance the infected tissue with a scalpel, drain it with a hemostat, and cauterize the wound with a cautery.
+
+<GuideReagentEmbed Reagent="Antibiox"/>
+
+While antibiox is in the blood:
+- New infections are blocked.
+- An existing infection is frozen at its current tier and its symptoms are suppressed. It carries on when the drug wears off.
+- The drug wipes out gut bacteria, leaving the patient with less stamina while it works and for a while afterwards.
+
+[color=red]Overdose (16 units or more):[/color] the patient is poisoned, the protection is lost, and any infection escalates about three times faster. Do not double up on doses.
+
+<Box>
+    <GuideEntityEmbed Entity="AntibioxAutoInjector"/>
+</Box>
+
+The [bold]antibiox auto-injector[/bold] holds a single 15 unit dose, just under the overdose line. It is stocked in the NanoMed Civilian vending machines and in the toxin first aid kit.
+</Document>

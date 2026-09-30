@@ -27,6 +27,22 @@ These medications tend to have specific use cases.
 <GuideReagentEmbed Reagent="Ambuzol"/>
 <GuideReagentEmbed Reagent="Oculine"/>
 
+# Pain Medications
+
+These dull the pain of wounds without healing them. See Wounds, Pain and Surgery.
+
+<GuideReagentEmbed Reagent="Analgesin"/>
+<GuideReagentEmbed Reagent="Antiflam"/>
+<GuideReagentEmbed Reagent="Lidonol"/>
+<GuideReagentEmbed Reagent="Dolorphine"/>
+<GuideReagentEmbed Reagent="Somnacaine"/>
+
+# Antibiotics
+
+Holds infections back but does not cure them. Overdoses make infections worse. See Infection and Sterility.
+
+<GuideReagentEmbed Reagent="Antibiox"/>
+
 # All Medications
 
 This is a list of -all- medications available, including ones previously listed.

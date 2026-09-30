@@ -54,6 +54,7 @@
         - id: SyringeIpecac
         - id: SyringeEthylredoxrazine
         - id: AntiPoisonMedipen
+        - id: AntibioxAutoInjector # Serenity
         - id: PillCanisterDylovene
         - id: PillCanisterCharcoal
 

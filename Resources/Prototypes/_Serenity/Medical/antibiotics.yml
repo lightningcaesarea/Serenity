@@ -1,11 +1,23 @@
 # Antibiox is a broad-spectrum antibiotic: it needs no diagnosis and protects against infection, but it does not
 # cure one. While it is active it blocks new infections, freezes an existing infection at its current tier and
 # suppresses its symptoms. The infection resumes when the drug wears off; draining it in surgery cures it.
-# The price is gut dysbiosis: it saps max stamina while it works and for a while after.
+# The price is gut dysbiosis: it saps max stamina while it works and for a while after. At 16u or more it overdoses:
+# it poisons the patient, stops protecting them, and makes infections escalate faster.
 - type: entity
   parent: MobStatusEffectBase
   id: StatusEffectAntibiotic
   name: antibiotic
+  components:
+  - type: StatusEffect
+    whitelist:
+      components:
+      - Wound
+
+# Applied while overdosed on an antibiotic: cancels the antibiotic's protection and speeds up infections.
+- type: entity
+  parent: MobStatusEffectBase
+  id: StatusEffectAntibioticOverdose
+  name: antibiotic overdose
   components:
   - type: StatusEffect
     whitelist:
@@ -46,15 +58,23 @@
         effectProto: StatusEffectDysbiosis
         time: 240
         type: Update
-      # Overdose
+      # Overdose (16u): poisons the patient, and the drug stops protecting against infection and instead speeds it up
       - !type:HealthChange
         conditions:
         - !type:ReagentCondition
           reagent: Antibiox
-          min: 30
+          min: 16
         damage:
           types:
             Poison: 1.5
+      - !type:ModifyStatusEffect
+        conditions:
+        - !type:ReagentCondition
+          reagent: Antibiox
+          min: 16
+        effectProto: StatusEffectAntibioticOverdose
+        time: 10
+        type: Update
 
 - type: reaction
   id: Antibiox

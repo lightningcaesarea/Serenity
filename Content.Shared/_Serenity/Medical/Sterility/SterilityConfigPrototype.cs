@@ -87,6 +87,13 @@ public sealed partial class SterilityConfigPrototype : IPrototype
     public float InfectionTickSeconds = 5f;
 
     /// <summary>
+    /// How many times faster an infection escalates while the patient is overdosed on an antibiotic. The overdose
+    /// also cancels the antibiotic's protection, so the infection isn't frozen and new ones aren't blocked.
+    /// </summary>
+    [DataField]
+    public float OverdoseProgressionMultiplier = 3f;
+
+    /// <summary>
     /// An operation with a total dirtiness above this can infect the patient: the chance is
     /// <c>(dirtiness - threshold) × SurgeryInfectionChancePerDirt</c>, at most <see cref="SurgeryInfectionMaxChance"/>.
     /// Independent of the sepsis damage, so a dirty operation can do both.

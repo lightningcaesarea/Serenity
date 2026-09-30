@@ -35,6 +35,7 @@
     ChemistryBottleInaprovaline: 3
     Syringe: 3
     PillTricordrazine: 10
+    AntibioxAutoInjector: 2 # Serenity
   contrabandInventory:
     PillCanisterRandom: 1
     StrangePill: 1 # Starlight
@@ -99,6 +100,7 @@
     PillCanisterIron: 1 # Starlight
     PillCanisterCopper: 1 # Starlight
     PillCanisterPotassiumIodide: 1 # Starlight
+    AntibioxAutoInjector: 4 # Serenity
     MedicalRecoveryImplanter: 3 # Serenity — priced via ItemPriceComponent, see medical_recovery_implant.yml
   contrabandInventory:
     PillCanisterRandom: 1

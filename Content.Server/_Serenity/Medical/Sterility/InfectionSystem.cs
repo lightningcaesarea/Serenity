@@ -27,6 +27,11 @@ public sealed partial class InfectionSystem : EntitySystem
     /// </summary>
     public static readonly EntProtoId AntibioticEffect = "StatusEffectAntibiotic";
 
+    /// <summary>
+    /// Status effect an antibiotic overdose applies. It cancels the antibiotic's protection and speeds up infections.
+    /// </summary>
+    public static readonly EntProtoId AntibioticOverdoseEffect = "StatusEffectAntibioticOverdose";
+
     [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private IRobustRandom _random = default!;
@@ -75,9 +80,17 @@ public sealed partial class InfectionSystem : EntitySystem
             TryInfect(ent, ent.Comp);
     }
 
+    /// <summary>
+    /// Whether the mob is protected by an antibiotic. An overdose wipes that protection out.
+    /// </summary>
     public bool HasAntibiotic(EntityUid uid)
     {
-        return _statusEffects.HasStatusEffect(uid, AntibioticEffect);
+        return _statusEffects.HasStatusEffect(uid, AntibioticEffect) && !IsOverdosed(uid);
+    }
+
+    public bool IsOverdosed(EntityUid uid)
+    {
+        return _statusEffects.HasStatusEffect(uid, AntibioticOverdoseEffect);
     }
 
     /// <summary>
@@ -148,6 +161,10 @@ public sealed partial class InfectionSystem : EntitySystem
                 Freeze(infection, now, config);
                 return;
             }
+
+            // An overdose shortens the current tier's timer each update, so the infection escalates faster.
+            if (IsOverdosed(uid) && infection.Tier < WoundsConstants.MaxWoundTier)
+                infection.NextDecayTime -= TimeSpan.FromSeconds(config.InfectionTickSeconds * (config.OverdoseProgressionMultiplier - 1f));
 
             Progress(uid, comp, infection, now, config);
             Symptoms(uid, infection, config);

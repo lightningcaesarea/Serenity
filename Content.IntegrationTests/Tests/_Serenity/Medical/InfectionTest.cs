@@ -161,6 +161,61 @@ public sealed class InfectionTest
     }
 
     /// <summary>
+    /// Overdosing on an antibiotic cancels its protection (no freeze, no symptom suppression, new infections allowed)
+    /// and makes an infection escalate faster than it would untreated.
+    /// </summary>
+    [Test]
+    public async Task AntibioticOverdoseSpeedsUpInfection()
+    {
+        await using var pair = await PoolManager.GetServerClient();
+        var server = pair.Server;
+        var entMan = server.EntMan;
+        var mapData = await pair.CreateTestMap();
+        var infections = entMan.System<InfectionSystem>();
+        var effects = entMan.System<StatusEffectsSystem>();
+        var wounds = entMan.System<SharedWoundSystem>();
+        var config = server.ProtoMan.Index<SterilityConfigPrototype>(SterilityConfigPrototype.DefaultId);
+        var start = server.ResolveDependency<IGameTiming>().CurTime;
+
+        await server.WaitAssertion(() =>
+        {
+            var patient = entMan.SpawnEntity("MobHuman", mapData.GridCoords);
+            var comp = entMan.GetComponent<WoundComponent>(patient);
+
+            Assert.That(effects.TryAddStatusEffectDuration(patient, InfectionSystem.AntibioticEffect, TimeSpan.FromHours(1)));
+            Assert.That(infections.HasAntibiotic(patient), "a plain dose protects");
+
+            Assert.That(effects.TryAddStatusEffectDuration(patient, InfectionSystem.AntibioticOverdoseEffect, TimeSpan.FromHours(1)));
+            Assert.That(infections.IsOverdosed(patient));
+            Assert.That(infections.HasAntibiotic(patient), Is.False, "an overdose cancels the protection");
+
+            // New infections are no longer blocked
+            wounds.AddWound(patient, comp, new WoundEntry("SlashLaceration", 3));
+            Assert.That(infections.OpenWoundInfectionChance(patient, comp), Is.GreaterThan(0f));
+
+            // An existing infection is not frozen: it worsens, and well before its normal delay is up
+            infections.TryInfect(patient, comp);
+            var now = start;
+            Infection(comp).NextDecayTime = now + TimeSpan.FromSeconds(config.EscalationSeconds[0]);
+
+            var elapsed = 0f;
+            while (Infection(comp).Tier == 1 && elapsed < config.EscalationSeconds[0])
+            {
+                now += TimeSpan.FromSeconds(config.InfectionTickSeconds);
+                elapsed += config.InfectionTickSeconds;
+                infections.Tick(patient, comp, now);
+            }
+
+            Assert.That(Infection(comp).Tier, Is.EqualTo(2), "the infection escalated");
+            Assert.That(elapsed, Is.LessThan(config.EscalationSeconds[0] / 2f), "and much faster than untreated");
+
+            entMan.DeleteEntity(patient);
+        });
+
+        await pair.CleanReturnAsync();
+    }
+
+    /// <summary>
     /// Untreated open wounds carry an infection risk that scales with tier; minor wounds, other kinds of wound, an
     /// existing infection and an antibiotic all mean no risk.
     /// </summary>

@@ -1,0 +1,22 @@
+<Document>
+# Medical Recovery
+
+A [bold]medical recovery implant[/bold] brings its carrier's body back to the station. It works once; after it has fired it is spent.
+
+<Box>
+    <GuideEntityEmbed Entity="MedicalRecoveryImplanter"/>
+    <GuideEntityEmbed Entity="MedicalRecoveryBeacon"/>
+    <GuideEntityEmbed Entity="MedicalRecoveryConsole"/>
+    <GuideEntityEmbed Entity="MedicalRecoveryPad"/>
+</Box>
+
+Security Officers and Assistants start with one, and the implanter can be bought from the NanoMed Civilian vending machine.
+
+There are three ways recovery starts. Each one takes about 6 seconds, is announced to Medical on the radio, and the body arrives on a recovery pad.
+
+- [bold]Automatically[/bold] when the carrier dies away from the station map, for example on a shuttle or at an away site. The body goes to a pad on the station.
+- [bold]Recovery beacon:[/bold] use it in your hand. It locks onto the nearest [italic]dead[/italic] carrier within 90 tiles on the same map.
+- [bold]Recovery console:[/bold] click it. It recalls the nearest carrier who is [italic]critical or dead[/italic] within 90 tiles on the same map, to its own linked pad. The console links to the first pad on its grid, so build the pad on the same grid.
+
+If there is no recovery pad on the station the implant is still spent, and Medical is told to notify an administrator.
+</Document>
