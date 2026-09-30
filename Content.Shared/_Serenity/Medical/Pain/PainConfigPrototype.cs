@@ -83,7 +83,7 @@ public sealed partial class PainConfigPrototype : IPrototype
     /// </summary>
     public float WoundWeight(WoundCategory category, int tier)
     {
-        if (tier <= 0 || !WoundWeights.TryGetValue(category, out var weights))
+        if (tier <= 0 || !WoundWeights.TryGetValue(category, out var weights) || weights.Length == 0)
             return 0f;
 
         return weights[Math.Min(tier, weights.Length) - 1];

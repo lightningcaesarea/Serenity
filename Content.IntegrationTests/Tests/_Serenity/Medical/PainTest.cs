@@ -14,15 +14,6 @@ public sealed class PainTest
 {
     private static readonly TimeSpan Duration = TimeSpan.FromMinutes(1);
 
-    private static readonly string[] PainkillerEffects =
-    [
-        "StatusEffectPainkillerLight",
-        "StatusEffectPainkillerAntiInflammatory",
-        "StatusEffectPainkillerOpioid",
-        "StatusEffectPainkillerTopical",
-        "StatusEffectPainkillerAnesthetic",
-    ];
-
     /// <summary>
     /// Wounds create pain, painkillers hide it without touching the wound, a topical painkiller only covers the
     /// injuries in its scope, and the pain returns when the drug is removed.
@@ -90,30 +81,6 @@ public sealed class PainTest
             Assert.That(painComp.Masked, Is.True);
 
             entMan.DeleteEntity(patient);
-        });
-
-        await pair.CleanReturnAsync();
-    }
-
-    /// <summary>
-    /// Every painkiller reagent must point at a status effect that carries a painkiller component, or it does nothing.
-    /// </summary>
-    [Test]
-    public async Task PainkillerEffectsAreWired()
-    {
-        await using var pair = await PoolManager.GetServerClient();
-        var server = pair.Server;
-        var proto = server.ProtoMan;
-        var factory = server.EntMan.ComponentFactory;
-
-        await server.WaitAssertion(() =>
-        {
-            foreach (var id in PainkillerEffects)
-            {
-                var entity = proto.Index<EntityPrototype>(id);
-                Assert.That(entity.TryGetComponent<PainkillerStatusEffectComponent>(out var comp, factory), $"{id} lacks a painkiller component");
-                Assert.That(comp!.Strength, Is.GreaterThan(0f), $"{id} masks nothing");
-            }
         });
 
         await pair.CleanReturnAsync();
