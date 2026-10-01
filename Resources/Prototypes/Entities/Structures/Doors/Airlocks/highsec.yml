@@ -14,7 +14,7 @@
   - type: InteractionOutline
   - type: Sprite
     snapCardinals: true
-    sprite: Structures/Doors/Airlocks/highsec/highsec.rsi
+    sprite: _DV/Structures/Doors/Airlocks/highsec/highsec.rsi
     layers:
     - state: closed
       map: ["enum.DoorVisualLayers.Base"]
@@ -70,11 +70,11 @@
       types:
         Blunt: 50
     openSound:
-      path: /Audio/Machines/airlock_open.ogg
+      path: /Audio/_RMC14/Machines/airlock.ogg
     closeSound:
-      path: /Audio/Machines/airlock_close.ogg
+      path: /Audio/_RMC14/Machines/airlock.ogg
     denySound:
-      path: /Audio/Machines/airlock_deny.ogg
+      path: /Audio/_RMC14/Machines/buzz_two.ogg
   - type: Weldable
     fuel: 10
     time: 10

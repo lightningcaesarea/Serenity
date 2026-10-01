@@ -146,7 +146,7 @@
         board: [ DoorElectronicsTurnstileCentCommDebrief ]
     - type: Turnstile
       denySound:
-        path: /Audio/Machines/airlock_deny.ogg
+        path: /Audio/_RMC14/Machines/buzz_two.ogg
         params:
           maxDistance: 1.5 # Small range to prevent disturbing debrief.
           volume: -7
