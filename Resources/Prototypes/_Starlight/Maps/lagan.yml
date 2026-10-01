@@ -61,7 +61,6 @@
             # Security
             HeadOfSecurity: [ 1, 1 ]
             Warden: [ 1, 1 ]
-            Detective: [ 2, 2 ]
             Brigmedic: [ 2, 2 ]
             SecurityOfficer: [ 12, 12 ]
             SeniorOfficer: [ 1, 1 ] # Serenity
