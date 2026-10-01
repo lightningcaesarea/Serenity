@@ -12,7 +12,7 @@ namespace Content.Client._Serenity.Intimacy;
 /// <summary>
 /// The intimacy window: a soft header, stat bars with their numbers laid right over the fill, one
 /// searchable list of acts per category tab (instead of a button grid), and a climax button at the
-/// bottom. Own layout, loosely inspired by Afterlight's mob-interaction window.
+/// bottom. Own layout.
 /// </summary>
 public sealed partial class IntimacyWindow : DefaultWindow
 {

@@ -1,4 +1,4 @@
-- type: loadout # afterlight start
+- type: loadout # starlight start
   id: CoronerJumpskirt
   equipment:
     jumpsuit: ClothingUniformJumpskirtCoroner

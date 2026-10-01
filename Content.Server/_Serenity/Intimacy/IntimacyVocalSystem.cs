@@ -12,9 +12,8 @@ namespace Content.Server._Serenity.Intimacy;
 
 /// <summary>
 /// Drives <see cref="IntimacyVocalComponent"/>: automatic moans while aroused, pained sounds when
-/// Pain spikes, a blush when acted upon, and a sex-appropriate climax cry. Design follows the
-/// behaviour of Afterlight's mob interactions (thresholds, per-second chance, sex-tiered sounds),
-/// reimplemented on Serenity's intimacy engine.
+/// Pain spikes, a blush when acted upon, and a sex-appropriate climax cry, using thresholds,
+/// a per-second chance and sex-tiered sounds.
 /// </summary>
 public sealed partial class IntimacyVocalSystem : EntitySystem
 {

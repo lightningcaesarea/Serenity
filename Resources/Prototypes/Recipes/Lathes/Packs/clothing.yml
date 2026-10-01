@@ -39,8 +39,8 @@
   - ClothingHeadHatCaptain
   - ClothingUniformJumpsuitCaptain
   - ClothingUniformJumpskirtCaptain
-  - ClothingUniformJumpsuitCapTurtleneck # afterlight
-  - ClothingUniformJumpskirtCapTurtleneck # afterlight
+  - ClothingUniformJumpsuitCapTurtleneck # starlight
+  - ClothingUniformJumpskirtCapTurtleneck # starlight
   - ClothingUniformJumpsuitCapFormal
   - ClothingUniformJumpskirtCapFormalDress
   # HoP
@@ -48,16 +48,16 @@
   - ClothingHeadHatHopCapFormal # DeltaV
   - ClothingUniformJumpsuitHoP
   - ClothingUniformJumpskirtHoP
-  - ClothingUniformJumpsuitHoPTurtleneck # afterlight
-  - ClothingUniformJumpskirtHoPTurtleneck # afterlight
+  - ClothingUniformJumpsuitHoPTurtleneck # starlight
+  - ClothingUniformJumpskirtHoPTurtleneck # starlight
   - ClothingUniformJumpsuitHopFormal # DeltaV
   - ClothingUniformJumpskirtHopFormal # DeltaV
-  # BSO ## afterlight start
+  # BSO ## starlight start
   - ClothingUniformJumpskirtBlueShield
   - ClothingUniformJumpskirtEliteBlueShield
   - ClothingUniformJumpsuitBlueShield
   - ClothingUniformJumpsuitEliteBlueShield
-  - ClothingUniformJumpsuitFormalBlueShield # afterlight end
+  - ClothingUniformJumpsuitFormalBlueShield # starlight end
   - ClothingUniformJumpsuitBlueShieldShirt # starlight start
   - ClothingUniformJumpskirtBlueShieldSkirt
   # NTR
@@ -106,10 +106,10 @@
   - ClothingUniformJumpsuitParamedic
   - ClothingUniformJumpskirtParamedic
   - ClothingHeadHatParamedicsoft
-  - ClothingUniformJumpsuitCoroner # afterlight
-  - ClothingUniformJumpsuitCoronerAlt # afterlight
-  - ClothingUniformJumpskirtCoroner # afterlight
-  - ClothingUniformJumpskirtSuitNurse # afterlight
+  - ClothingUniformJumpsuitCoroner # starlight
+  - ClothingUniformJumpsuitCoronerAlt # starlight
+  - ClothingUniformJumpskirtCoroner # starlight
+  - ClothingUniformJumpskirtSuitNurse # starlight
 
 - type: latheRecipePack
   id: ClothingScience
@@ -117,13 +117,13 @@
   - ClothingHeadHatBeretRND
   - ClothingUniformJumpsuitResearchDirector
   - ClothingUniformJumpskirtResearchDirector
-  - ClothingUniformJumpsuitRDClassical # afterlight
-  - ClothingUniformJumpskirtRDClassical # afterlight
+  - ClothingUniformJumpsuitRDClassical # starlight
+  - ClothingUniformJumpskirtRDClassical # starlight
   - ClothingUniformJumpsuitScientist
   - ClothingUniformJumpskirtScientist
   - ClothingUniformJumpsuitSeniorResearcher
   - ClothingUniformJumpskirtSeniorResearcher
-  - ClothingUniformJumpskirtScientistFormal # afterlight
+  - ClothingUniformJumpskirtScientistFormal # starlight
 
 - type: latheRecipePack
   id: ClothingSecurity
@@ -136,8 +136,8 @@
   - ClothingUniformJumpskirtHoS
   - ClothingUniformJumpsuitHosFormal
   - ClothingUniformJumpskirtHosFormal
-  - ClothingUniformJumpsuitHoSBlack # afterlight
-  - ClothingUniformJumpskirtHoSBlack # afterlight
+  - ClothingUniformJumpsuitHoSBlack # starlight
+  - ClothingUniformJumpskirtHoSBlack # starlight
   - ClothingUniformJumpsuitHoSAlt
   - ClothingUniformJumpskirtHoSAlt
   - ClothingUniformJumpsuitHoSBlue

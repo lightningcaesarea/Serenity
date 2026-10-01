@@ -140,7 +140,7 @@ public partial class RadiationSystem
             var rads = 0f;
             foreach (var source in _sources)
             {
-                // Afterlight Edit: Don't apply an artifact's radiation to itself
+                // Starlight Edit: Don't apply an artifact's radiation to itself
                 if (source.Entity.Owner == destUid && HasComp<XenoArtifactComponent>(destUid))
                     continue;
 
