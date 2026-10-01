@@ -1,7 +1,7 @@
 - type: vendingMachineInventory
   id: NanoMedInventory
   startingInventory:
-    HandheldHealthAnalyzer: 1
+    AdvancedHealthAnalyzer: 1 # Serenity: medbay machines stock the advanced analyzer
     ClothingBeltMedical: 2 # Starlight
     ClothingBeltMedicalEMT: 1 # Starlight
     Gauze: 3
@@ -47,7 +47,7 @@
   id: NanoMedPlusInventory
   #region Starlight - reverts Wizden NanoMed inventory changes
   startingInventory:
-    HandheldHealthAnalyzer: 3
+    AdvancedHealthAnalyzer: 3 # Serenity: medbay machines stock the advanced analyzer
     ClothingBeltMedical: 3
     ClothingBeltMedicalEMT: 2
     Gauze: 5
