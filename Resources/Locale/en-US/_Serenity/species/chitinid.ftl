@@ -1,0 +1,53 @@
+species-name-chitinid = Chitinid
+
+chat-speech-verb-name-chitinid = Chitinid
+chat-speech-verb-chitinid-1 = clicks
+chat-speech-verb-chitinid-2 = chitters
+chat-speech-verb-chitinid-3 = buzzes
+
+radiation-store-full = You feel saturated with radiation. Something hard is forming inside you.
+radiation-store-purge = {CAPITALIZE(THE($user))} coughs something up.
+chitinid-radiation-full = Your carapace is saturated with radiation. A stone is forming in your chest.
+chitinid-radiation-purge = {CAPITALIZE(THE($user))} hacks up a glowing stone!
+
+names-chitinid-first-male-dataset-1 = Kzzrit
+names-chitinid-first-male-dataset-2 = Tchakk
+names-chitinid-first-male-dataset-3 = Vrikk
+names-chitinid-first-male-dataset-4 = Zaxit
+names-chitinid-first-male-dataset-5 = Klikt
+names-chitinid-first-male-dataset-6 = Rrhaz
+names-chitinid-first-male-dataset-7 = Tzikkor
+names-chitinid-first-male-dataset-8 = Krell
+names-chitinid-first-male-dataset-9 = Vhaxx
+names-chitinid-first-male-dataset-10 = Chirrik
+names-chitinid-first-male-dataset-11 = Zettik
+names-chitinid-first-male-dataset-12 = Khrask
+names-chitinid-first-male-dataset-13 = Tikkar
+names-chitinid-first-male-dataset-14 = Vrezz
+names-chitinid-first-male-dataset-15 = Kaxxun
+names-chitinid-first-male-dataset-16 = Thrikk
+names-chitinid-first-male-dataset-17 = Zorrik
+names-chitinid-first-male-dataset-18 = Klaxt
+names-chitinid-first-male-dataset-19 = Rikkol
+names-chitinid-first-male-dataset-20 = Chazzt
+
+names-chitinid-first-female-dataset-1 = Ixzi
+names-chitinid-first-female-dataset-2 = Tsiri
+names-chitinid-first-female-dataset-3 = Vexi
+names-chitinid-first-female-dataset-4 = Kizzah
+names-chitinid-first-female-dataset-5 = Rhyssa
+names-chitinid-first-female-dataset-6 = Zhiri
+names-chitinid-first-female-dataset-7 = Tikka
+names-chitinid-first-female-dataset-8 = Klessa
+names-chitinid-first-female-dataset-9 = Vyrri
+names-chitinid-first-female-dataset-10 = Chixa
+names-chitinid-first-female-dataset-11 = Zessi
+names-chitinid-first-female-dataset-12 = Kirra
+names-chitinid-first-female-dataset-13 = Thixi
+names-chitinid-first-female-dataset-14 = Vhessa
+names-chitinid-first-female-dataset-15 = Yrrik
+names-chitinid-first-female-dataset-16 = Sissix
+names-chitinid-first-female-dataset-17 = Kaxi
+names-chitinid-first-female-dataset-18 = Trizza
+names-chitinid-first-female-dataset-19 = Zhyll
+names-chitinid-first-female-dataset-20 = Rikka
