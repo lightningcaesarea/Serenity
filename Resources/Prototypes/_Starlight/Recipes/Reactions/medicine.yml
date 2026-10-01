@@ -1,13 +1,11 @@
 - type: reaction
   id: Amoxla
   impact: Medium
-  minTemp: 540
+  minTemp: 380 # Serenity: just above the 370 K ammonia reaction (was 540, and needed Iron)
   reactants:
     Ammonia:
       amount: 1
     Carbon:
-      amount: 1
-    Iron:
       amount: 1
   products:
     Amoxla: 2
