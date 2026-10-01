@@ -3,12 +3,11 @@ using Robust.Shared.GameStates;
 namespace Content.Shared._Serenity.Medical.Recovery;
 
 /// <summary>
-/// A stationary medical recovery console. Unlike the handheld beacon, this scans for both
-/// Critical AND Dead carriers of a MedicalRecoveryComponent implant — a deliberate rescue tool,
-/// not just a body-recovery one. Delivers to a specific <see cref="LinkedPad"/> rather than any
-/// pad on the map; auto-links to the nearest unlinked MedicalRecoveryPadComponent on the same
-/// grid when it's first initialized. Activated by clicking it (ActivateInWorldEvent), same
-/// immediate-action model as the beacon — no BUI.
+/// A stationary medical recovery console. Unlike the handheld beacon, this sees both Critical
+/// AND Dead carriers of a MedicalRecoveryComponent implant — a deliberate rescue tool, not just a
+/// body-recovery one. Its UI lists every carrier in <see cref="Range"/> on the same map and lets
+/// the operator pick who to recover; they are delivered to <see cref="LinkedPad"/>, which is
+/// auto-linked to the first MedicalRecoveryPadComponent on the same grid at MapInit.
 /// </summary>
 [RegisterComponent, NetworkedComponent]
 public sealed partial class MedicalRecoveryConsoleComponent : Component
@@ -19,9 +18,12 @@ public sealed partial class MedicalRecoveryConsoleComponent : Component
     [DataField]
     public float Range = 90f;
 
+    /// <summary>
+    /// How often an open UI is re-scanned so the target list stays current.
+    /// </summary>
     [DataField]
-    public TimeSpan UseCooldown = TimeSpan.FromSeconds(3);
+    public TimeSpan UiUpdateInterval = TimeSpan.FromSeconds(1);
 
-    [DataField]
-    public TimeSpan NextUseTime = TimeSpan.Zero;
+    [ViewVariables]
+    public TimeSpan NextUiUpdate;
 }

@@ -4,13 +4,16 @@ namespace Content.Shared._Serenity.Medical.Recovery;
 
 /// <summary>
 /// Marks a mob as recoverable via the medical recovery system. Lives on a subdermal implant —
-/// see <c>MedicalRecoveryImplant</c> in Resources/Prototypes/_Serenity/Medical/MedicalRecovery.
+/// see <c>MedicalRecoveryImplant</c> in Resources/Prototypes/_Serenity/Medical/Recovery.
 ///
-/// Two trigger paths: automatically, if the carrier dies while off the round's default station
+/// Three trigger paths: automatically, if the carrier dies while off the round's default station
 /// map (see <see cref="MedicalRecoveryOnTriggerComponent"/>, fired via the vanilla
-/// TriggerOnMobstateChange component); or manually, by a paramedic activating a
-/// <c>MedicalRecoveryBeaconComponent</c> item within range of the body.
+/// TriggerOnMobstateChange component); manually, by a paramedic activating a
+/// <c>MedicalRecoveryBeaconComponent</c> item within range of the body; or from a
+/// <see cref="MedicalRecoveryConsoleComponent"/>'s UI.
 ///
+/// Every path runs the same two phases: <see cref="DeployDuration"/> to deploy the beacon, then a
+/// fulton balloon carries the body to the pad over <see cref="TransitDuration"/>.
 /// </summary>
 [RegisterComponent, NetworkedComponent]
 public sealed partial class MedicalRecoveryComponent : Component
@@ -22,10 +25,9 @@ public sealed partial class MedicalRecoveryComponent : Component
     [DataField]
     public bool Used;
 
-    /// <summary>
-    /// How long the "balloon ascends, gets snagged" animation beat takes before the body actually
-    /// relocates. Gives onlookers/rescuers a window to notice it happening.
-    /// </summary>
     [DataField]
-    public TimeSpan RecoveryDelay = TimeSpan.FromSeconds(6);
+    public TimeSpan DeployDuration = TimeSpan.FromSeconds(5);
+
+    [DataField]
+    public TimeSpan TransitDuration = TimeSpan.FromSeconds(10);
 }

@@ -12,11 +12,11 @@ A [bold]medical recovery implant[/bold] brings its carrier's body back to the st
 
 Marine Troopers and Assistants start with one, and the implanter can be bought from the NanoMed Civilian vending machine.
 
-There are three ways recovery starts. Each one takes about 6 seconds, is announced to Medical on the radio, and the body arrives on a recovery pad.
+Every recovery runs the same way: a beacon deploys on the body for 5 seconds, then a fulton balloon carries it to a recovery pad over 10 seconds. Each step is announced to Medical on the radio. The implant is only spent once the balloon goes up. If the body is put in a container before then, the recovery stops and the implant can be used again.
+
+There are three ways to start one:
 
 - [bold]Automatically[/bold] when the carrier dies away from the station map, for example on a shuttle or at an away site. The body goes to a pad on the station.
 - [bold]Recovery beacon:[/bold] use it in your hand. It locks onto the nearest [italic]dead[/italic] carrier within 90 tiles on the same map.
-- [bold]Recovery console:[/bold] click it. It recalls the nearest carrier who is [italic]critical or dead[/italic] within 90 tiles on the same map, to its own linked pad. The console links to the first pad on its grid, so build the pad on the same grid.
-
-If there is no recovery pad on the station the implant is still spent, and Medical is told to notify an administrator.
+- [bold]Recovery console:[/bold] needs Medical access. It lists every carrier who is [italic]critical or dead[/italic] within 90 tiles on the same map. Press Recover next to a name to bring them to the console's pad. The console shows a progress bar while the beacon deploys and a countdown until they arrive. It links to the first pad on its own grid, so build the pad on the same grid.
 </Document>

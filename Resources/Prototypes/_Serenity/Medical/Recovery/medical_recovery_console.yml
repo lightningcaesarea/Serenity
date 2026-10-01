@@ -1,12 +1,13 @@
-# Stationary recovery console — click to scan for Critical/Dead carriers of a medical recovery implant
-# within range and recall the nearest one to this console's linked pad. See medical_recovery_pad.yml for
-# the pad it links to and MedicalRecoverySystem for the scan/recall logic.
+# Stationary recovery console, built on the medical request computer's look and access. Its UI
+# lists every Critical/Dead carrier of a medical recovery implant within range and recovers the
+# chosen one to this console's linked pad. See medical_recovery_pad.yml for the pad it links to
+# and MedicalRecoverySystem for the scan/recall logic.
 
 - type: entity
-  parent: BaseComputer
+  parent: BaseComputerAiAccess
   id: MedicalRecoveryConsole
   name: medical recovery console
-  description: Scans for critically wounded or dead crew carrying a medical recovery implant and recalls them to its linked recovery pad.
+  description: Tracks crew carrying a medical recovery implant who are critically wounded or dead, and recalls them to its linked recovery pad.
   components:
   - type: Sprite
     layers:
@@ -15,21 +16,29 @@
     - map: ["computerLayerKeyboard"]
       state: generic_keyboard
     - map: ["computerLayerScreen"]
-      state: request
+      state: request-med
     - map: ["computerLayerKeys"]
       state: generic_keys
-    - map: ["enum.WiresVisualLayers.MaintenancePanel"]
+    - map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
       state: generic_panel_open
   - type: MedicalRecoveryConsole
-  - type: ItemSlots
-  - type: ContainerContainer
-    containers:
-      board: !type:Container
-      disk_slot: !type:ContainerSlot
-      pai_slot: !type:ContainerSlot
+  - type: ActivatableUI
+    key: enum.MedicalRecoveryConsoleUiKey.Key
+  - type: ActivatableUIRequiresAccess
+  - type: UserInterface
+    interfaces:
+      enum.MedicalRecoveryConsoleUiKey.Key:
+        type: MedicalRecoveryConsoleBoundUserInterface
+      enum.WiresUiKey.Key:
+        type: WiresBoundUserInterface
+  - type: AccessReader
+    access: [["Medical"]]
   - type: Computer
     board: MedicalRecoveryConsoleCircuitboard
   - type: PointLight
-    radius: 1.5
-    energy: 1.6
-    color: "#c9962e"
+    radius: 2.5
+    energy: 1.5
+    color: "#41e0fc"
+  - type: GuideHelp
+    guides:
+    - MedicalRecovery
