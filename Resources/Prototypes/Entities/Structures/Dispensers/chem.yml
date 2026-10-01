@@ -70,6 +70,20 @@
       Sugar: 2
       Silicon: 5
       Phosphorus: 5
+      # Serenity: the rest of the elements used to come from finite jugs; they are generated from energy too.
+      # A medium power cell holds 720, so a 30u dispense costs 30 x the number here.
+      Nitrogen: 2
+      Sodium: 3
+      Sulfur: 3
+      Chlorine: 3
+      Ethanol: 3
+      Aluminium: 4
+      Potassium: 5
+      Lithium: 5
+      Fluorine: 5
+      Iodine: 5
+      Mercury: 8 # dangerous and rare
+      Radium: 8
   - type: WiresVisuals
   - type: Appearance
   - type: BatteryVisuals
@@ -81,30 +95,8 @@
   parent: ChemDispenserEmpty
   components:
   - type: ReagentDispenser
-  - type: EntityTableContainerFill
-    containers:
-      storagebase: !type:AllSelector
-        children:
-        - id: JugAluminium
-#        - id: JugCarbon
-        - id: JugChlorine
-#        - id: JugCopper
-        - id: JugEthanol
-        - id: JugFluorine
-#        - id: JugSugar
-#        - id: JugHydrogen
-        - id: JugIodine
-#        - id: JugIron
-        - id: JugLithium
-        - id: JugMercury
-        - id: JugNitrogen
-#        - id: JugOxygen
-#        - id: JugPhosphorus
-        - id: JugPotassium
-        - id: JugRadium
-#        - id: JugSilicon
-        - id: JugSodium
-        - id: JugSulfur
+  # Serenity: no jugs. Every reagent the dispenser offers is generated from energy (see generatableReagents above),
+  # so the Filled version starts with an empty jug storage (it still takes jugs of anything exotic).
   # Starlight-start: Filled powercell slot
   - type: PowerCellSlot
     cellSlotId: cell_slot

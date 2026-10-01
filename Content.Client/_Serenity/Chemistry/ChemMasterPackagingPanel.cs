@@ -286,7 +286,7 @@ public sealed partial class ChemMasterPackagingPanel : BoxContainer
             _containerButtons.Add(containerButton);
             _sections.AddChild(containerButton);
 
-            var grid = new GridContainer { Columns = 10 };
+            var grid = new GridContainer { Columns = 8 };
             foreach (var packagingId in section.Packaging)
             {
                 if (!_prototype.TryIndex(packagingId, out var packagingProto))
@@ -296,13 +296,13 @@ public sealed partial class ChemMasterPackagingPanel : BoxContainer
                     ? $"{packagingProto.Name} ({capacity.Value.Int()}u)"
                     : packagingProto.Name;
 
-                var view = new EntityPrototypeView();
+                var view = new EntityPrototypeView { Scale = new Vector2(2, 2) };
                 view.SetPrototype(packagingId);
                 var button = new Button
                 {
                     ToggleMode = true,
                     ToolTip = tooltip,
-                    MinSize = new Vector2(40, 40),
+                    MinSize = new Vector2(72, 72),
                     Children = { view },
                 };
 
