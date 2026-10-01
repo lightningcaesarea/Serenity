@@ -1,8 +1,10 @@
 using Content.Shared._Serenity.Medical.Wounds.Systems;
+using Content.Shared._Starlight.Medical.Body.Part;
 using Robust.Shared.GameObjects;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.Manager.Attributes;
+using Robust.Shared.Timing;
 using Robust.Shared.ViewVariables;
 
 namespace Content.Shared._Serenity.Medical.Wounds;
@@ -50,4 +52,21 @@ public sealed partial class WoundComponent : Component
     /// </summary>
     [DataField, ViewVariables(VVAccess.ReadWrite)]
     public float ThresholdMultiplier = WoundsConstants.DefaultThresholdMultiplier;
+
+    /// <summary>
+    /// The weapon (or projectile, or thrown item) whose hit is about to deal damage, set just before the damage so
+    /// the hit counts as a weapon hit and can use the weapon's <see cref="HitLocationBiasComponent"/>. Only valid
+    /// during <see cref="PendingHitTick"/>. Server only, not saved.
+    /// </summary>
+    [ViewVariables]
+    public EntityUid? PendingHitSource;
+
+    [ViewVariables]
+    public GameTick PendingHitTick;
+
+    /// <summary>
+    /// The body part types the pending hit was aimed at, if the attacker aimed (see <see cref="HitAimConfig"/>).
+    /// </summary>
+    [ViewVariables]
+    public List<BodyPartType>? PendingHitAim;
 }

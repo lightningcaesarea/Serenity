@@ -21,6 +21,12 @@ public sealed partial class WoundEntry
     [DataField]
     public TimeSpan NextDecayTime;
 
+    /// <summary>
+    /// Where on the body the wound is, or null for a wound that affects the whole body.
+    /// </summary>
+    [DataField]
+    public WoundLocation? Location;
+
     public WoundEntry(ProtoId<WoundTypePrototype> woundTypeId, int tier)
     {
         WoundTypeId = woundTypeId;
