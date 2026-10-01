@@ -1,3 +1,4 @@
+using Content.Shared.Damage.Systems;
 using System.Linq;
 using Content.Server._Serenity.Medical.Sterility;
 using Content.Server._Serenity.Medical.Wounds;
@@ -24,7 +25,7 @@ public sealed class InfectionTest
 
     private static float Poison(IEntityManager entMan, EntityUid uid)
     {
-        return entMan.GetComponent<DamageableComponent>(uid).Damage.DamageDict.TryGetValue("Poison", out var poison) ? poison.Float() : 0f;
+        return entMan.System<DamageableSystem>().GetAllDamage(uid).DamageDict.TryGetValue("Poison", out var poison) ? poison.Float() : 0f;
     }
 
     private static WoundEntry Infection(WoundComponent comp)

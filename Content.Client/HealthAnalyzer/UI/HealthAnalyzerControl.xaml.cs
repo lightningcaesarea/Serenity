@@ -26,6 +26,7 @@ namespace Content.Client.HealthAnalyzer.UI;
 [GenerateTypedNameReferences]
 public sealed partial class HealthAnalyzerControl : BoxContainer
 {
+    /* Starlight - replaced health analyzer with custom one
     private readonly IEntityManager _entityManager;
     private readonly SpriteSystem _spriteSystem;
     private readonly IPrototypeManager _prototypes;
@@ -34,10 +35,6 @@ public sealed partial class HealthAnalyzerControl : BoxContainer
     // Starlight-start: Printable health reports.
     public event Action? PrintReportPressed;
 
-    public void SetPrintReportVisible(bool visible)
-    {
-        PrintReportButton.Visible = visible;
-    }
     // Starlight-end
 
     public HealthAnalyzerControl()
@@ -67,12 +64,12 @@ public sealed partial class HealthAnalyzerControl : BoxContainer
             ChemicalsDivider.Visible = false;
             ChemicalsContainer.Visible = false;
             // Starlight end
-            WoundsDivider.Visible = false; // Serenity
-            WoundsContainer.Visible = false; // Serenity
             return;
         }
 
         NoPatientDataText.Visible = false;
+
+        PrintReportButton.Visible = (state.EnablePrint ?? true); // Starlight-edit: Printable health reports.
         PrintReportButton.Disabled = !PrintReportButton.Visible || !(state.ScanMode ?? false) || !(state.CanPrint ?? false); // Starlight-edit: Printable health reports.
         // Scan Mode
 
@@ -121,7 +118,7 @@ public sealed partial class HealthAnalyzerControl : BoxContainer
 
         // Alerts
 
-        var showAlerts = state.Unrevivable == true || state.Bleeding == true || state.InfectionDetected == true; // Serenity
+        var showAlerts = state.Unrevivable == true || state.Bleeding == true;
 
         AlertsDivider.Visible = showAlerts;
         AlertsContainer.Visible = showAlerts;
@@ -145,21 +142,13 @@ public sealed partial class HealthAnalyzerControl : BoxContainer
                 MaxWidth = 300
             });
 
-        if (state.InfectionDetected == true) // Serenity
-            AlertsContainer.AddChild(new RichTextLabel
-            {
-                Text = Loc.GetString("health-analyzer-infection-detected"),
-                Margin = new Thickness(0, 4),
-                MaxWidth = 300
-            });
-
         // Damage Groups
-        /* Starlight begin - old damage group sorting by highest damage
-        var damageSortedGroups =
-            damageable.DamagePerGroup.OrderByDescending(damage => damage.Value)
-                .ToDictionary(x => x.Key, x => x.Value);
-         Starlight end */
-        IReadOnlyDictionary<string, FixedPoint2> damagePerType = damageable.Damage.DamageDict;
+        // Starlight begin - old damage group sorting by highest damage
+        //var damageSortedGroups =
+        //    damageable.DamagePerGroup.OrderByDescending(damage => damage.Value)
+        //        .ToDictionary(x => x.Key, x => x.Value);
+        // Starlight end
+        var damagePerType = damageable.Damage.DamageDict;
         //Starlight begin - Sort damage groups in a fixed order and add metabolizing section
         var sortedGroups = damageable.DamagePerGroup
             .OrderBy(g => HealthAnalyzerFormatting.GetDamageGroupSortKey(g.Key))
@@ -167,14 +156,13 @@ public sealed partial class HealthAnalyzerControl : BoxContainer
             .ToDictionary(g => g.Key, g => g.Value);
 
         DrawChemicals(state.Chemicals);
-        DrawWounds(state.Wounds); // Serenity
         // Starlight end
         DrawDiagnosticGroups(sortedGroups, damagePerType);
     }
     // Starlight-start: Draw Damage Groups in a two column grid in their own boxes.
     private void DrawDiagnosticGroups(
         Dictionary<string, FixedPoint2> groups,
-        IReadOnlyDictionary<string, FixedPoint2> damageDict)
+        IReadOnlyDictionary<ProtoId<DamageTypePrototype>, FixedPoint2> damageDict)
     {
         GroupsContainer.RemoveAllChildren();
 
@@ -412,4 +400,5 @@ public sealed partial class HealthAnalyzerControl : BoxContainer
         return titleRow;
     }
     #endregion
+    */
 }

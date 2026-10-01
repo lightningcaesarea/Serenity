@@ -1,3 +1,4 @@
+using Content.Shared.Damage.Systems;
 using Content.Server._Serenity.Medical.Sterility;
 using Content.Shared._Serenity.Medical.Sterility;
 using Content.Shared.Damage.Components;
@@ -20,7 +21,7 @@ public sealed class SterilityTest
 {
     private static float Poison(IEntityManager entMan, EntityUid uid)
     {
-        return entMan.GetComponent<DamageableComponent>(uid).Damage.DamageDict.TryGetValue("Poison", out var poison) ? poison.Float() : 0f;
+        return entMan.System<DamageableSystem>().GetAllDamage(uid).DamageDict.TryGetValue("Poison", out var poison) ? poison.Float() : 0f;
     }
 
     /// <summary>
