@@ -21,7 +21,7 @@ namespace Content.IntegrationTests.Tests._Serenity.GameRules;
 public sealed class SecretRuleCooldownTest : GameTest
 {
     private static readonly EntProtoId SecretRule = "Secret";
-    private static readonly ProtoId<GamePresetPrototype> NoMinimumPreset = "ShitStation";
+    private const string NoMinimumPreset = "ShitStation";
 
     [TestPrototypes]
     private const string Prototypes = """
@@ -58,7 +58,7 @@ public sealed class SecretRuleCooldownTest : GameTest
         await Pair.RunUntilSynced();
 
         // An earlier round on this server rolled the only preset that needs no players.
-        await server.WaitAssertion(() => cooldowns.ApplyPresetCooldown(prototypes.Index(NoMinimumPreset)));
+        await server.WaitAssertion(() => cooldowns.ApplyPresetCooldown(prototypes.Index(new ProtoId<GamePresetPrototype>(NoMinimumPreset))));
 
         await server.WaitPost(() => ticker.RestartRound());
         await Pair.RunUntilSynced();
@@ -70,7 +70,7 @@ public sealed class SecretRuleCooldownTest : GameTest
             Assert.Multiple(() =>
             {
                 Assert.That(ticker.ReadyPlayerCount(), Is.Zero);
-                Assert.That(cooldowns.TryGetPresetCooldown(NoMinimumPreset, out _), Is.True);
+                Assert.That(cooldowns.TryGetPresetCooldown(new ProtoId<GamePresetPrototype>(NoMinimumPreset), out _), Is.True);
                 Assert.That(ticker.StartGameRule(SecretRule, out var secret), Is.True);
                 Assert.That(server.EntMan.EntityExists(secret), Is.True);
             });
