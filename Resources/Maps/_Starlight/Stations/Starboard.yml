@@ -204296,11 +204296,6 @@ entities:
       anchored: True
     - type: Physics
       bodyType: Static
-  - uid: 28818
-    components:
-    - type: Transform
-      parent: 2
-      pos: 24.5,3.5
 - proto: LockerElectricalSuppliesFilled
   entities:
   - uid: 28819
@@ -255161,7 +255156,7 @@ entities:
     - type: Transform
       parent: 2
       pos: -36.5,-17.5
-- proto: VendingMachineDetDrobe
+- proto: VendingMachineBountyVend
   entities:
   - uid: 36797
     components:
@@ -290939,4 +290934,11 @@ entities:
     - type: Transform
       parent: 2
       pos: -7.695012,71.730644
+- proto: VendingMachineMarinePoliceField
+  entities:
+  - uid: 28818
+    components:
+    - type: Transform
+      parent: 2
+      pos: 24.5,3.5
 ...

@@ -137433,13 +137433,6 @@ entities:
     - type: Transform
       parent: 2
       pos: -39.5,-36.5
-- proto: LockerDetectiveFilled
-  entities:
-  - uid: 20250
-    components:
-    - type: Transform
-      parent: 2
-      pos: -98.5,-33.5
 - proto: LockerElectricalSuppliesFilled
   entities:
   - uid: 20251
@@ -166068,7 +166061,7 @@ entities:
     - type: Transform
       parent: 2
       pos: -46.5,-54.5
-- proto: VendingMachineDetDrobe
+- proto: VendingMachineBountyVend
   entities:
   - uid: 24388
     components:
@@ -184959,4 +184952,11 @@ entities:
     - type: Transform
       parent: 2
       pos: -63.460793,7.7403336
+- proto: VendingMachineMarinePoliceField
+  entities:
+  - uid: 20250
+    components:
+    - type: Transform
+      parent: 2
+      pos: -98.5,-33.5
 ...

@@ -2028,7 +2028,7 @@
 - type: entity
   parent: VendingMachine
   id: VendingMachineDetDrobe
-  categories: [ ShouldMapStation ] # Starlight
+  # Serenity: no longer mapped, the Detective is disabled and BountyVend took its place
   name: DetDrobe
   description: A machine for all your detective needs, as long as you need clothes.
   components:

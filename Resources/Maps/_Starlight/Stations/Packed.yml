@@ -80470,13 +80470,6 @@ entities:
     - type: Transform
       parent: 2
       pos: 75.5,-1.5
-- proto: LockerDetectiveFilled
-  entities:
-  - uid: 11647
-    components:
-    - type: Transform
-      parent: 2
-      pos: 57.5,39.5
 - proto: LockerElectricalSuppliesFilled
   entities:
   - uid: 11648
@@ -99299,7 +99292,7 @@ entities:
     - type: Transform
       parent: 2
       pos: 13.5,3.5
-- proto: VendingMachineDetDrobe
+- proto: VendingMachineBountyVend
   entities:
   - uid: 14384
     components:
@@ -113356,4 +113349,11 @@ entities:
     - type: Transform
       parent: 2
       pos: 71.78979,31.37478
+- proto: VendingMachineMarinePoliceField
+  entities:
+  - uid: 11647
+    components:
+    - type: Transform
+      parent: 2
+      pos: 57.5,39.5
 ...

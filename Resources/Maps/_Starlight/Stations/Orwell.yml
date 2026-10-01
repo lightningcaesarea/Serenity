@@ -149301,11 +149301,6 @@ entities:
     - type: Transform
       parent: 2
       pos: -6.5,-5.5
-  - uid: 22843
-    components:
-    - type: Transform
-      parent: 2
-      pos: -8.5,-2.5
 - proto: LockerEngineerFilledHardsuit
   entities:
   - uid: 22844
@@ -179875,7 +179870,7 @@ entities:
     - type: Transform
       parent: 2
       pos: -62.5,-15.5
-- proto: VendingMachineDetDrobe
+- proto: VendingMachineBountyVend
   entities:
   - uid: 27689
     components:
@@ -202023,4 +202018,11 @@ entities:
     - type: Transform
       parent: 2
       pos: 64.43076,27.440712
+- proto: VendingMachineMarinePoliceField
+  entities:
+  - uid: 22843
+    components:
+    - type: Transform
+      parent: 2
+      pos: -8.5,-2.5
 ...

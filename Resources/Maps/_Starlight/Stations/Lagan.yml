@@ -143477,11 +143477,6 @@ entities:
       pos: 0.5,-31.5
 - proto: LockerDetectiveFilled
   entities:
-  - uid: 21996
-    components:
-    - type: Transform
-      parent: 2
-      pos: -39.5,21.5
   - uid: 21997
     components:
     - type: Transform
@@ -175123,7 +175118,7 @@ entities:
       parent: 2
       rot: 3.141592653589793 rad
       pos: 28.5,-13.5
-- proto: VendingMachineDetDrobe
+- proto: VendingMachineBountyVend
   entities:
   - uid: 27037
     components:
@@ -198374,4 +198369,11 @@ entities:
     - type: Transform
       parent: 2
       pos: 49.27476,63.34703
+- proto: VendingMachineMarinePoliceField
+  entities:
+  - uid: 21996
+    components:
+    - type: Transform
+      parent: 2
+      pos: -39.5,21.5
 ...

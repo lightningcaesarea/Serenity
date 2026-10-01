@@ -155699,11 +155699,6 @@ entities:
     - type: Transform
       parent: 2
       pos: -29.5,-33.5
-  - uid: 23078
-    components:
-    - type: Transform
-      parent: 2
-      pos: -36.5,-32.5
 - proto: LockerElectricalSuppliesFilled
   entities:
   - uid: 23079
@@ -196821,7 +196816,7 @@ entities:
     - type: Transform
       parent: 2
       pos: -46.5,-3.5
-- proto: VendingMachineDetDrobe
+- proto: VendingMachineBountyVend
   entities:
   - uid: 29622
     components:
@@ -256904,4 +256899,11 @@ entities:
     - type: Transform
       parent: 2
       pos: 73.5,4.5
+- proto: VendingMachineMarinePoliceField
+  entities:
+  - uid: 23078
+    components:
+    - type: Transform
+      parent: 2
+      pos: -36.5,-32.5
 ...

@@ -50024,16 +50024,6 @@ entities:
     - type: Transform
       parent: 2
       pos: -18.5,6.5
-- proto: LockerDetectiveFilled
-  entities:
-  - uid: 5756
-    components:
-    - type: Transform
-      parent: 2
-      pos: -16.5,11.5
-    - type: AccessReader
-      accessListsOriginal:
-      - - Detective
 - proto: LockerEngineerFilledHardsuit
   entities:
   - uid: 5757
@@ -63562,7 +63552,7 @@ entities:
     - type: Transform
       parent: 2
       pos: -12.5,10.5
-- proto: VendingMachineDetDrobe
+- proto: VendingMachineBountyVend
   entities:
   - uid: 7466
     components:
@@ -73584,4 +73574,11 @@ entities:
     - type: Transform
       parent: 2
       pos: 5.693084,43.3906
+- proto: VendingMachineMarinePoliceField
+  entities:
+  - uid: 5756
+    components:
+    - type: Transform
+      parent: 2
+      pos: -16.5,11.5
 ...

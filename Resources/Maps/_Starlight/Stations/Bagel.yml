@@ -125401,21 +125401,6 @@ entities:
     - type: Transform
       parent: 2
       pos: 41.5,-10.5
-- proto: LockerDetectiveFilled
-  entities:
-  - uid: 17605
-    components:
-    - type: Transform
-      parent: 2
-      pos: -26.5,-26.5
-    - type: EntityStorage
-      air:
-        temperature: 293.1496
-        volume: 200
-        moles:
-          Oxygen: 1.6495836
-          Nitrogen: 6.2055764
-        immutable: False
 - proto: LockerElectricalSuppliesFilled
   entities:
   - uid: 17606
@@ -156384,7 +156369,7 @@ entities:
     - type: Transform
       parent: 2
       pos: -6.5,21.5
-- proto: VendingMachineDetDrobe
+- proto: VendingMachineBountyVend
   entities:
   - uid: 22158
     components:
@@ -176520,4 +176505,11 @@ entities:
     - type: Transform
       parent: 2
       pos: 22.523067,-13.471564
+- proto: VendingMachineMarinePoliceField
+  entities:
+  - uid: 17605
+    components:
+    - type: Transform
+      parent: 2
+      pos: -26.5,-26.5
 ...

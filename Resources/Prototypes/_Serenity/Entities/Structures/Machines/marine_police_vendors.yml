@@ -1,0 +1,73 @@
+# Marine Police vendors ported from Frontier Station 14 (MIT commit 5be37d18c2,
+# _NF/Entities/Structures/Machines/vending_machines.yml). Both replace the Detective's
+# DetDrobe and locker on the station maps now that the Detective job is disabled.
+# Department issue: free, Marine Police access only, like the MP-Tech.
+
+- type: entity
+  parent: VendingMachine
+  id: VendingMachineBountyVend
+  categories: [ ShouldMapStation ]
+  name: BountyVend
+  description: Essential gear for the space-men on the go. A label reads MARINE POLICE PERSONNEL ONLY.
+  components:
+  - type: VendingMachine
+    pack: BountyVendInventory
+    offState: off
+    brokenState: broken
+    normalState: normal-unshaded
+    showPrices: false
+  - type: SpeakOnUIClosed
+    pack: GenericVendGoodbyes
+  - type: Sprite
+    sprite: _Serenity/Structures/Machines/VendingMachines/bountyvend.rsi
+    layers:
+    - state: "off"
+      map: ["enum.VendingMachineVisualLayers.Base"]
+    - state: "off"
+      map: ["enum.VendingMachineVisualLayers.BaseUnshaded"]
+      shader: unshaded
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: AccessReader
+    access: [["Security"]]
+  - type: PointLight
+    radius: 1.5
+    energy: 1.6
+    color: "#4b93ad"
+
+- type: entity
+  parent: VendingMachine
+  id: VendingMachineMarinePoliceField
+  categories: [ ShouldMapStation ]
+  name: MP Field Supply
+  description: Field equipment for Marine Police patrols and investigations. A label reads MARINE POLICE PERSONNEL ONLY.
+  components:
+  - type: VendingMachine
+    pack: MarinePoliceFieldInventory
+    offState: off
+    brokenState: broken
+    normalState: normal-unshaded
+    showPrices: false
+  - type: DatasetVocalizer
+    dataset: SecTechAds
+  - type: SpeakOnUIClosed
+    pack: SecTechGoodbyes
+  - type: Sprite
+    sprite: _Serenity/Structures/Machines/VendingMachines/mp_field.rsi
+    layers:
+    - state: "off"
+      map: ["enum.VendingMachineVisualLayers.Base"]
+    - state: "off"
+      map: ["enum.VendingMachineVisualLayers.BaseUnshaded"]
+      shader: unshaded
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: AccessReader
+    access: [["Security"]]
+  - type: PointLight
+    radius: 1.5
+    energy: 1.6
+    color: "#4b93ad"
+  - type: GuideHelp
+    guides:
+    - Security
