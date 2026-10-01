@@ -934,6 +934,20 @@
   flavor: salty
   color: "#0064C8"
   metabolisms:
+    # Serenity: drunk, saline only quenches thirst; it is used up in the stomach and never reaches the blood.
+    # Only saline injected straight into the bloodstream (syringe, hypospray, IV line) restores blood level.
+    Digestion:
+      effects:
+        - !type:SatiateThirst
+          factor: 6
+        - !type:HealthChange
+          conditions:
+          - !type:MetabolizerTypeCondition
+            type: [ Avali, Resomi ]
+          damage:
+            types:
+              Caustic: 2
+              Heat: 2
     Bloodstream:
       effects:
         - !type:SatiateThirst  # Starlight - thirst effect changed from Drink to Medicine

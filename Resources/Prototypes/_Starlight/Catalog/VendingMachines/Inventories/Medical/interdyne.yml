@@ -10,7 +10,7 @@
     Gauze: 3
     SyndicateBrutePack: 3
     SyndicateOintment: 3
-    Bloodpack: 3
+    IVBagBlood: 3
     ChemistryBottleEpinephrine: 2
     Syringe: 3
     PillCanisterTricordrazine: 1
@@ -31,7 +31,7 @@
     Tourniquet: 3
     SyndicateBrutePack: 3
     SyndicateOintment: 3
-    Bloodpack: 3
+    IVBagBlood: 3
     ChemistryBottleEpinephrine: 2
     Syringe: 3
     PillTricordrazine: 10
@@ -52,7 +52,7 @@
     Gauze: 5
     SyndicateBrutePack: 5
     SyndicateOintment: 5
-    Bloodpack: 5
+    IVBagBlood: 5
     Tourniquet: 2
     ChemistryBottleEpinephrine: 2
     ChemistryBottleBicaridine: 1
@@ -86,7 +86,7 @@
     Gauze: 3
     SyndicateBrutePack: 5
     SyndicateOintment: 5
-    Bloodpack: 5
+    IVBagBlood: 5
     ChemistryBottleEpinephrine: 2
     Syringe: 5
     BoxBottle: 3
