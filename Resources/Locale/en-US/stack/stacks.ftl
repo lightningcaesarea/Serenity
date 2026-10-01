@@ -123,7 +123,6 @@ stack-ointment = ointment
 stack-aloe-cream = aloe cream
 stack-gauze = gauze
 # stack-brutepack = brutepack # Starlight - we split this out to ours
-stack-bloodpack = bloodpack
 stack-medicated-suture = medicated-suture
 stack-regenerative-mesh = regenerative-mesh
 stack-micro-manipulator = modular machine part

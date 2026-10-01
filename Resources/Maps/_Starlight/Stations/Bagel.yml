@@ -18543,18 +18543,13 @@ entities:
     - type: Transform
       parent: 2
       pos: -49.629227,-28.475441
-- proto: Bloodpack1
+- proto: IVBagBlood
   entities:
   - uid: 1070
     components:
     - type: Transform
       parent: 2
       pos: -64.64623,13.462484
-    - type: UserInterface
-      interfaces:
-        enum.StackCustomSplitUiKey.Key:
-          type: StackCustomSplitBoundUserInterface
-      actors: {}
 - proto: BodyBag
   entities:
   - uid: 1071

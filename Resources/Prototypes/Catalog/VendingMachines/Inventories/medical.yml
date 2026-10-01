@@ -7,7 +7,6 @@
     Gauze: 3
     Brutepack: 3
     Ointment: 3
-    Bloodpack: 3
     IVStand: 2
     IVBagSaline: 4
     IVBagBlood: 3
@@ -31,7 +30,7 @@
     Tourniquet: 3
     Brutepack: 3
     AloeCream: 3 # Currently just a reskin of Ointment but it's something
-    Bloodpack: 3
+    IVBagBlood: 3
     ChemistryBottleInaprovaline: 3
     Syringe: 3
     PillTricordrazine: 10
@@ -54,7 +53,7 @@
     Gauze: 5
     Brutepack: 5
     Ointment: 5
-    Bloodpack: 5
+    IVBagBlood: 5
     Tourniquet: 2
     ChemistryBottleEpinephrine: 3
     ChemistryBottleBicaridine: 1
@@ -91,7 +90,7 @@
     Gauze: 3 # Starlight
     Brutepack: 5
     AloeCream: 5
-    Bloodpack: 5
+    IVBagBlood: 5
     ChemistryBottleInaprovaline: 3 # Starlight
     ChemistryBottleEpinephrine: 3 # Starlight
     Syringe: 5

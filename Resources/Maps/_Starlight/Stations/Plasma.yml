@@ -27277,7 +27277,7 @@ entities:
     - type: Transform
       parent: 2
       pos: -20.5,14.5
-- proto: Bloodpack
+- proto: IVBagBlood
   entities:
   - uid: 2527
     components:
@@ -27286,11 +27286,6 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-    - type: UserInterface
-      interfaces:
-        enum.StackCustomSplitUiKey.Key:
-          type: StackCustomSplitBoundUserInterface
-      actors: {}
   - uid: 2528
     components:
     - type: Transform
@@ -27298,11 +27293,6 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-    - type: UserInterface
-      interfaces:
-        enum.StackCustomSplitUiKey.Key:
-          type: StackCustomSplitBoundUserInterface
-      actors: {}
   - uid: 2529
     components:
     - type: Transform
@@ -27310,11 +27300,6 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-    - type: UserInterface
-      interfaces:
-        enum.StackCustomSplitUiKey.Key:
-          type: StackCustomSplitBoundUserInterface
-      actors: {}
   - uid: 2530
     components:
     - type: Transform
@@ -27322,11 +27307,6 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-    - type: UserInterface
-      interfaces:
-        enum.StackCustomSplitUiKey.Key:
-          type: StackCustomSplitBoundUserInterface
-      actors: {}
 - proto: BlueprintFulton
   entities:
   - uid: 2531

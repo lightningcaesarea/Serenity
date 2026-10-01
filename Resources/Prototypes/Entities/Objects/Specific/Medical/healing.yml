@@ -217,54 +217,6 @@
     count: 1
 
 - type: entity
-  name: blood pack
-  description: Contains a groundbreaking universal blood replacement created by NanoTrasen's advanced medical science. # SL
-  parent: BaseHealingItem
-  id: Bloodpack
-  suffix: Full
-  components:
-  - type: Item
-    heldPrefix: bloodpack
-  - type: Tag
-    tags:
-    - Bloodpack
-  - type: Sprite
-    state: bloodpack
-  - type: Healing
-    damageContainers:
-    - Biological
-    - Hybrid   # Starlight
-    damage:
-      types:
-        Bloodloss: -0.5 #lowers bloodloss damage
-    delay: 1.6 # STARLIGHT
-    modifyBloodLevel: 15 #restores about 5% blood per use on standard humanoids.
-    healingBeginSound:
-      path: "/Audio/Items/Medical/brutepack_begin.ogg"
-      params:
-        volume: 1.0
-        variation: 0.125
-    healingEndSound:
-      path: "/Audio/Items/Medical/brutepack_end.ogg"
-      params:
-        volume: 1.0
-        variation: 0.125
-  - type: Stack
-    stackType: Bloodpack
-    count: 10
-  - type: StackPrice
-    price: 10
-
-- type: entity
-  parent: Bloodpack
-  id: Bloodpack1
-  suffix: Single
-  components:
-  - type: Stack
-    stackType: Bloodpack
-    count: 1
-
-- type: entity
   parent: BaseHealingItem
   id: Tourniquet
   name: tourniquet

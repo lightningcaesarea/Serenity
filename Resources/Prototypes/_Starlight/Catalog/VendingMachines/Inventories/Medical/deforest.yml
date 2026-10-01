@@ -10,7 +10,7 @@
     Gauze: 3
     DeforestBrutePack: 2
     DeforestOintment: 2
-    Bloodpack: 3
+    IVBagBlood: 3
     ChemistryBottleEpinephrine: 3
     Syringe: 3
     PillCanisterTricordrazine: 2
@@ -34,7 +34,7 @@
     Gauze: 3
     DeforestBrutePack: 2
     DeforestOintment: 2
-    Bloodpack: 3
+    IVBagBlood: 3
     ChemistryBottleInaprovaline: 3
     Syringe: 3
     PillTricordrazine: 10
@@ -58,7 +58,7 @@
     Gauze: 4
     DeforestBrutePack: 4
     DeforestOintment: 4
-    Bloodpack: 4
+    IVBagBlood: 4
     Tourniquet: 2
     ChemistryBottleEpinephrine: 3
     ChemistryBottleBicaridine: 1
@@ -101,7 +101,7 @@
     Gauze: 3
     DeforestBrutePack: 4
     DeforestOintment: 4
-    Bloodpack: 5
+    IVBagBlood: 5
     ChemistryBottleInaprovaline: 3
     ChemistryBottleEpinephrine: 3
     Syringe: 5
