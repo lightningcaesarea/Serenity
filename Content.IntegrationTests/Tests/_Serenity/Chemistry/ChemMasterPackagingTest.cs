@@ -78,4 +78,64 @@ public sealed class ChemMasterPackagingTest : InteractionTest
             Assert.That(buffer!.Volume, Is.EqualTo(FixedPoint2.Zero));
         });
     }
+
+    /// <summary>
+    /// A pen injector printed from the ChemMaster is a 25u single-dose injector that holds the packaged reagent.
+    /// </summary>
+    [Test]
+    public async Task PenInjectorPrintsWithPackagedReagent()
+    {
+        await SpawnTarget("ChemMaster");
+        ToggleNeedPower();
+
+        await InteractUsing("Beaker");
+
+        var solutions = Server.System<SharedSolutionContainerSystem>();
+        var slots = Server.System<ItemSlotsSystem>();
+        var chem = STarget!.Value;
+        var beaker = slots.GetItemOrNull(chem, SharedChemMaster.InputSlotName);
+        Assert.That(beaker, Is.Not.Null);
+
+        await Server.WaitPost(() =>
+        {
+            Assert.That(solutions.TryGetFitsInDispenser(beaker!.Value, out var beakerSoln, out _));
+            solutions.TryAddReagent(beakerSoln!.Value, Reagent, FixedPoint2.New(40), out _);
+        });
+
+        await Interact();
+
+        var penSection = -1;
+        await Server.WaitPost(() =>
+        {
+            var packaging = SEntMan.GetComponent<ChemMasterPackagingComponent>(chem);
+            penSection = packaging.Sections.FindIndex(s => s.Name == "Pen Injectors");
+            Assert.That(penSection, Is.GreaterThanOrEqualTo(0), "ChemMaster needs a Pen Injectors section");
+        });
+
+        await SendBui(ChemMasterUiKey.Key,
+            new ChemMasterPackagingTransferMessage(new ReagentId(Reagent, null), FixedPoint2.MaxValue, true));
+        await SendBui(ChemMasterUiKey.Key, new ChemMasterPackagingSelectMessage(penSection, "PenInjectorBrute"));
+        await SendBui(ChemMasterUiKey.Key, new ChemMasterPackagingSetAmountMessage(2));
+        await SendBui(ChemMasterUiKey.Key, new ChemMasterPackagingPrintMessage(""));
+
+        await Server.WaitAssertion(() =>
+        {
+            var pens = 0;
+            var total = FixedPoint2.Zero;
+            var query = SEntMan.AllEntityQueryEnumerator<MetaDataComponent>();
+            while (query.MoveNext(out var uid, out var meta))
+            {
+                if (meta.EntityPrototype?.ID != "PenInjectorBrute")
+                    continue;
+
+                pens++;
+                Assert.That(solutions.TryGetSolution(uid, "hypospray", out _, out var soln), "pen must use the hypospray solution");
+                Assert.That(soln!.MaxVolume, Is.EqualTo(FixedPoint2.New(25)));
+                total += soln.Volume;
+            }
+
+            Assert.That(pens, Is.EqualTo(2));
+            Assert.That(total, Is.EqualTo(FixedPoint2.New(40)), "40u split over two pens");
+        });
+    }
 }

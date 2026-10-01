@@ -82,6 +82,15 @@
       - ChemMasterPatchBurnSmall
       - ChemMasterPatchMedical
       - ChemMasterPatchClown
+    - name: Pen Injectors
+      packaging:
+      - PenInjector
+      - PenInjectorBrute
+      - PenInjectorBurn
+      - PenInjectorToxin
+      - PenInjectorOxygen
+      - PenInjectorRed
+      - PenInjectorDrug
   - type: Physics
     bodyType: Static
   - type: Fixtures
