@@ -30,13 +30,6 @@
 
 - type: stack
   parent: BaseSmallStack
-  id: Bloodpack
-  name: stack-bloodpack
-  icon: { sprite: "/Textures/Objects/Specific/Medical/medical.rsi", state: bloodpack }
-  spawn: Bloodpack
-
-- type: stack
-  parent: BaseSmallStack
   id: MedicatedSuture
   name: stack-medicated-suture
   icon: {sprite: "/Textures/Objects/Specific/Medical/medical.rsi", state: medicated-suture }

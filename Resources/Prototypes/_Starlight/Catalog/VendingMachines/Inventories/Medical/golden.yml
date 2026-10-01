@@ -2,13 +2,13 @@
 - type: vendingMachineInventory
   id: GoldNanoMedInventory
   startingInventory:
-    HandheldHealthAnalyzer: 1
+    AdvancedHealthAnalyzer: 1 # Serenity: medbay machines stock the advanced analyzer
     ClothingBeltMedical: 2
     ClothingBeltMedicalEMT: 1
     Gauze: 2
     GoldBrutePack: 2
     GoldOintment: 2
-    Bloodpack: 2
+    IVBagBlood: 2
     ChemistryBottleEpinephrine: 2
     Syringe: 2
     PillCanisterTricordrazine: 1
@@ -31,7 +31,7 @@
     Tourniquet: 2
     GoldBrutePack: 2
     GoldOintment: 2
-    Bloodpack: 2
+    IVBagBlood: 2
     ChemistryBottleInaprovaline: 2
     Syringe: 2
     PillTricordrazine: 5
@@ -48,13 +48,13 @@
 - type: vendingMachineInventory
   id: GoldNanoMedPlusInventory
   startingInventory:
-    HandheldHealthAnalyzer: 3
+    AdvancedHealthAnalyzer: 3 # Serenity: medbay machines stock the advanced analyzer
     ClothingBeltMedical: 3
     ClothingBeltMedicalEMT: 2
     Gauze: 4
     GoldBrutePack: 4
     GoldOintment: 4
-    Bloodpack: 4
+    IVBagBlood: 4
     Tourniquet: 1
     ChemistryBottleEpinephrine: 2
     ChemistryBottleBicaridine: 1
@@ -92,7 +92,7 @@
     Gauze: 2
     GoldBrutePack: 4
     GoldOintment: 4
-    Bloodpack: 4
+    IVBagBlood: 4
     ChemistryBottleInaprovaline: 2
     ChemistryBottleEpinephrine: 2
     Syringe: 4

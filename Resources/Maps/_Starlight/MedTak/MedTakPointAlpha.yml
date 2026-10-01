@@ -1624,7 +1624,7 @@ entities:
     - type: Transform
       pos: -31.5,7.5
       parent: 1
-- proto: Bloodpack
+- proto: IVBagBlood
   entities:
   - uid: 382
     components:

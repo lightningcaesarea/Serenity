@@ -67,11 +67,11 @@
       types:
         Blunt: 15
     openSound:
-      path: /Audio/Effects/docking.ogg
+      path: /Audio/_RMC14/Machines/airlock.ogg
     closeSound:
-      path: /Audio/Effects/docking.ogg
+      path: /Audio/_RMC14/Machines/airlock.ogg
     denySound:
-      path: /Audio/Machines/airlock_deny.ogg
+      path: /Audio/_RMC14/Machines/buzz_two.ogg
   - type: Airtight
     noAirWhenFullyAirBlocked: false
     airBlockedDirection:

@@ -42,7 +42,7 @@ Many stations are stocked with kits in storage, and all medics have some equipme
 <GuideEntityEmbed Entity="Brutepack"/>
 <GuideEntityEmbed Entity="Ointment"/>
 <GuideEntityEmbed Entity="EmergencyMedipen"/>
-<GuideEntityEmbed Entity="Bloodpack"/>
+<GuideEntityEmbed Entity="IVBagBlood"/>
 <GuideEntityEmbed Entity="Gauze"/>
 </Box>
 

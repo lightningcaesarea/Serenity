@@ -92,8 +92,8 @@
       - id: BottleCaseParamedicFilled
       - id: ZXATankFilled
       - id: MedkitFilled
-      - id: Bloodpack
-      - id: Bloodpack
+      - id: IVBagBlood
+      - id: IVBagBlood
       - id: UniformScrubsColorBlue
       - !type:GroupSelector
         children:

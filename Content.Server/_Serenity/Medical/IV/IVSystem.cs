@@ -10,8 +10,10 @@ using Content.Shared.DoAfter;
 using Content.Shared.DragDrop;
 using Content.Shared.FixedPoint;
 using Content.Shared.Hands;
+using Content.Shared.Hands.Components;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
+using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Popups;
 using Content.Shared.Verbs;
 using Robust.Shared.Containers;
@@ -26,6 +28,7 @@ public sealed partial class IVSystem : SharedIVSystem
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private SharedBloodstreamSystem _bloodstream = default!;
     [Dependency] private SharedChatSystem _chat = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private DamageableSystem _damageable = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
@@ -35,7 +38,8 @@ public sealed partial class IVSystem : SharedIVSystem
     [Dependency] private IGameTiming _timing = default!;
 
     /// <summary>
-    /// A line needs this skill to be set up or switched between injecting and drawing.
+    /// Anyone can set a line, but this skill makes it much faster (<c>skills.yml</c>), lets a line be switched between
+    /// injecting and drawing, and means pulling a line loose just takes it out instead of tearing it.
     /// </summary>
     private const string RequiredSkill = "Medicine";
 
@@ -157,12 +161,16 @@ public sealed partial class IVSystem : SharedIVSystem
     }
 
     /// <summary>
-    /// Takes the line out of the patient. <paramref name="rip"/> is for when it was torn out rather than removed.
+    /// Takes the line out of the patient. <paramref name="rip"/> is for when it was torn out rather than removed,
+    /// and <paramref name="user"/> is then whoever did the tearing: someone who knows Medicine just takes it out cleanly.
     /// </summary>
     public void Detach(Entity<IVLineComponent> line, EntityUid? user, bool rip)
     {
         if (line.Comp.AttachedTo is not { } patient)
             return;
+
+        if (rip && user is { } puller && _skills.HasSkill(puller, RequiredSkill))
+            rip = false;
 
         line.Comp.AttachedTo = null;
         Dirty(line);
@@ -187,7 +195,8 @@ public sealed partial class IVSystem : SharedIVSystem
 
         if (user is { } remover)
         {
-            _popup.PopupEntity(Loc.GetString("iv-detach-others", ("user", Identity.Entity(remover, EntityManager)), ("iv", line.Owner), ("target", target)),
+            var others = remover == patient ? "iv-detach-own-others" : "iv-detach-others";
+            _popup.PopupEntity(Loc.GetString(others, ("user", Identity.Entity(remover, EntityManager)), ("iv", line.Owner), ("target", target)),
                 patient, Filter.PvsExcept(remover), true);
         }
     }
@@ -251,7 +260,7 @@ public sealed partial class IVSystem : SharedIVSystem
 
             if (Deleted(patient) || !InRange(uid, patient, line.Range))
             {
-                Detach((uid, line), null, true);
+                Detach((uid, line), GetPuller(uid, patient), true);
                 continue;
             }
 
@@ -263,6 +272,20 @@ public sealed partial class IVSystem : SharedIVSystem
             if (TryGetBag(uid, out var bag))
                 Transfer((uid, line), bag.Value, patient);
         }
+    }
+
+    /// <summary>
+    /// Who is to blame for a line pulling loose: whoever is carrying or pulling it, else the patient walking off.
+    /// </summary>
+    private EntityUid GetPuller(EntityUid line, EntityUid patient)
+    {
+        if (_container.TryGetContainingContainer(line, out var holder) && HasComp<HandsComponent>(holder.Owner))
+            return holder.Owner;
+
+        if (TryComp<PullableComponent>(line, out var pullable) && pullable.Puller is { } puller)
+            return puller;
+
+        return patient;
     }
 
     private void Transfer(Entity<IVLineComponent> line, Entity<IVBagComponent> bag, EntityUid patient)

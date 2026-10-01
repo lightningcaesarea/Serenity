@@ -47,9 +47,10 @@
   - events: [ HealingDoAfterEvent ]
     skilled: 0.75
     unskilled: 1.25
-  # Setting an IV line; switching it between injecting and drawing is checked in IVSystem.
+  # Anyone can set an IV line, but it takes much longer without Medicine. Switching it between injecting and
+  # drawing, and pulling one out without tearing it, are checked in IVSystem.
   - events: [ IVAttachDoAfterEvent ]
-    required: true
+    unskilled: 4
 
 - type: skill
   id: Surgery
