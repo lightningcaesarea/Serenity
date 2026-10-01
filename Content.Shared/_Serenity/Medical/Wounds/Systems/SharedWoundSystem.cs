@@ -1,3 +1,5 @@
+using Content.Shared.Body.Components;
+using Content.Shared.Body.Systems;
 using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
 using Content.Shared.Damage.Systems;
@@ -5,6 +7,8 @@ using Content.Shared.Rejuvenate;
 using Content.Shared._Serenity.Medical.Damage;
 using Robust.Shared.GameObjects;
 using Robust.Shared.IoC;
+using Robust.Shared.Network;
+using Robust.Shared.Random;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
@@ -15,6 +19,9 @@ public abstract partial class SharedWoundSystem : EntitySystem
     [Dependency] protected IPrototypeManager _proto = default!;
     [Dependency] protected IGameTiming _timing = default!;
     [Dependency] private WoundDisplaySystem _display = default!;
+    [Dependency] private SharedBodySystem _body = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private INetManager _net = default!;
 
     private readonly List<WoundTypePrototype> _woundTypes = new();
     private readonly List<WoundCategoryPrototype> _categories = new();
@@ -86,6 +93,7 @@ public abstract partial class SharedWoundSystem : EntitySystem
         // can respond to more than one kind of damage. Dividing by ThresholdMultiplier means a multiplier
         // above 1 effectively raises the thresholds.
         var multiplier = ClampThresholdMultiplier(comp.ThresholdMultiplier);
+        List<(WoundTypePrototype Proto, int Tier)>? hits = null;
         foreach (var woundProto in _woundTypes)
         {
             // Wounds that damage never causes (infection) have nothing to score
@@ -94,7 +102,18 @@ public abstract partial class SharedWoundSystem : EntitySystem
 
             var tier = woundProto.TierFor(woundProto.Score(args.DamageDelta) / multiplier);
             if (tier > 0)
-                changed |= ApplyWound(comp, woundProto, tier);
+                (hits ??= new()).Add((woundProto, tier));
+        }
+
+        if (hits != null)
+        {
+            // One hit lands in one place, so every wound it causes is in the same location. Chosen on the server
+            // only: a client's guess would just be replaced by the server's state.
+            var location = _net.IsServer ? PickLocation(uid, _proto.Index(comp.Config)) : null;
+            foreach (var (woundProto, tier) in hits)
+            {
+                changed |= ApplyWound(comp, woundProto, tier, location);
+            }
         }
 
         if (!changed)
@@ -104,34 +123,38 @@ public abstract partial class SharedWoundSystem : EntitySystem
         RaiseLocalEvent(uid, new WoundsDamagedEvent());
     }
 
-    private bool ApplyWound(WoundComponent comp, WoundTypePrototype proto, int tier)
+    private bool ApplyWound(WoundComponent comp, WoundTypePrototype proto, int tier, WoundLocation? location)
     {
         var config = _proto.Index(comp.Config);
 
-        // Try to upgrade an existing wound of this type first
+        // A wound of this type in the same place gets worse; one in a new place is a separate wound
         var existingCount = 0;
+        WoundEntry? sameSpot = null;
         foreach (var wound in comp.ActiveWounds)
         {
             if (wound.WoundTypeId != proto.ID)
                 continue;
 
             existingCount++;
+            if (sameSpot == null && Equals(wound.Location, location))
+                sameSpot = wound;
+        }
 
-            if (wound.Tier < tier)
+        if (sameSpot != null)
+        {
+            if (sameSpot.Tier < tier)
             {
-                wound.Tier = tier;
-                wound.NextDecayTime = _timing.CurTime + config.GetTierDecayDuration(tier);
+                sameSpot.Tier = tier;
+                sameSpot.NextDecayTime = _timing.CurTime + config.GetTierDecayDuration(tier);
                 return true;
             }
 
-            if (wound.Tier < WoundsConstants.MaxWoundTier)
-                return false; // Existing wound is same or higher tier, no action
-
-            // At tier 3, fall through to stack a new wound
-            break;
+            // Already this bad here. Wounds with no location (a mob without a body) can still pile up at the worst tier.
+            if (sameSpot.Tier < WoundsConstants.MaxWoundTier || location != null)
+                return false;
         }
 
-        // Cap stacking at 3 wounds per type
+        // Cap stacking per type
         if (existingCount >= config.MaxStackedWoundsPerType)
             return false;
 
@@ -139,7 +162,68 @@ public abstract partial class SharedWoundSystem : EntitySystem
         comp.ActiveWounds.Add(new WoundEntry(proto.ID, tier)
         {
             NextDecayTime = _timing.CurTime + config.GetTierDecayDuration(tier),
+            Location = location,
         });
+        return true;
+    }
+
+    /// <summary>
+    /// Picks where a hit lands from the config's weighted locations, among the body parts the mob still has.
+    /// Null for a mob with no body or a config with no locations. Uses randomness, so call it on the server.
+    /// </summary>
+    public WoundLocation? PickLocation(EntityUid uid, WoundConfigPrototype config)
+    {
+        if (config.HitLocations.Count == 0 || !HasComp<BodyComponent>(uid))
+            return null;
+
+        var total = 0f;
+        var present = new List<HitLocationWeight>();
+        foreach (var candidate in config.HitLocations)
+        {
+            if (candidate.Weight <= 0f || !HasPart(uid, candidate))
+                continue;
+
+            present.Add(candidate);
+            total += candidate.Weight;
+        }
+
+        if (present.Count == 0)
+            return null;
+
+        var roll = _random.NextFloat() * total;
+        foreach (var candidate in present)
+        {
+            roll -= candidate.Weight;
+            if (roll <= 0f)
+                return new WoundLocation(candidate.Type, candidate.Symmetry);
+        }
+
+        var last = present[^1];
+        return new WoundLocation(last.Type, last.Symmetry);
+    }
+
+    private bool HasPart(EntityUid body, HitLocationWeight location)
+    {
+        foreach (var (_, part) in _body.GetBodyChildrenOfType(body, location.Type))
+        {
+            if (part.Symmetry == location.Symmetry)
+                return true;
+        }
+
+        return false;
+    }
+
+    /// <summary>
+    /// Adds a wound of the given type and tier at a location (or makes an existing one there worse), syncs it and
+    /// lets listeners react. Returns false if nothing changed.
+    /// </summary>
+    public bool TryApplyWound(EntityUid uid, WoundComponent comp, ProtoId<WoundTypePrototype> woundType, int tier, WoundLocation? location)
+    {
+        if (!_proto.TryIndex(woundType, out var proto) || !ApplyWound(comp, proto, tier, location))
+            return false;
+
+        Dirty(uid, comp);
+        RaiseLocalEvent(uid, new WoundsDamagedEvent());
         return true;
     }
 

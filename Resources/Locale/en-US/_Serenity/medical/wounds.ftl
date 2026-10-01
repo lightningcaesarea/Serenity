@@ -104,3 +104,17 @@ health-analyzer-wounds-title = Injuries
 health-analyzer-wound-tier = (tier { $tier })
 health-analyzer-infection-suppressed = An antibiotic is holding the infection back.
 health-analyzer-infection-detected = [color=#b9c24a]Infection detected.[/color]
+
+# Where a wound is
+wound-location-head = head
+wound-location-torso = torso
+wound-location-left-arm = left arm
+wound-location-right-arm = right arm
+wound-location-left-hand = left hand
+wound-location-right-hand = right hand
+wound-location-left-leg = left leg
+wound-location-right-leg = right leg
+wound-location-left-foot = left foot
+wound-location-right-foot = right foot
+wound-location-tail = tail
+wound-location-other = body

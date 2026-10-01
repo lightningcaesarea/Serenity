@@ -87,7 +87,7 @@ public sealed partial class WoundDisplaySystem : EntitySystem
                 continue;
 
             var locKey = $"wound-{proto.ID.ToLowerInvariant()}-{wound.Tier}";
-            result.Add(new WoundDisplayInfo(locKey, wound.Tier, proto.Category));
+            result.Add(new WoundDisplayInfo(locKey, wound.Tier, proto.Category, wound.Location));
         }
 
         // Sort by tier descending, then category

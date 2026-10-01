@@ -1,3 +1,4 @@
+using Content.Shared._Starlight.Medical.Body.Part;
 using Content.Shared.Damage.Prototypes;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.Manager.Attributes;
@@ -42,6 +43,13 @@ public sealed partial class WoundConfigPrototype : IPrototype
     /// </summary>
     [DataField]
     public List<ProtoId<DamageTypePrototype>> BleedSources = new();
+
+    /// <summary>
+    /// Where a damaging hit can land, and how likely each place is. A wound gets one of the locations the mob actually
+    /// has (a missing limb is never picked). Empty means wounds have no location.
+    /// </summary>
+    [DataField]
+    public List<HitLocationWeight> HitLocations = new();
 
     /// <summary>
     /// How many wounds of one type can be active at once.
@@ -89,4 +97,20 @@ public sealed partial class WoundCategoryEffects
 
     [DataField]
     public float DropChance;
+}
+
+[DataDefinition]
+public sealed partial class HitLocationWeight
+{
+    [DataField(required: true)]
+    public BodyPartType Type;
+
+    [DataField]
+    public BodyPartSymmetry Symmetry;
+
+    /// <summary>
+    /// Relative chance of a hit landing here. Only the ratios between locations matter.
+    /// </summary>
+    [DataField(required: true)]
+    public float Weight;
 }

@@ -25,6 +25,20 @@
       slowTier: 3
       slowMultiplier: 0.8
   maxStackedWoundsPerType: 3
+  # Where a damaging hit lands. A wound goes to one of these (only parts the mob still has), weighted by `weight`;
+  # a hit that causes several wounds puts them all in the same place. Wounds of one type in different places are
+  # separate wounds (up to maxStackedWoundsPerType); a worse hit in the same place makes that wound worse.
+  hitLocations:
+  - { type: Head, weight: 8 }
+  - { type: Torso, weight: 36 }
+  - { type: Arm, symmetry: Left, weight: 10 }
+  - { type: Arm, symmetry: Right, weight: 10 }
+  - { type: Hand, symmetry: Left, weight: 3 }
+  - { type: Hand, symmetry: Right, weight: 3 }
+  - { type: Leg, symmetry: Left, weight: 12 }
+  - { type: Leg, symmetry: Right, weight: 12 }
+  - { type: Foot, symmetry: Left, weight: 3 }
+  - { type: Foot, symmetry: Right, weight: 3 }
 
 - type: painConfig
   id: DefaultPain

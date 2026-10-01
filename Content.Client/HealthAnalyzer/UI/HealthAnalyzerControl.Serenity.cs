@@ -37,8 +37,9 @@ public sealed partial class HealthAnalyzerControl
                 2 => "#e6873c",
                 _ => "#dddd77",
             };
+            var where = wound.Location != null ? $" ({Loc.GetString(wound.Location.LocKey)})" : string.Empty;
             label.SetMessage(FormattedMessage.FromMarkupOrThrow(
-                $"[color={color}]{Loc.GetString(wound.LocKey)}[/color]  {Loc.GetString("health-analyzer-wound-tier", ("tier", wound.Tier))}"));
+                $"[color={color}]{Loc.GetString(wound.LocKey)}{where}[/color]  {Loc.GetString("health-analyzer-wound-tier", ("tier", wound.Tier))}"));
             WoundsContainer.AddChild(label);
         }
 
