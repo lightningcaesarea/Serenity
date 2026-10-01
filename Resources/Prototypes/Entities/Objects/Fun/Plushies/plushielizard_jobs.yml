@@ -190,8 +190,8 @@
 - type: entity
   parent: BasePlushieLizardJob
   id: PlushieLizardJobMedicalintern
-  name: medical intern lizard plushie
-  description: An adorable stuffed toy that resembles a lizardperson as a medical intern. It smells faintly of antiseptic.
+  name: nurse lizard plushie
+  description: An adorable stuffed toy that resembles a lizardperson as a nurse. It smells faintly of antiseptic.
   components:
   - type: Sprite
     state: medicalintern

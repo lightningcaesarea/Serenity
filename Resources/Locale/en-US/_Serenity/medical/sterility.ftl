@@ -12,5 +12,8 @@ surgery-cleaning = You start cleaning { THE($target) }.
 
 surgery-unsterile-warning = Your dirty tools and gloves are making the patient sick!
 
+reagent-name-exudate = exudate
+reagent-desc-exudate = A pus-yellow liquid drained from infected tissue. It has no use, and smells like it.
+
 reagent-name-antibiox = antibiox
 reagent-desc-antibiox = A broad-spectrum antibiotic. Needs no diagnosis: it blocks new infections and freezes an existing one where it is, but it does not cure it, and the infection resumes when the drug wears off. Wipes out helpful gut bacteria, leaving the patient weak, and is harmful in large doses: at 16 units or more it poisons the patient, stops protecting them and makes infections spread faster.

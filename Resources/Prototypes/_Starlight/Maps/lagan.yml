@@ -45,11 +45,8 @@
             TechnicalAssistant: [ 3, 3 ]
 
             # Medical
-            ChiefMedicalOfficer: [ 1, 1 ]
-            Chemist: [ 3, 3 ]
             Paramedic: [ 2, 2 ]
-            Psychologist: [ 1, 1 ]
-            MedicalDoctor: [ 8, 8 ]
+            MedicalDoctor: [ 11, 11 ]
             MedicalIntern: [ 4, 4 ]
 
             # Science

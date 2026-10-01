@@ -35,9 +35,7 @@
             StationEngineer: [ 5, 5 ]
             TechnicalAssistant: [ 4, 4 ]
             #medical
-            ChiefMedicalOfficer: [ 1, 1 ]
-            Chemist: [ 2, 2 ]
-            MedicalDoctor: [ 6, 6 ]
+            MedicalDoctor: [ 8, 8 ]
             Paramedic: [ 2, 2 ]
             MedicalIntern: [ 4, 4 ]
             #science

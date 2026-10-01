@@ -1,0 +1,150 @@
+- type: body
+  id: Chitinid
+  name: "chitinid"
+  root: torso
+  slots:
+    head:
+      part: HeadChitinid
+      connections:
+      - torso
+      organs:
+        brain: OrganHumanBrain
+        eyes: OrganHumanEyes
+        tongue: OrganHumanTongue
+        eye_implant: null
+        nose_implant: null
+        brain_implant: null
+    torso:
+      part: TorsoChitinid
+      connections:
+      - right arm
+      - left arm
+      - right leg
+      - left leg
+      organs:
+        heart: OrganAnimalHeart
+        lungs: OrganHumanLungs
+        stomach: OrganAnimalStomach
+        liver: OrganAnimalLiver
+        kidneys: OrganHumanKidneys
+        cavity: null
+    right arm:
+      part: RightArmChitinid
+      connections:
+      - right hand
+    left arm:
+      part: LeftArmChitinid
+      connections:
+      - left hand
+    right hand:
+      part: RightHandChitinid
+      organs:
+        hand_implant: null
+    left hand:
+      part: LeftHandChitinid
+      organs:
+        hand_implant: null
+    right leg:
+      part: RightLegChitinid
+      connections:
+      - right foot
+    left leg:
+      part: LeftLegChitinid
+      connections:
+      - left foot
+    right foot:
+      part: RightFootChitinid
+    left foot:
+      part: LeftFootChitinid
+
+# Body parts reuse the moth part behaviour (juice yields, part types) with chitinid sprites.
+
+- type: entity
+  id: TorsoChitinid
+  name: "chitinid torso"
+  parent: TorsoMoth
+  components:
+  - type: Sprite
+    sprite: _Serenity/Mobs/Species/Chitinid/parts.rsi
+    state: torso_m
+
+- type: entity
+  id: HeadChitinid
+  name: "chitinid head"
+  parent: HeadMoth
+  components:
+  - type: Sprite
+    sprite: _Serenity/Mobs/Species/Chitinid/parts.rsi
+    state: head_m
+
+- type: entity
+  id: LeftArmChitinid
+  name: "left chitinid arm"
+  parent: LeftArmMoth
+  components:
+  - type: Sprite
+    sprite: _Serenity/Mobs/Species/Chitinid/parts.rsi
+    state: l_arm
+
+- type: entity
+  id: RightArmChitinid
+  name: "right chitinid arm"
+  parent: RightArmMoth
+  components:
+  - type: Sprite
+    sprite: _Serenity/Mobs/Species/Chitinid/parts.rsi
+    state: r_arm
+
+- type: entity
+  id: LeftHandChitinid
+  name: "left chitinid hand"
+  parent: LeftHandMoth
+  components:
+  - type: Sprite
+    sprite: _Serenity/Mobs/Species/Chitinid/parts.rsi
+    state: l_hand
+
+- type: entity
+  id: RightHandChitinid
+  name: "right chitinid hand"
+  parent: RightHandMoth
+  components:
+  - type: Sprite
+    sprite: _Serenity/Mobs/Species/Chitinid/parts.rsi
+    state: r_hand
+
+- type: entity
+  id: LeftLegChitinid
+  name: "left chitinid leg"
+  parent: LeftLegMoth
+  components:
+  - type: Sprite
+    sprite: _Serenity/Mobs/Species/Chitinid/parts.rsi
+    state: l_leg
+
+- type: entity
+  id: RightLegChitinid
+  name: "right chitinid leg"
+  parent: RightLegMoth
+  components:
+  - type: Sprite
+    sprite: _Serenity/Mobs/Species/Chitinid/parts.rsi
+    state: r_leg
+
+- type: entity
+  id: LeftFootChitinid
+  name: "left chitinid foot"
+  parent: LeftFootMoth
+  components:
+  - type: Sprite
+    sprite: _Serenity/Mobs/Species/Chitinid/parts.rsi
+    state: l_foot
+
+- type: entity
+  id: RightFootChitinid
+  name: "right chitinid foot"
+  parent: RightFootMoth
+  components:
+  - type: Sprite
+    sprite: _Serenity/Mobs/Species/Chitinid/parts.rsi
+    state: r_foot

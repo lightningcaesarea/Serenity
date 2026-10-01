@@ -28,7 +28,7 @@ job-name-ertmedic = ERT Medic
 job-name-ertsecurity = ERT Security
 job-name-hop = Head of Personnel
 job-name-hos = Marine CO
-job-name-intern = Medical Intern
+job-name-intern = Nurse
 job-name-janitor = Janitor
 job-name-lawyer = Lawyer
 job-name-librarian = Librarian
@@ -109,7 +109,7 @@ JobLibrarian = Librarian
 # Starlight: Capitalization
 JobMedicalDoctor = Medical Doctor
 # Starlight: Capitalization
-JobMedicalIntern = Medical Intern
+JobMedicalIntern = Nurse
 JobMime = Mime
 JobMusician = Musician
 JobParamedic = Paramedic

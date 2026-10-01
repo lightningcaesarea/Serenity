@@ -4,6 +4,8 @@
   name: cane
   description: A wooden cane.
   components:
+  - type: HitLocationBias
+    multipliers: { Leg: 2, Foot: 3 } # Serenity: a cane goes for the legs
   - type: Sprite
     sprite: Objects/Weapons/Melee/cane.rsi
     state: cane

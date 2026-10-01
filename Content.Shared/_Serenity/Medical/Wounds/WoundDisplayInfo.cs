@@ -7,4 +7,4 @@ namespace Content.Shared._Serenity.Medical.Wounds;
 /// Display info for a wound, used in health analyzer and examine.
 /// </summary>
 [Serializable, NetSerializable]
-public readonly record struct WoundDisplayInfo(string LocKey, int Tier, ProtoId<WoundCategoryPrototype> Category);
+public readonly record struct WoundDisplayInfo(string LocKey, int Tier, ProtoId<WoundCategoryPrototype> Category, WoundLocation? Location = null);

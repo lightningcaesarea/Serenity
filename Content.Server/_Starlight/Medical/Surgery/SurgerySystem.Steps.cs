@@ -31,6 +31,7 @@ public sealed partial class SurgerySystem : SharedSurgerySystem
     [Dependency] private StarlightEntitySystem _entity = default!;
     [Dependency] private SharedBloodstreamSystem _bloodstreamSystem = default!;
     [Dependency] private SharedWoundSystem _wounds = default!; // Serenity
+    [Dependency] private SurgeryStepCollectSolutionSystem _collectSolution = default!; // Serenity
 
     public void InitializeSteps()
     {
@@ -39,6 +40,7 @@ public sealed partial class SurgerySystem : SharedSurgerySystem
         SubscribeLocalEvent<SurgeryStepEmoteEffectComponent, SurgeryStepEvent>(OnStepEmoteEffectComplete);
         SubscribeLocalEvent<SurgeryStepSpawnEffectComponent, SurgeryStepEvent>(OnStepSpawnComplete);
         SubscribeLocalEvent<SurgeryStepClearWoundEffectComponent, SurgeryStepEvent>(OnStepClearWoundComplete); // Serenity
+        SubscribeLocalEvent<SurgeryStepCollectSolutionEffectComponent, SurgeryStepEvent>(OnStepCollectSolutionComplete); // Serenity
 
         SubscribeLocalEvent<SurgeryStepOrganExtractComponent, SurgeryStepEvent>(OnStepOrganExtractComplete);
         SubscribeLocalEvent<SurgeryStepOrganInsertComponent, SurgeryStepEvent>(OnStepOrganInsertComplete);
@@ -101,6 +103,14 @@ public sealed partial class SurgerySystem : SharedSurgerySystem
     private void OnStepClearWoundComplete(Entity<SurgeryStepClearWoundEffectComponent> ent, ref SurgeryStepEvent args)
     {
         _wounds.ClearWoundsByCategory(args.Body, ent.Comp.Category);
+    }
+
+    // Serenity: a step that drains something (infection exudate) into a held container. The container was checked when
+    // the step started; if it has gone or filled up since, the step doesn't complete.
+    private void OnStepCollectSolutionComplete(Entity<SurgeryStepCollectSolutionEffectComponent> ent, ref SurgeryStepEvent args)
+    {
+        if (!_collectSolution.TryCollect(ent, args.Tools))
+            args.IsCancelled = true;
     }
 
     private void OnStepOrganInsertComplete(Entity<SurgeryStepOrganInsertComponent> ent, ref SurgeryStepEvent args)

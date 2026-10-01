@@ -35,11 +35,8 @@
   - !type:OverallPlaytimeRequirement
     time: 48h # Starlight start
   - !type:RoleTimeRequirement
-    role: JobChemist
-    time: 6h
-  - !type:RoleTimeRequirement
-    role: JobMedicalDoctor # Serenity: Surgeon is disabled; doctors do all surgery
-    time: 3h
+    role: JobMedicalDoctor # Serenity: Surgeon and Chemist are retired; doctors do all surgery and chemistry (3h + the 6h Chemist time)
+    time: 9h
   - !type:RoleTimeRequirement
     role: JobBrigmedic # Brigmedic is commonly used as Nukie Corpsman practice. With Brigmed being changed away from a chemist soon, this ensures you know how to operate medical in a high stress enviroment. This also accounts for your Security time.
     time: 3h

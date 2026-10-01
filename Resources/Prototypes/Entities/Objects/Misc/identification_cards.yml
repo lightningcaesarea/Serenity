@@ -273,7 +273,7 @@
 - type: entity
   parent: IDCardStandard
   id: MedicalInternIDCard
-  name: medical intern ID card
+  name: nurse ID card
   components:
   - type: Sprite
     layers:

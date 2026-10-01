@@ -4,6 +4,7 @@
   id: LockerFillMedicine
   table: !type:AllSelector
     children:
+    - id: IVStand # Serenity: every medicine locker, wall locker included, holds one IV stand
     - !type:NestedSelector
       tableId: CoreMedicineReagentBottleTable
       rolls: 2

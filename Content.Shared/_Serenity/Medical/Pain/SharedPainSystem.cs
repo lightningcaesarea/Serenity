@@ -183,7 +183,7 @@ public abstract partial class SharedPainSystem : EntitySystem
                 if (!_proto.TryIndex(wound.WoundTypeId, out var proto))
                     continue;
 
-                var weight = config.WoundWeight(proto.Category, wound.Tier);
+                var weight = config.WoundWeight(proto.Category, wound.Tier) * config.LocationMultiplier(wound.Location);
                 _categoryPain[proto.Category] = _categoryPain.GetValueOrDefault(proto.Category) + weight;
                 total += weight;
             }

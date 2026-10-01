@@ -1,0 +1,57 @@
+# The item is its own solution entity (see reference: legacy SolutionContainerManager is broken here).
+- type: entity
+  abstract: true
+  parent: Solution
+  id: SolutionChitzite
+  components:
+  - type: Solution
+    id: chitzite
+    solution:
+      canReact: false
+      maxVol: 5
+
+- type: entity
+  parent: [SolutionChitzite, BaseItem]
+  id: Chitzite
+  name: chitzite
+  description: A glassy, faintly glowing stone a chitinid coughs up once it has soaked in too much radiation. It is still hot to a geiger counter.
+  components:
+  - type: Sprite
+    sprite: _Serenity/Objects/Specific/Species/chitzite.rsi
+    layers:
+    - state: chitzite
+    - state: chitzite_glow
+      shader: unshaded
+  - type: Item
+    size: Tiny
+  - type: RadiationSource
+    intensity: 0.5
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Uranium
+        Quantity: 2.5
+      - ReagentId: Radium
+        Quantity: 2.5
+  - type: Extractable
+    grindableSolutionName: chitzite
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 3
+        Radiation: 3
+  - type: Tag
+    tags:
+    - Recyclable
+    - Trash
+
+- type: entity
+  id: ActionPurgeChitzite
+  name: Cough Up Chitzite
+  description: Hack up the radiation your carapace has stored, as a chitzite stone. Only possible once you have absorbed enough.
+  components:
+  - type: Action
+    icon: { sprite: _Serenity/Objects/Specific/Species/chitzite.rsi, state: chitzite }
+    useDelay: 10
+  - type: InstantAction
+    event: !type:PurgeRadiationStoreActionEvent
