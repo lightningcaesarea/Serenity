@@ -2,7 +2,7 @@
 - type: vendingMachineInventory
   id: GoldNanoMedInventory
   startingInventory:
-    HandheldHealthAnalyzer: 1
+    AdvancedHealthAnalyzer: 1 # Serenity: medbay machines stock the advanced analyzer
     ClothingBeltMedical: 2
     ClothingBeltMedicalEMT: 1
     Gauze: 2
@@ -48,7 +48,7 @@
 - type: vendingMachineInventory
   id: GoldNanoMedPlusInventory
   startingInventory:
-    HandheldHealthAnalyzer: 3
+    AdvancedHealthAnalyzer: 3 # Serenity: medbay machines stock the advanced analyzer
     ClothingBeltMedical: 3
     ClothingBeltMedicalEMT: 2
     Gauze: 4
