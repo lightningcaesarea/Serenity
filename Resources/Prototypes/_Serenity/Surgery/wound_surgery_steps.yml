@@ -133,11 +133,15 @@
 - type: entity
   parent: SurgeryStepBase
   id: SurgeryStepDrainInfection
-  name: Drain the infection
+  name: Drain the infection into a container
   components:
   - type: SurgeryStep
     tools:
     - type: Hemostat
+  # The exudate has to go somewhere: the surgeon needs a beaker (or any container with room) in their other hand
+  - type: SurgeryStepCollectSolutionEffect
+    reagent: Exudate
+    quantity: 30
   - type: Sprite
     sprite: _Starlight/Objects/Specific/Medical/scissors.rsi
     state: hemostat

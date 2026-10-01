@@ -4,8 +4,11 @@ using Content.Shared._Serenity.Medical.Wounds.Systems;
 using Content.Shared._Starlight;
 using Content.Shared._Starlight.Medical.Body.Part;
 using Content.Shared._Starlight.Medical.Surgery.Components;
+using Content.Shared._Starlight.Medical.Surgery;
 using Content.Shared._Starlight.Medical.Surgery.Events;
 using Content.Shared.Body.Systems;
+using Content.Shared.Chemistry.EntitySystems;
+using Content.Shared.Inventory;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Prototypes;
 
@@ -122,6 +125,77 @@ public sealed class WoundSurgeryTest
                     }
                 }
             });
+        });
+
+        await pair.CleanReturnAsync();
+    }
+
+    /// <summary>
+    /// Draining an infection needs a container with room in the surgeon's hands, and pours exudate into it.
+    /// </summary>
+    [Test]
+    public async Task DrainingInfectionFillsAHeldContainer()
+    {
+        await using var pair = await PoolManager.GetServerClient();
+        var server = pair.Server;
+        var entMan = server.EntMan;
+        var mapData = await pair.CreateTestMap();
+        var body = entMan.System<SharedBodySystem>();
+        var singletons = entMan.System<StarlightEntitySystem>();
+        var solutions = entMan.System<SharedSolutionContainerSystem>();
+
+        await server.WaitAssertion(() =>
+        {
+            var patient = entMan.SpawnEntity("MobHuman", mapData.GridCoords);
+            var torso = body.GetBodyChildrenOfType(patient, BodyPartType.Torso).First().Id;
+            var hemostat = entMan.SpawnEntity("Hemostat", mapData.GridCoords);
+            var beaker = entMan.SpawnEntity("Beaker", mapData.GridCoords);
+
+            const string drain = "SurgeryStepDrainInfection";
+            Assert.That(singletons.TryGetSingleton(drain, out var stepUid));
+
+            SurgeryCanPerformStepEvent CanPerform(params EntityUid[] tools)
+            {
+                var ev = new SurgeryCanPerformStepEvent(patient, patient, [.. tools], SlotFlags.OUTERCLOTHING);
+                entMan.EventBus.RaiseLocalEvent(stepUid, ref ev);
+                return ev;
+            }
+
+            bool Perform(params EntityUid[] tools)
+            {
+                var ev = new SurgeryStepEvent(patient, patient, torso, [.. tools])
+                {
+                    StepProto = drain,
+                    SurgeryProto = "SurgeryDrainInfection",
+                };
+                entMan.EventBus.RaiseLocalEvent(stepUid, ref ev);
+                return !ev.IsCancelled;
+            }
+
+            Assert.That(solutions.TryGetSolution(beaker, "beaker", out var beakerSoln, out var beakerSolution));
+
+            // The hemostat alone isn't enough: there is nothing to drain into
+            var alone = CanPerform(hemostat);
+            Assert.That(alone.Invalid, Is.EqualTo(StepInvalidReason.MissingTool));
+            Assert.That(alone.Popup, Does.Contain("container"));
+            Assert.That(Perform(hemostat), Is.False, "the step doesn't complete without a container");
+
+            // With a beaker in hand it works, and the beaker ends up holding exudate
+            Assert.That(CanPerform(hemostat, beaker).Invalid, Is.EqualTo(StepInvalidReason.None));
+            Assert.That(Perform(hemostat, beaker), Is.True);
+            Assert.That(beakerSolution!.GetTotalPrototypeQuantity("Exudate").Float(), Is.EqualTo(30f));
+
+            // A full container won't do
+            solutions.TryAddReagent(beakerSoln!.Value, "Water", beakerSolution.AvailableVolume);
+            Assert.That(beakerSolution.AvailableVolume.Float(), Is.EqualTo(0f));
+            var full = CanPerform(hemostat, beaker);
+            Assert.That(full.Invalid, Is.EqualTo(StepInvalidReason.MissingTool));
+            Assert.That(full.Popup, Does.Contain("full"));
+            Assert.That(Perform(hemostat, beaker), Is.False);
+
+            entMan.DeleteEntity(patient);
+            entMan.DeleteEntity(hemostat);
+            entMan.DeleteEntity(beaker);
         });
 
         await pair.CleanReturnAsync();
