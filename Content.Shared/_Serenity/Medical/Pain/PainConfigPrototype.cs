@@ -1,4 +1,5 @@
 using Content.Shared._Serenity.Medical.Wounds;
+using Content.Shared._Starlight.Medical.Body.Part;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.Manager.Attributes;
 
@@ -33,6 +34,18 @@ public sealed partial class PainConfigPrototype : IPrototype
     /// </summary>
     [DataField]
     public Dictionary<PainLevel, PainLevelConfig> Levels = new();
+
+    /// <summary>
+    /// Scales the pain of a wound by where it is (a smashed hand hurts more than a bruised thigh). Unlisted body
+    /// part types, and wounds with no location, count as 1.
+    /// </summary>
+    [DataField]
+    public Dictionary<BodyPartType, float> LocationMultipliers = new();
+
+    public float LocationMultiplier(WoundLocation? location)
+    {
+        return location != null && LocationMultipliers.TryGetValue(location.Type, out var multiplier) ? multiplier : 1f;
+    }
 
     /// <summary>
     /// Every painkiller after the strongest active one only counts for this fraction of its strength,

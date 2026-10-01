@@ -90,6 +90,13 @@ public sealed partial class WoundCategoryEffects
     public float SlowMultiplier = 1f;
 
     /// <summary>
+    /// Body part types where a wound causes the slow (a broken leg, not a broken arm). Empty means anywhere.
+    /// A wound with no location (a mob without a body) always counts.
+    /// </summary>
+    [DataField]
+    public List<BodyPartType> SlowLocations = new();
+
+    /// <summary>
     /// Wounds of this category at this tier or worse can make the mob drop a held item when hit. 0 means never.
     /// </summary>
     [DataField]
@@ -97,6 +104,35 @@ public sealed partial class WoundCategoryEffects
 
     [DataField]
     public float DropChance;
+
+    /// <summary>
+    /// Body part types where a wound causes drops. A wound on one side drops from the hand on that side. Empty
+    /// means anywhere.
+    /// </summary>
+    [DataField]
+    public List<BodyPartType> DropLocations = new();
+
+    /// <summary>
+    /// A status effect given for <see cref="StatusSeconds"/> whenever the mob is hurt while it has a wound of this
+    /// category at <see cref="StatusTier"/> or worse in one of <see cref="StatusLocations"/> (e.g. a concussion).
+    /// </summary>
+    [DataField]
+    public EntProtoId? StatusEffect;
+
+    /// <summary>
+    /// 0 means never.
+    /// </summary>
+    [DataField]
+    public int StatusTier;
+
+    [DataField]
+    public float StatusSeconds = 10f;
+
+    /// <summary>
+    /// Empty means anywhere.
+    /// </summary>
+    [DataField]
+    public List<BodyPartType> StatusLocations = new();
 }
 
 [DataDefinition]

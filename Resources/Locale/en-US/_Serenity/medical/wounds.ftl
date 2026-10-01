@@ -118,3 +118,10 @@ wound-location-left-foot = left foot
 wound-location-right-foot = right foot
 wound-location-tail = tail
 wound-location-other = body
+
+# Where an examined patient's injuries are, worst first
+wound-examine-locations = [color=#CED2D1]{ CAPITALIZE(POSS-ADJ($target)) } injuries: { $locations }.[/color]
+
+# Popups when a weapon hit lands: to the one hit, and to the attacker
+wound-hit-location-self = Your { $location }!
+wound-hit-location-other = { $location }

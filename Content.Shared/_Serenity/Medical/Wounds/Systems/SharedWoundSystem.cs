@@ -1,3 +1,4 @@
+using Content.Shared._Starlight.Medical.Body.Part;
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Systems;
 using Content.Shared.Damage;
@@ -37,6 +38,7 @@ public abstract partial class SharedWoundSystem : EntitySystem
         SubscribeLocalEvent<WoundComponent, DamageChangedEvent>(OnDamageChanged);
         SubscribeLocalEvent<WoundComponent, RejuvenateEvent>(OnRejuvenate);
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
+        InitializeHitLocation();
         CacheWoundTypes();
     }
 
@@ -105,22 +107,36 @@ public abstract partial class SharedWoundSystem : EntitySystem
                 (hits ??= new()).Add((woundProto, tier));
         }
 
+        // One hit lands in one place, so every wound it causes is in the same location. A weapon hit gets a
+        // location even when it is too light to wound. Chosen on the server only: a client's guess would just be
+        // replaced by the server's state.
+        WoundLocation? location = null;
+        var weapon = _net.IsServer ? TakePendingHit(comp) : null;
+        if (_net.IsServer && (hits != null || weapon != null))
+        {
+            var biasSource = weapon ?? args.Origin;
+            location = PickLocation(uid, _proto.Index(comp.Config), CompOrNull<HitLocationBiasComponent>(biasSource));
+        }
+
         if (hits != null)
         {
-            // One hit lands in one place, so every wound it causes is in the same location. Chosen on the server
-            // only: a client's guess would just be replaced by the server's state.
-            var location = _net.IsServer ? PickLocation(uid, _proto.Index(comp.Config)) : null;
             foreach (var (woundProto, tier) in hits)
             {
                 changed |= ApplyWound(comp, woundProto, tier, location);
             }
         }
 
-        if (!changed)
-            return;
+        if (changed)
+        {
+            Dirty(uid, comp);
+            RaiseLocalEvent(uid, new WoundsDamagedEvent());
+        }
 
-        Dirty(uid, comp);
-        RaiseLocalEvent(uid, new WoundsDamagedEvent());
+        if (weapon != null && location != null)
+        {
+            var hitEv = new BodyPartHitEvent(location, weapon.Value, args.Origin);
+            RaiseLocalEvent(uid, ref hitEv);
+        }
     }
 
     private bool ApplyWound(WoundComponent comp, WoundTypePrototype proto, int tier, WoundLocation? location)
@@ -169,36 +185,42 @@ public abstract partial class SharedWoundSystem : EntitySystem
 
     /// <summary>
     /// Picks where a hit lands from the config's weighted locations, among the body parts the mob still has.
-    /// Null for a mob with no body or a config with no locations. Uses randomness, so call it on the server.
+    /// Null for a mob with no body or a config with no locations. A weapon's <paramref name="bias"/> scales the
+    /// weights by body part type. Uses randomness, so call it on the server.
     /// </summary>
-    public WoundLocation? PickLocation(EntityUid uid, WoundConfigPrototype config)
+    public WoundLocation? PickLocation(EntityUid uid, WoundConfigPrototype config, HitLocationBiasComponent? bias = null)
     {
         if (config.HitLocations.Count == 0 || !HasComp<BodyComponent>(uid))
             return null;
 
         var total = 0f;
-        var present = new List<HitLocationWeight>();
+        var present = new List<(HitLocationWeight Location, float Weight)>();
         foreach (var candidate in config.HitLocations)
         {
-            if (candidate.Weight <= 0f || !HasPart(uid, candidate))
+            var weight = candidate.Weight;
+            if (bias != null && bias.Multipliers.TryGetValue(candidate.Type, out var multiplier))
+                weight *= multiplier;
+
+            if (weight <= 0f || !HasPart(uid, candidate))
                 continue;
 
-            present.Add(candidate);
-            total += candidate.Weight;
+            present.Add((candidate, weight));
+            total += weight;
         }
 
+        // A bias that rules out every part the mob has left falls back to the plain weights
         if (present.Count == 0)
-            return null;
+            return bias != null ? PickLocation(uid, config) : null;
 
         var roll = _random.NextFloat() * total;
-        foreach (var candidate in present)
+        foreach (var (candidate, weight) in present)
         {
-            roll -= candidate.Weight;
+            roll -= weight;
             if (roll <= 0f)
                 return new WoundLocation(candidate.Type, candidate.Symmetry);
         }
 
-        var last = present[^1];
+        var last = present[^1].Location;
         return new WoundLocation(last.Type, last.Symmetry);
     }
 
@@ -344,4 +366,33 @@ public abstract partial class SharedWoundSystem : EntitySystem
         return worst;
     }
 
+    /// <summary>
+    /// The worst active wound of a category in one of the given body part types (any part if the list is empty).
+    /// A wound with no location (a mob without a body) counts everywhere. Null if there is none.
+    /// </summary>
+    public WoundEntry? GetWorstWound(WoundComponent comp, ProtoId<WoundCategoryPrototype> category, List<BodyPartType> locations)
+    {
+        WoundEntry? worst = null;
+        foreach (var wound in comp.ActiveWounds)
+        {
+            if (worst != null && wound.Tier <= worst.Tier)
+                continue;
+
+            if (!_proto.TryIndex(wound.WoundTypeId, out var proto) || proto.Category != category)
+                continue;
+
+            if (locations.Count > 0 && wound.Location is { } where && !locations.Contains(where.Type))
+                continue;
+
+            worst = wound;
+        }
+
+        return worst;
+    }
+
+    /// <inheritdoc cref="GetWorstWound"/>
+    public int GetWorstTier(WoundComponent comp, ProtoId<WoundCategoryPrototype> category, List<BodyPartType> locations)
+    {
+        return GetWorstWound(comp, category, locations)?.Tier ?? 0;
+    }
 }
