@@ -1,5 +1,4 @@
 # IV stand and bags. A stand holds one bag; a bag can also be held and hooked to a patient directly.
-# The stand folds flat like a folding chair: unfolded it stays put and works, folded it is a huge item to carry.
 # Setting up a line or switching injecting/drawing needs the Medicine skill (skills.yml, iv-verb-toggle).
 # Fluid goes into the bloodstream, so a drug in a bag is metabolised like any other injection.
 
@@ -7,7 +6,7 @@
   parent: [ BaseStructureDynamic, StructureWheeled ]
   id: IVStand
   name: IV stand
-  description: Holds an IV bag upright, running a line to a patient to give them fluids or draw their blood. Drag it onto someone to set the line, or onto yourself to fold it flat and carry it.
+  description: Holds an IV bag upright, running a line to a patient to give them fluids or draw their blood. Drag it onto someone to set the line.
   components:
   - type: Sprite
     noRot: true
@@ -18,15 +17,8 @@
     - state: reagent0
       map: [ "enum.IVVisualLayers.Reagent" ]
       visible: false
-    - state: flatpack
-      map: [ "foldedLayer" ]
-      visible: false
   - type: Transform
     noRot: true
-  - type: Foldable
-  - type: DeployFoldable
-  - type: Item
-    size: Huge
   - type: Appearance
   - type: InteractionOutline
   - type: Pullable
@@ -66,14 +58,6 @@
       pack: !type:ContainerSlot {}
 
 # The bag is its own solution entity, like a beaker; the legacy SolutionContainerManager is broken here.
-- type: entity
-  parent: IVStand
-  id: IVStandFolded
-  suffix: Folded
-  components:
-  - type: Foldable
-    folded: true
-
 - type: entity
   abstract: true
   parent: Solution
