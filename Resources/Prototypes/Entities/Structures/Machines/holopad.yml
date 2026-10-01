@@ -346,7 +346,7 @@
 - type: entity
   parent: Holopad
   id: HolopadCommandHos
-  suffix: HoS
+  suffix: Marine CO
   components:
   - type: Label
     currentLabel: holopad-command-hos
@@ -631,7 +631,7 @@
 - type: entity
   parent: Holopad
   id: HolopadSecurityFront
-  suffix: Sec Front
+  suffix: MP Front
   components:
   - type: Label
     currentLabel: holopad-security-front
@@ -647,7 +647,7 @@
 - type: entity
   parent: Holopad
   id: HolopadSecurityWarden
-  suffix: Warden
+  suffix: Marine Quartermaster
   components:
   - type: Label
     currentLabel: holopad-security-warden
@@ -663,7 +663,7 @@
 - type: entity
   parent: Holopad
   id: HolopadSecurityBreakroom
-  suffix: Sec Breakroom
+  suffix: MP Breakroom
   components:
   - type: Label
     currentLabel: holopad-security-breakroom
@@ -711,7 +711,7 @@
 - type: entity
   parent: Holopad
   id: HolopadSecurityLockerRoom
-  suffix: Sec Locker Room
+  suffix: MP Locker Room
   components:
   - type: Label
     currentLabel: holopad-security-locker-room
@@ -727,7 +727,7 @@
 - type: entity
   parent: Holopad
   id: HolopadSecurityEvacCheckpoint
-  suffix: Sec Evac Checkpoint
+  suffix: MP Evac Checkpoint
   components:
   - type: Label
     currentLabel: holopad-security-evac-checkpoint
@@ -735,7 +735,7 @@
 - type: entity
   parent: Holopad
   id: HolopadSecurityArrivalsCheckpoint
-  suffix: Sec Arrivals Checkpoint
+  suffix: MP Arrivals Checkpoint
   components:
   - type: Label
     currentLabel: holopad-security-arrivals-checkpoint

@@ -285,8 +285,8 @@
 - type: entity
   id: IntercomSecurity
   parent: BaseIntercomSecure
-  suffix: Security
-  description: An intercom. It's been reinforced with metal from security helmets, making it a bitch-and-a-half to open.
+  suffix: Marine Police
+  description: An intercom. It's been reinforced with metal from Marine Police helmets, making it a bitch-and-a-half to open.
   components:
   - type: ContainerFill
     containers:

@@ -1,8 +1,8 @@
 - type: entity
   parent: [ClothingShoesBootsMagBase, BaseSecurityContraband, ClothingShoesMilitaryBase]
   id: ClothingShoesBootsMagSec
-  name: security magboots
-  description: A pair of standard magnetic boots, issued alongside the Security Hardsuit.
+  name: Marine Police magboots
+  description: A pair of standard magnetic boots, issued alongside the Marine Police Hardsuit.
   components:
   - type: Sprite
     sprite: _Serenity/Clothing/Shoes/Boots/magboots-security.rsi

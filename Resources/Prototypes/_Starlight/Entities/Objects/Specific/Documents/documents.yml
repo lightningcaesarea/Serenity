@@ -225,7 +225,7 @@
   id: BriefDocumentRevs
   name: USSP Secure Briefing
   suffix: Do Not Map
-  description: A set of classified documents to inform new members of Security on the risks of USSP activity.
+  description: A set of classified documents to inform new members of the Marine Police on the risks of USSP activity.
   parent: [ ImportantDocumentGeneric, BaseGrandTheftContraband ]
   components:
     - type: Item
@@ -239,7 +239,7 @@
   id: BriefDocumentLings
   name: Changeling Secure Briefing
   suffix: Do Not Map
-  description: A set of classified documents to inform new members of Security on the existance of Changelings.
+  description: A set of classified documents to inform new members of the Marine Police on the existance of Changelings.
   parent: [ ImportantDocumentGeneric, BaseGrandTheftContraband ]
   components:
     - type: Item
@@ -253,7 +253,7 @@
   id: BriefDocumentBrightEyes
   name: Bright-Eyes Secure Briefing
   suffix: Do Not Map
-  description: A set of classified documents to inform new members of Security on the existance of Bright-Eyes.
+  description: A set of classified documents to inform new members of the Marine Police on the existance of Bright-Eyes.
   parent: [ ImportantDocumentGeneric, BaseGrandTheftContraband ]
   components:
     - type: Item
@@ -267,7 +267,7 @@
   id: BriefDocumentVampires
   name: Vampires Secure Briefing
   suffix: Do Not Map
-  description: A set of classified documents to inform new members of Security on the existance of Vampires.
+  description: A set of classified documents to inform new members of the Marine Police on the existance of Vampires.
   parent: [ ImportantDocumentGeneric, BaseGrandTheftContraband ]
   components:
     - type: Item
@@ -281,7 +281,7 @@
   id: BriefDocumentSyndicate
   name: Syndicate Agent Secure Briefing
   suffix: Do Not Map
-  description: A set of classified documents to inform new members of Security on the existance of Syndicate Agents.
+  description: A set of classified documents to inform new members of the Marine Police on the existance of Syndicate Agents.
   parent: [ ImportantDocumentGeneric, BaseGrandTheftContraband ]
   components:
     - type: Item
@@ -295,7 +295,7 @@
   id: BriefDocumentWizard
   name: Wizard Secure Briefing
   suffix: Do Not Map
-  description: A set of classified documents to inform new members of Security on the existance of Wizards.
+  description: A set of classified documents to inform new members of the Marine Police on the existance of Wizards.
   parent: [ ImportantDocumentGeneric, BaseGrandTheftContraband ]
   components:
     - type: Item
@@ -309,7 +309,7 @@
   id: BriefDocumentXorgs
   name: Xenoborg Secure Briefing
   suffix: Do Not Map
-  description: A set of classified documents to inform new members of Security on the existance of Xenoborgs.
+  description: A set of classified documents to inform new members of the Marine Police on the existance of Xenoborgs.
   parent: [ ImportantDocumentGeneric, BaseGrandTheftContraband ]
   components:
     - type: Item

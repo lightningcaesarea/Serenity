@@ -86764,7 +86764,7 @@ entities:
       parent: 2
       pos: -45.5,62.5
     - type: NavMapBeacon
-      text: Sec EVA
+      text: MP EVA
   - uid: 13507
     components:
     - type: Transform

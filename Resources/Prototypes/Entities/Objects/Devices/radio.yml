@@ -26,8 +26,8 @@
     - Radio
 
 - type: entity
-  name: security radio
-  description: A handy security radio.
+  name: Marine Police radio
+  description: A handy Marine Police radio.
   parent: [ RadioHandheld, BaseSecurityContraband ]
   id: RadioHandheldSecurity
   components:

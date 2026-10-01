@@ -153,7 +153,7 @@
 - type: entity
   parent: [ClothingUniformBase, BaseSecurityContraband]
   id: ClothingUniformJumpsuitCorpsman
-  name: corpsman's suit
+  name: Marine Corpsman's suit
   description: Die in style on the front lines!
   components:
   - type: Sprite
@@ -169,7 +169,7 @@
 - type: entity
   parent: [ClothingUniformBase, BaseSecurityContraband]
   id: ClothingUniformJumpsuitCorpsmanResponse
-  name: corpsman's response wear
+  name: Marine Corpsman's response wear
   description: If only I'd been faster.
   components:
   - type: Sprite
@@ -185,8 +185,8 @@
 - type: entity
   parent: [ClothingUniformBase, BaseSecurityContraband]
   id: ClothingUniformJumpsuitFormalBrigmedic
-  name: formal corpsman jumpsuit
-  description: A formal suit for the corpsman.
+  name: formal Marine Corpsman jumpsuit
+  description: A formal suit for the Marine Corpsman.
   components:
   - type: Sprite
     sprite: _Starlight/Clothing/Uniforms/Jumpsuit/brigmedic_alt.rsi
@@ -201,8 +201,8 @@
 - type: entity
   parent: [ClothingUniformBase, BaseSecurityContraband]
   id: ClothingUniformJumpsuitSeniorBrigmedic
-  name: senior formal corpsman jumpsuit
-  description: A formal suit for the seasoned corpsman.
+  name: senior formal Marine Corpsman jumpsuit
+  description: A formal suit for the seasoned Marine Corpsman.
   components:
   - type: Sprite
     sprite: _Starlight/Clothing/Uniforms/Jumpsuit/brigmedic_senior.rsi
@@ -245,8 +245,8 @@
 - type: entity
   parent: [ClothingUniformBase, BaseSecurityContraband]
   id: ClothingUniformJumpsuitFormalSecoff
-  name: formal security jumpsuit
-  description: A formal attire for the security officer.
+  name: formal Marine Police jumpsuit
+  description: A formal attire for the Marine Trooper.
   components:
   - type: Sprite
     sprite: _Starlight/Clothing/Uniforms/Jumpsuit/secoff_formal.rsi
@@ -256,8 +256,8 @@
 - type: entity
   parent: [ClothingUniformBase, BaseSecurityContraband]
   id: ClothingUniformJumpsuitFormalSeniorSecoff
-  name: formal senior security jumpsuit
-  description: A formal attire for the senior security officer.
+  name: formal senior Marine Police jumpsuit
+  description: A formal attire for the Senior Marine Trooper.
   components:
   - type: Sprite
     sprite: _Starlight/Clothing/Uniforms/Jumpsuit/secoff_formal_senior.rsi
@@ -268,7 +268,7 @@
   parent: [ClothingUniformBase, BaseSecurityContraband]
   id: ClothingUniformJumpsuitDutyOfficer
   name: duty officer's uniform
-  description: A vibrant security suit for the warden's partner in chains.
+  description: A vibrant Marine Police suit for the Marine Quartermaster's partner in chains.
   components:
   - type: Sprite
     sprite: _Starlight/Clothing/Uniforms/Jumpsuit/dutyofficer.rsi
@@ -278,8 +278,8 @@
 - type: entity
   parent: [ClothingUniformBase, BaseSecurityContraband]
   id: ClothingUniformJumpsuitFormalWarden
-  name: warden's formal jumpsuit
-  description: A formal attire for the warden, missing a holster for the truncheon sadly.
+  name: Marine Quartermaster's formal jumpsuit
+  description: A formal attire for the Marine Quartermaster, missing a holster for the truncheon sadly.
   components:
   - type: Sprite
     sprite: _Starlight/Clothing/Uniforms/Jumpsuit/warden_formal.rsi
@@ -634,8 +634,8 @@
 - type: entity
   parent: ClothingUniformBase
   id: ClothingUniformJumpsuitHoSBlack
-  name: head of security's black suit
-  description: It's Head of Security's black suit.
+  name: Marine CO's black suit
+  description: It's the Marine CO's black suit.
   components:
   - type: Sprite
     sprite: _Starlight/Clothing/Uniforms/Jumpsuit/hos_black.rsi
@@ -934,7 +934,7 @@
 - type: entity
   parent: [ClothingUniformBase, BaseSecurityContraband]
   id: ClothingUniformSecurityTshirt
-  name: t-shirt security uniform
+  name: t-shirt Marine Police uniform
   description: Light and unrestrictive uniform, so that nothing can stop you from swinging a stunbaton.
   components:
   - type: Sprite

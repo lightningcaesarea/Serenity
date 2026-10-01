@@ -40,7 +40,7 @@ lobby-state-background-afriendlyfaceinspace-artist = Ramblinger
 lobby-state-background-tritfiredragon-title = Tritfire Dragon
 lobby-state-background-tritfiredragon-artist = Conflee
 
-lobby-state-background-securityshowdown-title = Security Showdown
+lobby-state-background-securityshowdown-title = Marine Police Showdown
 lobby-state-background-securityshowdown-artist = TheKillerDumb & Bukkataro
 
 lobby-state-background-revclown-title = Rev Clown
@@ -73,7 +73,7 @@ lobby-state-background-janitorialhell-artist = wintergem18
 lobby-state-background-katievssyndie-title = Katie vs Syndie
 lobby-state-background-katievssyndie-artist = ramblinger
 
-lobby-state-background-nogalcom-title = When the brigmedic's starting chems run out
+lobby-state-background-nogalcom-title = When the Marine Corpsman's starting chems run out
 lobby-state-background-nogalcom-artist = deltaVelocity
 
 lobby-state-background-aiderthief-title = Maints Discovery

@@ -159259,7 +159259,7 @@ entities:
   - uid: 24968
     components:
     - type: MetaData
-      name: SMES (security)
+      name: SMES (Marine Police)
     - type: Transform
       parent: 2
       pos: 40.5,3.5
@@ -162994,7 +162994,7 @@ entities:
   - uid: 25600
     components:
     - type: MetaData
-      name: substation (security)
+      name: substation (Marine Police)
     - type: Transform
       parent: 2
       pos: 40.5,5.5

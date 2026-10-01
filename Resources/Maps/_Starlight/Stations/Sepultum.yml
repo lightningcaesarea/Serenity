@@ -173337,7 +173337,7 @@ entities:
   - uid: 26472
     components:
     - type: MetaData
-      name: substation (Security)
+      name: substation (Marine Police)
     - type: Transform
       parent: 2
       pos: -89.5,57.5

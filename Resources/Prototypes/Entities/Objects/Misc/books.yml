@@ -211,8 +211,8 @@
 - type: entity
   id: BookSecurity
   parent: BaseGuidebook
-  name: security 101
-  description: A book about security written by NanoTrasen. The book is stained with blood. It seems to have been used more as a weapon than reading material. # SL
+  name: Marine Police 101
+  description: A book about the Marine Police written by NanoTrasen. The book is stained with blood. It seems to have been used more as a weapon than reading material. # SL
   components:
   - type: Sprite
     layers:

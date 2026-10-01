@@ -2,7 +2,7 @@
   name: BrigBuddy™ 5000
   parent: [ PowerCellSlotMediumItem, BaseHandheldComputer, BaseSecurityContraband ]
   id: HandheldBrigmedicCrewMonitor
-  description: So advanced it only tracks security personnel! Does not monitor emotional stability or competence levels of security members. Use at your own risk!
+  description: So advanced it only tracks Marine Police personnel! Does not monitor emotional stability or competence levels of Marine Police members. Use at your own risk!
   components:
   - type: Tag
     tags:

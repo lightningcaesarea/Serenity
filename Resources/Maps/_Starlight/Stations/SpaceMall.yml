@@ -111239,7 +111239,7 @@ entities:
   - uid: 18222
     components:
     - type: MetaData
-      name: station beacon (Security Evac Checkpoint)
+      name: station beacon (Marine Police Evac Checkpoint)
     - type: Transform
       parent: 2
       pos: 17.5,52.5
@@ -229907,7 +229907,7 @@ entities:
   - uid: 35643
     components:
     - type: MetaData
-      name: substation (Armory / Genpop / Warden)
+      name: substation (Armory / Genpop / Marine Quartermaster)
     - type: Transform
       parent: 2
       pos: 27.5,12.5
@@ -229918,7 +229918,7 @@ entities:
   - uid: 35644
     components:
     - type: MetaData
-      name: substation (Security / EVAC)
+      name: substation (Marine Police / EVAC)
     - type: Transform
       parent: 2
       pos: 10.5,44.5

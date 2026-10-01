@@ -72,8 +72,8 @@
 - type: entity
   parent: [ClothingBackpackDuffel, BaseSecurityContraband]
   id: ClothingBackpackDuffelSecurity
-  name: security duffel bag
-  description: A large duffel bag for holding extra security related goods.
+  name: Marine Police duffel bag
+  description: A large duffel bag for holding extra Marine Police related goods.
   components:
   - type: Sprite
     sprite: _Serenity/Clothing/Back/Duffels/security_dv.rsi
@@ -81,7 +81,7 @@
 - type: entity
   parent: [ClothingBackpackDuffel, BaseSecurityContraband]
   id: ClothingBackpackDuffelBrigmedic
-  name: corpsman duffel bag
+  name: Marine Corpsman duffel bag
   description: A large duffel bag for holding extra medical related goods.
   components:
   - type: Sprite

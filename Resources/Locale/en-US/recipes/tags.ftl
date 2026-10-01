@@ -25,12 +25,12 @@ construction-graph-tag-eva-suit = an EVA suit
 construction-graph-tag-eva-helmet = an EVA helmet
 
 # hud
-construction-graph-tag-security-hud = security hud
+construction-graph-tag-security-hud = MP HUD
 construction-graph-tag-medical-hud = medical hud
 
 # security
 construction-graph-tag-sun-glasses = sun glasses
-construction-graph-tag-security-helmet = security helmet
+construction-graph-tag-security-helmet = MP helmet
 
 # materials
 construction-graph-tag-manipulator = modular machine part

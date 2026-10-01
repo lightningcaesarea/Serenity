@@ -262,7 +262,7 @@
   parent: TelecomServer
   id: TelecomServerFilledSecurity
   categories: [ ShouldMapStation ] # Starlight
-  suffix: Security
+  suffix: Marine Police
   components:
   - type: ContainerFill
     containers:

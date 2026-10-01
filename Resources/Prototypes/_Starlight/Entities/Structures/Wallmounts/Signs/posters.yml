@@ -122,7 +122,7 @@
   parent: PosterBase
   id: PosterLegitKillEmAll
   name: "Kill Em All Advert"
-  description: "A poster of the Head of Security shooting a hole through an assistant, particularly violent."
+  description: "A poster of the Marine CO shooting a hole through an assistant, particularly violent."
   components:
   - type: Sprite
     sprite: _Starlight/Structures/Wallmounts/posters/killemall.rsi
@@ -322,7 +322,7 @@
   parent: PosterBase
   id: PosterContrabandWantedStirStir
   name: "Wanted, Stir Stir"
-  description: "A wanted poster for Stir Stir, Pun's cousin. He's a real cell stuffer, been in and out of Genpop almost every day for years. You dont know why Sec hasn't just executed him already."
+  description: "A wanted poster for Stir Stir, Pun's cousin. He's a real cell stuffer, been in and out of Genpop almost every day for years. You dont know why the MPs haven't just executed him already."
   components:
   - type: Sprite
     sprite: _Starlight/Structures/Wallmounts/posters/wanted.rsi

@@ -12,6 +12,6 @@ cargoproduct-category-name-livestock = Livestock
 cargoproduct-category-name-materials = Materials
 cargoproduct-category-name-medical = Medical
 cargoproduct-category-name-science = Science
-cargoproduct-category-name-security = Security
+cargoproduct-category-name-security = Marine Police
 cargoproduct-category-name-service = Service
 cargoproduct-category-name-shuttle = Shuttle

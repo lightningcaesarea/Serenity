@@ -451,7 +451,7 @@
     </ColorBox>
     <ColorBox Color="#2f3832">
       <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="2">
-        To make, hold, or use minor contraband without authorization. Authorization may only be granted by the Warden, the Head of Security, or the Captain.
+        To make, hold, or use minor contraband without authorization. Authorization may only be granted by the Marine Quartermaster, the Marine CO, or the Captain.
       </Box>
     </ColorBox>
     <ColorBox Color="#2e422e">
@@ -501,7 +501,7 @@
     </ColorBox>
     <ColorBox>
       <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="2">
-        To pretend to be someone you are not, or attempting to commit fraud in any fashion. Impersonation may be elevated to a Moderate crime if the perpetrator is impersonating a member of Security, or a Major crime if they are impersonating a member of Command or Central Command.
+        To pretend to be someone you are not, or attempting to commit fraud in any fashion. Impersonation may be elevated to a Moderate crime if the perpetrator is impersonating a member of the Marine Police, or a Major crime if they are impersonating a member of Command or Central Command.
       </Box>
     </ColorBox>
   </Table>
@@ -526,7 +526,7 @@
     </ColorBox>
     <ColorBox Color="#593a4e">
       <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="2">
-        To resist reasonable orders given by an authority. This includes lawful detainment and authorized searches. Officers are required to warn the individual before resorting to arrest.
+        To resist reasonable orders given by an authority. This includes lawful detainment and authorized searches. Marine Troopers are required to warn the individual before resorting to arrest.
       </Box>
     </ColorBox>
     <ColorBox Color="#2f3832">
@@ -536,7 +536,7 @@
     </ColorBox>
     <ColorBox Color="#2f3832">
       <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="2">
-        To make, hold, or use major contraband without authorization.  Any items restricted to a Department or Job are considered major contraband. Authorization may only be granted by the Warden, the Head of Security, the Captain or relevant department head.
+        To make, hold, or use major contraband without authorization.  Any items restricted to a Department or Job are considered major contraband. Authorization may only be granted by the Marine Quartermaster, the Marine CO, the Captain or relevant department head.
       </Box>
     </ColorBox>
     <ColorBox Color="#453a59">
@@ -641,7 +641,7 @@
     </ColorBox>
     <ColorBox Color="#475c7d">
       <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="2">
-      	To incite rebellion against the authority of the station including but not limited to; Command, Security, Central Command, or Nanotrasen.
+      	To incite rebellion against the authority of the station including but not limited to; Command, the Marine Police, Central Command, or Nanotrasen.
       </Box>
     </ColorBox>
     <ColorBox>
@@ -701,7 +701,7 @@
     </ColorBox>
     <ColorBox Color="#59563a">
       <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="2">
-       To enter a secured area without permission. If the area is behind a locked door, it is secure trespass. This includes non-public department spaces and especially security areas, command areas, the vault, and the armory.
+       To enter a secured area without permission. If the area is behind a locked door, it is secure trespass. This includes non-public department spaces and especially Marine Police areas, command areas, the vault, and the armory.
       </Box>
     </ColorBox>
     <ColorBox Color="#4d2e2e">
@@ -756,7 +756,7 @@
     </ColorBox>
     <ColorBox>
       <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="2">
-        To break out of a cell or custody with the intention of escaping. This applies to people breaking others out. Repeat offenses may have this charge increased to permanent confinement and later elevated to an execution with the Captain's authority only if the suspect has repeatedly committed breach of custody. Breach of custody for the preservation of life, not including to escape execution, such as to vacate a location made dangerous due to gunfire, fire, spacing, or lack of oxygen- may be reduced or ignored at the Warden or Head of Security's discretion.
+        To break out of a cell or custody with the intention of escaping. This applies to people breaking others out. Repeat offenses may have this charge increased to permanent confinement and later elevated to an execution with the Captain's authority only if the suspect has repeatedly committed breach of custody. Breach of custody for the preservation of life, not including to escape execution, such as to vacate a location made dangerous due to gunfire, fire, spacing, or lack of oxygen- may be reduced or ignored at the Marine Quartermaster or Marine CO's discretion.
       </Box>
     </ColorBox>
     <ColorBox Color="#2f3832">
@@ -842,7 +842,7 @@
   </Table>
 
   ## Capital Crimes
-  Those who commit a capital crime should be detained in perma with confirmation from Captain. If a capital criminal escapes they are to be executed and transported to CC in a body bag at the end of shift. Emergency executions may be enacted by Captain or the Head of Security with at least 3 other Command as witnesses, but must be reported directly to Central Command afterwards for review.
+  Those who commit a capital crime should be detained in perma with confirmation from Captain. If a capital criminal escapes they are to be executed and transported to CC in a body bag at the end of shift. Emergency executions may be enacted by Captain or the Marine CO with at least 3 other Command as witnesses, but must be reported directly to Central Command afterwards for review.
   <Table Columns="2">
     <ColorBox>
       <Box>
@@ -881,7 +881,7 @@
     </ColorBox>
     <ColorBox Color="#4d2e2e">
       <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="2">
-        To unlawfully execute an individual without authorization or outside of Standard Operating Procedure. This law is distinct from murder, and applies primarily to Security, Command, and Central Command forces such as Emergency Response Teams.
+        To unlawfully execute an individual without authorization or outside of Standard Operating Procedure. This law is distinct from murder, and applies primarily to the Marine Police, Command, and Central Command forces such as Emergency Response Teams.
       </Box>
     </ColorBox>
     <ColorBox Color="#4d2e2e">

@@ -177124,7 +177124,7 @@ entities:
   - uid: 26807
     components:
     - type: MetaData
-      name: remote signaller (Security Screen)
+      name: remote signaller (Marine Police Screen)
     - type: Transform
       parent: 2
       rot: 3.141592653589793 rad
@@ -187684,7 +187684,7 @@ entities:
   - uid: 28258
     components:
     - type: MetaData
-      name: substation (South Security)
+      name: substation (South Marine Police)
     - type: Transform
       parent: 2
       pos: -35.5,-38.5
@@ -187693,7 +187693,7 @@ entities:
   - uid: 28259
     components:
     - type: MetaData
-      name: substation (West Security)
+      name: substation (West Marine Police)
     - type: Transform
       parent: 2
       pos: -59.5,-28.5

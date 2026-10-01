@@ -12624,7 +12624,7 @@ entities:
   - uid: 215
     components:
     - type: MetaData
-      name: Security Substation
+      name: Marine Police Substation
     - type: Transform
       parent: 2
       pos: -33.5,4.5
@@ -16135,7 +16135,7 @@ entities:
   - uid: 676
     components:
     - type: MetaData
-      name: Main Hall South Security APC
+      name: Main Hall South Marine Police APC
     - type: Transform
       parent: 2
       pos: -28.5,-25.5
@@ -149862,7 +149862,7 @@ entities:
   - uid: 21307
     components:
     - type: MetaData
-      name: Security Substation
+      name: Marine Police Substation
     - type: Transform
       parent: 2
       pos: -34.5,2.5

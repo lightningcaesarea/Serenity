@@ -79,10 +79,10 @@
     - state: flashbang
 
 - type: entity
-  name: sechud box
+  name: MP HUD box
   parent: BoxCardboard
   id: BoxSechud
-  description: A box of sechuds.
+  description: A box of MP HUDs.
   components:
   - type: EntityTableContainerFill
     containers:
@@ -95,10 +95,10 @@
     - state: sechud
 
 - type: entity
-  name: secglasses box
+  name: MP glasses box
   parent: BoxCardboard
   id: BoxSecglasses
-  description: A box of security glasses.
+  description: A box of MP glasses.
   components:
   - type: EntityTableContainerFill
     containers:

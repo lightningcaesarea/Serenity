@@ -15,7 +15,7 @@
 - type: entity
   id: LockerSecurityLarge
   parent: LockerLargeBaseSecure
-  name: large security officer's locker
+  name: large Marine Trooper's locker
   components:
   - type: Appearance
   - type: EntityStorageVisuals
@@ -29,7 +29,7 @@
 - type: entity
   id: LockerBrigmedicLarge
   parent: LockerLargeBaseSecure
-  name: large corpsman's locker
+  name: large Marine Corpsman's locker
   components:
   - type: Appearance
   - type: EntityStorageVisuals

@@ -131170,7 +131170,7 @@ entities:
   - uid: 19738
     components:
     - type: MetaData
-      name: Gorlex - Warden
+      name: Gorlex - Marine Quartermaster
     - type: Transform
       parent: 2
       pos: 4.5,9.5
@@ -139832,7 +139832,7 @@ entities:
   - uid: 21108
     components:
     - type: MetaData
-      name: Gorlex Security Consulting 300th Anneversery commemoration
+      name: Gorlex Marine Police Consulting 300th Anneversery commemoration
       desc: A marble stele celebrating 300 years of business for the Gorlex Maurauders, we should probably have this removed soon...
     - type: Transform
       parent: 2

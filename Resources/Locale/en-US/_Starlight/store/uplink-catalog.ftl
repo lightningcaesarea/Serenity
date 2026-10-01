@@ -91,7 +91,7 @@ uplink-glue-grenade-name = Glue Grenade
 uplink-glue-grenade-desc = Special grenade for shenanigans, releasing large cloud of glue foam.
 
 uplink-hydra-name = Hydra
-uplink-hydra-desc = A modified Hydra capable of taking both cleanades and standard grenades. Excellent for when you need to clean up the security department. Comes pre-filled with special syndicate cleanades.
+uplink-hydra-desc = A modified Hydra capable of taking both cleanades and standard grenades. Excellent for when you need to clean up the Marine Police. Comes pre-filled with special syndicate cleanades.
 
 uplink-pizza-bomb-name = Nefarious Pizza bomb
 uplink-pizza-bomb-desc = Originally developed by covertly by DONK Co to disuade the heretics who prefer their pizza not in pocket form. This pizza box is wired, and explodes within moments of being opened.
@@ -124,7 +124,7 @@ uplink-syndiedrobe-name = SyndieDrobe flatpack
 uplink-syndiedrobe-desc = Looks like Syndieland's back in business.
 
 uplink-noslip-clown-shoes-name = No-Slip Clown Shoes
-uplink-noslip-clown-shoes-desc = For the clowns who want that extra edge against security.
+uplink-noslip-clown-shoes-desc = For the clowns who want that extra edge against the Marine Police.
 
 uplink-banana-esword-name = Banana Energy Sword
 uplink-banana-esword-desc = A bananium-modified energy sword that slips whoever it slices. Does minimal damage.

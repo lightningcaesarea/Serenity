@@ -11571,7 +11571,7 @@ entities:
   - uid: 41
     components:
     - type: MetaData
-      name: Security Main Air Alarm
+      name: Marine Police Main Air Alarm
     - type: Transform
       parent: 2
       rot: 1.5707963267948966 rad
@@ -12332,7 +12332,7 @@ entities:
   - uid: 84
     components:
     - type: MetaData
-      name: Warden Office Air Alarm
+      name: Marine Quartermaster Office Air Alarm
     - type: Transform
       parent: 2
       pos: -89.5,-19.5
@@ -12348,7 +12348,7 @@ entities:
   - uid: 85
     components:
     - type: MetaData
-      name: Security Locker Room Air Alarm
+      name: Marine Police Locker Room Air Alarm
     - type: Transform
       parent: 2
       pos: -88.5,-24.5
@@ -12373,7 +12373,7 @@ entities:
   - uid: 87
     components:
     - type: MetaData
-      name: HoS Office Air Alarm
+      name: Marine CO Office Air Alarm
     - type: Transform
       parent: 2
       rot: 3.141592653589793 rad
@@ -12388,7 +12388,7 @@ entities:
   - uid: 88
     components:
     - type: MetaData
-      name: HoS Bedroom Air Alarm
+      name: Marine CO Bedroom Air Alarm
     - type: Transform
       parent: 2
       rot: -1.5707963267948966 rad
@@ -12403,7 +12403,7 @@ entities:
   - uid: 89
     components:
     - type: MetaData
-      name: Security Entrance Air Alarm
+      name: Marine Police Entrance Air Alarm
     - type: Transform
       parent: 2
       pos: -97.5,-16.5
@@ -18028,7 +18028,7 @@ entities:
   - uid: 786
     components:
     - type: MetaData
-      name: Warden Office APC
+      name: Marine Quartermaster Office APC
     - type: Transform
       parent: 2
       rot: -1.5707963267948966 rad
@@ -18047,7 +18047,7 @@ entities:
   - uid: 788
     components:
     - type: MetaData
-      name: Security Storage APC
+      name: Marine Police Storage APC
     - type: Transform
       parent: 2
       rot: 3.141592653589793 rad
@@ -18057,7 +18057,7 @@ entities:
   - uid: 789
     components:
     - type: MetaData
-      name: HoS Office APC
+      name: Marine CO Office APC
     - type: Transform
       parent: 2
       rot: -1.5707963267948966 rad
@@ -18070,7 +18070,7 @@ entities:
   - uid: 790
     components:
     - type: MetaData
-      name: Security APC
+      name: Marine Police APC
     - type: Transform
       parent: 2
       rot: -1.5707963267948966 rad
@@ -139851,7 +139851,7 @@ entities:
   - uid: 20582
     components:
     - type: MetaData
-      name: paper (Aussec Security Suite)
+      name: paper (Aussec Marine Police Suite)
     - type: Transform
       parent: 2
       pos: -92.551506,-19.605207
@@ -156070,7 +156070,7 @@ entities:
   - uid: 22932
     components:
     - type: MetaData
-      name: Security Deterance SMES
+      name: Marine Police Deterance SMES
     - type: Transform
       parent: 2
       pos: -77.5,-28.5
@@ -159192,7 +159192,7 @@ entities:
   - uid: 23469
     components:
     - type: MetaData
-      name: Security Substation
+      name: Marine Police Substation
     - type: Transform
       parent: 2
       pos: -78.5,-28.5

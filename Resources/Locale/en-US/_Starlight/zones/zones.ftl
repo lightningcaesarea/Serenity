@@ -1,7 +1,7 @@
 zone-hallway = Hallway
 zone-maintenance = Maintenance
 zone-command = Command
-zone-security = Security
+zone-security = Marine Police
 zone-medical = Medical
 zone-engineering = Engineering
 zone-science = Science

@@ -123,8 +123,8 @@ secure-terminal-ert-cburn-desc = Deploys an ERT CBURN detail.
 secure-terminal-ert-cburn-announcement = An Emergency Response Team — CBURN detail — has been authorized and is en route. Estimated arrival: 15 minutes.
 
 secure-terminal-code-gamma-name = Code GAMMA
-secure-terminal-code-gamma-desc = Escalates the station to [color=palevioletred]GAMMA[/color] alert. Martial law — all civilians are to be escorted by security to safe areas.
-    Security must be armed at all times. All civilians must report to their nearest head of staff and be escorted to a secure location. Emergency lights activate.
+secure-terminal-code-gamma-desc = Escalates the station to [color=palevioletred]GAMMA[/color] alert. Martial law — all civilians are to be escorted by the Marine Police to safe areas.
+    The Marine Police must be armed at all times. All civilians must report to their nearest head of staff and be escorted to a secure location. Emergency lights activate.
 secure-terminal-code-gamma-announcement = Attention! Code GAMMA is being put into effect shortly. Martial law will be enforced. All crew report to your nearest head of staff immediately.
 
 secure-terminal-end-gamma-name = End GAMMA Alert
@@ -157,7 +157,7 @@ secure-terminal-med-pod-announcement = The Emergency Medical Pod has been author
 
 secure-terminal-itg-salvage-team-name = ITG Salvage Team
 secure-terminal-itg-salvage-team-desc = Contracts the Interstellar Trade Guild's local Salvage team to engage active station threats.
-    Recommended when no Security personnel are present, or when Security cannot respond without assistance.
+    Recommended when no Marine Police personnel are present, or when the Marine Police cannot respond without assistance.
 secure-terminal-itg-salvage-team-announcement = The Interstellar Trade Guild's local Salvage team has been contracted to engage active station threats.
 
 secure-terminal-dismiss-itg-salvage-team-name = Dismiss ITG Salvage Team

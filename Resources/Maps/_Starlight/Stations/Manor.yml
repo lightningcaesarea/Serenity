@@ -94544,7 +94544,7 @@ entities:
       parent: 2
       pos: -19.5,72.5
     - type: NavMapBeacon
-      text: HoS
+      text: Marine CO
     - type: WarpPoint
       location: HoS
 - proto: DefaultStationBeaconIAA
@@ -94706,7 +94706,7 @@ entities:
       parent: 2
       pos: -24.5,50.5
     - type: NavMapBeacon
-      text: Security
+      text: Marine Police
     - type: WarpPoint
       location: Security
   - uid: 15588
@@ -94742,7 +94742,7 @@ entities:
       parent: 2
       pos: -58.5,55.5
     - type: NavMapBeacon
-      text: Sec EVA
+      text: MP EVA
     - type: WarpPoint
       location: Sec EVA
 - proto: DefaultStationBeaconServerRoom
@@ -94867,7 +94867,7 @@ entities:
       parent: 2
       pos: -48.5,55.5
     - type: NavMapBeacon
-      text: Warden
+      text: Marine Quartermaster
     - type: WarpPoint
       location: Warden
 - proto: DefaultStationBeaconXenobiology
@@ -186840,7 +186840,7 @@ entities:
   - uid: 28923
     components:
     - type: MetaData
-      name: SMES (Security)
+      name: SMES (Marine Police)
     - type: Transform
       parent: 2
       pos: -41.5,74.5
@@ -189227,7 +189227,7 @@ entities:
   - uid: 29316
     components:
     - type: MetaData
-      name: substation (Security)
+      name: substation (Marine Police)
     - type: Transform
       parent: 2
       pos: -39.5,74.5

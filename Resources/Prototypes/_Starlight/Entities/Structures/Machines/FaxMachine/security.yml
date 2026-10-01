@@ -21,7 +21,7 @@
 - type: entity
   parent: FaxMachineSecurityBase
   id: FaxMachineSecurity
-  suffix: "SEC: Security"
+  suffix: "MP: Marine Police"
   components:
     - type: Sprite
       layers:
@@ -30,33 +30,33 @@
           color: "#ff4242"
     - type: FaxMachine
       group: FaxGroupSecurity
-      name: "Security"
+      name: "Marine Police"
       order: 100
 
 - type: entity
   parent: FaxMachineSecurityBase
   id: FaxMachineSecurityHoS
-  suffix: "SEC: HoS"
+  suffix: "MP: Marine CO"
   components:
     - type: FaxMachine
       group: FaxGroupSecurity
-      name: "Head of Security"
+      name: "Marine CO"
       order: 200
 
 - type: entity
   parent: FaxMachineSecurityBase
   id: FaxMachineSecurityWarden
-  suffix: "SEC: Warden"
+  suffix: "MP: Marine Quartermaster"
   components:
     - type: FaxMachine
       group: FaxGroupSecurity
-      name: "Warden"
+      name: "Marine Quartermaster"
       order: 300
 
 - type: entity
   parent: FaxMachineSecurityBase
   id: FaxMachineSecurityDetective
-  suffix: "SEC: Detective"
+  suffix: "MP: Detective"
   components:
     - type: FaxMachine
       group: FaxGroupSecurity
@@ -66,17 +66,17 @@
 - type: entity
   parent: FaxMachineSecurityBase
   id: FaxMachineSecurityFront
-  suffix: "SEC: Brigmedic"
+  suffix: "MP: Marine Corpsman"
   components:
     - type: FaxMachine
       group: FaxGroupSecurity
-      name: "Corpsman"
+      name: "Marine Corpsman"
       order: 500
 
 - type: entity
   parent: FaxMachineSecurityBase
   id: FaxMachineSecurityPrison
-  suffix: "SEC: Prison"
+  suffix: "MP: Prison"
   components:
     - type: FaxMachine
       group: FaxGroupSecurity

@@ -334,7 +334,7 @@
 - type: entity
   id: LockerHeadOfSecurity
   parent: LockerBaseSecure
-  name: head of security's locker
+  name: Marine CO's locker
   components:
   - type: Appearance
   - type: EntityStorageVisuals
@@ -350,7 +350,7 @@
 - type: entity
   id: LockerWarden
   parent: LockerBaseSecure
-  name: warden's locker
+  name: Marine Quartermaster's locker
   components:
   - type: Appearance
   - type: Sprite
@@ -399,7 +399,7 @@
 - type: entity
   id: LockerBrigmedic
   parent: LockerBaseSecure
-  name: corpsman locker
+  name: Marine Corpsman locker
   components:
   - type: Appearance
   - type: EntityStorageVisuals
@@ -413,7 +413,7 @@
 - type: entity
   id: LockerSecurity
   parent: LockerBaseSecure
-  name: security officer's locker
+  name: Marine Trooper's locker
   components:
   - type: Appearance
   - type: Sprite

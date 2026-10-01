@@ -19,8 +19,8 @@ id-card-access-level-shuttle = Shuttle
 id-card-access-level-robotics = Robotics
 
 # Security
-id-card-access-level-brigmedic = Corpsman
-id-card-access-level-cadet = Cadet
+id-card-access-level-brigmedic = Marine Corpsman
+id-card-access-level-cadet = Marine Cadet
 
 # Service
 id-card-access-level-clown = Clown
@@ -34,7 +34,7 @@ id-card-access-level-paramed = Paramedic
 id-card-access-level-cargo-cyborg = Cargo Cyborg
 id-card-access-level-engineering-cyborg = Engineering Cyborg
 id-card-access-level-research-cyborg = Research Cyborg
-id-card-access-level-security-cyborg = Security Cyborg
+id-card-access-level-security-cyborg = Marine Police Cyborg
 id-card-access-level-service-cyborg = Service Cyborg
 id-card-access-level-medical-cyborg = Medical Cyborg
 

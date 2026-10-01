@@ -438,8 +438,8 @@
   id: SecurityTechFab
   categories: [ ShouldMapStation ] # Starlight
   parent: BaseLatheLube
-  name: security techfab
-  description: Prints equipment for use by security crew.
+  name: Marine Police techfab
+  description: Prints equipment for use by Marine Police crew.
   components:
   - type: Sprite
     sprite: Structures/Machines/techfab.rsi

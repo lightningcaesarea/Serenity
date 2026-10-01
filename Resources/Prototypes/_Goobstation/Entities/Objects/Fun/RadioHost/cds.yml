@@ -102,8 +102,8 @@
 - type: entity
   parent: BaseCDDisc
   id: CDAdvertSecurityPSA
-  name: "CD: Security PSA"
-  description: A CD containing a prerecorded public service announcement for the station's security department.
+  name: "CD: Marine Police PSA"
+  description: A CD containing a prerecorded public service announcement for the station's Marine Police.
   components:
   - type: Vinyl
     song:

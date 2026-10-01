@@ -8934,7 +8934,7 @@ entities:
   - uid: 228
     components:
     - type: MetaData
-      name: APC (Security - Interrogation)
+      name: APC (Marine Police - Interrogation)
     - type: Transform
       parent: 2
       rot: -1.5707963267948966 rad
@@ -9154,7 +9154,7 @@ entities:
   - uid: 244
     components:
     - type: MetaData
-      name: APC (Security - Vault)
+      name: APC (Marine Police - Vault)
     - type: Transform
       parent: 2
       rot: 3.141592653589793 rad
@@ -9168,7 +9168,7 @@ entities:
   - uid: 245
     components:
     - type: MetaData
-      name: APC (Security - Warden)
+      name: APC (Marine Police - Marine Quartermaster)
     - type: Transform
       parent: 2
       rot: 3.141592653589793 rad
@@ -9567,7 +9567,7 @@ entities:
   - uid: 274
     components:
     - type: MetaData
-      name: APC (Security - Brig)
+      name: APC (Marine Police - Brig)
     - type: Transform
       parent: 2
       rot: 3.141592653589793 rad
@@ -9595,7 +9595,7 @@ entities:
   - uid: 276
     components:
     - type: MetaData
-      name: APC (Security - Main)
+      name: APC (Marine Police - Main)
     - type: Transform
       parent: 2
       rot: 3.141592653589793 rad
@@ -9637,7 +9637,7 @@ entities:
   - uid: 279
     components:
     - type: MetaData
-      name: APC (Security - Brigmed)
+      name: APC (Marine Police - Brigmed)
     - type: Transform
       parent: 2
       rot: 1.5707963267948966 rad
@@ -51954,7 +51954,7 @@ entities:
   - uid: 9052
     components:
     - type: MetaData
-      name: security notice
+      name: Marine Police notice
       desc: '""Surveillance to be conducted strictly through cameras" — The following letters are covered in blood, illegible.'
     - type: Transform
       parent: 8468

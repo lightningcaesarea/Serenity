@@ -122,7 +122,7 @@
   parent: [ClothingHeadHelmetBase, BaseSecurityContraband]
   id: ClothingHeadHelmetPlate
   name: plate helmet
-  description: A modified security helmet with a ceramic plate insert, which means less padding for blunt hits.
+  description: A modified Marine Police helmet with a ceramic plate insert, which means less padding for blunt hits.
   components:
   - type: Sprite
     sprite: _Starlight/Clothing/Head/Helmets/plate.rsi
@@ -143,7 +143,7 @@
   parent:  [ClothingHeadHelmetBase, BaseSecurityContraband ]
   id: ClothingHeadHelmetStabproof
   name: stabproof helmet
-  description: The most "comfortable" security helmet, as rated by officers. Will take a blow to the head nicely, but a bullet'll go right through it.
+  description: The most "comfortable" Marine Police helmet, as rated by Marine Troopers. Will take a blow to the head nicely, but a bullet'll go right through it.
   components:
   - type: Sprite
     sprite: _Starlight/Clothing/Head/Helmets/stabproof.rsi

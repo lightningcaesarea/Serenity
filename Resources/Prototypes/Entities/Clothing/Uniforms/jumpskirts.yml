@@ -177,8 +177,8 @@
 - type: entity
   parent: [ClothingUniformSkirtBase, BaseCommandContraband]
   id: ClothingUniformJumpskirtHoS
-  name: head of security's jumpskirt
-  description: It's bright red and rather crisp, much like security's victims tend to be.
+  name: Marine CO's jumpskirt
+  description: It's bright red and rather crisp, much like the Marine Police's victims tend to be.
   components:
   - type: Sprite
     sprite: _Serenity/Clothing/Uniforms/Jumpskirt/hos_dv.rsi
@@ -196,8 +196,8 @@
 - type: entity
   parent: [ClothingUniformSkirtBase, BaseCommandContraband]
   id: ClothingUniformJumpskirtHoSAlt
-  name: head of security's turtleneck
-  description: It's a turtleneck worn by those strong and disciplined enough to achieve the position of Head of Security.
+  name: Marine CO's turtleneck
+  description: It's a turtleneck worn by those strong and disciplined enough to achieve the position of Marine CO.
   components:
   - type: Sprite
     sprite: _Serenity/Clothing/Uniforms/Jumpskirt/hos_alt_dv.rsi
@@ -207,8 +207,8 @@
 - type: entity
   parent: [ClothingUniformSkirtBase, BaseCommandContraband]
   id: ClothingUniformJumpskirtHoSParadeMale
-  name: head of security's parade uniform
-  description: A head of security's luxury-wear, for special occasions.
+  name: Marine CO's parade uniform
+  description: A Marine CO's luxury-wear, for special occasions.
   components:
   - type: Sprite
     sprite: Clothing/Uniforms/Jumpskirt/hos_parade.rsi
@@ -284,7 +284,7 @@
 - type: entity
   parent: ClothingUniformSkirtBase
   id: ClothingUniformJumpskirtBrigmedic
-  name: corpsman jumpskirt
+  name: Marine Corpsman jumpskirt
   description: This uniform is issued to qualified personnel who have been trained. No one cares that the training took half a day.
   components:
   - type: Sprite
@@ -395,7 +395,7 @@
 - type: entity
   parent: [ClothingUniformSkirtBase, BaseSecurityContraband]
   id: ClothingUniformJumpskirtSec
-  name: security jumpskirt
+  name: Marine Police jumpskirt
   description: A jumpskirt made of strong material, providing robust protection.
   components:
   - type: Sprite
@@ -415,8 +415,8 @@
 - type: entity
   parent: [ClothingUniformSkirtBase, BaseSecurityContraband]
   id: ClothingUniformJumpskirtWarden
-  name: armourer's uniform
-  description: A formal security suit for officers complete with NanoTrasen belt buckle. # SL
+  name: Marine Quartermaster's uniform
+  description: A formal Marine Police suit for officers complete with NanoTrasen belt buckle. # SL
   components:
   - type: Sprite
     sprite: _Serenity/Clothing/Uniforms/Jumpskirt/warden_dv.rsi
@@ -490,7 +490,7 @@
 - type: entity
   parent: [ClothingUniformSkirtBase, BaseCommandContraband]
   id: ClothingUniformJumpskirtHosFormal
-  name: hos's formal dress
+  name: Marine CO's formal dress
   description: A dress for special occasions.
   components:
   - type: Sprite
@@ -688,8 +688,8 @@
 - type: entity
   parent: [ClothingUniformSkirtBase, BaseSecurityContraband]
   id: ClothingUniformJumpskirtSeniorOfficer
-  name: senior officer jumpskirt
-  description: A sign of skill and prestige within the security department.
+  name: Senior Marine Trooper jumpskirt
+  description: A sign of skill and prestige within the Marine Police.
   components:
   - type: Sprite
     sprite: Clothing/Uniforms/Jumpskirt/senior_officer.rsi
@@ -699,7 +699,7 @@
 - type: entity
   parent: [ClothingUniformSkirtBase, BaseSecurityContraband]
   id: ClothingUniformJumpskirtSecGrey
-  name: grey security jumpskirt
+  name: grey Marine Police jumpskirt
   description: A tactical relic of years past before NanoTrasen decided it was cheaper to dye the suits red instead of washing out the blood. # SL
   components:
   - type: Sprite

@@ -155,7 +155,7 @@
     state: stamp-hop
 
 - type: entity
-  name: head of security's rubber stamp
+  name: Marine CO's rubber stamp
   parent: [RubberStampBase, BaseCommandContraband]
   id: RubberStampHos
   description: A rubber stamp for stamping important documents. I love the smell of rubber in the morning. # Starlight
@@ -241,10 +241,10 @@
     price: 1000
 
 - type: entity
-  name: warden's rubber stamp
+  name: Marine Quartermaster's rubber stamp
   parent: [RubberStampBase, BaseSecurityContraband]
   id: RubberStampWarden
-  description: A rubber stamp for stamping important documents. Mostly used for approving whatever maints loot the secoffs bring in. # Starlight
+  description: A rubber stamp for stamping important documents. Mostly used for approving whatever maints loot the MPs bring in. # Starlight
   categories: [ DoNotMap ]
   components:
   - type: Stamp

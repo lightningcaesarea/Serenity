@@ -104,7 +104,7 @@
 - type: entity
   parent: [BaseSecurityCommandContraband, ClothingOuterBaseWarm, ClothingOuterArmorHoS] # Starlight
   id: ClothingOuterCoatHoSTrench
-  name: head of security's armored trenchcoat
+  name: Marine CO's armored trenchcoat
   description: A greatcoat enhanced with a special alloy for some extra protection and style for those with a commanding presence.
   components:
   - type: Sprite
@@ -367,8 +367,8 @@
 - type: entity
   parent: [ClothingOuterArmorWarden, ClothingOuterBaseWarm, BaseSecurityContraband] # Starlight
   id: ClothingOuterCoatWarden
-  name: armourer's armored jacket
-  description: A sturdy, utilitarian jacket designed to protect a warden from any brig-bound threats.
+  name: Marine Quartermaster's armored jacket
+  description: A sturdy, utilitarian jacket designed to protect a Marine Quartermaster from any brig-bound threats.
   components:
   - type: Sprite
     sprite: _Serenity/Clothing/OuterClothing/Coats/armourergreatcoat.rsi

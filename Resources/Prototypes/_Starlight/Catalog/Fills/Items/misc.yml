@@ -2,7 +2,7 @@
   id: SecureBriefings
   name: Secure Briefing Documents
   suffix: Do Not Map
-  description: A set of classified documents to inform new members of Security
+  description: A set of classified documents to inform new members of the Marine Police
   parent: [ BoxFolderRedEmpty, BaseCommandContraband ]
   components:
   - type: EntityTableContainerFill

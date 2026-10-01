@@ -219,7 +219,7 @@
     offset: 0.0
 
 - type: entity
-  name: random security crate spawner
+  name: random Marine Police crate spawner
   id: LootSpawnerRandomCrateSecurity
   parent: MarkerBase
   components:

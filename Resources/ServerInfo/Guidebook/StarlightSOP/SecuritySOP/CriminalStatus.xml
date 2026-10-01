@@ -2,13 +2,13 @@
 # Criminal Statuses
 
 <GuideEntityEmbed Entity="ComputerCriminalRecordsDesktop" Caption="Criminal Statuses"/>
-The Criminal Records system on-board all NT-CC stations allows for the profiling of individual crewmembers into categories, visible next to the crewmember if one is wearing security glasses.
+The Criminal Records system on-board all NT-CC stations allows for the profiling of individual crewmembers into categories, visible next to the crewmember if one is wearing MP glasses.
 
 All Criminal Statuses should be accompanied by a description as to why the status has been applied. This is to be done in the Criminal Records system. The exception to this is Discharged, which is self-explanatory.
 
 All Criminal Statuses should be removed or changed when no longer relevant. Failure to do so is a violation of Standard Operating Procedure.
 
-Should an Officer fail to change or remove a criminal status when they are obligated to as per their SOP, and this failure results in injury to the crewmember in question, then the Officer is guilty of Endangerment. Should the crewmember be killed as a result of this failure, the Officer is then guilty of Negligent Homicide; charged under Manslaughter in Corporate Law.
+Should a Marine Trooper fail to change or remove a criminal status when they are obligated to as per their SOP, and this failure results in injury to the crewmember in question, then the Marine Trooper is guilty of Endangerment. Should the crewmember be killed as a result of this failure, the Marine Trooper is then guilty of Negligent Homicide; charged under Manslaughter in Corporate Law.
 
  <Table Columns="3">
     <ColorBox>
@@ -53,7 +53,7 @@ Should an Officer fail to change or remove a criminal status when they are oblig
     </ColorBox>
     <ColorBox>
       <Box>
-        Bring to Security, following standard escalation as per §4 of Security SOP.
+        Bring to the Marine Police, following standard escalation as per §4 of Marine Police SOP.
       </Box>
     </ColorBox>
     <ColorBox>
@@ -68,7 +68,7 @@ Should an Officer fail to change or remove a criminal status when they are oblig
     </ColorBox>
     <ColorBox>
       <Box>
-        Engage with non-lethals on sight, then bring to Security.
+        Engage with non-lethals on sight, then bring to the Marine Police.
       </Box>
     </ColorBox>
     <ColorBox>
@@ -78,12 +78,12 @@ Should an Officer fail to change or remove a criminal status when they are oblig
     </ColorBox>
     <ColorBox>
       <Box>
-        Crewmember is an established threat to arresting officers.
+        Crewmember is an established threat to arresting Marine Troopers.
       </Box>
     </ColorBox>
     <ColorBox>
       <Box>
-        Engage with lethals on sight, then bring to Security.
+        Engage with lethals on sight, then bring to the Marine Police.
       </Box>
     </ColorBox>
     <ColorBox>

@@ -80,7 +80,7 @@
   parent: PosterBase
   id: PosterContrabandFunPolice
   name: "Fun Police"
-  description: "A poster condemning the station's security forces."
+  description: "A poster condemning the station's Marine Police."
   components:
   - type: Sprite
     state: poster3_contraband
@@ -632,7 +632,7 @@
   parent: PosterBase
   id: PosterLegitHereForYourSafety
   name: "Here For Your Safety"
-  description: "A poster glorifying the station's security force."
+  description: "A poster glorifying the station's Marine Police."
   components:
   - type: Sprite
     state: poster1_legit
@@ -812,7 +812,7 @@
   parent: PosterBase
   id: PosterLegitSafetyReport
   name: "Safety: Report"
-  description: "A poster instructing the viewer to report suspicious activity to the security force."
+  description: "A poster instructing the viewer to report suspicious activity to the Marine Police."
   components:
   - type: Sprite
     state: poster21_legit
@@ -821,7 +821,7 @@
   parent: PosterBase
   id: PosterLegitReportCrimes
   name: "Report Crimes"
-  description: "A poster encouraging the swift reporting of crime or seditious behavior to station security."
+  description: "A poster encouraging the swift reporting of crime or seditious behavior to the station's Marine Police."
   components:
   - type: Sprite
     state: poster22_legit
@@ -973,8 +973,8 @@
 - type: entity
   parent: PosterBase
   id: PosterLegitSecWatch
-  name: "Sec is Watching You"
-  description: "A poster reminding you that security is watching your every move."
+  name: "MP is Watching You"
+  description: "A poster reminding you that the Marine Police is watching your every move."
   components:
   - type: Sprite
     state: poster39_legit

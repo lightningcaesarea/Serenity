@@ -69,7 +69,7 @@
 - type: entity
   parent: [ClothingBackpack, BaseSecurityContraband]
   id: ClothingBackpackSecurity
-  name: security backpack
+  name: Marine Police backpack
   description: It's a very robust backpack.
   components:
   - type: Sprite
@@ -78,7 +78,7 @@
 - type: entity
   parent: [ClothingBackpack, BaseSecurityContraband]
   id: ClothingBackpackBrigmedic
-  name: corpsman backpack
+  name: Marine Corpsman backpack
   description: It's a very sterile backpack.
   components:
   - type: Sprite

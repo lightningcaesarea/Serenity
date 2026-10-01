@@ -1,7 +1,7 @@
 ﻿- type: entity
   parent: BoxStamps
   id: BoxWardenStamps
-  name: warden's stamp box
+  name: Marine Quartermaster's stamp box
   components:
   - type: EntityTableContainerFill
     containers:

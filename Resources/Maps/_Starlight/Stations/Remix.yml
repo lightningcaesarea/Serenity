@@ -77031,7 +77031,7 @@ entities:
   - uid: 11337
     components:
     - type: MetaData
-      name: divine security techfab
+      name: divine Marine Police techfab
       desc: Prints equipment for use by security crew. blessed by the shit sec of stations past.
     - type: Transform
       parent: 2

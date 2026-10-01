@@ -5156,7 +5156,7 @@ entities:
   - uid: 24
     components:
     - type: MetaData
-      name: Security Hallway air alarm
+      name: Marine Police Hallway air alarm
     - type: Transform
       parent: 2
       pos: 28.5,8.5
@@ -5177,7 +5177,7 @@ entities:
   - uid: 25
     components:
     - type: MetaData
-      name: Security Hallway air alarm
+      name: Marine Police Hallway air alarm
     - type: Transform
       parent: 2
       pos: 17.5,9.5
@@ -6293,7 +6293,7 @@ entities:
   - uid: 86
     components:
     - type: MetaData
-      name: Warden air alarm
+      name: Marine Quartermaster air alarm
     - type: Transform
       parent: 2
       pos: 16.5,13.5
@@ -9230,7 +9230,7 @@ entities:
   - uid: 479
     components:
     - type: MetaData
-      name: Security East APC
+      name: Marine Police East APC
     - type: Transform
       parent: 2
       pos: 26.5,8.5
@@ -9485,7 +9485,7 @@ entities:
   - uid: 505
     components:
     - type: MetaData
-      name: Security North APC
+      name: Marine Police North APC
     - type: Transform
       parent: 2
       rot: -1.5707963267948966 rad
@@ -9529,7 +9529,7 @@ entities:
   - uid: 509
     components:
     - type: MetaData
-      name: Security West APC
+      name: Marine Police West APC
     - type: Transform
       parent: 2
       pos: 14.5,9.5
@@ -43301,7 +43301,7 @@ entities:
   - uid: 6751
     components:
     - type: MetaData
-      name: Security Hallway fire alarm
+      name: Marine Police Hallway fire alarm
     - type: Transform
       parent: 2
       pos: 29.5,8.5
@@ -43322,7 +43322,7 @@ entities:
   - uid: 6752
     components:
     - type: MetaData
-      name: Security Hallway fire alarm
+      name: Marine Police Hallway fire alarm
     - type: Transform
       parent: 2
       pos: 16.5,9.5
@@ -91238,7 +91238,7 @@ entities:
   - uid: 13443
     components:
     - type: MetaData
-      name: Security Substation
+      name: Marine Police Substation
     - type: Transform
       parent: 2
       pos: 23.5,21.5

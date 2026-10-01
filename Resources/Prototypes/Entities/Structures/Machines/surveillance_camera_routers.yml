@@ -75,7 +75,7 @@
   id: SurveillanceCameraRouterSecurity
   categories: [ ShouldMapStation ] # Starlight
   name: security camera router
-  suffix: Security
+  suffix: Marine Police
   components:
     - type: SurveillanceCameraRouter
       subnetFrequency: SurveillanceCameraSecurity

@@ -34,7 +34,7 @@
 - type: entity
   id: ZoneMarkerSecurity
   parent: ZoneMarkerBase
-  name: zone marker (security)
+  name: zone marker (Marine Police)
   components:
   - type: ZoneMarker
     zone: Security

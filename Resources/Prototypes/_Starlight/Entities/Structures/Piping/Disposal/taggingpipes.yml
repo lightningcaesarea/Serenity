@@ -55,7 +55,7 @@
 - type: entity
   id: DisposalTaggerSecurity
   parent: DisposalTagger
-  suffix: Security
+  suffix: Marine Police
   components:
   - type: DisposalTagger
     tag: Security
@@ -82,7 +82,7 @@
 - type: entity
   id: DisposalTaggerWarden
   parent: DisposalTagger
-  suffix: Warden
+  suffix: Marine Quartermaster
   components:
   - type: DisposalTagger
     tag: Warden
@@ -91,7 +91,7 @@
 - type: entity
   id: DisposalTaggerHoS
   parent: DisposalTagger
-  suffix: HoS
+  suffix: Marine CO
   components:
   - type: DisposalTagger
     tag: HoS
@@ -145,7 +145,7 @@
 - type: entity
   id: DisposalTaggerSecurityCheckpoint
   parent: DisposalTagger
-  suffix: SecurityCheckpoint
+  suffix: Marine Police Checkpoint
   components:
   - type: DisposalTagger
     tag: SecurityCheckpoint

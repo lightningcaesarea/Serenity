@@ -1,4 +1,4 @@
-lobby-state-background-warden-title = Warden
+lobby-state-background-warden-title = Marine Quartermaster
 lobby-state-background-warden-artist = Solbusaur
 
 lobby-state-background-pharmacy-title = Pharmacy

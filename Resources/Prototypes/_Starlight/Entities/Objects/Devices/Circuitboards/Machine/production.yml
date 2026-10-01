@@ -513,8 +513,8 @@
 - type: entity
   id: VendingMachineSecCircuitboard
   parent: BaseMachineCircuitboard
-  name: SecTech circuitboard
-  description: A machine printed circuit board for a SecTech machine
+  name: MP-Tech circuitboard
+  description: A machine printed circuit board for an MP-Tech machine
   components:
     - type: Sprite
       state: security
@@ -793,8 +793,8 @@
 - type: entity
   id: VendingMachineSecDrobeCircuitboard
   parent: BaseMachineCircuitboard
-  name: SecDrobe circuitboard
-  description: A machine printed circuit board for a SecDrobe machine
+  name: MP-Drobe circuitboard
+  description: A machine printed circuit board for an MP-Drobe machine
   components:
     - type: Sprite
       state: security

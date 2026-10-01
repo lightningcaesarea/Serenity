@@ -1,6 +1,6 @@
 # Security
 - type: entity
-  name: security loot spawner
+  name: Marine Police loot spawner
   suffix: Gear, Simple
   id: LootSpawnerSecurityBasic
   parent: MarkerBase
@@ -24,7 +24,7 @@
       chance: 0.85
 
 - type: entity
-  name: security loot spawner
+  name: Marine Police loot spawner
   suffix: Gear, Better
   id: LootSpawnerSecurity
   parent: MarkerBase

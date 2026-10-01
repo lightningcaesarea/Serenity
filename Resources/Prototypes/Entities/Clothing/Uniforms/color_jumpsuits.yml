@@ -255,7 +255,7 @@
   parent: ClothingUniformBase
   id: ClothingUniformJumpsuitColorOrange
   name: orange jumpsuit
-  description: Don't wear this near paranoid security officers.
+  description: Don't wear this near paranoid Marine Troopers.
   components:
   - type: RollUpSleeves
   - type: Sprite

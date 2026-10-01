@@ -324,8 +324,8 @@
 - type: entity
   parent: [ClothingUniformBase, BaseCommandContraband]
   id: ClothingUniformJumpsuitHoS
-  name: head of security's jumpsuit
-  description: It's bright red and rather crisp, much like security's victims tend to be.
+  name: Marine CO's jumpsuit
+  description: It's bright red and rather crisp, much like the Marine Police's victims tend to be.
   components:
   - type: RollUpSleeves
   - type: Sprite
@@ -344,8 +344,8 @@
 - type: entity
   parent: [ClothingUniformBase, BaseCommandContraband]
   id: ClothingUniformJumpsuitHoSAlt
-  name: head of security's turtleneck
-  description: It's a turtleneck worn by those strong and disciplined enough to achieve the position of Head of Security.
+  name: Marine CO's turtleneck
+  description: It's a turtleneck worn by those strong and disciplined enough to achieve the position of Marine CO.
   components:
   - type: Sprite
     sprite: _Serenity/Clothing/Uniforms/Jumpsuit/hos_alt_dv.rsi
@@ -355,8 +355,8 @@
 - type: entity
   parent: [ClothingUniformBase, BaseCommandContraband]
   id: ClothingUniformJumpsuitHoSBlue
-  name: head of security's blue jumpsuit
-  description: A blue jumpsuit of Head of Security.
+  name: Marine CO's blue jumpsuit
+  description: A blue jumpsuit of the Marine CO.
   components:
   - type: Sprite
     sprite: _Serenity/Clothing/Uniforms/Jumpsuit/hos_grey_dv.rsi
@@ -366,8 +366,8 @@
 - type: entity
   parent: [ClothingUniformBase, BaseCommandContraband]
   id: ClothingUniformJumpsuitHoSGrey
-  name: head of security's grey jumpsuit
-  description: A grey jumpsuit of Head of Security, which make him look somewhat like a assistant.
+  name: Marine CO's grey jumpsuit
+  description: A grey jumpsuit of the Marine CO, which make him look somewhat like a assistant.
   components:
   - type: Sprite
     sprite: _Serenity/Clothing/Uniforms/Jumpsuit/hos_grey_dv.rsi
@@ -377,8 +377,8 @@
 - type: entity
   parent: [ClothingUniformBase, BaseCommandContraband]
   id: ClothingUniformJumpsuitHoSParadeMale
-  name: head of security's parade uniform
-  description: A male head of security's luxury-wear, for special occasions.
+  name: Marine CO's parade uniform
+  description: A male Marine CO's luxury-wear, for special occasions.
   components:
   - type: Sprite
     sprite: Clothing/Uniforms/Jumpsuit/hos_parade.rsi
@@ -462,7 +462,7 @@
 - type: entity
   parent: ClothingUniformBase
   id: ClothingUniformJumpsuitBrigmedic
-  name: corpsman jumpsuit
+  name: Marine Corpsman jumpsuit
   description: This uniform is issued to qualified personnel who have been trained. No one cares that the training took half a day.
   components:
   - type: Sprite
@@ -594,7 +594,7 @@
 - type: entity
   parent: [ClothingUniformBase, BaseSecurityContraband, ClothingUniformFoldableBase]
   id: ClothingUniformJumpsuitSec
-  name: security jumpsuit
+  name: Marine Police jumpsuit
   description: A jumpsuit made of strong material, providing robust protection.
   components:
   - type: RollUpSleeves
@@ -625,7 +625,7 @@
 - type: entity
   parent: [ClothingUniformBase, BaseSecurityContraband]
   id: ClothingUniformJumpsuitSecGrey
-  name: grey security jumpsuit
+  name: grey Marine Police jumpsuit
   description: A tactical relic of years past before NanoTrasen decided it was cheaper to dye the suits red instead of washing out the blood. # SL
   components:
   - type: Sprite
@@ -647,8 +647,8 @@
 - type: entity
   parent: [ClothingUniformBase, BaseSecurityContraband]
   id: ClothingUniformJumpsuitWarden
-  name: armourer's uniform
-  description: A formal security suit for officers complete with NanoTrasen belt buckle. # SL
+  name: Marine Quartermaster's uniform
+  description: A formal Marine Police suit for officers complete with NanoTrasen belt buckle. # SL
   components:
   - type: Sprite
     sprite: _Serenity/Clothing/Uniforms/Jumpsuit/warden_dv.rsi
@@ -820,7 +820,7 @@
 - type: entity
   parent: [ClothingUniformBase, BaseCommandContraband]
   id: ClothingUniformJumpsuitHosFormal
-  name: hos's formal suit
+  name: Marine CO's formal suit
   description: A suit for special occasions.
   components:
   - type: Sprite
@@ -1197,8 +1197,8 @@
 - type: entity
   parent: [ClothingUniformBase, BaseSecurityContraband]
   id: ClothingUniformJumpsuitSeniorOfficer
-  name: senior officer jumpsuit
-  description: A sign of skill and prestige within the security department.
+  name: Senior Marine Trooper jumpsuit
+  description: A sign of skill and prestige within the Marine Police.
   components:
   - type: Sprite
     sprite: Clothing/Uniforms/Jumpsuit/senior_officer.rsi

@@ -269,8 +269,8 @@
 - type: entity
   parent: [ ClothingHeadHelmetHardsuitSecurity, ClothingHeadSuitWithLightBase, ClothingHeadLightParamsAdvanced ]
   id: ClothingHeadHelmetHardsuitSecurityExperimental
-  name: experimental security hardsuit helmet
-  description: Heavily armored hardsuit helmet for security needs, now with lights!
+  name: experimental Marine Police hardsuit helmet
+  description: Heavily armored hardsuit helmet for Marine Police needs, now with lights!
   components:
   - type: Sprite
     sprite: _Starlight/Clothing/Head/Hardsuits/experimental_security.rsi

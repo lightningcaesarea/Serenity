@@ -163342,7 +163342,7 @@ entities:
   - uid: 25199
     components:
     - type: MetaData
-      name: security SMES
+      name: Marine Police SMES
     - type: Transform
       parent: 2
       pos: -36.5,-0.5
@@ -167750,7 +167750,7 @@ entities:
   - uid: 25964
     components:
     - type: MetaData
-      name: security substation
+      name: Marine Police substation
     - type: Transform
       parent: 2
       pos: -36.5,0.5

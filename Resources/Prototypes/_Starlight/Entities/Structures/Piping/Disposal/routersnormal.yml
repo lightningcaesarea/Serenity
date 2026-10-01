@@ -55,7 +55,7 @@
 - type: entity
   id: DisposalRouterSecurity
   parent: DisposalRouter
-  suffix: Security
+  suffix: Marine Police
   components:
   - type: DisposalRouter
     tags: ["Security"]
@@ -82,7 +82,7 @@
 - type: entity
   id: DisposalRouterWarden
   parent: DisposalRouter
-  suffix: Warden
+  suffix: Marine Quartermaster
   components:
   - type: DisposalRouter
     tags: ["Warden"]
@@ -91,7 +91,7 @@
 - type: entity
   id: DisposalRouterHoS
   parent: DisposalRouter
-  suffix: HoS
+  suffix: Marine CO
   components:
   - type: DisposalRouter
     tags: ["HoS"]
@@ -145,7 +145,7 @@
 - type: entity
   id: DisposalRouterSecurityCheckpoint
   parent: DisposalRouter
-  suffix: SecurityCheckpoint
+  suffix: Marine Police Checkpoint
   components:
   - type: DisposalRouter
     tags: ["SecurityCheckpoint"]

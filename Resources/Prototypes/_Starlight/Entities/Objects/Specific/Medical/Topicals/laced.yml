@@ -1,7 +1,7 @@
 ## Punct
 - type: entity
   name: red punct-laced brute pack
-  description: Specalized mixture of Puncturase and Security-Quality Red Goo. Best used for bullet-wounds, as it is much less effective on other types of damage.
+  description: Specalized mixture of Puncturase and Marine Police-Quality Red Goo. Best used for bullet-wounds, as it is much less effective on other types of damage.
   parent: BaseStarlightHealingItem
   id: RedPunctPack
   suffix: 20
@@ -38,7 +38,7 @@
 
 - type: entity
   name: red punct-laced brute pack
-  description: Specalized mixture of Puncturase and Security-Quality Red Goo. Best used for bullet-wounds, as it is much less effective on other types of damage.
+  description: Specalized mixture of Puncturase and Marine Police-Quality Red Goo. Best used for bullet-wounds, as it is much less effective on other types of damage.
   parent: RedPunctPack
   id: RedPunctPack1
   suffix: 1
@@ -51,7 +51,7 @@
 
 - type: entity
   name: red punct-laced brute pack
-  description: Specalized mixture of Puncturase and Security-Quality Red Goo. Best used for bullet-wounds, as it is much less effective on other types of damage.
+  description: Specalized mixture of Puncturase and Marine Police-Quality Red Goo. Best used for bullet-wounds, as it is much less effective on other types of damage.
   parent: RedPunctPack
   id: RedPunctPack10
   suffix: 10
@@ -72,7 +72,7 @@
 ## Lace
 - type: entity
   name: red lace-laced brute pack
-  description: Specalized mixture of Lacerinol and Security-Quality Red Goo. Best used for stab-wounds, as it is much less effective on other types of damage.
+  description: Specalized mixture of Lacerinol and Marine Police-Quality Red Goo. Best used for stab-wounds, as it is much less effective on other types of damage.
   parent: BaseStarlightHealingItem
   id: RedLacePack
   suffix: 20
@@ -109,7 +109,7 @@
 
 - type: entity
   name: red lace-laced brute pack
-  description: Specalized mixture of Lacerinol and Security-Quality Red Goo. Best used for stab-wounds, as it is much less effective on other types of damage.
+  description: Specalized mixture of Lacerinol and Marine Police-Quality Red Goo. Best used for stab-wounds, as it is much less effective on other types of damage.
   parent: RedLacePack
   id: RedLacePack1
   suffix: 1
@@ -122,7 +122,7 @@
 
 - type: entity
   name: red lace-laced brute pack
-  description: Specalized mixture of Lacerinol and Security-Quality Red Goo. Best used for stab-wounds, as it is much less effective on other types of damage.
+  description: Specalized mixture of Lacerinol and Marine Police-Quality Red Goo. Best used for stab-wounds, as it is much less effective on other types of damage.
   parent: RedLacePack
   id: RedLacePack10
   suffix: 10
@@ -143,7 +143,7 @@
 ## Bruiz
 - type: entity
   name: red bruiz-laced brute pack
-  description: Specalized mixture of Bruizine and Security-Quality Red Goo. Best used for blunt-force trauma, as it is much less effective on other types of damage.
+  description: Specalized mixture of Bruizine and Marine Police-Quality Red Goo. Best used for blunt-force trauma, as it is much less effective on other types of damage.
   parent: BaseStarlightHealingItem
   id: RedBruizPack
   suffix: 20
@@ -179,7 +179,7 @@
 
 - type: entity
   name: red bruiz-laced brute pack
-  description: Specalized mixture of Bruizine and Security-Quality Red Goo. Best used for blunt-force trauma, as it is much less effective on other types of damage.
+  description: Specalized mixture of Bruizine and Marine Police-Quality Red Goo. Best used for blunt-force trauma, as it is much less effective on other types of damage.
   parent: RedBruizPack
   id: RedBruizPack1
   suffix: 1
@@ -192,7 +192,7 @@
 
 - type: entity
   name: red bruiz-laced brute pack
-  description: Specalized mixture of Bruizine and Security-Quality Red Goo. Best used for blunt-force trauma, as it is much less effective on other types of damage.
+  description: Specalized mixture of Bruizine and Marine Police-Quality Red Goo. Best used for blunt-force trauma, as it is much less effective on other types of damage.
   parent: RedBruizPack
   id: RedBruizPack10
   suffix: 10

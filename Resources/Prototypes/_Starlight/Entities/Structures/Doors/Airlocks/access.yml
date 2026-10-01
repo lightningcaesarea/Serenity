@@ -373,7 +373,7 @@
 - type: entity
   parent: AirlockSecurityLocked
   id: AirlockCourtroomLocked
-  suffix: Security/Internal Affairs/Legal (Courtroom), Locked
+  suffix: Marine Police/Internal Affairs/Legal (Courtroom), Locked
   components:
   - type: ContainerFill
     containers:
@@ -382,7 +382,7 @@
 - type: entity
   parent: AirlockSecurityGlassLocked
   id: AirlockCourtroomGlassLocked
-  suffix: Security/Internal Affairs/Legal (Courtroom), Locked
+  suffix: Marine Police/Internal Affairs/Legal (Courtroom), Locked
   components:
   - type: ContainerFill
     containers:

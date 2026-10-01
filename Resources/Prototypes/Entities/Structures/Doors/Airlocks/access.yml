@@ -353,7 +353,7 @@
 - type: entity
   parent: AirlockCommand
   id: AirlockHeadOfSecurityLocked
-  suffix: HeadOfSecurity, Locked
+  suffix: Marine CO, Locked
   components:
   - type: ContainerFill
     containers:
@@ -389,7 +389,7 @@
 - type: entity
   parent: AirlockSecurity
   id: AirlockSecurityLocked
-  suffix: Security, Locked
+  suffix: Marine Police, Locked
   components:
   - type: ContainerFill
     containers:
@@ -416,7 +416,7 @@
 - type: entity
   parent: AirlockSecurity
   id: AirlockSecurityInternalAffairsLocked # Starlight
-  suffix: Security/Internal Affairs, Locked # Starlight
+  suffix: Marine Police/Internal Affairs, Locked # Starlight
   components:
   - type: ContainerFill
     containers:
@@ -769,7 +769,7 @@
 - type: entity
   parent: AirlockCommandGlass
   id: AirlockHeadOfSecurityGlassLocked
-  suffix: HeadOfSecurity, Locked
+  suffix: Marine CO, Locked
   components:
   - type: ContainerFill
     containers:
@@ -805,7 +805,7 @@
 - type: entity
   parent: AirlockSecurityGlass
   id: AirlockSecurityGlassLocked
-  suffix: Security, Locked
+  suffix: Marine Police, Locked
   components:
   - type: ContainerFill
     containers:
@@ -832,7 +832,7 @@
 - type: entity
   parent: AirlockSecurityGlass
   id: AirlockSecurityInternalAffairsGlassLocked # Starlight
-  suffix: Security/Internal Affairs, Locked # Starlight
+  suffix: Marine Police/Internal Affairs, Locked # Starlight
   components:
   - type: ContainerFill
     containers:

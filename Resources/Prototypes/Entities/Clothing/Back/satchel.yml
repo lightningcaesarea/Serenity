@@ -49,7 +49,7 @@
   parent: ClothingBackpackSatchel
   id: ClothingBackpackSatchelClown
   name: clown satchel
-  description: For fast running from security.
+  description: For fast running from the Marine Police.
   components:
   - type: Sprite
     sprite: Clothing/Back/Satchels/clown.rsi
@@ -123,8 +123,8 @@
 - type: entity
   parent: [ClothingBackpackSatchel, BaseSecurityContraband]
   id: ClothingBackpackSatchelSecurity
-  name: security satchel
-  description: A robust satchel for security related needs.
+  name: Marine Police satchel
+  description: A robust satchel for Marine Police related needs.
   components:
   - type: Sprite
     sprite: _Serenity/Clothing/Back/Satchels/security_dv.rsi
@@ -132,7 +132,7 @@
 - type: entity
   parent: [ClothingBackpackSatchel, BaseSecurityContraband]
   id: ClothingBackpackSatchelBrigmedic
-  name: corpsman satchel
+  name: Marine Corpsman satchel
   description: A sterile satchel for medical related needs.
   components:
   - type: Sprite

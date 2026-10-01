@@ -68,7 +68,7 @@
 - type: entity
   parent: [ ClothingUniformSkirtBase, BaseSecurityContraband ]
   id: ClothingUniformJumpskirtCorpsman
-  name: corpsman's skirt
+  name: Marine Corpsman's skirt
   description: Die in style on the front lines!
   components:
   - type: Sprite
@@ -84,7 +84,7 @@
 - type: entity
   parent: [ ClothingUniformSkirtBase, BaseSecurityContraband ]
   id: ClothingUniformJumpskirtCorpsmanTrauma
-  name: corpsman's trauma wear
+  name: Marine Corpsman's trauma wear
   description: I've seen worse. I've seen far worse.
   components:
   - type: Sprite
@@ -100,8 +100,8 @@
 - type: entity
   parent: [ClothingUniformSkirtBase, BaseSecurityContraband]
   id: ClothingUniformJumpskirtFormalBrigmedic
-  name: formal corpsman jumpskirt
-  description: A formal suit for the corpsman.
+  name: formal Marine Corpsman jumpskirt
+  description: A formal suit for the Marine Corpsman.
   components:
   - type: Sprite
     sprite: _Starlight/Clothing/Uniforms/Jumpskirt/brigmedic_alt.rsi
@@ -116,8 +116,8 @@
 - type: entity
   parent: [ClothingUniformSkirtBase, BaseSecurityContraband]
   id: ClothingUniformJumpskirtSeniorBrigmedic
-  name: senior formal corpsman jumpskirt
-  description: A formal suit for the seasoned corpsman.
+  name: senior formal Marine Corpsman jumpskirt
+  description: A formal suit for the seasoned Marine Corpsman.
   components:
   - type: Sprite
     sprite: _Starlight/Clothing/Uniforms/Jumpskirt/brigmedic_senior.rsi
@@ -154,8 +154,8 @@
 - type: entity
   parent: [ClothingUniformSkirtBase, BaseSecurityContraband]
   id: ClothingUniformJumpskirtFormalSecoff
-  name: formal security jumpskirt
-  description: A formal attire for the security officer.
+  name: formal Marine Police jumpskirt
+  description: A formal attire for the Marine Trooper.
   components:
   - type: Sprite
     sprite: _Starlight/Clothing/Uniforms/Jumpskirt/secoff_formal.rsi
@@ -165,8 +165,8 @@
 - type: entity
   parent: [ClothingUniformSkirtBase, BaseSecurityContraband]
   id: ClothingUniformJumpskirtFormalSeniorSecoff
-  name: formal senior security jumpskirt
-  description: A formal attire for the senior security officer.
+  name: formal senior Marine Police jumpskirt
+  description: A formal attire for the Senior Marine Trooper.
   components:
   - type: Sprite
     sprite: _Starlight/Clothing/Uniforms/Jumpskirt/secoff_formal_senior.rsi
@@ -176,8 +176,8 @@
 - type: entity
   parent: [ClothingUniformSkirtBase, BaseSecurityContraband]
   id: ClothingUniformJumpskirtFormalWarden
-  name: warden's formal jumpskirt
-  description: A formal attire for the warden, missing a holster for the truncheon sadly...
+  name: Marine Quartermaster's formal jumpskirt
+  description: A formal attire for the Marine Quartermaster, missing a holster for the truncheon sadly...
   components:
   - type: Sprite
     sprite: _Starlight/Clothing/Uniforms/Jumpskirt/warden_formal.rsi
@@ -188,7 +188,7 @@
   parent: [ClothingUniformSkirtBase, BaseSecurityContraband]
   id: ClothingUniformJumpskirtDutyOfficer
   name: duty officer's uniform
-  description: A vibrant security skirt for the warden's partner in chains.
+  description: A vibrant Marine Police skirt for the Marine Quartermaster's partner in chains.
   components:
   - type: Sprite
     sprite: _Starlight/Clothing/Uniforms/Jumpskirt/dutyofficer.rsi
@@ -817,8 +817,8 @@
 - type: entity
   parent: ClothingUniformBase
   id: ClothingUniformJumpskirtHoSBlack
-  name: head of security's black skirt
-  description: It's Head of Security's black skirt.
+  name: Marine CO's black skirt
+  description: It's the Marine CO's black skirt.
   components:
   - type: Sprite
     sprite: _Starlight/Clothing/Uniforms/Jumpskirt/hos_black.rsi

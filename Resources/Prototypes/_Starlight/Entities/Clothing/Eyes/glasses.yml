@@ -1,7 +1,7 @@
 - type: entity
   parent: [ClothingEyesBase, ShowSecurityIcons, BaseSecurityContraband]
   id: ClothingEyesGlassesBrigmedic
-  name: corpsman glasses
+  name: Marine Corpsman glasses
   description: High-quality hud that can protect against flashes. Tamashi-style!
   components:
   - type: Sprite
@@ -31,8 +31,8 @@
 - type: entity
   parent: [ClothingEyesBase, ShowSecurityIcons, BaseSecurityContraband]
   id: ClothingEyesGlassesCorpsman
-  name: corpsman glasses
-  description: Can protect against flashes much like security glasses, and track vitals!
+  name: Marine Corpsman glasses
+  description: Can protect against flashes much like MP glasses, and track vitals!
   components:
   - type: Sprite
     sprite: _Starlight/Clothing/Eyes/Glasses/corpsman.rsi
@@ -214,8 +214,8 @@
 - type: entity
   parent: [ClothingEyesBase, ShowSecurityIcons, BaseSecurityContraband]
   id: ClothingEyesGlassesBrigmedicPrescription
-  name: prescription corpsman glasses
-  description: A set of unshielded prescription glasses for corpsmen.
+  name: prescription Marine Corpsman glasses
+  description: A set of unshielded prescription glasses for Marine Corpsmen.
   components:
   - type: Sprite
     sprite: _Starlight/Clothing/Eyes/Glasses/prescriptionbrigmedicglasses.rsi
@@ -251,8 +251,8 @@
 - type: entity
   parent: [ClothingEyesBase, ShowSecurityIcons, BaseSecurityContraband]
   id: ClothingEyeGlassesSecurityPrescription
-  name: prescription security glasses
-  description: A set of unshielded prescription glasses for Security.
+  name: prescription MP glasses
+  description: A set of unshielded prescription glasses for the Marine Police.
   components:
   - type: Sprite
     sprite: _Starlight/Clothing/Eyes/Glasses/prescriptionsecglasses.rsi
@@ -267,8 +267,8 @@
 - type: entity
   parent: [ClothingEyesBase, ShowSecurityIcons, BaseSecurityContraband]
   id: ClothingEyeGlassesSecurityPrescriptionDV
-  name: prescription security glasses
-  description: A set of unshielded prescription glasses for Security.
+  name: prescription MP glasses
+  description: A set of unshielded prescription glasses for the Marine Police.
   components:
   - type: Sprite
     sprite: _Serenity/Clothing/Eyes/Glasses/prescsecglasses.rsi

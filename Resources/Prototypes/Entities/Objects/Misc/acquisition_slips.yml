@@ -67,7 +67,7 @@
 - type: entity
   parent: PaperAcquisitionSlip
   id: PaperAcquisitionSlipSecurity
-  suffix: Security
+  suffix: Marine Police
   components:
   - type: Sprite
     layers:

@@ -48,7 +48,7 @@
   suffix: Salvage, Secure
   id: CrateSalvageContrabandStorageSecure
   name: salvage storage crate
-  description: A security and salvage access locked crate for storing contraband.
+  description: A Marine Police and salvage access locked crate for storing contraband.
   components:
   - type: Icon
     sprite: _Starlight/Structures/Storage/Crates/salvagecontra_secure.rsi

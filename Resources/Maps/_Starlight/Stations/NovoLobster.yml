@@ -16697,7 +16697,7 @@ entities:
   - uid: 114
     components:
     - type: MetaData
-      name: air alarm (security heating)
+      name: air alarm (Marine Police heating)
     - type: Transform
       parent: 2
       rot: 3.141592653589793 rad
@@ -22043,7 +22043,7 @@ entities:
   - uid: 795
     components:
     - type: MetaData
-      name: advanced APC (security heating)
+      name: advanced APC (Marine Police heating)
     - type: Transform
       parent: 2
       pos: 55.5,-65.5
@@ -175077,7 +175077,7 @@ entities:
   - uid: 25942
     components:
     - type: MetaData
-      name: north security hallway heater
+      name: north Marine Police hallway heater
     - type: Transform
       parent: 2
       rot: 1.5707963267948966 rad
@@ -175111,7 +175111,7 @@ entities:
   - uid: 25945
     components:
     - type: MetaData
-      name: south security hallway heater
+      name: south Marine Police hallway heater
     - type: Transform
       parent: 2
       rot: 1.5707963267948966 rad
@@ -175123,7 +175123,7 @@ entities:
   - uid: 25946
     components:
     - type: MetaData
-      name: security front heater
+      name: Marine Police front heater
     - type: Transform
       parent: 2
       rot: 1.5707963267948966 rad
@@ -233080,7 +233080,7 @@ entities:
   - uid: 34872
     components:
     - type: MetaData
-      name: substation (security)
+      name: substation (Marine Police)
     - type: Transform
       parent: 2
       pos: 58.5,-50.5

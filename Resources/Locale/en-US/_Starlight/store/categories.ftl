@@ -11,7 +11,7 @@ store-category-engineering-main = Engineering
 store-category-engineering-atmos = Atmospherics
 store-category-service-clown = Clown
 store-category-service-mime = Mime
-store-category-security-main = Security
+store-category-security-main = Marine Police
 store-category-secret = Secret
 
 # Changeling

@@ -2,7 +2,7 @@
   parent: [ClothingEyesBase, BaseChameleon]
   id: ClothingEyesChameleon
   name: sun glasses
-  description: Useful both for security and cargonia.
+  description: Useful both for the Marine Police and cargonia.
   suffix: Chameleon
   components:
     - type: FlashImmunity

@@ -17459,7 +17459,7 @@ entities:
   - uid: 825
     components:
     - type: MetaData
-      name: APC (Security front)
+      name: APC (Marine Police front)
     - type: Transform
       parent: 2
       rot: 3.141592653589793 rad
@@ -17469,7 +17469,7 @@ entities:
   - uid: 826
     components:
     - type: MetaData
-      name: APC (Security locker)
+      name: APC (Marine Police locker)
     - type: Transform
       parent: 2
       pos: 34.5,41.5
@@ -17478,7 +17478,7 @@ entities:
   - uid: 827
     components:
     - type: MetaData
-      name: APC (Warden office)
+      name: APC (Marine Quartermaster office)
     - type: Transform
       parent: 2
       rot: -1.5707963267948966 rad
@@ -17488,7 +17488,7 @@ entities:
   - uid: 828
     components:
     - type: MetaData
-      name: APC (Security break)
+      name: APC (Marine Police break)
     - type: Transform
       parent: 2
       pos: 36.5,48.5
@@ -17575,7 +17575,7 @@ entities:
   - uid: 837
     components:
     - type: MetaData
-      name: APC (Security hall)
+      name: APC (Marine Police hall)
     - type: Transform
       parent: 2
       rot: -1.5707963267948966 rad
@@ -146294,7 +146294,7 @@ entities:
   - uid: 21156
     components:
     - type: MetaData
-      name: substation (Security)
+      name: substation (Marine Police)
     - type: Transform
       parent: 2
       pos: 53.5,51.5

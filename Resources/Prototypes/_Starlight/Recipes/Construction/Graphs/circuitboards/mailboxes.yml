@@ -65,7 +65,7 @@
 
 - type: entity
   id: SecurityMailBoxMachineCircuitboard
-  name: Security Mailbox Machine Circuitboard
+  name: Marine Police Mailbox Machine Circuitboard
   parent: BaseMailBoxMachineCircuitboard
   components:
     - type: MachineBoard

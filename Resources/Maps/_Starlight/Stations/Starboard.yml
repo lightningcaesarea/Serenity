@@ -26232,7 +26232,7 @@ entities:
   - uid: 52
     components:
     - type: MetaData
-      name: security front area air alarm
+      name: Marine Police front area air alarm
     - type: Transform
       parent: 2
       pos: -5.5,-9.5

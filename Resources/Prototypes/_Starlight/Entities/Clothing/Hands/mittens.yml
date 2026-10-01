@@ -408,7 +408,7 @@
 - type: entity
   parent: [ClothingHandsMittensBase, BaseSecurityContraband]
   id: ClothingHandsMittensSecurityRed
-  name: red security mittens
+  name: red Marine Police mittens
   description: Black mittens, but slightly red! The detective will LOVE you if you wear these.
   components:
   - type: Sprite

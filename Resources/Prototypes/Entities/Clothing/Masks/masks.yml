@@ -23,8 +23,8 @@
 - type: entity
   parent: [ClothingMaskGas, BaseSecurityContraband]
   id: ClothingMaskGasSecurity
-  name: security gas mask
-  description: A standard issue Security gas mask.
+  name: Marine Police gas mask
+  description: A standard issue Marine Police gas mask.
   components:
   - type: Item
     size: Tiny
@@ -274,7 +274,7 @@
 - type: entity
   parent: [ClothingMaskClownBase, BaseSecurityContraband]
   id: ClothingMaskClownSecurity
-  name: security clown wig and mask
+  name: Marine Police clown wig and mask
   description: A debatably oxymoronic but protective mask and wig.
   components:
   - type: Sprite
@@ -432,7 +432,7 @@
   parent: [ ClothingMaskGas, BaseSecurityContraband ]
   id: ClothingMaskGasSwat
   name: swat gas mask
-  description: A elite issue Security gas mask.
+  description: An elite issue Marine Police gas mask.
   components:
   - type: Sprite
     sprite: Clothing/Mask/swat.rsi
@@ -724,7 +724,7 @@
 - type: entity
   parent: [ClothingMaskMime, BaseSecurityContraband]
   id: ClothingMaskMimeSecurity
-  name: security mime mask
+  name: Marine Police mime mask
   description: You have the right to remain silent.
   components:
   - type: Sprite

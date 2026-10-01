@@ -162,7 +162,7 @@
   parent: MarkerBase
   id: SpawnMobMcGriff
   name:  McGriff Spawner
-  suffix: Warden Pet
+  suffix: Marine Quartermaster Pet
   components:
   - type: Sprite
     layers:
@@ -265,7 +265,7 @@
   parent: MarkerBase
   id: SpawnMobShiva
   name: Shiva Spawner
-  suffix: Security Pet
+  suffix: Marine Police Pet
   components:
   - type: Sprite
     layers:

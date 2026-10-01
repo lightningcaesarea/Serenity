@@ -74,5 +74,5 @@ tiles-floor-dev-maintenance = [dev] maintenance floor
 tiles-floor-dev-medical = [dev] medical floor
 tiles-floor-dev-salvage = [dev] salvage floor
 tiles-floor-dev-science = [dev] science floor
-tiles-floor-dev-security = [dev] security floor
+tiles-floor-dev-security = [dev] Marine Police floor
 tiles-floor-dev-service = [dev] service floor

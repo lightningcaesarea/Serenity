@@ -2,7 +2,7 @@
   parent: [ClothingEyesBase, BaseBlueShieldContraband]
   id: ClothingEyesHudBlueShield
   name: blue shield hud
-  description: An innovative heads-up display that scans the humanoids in view and provides accurate data about their ID status, security records, and medical information.
+  description: An innovative heads-up display that scans the humanoids in view and provides accurate data about their ID status, Marine Police records, and medical information.
   components:
     - type: Sprite
       sprite: _Starlight/Clothing/Eyes/Hud/blueshield.rsi
@@ -31,7 +31,7 @@
   parent: [ClothingEyesHudBlueShield, ClothingHeadEyeBaseFlippable]
   id: ClothingEyesEyepatchHudBlueShield
   name: blue shield hud eyepatch
-  description: An innovative heads-up display that scans the humanoids in view and provides accurate data about their ID status, security records, and medical information. For true patriots.
+  description: An innovative heads-up display that scans the humanoids in view and provides accurate data about their ID status, Marine Police records, and medical information. For true patriots.
   components:
     - type: Sprite
       sprite: _Starlight/Clothing/Eyes/Hud/blueshieldpatch.rsi
@@ -67,8 +67,8 @@
 - type: entity
   parent: [ClothingEyesBase, ShowSecurityIcons, BaseSecurityContraband]
   id: ClothingEyesHudBrigmedic
-  name: corpsman hud
-  description: Tamashi-upgraded HUDs. Yes. Corpsman ones.
+  name: Marine Corpsman hud
+  description: Tamashi-upgraded HUDs. Yes. Marine Corpsman ones.
   components:
     - type: Sprite
       sprite: _Starlight/Clothing/Eyes/Hud/brigmedichud.rsi
@@ -91,8 +91,8 @@
 - type: entity
   parent: [ClothingEyesHudBrigmedic, ClothingHeadEyeBaseFlippable]
   id: ClothingEyesEyepatchHudBrigmedic
-  name: corpsman hud eyepatch
-  description: Tamashi-upgraded HUDs for true patriots. Yes. Corpsman ones.
+  name: Marine Corpsman hud eyepatch
+  description: Tamashi-upgraded HUDs for true patriots. Yes. Marine Corpsman ones.
   components:
     - type: Sprite
       sprite: _Starlight/Clothing/Eyes/Hud/brigmedpatch.rsi
@@ -107,13 +107,13 @@
 - type: entity
   parent: [ClothingEyesEyepatchHudBrigmedic, ClothingHeadEyeBaseFlipped]
   id: ClothingEyesEyepatchHudBrigmedicFlipped
-  name: corpsman hud eyepatch
+  name: Marine Corpsman hud eyepatch
 
 - type: entity
   parent: [ClothingEyesBase, ShowSecurityIcons, BaseSecurityContraband]
   id: ClothingEyesHudCorpsman
-  name: corpsman hud
-  description: Tamashi-upgraded HUDs for true patriots. Yes. Corpsman ones.
+  name: Marine Corpsman hud
+  description: Tamashi-upgraded HUDs for true patriots. Yes. Marine Corpsman ones.
   components:
     - type: Sprite
       sprite: _Starlight/Clothing/Eyes/Hud/corpsmanhud.rsi

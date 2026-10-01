@@ -159,7 +159,7 @@
 - type: entity
   parent: IDCardStandard
   id: HoSIDCard
-  name: head of security ID card
+  name: Marine CO ID card
   components:
   - type: Sprite
     layers:
@@ -435,7 +435,7 @@
 - type: entity
   parent: IDCardStandard
   id: SecurityCadetIDCard
-  name: security cadet ID card
+  name: Marine Cadet ID card
   components:
   - type: Sprite
     layers:
@@ -453,7 +453,7 @@
 - type: entity
   parent: IDCardStandard
   id: SecurityIDCard
-  name: security ID card
+  name: Marine Police ID card
   components:
   - type: Sprite
     layers:
@@ -471,7 +471,7 @@
 - type: entity
   parent: IDCardStandard
   id: WardenIDCard
-  name: warden ID card
+  name: Marine Quartermaster ID card
   components:
   - type: Sprite
     layers:
@@ -507,7 +507,7 @@
 - type: entity
   parent: IDCardStandard
   id: BrigmedicIDCard
-  name: corpsman ID card
+  name: Marine Corpsman ID card
   components:
   - type: Sprite
     layers:
@@ -525,7 +525,7 @@
 - type: entity
   parent: SecurityIDCard
   id: SeniorOfficerIDCard
-  name: senior officer ID card
+  name: Senior Marine Trooper ID card
   components:
   - type: PresetIdCard # Serenity: Senior Officer is a job
     job: SeniorOfficer
