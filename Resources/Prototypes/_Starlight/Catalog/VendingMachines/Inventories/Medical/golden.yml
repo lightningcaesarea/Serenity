@@ -8,6 +8,7 @@
     Gauze: 2
     GoldBrutePack: 2
     GoldOintment: 2
+    IVStand: 2
     IVBagBlood: 2
     ChemistryBottleEpinephrine: 2
     Syringe: 2
@@ -54,6 +55,7 @@
     Gauze: 4
     GoldBrutePack: 4
     GoldOintment: 4
+    IVStand: 2
     IVBagBlood: 4
     Tourniquet: 1
     ChemistryBottleEpinephrine: 2
