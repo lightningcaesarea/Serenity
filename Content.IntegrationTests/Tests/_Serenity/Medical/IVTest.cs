@@ -66,6 +66,14 @@ public sealed class IVTest
         return solution!.Volume;
     }
 
+    // The test map has no air, so total damage keeps climbing from suffocation; a torn line deals piercing.
+    private static FixedPoint2 Piercing(IEntityManager entMan, EntityUid mob)
+    {
+        return entMan.GetComponent<DamageableComponent>(mob).Damage.DamageDict.TryGetValue("Piercing", out var piercing)
+            ? piercing
+            : FixedPoint2.Zero;
+    }
+
     private static TimeSpan AttachDelay(IEntityManager entMan, EntityUid user)
     {
         return entMan.GetComponent<DoAfterComponent>(user).DoAfters.Values.Single().Args.Delay;
@@ -88,7 +96,7 @@ public sealed class IVTest
         {
             var entMan = server.ResolveDependency<IEntityManager>();
             setup = Build(entMan, map.GridCoords, "IVBagSaline");
-            laymanStand = SpawnStand(entMan, map.GridCoords.Offset(new Vector2(0, -2)), "IVBagSaline", out _);
+            laymanStand = SpawnStand(entMan, map.GridCoords.Offset(new Vector2(1, -1)), "IVBagSaline", out _);
 
             Drag(entMan, laymanStand, setup.Layman, setup.Patient);
             Drag(entMan, setup.Stand, setup.Medic, setup.Patient);
@@ -222,7 +230,7 @@ public sealed class IVTest
         {
             var entMan = server.ResolveDependency<IEntityManager>();
             Assert.That(entMan.GetComponent<IVLineComponent>(setup.Stand).AttachedTo, Is.EqualTo(setup.Patient));
-            Assert.That(entMan.GetComponent<DamageableComponent>(setup.Patient).TotalDamage, Is.EqualTo(FixedPoint2.Zero));
+            Assert.That(Piercing(entMan, setup.Patient), Is.EqualTo(FixedPoint2.Zero));
 
             entMan.System<SharedTransformSystem>().SetCoordinates(setup.Patient, setup.Origin.Offset(new Vector2(10, 0)));
         });
@@ -234,7 +242,7 @@ public sealed class IVTest
             var entMan = server.ResolveDependency<IEntityManager>();
             Assert.That(entMan.GetComponent<IVLineComponent>(setup.Stand).AttachedTo, Is.Null, "the line came out");
 
-            var damage = entMan.GetComponent<DamageableComponent>(setup.Patient).TotalDamage;
+            var damage = Piercing(entMan, setup.Patient);
             if (skilled)
                 Assert.That(damage, Is.EqualTo(FixedPoint2.Zero), "someone who knows Medicine takes it out cleanly");
             else
@@ -275,8 +283,8 @@ public sealed class IVTest
 
             var stomachs = entMan.System<SharedBodySystem>().GetBodyOrganEntityComps<StomachComponent>(drinker);
             Assert.That(stomachs, Is.Not.Empty);
-            Assert.That(entMan.System<StomachSystem>().TryTransferSolution((stomachs[0].Owner, null, null), new Solution("Saline", FixedPoint2.New(60))));
-            Assert.That(bloodstream.TryAddToBloodstream(injected, new Solution("Saline", FixedPoint2.New(60))));
+            Assert.That(entMan.System<StomachSystem>().TryTransferSolution((stomachs[0].Owner, null, null), new Solution("Saline", FixedPoint2.New(40))));
+            Assert.That(bloodstream.TryAddToBloodstream(injected, new Solution("Saline", FixedPoint2.New(40))));
         });
 
         await pair.RunSeconds(20f);
