@@ -1,9 +1,14 @@
+using System.Linq;
 using System.Numerics;
 using Content.Server._Serenity.Skills;
 using Content.Shared._Serenity.Medical.IV;
+using Content.Shared._Starlight.Medical.Body.Components;
 using Content.Shared._Starlight.Medical.Body.Systems;
+using Content.Shared.Body.Systems;
+using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Containers.ItemSlots;
+using Content.Shared.Damage.Components;
 using Content.Shared.DoAfter;
 using Content.Shared.DragDrop;
 using Content.Shared.FixedPoint;
@@ -25,27 +30,33 @@ public sealed class IVTest
         public EntityCoordinates Origin;
     }
 
+    private static EntityUid SpawnStand(IEntityManager entMan, EntityCoordinates coords, string bagProto, out EntityUid bag)
+    {
+        var stand = entMan.SpawnAtPosition("IVStand", coords);
+        bag = entMan.SpawnAtPosition(bagProto, coords);
+        Assert.That(entMan.System<ItemSlotsSystem>().TryInsert(stand, "pack", bag, null), "the bag hangs on the stand");
+        return stand;
+    }
+
     private static Setup Build(IEntityManager entMan, EntityCoordinates coords, string bagProto)
     {
         var setup = new Setup
         {
             Origin = coords,
-            Stand = entMan.SpawnAtPosition("IVStand", coords),
-            Bag = entMan.SpawnAtPosition(bagProto, coords),
             Patient = entMan.SpawnAtPosition("MobHuman", coords.Offset(new Vector2(1, 0))),
             Medic = entMan.SpawnAtPosition("MobHuman", coords.Offset(new Vector2(0, 1))),
             Layman = entMan.SpawnAtPosition("MobHuman", coords.Offset(new Vector2(0, -1))),
         };
 
-        Assert.That(entMan.System<ItemSlotsSystem>().TryInsert(setup.Stand, "pack", setup.Bag, null), "the bag hangs on the stand");
+        setup.Stand = SpawnStand(entMan, coords, bagProto, out setup.Bag);
         Assert.That(entMan.System<SkillSystem>().GrantSkill(setup.Medic, "Medicine"));
         return setup;
     }
 
-    private static void Drag(IEntityManager entMan, Setup setup, EntityUid user)
+    private static void Drag(IEntityManager entMan, EntityUid stand, EntityUid user, EntityUid patient)
     {
-        var ev = new DragDropDraggedEvent(user, setup.Patient);
-        entMan.EventBus.RaiseLocalEvent(setup.Stand, ref ev);
+        var ev = new DragDropDraggedEvent(user, patient);
+        entMan.EventBus.RaiseLocalEvent(stand, ref ev);
     }
 
     private static FixedPoint2 BagVolume(IEntityManager entMan, Setup setup)
@@ -55,11 +66,16 @@ public sealed class IVTest
         return solution!.Volume;
     }
 
+    private static TimeSpan AttachDelay(IEntityManager entMan, EntityUid user)
+    {
+        return entMan.GetComponent<DoAfterComponent>(user).DoAfters.Values.Single().Args.Delay;
+    }
+
     /// <summary>
-    /// Setting a line needs the Medicine skill; anyone can still take one out.
+    /// Anyone can set a line, but without Medicine it takes much longer. Anyone can take one out.
     /// </summary>
     [Test]
-    public async Task SettingALineNeedsMedicine()
+    public async Task SettingALineIsSlowerWithoutMedicine()
     {
         await using var pair = await PoolManager.GetServerClient();
         var server = pair.Server;
@@ -67,16 +83,19 @@ public sealed class IVTest
         await server.WaitIdleAsync();
 
         Setup setup = default!;
+        EntityUid laymanStand = default;
         await server.WaitAssertion(() =>
         {
             var entMan = server.ResolveDependency<IEntityManager>();
             setup = Build(entMan, map.GridCoords, "IVBagSaline");
+            laymanStand = SpawnStand(entMan, map.GridCoords.Offset(new Vector2(0, -2)), "IVBagSaline", out _);
 
-            Drag(entMan, setup, setup.Layman);
-            Assert.That(entMan.GetComponent<DoAfterComponent>(setup.Layman).DoAfters, Is.Empty, "an unskilled user can't start a line");
+            Drag(entMan, laymanStand, setup.Layman, setup.Patient);
+            Drag(entMan, setup.Stand, setup.Medic, setup.Patient);
 
-            Drag(entMan, setup, setup.Medic);
-            Assert.That(entMan.GetComponent<DoAfterComponent>(setup.Medic).DoAfters, Is.Not.Empty, "a skilled user can");
+            var layman = AttachDelay(entMan, setup.Layman);
+            var medic = AttachDelay(entMan, setup.Medic);
+            Assert.That(layman, Is.GreaterThanOrEqualTo(medic * 3), "an unskilled user is much slower");
         });
 
         await pair.RunSeconds(5f);
@@ -84,10 +103,19 @@ public sealed class IVTest
         await server.WaitAssertion(() =>
         {
             var entMan = server.ResolveDependency<IEntityManager>();
-            Assert.That(entMan.GetComponent<IVLineComponent>(setup.Stand).AttachedTo, Is.EqualTo(setup.Patient));
+            Assert.That(entMan.GetComponent<IVLineComponent>(setup.Stand).AttachedTo, Is.EqualTo(setup.Patient), "the skilled line is in");
+            Assert.That(entMan.GetComponent<IVLineComponent>(laymanStand).AttachedTo, Is.Null, "the unskilled one is still being set");
+        });
 
-            // Someone who can't set a line can still take it out.
-            Drag(entMan, setup, setup.Layman);
+        await pair.RunSeconds(10f);
+
+        await server.WaitAssertion(() =>
+        {
+            var entMan = server.ResolveDependency<IEntityManager>();
+            Assert.That(entMan.GetComponent<IVLineComponent>(laymanStand).AttachedTo, Is.EqualTo(setup.Patient), "but they get there");
+
+            // Anyone can take a line out.
+            Drag(entMan, setup.Stand, setup.Layman, setup.Patient);
             Assert.That(entMan.GetComponent<IVLineComponent>(setup.Stand).AttachedTo, Is.Null);
         });
 
@@ -110,7 +138,7 @@ public sealed class IVTest
         {
             var entMan = server.ResolveDependency<IEntityManager>();
             setup = Build(entMan, map.GridCoords, "IVBagSaline");
-            Drag(entMan, setup, setup.Medic);
+            Drag(entMan, setup.Stand, setup.Medic, setup.Patient);
         });
 
         await pair.RunSeconds(5f);
@@ -164,10 +192,11 @@ public sealed class IVTest
     }
 
     /// <summary>
-    /// Walking away from the stand tears the line out.
+    /// Whoever pulls a line loose tears it out and hurts the patient, unless they know Medicine, in which case it just comes out.
     /// </summary>
-    [Test]
-    public async Task LineIsTornOutOnDistance()
+    [TestCase(false)]
+    [TestCase(true)]
+    public async Task PullingALineLoose(bool skilled)
     {
         await using var pair = await PoolManager.GetServerClient();
         var server = pair.Server;
@@ -179,7 +208,12 @@ public sealed class IVTest
         {
             var entMan = server.ResolveDependency<IEntityManager>();
             setup = Build(entMan, map.GridCoords, "IVBagSaline");
-            Drag(entMan, setup, setup.Medic);
+
+            // With nobody carrying or pulling the stand it's the patient who walks off, so their skill is what counts.
+            if (skilled)
+                Assert.That(entMan.System<SkillSystem>().GrantSkill(setup.Patient, "Medicine"));
+
+            Drag(entMan, setup.Stand, setup.Medic, setup.Patient);
         });
 
         await pair.RunSeconds(5f);
@@ -188,6 +222,7 @@ public sealed class IVTest
         {
             var entMan = server.ResolveDependency<IEntityManager>();
             Assert.That(entMan.GetComponent<IVLineComponent>(setup.Stand).AttachedTo, Is.EqualTo(setup.Patient));
+            Assert.That(entMan.GetComponent<DamageableComponent>(setup.Patient).TotalDamage, Is.EqualTo(FixedPoint2.Zero));
 
             entMan.System<SharedTransformSystem>().SetCoordinates(setup.Patient, setup.Origin.Offset(new Vector2(10, 0)));
         });
@@ -198,6 +233,63 @@ public sealed class IVTest
         {
             var entMan = server.ResolveDependency<IEntityManager>();
             Assert.That(entMan.GetComponent<IVLineComponent>(setup.Stand).AttachedTo, Is.Null, "the line came out");
+
+            var damage = entMan.GetComponent<DamageableComponent>(setup.Patient).TotalDamage;
+            if (skilled)
+                Assert.That(damage, Is.EqualTo(FixedPoint2.Zero), "someone who knows Medicine takes it out cleanly");
+            else
+                Assert.That(damage, Is.GreaterThan(FixedPoint2.Zero), "an unskilled pull tears it out");
+        });
+
+        await pair.CleanReturnAsync();
+    }
+
+    /// <summary>
+    /// Saline only restores blood level when it goes straight into the bloodstream; drunk, it is used up in the stomach.
+    /// </summary>
+    [Test]
+    public async Task SalineRestoresBloodOnlyWhenInjected()
+    {
+        await using var pair = await PoolManager.GetServerClient();
+        var server = pair.Server;
+        var map = await pair.CreateTestMap();
+        await server.WaitIdleAsync();
+
+        EntityUid drinker = default, injected = default;
+        var drinkerBefore = 0f;
+        var injectedBefore = 0f;
+        await server.WaitAssertion(() =>
+        {
+            var entMan = server.ResolveDependency<IEntityManager>();
+            var bloodstream = entMan.System<SharedBloodstreamSystem>();
+            drinker = entMan.SpawnAtPosition("MobHuman", map.GridCoords);
+            injected = entMan.SpawnAtPosition("MobHuman", map.GridCoords.Offset(new Vector2(1, 0)));
+
+            foreach (var mob in new[] { drinker, injected })
+            {
+                Assert.That(bloodstream.TryModifyBloodLevel(mob, FixedPoint2.New(-150)));
+            }
+
+            drinkerBefore = bloodstream.GetBloodLevel(drinker);
+            injectedBefore = bloodstream.GetBloodLevel(injected);
+
+            var stomachs = entMan.System<SharedBodySystem>().GetBodyOrganEntityComps<StomachComponent>(drinker);
+            Assert.That(stomachs, Is.Not.Empty);
+            Assert.That(entMan.System<StomachSystem>().TryTransferSolution((stomachs[0].Owner, null, null), new Solution("Saline", FixedPoint2.New(60))));
+            Assert.That(bloodstream.TryAddToBloodstream(injected, new Solution("Saline", FixedPoint2.New(60))));
+        });
+
+        await pair.RunSeconds(20f);
+
+        await server.WaitAssertion(() =>
+        {
+            var entMan = server.ResolveDependency<IEntityManager>();
+            var bloodstream = entMan.System<SharedBloodstreamSystem>();
+            var drunkGain = bloodstream.GetBloodLevel(drinker) - drinkerBefore;
+            var injectedGain = bloodstream.GetBloodLevel(injected) - injectedBefore;
+
+            Assert.That(injectedGain, Is.GreaterThan(0.05f), "injected saline restores blood");
+            Assert.That(drunkGain, Is.LessThan(injectedGain / 2), "drunk saline does not");
         });
 
         await pair.CleanReturnAsync();
