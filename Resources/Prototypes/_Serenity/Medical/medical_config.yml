@@ -51,6 +51,17 @@
   - { type: Leg, symmetry: Right, weight: 12 }
   - { type: Foot, symmetry: Left, weight: 3 }
   - { type: Foot, symmetry: Right, weight: 3 }
+  # Aiming a melee hit by where you click on the target's (upright) sprite. Heights are in tiles from the sprite's
+  # centre; the zone you click multiplies its parts' weights by `multiplier`, so aiming shifts the odds but never
+  # guarantees the part. Clicks farther than maxDistance from the target (a wide swing) and targets lying down
+  # aren't aimed.
+  aim:
+    multiplier: 3
+    maxDistance: 0.7
+    zones:
+    - { min: 0.17, types: [Head] }
+    - { min: -0.15, max: 0.17, types: [Torso, Arm, Hand] }
+    - { max: -0.15, types: [Leg, Foot] }
 
 - type: painConfig
   id: DefaultPain

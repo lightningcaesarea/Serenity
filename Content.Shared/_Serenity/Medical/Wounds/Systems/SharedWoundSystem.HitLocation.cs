@@ -1,7 +1,10 @@
+using Content.Shared._Starlight.Medical.Body.Part;
 using Content.Shared.Projectiles;
+using Content.Shared.Standing;
 using Content.Shared.Throwing;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.GameObjects;
+using Robust.Shared.Map;
 
 namespace Content.Shared._Serenity.Medical.Wounds.Systems;
 
@@ -10,6 +13,7 @@ namespace Content.Shared._Serenity.Medical.Wounds.Systems;
 /// the damage lands, so the damage handler knows the hit came from a weapon (and gets a location even when it causes
 /// no wound) and can use the weapon's <see cref="HitLocationBiasComponent"/>. Hitscan has no such event; its damage
 /// carries the gun as its origin, which <see cref="OnDamageChanged"/> falls back to.
+/// Melee hits can also be aimed by where the attacker clicked on the target (see <see cref="HitAimConfig"/>).
 /// </summary>
 public abstract partial class SharedWoundSystem
 {
@@ -23,7 +27,7 @@ public abstract partial class SharedWoundSystem
     private void OnAttacked(Entity<WoundComponent> ent, ref AttackedEvent args)
     {
         // Used is the user itself for an unarmed attack
-        SetPendingHit(ent, args.Used);
+        SetPendingHit(ent, args.Used, AimedAt(ent, args.ClickLocation));
     }
 
     private void OnThrowHitBy(Entity<WoundComponent> ent, ref ThrowHitByEvent args)
@@ -41,7 +45,7 @@ public abstract partial class SharedWoundSystem
         SetPendingHit(ent, source);
     }
 
-    private void SetPendingHit(Entity<WoundComponent> ent, EntityUid source)
+    private void SetPendingHit(Entity<WoundComponent> ent, EntityUid source, List<BodyPartType>? aim = null)
     {
         // Locations are only picked on the server
         if (!_net.IsServer)
@@ -49,16 +53,43 @@ public abstract partial class SharedWoundSystem
 
         ent.Comp.PendingHitSource = source;
         ent.Comp.PendingHitTick = _timing.CurTick;
+        ent.Comp.PendingHitAim = aim;
     }
 
     /// <summary>
-    /// The weapon whose hit is landing right now, if any. Clears it, so one hit is only counted once.
+    /// The weapon whose hit is landing right now and what it was aimed at, if any. Clears them, so one hit is only
+    /// counted once.
     /// </summary>
-    private EntityUid? TakePendingHit(WoundComponent comp)
+    private (EntityUid? Source, List<BodyPartType>? Aim) TakePendingHit(WoundComponent comp)
     {
-        var source = comp.PendingHitTick == _timing.CurTick ? comp.PendingHitSource : null;
+        var current = comp.PendingHitTick == _timing.CurTick;
+        var result = current ? (comp.PendingHitSource, comp.PendingHitAim) : (null, null);
         comp.PendingHitSource = null;
-        return source;
+        comp.PendingHitAim = null;
+        return result;
+    }
+
+    /// <summary>
+    /// The body part types a click aims at: the click's height relative to the target, as the attacker sees it.
+    /// Mobs are drawn upright and the camera follows the grid, so "up" is up in the target's grid frame. Null if
+    /// the mob can't be aimed at, is lying down (its sprite is on its side), or the click wasn't on it.
+    /// </summary>
+    public List<BodyPartType>? AimedAt(Entity<WoundComponent> target, EntityCoordinates click)
+    {
+        var aim = _proto.Index(target.Comp.Config).Aim;
+        if (aim == null || !click.IsValid(EntityManager) || _standing.IsDown(target.Owner))
+            return null;
+
+        var xform = Transform(target);
+        var local = _transform.WithEntityId(click, xform.ParentUid);
+        if (!local.IsValid(EntityManager))
+            return null;
+
+        var offset = local.Position - xform.LocalPosition;
+        if (offset.Length() > aim.MaxDistance)
+            return null;
+
+        return aim.ZoneAt(offset.Y);
     }
 }
 

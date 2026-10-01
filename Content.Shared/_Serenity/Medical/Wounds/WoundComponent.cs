@@ -1,4 +1,5 @@
 using Content.Shared._Serenity.Medical.Wounds.Systems;
+using Content.Shared._Starlight.Medical.Body.Part;
 using Robust.Shared.GameObjects;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -62,4 +63,10 @@ public sealed partial class WoundComponent : Component
 
     [ViewVariables]
     public GameTick PendingHitTick;
+
+    /// <summary>
+    /// The body part types the pending hit was aimed at, if the attacker aimed (see <see cref="HitAimConfig"/>).
+    /// </summary>
+    [ViewVariables]
+    public List<BodyPartType>? PendingHitAim;
 }

@@ -5,6 +5,7 @@ using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Rejuvenate;
+using Content.Shared.Standing;
 using Content.Shared._Serenity.Medical.Damage;
 using Robust.Shared.GameObjects;
 using Robust.Shared.IoC;
@@ -23,6 +24,8 @@ public abstract partial class SharedWoundSystem : EntitySystem
     [Dependency] private SharedBodySystem _body = default!;
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private INetManager _net = default!;
+    [Dependency] private StandingStateSystem _standing = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     private readonly List<WoundTypePrototype> _woundTypes = new();
     private readonly List<WoundCategoryPrototype> _categories = new();
@@ -111,11 +114,11 @@ public abstract partial class SharedWoundSystem : EntitySystem
         // location even when it is too light to wound. Chosen on the server only: a client's guess would just be
         // replaced by the server's state.
         WoundLocation? location = null;
-        var weapon = _net.IsServer ? TakePendingHit(comp) : null;
+        var (weapon, aim) = _net.IsServer ? TakePendingHit(comp) : (null, null);
         if (_net.IsServer && (hits != null || weapon != null))
         {
             var biasSource = weapon ?? args.Origin;
-            location = PickLocation(uid, _proto.Index(comp.Config), CompOrNull<HitLocationBiasComponent>(biasSource));
+            location = PickLocation(uid, _proto.Index(comp.Config), CompOrNull<HitLocationBiasComponent>(biasSource), aim);
         }
 
         if (hits != null)
@@ -186,9 +189,10 @@ public abstract partial class SharedWoundSystem : EntitySystem
     /// <summary>
     /// Picks where a hit lands from the config's weighted locations, among the body parts the mob still has.
     /// Null for a mob with no body or a config with no locations. A weapon's <paramref name="bias"/> scales the
-    /// weights by body part type. Uses randomness, so call it on the server.
+    /// weights by body part type, and <paramref name="aimed"/> body part types get the config's aim multiplier.
+    /// Uses randomness, so call it on the server.
     /// </summary>
-    public WoundLocation? PickLocation(EntityUid uid, WoundConfigPrototype config, HitLocationBiasComponent? bias = null)
+    public WoundLocation? PickLocation(EntityUid uid, WoundConfigPrototype config, HitLocationBiasComponent? bias = null, List<BodyPartType>? aimed = null)
     {
         if (config.HitLocations.Count == 0 || !HasComp<BodyComponent>(uid))
             return null;
@@ -201,6 +205,9 @@ public abstract partial class SharedWoundSystem : EntitySystem
             if (bias != null && bias.Multipliers.TryGetValue(candidate.Type, out var multiplier))
                 weight *= multiplier;
 
+            if (aimed != null && config.Aim != null && aimed.Contains(candidate.Type))
+                weight *= config.Aim.Multiplier;
+
             if (weight <= 0f || !HasPart(uid, candidate))
                 continue;
 
@@ -210,7 +217,7 @@ public abstract partial class SharedWoundSystem : EntitySystem
 
         // A bias that rules out every part the mob has left falls back to the plain weights
         if (present.Count == 0)
-            return bias != null ? PickLocation(uid, config) : null;
+            return bias != null || aimed != null ? PickLocation(uid, config) : null;
 
         var roll = _random.NextFloat() * total;
         foreach (var (candidate, weight) in present)

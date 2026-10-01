@@ -12,7 +12,9 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Movement.Components;
 using Content.Shared.StatusEffectNew;
 using Content.Shared.Weapons.Melee.Events;
+using System.Numerics;
 using Robust.Shared.GameObjects;
+using Robust.Shared.Map;
 using Robust.Shared.Localization;
 using Robust.Shared.Prototypes;
 
@@ -175,6 +177,49 @@ public sealed class WoundLocationTest
 
             entMan.DeleteEntity(other);
             entMan.DeleteEntity(club);
+        });
+
+        await pair.CleanReturnAsync();
+    }
+
+    /// <summary>
+    /// Clicking high on a target aims at the head, low at the legs, and a click well off the target isn't aimed.
+    /// Aiming shifts the odds: over many aimed hits most land in the aimed zone, but the aim never forces it.
+    /// </summary>
+    [Test]
+    public async Task ClickHeightAimsHits()
+    {
+        await using var pair = await PoolManager.GetServerClient();
+        var server = pair.Server;
+        var entMan = server.EntMan;
+        var mapData = await pair.CreateTestMap();
+        var wounds = entMan.System<SharedWoundSystem>();
+        var config = server.ProtoMan.Index(DefaultConfig);
+
+        await server.WaitAssertion(() =>
+        {
+            var patient = entMan.SpawnEntity("MobHuman", mapData.GridCoords);
+            var target = (patient, entMan.GetComponent<WoundComponent>(patient));
+            var at = entMan.GetComponent<TransformComponent>(patient).Coordinates;
+
+            Assert.That(wounds.AimedAt(target, at.Offset(new Vector2(0f, 0.35f))), Does.Contain(BodyPartType.Head));
+            Assert.That(wounds.AimedAt(target, at.Offset(new Vector2(0.1f, -0.35f))), Does.Contain(BodyPartType.Leg));
+            Assert.That(wounds.AimedAt(target, at), Does.Contain(BodyPartType.Torso));
+            Assert.That(wounds.AimedAt(target, at.Offset(new Vector2(2f, 0f))), Is.Null, "a click off the target isn't aimed");
+
+            var head = wounds.AimedAt(target, at.Offset(new Vector2(0f, 0.35f)));
+            var heads = 0;
+            const int tries = 400;
+            for (var i = 0; i < tries; i++)
+            {
+                if (wounds.PickLocation(patient, config, aimed: head)?.Type == BodyPartType.Head)
+                    heads++;
+            }
+
+            // Head is 8 of 100 by default; aimed x3 it is 24 of 116, about a fifth
+            Assert.That(heads, Is.InRange(tries / 10, tries / 2), "aiming high should land on the head more often, not always");
+
+            entMan.DeleteEntity(patient);
         });
 
         await pair.CleanReturnAsync();

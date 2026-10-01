@@ -52,6 +52,12 @@ public sealed partial class WoundConfigPrototype : IPrototype
     public List<HitLocationWeight> HitLocations = new();
 
     /// <summary>
+    /// How clicking high or low on this mob's sprite steers a melee hit. Null means attacks can't be aimed.
+    /// </summary>
+    [DataField]
+    public HitAimConfig? Aim;
+
+    /// <summary>
     /// How many wounds of one type can be active at once.
     /// </summary>
     [DataField]
@@ -133,6 +139,60 @@ public sealed partial class WoundCategoryEffects
     /// </summary>
     [DataField]
     public List<BodyPartType> StatusLocations = new();
+}
+
+/// <summary>
+/// Aiming by where you click on the target: the click's height on the (upright) sprite picks a zone, and hits are
+/// more likely to land in that zone's body parts. It shifts the odds, it never guarantees the part.
+/// </summary>
+[DataDefinition]
+public sealed partial class HitAimConfig
+{
+    /// <summary>
+    /// Multiplies the hit weight of the aimed zone's body parts.
+    /// </summary>
+    [DataField]
+    public float Multiplier = 3f;
+
+    /// <summary>
+    /// A click farther than this (in tiles) from the target's centre isn't aiming at it, e.g. a wide swing.
+    /// </summary>
+    [DataField]
+    public float MaxDistance = 0.7f;
+
+    /// <summary>
+    /// Height bands on the sprite, in tiles from its centre (up is positive). The first band containing the click
+    /// wins; a click in no band isn't aimed.
+    /// </summary>
+    [DataField]
+    public List<HitAimZone> Zones = new();
+
+    /// <summary>
+    /// The body part types aimed at by a click this far above (negative: below) the target's centre, or null.
+    /// </summary>
+    public List<BodyPartType>? ZoneAt(float height)
+    {
+        foreach (var zone in Zones)
+        {
+            if (height >= zone.Min && height < zone.Max)
+                return zone.Types;
+        }
+
+        return null;
+    }
+}
+
+[DataDefinition]
+public sealed partial class HitAimZone
+{
+    [DataField]
+    public float Min = float.NegativeInfinity;
+
+    [DataField]
+    public float Max = float.PositiveInfinity;
+
+    [DataField(required: true)]
+    public List<BodyPartType> Types = new();
 }
 
 [DataDefinition]
