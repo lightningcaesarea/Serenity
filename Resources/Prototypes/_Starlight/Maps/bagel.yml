@@ -21,7 +21,6 @@
             Captain: [ 1, 1 ]
             HeadOfPersonnel: [ 1, 1 ]
             HeadOfSecurity: [ 1, 1 ]
-            ChiefMedicalOfficer: [ 1, 1 ]
             ChiefEngineer: [ 1, 1 ]
             ResearchDirector: [ 1, 1 ]
             Quartermaster: [ 1, 1 ]
@@ -40,8 +39,7 @@
             StationEngineer: [ 4, 4 ]
             TechnicalAssistant: [ 4, 4 ]
             #medical
-            Chemist: [ 2, 2 ]
-            MedicalDoctor: [ 3, 3 ]
+            MedicalDoctor: [ 5, 5 ]
             Paramedic: [ 1, 1 ]
             MedicalIntern: [ 4, 4 ]
             #science
