@@ -183,7 +183,7 @@ public sealed class WoundSurgeryTest
             // With a beaker in hand it works, and the beaker ends up holding exudate
             Assert.That(CanPerform(hemostat, beaker).Invalid, Is.EqualTo(StepInvalidReason.None));
             Assert.That(Perform(hemostat, beaker), Is.True);
-            Assert.That(beakerSolution!.GetTotalPrototypeQuantity("Exudate").Float(), Is.EqualTo(10f));
+            Assert.That(beakerSolution!.GetTotalPrototypeQuantity("Exudate").Float(), Is.EqualTo(30f));
 
             // A full container won't do
             solutions.TryAddReagent(beakerSoln!.Value, "Water", beakerSolution.AvailableVolume);

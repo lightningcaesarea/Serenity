@@ -30,7 +30,7 @@ An untreated Laceration, Puncture or Burn of tier 2 or worse can become infected
 The patient looks flushed, then feverish, then gravely ill when examined. A health analyzer tells you if they are infected.
 
 ## Treating it
-[bold]Antibiotics hold an infection back but do not cure it.[/bold] The [bold]Drain Infection[/bold] surgery cures it: after an incision, lance the infected tissue with a scalpel, drain it with a hemostat, and cauterize the wound with a cautery. Draining needs a [bold]container[/bold], like a beaker, in your other hand to catch the exudate (about 10 units) that comes out; a full container will not do.
+[bold]Antibiotics hold an infection back but do not cure it.[/bold] The [bold]Drain Infection[/bold] surgery cures it: after an incision, lance the infected tissue with a scalpel, drain it with a hemostat, and cauterize the wound with a cautery. Draining needs a [bold]container[/bold], like a beaker, in your other hand to catch the exudate (30 units) that comes out; a full container will not do.
 
 <GuideReagentEmbed Reagent="Exudate"/>
 
