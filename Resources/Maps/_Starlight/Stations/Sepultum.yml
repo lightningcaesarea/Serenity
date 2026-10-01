@@ -20839,7 +20839,7 @@ entities:
       parent: 2
       rot: -1.5707963267948966 rad
       pos: -126.5,48.5
-- proto: Bloodpack
+- proto: IVBagBlood
   entities:
   - uid: 1624
     components:

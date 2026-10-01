@@ -25,9 +25,9 @@
       types:
         Blunt: 25 # yowch
     openSound:
-      path: /Audio/Machines/blastdoor.ogg
+      path: /Audio/_RMC14/Machines/blastdoor.ogg
     closeSound:
-      path: /Audio/Machines/blastdoor.ogg
+      path: /Audio/_RMC14/Machines/blastdoor.ogg
   - type: Occluder
   - type: Appearance
   - type: RadiationBlocker

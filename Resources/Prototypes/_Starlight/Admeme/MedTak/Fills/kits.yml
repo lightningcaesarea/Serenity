@@ -24,8 +24,8 @@
       storagebase: !type:AllSelector
         children:
         - id: RegenerativeMesh
-        - id: Bloodpack
-        - id: Bloodpack
+        - id: IVBagBlood
+        - id: IVBagBlood
         - id: ChemistryBottleSaline
         - id: ChemistryBottleAmoxla
 
@@ -41,7 +41,7 @@
         children:
         - id: MedicatedSuture
         - id: RegenerativeMesh
-        - id: Bloodpack
+        - id: IVBagBlood
         - id: ChemistryEmptyBottle01
         - id: ChemistryEmptyBottle01
 

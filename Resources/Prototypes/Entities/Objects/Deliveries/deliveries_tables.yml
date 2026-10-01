@@ -93,7 +93,7 @@
     - id: Brutepack # Starlight-edit-Start: Moved From Rare Letter loot table, to Uncommon Letter loot table
     - id: Ointment
     - id: Gauze
-    - id: Bloodpack # Starlight-edit-End:
+    - id: IVBagBlood # Starlight-edit-End:
     - id: BikeHornImplanter # Starlight Start: Added Some More Variety Of items
     - id: SnapPopBox
     - id: CrazyLube

@@ -776,7 +776,7 @@
           weight: 50
         - id: CandleGreenInfinite
           weight: 50
-        - id: Bloodpack1
+        - id: IVBagBlood
           weight: 25
         - id: DrinkDemonsBlood
           weight: 25

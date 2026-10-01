@@ -12,7 +12,7 @@
           amount: 2
         - id: Gauze
           amount: 2
-        - id: Bloodpack
+        - id: IVBagBlood
           amount: 2
         - id: BoxLatexGloves
         - id: BoxSterileMask

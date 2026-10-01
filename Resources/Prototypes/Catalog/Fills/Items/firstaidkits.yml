@@ -98,7 +98,7 @@
         children:
         - id: MedicatedSuture
         - id: RegenerativeMesh
-        - id: Bloodpack
+        - id: IVBagBlood
           amount: 2
 
 - type: entity

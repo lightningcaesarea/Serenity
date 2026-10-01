@@ -1463,7 +1463,7 @@ entities:
       parent: 1
       rot: 1.5707963267948966 rad
       pos: -2.5,15.5
-- proto: Bloodpack
+- proto: IVBagBlood
   entities:
   - uid: 76
     components:
@@ -1471,33 +1471,18 @@ entities:
       parent: 1
       rot: -1.5707963267948966 rad
       pos: 3.8097827,16.95979
-    - type: UserInterface
-      interfaces:
-        enum.StackCustomSplitUiKey.Key:
-          type: StackCustomSplitBoundUserInterface
-      actors: {}
   - uid: 77
     components:
     - type: Transform
       parent: 1
       rot: -1.5707963267948966 rad
       pos: 3.6318638,16.855463
-    - type: UserInterface
-      interfaces:
-        enum.StackCustomSplitUiKey.Key:
-          type: StackCustomSplitBoundUserInterface
-      actors: {}
   - uid: 78
     components:
     - type: Transform
       parent: 1
       rot: -1.5707963267948966 rad
       pos: 3.7800508,16.662338
-    - type: UserInterface
-      interfaces:
-        enum.StackCustomSplitUiKey.Key:
-          type: StackCustomSplitBoundUserInterface
-      actors: {}
 - proto: BoozeDispenser
   entities:
   - uid: 79

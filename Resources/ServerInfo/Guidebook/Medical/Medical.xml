@@ -17,7 +17,7 @@ Right now, medbay is divided into two different sets of care:
 ## Medical Treatment
   <Box>
     <GuideEntityEmbed Entity="Brutepack"/>
-    <GuideEntityEmbed Entity="Bloodpack"/>
+    <GuideEntityEmbed Entity="IVBagBlood"/>
     <GuideEntityEmbed Entity="Ointment"/>
     <GuideEntityEmbed Entity="Gauze"/>
     <GuideEntityEmbed Entity="HandheldHealthAnalyzer"/>

@@ -19801,48 +19801,28 @@ entities:
       parent: 2
       rot: -1.5707963267948966 rad
       pos: 21.5,13.5
-- proto: Bloodpack
+- proto: IVBagBlood
   entities:
   - uid: 1390
     components:
     - type: Transform
       parent: 2
       pos: 21.380043,-40.81268
-    - type: UserInterface
-      interfaces:
-        enum.StackCustomSplitUiKey.Key:
-          type: StackCustomSplitBoundUserInterface
-      actors: {}
   - uid: 1391
     components:
     - type: Transform
       parent: 2
       pos: 21.630043,-40.734554
-    - type: UserInterface
-      interfaces:
-        enum.StackCustomSplitUiKey.Key:
-          type: StackCustomSplitBoundUserInterface
-      actors: {}
   - uid: 1392
     components:
     - type: Transform
       parent: 2
       pos: -2.6092138,-46.325096
-    - type: UserInterface
-      interfaces:
-        enum.StackCustomSplitUiKey.Key:
-          type: StackCustomSplitBoundUserInterface
-      actors: {}
   - uid: 1393
     components:
     - type: Transform
       parent: 2
       pos: -2.3748388,-46.46572
-    - type: UserInterface
-      interfaces:
-        enum.StackCustomSplitUiKey.Key:
-          type: StackCustomSplitBoundUserInterface
-      actors: {}
 - proto: BodyBag
   entities:
   - uid: 1394
