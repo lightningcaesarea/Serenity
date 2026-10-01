@@ -182,6 +182,10 @@ public sealed partial class GameTicker
     /// </summary>
     public bool StartGameRule(EntityUid ruleEntity, GameRuleComponent? ruleData = null)
     {
+        // Serenity: a rule can delete itself while being added (e.g. Secret failing to pick a preset).
+        if (TerminatingOrDeleted(ruleEntity))
+            return false;
+
         if (!Resolve(ruleEntity, ref ruleData))
             ruleData ??= EnsureComp<GameRuleComponent>(ruleEntity);
 
