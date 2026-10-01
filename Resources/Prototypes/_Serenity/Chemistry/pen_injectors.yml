@@ -1,0 +1,93 @@
+# Blank, refillable-by-ChemMaster pen injectors (Serenity). Art is CC-BY-SA from S.P.L.U.R.T-tg,
+# see pen_injector.rsi/meta.json. The solution is "hypospray" because the shared Injector code,
+# solution visuals and trash-on-empty all look for that name.
+- type: entity
+  parent: ChemicalMedipen
+  id: PenInjector
+  name: pen injector
+  description: A single-dose, non-refillable injector pen. Printed blank from a ChemMaster and loaded with whatever the chemist mixed.
+  components:
+  - type: Sprite
+    sprite: _Serenity/Objects/Specific/Medical/pen_injector.rsi
+    layers:
+    - state: default
+      map: ["enum.SolutionContainerLayers.Fill"]
+  - type: SolutionContainerVisuals
+    maxFillLevels: 1
+    changeColor: false
+    emptySpriteName: default0
+  - type: Solution
+    solution:
+      maxVol: 25
+
+- type: entity
+  parent: PenInjector
+  id: PenInjectorBrute
+  suffix: brute
+  components:
+  - type: Sprite
+    layers:
+    - state: brute
+      map: ["enum.SolutionContainerLayers.Fill"]
+  - type: SolutionContainerVisuals
+    emptySpriteName: brute0
+
+- type: entity
+  parent: PenInjector
+  id: PenInjectorBurn
+  suffix: burn
+  components:
+  - type: Sprite
+    layers:
+    - state: burn
+      map: ["enum.SolutionContainerLayers.Fill"]
+  - type: SolutionContainerVisuals
+    emptySpriteName: burn0
+
+- type: entity
+  parent: PenInjector
+  id: PenInjectorToxin
+  suffix: toxin
+  components:
+  - type: Sprite
+    layers:
+    - state: tox
+      map: ["enum.SolutionContainerLayers.Fill"]
+  - type: SolutionContainerVisuals
+    emptySpriteName: tox0
+
+- type: entity
+  parent: PenInjector
+  id: PenInjectorOxygen
+  suffix: oxygen
+  components:
+  - type: Sprite
+    layers:
+    - state: oxy
+      map: ["enum.SolutionContainerLayers.Fill"]
+  - type: SolutionContainerVisuals
+    emptySpriteName: oxy0
+
+- type: entity
+  parent: PenInjector
+  id: PenInjectorRed
+  suffix: red
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+      map: ["enum.SolutionContainerLayers.Fill"]
+  - type: SolutionContainerVisuals
+    emptySpriteName: red0
+
+- type: entity
+  parent: PenInjector
+  id: PenInjectorDrug
+  suffix: drug
+  components:
+  - type: Sprite
+    layers:
+    - state: medicinedrug
+      map: ["enum.SolutionContainerLayers.Fill"]
+  - type: SolutionContainerVisuals
+    emptySpriteName: medicinedrug0
