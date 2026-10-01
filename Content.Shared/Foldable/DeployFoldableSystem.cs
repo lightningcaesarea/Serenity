@@ -36,12 +36,6 @@ public sealed partial class DeployFoldableSystem : EntitySystem
 
     private void OnDragDropDragged(Entity<DeployFoldableComponent> ent, ref DragDropDraggedEvent args)
     {
-        // Serenity start: only fold when dropped on yourself, which is all CanDropDragged allows. Otherwise an IV stand
-        // dragged onto a patient would fold itself as well as attach.
-        if (args.Handled || args.User != args.Target)
-            return;
-        // Serenity end
-
         if (!TryComp<FoldableComponent>(ent, out var foldable)
             || !_foldable.TrySetFolded(ent, foldable, true, args.User))
             return;
