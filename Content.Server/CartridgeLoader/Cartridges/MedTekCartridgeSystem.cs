@@ -1,4 +1,5 @@
 using Content.Server.Medical.Components;
+using Content.Shared._Serenity.Medical.Analyzer;
 using Content.Shared.CartridgeLoader;
 //FarHorizons Start
 using Content.Shared.Interaction;
@@ -28,6 +29,7 @@ public sealed partial class MedTekCartridgeSystem : EntitySystem
     {
         var healthAnalyzer = EnsureComp<HealthAnalyzerComponent>(args.Loader);
         EnsureComp<MedTekAnalyzerComponent>(args.Loader); // Starlight
+        EnsureComp<AdvancedHealthAnalyzerComponent>(args.Loader); // Serenity: a PDA's MedTek is an advanced analyzer
     }
 
     private void OnCartridgeRemoved(Entity<MedTekCartridgeComponent> ent, ref CartridgeRemovedEvent args)
@@ -37,6 +39,7 @@ public sealed partial class MedTekCartridgeSystem : EntitySystem
         {
             RemComp<HealthAnalyzerComponent>(args.Loader);
             RemComp<MedTekAnalyzerComponent>(args.Loader); // Starlight
+            RemComp<AdvancedHealthAnalyzerComponent>(args.Loader); // Serenity
         }
     }
 

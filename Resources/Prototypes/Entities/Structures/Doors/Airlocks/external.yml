@@ -9,13 +9,13 @@
       types:
         Blunt: 15
     openSound:
-      path: /Audio/Machines/airlock_ext_open.ogg
+      path: /Audio/_RMC14/Machines/airlock.ogg
     closeSound:
-      path: /Audio/Machines/airlock_ext_close.ogg
+      path: /Audio/_RMC14/Machines/airlock.ogg
     denySound:
-      path: /Audio/Machines/airlock_deny.ogg
+      path: /Audio/_RMC14/Machines/buzz_two.ogg
   - type: Sprite
-    sprite: Structures/Doors/Airlocks/Standard/external.rsi
+    sprite: _DV/Structures/Doors/Airlocks/Standard/external.rsi
   - type: Wires
     layoutId: AirlockExternal
   - type: Paintable
@@ -31,7 +31,7 @@
   - type: Occluder
     enabled: false
   - type: Sprite
-    sprite: Structures/Doors/Airlocks/Glass/external.rsi
+    sprite: _DV/Structures/Doors/Airlocks/Glass/external.rsi
   - type: Fixtures
     fixtures:
       fix1:

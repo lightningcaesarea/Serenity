@@ -33,7 +33,7 @@
           amount: 3
         - id: Ointment
           amount: 3
-        - id: Bloodpack
+        - id: IVBagBlood
           amount: 3
 
 - type: entity
@@ -112,7 +112,7 @@
           amount: 3
         - id: Brutepack
         - id: Ointment
-        - id: Bloodpack
+        - id: IVBagBlood
         - id: PowerCellSmall
         - id: ClothingHandsGlovesBlackNitrile
 

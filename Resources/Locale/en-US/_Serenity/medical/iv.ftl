@@ -14,6 +14,7 @@ iv-attach-others-drawing = { CAPITALIZE(THE($user)) } hooks { THE($iv) } to { TH
 
 iv-detach-self = You take { THE($iv) } out of { THE($target) }.
 iv-detach-others = { CAPITALIZE(THE($user)) } takes { THE($iv) } out of { THE($target) }.
+iv-detach-own-others = { CAPITALIZE(THE($target)) } takes { THE($iv) } out.
 iv-rip = The IV line is torn out of { THE($target) }!
 
 iv-examine-injecting = It is set to give fluid to the patient.

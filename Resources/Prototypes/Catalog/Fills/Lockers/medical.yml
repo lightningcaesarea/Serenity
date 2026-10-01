@@ -12,7 +12,7 @@
       children:
       - id: Brutepack
       - id: Ointment
-      - id: Bloodpack
+      - id: IVBagBlood
       - id: Gauze
         weight: 0.5
 

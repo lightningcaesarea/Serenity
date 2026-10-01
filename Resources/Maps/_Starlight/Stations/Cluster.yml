@@ -10886,28 +10886,18 @@ entities:
     - type: Transform
       parent: 2
       pos: 4.5,29.5
-- proto: Bloodpack
+- proto: IVBagBlood
   entities:
   - uid: 727
     components:
     - type: Transform
       parent: 2
       pos: -27.606981,21.468859
-    - type: UserInterface
-      interfaces:
-        enum.StackCustomSplitUiKey.Key:
-          type: StackCustomSplitBoundUserInterface
-      actors: {}
   - uid: 728
     components:
     - type: Transform
       parent: 2
       pos: -27.339277,21.73645
-    - type: UserInterface
-      interfaces:
-        enum.StackCustomSplitUiKey.Key:
-          type: StackCustomSplitBoundUserInterface
-      actors: {}
 - proto: BodyBag
   entities:
   - uid: 729

@@ -41449,7 +41449,7 @@ entities:
     - type: Transform
       parent: 2
       pos: -8.5,-56.5
-- proto: Bloodpack
+- proto: IVBagBlood
   entities:
   - uid: 2225
     components:
@@ -41466,22 +41466,13 @@ entities:
     - type: Transform
       parent: 2
       pos: 64.26569,45.78029
-- proto: Bloodpack1
-  entities:
   - uid: 2229
     components:
     - type: Transform
       parent: 2228
-    - type: Stack
-      count: 4
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-    - type: UserInterface
-      interfaces:
-        enum.StackCustomSplitUiKey.Key:
-          type: StackCustomSplitBoundUserInterface
-      actors: {}
 - proto: BluespaceHarvester
   entities:
   - uid: 2232

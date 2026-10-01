@@ -117,6 +117,7 @@
     emptySpriteName: antibiox_empty
   - type: Solution
     solution:
+      maxVol: 15 # one dose; the base medipen holds 20
       reagents:
       - ReagentId: Antibiox
         Quantity: 15

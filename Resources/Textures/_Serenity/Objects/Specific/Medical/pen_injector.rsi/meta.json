@@ -1,0 +1,81 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from S.P.L.U.R.T-tg at https://github.com/SPLURT-Station/S.P.L.U.R.T-tg/blob/aa2214d56629659190622ef0f82458383d180b1d/modular_zubbers/icons/obj/medical/pen_medipens/pen_medipens.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "default",
+      "directions": 1,
+      "flags": {}
+    },
+    {
+      "name": "default0",
+      "directions": 1,
+      "flags": {}
+    },
+    {
+      "name": "brute",
+      "directions": 1,
+      "flags": {}
+    },
+    {
+      "name": "brute0",
+      "directions": 1,
+      "flags": {}
+    },
+    {
+      "name": "burn",
+      "directions": 1,
+      "flags": {}
+    },
+    {
+      "name": "burn0",
+      "directions": 1,
+      "flags": {}
+    },
+    {
+      "name": "tox",
+      "directions": 1,
+      "flags": {}
+    },
+    {
+      "name": "tox0",
+      "directions": 1,
+      "flags": {}
+    },
+    {
+      "name": "oxy",
+      "directions": 1,
+      "flags": {}
+    },
+    {
+      "name": "oxy0",
+      "directions": 1,
+      "flags": {}
+    },
+    {
+      "name": "red",
+      "directions": 1,
+      "flags": {}
+    },
+    {
+      "name": "red0",
+      "directions": 1,
+      "flags": {}
+    },
+    {
+      "name": "medicinedrug",
+      "directions": 1,
+      "flags": {}
+    },
+    {
+      "name": "medicinedrug0",
+      "directions": 1,
+      "flags": {}
+    }
+  ]
+}

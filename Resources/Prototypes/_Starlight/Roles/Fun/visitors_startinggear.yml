@@ -623,7 +623,7 @@
     pocket1: Ointment
     pocket2: Brutepack
   inhand:
-  - Bloodpack
+  - IVBagBlood
   - Gauze
 
 - type: startingGear
