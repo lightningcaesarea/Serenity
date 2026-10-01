@@ -374,6 +374,8 @@
     canRestock:
     - SecTechInventory
     - AmmoVendInventory # Starlight
+    - BountyVendInventory # Serenity
+    - MarinePoliceFieldInventory # Serenity
   - type: Sprite
     layers:
     - state: base

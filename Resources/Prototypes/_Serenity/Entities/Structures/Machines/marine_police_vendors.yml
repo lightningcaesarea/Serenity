@@ -1,7 +1,8 @@
 # Marine Police vendors ported from Frontier Station 14 (MIT commit 5be37d18c2,
 # _NF/Entities/Structures/Machines/vending_machines.yml). Both replace the Detective's
 # DetDrobe and locker on the station maps now that the Detective job is disabled.
-# Department issue: free, Marine Police access only, like the MP-Tech.
+# Department issue: free, Marine Police (and Cadet) access, like the MP-Tech. Restocked with the
+# MP-Tech restock box; rebuilt from a board they start empty.
 
 - type: entity
   parent: VendingMachine
@@ -16,6 +17,8 @@
     brokenState: broken
     normalState: normal-unshaded
     showPrices: false
+  - type: Machine
+    board: VendingMachineBountyVendCircuitboard
   - type: SpeakOnUIClosed
     pack: GenericVendGoodbyes
   - type: Sprite
@@ -29,7 +32,7 @@
     - state: panel
       map: ["enum.WiresVisualLayers.MaintenancePanel"]
   - type: AccessReader
-    access: [["Security"]]
+    access: [["Security"], ["Cadet"]]
   - type: PointLight
     radius: 1.5
     energy: 1.6
@@ -48,6 +51,8 @@
     brokenState: broken
     normalState: normal-unshaded
     showPrices: false
+  - type: Machine
+    board: VendingMachineMarinePoliceFieldCircuitboard
   - type: DatasetVocalizer
     dataset: SecTechAds
   - type: SpeakOnUIClosed
@@ -63,7 +68,7 @@
     - state: panel
       map: ["enum.WiresVisualLayers.MaintenancePanel"]
   - type: AccessReader
-    access: [["Security"]]
+    access: [["Security"], ["Cadet"]]
   - type: PointLight
     radius: 1.5
     energy: 1.6
@@ -71,3 +76,63 @@
   - type: GuideHelp
     guides:
     - Security
+
+- type: entity
+  parent: VendingMachineBountyVend
+  id: VendingMachineBountyVendEmpty
+  suffix: Empty
+  components:
+  - type: EmptyVendingMachine
+
+- type: entity
+  parent: VendingMachineMarinePoliceField
+  id: VendingMachineMarinePoliceFieldEmpty
+  suffix: Empty
+  components:
+  - type: EmptyVendingMachine
+
+- type: entity
+  parent: BaseMachineCircuitboard
+  id: VendingMachineBountyVendCircuitboard
+  name: BountyVend circuitboard
+  description: A machine printed circuit board for a BountyVend machine.
+  components:
+  - type: Sprite
+    state: security
+  - type: MachineBoard
+    prototype: VendingMachineBountyVendEmpty
+    stackRequirements:
+      Steel: 5
+      Manipulator: 1
+      Glass: 2
+
+- type: entity
+  parent: BaseMachineCircuitboard
+  id: VendingMachineMarinePoliceFieldCircuitboard
+  name: MP Field Supply circuitboard
+  description: A machine printed circuit board for an MP Field Supply machine.
+  components:
+  - type: Sprite
+    state: security
+  - type: MachineBoard
+    prototype: VendingMachineMarinePoliceFieldEmpty
+    stackRequirements:
+      Steel: 5
+      Manipulator: 1
+      Glass: 2
+
+- type: latheRecipe
+  id: VendingMachineBountyVendCircuitboard
+  result: VendingMachineBountyVendCircuitboard
+  completetime: 4
+  materials:
+    Steel: 100
+    Glass: 500
+
+- type: latheRecipe
+  id: VendingMachineMarinePoliceFieldCircuitboard
+  result: VendingMachineMarinePoliceFieldCircuitboard
+  completetime: 4
+  materials:
+    Steel: 100
+    Glass: 500

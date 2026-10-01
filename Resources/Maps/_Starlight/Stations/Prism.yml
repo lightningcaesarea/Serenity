@@ -145048,13 +145048,6 @@ entities:
     - type: Transform
       parent: 2
       pos: 9.5,51.5
-- proto: SpawnPointDetective
-  entities:
-  - uid: 20986
-    components:
-    - type: Transform
-      parent: 2
-      pos: 34.5,53.5
 - proto: SpawnPointDutyOfficer
   entities:
   - uid: 21046

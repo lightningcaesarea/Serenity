@@ -79468,13 +79468,6 @@ entities:
     - type: Transform
       parent: 2
       pos: -34.5,-9.5
-- proto: SpawnPointDetective
-  entities:
-  - uid: 11679
-    components:
-    - type: Transform
-      parent: 2
-      pos: -7.5,-39.5
 - proto: SpawnPointDutyOfficer
   entities:
   - uid: 11680

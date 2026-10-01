@@ -82773,13 +82773,6 @@ entities:
     - type: Transform
       parent: 2
       pos: -19.5,-11.5
-- proto: SpawnPointDetective
-  entities:
-  - uid: 12491
-    components:
-    - type: Transform
-      parent: 2
-      pos: -15.5,-38.5
 - proto: SpawnPointDutyOfficer
   entities:
   - uid: 12492

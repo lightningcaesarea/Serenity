@@ -227811,23 +227811,6 @@ entities:
     - type: Transform
       parent: 2
       pos: 1.5,12.5
-- proto: SpawnPointDetective
-  entities:
-  - uid: 35337
-    components:
-    - type: Transform
-      parent: 2
-      pos: 24.5,46.5
-  - uid: 35338
-    components:
-    - type: Transform
-      parent: 2
-      pos: 25.5,41.5
-  - uid: 35339
-    components:
-    - type: Transform
-      parent: 2
-      pos: 26.5,45.5
 - proto: SpawnPointDutyOfficer
   entities:
   - uid: 35340

@@ -203471,28 +203471,6 @@ entities:
     - type: Transform
       parent: 2
       pos: -13.5,9.5
-- proto: SpawnPointDetective
-  entities:
-  - uid: 30772
-    components:
-    - type: Transform
-      parent: 2
-      pos: -22.5,41.5
-  - uid: 30773
-    components:
-    - type: Transform
-      parent: 2
-      pos: -22.5,40.5
-  - uid: 38181
-    components:
-    - type: Transform
-      parent: 2
-      pos: -22.5,38.5
-  - uid: 38182
-    components:
-    - type: Transform
-      parent: 2
-      pos: -25.5,40.5
 - proto: SpawnPointDutyOfficer
   entities:
   - uid: 30774
