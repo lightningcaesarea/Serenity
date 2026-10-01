@@ -221,7 +221,7 @@
   parent: WeaponEnergyTurretStationControlPanelBase
   id: WeaponEnergyTurretSecurityControlPanel
   categories: [ ShouldMapStation ] # Starlight
-  suffix: Security
+  suffix: Marine Police
   components:
   - type: AccessReader
     access: [["StationAi"], ["Security"]]

@@ -130,7 +130,7 @@
   id: BottleCaseSecurity
   parent: [ BaseBottleCase, BaseSecurityContraband ]
   name: chemical case
-  suffix: Security
+  suffix: Marine Police
   description: A plastic case with slots for bottles.
   components:
   - type: Sprite
@@ -233,7 +233,7 @@
   id: PenPackSecurity
   parent: [ BasePenPack, BaseSecurityContraband ]
   name: autoinjector pack
-  suffix: Security
+  suffix: Marine Police
   description: A pouch filled with some autoinjectors.
   components:
   - type: Storage

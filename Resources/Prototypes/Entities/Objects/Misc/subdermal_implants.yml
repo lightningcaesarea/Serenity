@@ -80,7 +80,7 @@
   parent: BaseSubdermalImplant
   id: TrackingImplant
   name: tracking implant
-  description: This implant has a tracking device attached to the suit sensor network, as well as a condition monitor for the Security radio channel.
+  description: This implant has a tracking device attached to the suit sensor network, as well as a condition monitor for the Marine Police radio channel.
   categories: [ HideSpawnMenu ]
   components:
     - type: SubdermalImplant
@@ -391,7 +391,7 @@
   parent: BaseSubdermalImplant
   id: FakeMindShieldImplant
   name: fake mindshield implant
-  description: This implant allows the implanter to produce a fake signal that NT security huds use to identify individuals implanted with a mindshield.
+  description: This implant allows the implanter to produce a fake signal that NT MP HUDs use to identify individuals implanted with a mindshield.
   categories: [ HideSpawnMenu ]
   components:
   - type: SubdermalImplant

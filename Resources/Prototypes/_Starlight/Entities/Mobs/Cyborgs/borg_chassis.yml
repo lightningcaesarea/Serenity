@@ -38,7 +38,7 @@
 - type: entity
   id: BorgChassisSecurity
   parent: BorgChassisSelectable
-  name: security cyborg
+  name: Marine Police cyborg
   components:
   - type: BorgSwitchableType
     selectedBorgType: security
@@ -93,7 +93,7 @@
 - type: entity
   id: BorgChassisSecurityPowered
   parent: BorgChassisSecurity
-  name: security cyborg
+  name: Marine Police cyborg
   suffix: Powered
   components:
   - type: ItemSlots

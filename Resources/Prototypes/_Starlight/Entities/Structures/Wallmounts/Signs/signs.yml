@@ -171,7 +171,7 @@
 - type: entity
   parent: BaseSign
   id: SignBreakSecurity
-  name: security breakroom sign
+  name: Marine Police breakroom sign
   description: A sign indicating where the breakroom is.
   components:
   - type: Sprite
@@ -241,7 +241,7 @@
 - type: entity
   parent: BaseSign
   id: SignLockerSecurity
-  name: security locker room sign
+  name: Marine Police locker room sign
   description: A sign indicating where the locker room is.
   components:
   - type: Sprite

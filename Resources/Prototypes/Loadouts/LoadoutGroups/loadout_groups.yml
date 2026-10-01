@@ -260,8 +260,8 @@
   loadouts:
   - HoPJumpsuit
   - HoPJumpskirt
-  - HoPTurtleneckJumpsuit # afterlight
-  - HoPTurtleneckJumpskirt # afterlight
+  - HoPTurtleneckJumpsuit # starlight
+  - HoPTurtleneckJumpskirt # starlight
   - HopFormalSuit # DeltaV
   - HopFormalSkirt # DeltaV
 
@@ -1035,9 +1035,9 @@
   loadouts:
   - CargoTechnicianJumpsuit
   - CargoTechnicianJumpskirt
-  - CargoTechnicianJumpsuitAlt # afterlight start
+  - CargoTechnicianJumpsuitAlt # starlight start
   - CargoTechnicianJumpsuitFormal
-  - CargoTechnicianJumpskirtFormal # afterlight end
+  - CargoTechnicianJumpskirtFormal # starlight end
   - CargoTechnicianOveralls # Starlight
   - CargoTechnicianJumpsuitInformal # DeltaV
 
@@ -1383,7 +1383,7 @@
   loadouts:
   - ScientistJumpsuit
   - ScientistJumpskirt
-  - ScientistJumpskirtFormal # afterlight
+  - ScientistJumpskirtFormal # starlight
   - RoboticistJumpsuit
   - RoboticistJumpskirt
   - SeniorResearcherJumpsuit

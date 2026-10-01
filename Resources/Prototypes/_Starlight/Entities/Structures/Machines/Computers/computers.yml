@@ -477,8 +477,8 @@
 - type: entity
   parent: BaseComputerShuttle
   id: ComputerShuttleSecurity
-  name: remote security shuttle console
-  description: Used to pilot the security shuttle remotely.
+  name: remote Marine Police shuttle console
+  description: Used to pilot the Marine Police shuttle remotely.
   components:
     - type: Sprite
       layers:
@@ -670,7 +670,7 @@
   parent: ComputerComms
   id: ComputerCommsSecurity
   categories: [ ShouldMapStation ]
-  name: security communications console
+  name: Marine Police communications console
   description: A computer used to make station wide announcements via keyboard, set the appropriate alert level, and call the emergency shuttle.
   components:
     - type: Sprite

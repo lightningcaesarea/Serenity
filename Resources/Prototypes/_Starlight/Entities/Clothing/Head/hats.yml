@@ -92,8 +92,8 @@
 - type: entity
   parent: [ClothingHeadBase, BaseSecurityContraband]
   id: ClothingHeadHatBeretCorpsman
-  name: corpsman's beret
-  description: Losing this hat is considered grounds for demotion. Kidding, though you will be ridiculed by your fellow corpsmans.
+  name: Marine Corpsman's beret
+  description: Losing this hat is considered grounds for demotion. Kidding, though you will be ridiculed by your fellow Marine Corpsmen.
   components:
     - type: Sprite
       sprite: _Starlight/Clothing/Head/Hats/beret_corpsman.rsi
@@ -103,7 +103,7 @@
 - type: entity
   parent: [ClothingHeadBase, BaseSecurityContraband]
   id: ClothingHeadNurseHatBrigmedic
-  name: corpsman's medbay hat
+  name: Marine Corpsman's medbay hat
   description: For those long nights on the shift.
   components:
     - type: Sprite
@@ -120,7 +120,7 @@
 - type: entity
   parent: [ClothingHeadBase, BaseSecurityContraband]
   id: ClothingHeadNurseHatCorpsman
-  name: corpsman's traumabay hat
+  name: Marine Corpsman's traumabay hat
   description: Dark enough to hide blood and tears alike.
   components:
     - type: Sprite
@@ -171,7 +171,7 @@
   parent: ClothingHeadBase
   id: ClothingHeadHatBeretDutyOfficer
   name: duty officer's beret
-  description: A dark-red beret themed after the warden's. Not bad, not bad.
+  description: A dark-red beret themed after the Marine Quartermaster's. Not bad, not bad.
   components:
     - type: Sprite
       sprite: _Starlight/Clothing/Head/Hats/beret_dutyofficer.rsi
@@ -186,7 +186,7 @@
 - type: entity
   parent: [ClothingHeadBaseSummer, BaseCommandContraband]
   id: ClothingHeadHatSheriffHat
-  name: head of security's sheriff hat
+  name: Marine CO's sheriff hat
   description: It's high noon.
   components:
     - type: Sprite

@@ -400,9 +400,9 @@
 - type: entity
   parent: [ClothingOuterArmorHoS, ClothingOuterWinterCoatToggleable, BaseSecurityCommandContraband]
   id: ClothingOuterWinterHoS
-  name: head of security's armored winter coat
+  name: Marine CO's armored winter coat
   suffix: Armored #SL Edit
-  description: A sturdy, utilitarian winter coat designed to protect a head of security from any brig-bound threats and hypothermic events.
+  description: A sturdy, utilitarian winter coat designed to protect a Marine CO from any brig-bound threats and hypothermic events.
   components:
   - type: Sprite
     sprite: _Serenity/Clothing/OuterClothing/WinterCoats/hosgreatcoat.rsi
@@ -437,7 +437,7 @@
 - type: entity
   parent: [ClothingOuterWinterCoatToggleable, BaseSecurityCommandContraband]
   id: ClothingOuterWinterHoSUnarmored
-  name: head of security's winter coat
+  name: Marine CO's winter coat
   suffix: Unarmored #SL Edit
   description: A sturdy coat, a warm coat, but not an armored coat.
   components:
@@ -744,7 +744,7 @@
 - type: entity
   parent: [ClothingOuterWinterCoatToggleable, BaseSecurityContraband, AllowSuitStorageClothing]
   id: ClothingOuterWinterSec
-  name: security winter coat
+  name: Marine Police winter coat
   components:
   - type: Sprite
     sprite: Clothing/OuterClothing/WinterCoats/coat.rsi
@@ -811,9 +811,9 @@
 - type: entity
   parent: [ClothingOuterArmorWarden, ClothingOuterWinterCoatToggleable, BaseSecurityContraband]
   id: ClothingOuterWinterWarden
-  name: armourer's armored winter coat
+  name: Marine Quartermaster's armored winter coat
   suffix: Armored #SL Edit
-  description: A sturdy, utilitarian winter coat designed to protect a warden from any brig-bound threats and hypothermic events.
+  description: A sturdy, utilitarian winter coat designed to protect a Marine Quartermaster from any brig-bound threats and hypothermic events.
   components:
   - type: Sprite
     sprite: _Serenity/Clothing/OuterClothing/WinterCoats/armourercoat.rsi
@@ -848,7 +848,7 @@
 - type: entity
   parent: [ClothingOuterWinterCoatToggleable, BaseSecurityContraband]
   id: ClothingOuterWinterWardenUnarmored
-  name: warden's winter coat
+  name: Marine Quartermaster's winter coat
   suffix: Unarmored #SL Edit
   description: A sturdy coat, a warm coat, but not an armored coat.
   components:

@@ -11,7 +11,7 @@ loadout-group-survival-basic = Survival Box
 loadout-group-survival-extended = Extended Survival Box
 loadout-group-survival-clown = Clown Survival Box
 loadout-group-survival-medical = Medical Survival Box
-loadout-group-survival-security = Security Survival Box
+loadout-group-survival-security = Marine Police Survival Box
 loadout-group-survival-syndicate = Github is forcing me to write text that is literally twice-impossible for the player to ever see, send help
 loadout-group-survival-military = See line 14, no one will ever see this so :3
 loadout-group-breath-tool = Species-dependent breath tools
@@ -150,40 +150,40 @@ loadout-group-scientist-id = Scientist ID
 loadout-group-research-assistant-jumpsuit = Research Assistant jumpsuit
 
 # Security
-loadout-group-head-of-security-head = Head of Security head
-loadout-group-head-of-security-jumpsuit = Head of Security jumpsuit
-loadout-group-head-of-security-neck = Head of Security neck
-loadout-group-head-of-security-outerclothing = Head of Security outer clothing
+loadout-group-head-of-security-head = Marine CO head
+loadout-group-head-of-security-jumpsuit = Marine CO jumpsuit
+loadout-group-head-of-security-neck = Marine CO neck
+loadout-group-head-of-security-outerclothing = Marine CO outer clothing
 
-loadout-group-warden-head = Warden head
-loadout-group-warden-jumpsuit = Warden jumpsuit
-loadout-group-warden-outerclothing = Warden outer clothing
+loadout-group-warden-head = Marine Quartermaster head
+loadout-group-warden-jumpsuit = Marine Quartermaster jumpsuit
+loadout-group-warden-outerclothing = Marine Quartermaster outer clothing
 
-loadout-group-security-head = Security head
-loadout-group-security-jumpsuit = Security jumpsuit
-loadout-group-security-backpack = Security backpack
-loadout-group-security-belt = Security Belt
-loadout-group-security-outerclothing = Security outer clothing
-loadout-group-security-shoes = Security shoes
-loadout-group-security-id = Security ID
-loadout-group-security-weapon = Security Weapon
-loadout-group-security-eyewear = Security eyewear
+loadout-group-security-head = Marine Police head
+loadout-group-security-jumpsuit = Marine Police jumpsuit
+loadout-group-security-backpack = Marine Police backpack
+loadout-group-security-belt = Marine Police Belt
+loadout-group-security-outerclothing = Marine Police outer clothing
+loadout-group-security-shoes = Marine Police shoes
+loadout-group-security-id = Marine Police ID
+loadout-group-security-weapon = Marine Police Weapon
+loadout-group-security-eyewear = Marine Police eyewear
 
-loadout-group-brigmedic-head = Corpsman head
-loadout-group-brigmedic-jumpsuit = Corpsman jumpsuit
-loadout-group-brigmedic-backpack = Corpsman backpack
-loadout-group-brigmedic-belt = Corpsman belt
-loadout-group-brigmedic-outerclothing = Corpsman outer clothing
-loadout-group-brigmedic-eyewear = Corpsman eyewear
+loadout-group-brigmedic-head = Marine Corpsman head
+loadout-group-brigmedic-jumpsuit = Marine Corpsman jumpsuit
+loadout-group-brigmedic-backpack = Marine Corpsman backpack
+loadout-group-brigmedic-belt = Marine Corpsman belt
+loadout-group-brigmedic-outerclothing = Marine Corpsman outer clothing
+loadout-group-brigmedic-eyewear = Marine Corpsman eyewear
 
 loadout-group-detective-head = Detective head
 loadout-group-detective-neck = Detective neck
 loadout-group-detective-jumpsuit = Detective jumpsuit
 loadout-group-detective-outerclothing = Detective outer clothing
 
-loadout-group-security-cadet-jumpsuit = Security cadet jumpsuit
-loadout-group-security-cadet-head = Security cadet headwear
-loadout-group-security-star = Security Star
+loadout-group-security-cadet-jumpsuit = Marine Cadet jumpsuit
+loadout-group-security-cadet-head = Marine Cadet headwear
+loadout-group-security-star = Marine Police Star
 
 # Medical
 loadout-group-medical-mask = Medical mask

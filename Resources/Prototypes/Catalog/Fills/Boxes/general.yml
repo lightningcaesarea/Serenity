@@ -399,7 +399,7 @@
         amount: 4
 
 - type: entity
-  name: security encryption key box
+  name: Marine Police encryption key box
   parent: BoxEncryptionKeyAssistant
   id: BoxEncryptionKeySecurity
   components:

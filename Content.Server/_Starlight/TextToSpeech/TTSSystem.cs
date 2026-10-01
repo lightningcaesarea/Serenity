@@ -30,7 +30,7 @@ public sealed partial class TTSSystem : EntitySystem
     private readonly List<string> _sampleText =
     [
         "Can someone bring me a pair of insulating gloves, please?",
-        "Security, the clown has stolen the captain's ID!",
+        "Marine Police, the clown has stolen the captain's ID!",
         "The singularity has reached the arrivals area!",
     ];
 

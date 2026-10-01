@@ -12979,7 +12979,7 @@ entities:
   - uid: 102
     components:
     - type: MetaData
-      name: Outside Sec South Hall
+      name: Outside MP South Hall
     - type: Transform
       parent: 2
       rot: -1.5707963267948966 rad
@@ -13138,7 +13138,7 @@ entities:
   - uid: 112
     components:
     - type: MetaData
-      name: Outside Sec Entrance Air Alarm
+      name: Outside MP Entrance Air Alarm
     - type: Transform
       parent: 2
       rot: -1.5707963267948966 rad
@@ -13166,7 +13166,7 @@ entities:
   - uid: 113
     components:
     - type: MetaData
-      name: Sec South Hall Air Alarm
+      name: MP South Hall Air Alarm
     - type: Transform
       parent: 2
       pos: -3.5,39.5
@@ -13188,7 +13188,7 @@ entities:
   - uid: 114
     components:
     - type: MetaData
-      name: Warden Air Alarm
+      name: Marine Quartermaster Air Alarm
     - type: Transform
       parent: 2
       pos: -3.5,35.5
@@ -13221,7 +13221,7 @@ entities:
   - uid: 115
     components:
     - type: MetaData
-      name: Sec North Hall Air Alarm
+      name: MP North Hall Air Alarm
     - type: Transform
       parent: 2
       rot: 1.5707963267948966 rad
@@ -13242,7 +13242,7 @@ entities:
   - uid: 116
     components:
     - type: MetaData
-      name: Sec Locker Room Air Alarm
+      name: MP Locker Room Air Alarm
     - type: Transform
       parent: 2
       rot: 1.5707963267948966 rad
@@ -13259,7 +13259,7 @@ entities:
   - uid: 117
     components:
     - type: MetaData
-      name: Sec Break Room Air Alarm
+      name: MP Break Room Air Alarm
     - type: Transform
       parent: 2
       rot: 1.5707963267948966 rad
@@ -13282,7 +13282,7 @@ entities:
   - uid: 118
     components:
     - type: MetaData
-      name: HoS Office Air Alarm
+      name: Marine CO Office Air Alarm
     - type: Transform
       parent: 2
       pos: 1.5,56.5
@@ -14053,7 +14053,7 @@ entities:
   - uid: 191
     components:
     - type: MetaData
-      name: Warden
+      name: Marine Quartermaster
     - type: Transform
       parent: 2
       rot: 1.5707963267948966 rad
@@ -14061,7 +14061,7 @@ entities:
   - uid: 192
     components:
     - type: MetaData
-      name: Warden
+      name: Marine Quartermaster
     - type: Transform
       parent: 2
       rot: 1.5707963267948966 rad
@@ -14097,7 +14097,7 @@ entities:
   - uid: 197
     components:
     - type: MetaData
-      name: Security Air Room
+      name: Marine Police Air Room
     - type: Transform
       parent: 2
       pos: 7.5,36.5
@@ -14144,7 +14144,7 @@ entities:
   - uid: 204
     components:
     - type: MetaData
-      name: Security Entrance
+      name: Marine Police Entrance
     - type: Transform
       parent: 2
       rot: 1.5707963267948966 rad
@@ -14180,7 +14180,7 @@ entities:
   - uid: 207
     components:
     - type: MetaData
-      name: Security Entrance
+      name: Marine Police Entrance
     - type: Transform
       parent: 2
       rot: 1.5707963267948966 rad
@@ -14198,7 +14198,7 @@ entities:
   - uid: 208
     components:
     - type: MetaData
-      name: Security Entrance
+      name: Marine Police Entrance
     - type: Transform
       parent: 2
       rot: 1.5707963267948966 rad
@@ -14216,7 +14216,7 @@ entities:
   - uid: 209
     components:
     - type: MetaData
-      name: Security Entrance
+      name: Marine Police Entrance
     - type: Transform
       parent: 2
       rot: 1.5707963267948966 rad
@@ -14621,7 +14621,7 @@ entities:
   - uid: 270
     components:
     - type: MetaData
-      name: Security Power Room
+      name: Marine Police Power Room
     - type: Transform
       parent: 2
       pos: 9.5,34.5
@@ -15981,14 +15981,14 @@ entities:
   - uid: 439
     components:
     - type: MetaData
-      name: HoS Office
+      name: Marine CO Office
     - type: Transform
       parent: 2
       pos: 3.5,50.5
   - uid: 440
     components:
     - type: MetaData
-      name: HoS Bedroom
+      name: Marine CO Bedroom
     - type: Transform
       parent: 2
       pos: 0.5,54.5
@@ -16628,14 +16628,14 @@ entities:
   - uid: 537
     components:
     - type: MetaData
-      name: Security Maintenance
+      name: Marine Police Maintenance
     - type: Transform
       parent: 2
       pos: 10.5,39.5
   - uid: 538
     components:
     - type: MetaData
-      name: Security Checkpoint Maintenance
+      name: Marine Police Checkpoint Maintenance
     - type: Transform
       parent: 2
       pos: -56.5,6.5
@@ -17017,7 +17017,7 @@ entities:
   - uid: 599
     components:
     - type: MetaData
-      name: Security Checkpoint
+      name: Marine Police Checkpoint
     - type: Transform
       parent: 2
       pos: -60.5,2.5
@@ -17043,7 +17043,7 @@ entities:
   - uid: 602
     components:
     - type: MetaData
-      name: Security Office
+      name: Marine Police Office
     - type: Transform
       parent: 2
       pos: -23.5,-30.5
@@ -18820,7 +18820,7 @@ entities:
   - uid: 839
     components:
     - type: MetaData
-      name: Security Checkpoint APC
+      name: Marine Police Checkpoint APC
     - type: Transform
       parent: 2
       pos: -57.5,6.5
@@ -19168,7 +19168,7 @@ entities:
   - uid: 871
     components:
     - type: MetaData
-      name: Sec Locker Room APC
+      name: MP Locker Room APC
     - type: Transform
       parent: 2
       rot: -1.5707963267948966 rad
@@ -19178,7 +19178,7 @@ entities:
   - uid: 872
     components:
     - type: MetaData
-      name: HoS APC
+      name: Marine CO APC
     - type: Transform
       parent: 2
       rot: -1.5707963267948966 rad
@@ -19206,7 +19206,7 @@ entities:
   - uid: 875
     components:
     - type: MetaData
-      name: Sec Breakroom APC
+      name: MP Breakroom APC
     - type: Transform
       parent: 2
       pos: 10.5,46.5
@@ -19235,7 +19235,7 @@ entities:
   - uid: 878
     components:
     - type: MetaData
-      name: Sec Entrance APC
+      name: MP Entrance APC
     - type: Transform
       parent: 2
       pos: 0.5,39.5
@@ -19244,7 +19244,7 @@ entities:
   - uid: 879
     components:
     - type: MetaData
-      name: Outside Sec Hall APC
+      name: Outside MP Hall APC
     - type: Transform
       parent: 2
       rot: -1.5707963267948966 rad
@@ -19254,7 +19254,7 @@ entities:
   - uid: 880
     components:
     - type: MetaData
-      name: Warden's APC
+      name: Marine Quartermaster's APC
     - type: Transform
       parent: 2
       rot: 3.141592653589793 rad
@@ -19264,7 +19264,7 @@ entities:
   - uid: 881
     components:
     - type: MetaData
-      name: Sec North APC
+      name: MP North APC
     - type: Transform
       parent: 2
       rot: -1.5707963267948966 rad
@@ -137042,13 +137042,6 @@ entities:
     - type: Transform
       parent: 2
       pos: 45.5,-19.5
-- proto: LockerDetectiveFilled
-  entities:
-  - uid: 20297
-    components:
-    - type: Transform
-      parent: 2
-      pos: 7.5,23.5
 - proto: LockerElectricalSuppliesFilled
   entities:
   - uid: 20298
@@ -161108,23 +161101,6 @@ entities:
     - type: Transform
       parent: 2
       pos: 16.5,3.5
-- proto: SpawnPointDetective
-  entities:
-  - uid: 24077
-    components:
-    - type: Transform
-      parent: 2
-      pos: 9.5,24.5
-  - uid: 24078
-    components:
-    - type: Transform
-      parent: 2
-      pos: 11.5,30.5
-  - uid: 24079
-    components:
-    - type: Transform
-      parent: 2
-      pos: 11.5,24.5
 - proto: SpawnPointDutyOfficer
   entities:
   - uid: 24080
@@ -169724,7 +169700,7 @@ entities:
     - type: Transform
       parent: 2
       pos: 61.5,-2.5
-- proto: VendingMachineDetDrobe
+- proto: VendingMachineBountyVend
   entities:
   - uid: 25369
     components:
@@ -190488,7 +190464,7 @@ entities:
   - uid: 29315
     components:
     - type: MetaData
-      name: Security Checkpoint Desk
+      name: Marine Police Checkpoint Desk
     - type: Transform
       parent: 2
       rot: 3.141592653589793 rad
@@ -192038,4 +192014,11 @@ entities:
     - type: Transform
       parent: 2
       pos: -51.5,7.5
+- proto: VendingMachineMarinePoliceField
+  entities:
+  - uid: 20297
+    components:
+    - type: Transform
+      parent: 2
+      pos: 7.5,23.5
 ...

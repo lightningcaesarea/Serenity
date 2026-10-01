@@ -65,8 +65,8 @@
 - type: entity
   parent: [ClothingEyesHudBase, ShowSecurityIcons, BaseSecurityContraband]
   id: ClothingEyesHudSecurity
-  name: security hud
-  description: A heads-up display that scans the humanoids in view and provides accurate data about their ID status and security records.
+  name: MP HUD
+  description: A heads-up display that scans the humanoids in view and provides accurate data about their ID status and Marine Police records.
   components:
   - type: Sprite
     sprite: _Serenity/Clothing/Eyes/Hud/sec_dv.rsi
@@ -181,7 +181,7 @@
   parent: [ClothingEyesHudBase, ShowSecurityIcons, ShowMedicalIcons, BaseSecurityCommandContraband]
   id: ClothingEyesHudMedSec
   name: medsec hud
-  description: An eye display that looks like a mixture of medical and security huds.
+  description: An eye display that looks like a mixture of medical and MP HUDs.
   components:
   - type: Sprite
     sprite: _Serenity/Clothing/Eyes/Hud/medsec_dv.rsi
@@ -298,8 +298,8 @@
 - type: entity
   parent: [ClothingEyesHudSecurity, ClothingHeadEyeBaseFlippable]
   id: ClothingEyesEyepatchHudSecurity
-  name: security hud eyepatch
-  description: A heads-up display that scans the humanoids in view and provides accurate data about their ID status and security records. For true patriots.
+  name: MP HUD eyepatch
+  description: A heads-up display that scans the humanoids in view and provides accurate data about their ID status and Marine Police records. For true patriots.
   components:
   - type: Sprite
     sprite: _Serenity/Clothing/Eyes/Hud/secpatch_dv.rsi
@@ -314,7 +314,7 @@
 - type: entity
   parent: [ClothingEyesEyepatchHudSecurity,  ClothingHeadEyeBaseFlipped]
   id: ClothingEyesEyepatchHudSecurityFlipped
-  name: security hud eyepatch
+  name: MP HUD eyepatch
 
 - type: entity
   parent: ClothingHeadEyeBaseFlippable

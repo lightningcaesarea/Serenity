@@ -124,8 +124,8 @@
 
 - type: entity
   id: SecurityMailBox
-  name: security mailbox
-  description: A mailbox for storing and retrieving mail. Allows for Security to store and retrieve their mail.
+  name: Marine Police mailbox
+  description: A mailbox for storing and retrieving mail. Allows for the Marine Police to store and retrieve their mail.
   parent: BaseMailBox
   components:
     - type: MailBox

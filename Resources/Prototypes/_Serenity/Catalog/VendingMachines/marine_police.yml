@@ -1,0 +1,59 @@
+# BountyVend: Frontier Station 14's investigator vendor (MIT commit 5be37d18c2,
+# _NF/Catalog/VendingMachines/Inventories/bountyvend.yml). The contraband appraisal tool is
+# left out, it is a Frontier-only item.
+- type: vendingMachineInventory
+  id: BountyVendInventory
+  startingInventory:
+    PinpointerUniversal: 5
+    WeaponGrapplingGun: 5
+    HandheldGPSBasic: 3
+    JetpackMiniFilled: 5
+    WeaponDisabler: 10
+    Zipties: 20
+    Flash: 10
+    ClothingEyesGlassesSunglasses: 6
+    ForensicScanner: 3
+    BoxForensicPad: 6
+    LogProbeCartridge: 3
+    ClothingUniformJumpsuitBH: 3
+    ClothingUniformJumpskirtBH: 3
+    ClothingUniformJumpsuitBHGrey: 2
+    ClothingUniformJumpskirtBHGrey: 2
+    ClothingNeckTieBH: 2
+    ClothingOuterCoatBHTrench: 3
+    ClothingHeadHatBH: 3
+
+# MP Field Supply: Frontier's NFSD-Tec (same commit, nfsdtech.yml) re-themed for the Marine Police.
+# Each NFSD-branded item is swapped for the station security equivalent; the NFSD SOP book and
+# the contraband appraisal tool have none and are left out.
+- type: vendingMachineInventory
+  id: MarinePoliceFieldInventory
+  startingInventory:
+    BookSpaceLaw: 20
+    Handcuffs: 10
+    Zipties: 10
+    GrenadeFlashBang: 10
+    SecurityWhistle: 5
+    TearGasGrenade: 4
+    ClusterBangFull: 2
+    GrenadeStinger: 4
+    Flash: 10
+    FlashlightSeclite: 10
+    HoloprojectorSecurity: 4
+    Tourniquet: 5
+    ClothingEyesGlassesSunglasses: 5
+    ClothingEyesGlassesSecurity: 5
+    ClothingEyesHudSecurity: 10
+    ClothingEyesEyepatchHudSecurity: 5
+    ClothingBeltSecurityWebbing: 10
+    ClothingBeltSecurity: 10
+    RiotShield: 3
+    RiotLaserShield: 3
+    RiotBulletShield: 3
+    Stunbaton: 10
+    WeaponDisabler: 10
+    CrowbarRed: 10
+    ForensicScanner: 3
+    BoxForensicPad: 3
+    LogProbeCartridge: 3
+    TrackingImplanter: 5

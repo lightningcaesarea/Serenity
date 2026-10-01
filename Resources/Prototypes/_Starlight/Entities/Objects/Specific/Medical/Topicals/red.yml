@@ -1,7 +1,7 @@
 ## Bruise packs
 - type: entity
   name: red bruise pack
-  description: Security-Graded Bruise Packs for all your harmbaton needs!
+  description: Marine Police-Graded Bruise Packs for all your harmbaton needs!
   parent: BaseStarlightHealingItem
   id: RedBrutePack
   suffix: 20
@@ -37,7 +37,7 @@
 
 - type: entity
   name: red bruise pack
-  description: Security-Graded Bruise Packs for all your harmbaton needs! You really went ham with that baton, huh?
+  description: Marine Police-Graded Bruise Packs for all your harmbaton needs! You really went ham with that baton, huh?
   parent: RedBrutePack
   id: RedBrutePack1
   suffix: 1
@@ -50,7 +50,7 @@
 
 - type: entity
   name: red bruise pack
-  description: Security-Graded Bruise Packs for all your harmbaton needs! Someone's been busy!
+  description: Marine Police-Graded Bruise Packs for all your harmbaton needs! Someone's been busy!
   parent: RedBrutePack
   id: RedBrutePack10
   suffix: 10

@@ -2,13 +2,13 @@
 borg-select-type-menu-paints = Models
 
 ## Security borg chassis actions
-borg-call-for-help-message = SECURITY ALERT: {$borg} is requesting backup at {$position}!
+borg-call-for-help-message = MARINE POLICE ALERT: {$borg} is requesting backup at {$position}!
 
 ## Borg type information
 
-borg-type-security-name = Security
-borg-type-security-desc = Assist the security team in maintaining order on the station, apprehending criminals, and responding to threats.
-borg-type-security-transponder = security cyborg
+borg-type-security-name = Marine Police
+borg-type-security-desc = Assist the Marine Police in maintaining order on the station, apprehending criminals, and responding to threats.
+borg-type-security-transponder = Marine Police cyborg
 
 borg-type-SyndicateAssault-name = Syndicate Assault
 borg-type-SyndicateAssault-desc = A heavily armed combat cyborg designed for frontline engagements and assault operations.

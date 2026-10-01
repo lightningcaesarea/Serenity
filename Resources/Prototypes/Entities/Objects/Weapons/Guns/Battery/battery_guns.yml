@@ -311,7 +311,7 @@
   name: laser carbine
   parent: [BaseLaserRifle, BaseGunWieldable, BaseSecurityContraband]
   id: WeaponLaserCarbine
-  description: Favoured by NanoTrasen Security for being cheap and easy to use. # SL
+  description: Favoured by the NanoTrasen Marine Police for being cheap and easy to use. # SL
 
 - type: entity
   name: practice laser carbine
@@ -549,7 +549,7 @@
   name: practice disabler
   parent: BaseWeaponBatterySmall
   id: WeaponDisablerPractice
-  description: A self-defense weapon that exhausts organic targets, weakening them until they collapse. This one has been undertuned for cadets making it mostly harmless.
+  description: A self-defense weapon that exhausts organic targets, weakening them until they collapse. This one has been undertuned for Marine Cadets making it mostly harmless.
   components:
   - type: CanDualWield # 🌟Starlight🌟
     dualWieldInaccuracyPenalty: 30
@@ -679,7 +679,7 @@
   name: taser
   parent: [BaseWeaponBatterySmall, BaseSecurityContraband]
   id: WeaponTaser
-  description: A low-capacity, energy-based stun gun used by security teams to subdue targets at close range.
+  description: A low-capacity, energy-based stun gun used by Marine Police teams to subdue targets at close range.
   components:
   - type: Tag
     tags:

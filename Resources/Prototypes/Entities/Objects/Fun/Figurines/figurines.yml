@@ -129,8 +129,8 @@
 - type: entity
   parent: BaseFigurine
   id: ToyFigurineHeadOfSecurity
-  name: head of security figure
-  description: A figurine depicting the glorious head of the Security department.
+  name: Marine CO figure
+  description: A figurine depicting the glorious head of the Marine Police.
   components:
   - type: Sprite
     state: hos
@@ -140,8 +140,8 @@
 - type: entity
   parent: BaseFigurine
   id: ToyFigurineWarden
-  name: warden figure
-  description: A figurine depicting a Warden, ready to jail someone at any moment.
+  name: Marine Quartermaster figure
+  description: A figurine depicting a Marine Quartermaster, ready to jail someone at any moment.
   components:
   - type: Sprite
     state: warden
@@ -162,8 +162,8 @@
 - type: entity
   parent: BaseFigurine
   id: ToyFigurineSecurity
-  name: security officer figure
-  description: A figurine depicting a Security Officer holding a stunbaton, ready to defend the station.
+  name: Marine Trooper figure
+  description: A figurine depicting a Marine Trooper holding a stunbaton, ready to defend the station.
   components:
   - type: Sprite
     state: security

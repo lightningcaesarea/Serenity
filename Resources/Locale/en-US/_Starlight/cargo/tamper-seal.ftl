@@ -36,5 +36,5 @@ tamper-seal-account-name-cargo = Cargo
 tamper-seal-account-name-engineering = Engineering
 tamper-seal-account-name-medical = Medical
 tamper-seal-account-name-science = Science
-tamper-seal-account-name-security = Security
+tamper-seal-account-name-security = Marine Police
 tamper-seal-account-name-service = Service

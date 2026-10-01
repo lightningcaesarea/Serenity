@@ -330,10 +330,10 @@ ghost-role-information-cossack-name = Ancient Traveler
 ghost-role-information-cossack-description = From a history lost to time, you find yourself cast into this day and age.
 
 ghost-role-information-pirate-name = Space Pirate
-ghost-role-information-pirate-description = Argh matey! Collect some cool loot, but make sure to avoid security and salvage!
+ghost-role-information-pirate-description = Argh matey! Collect some cool loot, but make sure to avoid the Marine Police and salvage!
 
 ghost-role-information-pirate-captain-name = Space Pirate Captain
-ghost-role-information-pirate-captain-description = Argh matey! You are in charge here and need to devise a plan to get that juicy loot by hook or by crook. Just make sure to avoid security and salvage!
+ghost-role-information-pirate-captain-description = Argh matey! You are in charge here and need to devise a plan to get that juicy loot by hook or by crook. Just make sure to avoid the Marine Police and salvage!
 
 ghost-role-information-artifact-name = Sentient Artifact
 ghost-role-information-artifact-description = Enact your eldritch whims. Forcibly activate your nodes for good or for evil.

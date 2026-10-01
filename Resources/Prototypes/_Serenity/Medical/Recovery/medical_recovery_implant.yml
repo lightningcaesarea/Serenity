@@ -22,11 +22,12 @@
   - type: MedicalRecoveryOnTrigger
   - type: MedicalRecovery
 
+# Same base as the vanilla TrackingImplanter (an inject-only syringe). The implant itself does
+# not inherit from TrackingImplant, so it carries no suit sensor or security death rattle.
 - type: entity
-  parent: BaseImplanter
+  parent: BaseImplantOnlyImplanter
   id: MedicalRecoveryImplanter
   name: medical recovery implanter
-  description: Contains a single medical recovery implant.
   components:
   - type: Implanter
     implant: MedicalRecoveryImplant

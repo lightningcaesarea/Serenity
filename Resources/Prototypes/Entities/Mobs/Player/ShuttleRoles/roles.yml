@@ -46,7 +46,7 @@
 
 - type: entity
   id: RandomHumanoidVisitorHOS
-  name: visiting HOS ghost role
+  name: visiting Marine CO ghost role
   components:
     - type: Sprite
       sprite: Markers/jobs.rsi
@@ -78,7 +78,7 @@
 
 - type: entity
   id: RandomHumanoidVisitorSecurityCadet
-  name: visiting security cadet role
+  name: visiting Marine Cadet role
   components:
     - type: Sprite
       sprite: Markers/jobs.rsi
@@ -88,7 +88,7 @@
 
 - type: entity
   id: RandomHumanoidVisitorSecurityOfficer
-  name: visiting security officer ghost role
+  name: visiting Marine Trooper ghost role
   components:
     - type: Sprite
       sprite: Markers/jobs.rsi
@@ -108,7 +108,7 @@
 
 - type: entity
   id: RandomHumanoidVisitorWarden
-  name: visiting warden ghost role
+  name: visiting Marine Quartermaster ghost role
   components:
     - type: Sprite
       sprite: Markers/jobs.rsi
@@ -505,7 +505,7 @@
 - type: entity
   id: RandomHumanoidChallengeVictimHOS
   parent: RandomHumanoidChallengeVictimCaptain
-  name: disaster victim HOS ghost role
+  name: disaster victim Marine CO ghost role
   suffix: CHALLENGE
   # This is supposed to be for challenge events. Its intentionally missing QOL gear to make interesting scenarios.
   components:

@@ -55,7 +55,7 @@
 - type: entity
   id: DisposalRouterFlippedSecurity
   parent: DisposalRouterFlipped
-  suffix: Flipped, Security
+  suffix: Flipped, Marine Police
   components:
   - type: DisposalRouter
     tags: ["Security"]
@@ -82,7 +82,7 @@
 - type: entity
   id: DisposalRouterFlippedWarden
   parent: DisposalRouterFlipped
-  suffix: Flipped, Warden
+  suffix: Flipped, Marine Quartermaster
   components:
   - type: DisposalRouter
     tags: ["Warden"]
@@ -91,7 +91,7 @@
 - type: entity
   id: DisposalRouterFlippedHoS
   parent: DisposalRouterFlipped
-  suffix: Flipped, HoS
+  suffix: Flipped, Marine CO
   components:
   - type: DisposalRouter
     tags: ["HoS"]
@@ -145,7 +145,7 @@
 - type: entity
   id: DisposalRouterFlippedSecurityCheckpoint
   parent: DisposalRouterFlipped
-  suffix: Flipped, SecurityCheckpoint
+  suffix: Flipped, Marine Police Checkpoint
   components:
   - type: DisposalRouter
     tags: ["SecurityCheckpoint"]

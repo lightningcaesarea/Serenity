@@ -2,7 +2,7 @@
   parent: CrateSecgear
   id: CrateSecurityReflectiveArmor
   name: reflective armor crate
-  description: Contains three reflective vests. Requires Security access to open.
+  description: Contains three reflective vests. Requires Marine Police access to open.
   components:
   - type: EntityTableContainerFill
     containers:

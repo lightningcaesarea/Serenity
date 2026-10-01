@@ -125,7 +125,7 @@
 - type: entity
   parent: [ClothingOuterStorageBase, AllowSuitStorageClothing, BaseSecurityContraband, ClothingOuterWinterCoatToggleable]
   id: ClothingOuterCoatCorpsman
-  name: corpsman's armored jacket
+  name: Marine Corpsman's armored jacket
   description: Stylish black and red jacket, with tacticooly placed armor plating.
   components:
   - type: Sprite
@@ -160,7 +160,7 @@
 - type: entity
   parent: [ClothingOuterStorageFoldableBase, ClothingOuterBaseWarm, AllowSuitStorageClothing, BaseSecurityContraband]
   id: ClothingOuterCoatLabBrigmedic
-  name: corpsman's reminisced overcoat
+  name: Marine Corpsman's reminisced overcoat
   description: A labcoat from reminisced, peaceful days. It's been reinforced several times over.
   components:
   - type: Sprite
@@ -184,12 +184,12 @@
 - type: entity
   parent: [ClothingOuterStorageFoldableBaseOpened, ClothingOuterCoatLabBrigmedic]
   id: ClothingOuterCoatLabBrigmedicOpened
-  name: corpsman's reminisced overcoat
+  name: Marine Corpsman's reminisced overcoat
 
 - type: entity
   parent: [ClothingOuterStorageFoldableBase, ClothingOuterBaseWarm, AllowSuitStorageClothing, BaseSecurityContraband]
   id: ClothingOuterCoatLabCorpsman
-  name: corpsman's nostalgic overcoat
+  name: Marine Corpsman's nostalgic overcoat
   description: A dark labcoat that's been reinforced several times over. Peaceful days died.
   components:
   - type: Sprite
@@ -213,7 +213,7 @@
 - type: entity
   parent: [ClothingOuterStorageFoldableBaseOpened, ClothingOuterCoatLabCorpsman]
   id: ClothingOuterCoatLabCorpsmanOpened
-  name: corpsman's nostalgic overcoat
+  name: Marine Corpsman's nostalgic overcoat
 
 # Fashion-O-Mat
 - type: entity
@@ -317,7 +317,7 @@
 - type: entity
   parent: [ClothingOuterStorageFoldableBase, ClothingOuterBaseWinter, AllowSuitStorageClothing, BaseSecurityContraband]
   id: ClothingOuterSecurityBomber
-  name: security bomber
+  name: Marine Police bomber
   description: A regular bomber, but with armored inserts.
   components:
   - type: Sprite
@@ -338,13 +338,13 @@
 - type: entity
   parent: [ClothingOuterStorageFoldableBaseOpened, ClothingOuterSecurityBomber]
   id: ClothingOuterSecurityBomberOpened
-  name: security bomber
+  name: Marine Police bomber
 
 # Security Bomber (Delta-V sprite)
 - type: entity
   parent: [ClothingOuterStorageFoldableBase, ClothingOuterBaseWinter, AllowSuitStorageClothing, BaseSecurityContraband]
   id: ClothingOuterSecurityBomberDV
-  name: security bomber
+  name: Marine Police bomber
   description: A regular bomber, but with armored inserts.
   components:
   - type: Sprite
@@ -365,7 +365,7 @@
 - type: entity
   parent: [ClothingOuterStorageFoldableBaseOpened, ClothingOuterSecurityBomberDV]
   id: ClothingOuterSecurityBomberDVOpened
-  name: security bomber
+  name: Marine Police bomber
   components:
   - type: Item
     heldPrefix: null # Delta-V sprite has no open-inhand-* states; fall back to the closed inhand art
@@ -379,8 +379,8 @@
 - type: entity
   parent: [ClothingOuterStorageFoldableBase, ClothingOuterBaseWinter, AllowSuitStorageClothing, BaseSecurityContraband]
   id: ClothingOuterWindbreakerSecurity
-  name: security windbreaker
-  description: A stylish red windbreaker with additional inserted plate padding for security usage.
+  name: Marine Police windbreaker
+  description: A stylish red windbreaker with additional inserted plate padding for Marine Police usage.
   components:
   - type: Sprite
     sprite: _Starlight/Clothing/OuterClothing/Coats/windbreaker_security
@@ -398,7 +398,7 @@
 - type: entity
   parent: [ClothingOuterStorageFoldableBaseOpened, ClothingOuterWindbreakerSecurity]
   id: ClothingOuterWindbreakerSecurityOpened
-  name: security windbreaker
+  name: Marine Police windbreaker
 
 # Cargo Windbreaker
 - type: entity

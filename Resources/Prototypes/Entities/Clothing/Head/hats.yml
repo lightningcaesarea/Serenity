@@ -51,8 +51,8 @@
 - type: entity
   parent: ClothingHeadBase
   id: ClothingHeadHatBeretSecurity
-  name: security beret
-  description: A beret with the security department's insignia. For officers that are more inclined towards style than safety.
+  name: Marine Police beret
+  description: A beret with the Marine Police's insignia. For Marine Troopers that are more inclined towards style than safety.
   components:
   - type: Sprite
     sprite: _Serenity/Clothing/Head/Hats/beret_security_dv.rsi
@@ -157,7 +157,7 @@
 - type: entity
   parent: ClothingHeadBase
   id: ClothingHeadHatBeretHoS
-  name: head of security's beret
+  name: Marine CO's beret
   description: A black beret with a commander's rank emblem. For officers that are more inclined towards style than safety.
   components:
   - type: Sprite
@@ -176,8 +176,8 @@
 - type: entity
   parent: ClothingHeadBase
   id: ClothingHeadHatBeretWarden
-  name: warden's beret
-  description: A corporate-blue beret with a warden's rank emblem. For officers that are more inclined towards style than safety.
+  name: Marine Quartermaster's beret
+  description: A corporate-blue beret with a Marine Quartermaster's rank emblem. For officers that are more inclined towards style than safety.
   components:
   - type: Sprite
     sprite: _Serenity/Clothing/Head/Hats/beret_warden_dv.rsi
@@ -206,7 +206,7 @@
 - type: entity
   parent: ClothingHeadBase
   id: ClothingHeadHatBeretBrigmedic
-  name: corpsman beret
+  name: Marine Corpsman beret
   description: A white beret for corpsmen.
   components:
   - type: Sprite
@@ -430,8 +430,8 @@
 - type: entity
   parent: [ClothingHeadBase, BaseCommandContraband]
   id: ClothingHeadHatHoshat
-  name: head of security cap
-  description: The robust hat of the Head of Security. For showing the officers who's the real boss.
+  name: Marine CO cap
+  description: The robust hat of the Marine CO. For showing the Marine Troopers who's the real boss.
   components:
   - type: Sprite
     sprite: _Serenity/Clothing/Head/Hats/hoshat_dv.rsi
@@ -759,7 +759,7 @@
 - type: entity
   parent: ClothingHeadBase
   id: ClothingHeadHatWarden
-  name: warden's cap
+  name: Marine Quartermaster's cap
   description: This hat emphasizes that you are THE LAW.
   components:
   - type: Sprite

@@ -243,7 +243,7 @@
   parent: TrackingImplant
   id: CommandTrackingImplant
   name: command tracking implant
-  description: This implant has a tracking device attached to the suit sensor network, as well as a condition monitor for the security and command radio channels.
+  description: This implant has a tracking device attached to the suit sensor network, as well as a condition monitor for the Marine Police and command radio channels.
   categories: [ HideSpawnMenu ]
   components:
     - type: RattleOnTrigger

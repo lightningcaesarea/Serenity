@@ -141,12 +141,12 @@
   - MedicalPinkScrubs # DeltaV
   - MedicalRainbowScrubs # DeltaV
   - MedicalWhiteScrubs # DeltaV
-  # afterlight start
+  # starlight start
   - NurseJumpskirt
   - CoronerJumpskirt
   - CoronerJumpsuit
   - CoronerJumpsuitAlt
-  # afterlight end
+  # starlight end
 
 - type: loadoutGroup
   id: MedicalDoctorOuterClothing

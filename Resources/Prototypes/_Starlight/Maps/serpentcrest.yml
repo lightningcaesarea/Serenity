@@ -66,7 +66,6 @@
             SecurityOfficer: [ 10, 12 ]
             SeniorOfficer: [ 1, 1 ] # Serenity
             Brigmedic: [ 2, 2 ]
-            Detective: [ 2, 2 ]
             SecurityCadet: [ 4, 4 ]
 
             # Supply

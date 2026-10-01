@@ -1,0 +1,29 @@
+<controls:FancyWindow xmlns="https://spacestation14.io"
+                      xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+                      Title="{Loc 'medical-recovery-console-window-title'}"
+                      SetSize="480 520"
+                      MinSize="400 400">
+    <BoxContainer Orientation="Vertical" Margin="8 4 8 8" VerticalExpand="True">
+        <BoxContainer Orientation="Horizontal">
+            <Label Text="{Loc 'medical-recovery-console-pad-label'}" StyleClasses="LabelKeyText" />
+            <Label Name="PadStatusLabel" Margin="4 0 0 0" />
+            <Control HorizontalExpand="True" />
+            <Label Name="RangeLabel" StyleClasses="LabelSubText" />
+        </BoxContainer>
+
+        <Label Text="{Loc 'medical-recovery-console-active-header'}" StyleClasses="LabelHeading" Margin="0 8 0 2" />
+        <PanelContainer StyleClasses="LowDivider" />
+        <BoxContainer Name="ActiveContainer" Orientation="Vertical" Margin="0 4 0 0" />
+        <Label Name="NoActiveLabel" Text="{Loc 'medical-recovery-console-no-active'}" StyleClasses="LabelSubText" />
+
+        <BoxContainer Orientation="Horizontal" Margin="0 12 0 2">
+            <Label Text="{Loc 'medical-recovery-console-signals-header'}" StyleClasses="LabelHeading" HorizontalExpand="True" />
+            <Button Name="ScanButton" Text="{Loc 'medical-recovery-console-scan-button'}" />
+        </BoxContainer>
+        <PanelContainer StyleClasses="LowDivider" />
+        <ScrollContainer VerticalExpand="True" HScrollEnabled="False" Margin="0 4 0 0">
+            <BoxContainer Name="TargetsContainer" Orientation="Vertical" />
+        </ScrollContainer>
+        <Label Name="NoTargetsLabel" Text="{Loc 'medical-recovery-console-no-targets'}" StyleClasses="LabelSubText" />
+    </BoxContainer>
+</controls:FancyWindow>

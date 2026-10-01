@@ -23381,7 +23381,7 @@ entities:
   - uid: 879
     components:
     - type: MetaData
-      name: Departures Security Station APC
+      name: Departures Marine Police Station APC
     - type: Transform
       parent: 2
       pos: -36.5,51.5
@@ -23499,7 +23499,7 @@ entities:
   - uid: 892
     components:
     - type: MetaData
-      name: Security East Entrance APC
+      name: Marine Police East Entrance APC
     - type: Transform
       parent: 2
       rot: 1.5707963267948966 rad
@@ -23516,7 +23516,7 @@ entities:
   - uid: 894
     components:
     - type: MetaData
-      name: Security Offices APC
+      name: Marine Police Offices APC
     - type: Transform
       parent: 2
       rot: 1.5707963267948966 rad
@@ -23535,7 +23535,7 @@ entities:
   - uid: 896
     components:
     - type: MetaData
-      name: Security North APC
+      name: Marine Police North APC
     - type: Transform
       parent: 2
       pos: 19.5,27.5
@@ -23582,7 +23582,7 @@ entities:
   - uid: 901
     components:
     - type: MetaData
-      name: Security Lockers APC
+      name: Marine Police Lockers APC
     - type: Transform
       parent: 2
       rot: 1.5707963267948966 rad
@@ -23953,7 +23953,7 @@ entities:
   - uid: 940
     components:
     - type: MetaData
-      name: Security Engineering Office APC
+      name: Marine Police Engineering Office APC
     - type: Transform
       parent: 2
       pos: 72.5,-7.5
@@ -171473,7 +171473,7 @@ entities:
   - uid: 25909
     components:
     - type: MetaData
-      name: holopad (Security - Front North)
+      name: holopad (Marine Police - Front North)
     - type: Transform
       parent: 2
       pos: 24.5,26.5
@@ -173909,11 +173909,6 @@ entities:
       pos: 8.5,38.5
 - proto: LockerDetectiveFilled
   entities:
-  - uid: 26214
-    components:
-    - type: Transform
-      parent: 2
-      pos: -24.5,37.5
   - uid: 26215
     components:
     - type: Transform
@@ -203476,28 +203471,6 @@ entities:
     - type: Transform
       parent: 2
       pos: -13.5,9.5
-- proto: SpawnPointDetective
-  entities:
-  - uid: 30772
-    components:
-    - type: Transform
-      parent: 2
-      pos: -22.5,41.5
-  - uid: 30773
-    components:
-    - type: Transform
-      parent: 2
-      pos: -22.5,40.5
-  - uid: 38181
-    components:
-    - type: Transform
-      parent: 2
-      pos: -22.5,38.5
-  - uid: 38182
-    components:
-    - type: Transform
-      parent: 2
-      pos: -25.5,40.5
 - proto: SpawnPointDutyOfficer
   entities:
   - uid: 30774
@@ -205394,7 +205367,7 @@ entities:
   - uid: 31065
     components:
     - type: MetaData
-      name: Security Substation
+      name: Marine Police Substation
     - type: Transform
       parent: 2
       pos: 35.5,25.5
@@ -214695,7 +214668,7 @@ entities:
     - type: Transform
       parent: 2
       pos: -24.5,62.5
-- proto: VendingMachineDetDrobe
+- proto: VendingMachineBountyVend
   entities:
   - uid: 32536
     components:
@@ -242506,4 +242479,11 @@ entities:
     - type: Transform
       parent: 2
       pos: 87.53917,-53.523365
+- proto: VendingMachineMarinePoliceField
+  entities:
+  - uid: 26214
+    components:
+    - type: Transform
+      parent: 2
+      pos: -24.5,37.5
 ...

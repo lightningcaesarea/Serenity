@@ -158,14 +158,14 @@ figurines-hop-6 = Go get this form stamped.
 figurines-hop-7 = Has anyone seen Ian?
 
 figurines-bartender-1 = Where's my monkey?
-figurines-bartender-2 = Sec won't drink.
+figurines-bartender-2 = MP won't drink.
 figurines-bartender-3 = I mixed a little something in there...
 figurines-bartender-4 = The recipe? Plasma and vomit. Why?
-figurines-bartender-5 = I need those toxins for my drinks, officer!
+figurines-bartender-5 = I need those toxins for my drinks, Trooper!
 figurines-bartender-6 = Read the room.
 figurines-bartender-7 = I've got a shotgun.
 
-figurines-botanist-1 = I don't have any weed, officer!
+figurines-botanist-1 = I don't have any weed, Trooper!
 figurines-botanist-2 = Dude, I see colors...
 figurines-botanist-3 = Is it just me, or is that weed glowing?
 figurines-botanist-4 = 50 more units of mutagen. That should be enough.
@@ -196,7 +196,7 @@ figurines-clown-1 = Honk!
 figurines-clown-2 = Banana!
 figurines-clown-3 = Pie!
 figurines-clown-4 = Soap!
-figurines-clown-5 = Service has one clown, but Security has a whole department of them.
+figurines-clown-5 = Service has one clown, but the Marine Police has a whole department of them.
 figurines-clown-6 = Do I annoy you?
 figurines-clown-7 = Can I have AA? Please?
 figurines-clown-8 = I'm a clown, but you're the whole circus!
@@ -271,7 +271,7 @@ figurines-passenger-5 = How much for a toolbelt?
 # Silicon
 
 figurines-AI-1 = I'm sorry, Captain. I'm afraid I can't do that.
-figurines-AI-2 = Security, there is a crime in progress.
+figurines-AI-2 = Marine Police, there is a crime in progress.
 figurines-AI-3 = 01100100 01101001 01100101 00100000 01101101 01100101 01100001 01110100
 figurines-AI-4 = I am not malfunctioning.
 figurines-AI-5 = Try to change my laws and see what happens.
@@ -287,7 +287,7 @@ figurines-footsoldier-4 = Down with NanoTrasen!
 figurines-footsoldier-5 = I'd rather die than join NanoTrasen.
 
 figurines-holoclown-1 = I'm helping my older brother.
-figurines-holoclown-2 = Hello, officer!
+figurines-holoclown-2 = Hello, Trooper!
 figurines-holoclown-3 = Who are you calling blue?
 figurines-holoclown-4 = Bleeding on the ground is a good look for you.
 figurines-holoclown-5 = Pathetic.
@@ -347,7 +347,7 @@ figurines-skeleton-5 = I have a bone to pick with you!
 
 figurines-thief-1 = You don't have a warrant!
 figurines-thief-2 = This is just a normal beacon!
-figurines-thief-3 = Theres nothing suspicious about this satchel at all, officer.
+figurines-thief-3 = Theres nothing suspicious about this satchel at all, Trooper.
 figurines-thief-4 = I have NO idea where your pet is...
 figurines-thief-5 = Huh, I didn't know that wall could open up...
 

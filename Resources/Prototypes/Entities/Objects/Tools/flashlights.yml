@@ -88,7 +88,7 @@
   name: seclite
   parent: [FlashlightLantern, BaseSecurityContraband]
   id: FlashlightSeclite
-  description: A robust flashlight used by security.
+  description: A robust flashlight used by the Marine Police.
   components:
   - type: Tag
     tags:

@@ -11501,7 +11501,7 @@ entities:
   - uid: 47
     components:
     - type: MetaData
-      name: air alarm (HoS's Bedroom)
+      name: air alarm (Marine CO's Bedroom)
     - type: Transform
       parent: 2
       rot: -1.5707963267948966 rad
@@ -12784,7 +12784,7 @@ entities:
   - uid: 126
     components:
     - type: MetaData
-      name: air alarm (Security Breakroom)
+      name: air alarm (Marine Police Breakroom)
     - type: Transform
       parent: 2
       rot: 1.5707963267948966 rad
@@ -12802,7 +12802,7 @@ entities:
   - uid: 127
     components:
     - type: MetaData
-      name: air alarm (Security Entrance)
+      name: air alarm (Marine Police Entrance)
     - type: Transform
       parent: 2
       rot: 3.141592653589793 rad
@@ -12818,7 +12818,7 @@ entities:
   - uid: 128
     components:
     - type: MetaData
-      name: air alarm (Security Front)
+      name: air alarm (Marine Police Front)
     - type: Transform
       parent: 2
       rot: 1.5707963267948966 rad
@@ -12835,7 +12835,7 @@ entities:
   - uid: 129
     components:
     - type: MetaData
-      name: air alarm (Warden's Office)
+      name: air alarm (Marine Quartermaster's Office)
     - type: Transform
       parent: 2
       rot: 3.141592653589793 rad
@@ -12851,7 +12851,7 @@ entities:
   - uid: 130
     components:
     - type: MetaData
-      name: air alarm (Security)
+      name: air alarm (Marine Police)
     - type: Transform
       parent: 2
       rot: 1.5707963267948966 rad
@@ -12868,7 +12868,7 @@ entities:
   - uid: 131
     components:
     - type: MetaData
-      name: air alarm (HoS's Office)
+      name: air alarm (Marine CO's Office)
     - type: Transform
       parent: 2
       rot: 1.5707963267948966 rad
@@ -13394,7 +13394,7 @@ entities:
   - uid: 172
     components:
     - type: MetaData
-      name: glass airlock (Warden's Office)
+      name: glass airlock (Marine Quartermaster's Office)
     - type: Transform
       parent: 2
       pos: -2.5,-30.5
@@ -13464,28 +13464,28 @@ entities:
   - uid: 181
     components:
     - type: MetaData
-      name: glass airlock (Security)
+      name: glass airlock (Marine Police)
     - type: Transform
       parent: 2
       pos: -4.5,-19.5
   - uid: 182
     components:
     - type: MetaData
-      name: glass airlock (Security)
+      name: glass airlock (Marine Police)
     - type: Transform
       parent: 2
       pos: -3.5,-19.5
   - uid: 183
     components:
     - type: MetaData
-      name: glass airlock (Security)
+      name: glass airlock (Marine Police)
     - type: Transform
       parent: 2
       pos: -4.5,-15.5
   - uid: 184
     components:
     - type: MetaData
-      name: glass airlock (Security)
+      name: glass airlock (Marine Police)
     - type: Transform
       parent: 2
       pos: -3.5,-15.5
@@ -13830,7 +13830,7 @@ entities:
   - uid: 230
     components:
     - type: MetaData
-      name: airlock (Security Substation)
+      name: airlock (Marine Police Substation)
     - type: Transform
       parent: 2
       pos: 11.5,-29.5
@@ -14696,14 +14696,14 @@ entities:
   - uid: 339
     components:
     - type: MetaData
-      name: airlock (HoS's Office)
+      name: airlock (Marine CO's Office)
     - type: Transform
       parent: 2
       pos: -0.5,-35.5
   - uid: 340
     components:
     - type: MetaData
-      name: airlock (HoS's Bedroom)
+      name: airlock (Marine CO's Bedroom)
     - type: Transform
       parent: 2
       pos: 1.5,-37.5
@@ -15291,21 +15291,21 @@ entities:
   - uid: 427
     components:
     - type: MetaData
-      name: maintenance access (Security)
+      name: maintenance access (Marine Police)
     - type: Transform
       parent: 2
       pos: 1.5,-24.5
   - uid: 428
     components:
     - type: MetaData
-      name: maintenance access (Security)
+      name: maintenance access (Marine Police)
     - type: Transform
       parent: 2
       pos: 4.5,-21.5
   - uid: 429
     components:
     - type: MetaData
-      name: airlock (Security)
+      name: airlock (Marine Police)
     - type: Transform
       parent: 2
       pos: -6.5,-36.5
@@ -15603,7 +15603,7 @@ entities:
   - uid: 469
     components:
     - type: MetaData
-      name: glass airlock (Security)
+      name: glass airlock (Marine Police)
     - type: Transform
       parent: 2
       pos: -1.5,-21.5
@@ -16896,7 +16896,7 @@ entities:
   - uid: 638
     components:
     - type: MetaData
-      name: APC (HoS's Office)
+      name: APC (Marine CO's Office)
     - type: Transform
       parent: 2
       rot: 3.141592653589793 rad
@@ -17084,7 +17084,7 @@ entities:
   - uid: 657
     components:
     - type: MetaData
-      name: APC (Security Breakroom)
+      name: APC (Marine Police Breakroom)
     - type: Transform
       parent: 2
       pos: -1.5,-23.5
@@ -17093,7 +17093,7 @@ entities:
   - uid: 658
     components:
     - type: MetaData
-      name: APC (Security Front)
+      name: APC (Marine Police Front)
     - type: Transform
       parent: 2
       rot: 1.5707963267948966 rad
@@ -17606,7 +17606,7 @@ entities:
   - uid: 710
     components:
     - type: MetaData
-      name: APC (Warden)
+      name: APC (Marine Quartermaster)
     - type: Transform
       parent: 2
       rot: 1.5707963267948966 rad
@@ -65707,7 +65707,7 @@ entities:
   - uid: 9623
     components:
     - type: MetaData
-      name: fire alarm (Security Front)
+      name: fire alarm (Marine Police Front)
     - type: Transform
       parent: 2
       rot: -1.5707963267948966 rad
@@ -65721,7 +65721,7 @@ entities:
   - uid: 9624
     components:
     - type: MetaData
-      name: fire alarm (Security Breakroom)
+      name: fire alarm (Marine Police Breakroom)
     - type: Transform
       parent: 2
       rot: 3.141592653589793 rad
@@ -65748,7 +65748,7 @@ entities:
   - uid: 9626
     components:
     - type: MetaData
-      name: fire alarm (Security)
+      name: fire alarm (Marine Police)
     - type: Transform
       parent: 2
       pos: 0.5,-27.5
@@ -93871,13 +93871,6 @@ entities:
     - type: Transform
       parent: 2
       pos: 38.5,15.5
-- proto: LockerDetectiveFilled
-  entities:
-  - uid: 13349
-    components:
-    - type: Transform
-      parent: 2
-      pos: 2.5,-27.5
 - proto: LockerElectricalSuppliesFilled
   entities:
   - uid: 13350
@@ -108167,13 +108160,6 @@ entities:
     - type: Transform
       parent: 2
       pos: 0.5,9.5
-- proto: SpawnPointDetective
-  entities:
-  - uid: 15602
-    components:
-    - type: Transform
-      parent: 2
-      pos: 4.5,-26.5
 - proto: SpawnPointDutyOfficer
   entities:
   - uid: 15603
@@ -109428,7 +109414,7 @@ entities:
   - uid: 15799
     components:
     - type: MetaData
-      name: substation (Security)
+      name: substation (Marine Police)
     - type: Transform
       parent: 2
       pos: 13.5,-29.5
@@ -109846,7 +109832,7 @@ entities:
   - uid: 15855
     components:
     - type: MetaData
-      name: camera (C09 - HoS's Room)
+      name: camera (C09 - Marine CO's Room)
     - type: Transform
       parent: 2
       pos: 2.5,-38.5
@@ -109858,7 +109844,7 @@ entities:
   - uid: 15856
     components:
     - type: MetaData
-      name: camera (C08 - HoS;s Office)
+      name: camera (C08 - Marine CO;s Office)
     - type: Transform
       parent: 2
       rot: 1.5707963267948966 rad
@@ -110946,7 +110932,7 @@ entities:
   - uid: 15946
     components:
     - type: MetaData
-      name: camera (S02 - Security Front)
+      name: camera (S02 - Marine Police Front)
     - type: Transform
       parent: 2
       rot: -1.5707963267948966 rad
@@ -110959,7 +110945,7 @@ entities:
   - uid: 15947
     components:
     - type: MetaData
-      name: camera (S01 - Security Entrance)
+      name: camera (S01 - Marine Police Entrance)
     - type: Transform
       parent: 2
       rot: 3.141592653589793 rad
@@ -110972,7 +110958,7 @@ entities:
   - uid: 15948
     components:
     - type: MetaData
-      name: camera (S03 - Security Breakroom)
+      name: camera (S03 - Marine Police Breakroom)
     - type: Transform
       parent: 2
       rot: 1.5707963267948966 rad
@@ -111086,7 +111072,7 @@ entities:
   - uid: 15957
     components:
     - type: MetaData
-      name: camera (S06 - Warden's Office)
+      name: camera (S06 - Marine Quartermaster's Office)
     - type: Transform
       parent: 2
       pos: -3.5,-32.5
@@ -111111,7 +111097,7 @@ entities:
   - uid: 15959
     components:
     - type: MetaData
-      name: camera (S04 - Security)
+      name: camera (S04 - Marine Police)
     - type: Transform
       parent: 2
       rot: 1.5707963267948966 rad
@@ -114242,7 +114228,7 @@ entities:
     - type: Transform
       parent: 2
       pos: -22.5,-25.5
-- proto: VendingMachineDetDrobe
+- proto: VendingMachineBountyVend
   entities:
   - uid: 16445
     components:
@@ -128995,4 +128981,11 @@ entities:
     - type: Transform
       parent: 2
       pos: -26.609678,7.5555515
+- proto: VendingMachineMarinePoliceField
+  entities:
+  - uid: 13349
+    components:
+    - type: Transform
+      parent: 2
+      pos: 2.5,-27.5
 ...

@@ -14833,7 +14833,7 @@ entities:
   - uid: 670
     components:
     - type: MetaData
-      name: APC (Warden)
+      name: APC (Marine Quartermaster)
     - type: Transform
       parent: 2
       pos: 37.5,-11.5
@@ -14845,7 +14845,7 @@ entities:
   - uid: 671
     components:
     - type: MetaData
-      name: APC (Security Lockers)
+      name: APC (Marine Police Lockers)
     - type: Transform
       parent: 2
       rot: -1.5707963267948966 rad
@@ -14874,7 +14874,7 @@ entities:
   - uid: 674
     components:
     - type: MetaData
-      name: APC (Head of Security)
+      name: APC (Marine CO)
     - type: Transform
       parent: 2
       rot: 1.5707963267948966 rad
@@ -14894,7 +14894,7 @@ entities:
   - uid: 676
     components:
     - type: MetaData
-      name: APC (Security Hallway)
+      name: APC (Marine Police Hallway)
     - type: Transform
       parent: 2
       rot: 1.5707963267948966 rad
@@ -15088,7 +15088,7 @@ entities:
   - uid: 695
     components:
     - type: MetaData
-      name: APC (Security)
+      name: APC (Marine Police)
     - type: Transform
       parent: 2
       rot: -1.5707963267948966 rad
@@ -88669,13 +88669,6 @@ entities:
     - type: Transform
       parent: 2
       pos: 7.5,-36.5
-- proto: LockerDetectiveFilled
-  entities:
-  - uid: 12672
-    components:
-    - type: Transform
-      parent: 2
-      pos: 31.5,10.5
 - proto: LockerElectricalSuppliesFilled
   entities:
   - uid: 12673
@@ -102601,13 +102594,6 @@ entities:
     - type: Transform
       parent: 2
       pos: 38.5,10.5
-- proto: SpawnPointDetective
-  entities:
-  - uid: 14957
-    components:
-    - type: Transform
-      parent: 2
-      pos: 32.5,10.5
 - proto: SpawnPointDutyOfficer
   entities:
   - uid: 14958
@@ -103778,7 +103764,7 @@ entities:
   - uid: 15145
     components:
     - type: MetaData
-      name: substation (Security)
+      name: substation (Marine Police)
     - type: Transform
       parent: 2
       pos: 41.5,-11.5
@@ -108404,7 +108390,7 @@ entities:
     - type: Transform
       parent: 2
       pos: -20.5,-35.5
-- proto: VendingMachineDetDrobe
+- proto: VendingMachineBountyVend
   entities:
   - uid: 15796
     components:
@@ -121068,4 +121054,11 @@ entities:
       parent: 2
       rot: -1.5707963267948966 rad
       pos: 13.142442,-40.748253
+- proto: VendingMachineMarinePoliceField
+  entities:
+  - uid: 12672
+    components:
+    - type: Transform
+      parent: 2
+      pos: 31.5,10.5
 ...

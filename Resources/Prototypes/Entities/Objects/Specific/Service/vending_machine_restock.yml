@@ -367,13 +367,15 @@
 - type: entity
   parent: BaseVendingMachineRestock
   id: VendingMachineRestockSecTech
-  name: SecTech restock box
-  description: "Communists beware: the reinforcements have arrived! A label reads SECURITY PERSONNEL ONLY."
+  name: MP-Tech restock box
+  description: "Communists beware: the reinforcements have arrived! A label reads MARINE POLICE PERSONNEL ONLY."
   components:
   - type: VendingMachineRestock
     canRestock:
     - SecTechInventory
     - AmmoVendInventory # Starlight
+    - BountyVendInventory # Serenity
+    - MarinePoliceFieldInventory # Serenity
   - type: Sprite
     layers:
     - state: base

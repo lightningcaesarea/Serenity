@@ -149303,11 +149303,6 @@ entities:
     - type: Transform
       parent: 2
       pos: -6.5,-5.5
-  - uid: 22943
-    components:
-    - type: Transform
-      parent: 2
-      pos: -8.5,-2.5
 - proto: LockerEngineerFilledHardsuit
   entities:
   - uid: 22944
@@ -170857,18 +170852,6 @@ entities:
     - type: Transform
       parent: 2
       pos: -40.5,-29.5
-- proto: SpawnPointDetective
-  entities:
-  - uid: 26393
-    components:
-    - type: Transform
-      parent: 2
-      pos: -6.5,-4.5
-  - uid: 26394
-    components:
-    - type: Transform
-      parent: 2
-      pos: -6.5,-2.5
 - proto: SpawnPointDutyOfficer
   entities:
   - uid: 26395
@@ -179882,7 +179865,7 @@ entities:
     - type: Transform
       parent: 2
       pos: -62.5,-15.5
-- proto: VendingMachineDetDrobe
+- proto: VendingMachineBountyVend
   entities:
   - uid: 27817
     components:
@@ -202030,4 +202013,11 @@ entities:
     - type: Transform
       parent: 2
       pos: 64.43076,27.440712
+- proto: VendingMachineMarinePoliceField
+  entities:
+  - uid: 22943
+    components:
+    - type: Transform
+      parent: 2
+      pos: -8.5,-2.5
 ...

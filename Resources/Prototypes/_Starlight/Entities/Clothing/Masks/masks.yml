@@ -2,7 +2,7 @@
   parent: [ ClothingMaskGas, BaseBlueShieldContraband ]
   id: ClothingMaskGasBSO
   name: blue swat gas mask
-  description: A elite issue Security gas mask. Now in blue!
+  description: An elite issue Marine Police gas mask. Now in blue!
   components:
   - type: Sprite
     sprite: _Starlight/Clothing/Mask/blueswat.rsi
@@ -29,7 +29,7 @@
 - type: entity
   parent: [ ClothingMaskGas, BaseSecurityContraband ]
   id: ClothingMaskGasCorpsman
-  name: security bio mask
+  name: Marine Police bio mask
   description: VERY Expensive medical PPE that provides superior pathological protection.
   components:
   - type: Sprite
@@ -239,7 +239,7 @@
 - type: entity
   parent: ClothingMaskGeneralBorg
   id: ClothingMaskSecBorg
-  name: protogen security mask
+  name: protogen Marine Police mask
   description: Always on guard, nothing escapes those mechanical eyes.
   components:
   - type: Sprite

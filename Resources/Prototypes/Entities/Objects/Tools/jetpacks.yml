@@ -251,8 +251,8 @@
 - type: entity
   id: JetpackSecurity
   parent: [JetpackMini, BaseSecurityContraband]
-  name: security mini jetpack
-  description: A compact jetpack utilized by station security when patrolling the station's exterior. Not intended for long range travel, it holds only 1.5 L of gas.
+  name: Marine Police mini jetpack
+  description: A compact jetpack utilized by the station's Marine Police when patrolling the station's exterior. Not intended for long range travel, it holds only 1.5 L of gas.
   suffix: Empty
   components:
   - type: Item

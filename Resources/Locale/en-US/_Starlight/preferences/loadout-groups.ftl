@@ -47,17 +47,17 @@ loadout-group-blueshield-neck = Blueshield Neck
 loadout-group-blueshield-id = Blueshield ID
 
 # Security
-loadout-group-security-tie = Security tie
-loadout-group-security-mask = Security mask
-loadout-group-security-mask-elite = Elite Security mask
+loadout-group-security-tie = Marine Police tie
+loadout-group-security-mask = Marine Police mask
+loadout-group-security-mask-elite = Elite Marine Police mask
 
-loadout-group-brigmedic-gloves = Corpsman gloves
-loadout-group-security-non-lethal-weapon = Security Non-Lethal Weapon
-loadout-group-security-sidearm = Security Sidearm
+loadout-group-brigmedic-gloves = Marine Corpsman gloves
+loadout-group-security-non-lethal-weapon = Marine Police Non-Lethal Weapon
+loadout-group-security-sidearm = Marine Police Sidearm
 loadout-group-detective-shoes = Detective shoes
-loadout-group-brigmedic-id = Corpsman ID
-loadout-group-brigmedic-beaker = Corpsman beaker
-loadout-group-brigmedic-mask = Corpsman mask
+loadout-group-brigmedic-id = Marine Corpsman ID
+loadout-group-brigmedic-beaker = Marine Corpsman beaker
+loadout-group-brigmedic-mask = Marine Corpsman mask
 
 loadout-group-dutyofficer-head = Duty officer head
 loadout-group-dutyofficer-jumpsuit = Duty officer jumpsuit
@@ -148,4 +148,4 @@ loadout-group-NanotrasenCareerTrainer-shoes = NanoTrasen Career Trainer shoes
 loadout-group-NanotrasenCareerTrainer-eyewear = NanoTrasen Career Trainer eyewear
 
 # Security
-loadout-group-warden-neck = Warden neck
+loadout-group-warden-neck = Marine Quartermaster neck

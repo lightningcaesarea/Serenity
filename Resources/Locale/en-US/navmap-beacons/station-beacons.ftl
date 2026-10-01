@@ -7,11 +7,11 @@ station-beacon-gateway = Gateway
 station-beacon-captain = Captain
 station-beacon-hop = HOP
 
-station-beacon-security = Security
+station-beacon-security = Marine Police
 station-beacon-brig = Brig
 station-beacon-brig-med = Brig Med
-station-beacon-warden = Warden
-station-beacon-hos = HOS
+station-beacon-warden = Marine Quartermaster
+station-beacon-hos = Marine CO
 station-beacon-armory = Armory
 station-beacon-perma-brig = Perma
 station-beacon-detective = Detective

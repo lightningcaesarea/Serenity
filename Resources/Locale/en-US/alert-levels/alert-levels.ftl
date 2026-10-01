@@ -8,11 +8,11 @@ alert-level-green-announcement = It is now safe to return to your workplaces.
 alert-level-green-instructions = Do your job.
 
 alert-level-blue = Blue
-alert-level-blue-announcement = There may be a threat onboard the station that endangers a minority of the crew. Security should perform random checks. Crewmembers are advised to be vigilant and report suspicious activity to security.
-alert-level-blue-instructions = Crewmembers are advised to be vigilant and report suspicious activity to security.
+alert-level-blue-announcement = There may be a threat onboard the station that endangers a minority of the crew. The Marine Police should perform random checks. Crewmembers are advised to be vigilant and report suspicious activity to the Marine Police.
+alert-level-blue-instructions = Crewmembers are advised to be vigilant and report suspicious activity to the Marine Police.
 
 alert-level-red = Red
-alert-level-red-announcement = There is a threat onboard the station that endangers the entire crew. Security should prepare to use lethal force if necessary. Crewmembers should find a safe place to shelter in, and are advised to follow any present authorities.
+alert-level-red-announcement = There is a threat onboard the station that endangers the entire crew. The Marine Police should prepare to use lethal force if necessary. Crewmembers should find a safe place to shelter in, and are advised to follow any present authorities.
 alert-level-red-instructions = Crewmembers should find a safe place to shelter in, and are advised to follow any present authorities.
 
 # Starlight - start
@@ -28,7 +28,7 @@ alert-level-yellow-announcement = There is a localized structural or atmospheric
 alert-level-yellow-instructions = Crewmembers are advised to stay away from the threat, and stay in their workplaces if necessary.
 
 alert-level-gamma = Gamma
-alert-level-gamma-announcement = Central Command has ordered the Gamma security level on the station. Security is to have weapons equipped at all times, and all civilians are to immediately seek their nearest head for transportation to a secure location.
+alert-level-gamma-announcement = Central Command has ordered the Gamma security level on the station. The Marine Police are to have weapons equipped at all times, and all civilians are to immediately seek their nearest head for transportation to a secure location.
 alert-level-gamma-instructions = All civilians are to immediately seek their nearest head for transportation to a secure location.
 
 alert-level-delta = Delta

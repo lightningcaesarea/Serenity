@@ -8934,7 +8934,7 @@ entities:
   - uid: 228
     components:
     - type: MetaData
-      name: APC (Security - Interrogation)
+      name: APC (Marine Police - Interrogation)
     - type: Transform
       parent: 2
       rot: -1.5707963267948966 rad
@@ -9154,7 +9154,7 @@ entities:
   - uid: 244
     components:
     - type: MetaData
-      name: APC (Security - Vault)
+      name: APC (Marine Police - Vault)
     - type: Transform
       parent: 2
       rot: 3.141592653589793 rad
@@ -9168,7 +9168,7 @@ entities:
   - uid: 245
     components:
     - type: MetaData
-      name: APC (Security - Warden)
+      name: APC (Marine Police - Marine Quartermaster)
     - type: Transform
       parent: 2
       rot: 3.141592653589793 rad
@@ -9567,7 +9567,7 @@ entities:
   - uid: 274
     components:
     - type: MetaData
-      name: APC (Security - Brig)
+      name: APC (Marine Police - Brig)
     - type: Transform
       parent: 2
       rot: 3.141592653589793 rad
@@ -9595,7 +9595,7 @@ entities:
   - uid: 276
     components:
     - type: MetaData
-      name: APC (Security - Main)
+      name: APC (Marine Police - Main)
     - type: Transform
       parent: 2
       rot: 3.141592653589793 rad
@@ -9637,7 +9637,7 @@ entities:
   - uid: 279
     components:
     - type: MetaData
-      name: APC (Security - Brigmed)
+      name: APC (Marine Police - Brigmed)
     - type: Transform
       parent: 2
       rot: 1.5707963267948966 rad
@@ -50024,16 +50024,6 @@ entities:
     - type: Transform
       parent: 2
       pos: -18.5,6.5
-- proto: LockerDetectiveFilled
-  entities:
-  - uid: 5756
-    components:
-    - type: Transform
-      parent: 2
-      pos: -16.5,11.5
-    - type: AccessReader
-      accessListsOriginal:
-      - - Detective
 - proto: LockerEngineerFilledHardsuit
   entities:
   - uid: 5757
@@ -51954,7 +51944,7 @@ entities:
   - uid: 9052
     components:
     - type: MetaData
-      name: security notice
+      name: Marine Police notice
       desc: '""Surveillance to be conducted strictly through cameras" — The following letters are covered in blood, illegible.'
     - type: Transform
       parent: 8468
@@ -59847,13 +59837,6 @@ entities:
     - type: Transform
       parent: 2
       pos: -18.5,5.5
-- proto: SpawnPointDetective
-  entities:
-  - uid: 7027
-    components:
-    - type: Transform
-      parent: 2
-      pos: -15.5,10.5
 - proto: SpawnPointDutyOfficer
   entities:
   - uid: 7028
@@ -63562,7 +63545,7 @@ entities:
     - type: Transform
       parent: 2
       pos: -12.5,10.5
-- proto: VendingMachineDetDrobe
+- proto: VendingMachineBountyVend
   entities:
   - uid: 7466
     components:
@@ -73584,4 +73567,11 @@ entities:
     - type: Transform
       parent: 2
       pos: 5.693084,43.3906
+- proto: VendingMachineMarinePoliceField
+  entities:
+  - uid: 5756
+    components:
+    - type: Transform
+      parent: 2
+      pos: -16.5,11.5
 ...

@@ -84,7 +84,7 @@
 - type: entity
   parent: ClothingHeadHatHairFlowerBase
   id: ClothingHeadHatHairFlowerRed
-  name: security red hairflower
+  name: Marine Police red hairflower
   components:
   - type: Sprite
     layers:

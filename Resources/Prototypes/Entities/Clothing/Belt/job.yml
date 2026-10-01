@@ -439,8 +439,8 @@
 - type: entity
   parent: [ClothingBeltStorageBase, ContentsExplosionResistanceBase, BaseSecurityContraband]
   id: ClothingBeltSecurity
-  name: security belt
-  description: Can hold security gear like handcuffs and flashes.
+  name: Marine Police belt
+  description: Can hold Marine Police gear like handcuffs and flashes.
   components:
   - type: Sprite
     sprite: _Serenity/Clothing/Belt/security_dv.rsi

@@ -64,7 +64,7 @@
 - type: entity
   parent: Windoor
   id: WindoorSecurityLocked
-  suffix: Security, Locked
+  suffix: Marine Police, Locked
   components:
   - type: ContainerFill
     containers:
@@ -95,7 +95,7 @@
 - type: entity
   parent: WindoorSecurityLocked
   id: WindoorSecurityInternalAffairsLocked
-  suffix: Security/Internal Affairs, Locked
+  suffix: Marine Police/Internal Affairs, Locked
   components:
   - type: ContainerFill
     containers:
@@ -124,7 +124,7 @@
 - type: entity
   parent: WindoorSecurityLocked
   id: WindoorCourtroomLocked
-  suffix: Security/Internal Affairs/Legal (Courtroom), Locked
+  suffix: Marine Police/Internal Affairs/Legal (Courtroom), Locked
   components:
   - type: ContainerFill
     containers:
@@ -133,7 +133,7 @@
 - type: entity
   parent: WindoorSecureSecurityLocked
   id: WindoorSecureCourtroomLocked
-  suffix: Security/Internal Affairs/Legal (Courtroom), Locked
+  suffix: Marine Police/Internal Affairs/Legal (Courtroom), Locked
   components:
   - type: ContainerFill
     containers:

@@ -180,7 +180,7 @@
 - type: entity
   id: SuitStorageSec
   parent: SuitStorageBase
-  suffix: Security
+  suffix: Marine Police
   components:
   - type: EntityTableContainerFill
     containers:
@@ -248,7 +248,7 @@
   id: SuitStorageHOS
   categories: [ ShouldMapStation ] # Starlight
   parent: SuitStorageBase
-  suffix: Head of Security
+  suffix: Marine CO
   components:
   - type: EntityTableContainerFill
     containers:
@@ -262,7 +262,7 @@
   id: SuitStorageWarden
   categories: [ ShouldMapStation ] # Starlight
   parent: SuitStorageBase
-  suffix: Warden
+  suffix: Marine Quartermaster
   components:
   - type: EntityTableContainerFill
     containers:

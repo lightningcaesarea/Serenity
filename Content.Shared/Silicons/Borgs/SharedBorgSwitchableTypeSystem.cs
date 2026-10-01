@@ -1,4 +1,4 @@
-using Content.Shared._Afterlight.Silicons.Borgs; // Afterlight
+using Content.Shared._Serenity.Silicons.Borgs; // Starlight
 using Content.Shared.Actions;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Components;
@@ -90,10 +90,10 @@ public abstract partial class SharedBorgSwitchableTypeSystem : EntitySystem
 
         UpdateEntityAppearance(ent);
 
-        // Afterlight-start: event for subtype system, always runs at end of borg type code
+        // Starlight-start: event for subtype system, always runs at end of borg type code
         var ev = new AfterBorgTypeSelectEvent();
         RaiseLocalEvent(ent, ref ev);
-        // Afterlight-end
+        // Starlight-end
     }
 
     public void UpdateEntityAppearance(Entity<BorgSwitchableTypeComponent> entity) // Starlight: public so the subtype system can hand the sprite back

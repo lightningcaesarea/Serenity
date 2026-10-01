@@ -28,5 +28,5 @@ spray-painter-style-cardboard-engineering = Engineering
 spray-painter-style-cardboard-evidence = Evidence
 spray-painter-style-cardboard-medical = Medical
 spray-painter-style-cardboard-science = Science
-spray-painter-style-cardboard-security = Security
+spray-painter-style-cardboard-security = Marine Police
 spray-painter-style-cardboard-service = Service

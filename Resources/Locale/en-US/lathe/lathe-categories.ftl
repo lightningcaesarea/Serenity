@@ -18,7 +18,7 @@ lathe-category-engineering = Engineering
 lathe-category-general = General
 lathe-category-medical = Medical
 lathe-category-research = Research
-lathe-category-security = Security
+lathe-category-security = Marine Police
 lathe-category-service = Service
 lathe-category-supply = Supply
 

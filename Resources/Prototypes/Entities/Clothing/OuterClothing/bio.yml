@@ -89,7 +89,7 @@
   parent: [ClothingOuterBaseLarge, ClothingOuterBaseWarm, AllowSuitStorageClothing, BaseSecurityContraband] # Starlight
   id: ClothingOuterBioSecurity
   name: bio suit
-  suffix: Security
+  suffix: Marine Police
   description: A suit that protects against biological contamination, kitted out with additional armor.
   components:
   - type: Sprite

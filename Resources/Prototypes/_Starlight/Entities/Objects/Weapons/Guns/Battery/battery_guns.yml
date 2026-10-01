@@ -2,7 +2,7 @@
   name: hybrid taser
   parent: [ BaseWeaponBatterySmall, BaseSecurityContraband ]
   id: WeaponAdvancedTaser
-  description: A low-capacity, energy-based stun gun used by security teams to subdue targets at range.
+  description: A low-capacity, energy-based stun gun used by Marine Police teams to subdue targets at range.
   components:
   - type: CanDualWield
     dualWieldInaccuracyPenalty: 25

@@ -4,7 +4,7 @@ skill-category-engineering = Engineering
 skill-category-medical = Medical
 skill-category-science = Science
 skill-category-service = Service
-skill-category-security = Security
+skill-category-security = Marine Police
 
 ## Skills
 
@@ -30,8 +30,8 @@ skill-botany-name = Botany
 skill-botany-desc = Harvesting and swabbing plants is twice as fast.
 skill-cooking-name = Cooking
 skill-cooking-desc = Butchering on a meat spike is twice as fast; the untrained are slower.
-skill-advanced-security-training-name = Advanced Security Training
-skill-advanced-security-training-desc = Senior restraint and search techniques. Cuffing, uncuffing and searching people is faster. Security department only.
+skill-advanced-security-training-name = Advanced Marine Police Training
+skill-advanced-security-training-desc = Senior restraint and search techniques. Cuffing, uncuffing and searching people is faster. Marine Police only.
 
 ## Locks
 

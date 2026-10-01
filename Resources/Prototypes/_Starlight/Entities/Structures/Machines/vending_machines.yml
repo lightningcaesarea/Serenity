@@ -199,7 +199,7 @@
   parent: SLVendingMachine
   id: SLVendingMachineSecurity
   categories: [ ShouldMapStation ]
-  name: security dispenser
+  name: Marine Police dispenser
   components:
   - type: AccessReader
     access: [["Security"], ["Cadet"]]
@@ -436,8 +436,8 @@
 - type: entity
   parent: VendingMachineMedicalBase
   id: VendingMachineMedicalSecurity
-  name: NanoMed Security
-  suffix: Security
+  name: NanoMed Marine Police
+  suffix: Marine Police
   description: It's a medical drug dispenser. Natural chemicals only!
   components:
   - type: VendingMachine
@@ -1457,7 +1457,7 @@
 - type: entity
   parent: VendingMachineMedicalSecurity
   id: VendingMachineMedicalSecurityEmpty
-  suffix: Empty, Security
+  suffix: Empty, Marine Police
   components:
     - type: EmptyVendingMachine
 

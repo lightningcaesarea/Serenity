@@ -190,6 +190,8 @@
     - VendingMachineEngiDrobeCircuitboard
     - VendingMachineChefDrobeCircuitboard
     - VendingMachineDetDrobeCircuitboard
+    - VendingMachineBountyVendCircuitboard # Serenity
+    - VendingMachineMarinePoliceFieldCircuitboard # Serenity
     - VendingMachineJaniDrobeCircuitboard
     - VendingMachineSciDrobeCircuitboard
     - VendingMachineRoboDrobeCircuitboard

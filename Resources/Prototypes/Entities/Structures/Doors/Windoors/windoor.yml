@@ -390,7 +390,7 @@
 - type: entity
   parent: WindoorSecureSecurityLocked
   id: WindoorSecureSecurityInternalAffairsLocked
-  suffix: Security/Internal Affairs, Locked # Starlight
+  suffix: Marine Police/Internal Affairs, Locked # Starlight
   components:
   - type: ContainerFill
     containers:
@@ -428,7 +428,7 @@
 - type: entity
   parent: WindoorSecure
   id: WindoorSecureSecurityLocked
-  suffix: Security, Locked
+  suffix: Marine Police, Locked
   components:
   - type: ContainerFill
     containers:
@@ -439,7 +439,7 @@
 - type: entity
   parent: WindoorSecurePlasma
   id: PlasmaWindoorSecureSecurityLocked
-  suffix: Security, Locked, Plasma
+  suffix: Marine Police, Locked, Plasma
   components:
   - type: ContainerFill
     containers:

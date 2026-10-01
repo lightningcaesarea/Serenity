@@ -244,7 +244,7 @@
 - type: entity
   parent: BaseSecurityPDA
   id: SecurityCadetPDA
-  name: security cadet PDA
+  name: Marine Cadet PDA
   description: Why isn't it red?
   components:
   - type: Pda
@@ -908,7 +908,7 @@
 - type: entity
   parent: BaseSecurityPDA
   id: HoSPDA
-  name: head of security PDA
+  name: Marine CO PDA
   description: Whosoever bears this PDA is the law.
   components:
   - type: Pda
@@ -936,7 +936,7 @@
 - type: entity
   parent: BaseSecurityPDA
   id: WardenPDA
-  name: warden PDA
+  name: Marine Quartermaster PDA
   description: The OS appears to have been jailbroken.
   components:
   - type: Pda
@@ -955,7 +955,7 @@
 - type: entity
   parent: BaseSecurityPDA
   id: SecurityPDA
-  name: security PDA
+  name: Marine Police PDA
   description: Red to hide the stains of assistant blood.
   components:
   - type: Pda
@@ -1435,7 +1435,7 @@
 - type: entity
   parent: BaseMedicalPDA
   id: BrigmedicPDA
-  name: corpsman PDA
+  name: Marine Corpsman PDA
   description: I wonder whose pulse is on the screen? I hope it doesn't stop...
   components:
   - type: Pda
@@ -1567,7 +1567,7 @@
 - type: entity
   parent: BaseSecurityPDA
   id: SeniorOfficerPDA
-  name: senior officer PDA
+  name: Senior Marine Trooper PDA
   description: Beaten, battered and broken, but just barely useable.
   components:
   - type: Pda

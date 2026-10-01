@@ -1,0 +1,138 @@
+# Marine Police vendors ported from Frontier Station 14 (MIT commit 5be37d18c2,
+# _NF/Entities/Structures/Machines/vending_machines.yml). Both replace the Detective's
+# DetDrobe and locker on the station maps now that the Detective job is disabled.
+# Department issue: free, Marine Police (and Cadet) access, like the MP-Tech. Restocked with the
+# MP-Tech restock box; rebuilt from a board they start empty.
+
+- type: entity
+  parent: VendingMachine
+  id: VendingMachineBountyVend
+  categories: [ ShouldMapStation ]
+  name: BountyVend
+  description: Essential gear for the space-men on the go. A label reads MARINE POLICE PERSONNEL ONLY.
+  components:
+  - type: VendingMachine
+    pack: BountyVendInventory
+    offState: off
+    brokenState: broken
+    normalState: normal-unshaded
+    showPrices: false
+  - type: Machine
+    board: VendingMachineBountyVendCircuitboard
+  - type: SpeakOnUIClosed
+    pack: GenericVendGoodbyes
+  - type: Sprite
+    sprite: _Serenity/Structures/Machines/VendingMachines/bountyvend.rsi
+    layers:
+    - state: "off"
+      map: ["enum.VendingMachineVisualLayers.Base"]
+    - state: "off"
+      map: ["enum.VendingMachineVisualLayers.BaseUnshaded"]
+      shader: unshaded
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: AccessReader
+    access: [["Security"], ["Cadet"]]
+  - type: PointLight
+    radius: 1.5
+    energy: 1.6
+    color: "#4b93ad"
+
+- type: entity
+  parent: VendingMachine
+  id: VendingMachineMarinePoliceField
+  categories: [ ShouldMapStation ]
+  name: MP Field Supply
+  description: Field equipment for Marine Police patrols and investigations. A label reads MARINE POLICE PERSONNEL ONLY.
+  components:
+  - type: VendingMachine
+    pack: MarinePoliceFieldInventory
+    offState: off
+    brokenState: broken
+    normalState: normal-unshaded
+    showPrices: false
+  - type: Machine
+    board: VendingMachineMarinePoliceFieldCircuitboard
+  - type: DatasetVocalizer
+    dataset: SecTechAds
+  - type: SpeakOnUIClosed
+    pack: SecTechGoodbyes
+  - type: Sprite
+    sprite: _Serenity/Structures/Machines/VendingMachines/mp_field.rsi
+    layers:
+    - state: "off"
+      map: ["enum.VendingMachineVisualLayers.Base"]
+    - state: "off"
+      map: ["enum.VendingMachineVisualLayers.BaseUnshaded"]
+      shader: unshaded
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: AccessReader
+    access: [["Security"], ["Cadet"]]
+  - type: PointLight
+    radius: 1.5
+    energy: 1.6
+    color: "#4b93ad"
+  - type: GuideHelp
+    guides:
+    - Security
+
+- type: entity
+  parent: VendingMachineBountyVend
+  id: VendingMachineBountyVendEmpty
+  suffix: Empty
+  components:
+  - type: EmptyVendingMachine
+
+- type: entity
+  parent: VendingMachineMarinePoliceField
+  id: VendingMachineMarinePoliceFieldEmpty
+  suffix: Empty
+  components:
+  - type: EmptyVendingMachine
+
+- type: entity
+  parent: BaseMachineCircuitboard
+  id: VendingMachineBountyVendCircuitboard
+  name: BountyVend circuitboard
+  description: A machine printed circuit board for a BountyVend machine.
+  components:
+  - type: Sprite
+    state: security
+  - type: MachineBoard
+    prototype: VendingMachineBountyVendEmpty
+    stackRequirements:
+      Steel: 5
+      Manipulator: 1
+      Glass: 2
+
+- type: entity
+  parent: BaseMachineCircuitboard
+  id: VendingMachineMarinePoliceFieldCircuitboard
+  name: MP Field Supply circuitboard
+  description: A machine printed circuit board for an MP Field Supply machine.
+  components:
+  - type: Sprite
+    state: security
+  - type: MachineBoard
+    prototype: VendingMachineMarinePoliceFieldEmpty
+    stackRequirements:
+      Steel: 5
+      Manipulator: 1
+      Glass: 2
+
+- type: latheRecipe
+  id: VendingMachineBountyVendCircuitboard
+  result: VendingMachineBountyVendCircuitboard
+  completetime: 4
+  materials:
+    Steel: 100
+    Glass: 500
+
+- type: latheRecipe
+  id: VendingMachineMarinePoliceFieldCircuitboard
+  result: VendingMachineMarinePoliceFieldCircuitboard
+  completetime: 4
+  materials:
+    Steel: 100
+    Glass: 500

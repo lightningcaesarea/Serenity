@@ -183,8 +183,8 @@
 - type: entity
   parent: CargoRequestSecurityComputerCircuitboard
   id: CargoRequestSecurityComputerCircuitboardDesktop
-  name: security request desktop computer board
-  description: A circuit board for a security request desktop computer.
+  name: Marine Police request desktop computer board
+  description: A circuit board for a Marine Police request desktop computer.
   components:
   - type: ComputerBoard
     prototype: ComputerCargoOrdersSecurityDesktop

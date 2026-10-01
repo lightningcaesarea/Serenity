@@ -33,5 +33,5 @@ fax-group-engineering = Engineering
 fax-group-medical = Medical
 fax-group-nanotrasen = NanoTrasen
 fax-group-science = Science
-fax-group-security = Security
+fax-group-security = Marine Police
 fax-group-service = Service

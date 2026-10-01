@@ -1,8 +1,8 @@
 - type: entity
   parent: MobCorgiBase
   id: MobK9
-  name: security K9
-  description: A dog trained for station security work.
+  name: Marine Police K9
+  description: A dog trained for Marine Police work.
   components:
   - type: RemoveFlavorText
   - type: Sprite

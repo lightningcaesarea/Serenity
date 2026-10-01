@@ -618,9 +618,9 @@
   - MailTechnicianJumpskirt
   - MailTechnicianJumpsuitSenior
   - MailTechnicianJumpskirtSenior
-  - CargoTechnicianJumpsuitAlt # afterlight start
+  - CargoTechnicianJumpsuitAlt # starlight start
   - CargoTechnicianJumpsuitFormal
-  - CargoTechnicianJumpskirtFormal # afterlight end
+  - CargoTechnicianJumpskirtFormal # starlight end
 
 - type: loadoutGroup
   id: MailTechnicianBackpack

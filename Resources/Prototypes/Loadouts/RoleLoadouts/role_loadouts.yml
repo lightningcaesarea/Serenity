@@ -323,7 +323,7 @@
   groups:
   - GroupTankHarness
   - SalvageSpecialistBackpack
-  - SalvageSpecialistJumpsuit # afterlight
+  - SalvageSpecialistJumpsuit # starlight
   - SalvageSpecialistOuterClothing
   - SalvageSpecialistShoes
   - SalvageSpecialistPDA # Starlight

@@ -80,8 +80,8 @@
 - type: entity
   id: SecurityTechFabCircuitboard
   parent: [BaseMachineCircuitboard, BaseSecurityContraband] # Starlight
-  name: security techfab machine board
-  description: A machine printed circuit board for a security techfab.
+  name: Marine Police techfab machine board
+  description: A machine printed circuit board for a Marine Police techfab.
   components:
     - type: Sprite
       state: security

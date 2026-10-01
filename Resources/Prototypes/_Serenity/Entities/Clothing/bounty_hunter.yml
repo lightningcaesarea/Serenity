@@ -1,0 +1,75 @@
+# Bounty hunter clothing line, ported from Frontier Station 14 at its last MIT-licensed commit
+# (5be37d18c2, Resources/Prototypes/_NF/Entities/Clothing/...). Sold from the BountyVend.
+# Frontier built these on the detective and HoS items; the HoS ones are pointed back at the
+# vanilla sprites here, because Serenity's HoS items now wear the Marine CO's navy Delta-V art.
+
+- type: entity
+  parent: ClothingUniformJumpsuitDetective
+  id: ClothingUniformJumpsuitBH
+  name: hard-worn suit
+  description: Someone who wears this means business.
+
+- type: entity
+  parent: ClothingUniformJumpskirtDetective
+  id: ClothingUniformJumpskirtBH
+  name: hard-worn suit
+  description: Someone who wears this means business.
+
+- type: entity
+  parent: ClothingUniformJumpsuitDetectiveGrey
+  id: ClothingUniformJumpsuitBHGrey
+  name: noir suit
+  description: A grey suit, complete with tie clip.
+
+- type: entity
+  parent: ClothingUniformJumpskirtDetectiveGrey
+  id: ClothingUniformJumpskirtBHGrey
+  name: noir suit
+  description: A grey suit, complete with tie clip.
+
+- type: entity
+  parent: ClothingNeckTieDet
+  id: ClothingNeckTieBH
+  name: tie
+  description: A loosely tied necktie, a perfect accessory for the over-worked.
+
+- type: entity
+  parent: ClothingOuterCoatHoSTrench
+  id: ClothingOuterCoatBHTrench
+  name: bounty hunter's flak trenchcoat
+  description: A greatcoat enhanced with a bullet proof alloy for some extra protection and style for those with a charismatic presence.
+  components:
+  - type: Sprite
+    sprite: Clothing/OuterClothing/Coats/hos_trenchcoat.rsi
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        sprite: Clothing/OuterClothing/Coats/hos_trenchcoat.rsi
+      right:
+      - state: inhand-right
+        sprite: Clothing/OuterClothing/Coats/hos_trenchcoat.rsi
+  - type: Clothing
+    sprite: Clothing/OuterClothing/Coats/hos_trenchcoat.rsi
+  - type: Armor # ClothingOuterArmorBulletproof stats
+    modifiers:
+      coefficients:
+        Blunt: 0.9
+        Slash: 0.9
+        Piercing: 0.4
+        Heat: 0.9
+  - type: ExplosionResistance
+    damageCoefficient: 0.80
+
+- type: entity
+  parent: ClothingHeadHatHoshat
+  id: ClothingHeadHatBH
+  name: bounty hunter's hat
+  description: There's a new bounty hunter in the sector.
+  components:
+  - type: Sprite
+    sprite: Clothing/Head/Hats/hoshat.rsi
+  - type: Clothing
+    sprite: Clothing/Head/Hats/hoshat.rsi
+  - type: Contraband
+    allowedDepartments: [ Security ]

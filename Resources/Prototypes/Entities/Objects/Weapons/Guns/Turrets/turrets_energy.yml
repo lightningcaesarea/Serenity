@@ -162,7 +162,7 @@
 - type: entity
   parent: WeaponEnergyTurretStationBase
   id: WeaponEnergyTurretSecurity
-  suffix: Security
+  suffix: Marine Police
   components:
   - type: AccessReader
     access: [["StationAi"], ["Security"]]

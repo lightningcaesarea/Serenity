@@ -32,7 +32,7 @@
 - type: entity
   id: TurnstileSecurity
   parent: Turnstile
-  suffix: Security
+  suffix: Marine Police
   components:
   - type: ContainerFill
     containers:

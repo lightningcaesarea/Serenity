@@ -352,7 +352,7 @@
 - type: entity
   parent: BaseStoryObjective
   id: RetrieveContrabandObjective
-  name: Retrieve any contraband confiscated by SEC this shift, sell it or keep it for your collection, just dont let SEC keep it.
+  name: Retrieve any contraband confiscated by the MPs this shift, sell it or keep it for your collection, just dont let the MPs keep it.
   description: Escape to CentComm after the shift, one of our agents will debrief you. Don't show up in cuffs.
   components:
     - type: Objective
@@ -591,7 +591,7 @@
 - type: entity
   parent: BaseStoryObjective
   id: ReputationObjective
-  name: Commit petty crimes, litter the station, ruin the reputation of the onboard security force and the stations command members.
+  name: Commit petty crimes, litter the station, ruin the reputation of the onboard Marine Police and the stations command members.
   description: Escape to CentComm after the shift, one of our agents will debrief you. Don't show up in cuffs.
   components:
     - type: Objective

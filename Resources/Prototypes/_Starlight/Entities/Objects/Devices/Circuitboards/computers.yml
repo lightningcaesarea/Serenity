@@ -70,8 +70,8 @@
 - type: entity
   parent: BaseComputerCircuitboard
   id: SecurityShuttleConsoleCircuitboard
-  name: remote security shuttle console board
-  description: A computer printed circuit board for a remote security shuttle console.
+  name: remote Marine Police shuttle console board
+  description: A computer printed circuit board for a remote Marine Police shuttle console.
   components:
     - type: Sprite
       state: cpu_supply
@@ -128,8 +128,8 @@
 - type: entity
   parent: [ BaseComputerCircuitboard, BaseCommandContraband ]
   id: SecurityCommsComputerCircuitboard
-  name: security communications console board
-  description: A computer printed circuit board for a security communications console.
+  name: Marine Police communications console board
+  description: A computer printed circuit board for a Marine Police communications console.
   components:
     - type: Sprite
       state: cpu_security

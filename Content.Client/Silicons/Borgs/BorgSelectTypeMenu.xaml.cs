@@ -1,10 +1,10 @@
 ﻿using System.Linq;
-// Afterlight
+// Starlight
 using Content.Client.UserInterface.Controls;
-// Afterlight
+// Starlight
 using Content.Shared._Starlight.Silicons.Borgs; // Starlight
-// Afterlight
-// Afterlight
+// Starlight
+// Starlight
 using Content.Shared.Guidebook;
 using Content.Shared.Silicons.Borgs;
 using Content.Shared.Silicons.Borgs.Components;
@@ -46,9 +46,9 @@ public sealed partial class BorgSelectTypeMenu : FancyWindow
         ConfirmTypeButton.OnPressed += ConfirmButtonPressed;
         HelpGuidebookIds = GuidebookEntries;
 
-        // Afterlight - borg subtypes
+        // Starlight - borg subtypes
         ChassisSpriteSelection.SubtypeSelected += () => ConfirmTypeButton.Disabled = false;
-        // Afterlight end
+        // Starlight end
     }
 
     // Move from BorgSelectTypeMenu to method
@@ -107,13 +107,13 @@ public sealed partial class BorgSelectTypeMenu : FancyWindow
         InfoPlaceholder.Visible = false;
         // ConfirmTypeButton.Disabled = false; Starlight
 
-        // Afterlight - borg subtype
+        // Starlight - borg subtype
         if (_selectedBorgType != null)
         {
             ChassisSpriteSelection.Update(_selectedBorgType);
             ConfirmTypeButton.Disabled = !ChassisSpriteSelection.HasSelection; // Starlight
         }
-        // Afterlight end
+        // Starlight end
 
         NameLabel.Text = PrototypeName(prototype);
         DescriptionLabel.Text = Loc.GetString($"borg-type-{prototype.ID}-desc");
@@ -125,7 +125,7 @@ public sealed partial class BorgSelectTypeMenu : FancyWindow
         if (_selectedBorgType == null)
             return;
 
-        ConfirmedBorgType?.Invoke(_selectedBorgType, ChassisSpriteSelection.SubtypePrototype); // Afterlight
+        ConfirmedBorgType?.Invoke(_selectedBorgType, ChassisSpriteSelection.SubtypePrototype); // Starlight
     }
 
     private static string PrototypeName(BorgTypePrototype prototype)

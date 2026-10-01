@@ -8445,7 +8445,7 @@ entities:
   - uid: 353
     components:
     - type: MetaData
-      name: Security APC
+      name: Marine Police APC
     - type: Transform
       parent: 2
       pos: -4.5,15.5
@@ -8690,7 +8690,7 @@ entities:
   - uid: 376
     components:
     - type: MetaData
-      name: Security Locker Room APC
+      name: Marine Police Locker Room APC
     - type: Transform
       parent: 2
       rot: 3.141592653589793 rad
@@ -38782,7 +38782,7 @@ entities:
       parent: 2
       pos: -17.5,34.5
     - type: NavMapBeacon
-      text: Security Dock
+      text: Marine Police Dock
       color: '#DE3A3A96'
     - type: WarpPoint
       location: Security Dock
@@ -70427,13 +70427,6 @@ entities:
     - type: Transform
       parent: 2
       pos: -20.5,-11.5
-- proto: LockerDetectiveFilled
-  entities:
-  - uid: 10572
-    components:
-    - type: Transform
-      parent: 2
-      pos: -11.5,-39.5
 - proto: LockerElectricalSuppliesFilled
   entities:
   - uid: 10573
@@ -82780,13 +82773,6 @@ entities:
     - type: Transform
       parent: 2
       pos: -19.5,-11.5
-- proto: SpawnPointDetective
-  entities:
-  - uid: 12491
-    components:
-    - type: Transform
-      parent: 2
-      pos: -15.5,-38.5
 - proto: SpawnPointDutyOfficer
   entities:
   - uid: 12492
@@ -83690,7 +83676,7 @@ entities:
   - uid: 12634
     components:
     - type: MetaData
-      name: security substation
+      name: Marine Police substation
     - type: Transform
       parent: 2
       pos: -16.5,16.5
@@ -87523,7 +87509,7 @@ entities:
     - type: Transform
       parent: 2
       pos: -24.5,19.5
-- proto: VendingMachineDetDrobe
+- proto: VendingMachineBountyVend
   entities:
   - uid: 13153
     components:
@@ -98707,4 +98693,11 @@ entities:
     - type: Transform
       parent: 2
       pos: 9.615229,30.49403
+- proto: VendingMachineMarinePoliceField
+  entities:
+  - uid: 10572
+    components:
+    - type: Transform
+      parent: 2
+      pos: -11.5,-39.5
 ...

@@ -7,33 +7,28 @@
       - STARLIGHT.gamma
       - STARLIGHT.epsilon
       - TRIESTEPORT.main
-      - AFTERLIGHT.main
     beta:
       - STARLIGHT.alpha
       - STARLIGHT.gamma
       - STARLIGHT.epsilon
       - TRIESTEPORT.main
-      - AFTERLIGHT.main
     gamma:
       - STARLIGHT.alpha
       - STARLIGHT.beta
       - STARLIGHT.delta
       - STARLIGHT.epsilon
       - TRIESTEPORT.main
-      - AFTERLIGHT.main
     delta:
       - STARLIGHT.alpha
       - STARLIGHT.beta
       - STARLIGHT.gamma
       - STARLIGHT.epsilon
       - TRIESTEPORT.main
-      - AFTERLIGHT.main
     epsilon:
       - STARLIGHT.alpha
       - STARLIGHT.beta
       - STARLIGHT.gamma
       - TRIESTEPORT.main
-      - AFTERLIGHT.main
   # debug
     test:
       - STARLIGHT.alpha
@@ -42,7 +37,6 @@
       - STARLIGHT.delta
       - STARLIGHT.epsilon
       - TRIESTEPORT.main
-      - AFTERLIGHT.main
 
 - type: serverPlaytimeRecognition
   id: TRIESTEPORT
@@ -51,16 +45,6 @@
       #- STARLIGHT.alpha
       #- STARLIGHT.delta
       #- STARLIGHT.epsilon
-      #- AFTERLIGHT.main
-
-- type: serverPlaytimeRecognition
-  id: AFTERLIGHT
-  recognition:
-    main: [] #TODO @drsmugleaf
-      #- STARLIGHT.alpha
-      #- STARLIGHT.delta
-      #- STARLIGHT.epsilon
-      #- TRIESTEPORT.main
 
 # Bans
 
@@ -73,33 +57,28 @@
       - STARLIGHT.gamma
       - STARLIGHT.epsilon
       - TRIESTEPORT.main
-      - AFTERLIGHT.main
     beta:
       - STARLIGHT.alpha
       - STARLIGHT.gamma
       - STARLIGHT.epsilon
       - TRIESTEPORT.main
-      - AFTERLIGHT.main
     gamma:
       - STARLIGHT.alpha
       - STARLIGHT.beta
       - STARLIGHT.delta
       - STARLIGHT.epsilon
       - TRIESTEPORT.main
-      - AFTERLIGHT.main
     delta:
       - STARLIGHT.alpha
       - STARLIGHT.beta
       - STARLIGHT.gamma
       - STARLIGHT.epsilon
       - TRIESTEPORT.main
-      - AFTERLIGHT.main
     epsilon:
       - STARLIGHT.alpha
       - STARLIGHT.beta
       - STARLIGHT.gamma
       - TRIESTEPORT.main
-      - AFTERLIGHT.main
   # debug
     test:
       - STARLIGHT.alpha
@@ -108,7 +87,6 @@
       - STARLIGHT.delta
       - STARLIGHT.epsilon
       - TRIESTEPORT.main
-      - AFTERLIGHT.main
 
 - type: serverBanRecognition
   id: TRIESTEPORT
@@ -117,13 +95,3 @@
       #- STARLIGHT.alpha
       #- STARLIGHT.delta
       #- STARLIGHT.epsilon
-      #- AFTERLIGHT.main
-
-- type: serverBanRecognition
-  id: AFTERLIGHT
-  recognition:
-    main: [] #TODO @drsmugleaf
-      #- STARLIGHT.alpha
-      #- STARLIGHT.delta
-      #- STARLIGHT.epsilon
-      #- TRIESTEPORT.main

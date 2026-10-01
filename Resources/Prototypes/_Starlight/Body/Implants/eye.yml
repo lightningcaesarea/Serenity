@@ -75,8 +75,8 @@
 
 - type: entity
   id: EyeImplantSecurity
-  name: security implant
-  description: A surgically-installed eye implant that allows you to see the security information of station crew, including their job, their mindshield status, and their wanted status.
+  name: MP implant
+  description: Enables you to see information about station crew without MP glasses.
   parent: BaseEntityEyeImplant
   components:
   - type: Sprite

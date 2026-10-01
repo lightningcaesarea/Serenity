@@ -11155,7 +11155,7 @@ entities:
   - uid: 37
     components:
     - type: MetaData
-      name: air alarm (Security Lobby)
+      name: air alarm (Marine Police Lobby)
     - type: Transform
       parent: 2
       rot: -1.5707963267948966 rad
@@ -11181,7 +11181,7 @@ entities:
   - uid: 38
     components:
     - type: MetaData
-      name: air alarm (HoS' Office)
+      name: air alarm (Marine CO's Office)
     - type: Transform
       parent: 2
       rot: -1.5707963267948966 rad
@@ -11235,7 +11235,7 @@ entities:
   - uid: 41
     components:
     - type: MetaData
-      name: air alarm (Security Locker Room)
+      name: air alarm (Marine Police Locker Room)
     - type: Transform
       parent: 2
       pos: 21.5,7.5
@@ -11256,7 +11256,7 @@ entities:
   - uid: 42
     components:
     - type: MetaData
-      name: air alarm (Security Reception)
+      name: air alarm (Marine Police Reception)
     - type: Transform
       parent: 2
       rot: 3.141592653589793 rad
@@ -12561,7 +12561,7 @@ entities:
   - uid: 107
     components:
     - type: MetaData
-      name: air alarm (Security Entrance)
+      name: air alarm (Marine Police Entrance)
     - type: Transform
       parent: 2
       rot: 3.141592653589793 rad
@@ -12985,7 +12985,7 @@ entities:
   - uid: 129
     components:
     - type: MetaData
-      name: air alarm (Security Front)
+      name: air alarm (Marine Police Front)
     - type: Transform
       parent: 2
       pos: 15.5,11.5
@@ -13150,7 +13150,7 @@ entities:
   - uid: 137
     components:
     - type: MetaData
-      name: air alarm (Security Back Entrance)
+      name: air alarm (Marine Police Back Entrance)
     - type: Transform
       parent: 2
       pos: 47.5,5.5
@@ -13174,7 +13174,7 @@ entities:
   - uid: 138
     components:
     - type: MetaData
-      name: air alarm (Security Docking)
+      name: air alarm (Marine Police Docking)
     - type: Transform
       parent: 2
       pos: 61.5,3.5
@@ -13522,7 +13522,7 @@ entities:
   - uid: 157
     components:
     - type: MetaData
-      name: air alarm (Security Back)
+      name: air alarm (Marine Police Back)
     - type: Transform
       parent: 2
       rot: 3.141592653589793 rad
@@ -17333,7 +17333,7 @@ entities:
   - uid: 669
     components:
     - type: MetaData
-      name: APC (East Security Maintenance)
+      name: APC (East Marine Police Maintenance)
     - type: Transform
       parent: 2
       pos: 34.5,-3.5
@@ -17402,7 +17402,7 @@ entities:
   - uid: 676
     components:
     - type: MetaData
-      name: APC (Telecomms Hi-Sec)
+      name: APC (Telecomms Hi-MP)
     - type: Transform
       parent: 2
       rot: -1.5707963267948966 rad
@@ -17776,7 +17776,7 @@ entities:
   - uid: 713
     components:
     - type: MetaData
-      name: APC (HoS' Office)
+      name: APC (Marine CO's Office)
     - type: Transform
       parent: 2
       rot: 3.141592653589793 rad
@@ -17786,7 +17786,7 @@ entities:
   - uid: 714
     components:
     - type: MetaData
-      name: APC (Security Reception)
+      name: APC (Marine Police Reception)
     - type: Transform
       parent: 2
       rot: 3.141592653589793 rad
@@ -17872,7 +17872,7 @@ entities:
   - uid: 722
     components:
     - type: MetaData
-      name: APC (Security)
+      name: APC (Marine Police)
     - type: Transform
       parent: 2
       rot: 1.5707963267948966 rad
@@ -17921,7 +17921,7 @@ entities:
   - uid: 728
     components:
     - type: MetaData
-      name: APC (West Security Maintenance)
+      name: APC (West Marine Police Maintenance)
     - type: Transform
       parent: 2
       rot: 3.141592653589793 rad
@@ -17934,7 +17934,7 @@ entities:
   - uid: 729
     components:
     - type: MetaData
-      name: APC (Security Locker Room)
+      name: APC (Marine Police Locker Room)
     - type: Transform
       parent: 2
       rot: 3.141592653589793 rad
@@ -18354,7 +18354,7 @@ entities:
   - uid: 768
     components:
     - type: MetaData
-      name: APC (Security Docking Arm)
+      name: APC (Marine Police Docking Arm)
     - type: Transform
       parent: 2
       pos: 51.5,3.5
@@ -90780,7 +90780,7 @@ entities:
   - uid: 14319
     components:
     - type: MetaData
-      name: fire alarm (Security Entrance)
+      name: fire alarm (Marine Police Entrance)
     - type: Transform
       parent: 2
       rot: 3.141592653589793 rad
@@ -91710,7 +91710,7 @@ entities:
   - uid: 14375
     components:
     - type: MetaData
-      name: fire alarm (Security Reception)
+      name: fire alarm (Marine Police Reception)
     - type: Transform
       parent: 2
       rot: 3.141592653589793 rad
@@ -91726,7 +91726,7 @@ entities:
   - uid: 14376
     components:
     - type: MetaData
-      name: fire alarm (Security Locker Room)
+      name: fire alarm (Marine Police Locker Room)
     - type: Transform
       parent: 2
       rot: 3.141592653589793 rad
@@ -91743,7 +91743,7 @@ entities:
   - uid: 14377
     components:
     - type: MetaData
-      name: fire alarm (Security Lobby)
+      name: fire alarm (Marine Police Lobby)
     - type: Transform
       parent: 2
       rot: -1.5707963267948966 rad
@@ -91793,7 +91793,7 @@ entities:
   - uid: 14380
     components:
     - type: MetaData
-      name: fire alarm (HoS' Office)
+      name: fire alarm (Marine CO's Office)
     - type: Transform
       parent: 2
       rot: -1.5707963267948966 rad
@@ -92287,7 +92287,7 @@ entities:
   - uid: 14410
     components:
     - type: MetaData
-      name: fire alarm (Security Docking)
+      name: fire alarm (Marine Police Docking)
     - type: Transform
       parent: 2
       pos: 60.5,3.5
@@ -148637,32 +148637,6 @@ entities:
     - type: Transform
       parent: 2
       pos: -13.5,-14.5
-- proto: LockerDetectiveFilled
-  entities:
-  - uid: 21863
-    components:
-    - type: Transform
-      parent: 2
-      pos: 42.5,-0.5
-    - type: EntityStorage
-      air:
-        temperature: 293.14673
-        volume: 200
-        moles:
-          Oxygen: 1.7459903
-          Nitrogen: 6.568249
-        immutable: False
-    - type: ContainerContainer
-      containers:
-        entity_storage: !type:Container
-          ents:
-          - 21864
-          showEnts: False
-          occludes: True
-        paper_label: !type:ContainerSlot
-          ent: null
-          showEnts: False
-          occludes: True
 - proto: LockerElectricalSuppliesFilled
   entities:
   - uid: 21865
@@ -153517,10 +153491,8 @@ entities:
   - uid: 21864
     components:
     - type: Transform
-      parent: 21863
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
+      parent: 2
+      pos: 41.5,-0.5
 - proto: PlushieCarp
   entities:
   - uid: 21929
@@ -173743,13 +173715,6 @@ entities:
     - type: Transform
       parent: 2
       pos: 65.5,-8.5
-- proto: SpawnPointDetective
-  entities:
-  - uid: 25693
-    components:
-    - type: Transform
-      parent: 2
-      pos: 41.5,-1.5
 - proto: SpawnPointDutyOfficer
   entities:
   - uid: 25694
@@ -175273,7 +175238,7 @@ entities:
   - uid: 25930
     components:
     - type: MetaData
-      name: substation (Security)
+      name: substation (Marine Police)
     - type: Transform
       parent: 2
       pos: 44.5,6.5
@@ -180929,7 +180894,7 @@ entities:
     - type: Transform
       parent: 2
       pos: 14.5,-41.5
-- proto: VendingMachineDetDrobe
+- proto: VendingMachineBountyVend
   entities:
   - uid: 26731
     components:
@@ -198537,4 +198502,11 @@ entities:
     - type: Transform
       parent: 2
       pos: -9.363627,-26.423508
+- proto: VendingMachineMarinePoliceField
+  entities:
+  - uid: 21863
+    components:
+    - type: Transform
+      parent: 2
+      pos: 42.5,-0.5
 ...

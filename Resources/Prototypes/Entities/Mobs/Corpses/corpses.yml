@@ -68,7 +68,7 @@
 - type: entity
   parent: SalvageHumanCorpse
   id: MobRandomSecurityCorpse
-  suffix: Dead, Security
+  suffix: Dead, Marine Police
   components:
   - type: Loadout
     prototypes:

@@ -81,7 +81,7 @@
     - RandomHumanoidVisitorHOP
 
 - type: entity
-  name: visiting head of security spawner
+  name: visiting Marine CO spawner
   id: VisitorHOSSpawner
   parent: MarkerBase
   components:
@@ -125,7 +125,7 @@
 # Security
 
 - type: entity
-  name: security visitor spawner
+  name: Marine Police visitor spawner
   id: SecurityVisitorSpawner
   parent: MarkerBase
   components:
@@ -145,7 +145,7 @@
     rareChance: 0.05
 
 - type: entity
-  name: visiting security cadet spawner
+  name: visiting Marine Cadet spawner
   id: VisitorSecurityCadetSpawner
   parent: MarkerBase
   components:
@@ -159,7 +159,7 @@
     - RandomHumanoidVisitorSecurityCadet
 
 - type: entity
-  name: visiting security officer spawner
+  name: visiting Marine Trooper spawner
   id: VisitorSecurityOfficerSpawner
   parent: MarkerBase
   components:
@@ -187,7 +187,7 @@
     - RandomHumanoidVisitorDetective
 
 - type: entity
-  name: visiting warden spawner
+  name: visiting Marine Quartermaster spawner
   id: VisitorWarden
   parent: MarkerBase
   components:

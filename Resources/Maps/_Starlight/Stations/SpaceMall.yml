@@ -111239,7 +111239,7 @@ entities:
   - uid: 18222
     components:
     - type: MetaData
-      name: station beacon (Security Evac Checkpoint)
+      name: station beacon (Marine Police Evac Checkpoint)
     - type: Transform
       parent: 2
       pos: 17.5,52.5
@@ -191997,11 +191997,6 @@ entities:
       pos: -56.5,-17.5
 - proto: LockerDetectiveFilled
   entities:
-  - uid: 29585
-    components:
-    - type: Transform
-      parent: 2
-      pos: 23.5,46.5
   - uid: 29586
     components:
     - type: Transform
@@ -227816,23 +227811,6 @@ entities:
     - type: Transform
       parent: 2
       pos: 1.5,12.5
-- proto: SpawnPointDetective
-  entities:
-  - uid: 35337
-    components:
-    - type: Transform
-      parent: 2
-      pos: 24.5,46.5
-  - uid: 35338
-    components:
-    - type: Transform
-      parent: 2
-      pos: 25.5,41.5
-  - uid: 35339
-    components:
-    - type: Transform
-      parent: 2
-      pos: 26.5,45.5
 - proto: SpawnPointDutyOfficer
   entities:
   - uid: 35340
@@ -229907,7 +229885,7 @@ entities:
   - uid: 35643
     components:
     - type: MetaData
-      name: substation (Armory / Genpop / Warden)
+      name: substation (Armory / Genpop / Marine Quartermaster)
     - type: Transform
       parent: 2
       pos: 27.5,12.5
@@ -229918,7 +229896,7 @@ entities:
   - uid: 35644
     components:
     - type: MetaData
-      name: substation (Security / EVAC)
+      name: substation (Marine Police / EVAC)
     - type: Transform
       parent: 2
       pos: 10.5,44.5
@@ -239861,7 +239839,7 @@ entities:
     - type: Transform
       parent: 2
       pos: -68.5,-17.5
-- proto: VendingMachineDetDrobe
+- proto: VendingMachineBountyVend
   entities:
   - uid: 37087
     components:
@@ -270182,4 +270160,11 @@ entities:
     - type: Transform
       parent: 2
       pos: -24.419197,54.682674
+- proto: VendingMachineMarinePoliceField
+  entities:
+  - uid: 29585
+    components:
+    - type: Transform
+      parent: 2
+      pos: 23.5,46.5
 ...

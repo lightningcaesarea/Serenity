@@ -13,9 +13,9 @@
   subspeciesOf: Neocyte # This is alternative version of other species. It will only be displayed in subspecies list
   subspeciesName: subspecies-name-neovulpkanin
   loadout: NeocyteLoadout
-  minHeight: 0.9
+  minHeight: 0.5
   defaultHeight: 1
-  maxHeight: 1.2
+  maxHeight: 2.0
   standardSize: 170
   standardWeight: 75
   standardDensity: 110

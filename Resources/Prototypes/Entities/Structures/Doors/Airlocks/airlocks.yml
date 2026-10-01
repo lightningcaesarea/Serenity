@@ -107,7 +107,7 @@
 - type: entity
   parent: Airlock
   id: AirlockSecurity
-  suffix: Security
+  suffix: Marine Police
   components:
   - type: Sprite
     sprite: _DV/Structures/Doors/Airlocks/Standard/security.rsi
@@ -316,7 +316,7 @@
 - type: entity
   parent: AirlockGlass
   id: AirlockSecurityGlass
-  suffix: Security
+  suffix: Marine Police
   components:
   - type: Sprite
     sprite: _DV/Structures/Doors/Airlocks/Glass/security.rsi

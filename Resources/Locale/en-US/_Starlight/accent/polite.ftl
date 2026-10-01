@@ -2,7 +2,7 @@ accent-polite-replaced-1 = fucker
 accent-polite-replacement-1 = lovely person
 
 accent-polite-replaced-2 = shitsec
-accent-polite-replacement-2 = wonderful security
+accent-polite-replacement-2 = wonderful Marine Police
 
 accent-polite-replaced-3 = bastard
 accent-polite-replacement-3 = based individual

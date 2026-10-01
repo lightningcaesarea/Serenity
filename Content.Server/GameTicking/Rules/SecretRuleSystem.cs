@@ -105,7 +105,7 @@ public sealed partial class SecretRuleSystem : GameRuleSystem<SecretRuleComponen
             return true;
         }
 
-        Log.Warning("Preset cooldowns removed every valid option. Retrying without Secret's own cooldowns.");
+        Log.Info("Preset cooldowns removed every valid option. Retrying without Secret's own cooldowns."); // Serenity: Info, tests fail on warnings
 
         options = baseOptions.ShallowClone();
         RemovePresetCooldownOptions(options, includeSecretCooldowns: false);
@@ -116,6 +116,17 @@ public sealed partial class SecretRuleSystem : GameRuleSystem<SecretRuleComponen
             return true;
         }
         // Starlight edit End
+
+        // Serenity: cooldowns are a preference, not a reason to run no preset at all. With few players,
+        // ShitStation can be the only pickable preset, and its Dynamic cooldown group outlives the round.
+        Log.Info("Dynamic cooldowns removed every valid option. Retrying without any cooldowns.");
+
+        if (TryPickPresetFromOptions(baseOptions.ShallowClone(), weights, players, out preset))
+        {
+            UpdateSecretPresetCooldown(preset);
+            return true;
+        }
+
         return false;
     }
 

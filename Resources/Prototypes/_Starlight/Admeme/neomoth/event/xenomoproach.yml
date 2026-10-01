@@ -281,7 +281,7 @@
     #region Starlight
     - type: CyborgSparkEffect
     - type: StationAIShunt #Starlight allow shunting into all borgs
-    - type: BorgSwitchableSubtype # Afterlight change
+    - type: BorgSwitchableSubtype # Starlight change
     - type: Crawler
     - type: Blindable
     - type: EyeProtection
