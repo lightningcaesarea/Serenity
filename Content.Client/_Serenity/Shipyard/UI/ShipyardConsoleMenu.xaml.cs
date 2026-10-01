@@ -24,6 +24,7 @@ public sealed partial class ShipyardConsoleMenu : FancyWindow
     private readonly List<string> _categoryStrings = new();
     private string? _category;
     private List<string> _lastProtos = new();
+    private bool _accessGranted = true;
 
     public ShipyardConsoleMenu()
     {
@@ -68,7 +69,7 @@ public sealed partial class ShipyardConsoleMenu : FancyWindow
             {
                 Vessel = proto,
                 VesselName = { Text = proto.Name },
-                Purchase = { ToolTip = proto.Description, TooltipDelay = 0.2f },
+                Purchase = { ToolTip = proto.Description, TooltipDelay = 0.2f, Disabled = !_accessGranted },
                 Price = { Text = Loc.GetString("cargo-console-menu-points-amount", ("amount", proto.Price.ToString())) },
             };
             row.Purchase.OnPressed += _ => OnPurchase?.Invoke(proto.ID);
@@ -109,6 +110,7 @@ public sealed partial class ShipyardConsoleMenu : FancyWindow
 
     public void UpdateState(ShipyardConsoleInterfaceState state)
     {
+        _accessGranted = state.AccessGranted;
         PopulateCategories(state.ShipyardPrototypes);
         PopulateProducts(state.ShipyardPrototypes);
 

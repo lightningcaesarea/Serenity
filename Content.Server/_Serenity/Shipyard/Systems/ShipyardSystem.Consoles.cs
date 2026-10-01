@@ -86,7 +86,7 @@ public sealed partial class ShipyardSystem
             return;
         }
 
-        if (TryComp<AccessReaderComponent>(uid, out var reader) && reader.Enabled && !_accessReader.IsAllowed(player, uid, reader))
+        if (!HasConsoleAccess(uid, player, targetId))
         {
             Deny(uid, component, player, "comms-console-permission-denied");
             return;
@@ -302,7 +302,7 @@ public sealed partial class ShipyardSystem
         }
 
         var balance = GetBillBalance(uid, component);
-        var access = !TryComp<AccessReaderComponent>(uid, out var reader) || !reader.Enabled || _accessReader.IsAllowed(player, uid, reader);
+        var access = HasConsoleAccess(uid, player, targetId);
 
         var state = new ShipyardConsoleInterfaceState(
             (int) balance,
@@ -341,6 +341,19 @@ public sealed partial class ShipyardSystem
         }
 
         return result;
+    }
+
+    /// <summary>
+    /// Whether the console's access reader lets this purchase through. The ID card in the console's slot counts
+    /// as well as whatever the player is carrying, so inserting a card with the right access is enough.
+    /// </summary>
+    private bool HasConsoleAccess(EntityUid uid, EntityUid player, EntityUid? targetId)
+    {
+        if (!TryComp<AccessReaderComponent>(uid, out var reader) || !reader.Enabled)
+            return true;
+
+        return targetId is { Valid: true } card && _accessReader.IsAllowed(card, uid, reader)
+            || _accessReader.IsAllowed(player, uid, reader);
     }
 
     /// <summary>

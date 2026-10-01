@@ -106,11 +106,11 @@
       state: generic_keys
     - map: ["enum.WiresVisualLayers.MaintenancePanel"]
       state: generic_panel_open
-  # Serenity: only the medical department (anyone with Medical access) can buy medical vessels.
+  # Serenity: only the medical department can buy medical vessels. Medical access on the buyer or on the
+  # ID card inserted into the console both count, so the window opens for anyone and purchases are gated.
   - type: AccessReader
     access:
     - [ Medical ]
-  - type: ActivatableUIRequiresAccess
   - type: ShipyardConsole
     groups: [ ShipyardMedical ]
     targetIdSlot:
