@@ -560,6 +560,7 @@
     - ChemistryStatic
     - MedicalStatic
     - RollerBedsStatic
+    - IVStatic # Serenity
     - MedicalClothingStatic
     - EmptyMedkitsStatic
     - StarlightMedicalStatic # Starlight

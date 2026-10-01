@@ -465,10 +465,7 @@
     time: 72h # Starlight
   - !type:RoleTimeRequirement
     role: JobMedicalDoctor
-    time: 10h # Starlight
-  - !type:RoleTimeRequirement
-    role: JobChemist
-    time: 10h #Starlight start
+    time: 20h # Starlight; Serenity: includes the old 10h Chemist requirement, Chemist is retired
   - !type:RoleTimeRequirement
     role: JobSecurityOfficer
     time: 5h #Starlight, youre a medic but you WILL be fighting at some point, Starlight end

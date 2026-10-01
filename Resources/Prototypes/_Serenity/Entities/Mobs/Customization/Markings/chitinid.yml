@@ -1,0 +1,450 @@
+# Chitinid markings. Sprites: CC-BY-SA-3.0, see each meta.json.
+
+- type: marking
+  id: ChitinidAntennasDefault
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Chitinid]
+  sprites:
+  - sprite: _Serenity/Mobs/Customization/Chitinid/chitinid_antennas.rsi
+    state: default
+
+- type: marking
+  id: ChitinidAntennasCurly
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Chitinid]
+  sprites:
+  - sprite: _Serenity/Mobs/Customization/Chitinid/chitinid_antennas.rsi
+    state: curly
+
+- type: marking
+  id: ChitinidAntennasGray
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Chitinid]
+  sprites:
+  - sprite: _Serenity/Mobs/Customization/Chitinid/chitinid_antennas.rsi
+    state: gray
+
+- type: marking
+  id: ChitinidAntennasSlick
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Chitinid]
+  sprites:
+  - sprite: _Serenity/Mobs/Customization/Chitinid/chitinid_antennas.rsi
+    state: slick
+
+- type: marking
+  id: ChitinidAntennasShort
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Chitinid]
+  sprites:
+  - sprite: _Serenity/Mobs/Customization/Chitinid/chitinid_antennas.rsi
+    state: short
+
+- type: marking
+  id: ChitinidAntennasLong
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Chitinid]
+  sprites:
+  - sprite: _Serenity/Mobs/Customization/Chitinid/chitinid_antennas.rsi
+    state: long
+
+- type: marking
+  id: ChitinidAntennasBee
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Chitinid]
+  sprites:
+  - sprite: _Serenity/Mobs/Customization/Chitinid/chitinid_antennas.rsi
+    state: bee
+
+- type: marking
+  id: ChitinidAntennasFirefly
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Chitinid]
+  sprites:
+  - sprite: _Serenity/Mobs/Customization/Chitinid/chitinid_antennas.rsi
+    state: firefly_primary
+  - sprite: _Serenity/Mobs/Customization/Chitinid/chitinid_antennas.rsi
+    state: firefly_secondary
+
+- type: marking
+  id: ChitinidAntennasRadar
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Chitinid]
+  sprites:
+  - sprite: _Serenity/Mobs/Customization/Chitinid/chitinid_antennas.rsi
+    state: radar
+
+- type: marking
+  id: ChitinidAntennasSpeed
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Chitinid]
+  sprites:
+  - sprite: _Serenity/Mobs/Customization/Chitinid/chitinid_antennas.rsi
+    state: speed
+
+- type: marking
+  id: ChitinidWingsDefault
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Chitinid]
+  sprites:
+  - sprite: _Serenity/Mobs/Customization/Chitinid/chitinid_wings.rsi
+    state: default
+
+- type: marking
+  id: ChitinidWingsSmooth
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Chitinid]
+  sprites:
+  - sprite: _Serenity/Mobs/Customization/Chitinid/chitinid_wings.rsi
+    state: smooth
+
+- type: marking
+  id: ChitinidWingsHoneypot
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Chitinid]
+  sprites:
+  - sprite: _Serenity/Mobs/Customization/Chitinid/chitinid_wings.rsi
+    state: honeypot_primary
+  - sprite: _Serenity/Mobs/Customization/Chitinid/chitinid_wings.rsi
+    state: honeypot_secondary
+
+- type: marking
+  id: ChitinidWingsStubby
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Chitinid]
+  sprites:
+  - sprite: _Serenity/Mobs/Customization/Chitinid/chitinid_wings.rsi
+    state: stubby
+
+- type: marking
+  id: ChitinidWingsBee
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Chitinid]
+  sprites:
+  - sprite: _Serenity/Mobs/Customization/Chitinid/chitinid_wings.rsi
+    state: bee_primary
+  - sprite: _Serenity/Mobs/Customization/Chitinid/chitinid_wings.rsi
+    state: bee_secondary
+
+- type: marking
+  id: ChitinidWingsFirefly
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Chitinid]
+  sprites:
+  - sprite: _Serenity/Mobs/Customization/Chitinid/chitinid_wings.rsi
+    state: firefly_primary
+  - sprite: _Serenity/Mobs/Customization/Chitinid/chitinid_wings.rsi
+    state: firefly_secondary
+
+- type: marking
+  id: ChitinidHeadToxic
+  bodyPart: Head
+  markingCategory: Head
+  speciesRestriction: [Chitinid]
+  sprites:
+  - sprite: _Serenity/Mobs/Customization/Chitinid/chitinid_parts.rsi
+    state: toxic_head
+
+- type: marking
+  id: ChitinidChestToxic
+  bodyPart: Chest
+  markingCategory: Chest
+  speciesRestriction: [Chitinid]
+  sprites:
+  - sprite: _Serenity/Mobs/Customization/Chitinid/chitinid_parts.rsi
+    state: toxic_chest
+
+- type: marking
+  id: ChitinidRightArmToxic
+  bodyPart: RArm
+  markingCategory: Arms
+  speciesRestriction: [Chitinid]
+  sprites:
+  - sprite: _Serenity/Mobs/Customization/Chitinid/chitinid_parts.rsi
+    state: toxic_r_arm
+
+- type: marking
+  id: ChitinidLeftArmToxic
+  bodyPart: LArm
+  markingCategory: Arms
+  speciesRestriction: [Chitinid]
+  sprites:
+  - sprite: _Serenity/Mobs/Customization/Chitinid/chitinid_parts.rsi
+    state: toxic_l_arm
+
+- type: marking
+  id: ChitinidRightLegToxic
+  bodyPart: RLeg
+  markingCategory: Legs
+  speciesRestriction: [Chitinid]
+  sprites:
+  - sprite: _Serenity/Mobs/Customization/Chitinid/chitinid_parts.rsi
+    state: toxic_r_leg
+
+- type: marking
+  id: ChitinidLeftLegToxic
+  bodyPart: LLeg
+  markingCategory: Legs
+  speciesRestriction: [Chitinid]
+  sprites:
+  - sprite: _Serenity/Mobs/Customization/Chitinid/chitinid_parts.rsi
+    state: toxic_l_leg
+
+- type: marking
+  id: ChitinidHeadCharred
+  bodyPart: Head
+  markingCategory: Head
+  speciesRestriction: [Chitinid]
+  sprites:
+  - sprite: _Serenity/Mobs/Customization/Chitinid/chitinid_parts.rsi
+    state: charred_head
+
+- type: marking
+  id: ChitinidChestCharred
+  bodyPart: Chest
+  markingCategory: Chest
+  speciesRestriction: [Chitinid]
+  sprites:
+  - sprite: _Serenity/Mobs/Customization/Chitinid/chitinid_parts.rsi
+    state: charred_chest
+
+- type: marking
+  id: ChitinidRightArmCharred
+  bodyPart: RArm
+  markingCategory: Arms
+  speciesRestriction: [Chitinid]
+  sprites:
+  - sprite: _Serenity/Mobs/Customization/Chitinid/chitinid_parts.rsi
+    state: charred_r_arm
+
+- type: marking
+  id: ChitinidLeftArmCharred
+  bodyPart: LArm
+  markingCategory: Arms
+  speciesRestriction: [Chitinid]
+  sprites:
+  - sprite: _Serenity/Mobs/Customization/Chitinid/chitinid_parts.rsi
+    state: charred_l_arm
+
+- type: marking
+  id: ChitinidRightLegCharred
+  bodyPart: RLeg
+  markingCategory: Legs
+  speciesRestriction: [Chitinid]
+  sprites:
+  - sprite: _Serenity/Mobs/Customization/Chitinid/chitinid_parts.rsi
+    state: charred_r_leg
+
+- type: marking
+  id: ChitinidLeftLegCharred
+  bodyPart: LLeg
+  markingCategory: Legs
+  speciesRestriction: [Chitinid]
+  sprites:
+  - sprite: _Serenity/Mobs/Customization/Chitinid/chitinid_parts.rsi
+    state: charred_l_leg
+
+- type: marking
+  id: ChitinidHeadRadiant
+  bodyPart: Head
+  markingCategory: Head
+  speciesRestriction: [Chitinid]
+  sprites:
+  - sprite: _Serenity/Mobs/Customization/Chitinid/chitinid_parts.rsi
+    state: radiant_head
+
+- type: marking
+  id: ChitinidChestRadiant
+  bodyPart: Chest
+  markingCategory: Chest
+  speciesRestriction: [Chitinid]
+  sprites:
+  - sprite: _Serenity/Mobs/Customization/Chitinid/chitinid_parts.rsi
+    state: radiant_chest
+
+- type: marking
+  id: ChitinidRightArmRadiant
+  bodyPart: RArm
+  markingCategory: Arms
+  speciesRestriction: [Chitinid]
+  sprites:
+  - sprite: _Serenity/Mobs/Customization/Chitinid/chitinid_parts.rsi
+    state: radiant_r_arm
+
+- type: marking
+  id: ChitinidLeftArmRadiant
+  bodyPart: LArm
+  markingCategory: Arms
+  speciesRestriction: [Chitinid]
+  sprites:
+  - sprite: _Serenity/Mobs/Customization/Chitinid/chitinid_parts.rsi
+    state: radiant_l_arm
+
+- type: marking
+  id: ChitinidRightLegRadiant
+  bodyPart: RLeg
+  markingCategory: Legs
+  speciesRestriction: [Chitinid]
+  sprites:
+  - sprite: _Serenity/Mobs/Customization/Chitinid/chitinid_parts.rsi
+    state: radiant_r_leg
+
+- type: marking
+  id: ChitinidLeftLegRadiant
+  bodyPart: LLeg
+  markingCategory: Legs
+  speciesRestriction: [Chitinid]
+  sprites:
+  - sprite: _Serenity/Mobs/Customization/Chitinid/chitinid_parts.rsi
+    state: radiant_l_leg
+
+- type: marking
+  id: ChitinidChestPlated
+  bodyPart: Chest
+  markingCategory: Chest
+  speciesRestriction: [Chitinid]
+  sprites:
+  - sprite: _Serenity/Mobs/Customization/Chitinid/chitinid_parts.rsi
+    state: plated_chest
+
+- type: marking
+  id: ChitinidRightArmPlated
+  bodyPart: RArm
+  markingCategory: Arms
+  speciesRestriction: [Chitinid]
+  sprites:
+  - sprite: _Serenity/Mobs/Customization/Chitinid/chitinid_parts.rsi
+    state: plated_r_arm
+
+- type: marking
+  id: ChitinidLeftArmPlated
+  bodyPart: LArm
+  markingCategory: Arms
+  speciesRestriction: [Chitinid]
+  sprites:
+  - sprite: _Serenity/Mobs/Customization/Chitinid/chitinid_parts.rsi
+    state: plated_l_arm
+
+- type: marking
+  id: ChitinidHeadStripes
+  bodyPart: Head
+  markingCategory: Head
+  speciesRestriction: [Chitinid]
+  sprites:
+  - sprite: _Serenity/Mobs/Customization/Chitinid/chitinid_parts.rsi
+    state: stripes_head
+
+- type: marking
+  id: ChitinidChestStripes
+  bodyPart: Chest
+  markingCategory: Chest
+  speciesRestriction: [Chitinid]
+  sprites:
+  - sprite: _Serenity/Mobs/Customization/Chitinid/chitinid_parts.rsi
+    state: stripes_chest
+
+- type: marking
+  id: ChitinidRightArmStripes
+  bodyPart: RArm
+  markingCategory: Arms
+  speciesRestriction: [Chitinid]
+  sprites:
+  - sprite: _Serenity/Mobs/Customization/Chitinid/chitinid_parts.rsi
+    state: stripes_r_arm
+
+- type: marking
+  id: ChitinidLeftArmStripes
+  bodyPart: LArm
+  markingCategory: Arms
+  speciesRestriction: [Chitinid]
+  sprites:
+  - sprite: _Serenity/Mobs/Customization/Chitinid/chitinid_parts.rsi
+    state: stripes_l_arm
+
+- type: marking
+  id: ChitinidRightLegStripes
+  bodyPart: RLeg
+  markingCategory: Legs
+  speciesRestriction: [Chitinid]
+  sprites:
+  - sprite: _Serenity/Mobs/Customization/Chitinid/chitinid_parts.rsi
+    state: stripes_r_leg
+
+- type: marking
+  id: ChitinidLeftLegStripes
+  bodyPart: LLeg
+  markingCategory: Legs
+  speciesRestriction: [Chitinid]
+  sprites:
+  - sprite: _Serenity/Mobs/Customization/Chitinid/chitinid_parts.rsi
+    state: stripes_l_leg
+
+- type: marking
+  id: ChitinidHeadSpotted
+  bodyPart: Head
+  markingCategory: Head
+  speciesRestriction: [Chitinid]
+  sprites:
+  - sprite: _Serenity/Mobs/Customization/Chitinid/chitinid_parts.rsi
+    state: spotted_head
+
+- type: marking
+  id: ChitinidChestSpotted
+  bodyPart: Chest
+  markingCategory: Chest
+  speciesRestriction: [Chitinid]
+  sprites:
+  - sprite: _Serenity/Mobs/Customization/Chitinid/chitinid_parts.rsi
+    state: spotted_chest
+
+- type: marking
+  id: ChitinidRightArmSpotted
+  bodyPart: RArm
+  markingCategory: Arms
+  speciesRestriction: [Chitinid]
+  sprites:
+  - sprite: _Serenity/Mobs/Customization/Chitinid/chitinid_parts.rsi
+    state: spotted_r_arm
+
+- type: marking
+  id: ChitinidLeftArmSpotted
+  bodyPart: LArm
+  markingCategory: Arms
+  speciesRestriction: [Chitinid]
+  sprites:
+  - sprite: _Serenity/Mobs/Customization/Chitinid/chitinid_parts.rsi
+    state: spotted_l_arm
+
+- type: marking
+  id: ChitinidRightLegSpotted
+  bodyPart: RLeg
+  markingCategory: Legs
+  speciesRestriction: [Chitinid]
+  sprites:
+  - sprite: _Serenity/Mobs/Customization/Chitinid/chitinid_parts.rsi
+    state: spotted_r_leg
+
+- type: marking
+  id: ChitinidLeftLegSpotted
+  bodyPart: LLeg
+  markingCategory: Legs
+  speciesRestriction: [Chitinid]
+  sprites:
+  - sprite: _Serenity/Mobs/Customization/Chitinid/chitinid_parts.rsi
+    state: spotted_l_leg

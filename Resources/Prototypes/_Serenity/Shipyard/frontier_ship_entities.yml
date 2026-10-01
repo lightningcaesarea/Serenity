@@ -1037,6 +1037,8 @@
   placement:
     mode: SnapgridCenter
   components:
+  - type: SkillRequired # Serenity
+    skills: [ Chemistry ]
   - type: Sprite
     sprite: Structures/Machines/mixer.rsi
     snapCardinals: true

@@ -20,7 +20,7 @@
           "/Audio/Weapons/smash.ogg"
   - type: InteractionOutline
   - type: Sprite
-    sprite: Structures/Doors/Airlocks/Standard/basic.rsi
+    sprite: _DV/Structures/Doors/Airlocks/Standard/basic.rsi
     snapCardinals: true
     layers:
     - state: closed
@@ -79,11 +79,11 @@
       types:
         Blunt: 15
     openSound:
-      path: /Audio/Machines/airlock_open.ogg
+      path: /Audio/_RMC14/Machines/airlock.ogg
     closeSound:
-      path: /Audio/_ES/Machines/airlock_close.ogg # Ephemeral Space - better door timings
+      path: /Audio/_RMC14/Machines/airlock.ogg
     denySound:
-      path: /Audio/Machines/airlock_deny.ogg
+      path: /Audio/_RMC14/Machines/buzz_two.ogg
   - type: ContainerContainer
     containers:
       board: !type:Container
@@ -217,7 +217,7 @@
   - type: Occluder
     enabled: false
   - type: Sprite
-    sprite: Structures/Doors/Airlocks/Glass/glass.rsi
+    sprite: _DV/Structures/Doors/Airlocks/Glass/glass.rsi
   - type: AnimationPlayer
   - type: Fixtures
     fixtures:

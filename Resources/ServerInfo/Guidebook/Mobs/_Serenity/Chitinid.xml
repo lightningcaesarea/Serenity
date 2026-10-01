@@ -1,0 +1,25 @@
+<Document>
+  # Chitinids
+
+  <Box>
+    <GuideEntityEmbed Entity="AppearanceChitinid" Caption=""/>
+  </Box>
+
+  Chitinids are insectoid workers covered in a hard carapace. They bleed Insect Blood, which can't be restored from Iron like normal blood.
+
+  ## Carapace
+  Their shell gives them [color=#1e90ff]10% less Blunt, Piercing and Slash damage[/color] and [color=#1e90ff]80% less Radiation damage[/color], but they take [color=#ffa500]10% more Cold damage and 15% more Shock damage[/color].
+
+  The carapace also turns away needles: [color=#ffa500]syringes and hyposprays can't inject a chitinid[/color]. Medicine has to go in another way, such as pills, drinks or patches.
+
+  ## Radiation
+  A living chitinid slowly heals radiation damage on its own, storing what it absorbs. Once the store is full the healing stops, and the chitinid can use [color=yellow]Cough Up Chitzite[/color] to hack up a small radioactive stone, emptying the store so it can absorb again.
+
+  Chitzite is mildly radioactive. It can be ground down for Uranium and Radium.
+
+  ## Cold
+  Chitinids are cold-blooded. Chilly air hurts them, and they [color=#ffa500]slow down sharply as the temperature drops[/color].
+
+  ## Other traits
+  Their extra limbs let them drag things without a free hand, and they can make their body glow a soft green.
+</Document>

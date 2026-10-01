@@ -558,7 +558,7 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem
         Interaction.DoContactInteraction(user, target, weapon, true, interactionParticles: false); // Stellar/ES - Interaction particles
 
         // For stuff that cares about it being attacked.
-        var attackedEvent = new AttackedEvent(meleeUid, user, targetXform.Coordinates);
+        var attackedEvent = new AttackedEvent(meleeUid, user, GetCoordinates(ev.Coordinates)); // Serenity: the real click (was the target's position), for aimed hits
         RaiseLocalEvent(target.Value, attackedEvent);
 
         var modifiedDamage = DamageSpecifier.ApplyModifierSets(damage + hitEvent.BonusDamage + attackedEvent.BonusDamage, hitEvent.ModifiersList);

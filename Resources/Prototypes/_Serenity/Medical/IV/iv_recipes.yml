@@ -1,0 +1,25 @@
+# Medical techfab recipes for IV equipment, in their own pack so only the medical techfab prints them (MedicalStatic is
+# shared with the NanoTrasen and Syndicate techfabs). The bag prints empty; fill it with a
+# syringe or from a dispenser. Costs sit under the neighbours: a body bag or medkit is 300 plastic, a rollerbed
+# 600 steel + 300 plastic.
+
+- type: latheRecipe
+  id: IVBag
+  result: IVBag
+  completetime: 1
+  materials:
+    Plastic: 100
+
+- type: latheRecipe
+  id: IVStand
+  result: IVStand
+  completetime: 1
+  materials:
+    Steel: 300
+    Plastic: 100
+
+- type: latheRecipePack
+  id: IVStatic
+  recipes:
+  - IVBag
+  - IVStand

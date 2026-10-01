@@ -142,6 +142,8 @@
   id: Truncheon
   description: A rigid, steel-studded baton, meant to harm.
   components:
+  - type: HitLocationBias
+    multipliers: { Head: 2.5 } # Serenity: clubs aim high
   - type: Sprite
     sprite: Objects/Weapons/Melee/truncheon.rsi
     state: icon

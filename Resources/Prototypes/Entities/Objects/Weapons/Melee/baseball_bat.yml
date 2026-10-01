@@ -4,6 +4,8 @@
   id: BaseBallBat
   description: A robust baseball bat.
   components:
+  - type: HitLocationBias
+    multipliers: { Head: 2.5 } # Serenity: clubs aim high
   - type: Sprite
     sprite: Objects/Weapons/Melee/baseball_bat.rsi
     state: icon

@@ -10,13 +10,25 @@
   # Damage types that make a mob bleed, for the bleed source on the health analyzer. Earlier wins.
   bleedSources: [Slash, Piercing]
   # Per wound category: slowTier/slowMultiplier slow movement at that tier or worse; dropTier/dropChance let a
-  # hit make the patient drop what they hold. A tier of 0 (or an unlisted category) means never.
+  # hit make the patient drop what they hold; statusEffect/statusTier/statusSeconds give a status effect each time
+  # the patient is hurt. A tier of 0 (or an unlisted category) means never. slowLocations / dropLocations /
+  # statusLocations limit each effect to wounds in those body part types (empty = anywhere); a wound on one side
+  # drops what that side's hand holds.
   categories:
     Fracture:
+      # A broken leg or foot makes you limp
       slowTier: 2
       slowMultiplier: 0.7
-      dropTier: 3
+      slowLocations: [Leg, Foot]
+      # A broken arm or hand loses its grip
+      dropTier: 2
       dropChance: 0.5
+      dropLocations: [Arm, Hand]
+      # A cracked skull leaves you concussed
+      statusEffect: StatusEffectWoozy
+      statusTier: 2
+      statusSeconds: 15
+      statusLocations: [Head]
     Burn:
       slowTier: 2
       slowMultiplier: 0.7
@@ -25,6 +37,31 @@
       slowTier: 3
       slowMultiplier: 0.8
   maxStackedWoundsPerType: 3
+  # Where a damaging hit lands. A wound goes to one of these (only parts the mob still has), weighted by `weight`;
+  # a hit that causes several wounds puts them all in the same place. Wounds of one type in different places are
+  # separate wounds (up to maxStackedWoundsPerType); a worse hit in the same place makes that wound worse.
+  hitLocations:
+  - { type: Head, weight: 8 }
+  - { type: Torso, weight: 36 }
+  - { type: Arm, symmetry: Left, weight: 10 }
+  - { type: Arm, symmetry: Right, weight: 10 }
+  - { type: Hand, symmetry: Left, weight: 3 }
+  - { type: Hand, symmetry: Right, weight: 3 }
+  - { type: Leg, symmetry: Left, weight: 12 }
+  - { type: Leg, symmetry: Right, weight: 12 }
+  - { type: Foot, symmetry: Left, weight: 3 }
+  - { type: Foot, symmetry: Right, weight: 3 }
+  # Aiming a melee hit by where you click on the target's (upright) sprite. Heights are in tiles from the sprite's
+  # centre; the zone you click multiplies its parts' weights by `multiplier`, so aiming shifts the odds but never
+  # guarantees the part. Clicks farther than maxDistance from the target (a wide swing) and targets lying down
+  # aren't aimed.
+  aim:
+    multiplier: 3
+    maxDistance: 0.7
+    zones:
+    - { min: 0.17, types: [Head] }
+    - { min: -0.15, max: 0.17, types: [Torso, Arm, Hand] }
+    - { max: -0.15, types: [Leg, Foot] }
 
 - type: painConfig
   id: DefaultPain
@@ -42,6 +79,11 @@
     Laceration: [6, 14, 28]
     Puncture: [7, 16, 30]
     Infection: [3, 8, 15]
+  # Wound pain scaled by where the wound is. Unlisted parts count as 1.
+  locationMultipliers:
+    Head: 1.3
+    Hand: 1.25
+    Foot: 1.15
   # Felt-pain bands. `threshold` is where the band starts; speedMultiplier and dropChance apply while in it.
   levels:
     Mild:

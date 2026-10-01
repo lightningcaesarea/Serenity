@@ -27,7 +27,7 @@ highlights-technical-assistant = Technical Assistant, Tech Assistant, Engineerin
 # Medical
 highlights-chemist = Chemist, Chemistry, "Chem", Medbay, Medical, "Med"
 highlights-medical-doctor = Medical Doctor, Doctor, "Doc", Medbay, Medical, "Med"
-highlights-medical-intern = Medical Intern, Intern, Medbay, Medical, "Med"
+highlights-medical-intern = Nurse, Medical Intern, Intern, Medbay, Medical, "Med"
 highlights-paramedic = Paramedic, "Para", "Medic", Medbay, Medical, "Med"
 
 # Science

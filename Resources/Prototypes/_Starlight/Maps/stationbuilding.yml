@@ -34,12 +34,9 @@
             StationEngineer: [ 6, 8 ]
             TechnicalAssistant: [ 4, 6 ]
             #medical
-            ChiefMedicalOfficer: [ 1, 1 ]
-            Chemist: [ 2, 2 ]
-            MedicalDoctor: [ 3, 4 ]
+            MedicalDoctor: [ 5, 6 ]
             Paramedic: [ 1, 2 ]
             MedicalIntern: [ 2, 3 ]
-            Psychologist: [ 1, 1 ]
             #science
             ResearchDirector: [ 1, 1 ]
             Scientist: [ 3, 4 ]

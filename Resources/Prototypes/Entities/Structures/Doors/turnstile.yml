@@ -6,7 +6,7 @@
   description: An unfinished turnstile assembly.
   components:
   - type: Sprite
-    sprite: Structures/Doors/turnstile.rsi
+    sprite: _DV/Structures/Doors/turnstile.rsi
     snapCardinals: true
     drawdepth: Doors
     layers:
@@ -49,7 +49,7 @@
   description: A mechanical door that permits one-way access and prevents tailgating.
   components:
   - type: Sprite
-    sprite: Structures/Doors/turnstile.rsi
+    sprite: _DV/Structures/Doors/turnstile.rsi
     snapCardinals: true
     drawdepth: Doors
     layers:
@@ -119,7 +119,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: Structures/Doors/turnstile.rsi
+    sprite: _DV/Structures/Doors/turnstile.rsi
     color: "#FFFFFFBB"
     layers:
     - state: arrow
