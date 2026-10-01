@@ -34,11 +34,7 @@ public sealed class WoundLocationTest
 
     [TestPrototypes]
     private const string Prototypes = @"
-- type: entity
-  id: TestSerenityHeadClub
-  components:
-  - type: HitLocationBias
-    multipliers: { Torso: 0, Arm: 0, Hand: 0, Leg: 0, Foot: 0 }
+- { type: entity, id: TestSerenityHeadClub, components: [ { type: HitLocationBias, multipliers: { Torso: 0, Arm: 0, Hand: 0, Leg: 0, Foot: 0 } } ] }
 ";
 
     /// <summary>
