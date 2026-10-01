@@ -1,0 +1,12 @@
+# What comes out of cleaning out an infection: the Drain Infection surgery drains it into a container the surgeon
+# holds (see wound_surgery_steps.yml). It has no medical use; it is just a foul pus-yellow liquid.
+- type: reagent
+  id: Exudate
+  name: reagent-name-exudate
+  group: Biological
+  desc: reagent-desc-exudate
+  physicalDesc: reagent-physical-desc-viscous
+  flavor: bitter
+  color: "#d4c63a"
+  boilingPoint: 100.0
+  meltingPoint: -10.0
