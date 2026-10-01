@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using Content.Server._Serenity.Medical.Analyzer;
 using Content.Server._Serenity.Medical.Sterility;
+using Content.Server.Medical.Components;
+using Content.Shared._Serenity.Medical.Analyzer;
 using Content.Shared._Serenity.Medical.Wounds;
 using Content.Shared._Serenity.Medical.Wounds.Systems;
 using Content.Shared._Serenity.Skills;
@@ -131,6 +133,34 @@ public sealed class AnalyzerTest
             {
                 entMan.DeleteEntity(uid);
             }
+        });
+
+        await pair.CleanReturnAsync();
+    }
+
+    /// <summary>
+    /// A PDA's MedTek program is an advanced analyzer (so it gets the detailed readout and takes the Diagnostics
+    /// skill to use); a PDA without it isn't, and the readout follows the program being added or removed.
+    /// </summary>
+    [Test]
+    public async Task MedTekPdaIsAnAdvancedAnalyzer()
+    {
+        await using var pair = await PoolManager.GetServerClient();
+        var server = pair.Server;
+        var entMan = server.EntMan;
+        var mapData = await pair.CreateTestMap();
+
+        await server.WaitAssertion(() =>
+        {
+            var medical = entMan.SpawnEntity("MedicalPDA", mapData.GridCoords);
+            var plain = entMan.SpawnEntity("AssistantPDA", mapData.GridCoords);
+
+            Assert.That(entMan.HasComponent<HealthAnalyzerComponent>(medical));
+            Assert.That(entMan.HasComponent<AdvancedHealthAnalyzerComponent>(medical), "the MedTek PDA is advanced");
+            Assert.That(entMan.HasComponent<AdvancedHealthAnalyzerComponent>(plain), Is.False);
+
+            entMan.DeleteEntity(medical);
+            entMan.DeleteEntity(plain);
         });
 
         await pair.CleanReturnAsync();

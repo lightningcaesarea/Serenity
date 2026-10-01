@@ -4,6 +4,7 @@ using Content.Server._Serenity.Medical.Wounds;
 using Content.Shared._Serenity.Medical.Sterility;
 using Content.Shared._Serenity.Medical.Wounds;
 using Content.Shared._Serenity.Medical.Wounds.Systems;
+using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.EntityEffects.Effects.StatusEffects;
 using Content.Shared.Damage.Components;
@@ -378,6 +379,33 @@ public sealed class InfectionTest
         {
             Assert.That(antibiotic, Is.EqualTo(7 * 60).Within(15), "15u should protect for about 7 minutes");
             Assert.That(dysbiosis, Is.GreaterThan(antibiotic), "the dysbiosis debuff outlasts the protection");
+        });
+
+        await pair.CleanReturnAsync();
+    }
+
+    /// <summary>
+    /// The antibiox auto-injector holds exactly one 15u dose: full, with no room for more.
+    /// </summary>
+    [Test]
+    public async Task AntibioxInjectorHoldsOneDose()
+    {
+        await using var pair = await PoolManager.GetServerClient();
+        var server = pair.Server;
+        var entMan = server.EntMan;
+        var mapData = await pair.CreateTestMap();
+        var solutions = entMan.System<SharedSolutionContainerSystem>();
+
+        await server.WaitAssertion(() =>
+        {
+            var injector = entMan.SpawnEntity("AntibioxAutoInjector", mapData.GridCoords);
+
+            Assert.That(solutions.TryGetSolution(injector, "hypospray", out _, out var solution));
+            Assert.That(solution!.MaxVolume.Float(), Is.EqualTo(15f), "capacity is one dose");
+            Assert.That(solution.Volume.Float(), Is.EqualTo(15f), "and it comes full");
+            Assert.That(solution.GetTotalPrototypeQuantity(Antibiox).Float(), Is.EqualTo(15f));
+
+            entMan.DeleteEntity(injector);
         });
 
         await pair.CleanReturnAsync();
