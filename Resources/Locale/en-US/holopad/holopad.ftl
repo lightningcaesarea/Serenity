@@ -67,7 +67,7 @@ holopad-command-cmo = Command - CMO
 holopad-command-qm = Command - QM
 holopad-command-ce = Command - CE
 holopad-command-rd = Command - RD
-holopad-command-hos = Command - HoS
+holopad-command-hos = Command - Marine CO
 
 # Science
 holopad-science-anomaly = Science - Anomaly
@@ -114,20 +114,20 @@ holopad-engineering-power = Engineering - Power
 holopad-engineering-main = Engineering - Main
 
 # Security
-holopad-security-front = Security - Front
-holopad-security-brig = Security - Brig
-holopad-security-warden = Security - Warden
-holopad-security-interrogation = Security - Interrogation
-holopad-security-breakroom = Security - Breakroom
-holopad-security-detective = Security - Detective
-holopad-security-perma = Security - Perma
-holopad-security-courtroom = Security - Courtroom
-holopad-security-lawyer = Security - Lawyer
-holopad-security-armory = Security - Armory
-holopad-security-locker-room = Security - Locker Room
-holopad-security-brig-med = Security - Brig Med
-holopad-security-evac-checkpoint = Security - Evac Checkpoint
-holopad-security-arrivals-checkpoint = Security - Arrivals Checkpoint
+holopad-security-front = Marine Police - Front
+holopad-security-brig = Marine Police - Brig
+holopad-security-warden = Marine Police - Marine Quartermaster
+holopad-security-interrogation = Marine Police - Interrogation
+holopad-security-breakroom = Marine Police - Breakroom
+holopad-security-detective = Marine Police - Detective
+holopad-security-perma = Marine Police - Perma
+holopad-security-courtroom = Marine Police - Courtroom
+holopad-security-lawyer = Marine Police - Lawyer
+holopad-security-armory = Marine Police - Armory
+holopad-security-locker-room = Marine Police - Locker Room
+holopad-security-brig-med = Marine Police - Brig Med
+holopad-security-evac-checkpoint = Marine Police - Evac Checkpoint
+holopad-security-arrivals-checkpoint = Marine Police - Arrivals Checkpoint
 
 # Service
 holopad-service-janitor = Service - Janitor

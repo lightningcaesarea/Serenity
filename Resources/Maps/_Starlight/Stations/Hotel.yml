@@ -11988,7 +11988,7 @@ entities:
   - uid: 700
     components:
     - type: MetaData
-      name: Security South East APC
+      name: Marine Police South East APC
     - type: Transform
       parent: 2
       rot: 1.5707963267948966 rad
@@ -11998,7 +11998,7 @@ entities:
   - uid: 701
     components:
     - type: MetaData
-      name: Security South APC
+      name: Marine Police South APC
     - type: Transform
       parent: 2
       rot: -1.5707963267948966 rad
@@ -12018,7 +12018,7 @@ entities:
   - uid: 703
     components:
     - type: MetaData
-      name: Warden APC
+      name: Marine Quartermaster APC
     - type: Transform
       parent: 2
       rot: 1.5707963267948966 rad
@@ -12037,7 +12037,7 @@ entities:
   - uid: 705
     components:
     - type: MetaData
-      name: Security South APC
+      name: Marine Police South APC
     - type: Transform
       parent: 2
       pos: 30.5,-14.5
@@ -12085,7 +12085,7 @@ entities:
   - uid: 710
     components:
     - type: MetaData
-      name: Security North APC
+      name: Marine Police North APC
     - type: Transform
       parent: 2
       rot: 1.5707963267948966 rad
@@ -12826,7 +12826,7 @@ entities:
   - uid: 788
     components:
     - type: MetaData
-      name: Security Substation APC
+      name: Marine Police Substation APC
     - type: Transform
       parent: 2
       pos: 48.5,-15.5
@@ -107543,13 +107543,6 @@ entities:
     - type: Transform
       parent: 2
       pos: -28.5,-15.5
-- proto: LockerDetectiveFilled
-  entities:
-  - uid: 16264
-    components:
-    - type: Transform
-      parent: 2
-      pos: 18.5,-24.5
 - proto: LockerEngineerFilledHardsuit
   entities:
   - uid: 16265
@@ -120199,7 +120192,7 @@ entities:
   - uid: 18246
     components:
     - type: MetaData
-      name: Security SMES
+      name: Marine Police SMES
     - type: Transform
       parent: 2
       pos: 48.5,-17.5
@@ -121392,13 +121385,6 @@ entities:
     - type: Transform
       parent: 2
       pos: 17.5,4.5
-- proto: SpawnPointDetective
-  entities:
-  - uid: 18431
-    components:
-    - type: Transform
-      parent: 2
-      pos: 18.5,-26.5
 - proto: SpawnPointDutyOfficer
   entities:
   - uid: 18432
@@ -122482,7 +122468,7 @@ entities:
   - uid: 18601
     components:
     - type: MetaData
-      name: Security Substation
+      name: Marine Police Substation
     - type: Transform
       parent: 2
       pos: 48.5,-19.5
@@ -126849,7 +126835,7 @@ entities:
     - type: Transform
       parent: 2
       pos: 28.5,-38.5
-- proto: VendingMachineDetDrobe
+- proto: VendingMachineBountyVend
   entities:
   - uid: 19282
     components:
@@ -142879,4 +142865,11 @@ entities:
     - type: Transform
       parent: 2
       pos: -41.491108,-19.452692
+- proto: VendingMachineMarinePoliceField
+  entities:
+  - uid: 16264
+    components:
+    - type: Transform
+      parent: 2
+      pos: 18.5,-24.5
 ...

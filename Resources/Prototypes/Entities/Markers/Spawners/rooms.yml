@@ -3,7 +3,7 @@
   parent: MarkerBase
   id: SpawnPointHeadOfSecurityWeapon
   categories: [ ShouldMapStation ] # Starlight
-  name: head of security weapon spawner
+  name: Marine CO weapon spawner
   components:
   - type: EntityTableSpawner
     offset: 0.2
@@ -22,7 +22,7 @@
 - type: entity
   parent: MarkerBase
   id: SpawnPointWardenWeapon
-  name: warden weapon spawner
+  name: Marine Quartermaster weapon spawner
   components:
   - type: EntityTableSpawner
     offset: 0.2

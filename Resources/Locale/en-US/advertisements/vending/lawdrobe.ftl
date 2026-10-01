@@ -1,9 +1,9 @@
 advertisement-lawdrobe-1 = OBJECTION! Get the rule of law for yourself!
-advertisement-lawdrobe-2 = Go pester security until they abide by your own rules!
+advertisement-lawdrobe-2 = Go pester the Marine Police until they abide by your own rules!
 advertisement-lawdrobe-3 = A new case just came in? Go get them out of jail!
-advertisement-lawdrobe-4 = A dougnut a day keeps security away!
+advertisement-lawdrobe-4 = A dougnut a day keeps the Marine Police away!
 advertisement-lawdrobe-5 = No one is above the law!
-advertisement-lawdrobe-6 = No officer, I do not consent to a search!
+advertisement-lawdrobe-6 = No, Trooper, I do not consent to a search!
 advertisement-lawdrobe-7 = Injecting space drugs leaves no evidence!
 advertisement-lawdrobe-8 = You or a loved one hurt by NanoTrasen? Too bad!
 advertisement-lawdrobe-9 = Case closed! Defendant has too much drip!

@@ -17,9 +17,9 @@
 
   Conflicts should almost never reach the "permanently lethal" stage. Conflicts should only reach this stage if the other party brought it to the stage, or if the same conflict escalated to the lethal stage multiple times in the round.
 
-  If a party in the conflict goes into crit or dies, the party responsible should take them to get treatment or to security. For the conflict, this should be considered saving someone from dying and should deescalate the conflict. If the conflict is deescalated in this way, both parties need to re-escalate to lethal for the conflict to return to that stage. If the conflict is not deescalated in this way, then only the party who defeated the other would need to re-escalate for the conflict to return to the lethal stage.
+  If a party in the conflict goes into crit or dies, the party responsible should take them to get treatment or to the Marine Police. For the conflict, this should be considered saving someone from dying and should deescalate the conflict. If the conflict is deescalated in this way, both parties need to re-escalate to lethal for the conflict to return to that stage. If the conflict is not deescalated in this way, then only the party who defeated the other would need to re-escalate for the conflict to return to the lethal stage.
 
-  Security can immediately escalate to non-lethal force if it is necessary to arrest someone.
+  The Marine Police can immediately escalate to non-lethal force if it is necessary to arrest someone.
 
   People using or brandishing Syndicate items can typically be presumed to have lethal intent. Someone with lethal intent can typically be immediately escalated against at a lethal level, a notable exception is if you have the tools to safely detain them.
 
@@ -39,32 +39,32 @@
   These examples assume that you are not an antagonist.
 
   Acceptable:
-  - A player starts punching you, so you start punching back until they stop. If they go into crit, you stop attacking them and take them to security or to get medical attention.
+  - A player starts punching you, so you start punching back until they stop. If they go into crit, you stop attacking them and take them to the Marine Police or to get medical attention.
   - You make fun of a clown, who then throws a pie at you and steals your shoes. You slip the clown and steal their mask.
-  - You are a security officer and tell someone to stop, so you can question them. They run away, so you use your disabler to stun and cuff them.
-  - You are a security officer and see someone wearing a syndicate hardsuit, so you shoot them to crit, cuff them, then take them to security.
+  - You are a Marine Trooper and tell someone to stop, so you can question them. They run away, so you use your disabler to stun and cuff them.
+  - You are a Marine Trooper and see someone wearing a syndicate hardsuit, so you shoot them to crit, cuff them, then take them to the Marine Police.
   - You are a crewmember and see a nuclear operative, so you kill them.
   - An unauthorized person enters a high risk area of the station, like the armory or atmospherics, so you attack them until they leave.
   - Minorly inconveniencing someone for your own benefit.
   - As an antagonist, killing someone who got in your way.
   - As an antagonist, killing someone who didn't give you what you want.
-  - A chef and bartender reach the lethal level of conflict through appropriate escalation. The chef crits the bartender and does not take them to medbay or security. The bartender immediately tries to crit the chef next time they run into each other.
-  - A chef and bartender reach the lethal level of conflict through appropriate escalation. The chef crits the bartender and does not take them to medbay or security. The chef insults the bartender next time they see them.
+  - A chef and bartender reach the lethal level of conflict through appropriate escalation. The chef crits the bartender and does not take them to medbay or the Marine Police. The bartender immediately tries to crit the chef next time they run into each other.
+  - A chef and bartender reach the lethal level of conflict through appropriate escalation. The chef crits the bartender and does not take them to medbay or the Marine Police. The chef insults the bartender next time they see them.
   - A cargo technician gets a cargo bounty for a brain. After receiving a body from Medical with the purple examine text reading "Any recovery is impossible.", the cargo technician proceeds to permanently destroy the body to get the brain out.
 
   Prohibited:
   - A player starts punching you, so you gib them.
   - A clown throws a pie at you and steals your shoes, so you stab them to crit with a screwdriver.
-  - You are a security officer and tell someone to stop, so you can question them. They run away so you use a truncheon to beat them to crit.
+  - You are a Marine Trooper and tell someone to stop, so you can question them. They run away so you use a truncheon to beat them to crit.
   - An authorized person who you unreasonably or carelessly think is unauthorized enters a high risk area of the station, like the armory or atmospherics, so you attack them until they leave.
   - An unauthorized person enters a low risk area of the station, like cargo, and you start attacking them with no other escalation.
-  - Slipping security all round because they are security.
+  - Slipping Marine Troopers all round because they are Marine Police.
   - Blocking the head of personnel in their office using walls because they didn't give you what you asked for.
   - Hiding someone's body because they punched you earlier in the round.
   - Harassing the bar or bartender by frequently coming in to break their glasses or furniture.
   - Randomly picking fights with people.
   - Stealing an ID from a disconnected player as a non-antagonist.
-  - A chef and bartender reach the lethal level of conflict through appropriate escalation. The chef crits the bartender and does not take them to medbay or security. The chef immediately tries to crit the bartender next time they run into each other.
-  - A chef and bartender reach the lethal level of conflict through appropriate escalation. The chef crits the bartender and takes them to the medbay or security. The bartender immediately tries to crit the chef next time they run into each other.
+  - A chef and bartender reach the lethal level of conflict through appropriate escalation. The chef crits the bartender and does not take them to medbay or the Marine Police. The chef immediately tries to crit the bartender next time they run into each other.
+  - A chef and bartender reach the lethal level of conflict through appropriate escalation. The chef crits the bartender and takes them to the medbay or the Marine Police. The bartender immediately tries to crit the chef next time they run into each other.
   - A cargo technician gets a cargo bounty for a brain. After finding a dead passenger in a hallway, without the body's examine text reading "Any recovery is impossible.", the cargo technician proceeds to permanently destroy the body to get the brain out.
 </Document>

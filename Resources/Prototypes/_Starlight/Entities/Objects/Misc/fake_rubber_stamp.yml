@@ -286,14 +286,14 @@
       stampedName: "Head of Tiders"
 
 - type: entity
-  name: fake head of security's rubber stamp
+  name: fake Marine CO's rubber stamp
   parent: RubberStampBaseFake
   id: RubberStampHosFake
   description: A rubber stamp for forging important documents. Hopefully they don't look too closely.
   categories: [ DoNotMap ]
   components:
     - type: Stamp
-      stampedName: "Head of Shecurity"
+      stampedName: "Marine Shee-O"
       stampedColor: "#cc0000"
       stampState: "paper_stamp-hos"
     - type: Sprite
@@ -304,23 +304,23 @@
   id: RubberStampHosFake1
   components:
     - type: Stamp
-      stampedName: "Head of Securuty"
+      stampedName: "Marine C0"
 
 - type: entity
   parent: RubberStampHosFake
   id: RubberStampHosFake2
   components:
     - type: Stamp
-      stampedName: "Head ot Security"
+      stampedName: "Marnie CO"
 
 - type: entity
-  name: joke head of security's rubber stamp
+  name: joke Marine CO's rubber stamp
   parent: RubberStampHosFake
   id: RubberStampHosJoke
   description: A funny rubber stamp for forging important documents.
   components:
     - type: Stamp
-      stampedName: "Head of Shitcurity"
+      stampedName: "Marine CO-ward"
 
 #Mime is hard to come up with stuff for.
 - type: entity
@@ -426,14 +426,14 @@
       state: stamp-trader
 
 - type: entity
-  name: fake warden's rubber stamp
+  name: fake Marine Quartermaster's rubber stamp
   parent: RubberStampBaseFake
   id: RubberStampWardenFake
   description: A rubber stamp for forging important documents. Hopefully they don't look too closely.
   categories: [ DoNotMap ]
   components:
     - type: Stamp
-      stampedName: "Warben"
+      stampedName: "Marine Quatermaster"
       stampedColor: "#5b0000"
       stampState: "paper_stamp-warden"
     - type: Sprite
@@ -564,14 +564,14 @@
 
 
 - type: entity
-  name: fake corpsman's rubber stamp
+  name: fake Marine Corpsman's rubber stamp
   parent: RubberStampBaseFake
   id: RubberStampBrigmedicFake
   description: A rubber stamp for forging important documents. Hopefully they don't look too closely.
   suffix: DO NOT MAP
   components:
     - type: Stamp
-      stampedName: "Brigdemedic"
+      stampedName: "Marine Corpseman"
       stampedColor: "#ae2e33"
       stampState: "paper_stamp-brigmedic"
     - type: Sprite

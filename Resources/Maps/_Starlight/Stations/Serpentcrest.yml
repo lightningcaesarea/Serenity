@@ -75146,10 +75146,8 @@ entities:
   - uid: 12054
     components:
     - type: Transform
-      parent: 12053
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
+      parent: 2
+      pos: -14.5,5.5
 - proto: ClothingOuterEVASuitSyndicate
   entities:
   - uid: 36
@@ -131170,7 +131168,7 @@ entities:
   - uid: 19738
     components:
     - type: MetaData
-      name: Gorlex - Warden
+      name: Gorlex - Marine Quartermaster
     - type: Transform
       parent: 2
       pos: 4.5,9.5
@@ -137206,32 +137204,6 @@ entities:
     - type: Transform
       parent: 2
       pos: -21.5,-40.5
-- proto: LockerDetectiveFilled
-  entities:
-  - uid: 12053
-    components:
-    - type: Transform
-      parent: 2
-      pos: -20.5,6.5
-    - type: EntityStorage
-      air:
-        temperature: 293.14673
-        volume: 200
-        moles:
-          Oxygen: 1.7459903
-          Nitrogen: 6.568249
-        immutable: False
-    - type: ContainerContainer
-      containers:
-        entity_storage: !type:Container
-          ents:
-          - 12054
-          showEnts: False
-          occludes: True
-        paper_label: !type:ContainerSlot
-          ent: null
-          showEnts: False
-          occludes: True
 - proto: LockerElectricalSuppliesFilled
   entities:
   - uid: 20752
@@ -139832,7 +139804,7 @@ entities:
   - uid: 21108
     components:
     - type: MetaData
-      name: Gorlex Security Consulting 300th Anneversery commemoration
+      name: Gorlex Marine Police Consulting 300th Anneversery commemoration
       desc: A marble stele celebrating 300 years of business for the Gorlex Maurauders, we should probably have this removed soon...
     - type: Transform
       parent: 2
@@ -163568,13 +163540,6 @@ entities:
     - type: Transform
       parent: 2
       pos: -31.5,-32.5
-- proto: SpawnPointDetective
-  entities:
-  - uid: 24813
-    components:
-    - type: Transform
-      parent: 2
-      pos: -19.5,4.5
 - proto: SpawnPointDutyOfficer
   entities:
   - uid: 24814
@@ -172752,7 +172717,7 @@ entities:
     - type: AccessReader
       accessListsOriginal:
       - - Service
-- proto: VendingMachineDetDrobe
+- proto: VendingMachineBountyVend
   entities:
   - uid: 26041
     components:
@@ -193072,4 +193037,11 @@ entities:
     - type: Transform
       parent: 2
       pos: -9.552427,49.802536
+- proto: VendingMachineMarinePoliceField
+  entities:
+  - uid: 12053
+    components:
+    - type: Transform
+      parent: 2
+      pos: -20.5,6.5
 ...

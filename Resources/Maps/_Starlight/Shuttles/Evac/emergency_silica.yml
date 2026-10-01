@@ -1310,7 +1310,7 @@ entities:
   - uid: 55
     components:
     - type: MetaData
-      name: APC Security
+      name: APC Marine Police
     - type: Transform
       parent: 1
       rot: -1.5707963267948966 rad

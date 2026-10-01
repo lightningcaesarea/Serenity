@@ -20,6 +20,7 @@
   access:
   - Security
   - Brig
+  - Detective # Serenity: the Detective is disabled; its office now holds the Marine Police vendors
   - Maintenance
   - Service
   - Medical

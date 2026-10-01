@@ -3,7 +3,7 @@
   id: WeaponPDW9TaserBorg
   name: PDW-9 integrated taser
   parent: WeaponPDW9
-  description: A self-recharging PDW-9 taser integrated directly into a security cyborg's chassis. Lethal mode requires Code Red or higher.
+  description: A self-recharging PDW-9 taser integrated directly into a Marine Police cyborg's chassis. Lethal mode requires Code Red or higher.
   components:
   - type: StationGridMemory
   - type: Battery
@@ -35,7 +35,7 @@
   id: BorgStunbatonRechargeable
   name: integrated stun baton
   parent: Stunbaton
-  description: A self-recharging stun baton integrated directly into a security cyborg's chassis.
+  description: A self-recharging stun baton integrated directly into a Marine Police cyborg's chassis.
   components:
   - type: Battery
     maxCharge: 1000
@@ -51,7 +51,7 @@
   id: BorgHolocuffs
   name: holocuffs
   parent: Handcuffs
-  description: Holographic restraining cuffs emitted directly from a security cyborg's chassis. A fresh pair reappears moments after use, retrieved when the target is freed.
+  description: Holographic restraining cuffs emitted directly from a Marine Police cyborg's chassis. A fresh pair reappears moments after use, retrieved when the target is freed.
   components:
   - type: Sprite
     sprite: _Starlight/Objects/Tools/cyberling.rsi
@@ -72,7 +72,7 @@
   id: BorgFlashRechargeable
   name: integrated flash
   parent: Flash
-  description: An ultrabright flashbulb integrated directly into a security cyborg's chassis. The internal capacitor recharges automatically.
+  description: An ultrabright flashbulb integrated directly into a Marine Police cyborg's chassis. The internal capacitor recharges automatically.
   components:
   - type: LimitedCharges
     maxCharges: 5
@@ -86,7 +86,7 @@
   name: integrated holobarrier projector
   parent: HoloprojectorSecurity
   suffix: borg
-  description: A holographic barrier projector integrated directly into a security cyborg's chassis. The sealed microreactor keeps it self-charging.
+  description: A holographic barrier projector integrated directly into a Marine Police cyborg's chassis. The sealed microreactor keeps it self-charging.
   components:
   - type: ItemSlots
     slots:

@@ -94,8 +94,8 @@
 - type: entity
   parent: ClothingMiscBase # starlight: neck -> misc
   id: ClothingNeckSecuritymedal
-  name: security medal
-  description: Given for the best work in the security department.
+  name: Marine Police medal
+  description: Given for the best work in the Marine Police.
   components:
   - type: Sprite
     sprite: _Serenity/Clothing/Neck/Medals/securitymedal_dv.rsi

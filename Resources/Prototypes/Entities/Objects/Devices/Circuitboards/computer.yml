@@ -212,8 +212,8 @@
 - type: entity
   parent: BaseComputerCircuitboard
   id: CargoRequestSecurityComputerCircuitboard
-  name: security request computer board
-  description: A computer printed circuit board for a security request computer.
+  name: Marine Police request computer board
+  description: A computer printed circuit board for a Marine Police request computer.
   components:
   - type: Sprite
     state: cpu_security

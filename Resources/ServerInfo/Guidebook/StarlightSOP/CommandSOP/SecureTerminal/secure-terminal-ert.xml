@@ -3,17 +3,17 @@
 
 ## ERT Security
 
-[bold]Called by:[/bold] [color=#fcdf03]Captain[/color] and [color=#ff4242]Head of Security[/color], with [color=#86d420]Central Command[/color] approval.
+[bold]Called by:[/bold] [color=#fcdf03]Captain[/color] and [color=#ff4242]Marine CO[/color], with [color=#86d420]Central Command[/color] approval.
 
-[bold]Conditions:[/bold] Active, confirmed hostile threats have overwhelmed station security's ability to respond. Remaining security staff are insufficient to contain or eliminate the threat, and the situation poses ongoing danger to the crew.
+[bold]Conditions:[/bold] Active, confirmed hostile threats have overwhelmed the station Marine Police's ability to respond. Remaining Marine Police personnel are insufficient to contain or eliminate the threat, and the situation poses ongoing danger to the crew.
 
 Must not be called during a War Declaration; the Nuclear Response Team should be called instead.
 
 [bold]One-time use per shift.[/bold]
 
-[bold]Canceled when:[/bold] The threat has been neutralized or sufficiently contained that security can manage without external support.
+[bold]Canceled when:[/bold] The threat has been neutralized or sufficiently contained that the Marine Police can manage without external support.
 
-[bold]Canceled by:[/bold] [color=#fcdf03]Captain[/color] and [color=#ff4242]Head of Security[/color].
+[bold]Canceled by:[/bold] [color=#fcdf03]Captain[/color] and [color=#ff4242]Marine CO[/color].
 
 ## ERT Engineering
 
@@ -55,19 +55,19 @@ Must not be called during a War Declaration; the Nuclear Response Team should be
 
 [bold]Called by:[/bold] [color=#fcdf03]Captain[/color] and [color=#2253b5]NanoTrasen Representative[/color].
 
-[bold]Conditions:[/bold] Cult activity on the station cannot be handled by existing security and the chaplain.
+[bold]Conditions:[/bold] Cult activity on the station cannot be handled by the existing Marine Police and the chaplain.
 
 [bold]One-time use per shift.[/bold]
 
-[bold]Canceled when:[/bold] Cult activity has been reduced to a level that existing security and the chaplain can handle.
+[bold]Canceled when:[/bold] Cult activity has been reduced to a level that the existing Marine Police and the chaplain can handle.
 
 [bold]Canceled by:[/bold] [color=#fcdf03]Captain[/color] and [color=#2253b5]NanoTrasen Representative[/color].
 
 ## ERT CBURN
 
-[bold]Called by any three of:[/bold] [color=#fcdf03]Captain[/color], [color=#ff4242]Head of Security[/color], [color=#57b8f0]Chief Medical Officer[/color], or [color=#cd7ccd]Research Director[/color].
+[bold]Called by any three of:[/bold] [color=#fcdf03]Captain[/color], [color=#ff4242]Marine CO[/color], [color=#57b8f0]Chief Medical Officer[/color], or [color=#cd7ccd]Research Director[/color].
 
-[bold]Conditions:[/bold] Code Violet is active. A biological or viral outbreak has been confirmed, and containment has failed or is at imminent risk of failure. Standard medical and security response are insufficient.
+[bold]Conditions:[/bold] Code Violet is active. A biological or viral outbreak has been confirmed, and containment has failed or is at imminent risk of failure. Standard medical and Marine Police response are insufficient.
 
 Must not be called during a War Declaration.
 
@@ -75,11 +75,11 @@ Must not be called during a War Declaration.
 
 [bold]Canceled when:[/bold] The outbreak has been contained and CBURN intervention is no longer necessary.
 
-[bold]Canceled by any three of:[/bold] [color=#fcdf03]Captain[/color], [color=#ff4242]Head of Security[/color], [color=#57b8f0]Chief Medical Officer[/color], or [color=#cd7ccd]Research Director[/color].
+[bold]Canceled by any three of:[/bold] [color=#fcdf03]Captain[/color], [color=#ff4242]Marine CO[/color], [color=#57b8f0]Chief Medical Officer[/color], or [color=#cd7ccd]Research Director[/color].
 
 ## Nuclear Response Team
 
-[bold]Called by:[/bold] [color=#fcdf03]Captain[/color] and [color=#ff4242]Head of Security[/color].
+[bold]Called by:[/bold] [color=#fcdf03]Captain[/color] and [color=#ff4242]Marine CO[/color].
 
 [bold]Conditions:[/bold] A War Declaration has been made against the station.
 
@@ -89,5 +89,5 @@ Only available after war has been declared. Has no co-authorization time limit.
 
 [bold]Canceled when:[/bold] The war threat has been repelled or the situation no longer requires additional security personnel.
 
-[bold]Canceled by:[/bold] [color=#fcdf03]Captain[/color] and [color=#ff4242]Head of Security[/color].
+[bold]Canceled by:[/bold] [color=#fcdf03]Captain[/color] and [color=#ff4242]Marine CO[/color].
 </Document>

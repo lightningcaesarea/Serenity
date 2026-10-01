@@ -7,8 +7,8 @@ highlights-nanotrasen-representative = NanoTrasen Representative, "NTR", NT Rep,
 highlights-nanotrasen-career-trainer = NanoTrasen Career Trainer, Career Trainer, "NCT"
 
 # Security
-highlights-duty-officer = Duty Officer, Security, "Sec"
-highlights-brigmedic = Brigmedic, BrigMed, "BM", Security, "Sec"
+highlights-duty-officer = Duty Officer, Marine Police, "MP"
+highlights-brigmedic = Marine Corpsman, Corpsman, Marine Police, "MP"
 
 # Cargo
 highlights-mail-technician = Mail Technician, Mail Tech, "MT", Mail, Cargo

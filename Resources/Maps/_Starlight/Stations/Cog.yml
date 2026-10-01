@@ -86764,7 +86764,7 @@ entities:
       parent: 2
       pos: -45.5,62.5
     - type: NavMapBeacon
-      text: Sec EVA
+      text: MP EVA
   - uid: 13507
     components:
     - type: Transform
@@ -152173,13 +152173,6 @@ entities:
     - type: Transform
       parent: 2
       pos: 2.5,59.5
-- proto: LockerDetectiveFilled
-  entities:
-  - uid: 22899
-    components:
-    - type: Transform
-      parent: 2
-      pos: 37.5,33.5
 - proto: LockerElectricalSuppliesFilled
   entities:
   - uid: 12367
@@ -179420,18 +179413,6 @@ entities:
     - type: Transform
       parent: 2
       pos: 3.5,59.5
-- proto: SpawnPointDetective
-  entities:
-  - uid: 27205
-    components:
-    - type: Transform
-      parent: 2
-      pos: 39.5,36.5
-  - uid: 27206
-    components:
-    - type: Transform
-      parent: 2
-      pos: 38.5,34.5
 - proto: SpawnPointDutyOfficer
   entities:
   - uid: 27207
@@ -189697,7 +189678,7 @@ entities:
     - type: Transform
       parent: 2
       pos: 56.5,23.5
-- proto: VendingMachineDetDrobe
+- proto: VendingMachineBountyVend
   entities:
   - uid: 28682
     components:
@@ -214111,4 +214092,11 @@ entities:
     - type: Transform
       parent: 2
       pos: 54.32351,25.56691
+- proto: VendingMachineMarinePoliceField
+  entities:
+  - uid: 22899
+    components:
+    - type: Transform
+      parent: 2
+      pos: 37.5,33.5
 ...

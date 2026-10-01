@@ -155699,11 +155699,6 @@ entities:
     - type: Transform
       parent: 2
       pos: -29.5,-33.5
-  - uid: 23078
-    components:
-    - type: Transform
-      parent: 2
-      pos: -36.5,-32.5
 - proto: LockerElectricalSuppliesFilled
   entities:
   - uid: 23079
@@ -177124,7 +177119,7 @@ entities:
   - uid: 26807
     components:
     - type: MetaData
-      name: remote signaller (Security Screen)
+      name: remote signaller (Marine Police Screen)
     - type: Transform
       parent: 2
       rot: 3.141592653589793 rad
@@ -185871,23 +185866,6 @@ entities:
     - type: Transform
       parent: 2
       pos: -31.5,3.5
-- proto: SpawnPointDetective
-  entities:
-  - uid: 27978
-    components:
-    - type: Transform
-      parent: 2
-      pos: -34.5,-33.5
-  - uid: 27979
-    components:
-    - type: Transform
-      parent: 2
-      pos: -30.5,-34.5
-  - uid: 27980
-    components:
-    - type: Transform
-      parent: 2
-      pos: -35.5,-31.5
 - proto: SpawnPointDutyOfficer
   entities:
   - uid: 27981
@@ -187684,7 +187662,7 @@ entities:
   - uid: 28258
     components:
     - type: MetaData
-      name: substation (South Security)
+      name: substation (South Marine Police)
     - type: Transform
       parent: 2
       pos: -35.5,-38.5
@@ -187693,7 +187671,7 @@ entities:
   - uid: 28259
     components:
     - type: MetaData
-      name: substation (West Security)
+      name: substation (West Marine Police)
     - type: Transform
       parent: 2
       pos: -59.5,-28.5
@@ -196821,7 +196799,7 @@ entities:
     - type: Transform
       parent: 2
       pos: -46.5,-3.5
-- proto: VendingMachineDetDrobe
+- proto: VendingMachineBountyVend
   entities:
   - uid: 29622
     components:
@@ -256904,4 +256882,11 @@ entities:
     - type: Transform
       parent: 2
       pos: 73.5,4.5
+- proto: VendingMachineMarinePoliceField
+  entities:
+  - uid: 23078
+    components:
+    - type: Transform
+      parent: 2
+      pos: -36.5,-32.5
 ...

@@ -138519,11 +138519,6 @@ entities:
     - type: Transform
       parent: 2
       pos: 42.5,-19.5
-  - uid: 21501
-    components:
-    - type: Transform
-      parent: 2
-      pos: 42.5,-21.5
 - proto: LockerEngineerFilledHardsuit
   entities:
   - uid: 21502
@@ -159259,7 +159254,7 @@ entities:
   - uid: 24968
     components:
     - type: MetaData
-      name: SMES (security)
+      name: SMES (Marine Police)
     - type: Transform
       parent: 2
       pos: 40.5,3.5
@@ -160782,23 +160777,6 @@ entities:
     - type: Transform
       parent: 2
       pos: -40.5,19.5
-- proto: SpawnPointDetective
-  entities:
-  - uid: 25247
-    components:
-    - type: Transform
-      parent: 2
-      pos: 39.5,-19.5
-  - uid: 25248
-    components:
-    - type: Transform
-      parent: 2
-      pos: 39.5,-22.5
-  - uid: 25249
-    components:
-    - type: Transform
-      parent: 2
-      pos: 41.5,-22.5
 - proto: SpawnPointDutyOfficer
   entities:
   - uid: 25252
@@ -162994,7 +162972,7 @@ entities:
   - uid: 25600
     components:
     - type: MetaData
-      name: substation (security)
+      name: substation (Marine Police)
     - type: Transform
       parent: 2
       pos: 40.5,5.5
@@ -168816,7 +168794,7 @@ entities:
     - type: Transform
       parent: 2
       pos: -74.5,19.5
-- proto: VendingMachineDetDrobe
+- proto: VendingMachineBountyVend
   entities:
   - uid: 26541
     components:
@@ -192377,4 +192355,11 @@ entities:
     - type: Transform
       parent: 2
       pos: -26.5,25.5
+- proto: VendingMachineMarinePoliceField
+  entities:
+  - uid: 21501
+    components:
+    - type: Transform
+      parent: 2
+      pos: 42.5,-21.5
 ...

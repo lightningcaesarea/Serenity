@@ -73,7 +73,7 @@
 - type: entity
   parent: BoxShelf
   id: BoxShelfSecurity
-  suffix: Security
+  suffix: Marine Police
   components:
   - type: ItemSlots
     slots:

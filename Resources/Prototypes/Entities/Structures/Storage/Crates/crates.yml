@@ -627,7 +627,7 @@
 - type: entity
   id: CrateLockBoxSecurity
   parent: CrateBaseLockBox
-  name: security lock box
+  name: Marine Police lock box
   components:
   - type: Sprite
     layers:

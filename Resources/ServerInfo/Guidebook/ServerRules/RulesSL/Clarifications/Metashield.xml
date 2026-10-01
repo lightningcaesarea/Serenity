@@ -9,7 +9,7 @@ This system is broken up into four core pillars: [bold]Unknown Information, Corp
 
 - [bold][color=#ff6200]Unknown Information[/color][/bold] is not known by anyone, or is only known by a very small group of people which is defined specifically.
 - [bold][color=#9819ff]Corporate Secrets[/color][/bold] are only known by high value members of the corporation. These are; All of Command, the Station AI, NanoTrasen Representative, Blue Shield Officer, Magistrate, NanoTrasen Career Trainers, Assistant Managers, and all Central Command roles such as ERT, OPs, CBURN, etc. Corporate Secrets should be kept secret until it is necessary to reveal them, revealing them frivolously is frowned upon by Central Command.
-- [bold][color=#f00000]Secure Knowledge[/color][/bold] is only known by members of Security, Internal Affairs Agents, and everyone who knows Corporate Secrets. This includes the Brig Medic, Warden, Security Cadets- all Security jobs. Secure Knowledge should be kept secret until necessary, but may be revealed in order to preserve Crew lives.
+- [bold][color=#f00000]Secure Knowledge[/color][/bold] is only known by members of the Marine Police, Internal Affairs Agents, and everyone who knows Corporate Secrets. This includes the Marine Corpsman, Marine Quartermaster, Marine Cadets- all Marine Police jobs. Secure Knowledge should be kept secret until necessary, but may be revealed in order to preserve Crew lives.
 - [bold][color=#0af024]Background[/color][/bold] is a system that allows any characters to know specific pieces of ordinarily Metashielded knowledge. Every character may only have one Background, which is picked during Character Creation as a Trait and can not be changed mid-round or frequently at all. Your Background should reflect the life your character has lived, and act in complement to their characterization and backstory.
 
 Additionally, there are some pieces of information that exist as rumors or as pieces of pop culture and media that are not believed to be real by most people. These pieces of information will be listed near the bottom of the page, as additive worldbuilding information.
@@ -40,7 +40,7 @@ Meta Information such as the current gamemode and the possible antagonists there
 
 Examples:
 - You may never know that because the gamemode is Survival, there will be an escalating number of threats.
-- You may never know that the player Gregman69 only ever plays Security, and thus since he is an Assistant this shift he must be an Antagonist.
+- You may never know that the player Gregman69 only ever plays Marine Police, and thus since he is an Assistant this shift he must be an Antagonist.
 - You may never know that the last round was Nukies, or any other Metashielded gamemode, per Continuity Rules.
 - You may never know anything that you did not learn in character, such as things witnessed while observing as a ghost before spawning, things you were told by a friend out of game, etc.
 - You may never know an item has a secret use by right clicking it, such as exploding pens or chameleon gloves.
@@ -60,7 +60,7 @@ Examples:
 ## Corporate Secrets
 [color=#9819ff]Corporate Secrets[/color] are only known by high value members of the corporation. These are; All of Command, the Station AI, NanoTrasen Representative, Blue Shield Officer, Magistrate, NanoTrasen Career Trainers, Assistant Managers, and all Central Command roles such as ERT, OPs, CBURN, etc. Corporate Secrets should be kept secret until it is necessary to reveal them, revealing them frivolously is frowned upon by Central Command. This information is considered sensitive and liable to cause mass panic if learned by the Crew.
 
-Corporate Secrets may be revealed to individuals, departments, or the station as a whole if deemed necessary. You had better have a good reason to do so however, and expect your reasoning to be cross examined and scrutinized heavily by Central Command. Revealing Corporate Secrets to Security is generally deemed more acceptable, better for them to clean up an issue without panicking the rest of the Crew.
+Corporate Secrets may be revealed to individuals, departments, or the station as a whole if deemed necessary. You had better have a good reason to do so however, and expect your reasoning to be cross examined and scrutinized heavily by Central Command. Revealing Corporate Secrets to the Marine Police is generally deemed more acceptable, better for them to clean up an issue without panicking the rest of the Crew.
 
 
 [bold][color=#9819ff]Ninjas || [/color][/bold]
@@ -96,7 +96,7 @@ The existence of NanoTrasen Special Forces is common, and recruitment drives for
 
 
 ## Secure Knowledge
-[color=#f00000]Secure Knowledge[/color] is only known by members of Security, Internal Affairs Agents, and everyone who knows Corporate Secrets. This includes the Brig Medic, Warden, Security Cadets- all Security jobs. Secure Knowledge should be kept secret until necessary, but may be revealed in order to preserve Crew lives at the discretion of the Head of Security.
+[color=#f00000]Secure Knowledge[/color] is only known by members of the Marine Police, Internal Affairs Agents, and everyone who knows Corporate Secrets. This includes the Marine Corpsman, Marine Quartermaster, Marine Cadets- all Marine Police jobs. Secure Knowledge should be kept secret until necessary, but may be revealed in order to preserve Crew lives at the discretion of the Marine CO.
 
 
 [bold][color=#f00000]Revolutionary Methods || [/color][/bold]
@@ -115,7 +115,7 @@ Changelings are an parasitic species associated with radical elements of the Syn
 
 
 [bold][color=#f00000]Suspected Syndicate Corporations || [/color][/bold]
-While nobody is able to prove anything, Central Command maintains a small curated list of corporations they believe to be backing the Syndicate. Security is made privy to this list so they may observe and report any connections to Syndicate activity onboard stations. Their products should be viewed with suspicion but may or may not be considered contraband. Consult with Corporate Law for more information.
+While nobody is able to prove anything, Central Command maintains a small curated list of corporations they believe to be backing the Syndicate. The Marine Police is made privy to this list so they may observe and report any connections to Syndicate activity onboard stations. Their products should be viewed with suspicion but may or may not be considered contraband. Consult with Corporate Law for more information.
 
 These suspected corporations are:
 - Cybersun
@@ -132,7 +132,7 @@ Where Vampires come from is poorly understood, but rigorous interrogation has co
 
 
 [bold][color=#f00000]Wizards || [/color][/bold]
-The Wizard Federation is very outspoken about their so-called 'magic'. Whether that they do is actually 'magic' or not, they are a danger and Security has been briefed on them. Security knows they may have access to strange abilities, but they do not know the extent of the Wizard's capabilities.
+The Wizard Federation is very outspoken about their so-called 'magic'. Whether that they do is actually 'magic' or not, they are a danger and the Marine Police has been briefed on them. The Marine Police knows they may have access to strange abilities, but they do not know the extent of the Wizard's capabilities.
 
 
 [bold][color=#f00000]Xenoborgs || [/color][/bold]
@@ -140,7 +140,7 @@ Xenoborgs are rogue Silicons that have started assimilating organics to grow the
 
 
 [bold][color=#f00000]Syndicate Equipment || [/color][/bold]
-Security is aware of some specific equipment associated with the Syndicate. They are not aware of all or even most of the items within the uplink, however they do get foreknowledge of:
+The Marine Police is aware of some specific equipment associated with the Syndicate. They are not aware of all or even most of the items within the uplink, however they do get foreknowledge of:
 - Syndicate Hardsuits, EVA Suits, Jetpacks, Mag Boots, Chest Rigs, and Web Vests
 - Syndicate Guns and Energy Swords
 - Basic tools; Syndicate Jaws of Life, EMAG, Access Breaker, Suspicious Toolbox and its contents, and Radio Jammer
@@ -150,7 +150,7 @@ You also know that things called [bold]'Uplinks'[/bold] exist which allow the Sy
 
 
 [bold][color=#f00000]High Value Targets || [/color][/bold]
-All items that can be targets of theft by the Syndicate are known to Security. This includes the CE's Mag Boots, Captain's Gun, RD's Hardsuit, etc. While normal crew know they are valuable, they do not know that they are deliberately targeted for theft by Syndicate Agents.
+All items that can be targets of theft by the Syndicate are known to the Marine Police. This includes the CE's Mag Boots, Captain's Gun, RD's Hardsuit, etc. While normal crew know they are valuable, they do not know that they are deliberately targeted for theft by Syndicate Agents.
 
 
 ## Backgrounds

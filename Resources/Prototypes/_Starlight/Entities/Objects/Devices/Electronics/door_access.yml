@@ -83,7 +83,7 @@
 - type: entity
   parent: DoorElectronics
   id: DoorElectronicsCourtroom
-  suffix: Security/Internal Affairs/Legal (Courtroom), Locked
+  suffix: Marine Police/Internal Affairs/Legal (Courtroom), Locked
   components:
   - type: AccessReader
     access: [["Security"], ["IAA"], ["Lawyer"]]

@@ -15,7 +15,7 @@
   parent: [ BaseItem, BaseToyGun ]
   id: FoamCrossbow
   name: foam crossbow
-  description: Aiming this at Security may get you filled with lead.
+  description: Aiming this at the Marine Police may get you filled with lead.
   components:
   - type: Sprite
     sprite: Objects/Fun/Foam/foam_crossbow.rsi

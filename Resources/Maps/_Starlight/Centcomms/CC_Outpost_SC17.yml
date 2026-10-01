@@ -58206,7 +58206,7 @@ entities:
   - uid: 8371
     components:
     - type: MetaData
-      name: substation (Security)
+      name: substation (Marine Police)
     - type: Transform
       parent: 1
       pos: -35.5,28.5

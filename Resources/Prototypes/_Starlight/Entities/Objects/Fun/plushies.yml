@@ -3,7 +3,7 @@
   parent: BaseShadekinPlushie
   id: PlushieBrightheart # rtasva
   name: brightheart plushie
-  description: A plushie of a small, elusive, and odd looking security officer. Seems familiar somehow.
+  description: A plushie of a small, elusive, and odd looking Marine Trooper. Seems familiar somehow.
   components:
   - type: Item
     size: Small

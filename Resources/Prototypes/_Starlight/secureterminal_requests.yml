@@ -24,8 +24,8 @@
     - [Captain, HeadOfSecurity]
     - [Captain, HeadOfSecurity]
   authGroupLabels:
-    - "Captain / HoS (1)"
-    - "Captain / HoS (2)"
+    - "Captain / Marine CO (1)"
+    - "Captain / Marine CO (2)"
   cooldownSecs: 3600
 
 # ── ERT Security ─────────────────────────────────────────────────────────────
@@ -49,8 +49,8 @@
     - [Captain, HeadOfSecurity]
     - [Captain, HeadOfSecurity]
   authGroupLabels:
-    - "Captain / HoS (1)"
-    - "Captain / HoS (2)"
+    - "Captain / Marine CO (1)"
+    - "Captain / Marine CO (2)"
   cooldownSecs: 3600
   authTimer: 30
 
@@ -172,9 +172,9 @@
     - [Captain, HeadOfSecurity, ChiefMedicalOfficer, ResearchDirector]
     - [Captain, HeadOfSecurity, ChiefMedicalOfficer, ResearchDirector]
   authGroupLabels:
-    - "Captain / HoS / CMO / RD (1)"
-    - "Captain / HoS / CMO / RD (2)"
-    - "Captain / HoS / CMO / RD (3)"
+    - "Captain / Marine CO / CMO / RD (1)"
+    - "Captain / Marine CO / CMO / RD (2)"
+    - "Captain / Marine CO / CMO / RD (3)"
   cooldownSecs: 3600
   authTimer: 30
 
@@ -199,8 +199,8 @@
     - [Captain, HeadOfSecurity, Ntrep]
     - [Captain, HeadOfSecurity, Ntrep]
   authGroupLabels:
-    - "Captain / HoS / NTR (1)"
-    - "Captain / HoS / NTR (2)"
+    - "Captain / Marine CO / NTR (1)"
+    - "Captain / Marine CO / NTR (2)"
   cooldownSecs: 900
   authTimer: 30
 
@@ -221,8 +221,8 @@
     - [Captain, HeadOfSecurity, ResearchDirector]
     - [Captain, HeadOfSecurity, ResearchDirector]
   authGroupLabels:
-    - "Captain / HoS / RD (1)"
-    - "Captain / HoS / RD (2)"
+    - "Captain / Marine CO / RD (1)"
+    - "Captain / Marine CO / RD (2)"
   cooldownSecs: 900
   authTimer: 30
 
@@ -243,8 +243,8 @@
     - [Captain, HeadOfSecurity, ChiefMedicalOfficer, ResearchDirector]
     - [Captain, HeadOfSecurity, ChiefMedicalOfficer, ResearchDirector]
   authGroupLabels:
-    - "Captain / HoS / CMO / RD (1)"
-    - "Captain / HoS / CMO / RD (2)"
+    - "Captain / Marine CO / CMO / RD (1)"
+    - "Captain / Marine CO / CMO / RD (2)"
   cooldownSecs: 600
   authTimer: 30
 
@@ -268,8 +268,8 @@
     - [Captain, HeadOfSecurity, Ntrep]
     - [Captain, HeadOfSecurity, Ntrep]
   authGroupLabels:
-    - "Captain / HoS / NTR (1)"
-    - "Captain / HoS / NTR (2)"
+    - "Captain / Marine CO / NTR (1)"
+    - "Captain / Marine CO / NTR (2)"
   cooldownSecs: 0
 
 # ── End Violet ─────────────────────────────────────────────────────────────────
@@ -291,7 +291,7 @@
   authGroups:
     - [Captain, HeadOfSecurity, ChiefMedicalOfficer, ResearchDirector]
   authGroupLabels:
-    - "Captain / HoS / CMO / RD (1)"
+    - "Captain / Marine CO / CMO / RD (1)"
   cooldownSecs: 0
 
 # ── End PSI ───────────────────────────────────────────────────────────────────
@@ -315,8 +315,8 @@
     - [Captain, HeadOfSecurity, ResearchDirector]
     - [Captain, HeadOfSecurity, ResearchDirector]
   authGroupLabels:
-    - "Captain / HoS / RD (1)"
-    - "Captain / HoS / RD (2)"
+    - "Captain / Marine CO / RD (1)"
+    - "Captain / Marine CO / RD (2)"
   cooldownSecs: 0
 #region Armory
 
@@ -341,8 +341,8 @@
     - [Captain, HeadOfSecurity, Ntrep]
     - [Captain, HeadOfSecurity, Ntrep]
   authGroupLabels:
-    - "Captain / HoS / NTR (1)"
-    - "Captain / HoS / NTR (2)"
+    - "Captain / Marine CO / NTR (1)"
+    - "Captain / Marine CO / NTR (2)"
   cooldownSecs: 3600
   authTimer: 30
 
@@ -367,8 +367,8 @@
     - [Captain, HeadOfSecurity, ResearchDirector]
     - [Captain, HeadOfSecurity, ResearchDirector]
   authGroupLabels:
-    - "Captain / HoS / RD (1)"
-    - "Captain / HoS / RD (2)"
+    - "Captain / Marine CO / RD (1)"
+    - "Captain / Marine CO / RD (2)"
   cooldownSecs: 3600
   authTimer: 30
 
@@ -505,7 +505,7 @@
     - [HeadOfSecurity]
   authGroupLabels:
     - "Captain (1)"
-    - "Head of Security (2)"
+    - "Marine CO (2)"
   cooldownSecs: 600
   authTimer: 60
 
@@ -524,7 +524,7 @@
   authGroups:
     - [Captain, HeadOfSecurity]
   authGroupLabels:
-    - "Captain / HoS (1)"
+    - "Captain / Marine CO (1)"
   cooldownSecs: 0
 
 # ── Self Destruct Code ─────────────────────────────────────────────────────

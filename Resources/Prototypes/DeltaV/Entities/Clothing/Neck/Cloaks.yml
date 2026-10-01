@@ -21,7 +21,7 @@
 - type: entity
   parent: [ClothingNeckBase, BaseCommandContraband]
   id: ClothingNeckCloakBoatHos
-  name: head of security's boat cloak
+  name: Marine CO's boat cloak
   description: A light gray durathread boat cloak with a red felt lining and gold trim. Somehow, it's even more expensive than it looks.
   components:
     - type: Sprite
@@ -41,8 +41,8 @@
 - type: entity
   parent: [ClothingNeckBase, BaseCommandContraband]
   id: ClothingNeckHosRobe
-  name: head of security's decadent robe
-  description: A comfy formal robe given to veteran heads of security
+  name: Marine CO's decadent robe
+  description: A comfy formal robe given to veteran Marine COs
   components:
     - type: Sprite
       sprite: DeltaV/Clothing/Neck/Cloaks/hosrobe.rsi

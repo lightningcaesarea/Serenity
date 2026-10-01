@@ -10,7 +10,7 @@ A [bold]medical recovery implant[/bold] brings its carrier's body back to the st
     <GuideEntityEmbed Entity="MedicalRecoveryPad"/>
 </Box>
 
-Security Officers and Assistants start with one, and the implanter can be bought from the NanoMed Civilian vending machine.
+Marine Troopers and Assistants start with one, and the implanter can be bought from the NanoMed Civilian vending machine.
 
 There are three ways recovery starts. Each one takes about 6 seconds, is announced to Medical on the radio, and the body arrives on a recovery pad.
 

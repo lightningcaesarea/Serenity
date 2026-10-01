@@ -65,7 +65,7 @@
 - type: entity
   id: DresserHeadOfSecurityFilled
   parent: Dresser
-  suffix: Filled, Head Of Security
+  suffix: Filled, Marine CO
   components:
   - type: EntityTableContainerFill
     containers:
@@ -117,7 +117,7 @@
 - type: entity
   id: DresserWardenFilled
   parent: Dresser
-  suffix: Filled, Warden
+  suffix: Filled, Marine Quartermaster
   components:
   - type: EntityTableContainerFill
     containers:

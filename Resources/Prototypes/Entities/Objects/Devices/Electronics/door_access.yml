@@ -199,7 +199,7 @@
 - type: entity
   parent: DoorElectronics
   id: DoorElectronicsHeadOfSecurity
-  suffix: HeadOfSecurity, Locked
+  suffix: Marine CO, Locked
   components:
   - type: AccessReader
     access: [["HeadOfSecurity"]]
@@ -223,7 +223,7 @@
 - type: entity
   parent: DoorElectronics
   id: DoorElectronicsSecurity
-  suffix: Security, Locked
+  suffix: Marine Police, Locked
   components:
   - type: AccessReader
     access: [["Security"], ["Cadet"]] # Starlight: add cadet
@@ -231,7 +231,7 @@
 - type: entity
   parent: DoorElectronics
   id: DoorElectronicsSecurityInternalAffairs
-  suffix: Security/Internal Affairs, Locked # Starlight
+  suffix: Marine Police/Internal Affairs, Locked # Starlight
   components:
   - type: AccessReader
     access: [["Security"], ["IAA"]] # Starlight: Lawyer -> IAA.

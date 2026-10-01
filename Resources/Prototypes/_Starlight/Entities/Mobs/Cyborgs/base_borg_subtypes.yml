@@ -3,7 +3,7 @@
   parent: BorgSubtypeBase
   abstract: true
   id: BorgSecuritySubtypeBase
-  name: borg security subtype
+  name: borg Marine Police subtype
   components:
     - type: BorgSubtypeDefinition
       parentType: security

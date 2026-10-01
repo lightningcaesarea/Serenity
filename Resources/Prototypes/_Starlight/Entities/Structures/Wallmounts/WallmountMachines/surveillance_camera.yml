@@ -116,7 +116,7 @@
   parent: SurveillanceCameraReinforcedBase
   id: SurveillanceCameraReinforcedSecurity
   name: reinforced camera
-  suffix: Security
+  suffix: Marine Police
   components:
     - type: DeviceNetwork
       deviceNetId: Wired

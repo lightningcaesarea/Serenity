@@ -1,7 +1,7 @@
 # Traitor single items
 steal-target-groups-rddiploma = diploma
 steal-target-groups-cmolicense = medical license
-steal-target-groups-hypoinjector-combined = chief medical officer's hypospray or the brigmedic's tactical jet injector
+steal-target-groups-hypoinjector-combined = chief medical officer's hypospray or the Marine Corpsman's tactical jet injector
 steal-target-groups-pinpointer-nuclear = nuclear pinpointer
 steal-target-groups-access-configurator = access configurator
 steal-target-groups-hop-id-card = head of personnel ID card
@@ -9,9 +9,9 @@ steal-target-groups-ntr-briefcase = nanotrasen representative's secure briefcase
 steal-target-groups-clothing-outer-hardsuit-cmo = chief medical officer's hardsuit
 steal-target-groups-clothing-outer-hardsuit-ce = chief engineer's hardsuit
 steal-target-groups-jetpack-ce = chief engineer's void jetpack
-steal-target-groups-clothing-outer-hardsuit-hos = head of security's hardsuit
-steal-target-groups-clothing-outer-hardsuit-warden = warden's hardsuit
-steal-target-groups-clothing-outer-hardsuit-brigmedic = corpsman's hardsuit
+steal-target-groups-clothing-outer-hardsuit-hos = Marine CO's hardsuit
+steal-target-groups-clothing-outer-hardsuit-warden = Marine Quartermaster's hardsuit
+steal-target-groups-clothing-outer-hardsuit-brigmedic = Marine Corpsman's hardsuit
 steal-target-groups-clothing-outer-hardsuit-qm = quartermaster's luxury maxim hardsuit
 steal-target-groups-clothing-outer-hardsuit-salvlead = spationaut lead hardsuit
 steal-target-groups-clothing-outer-hardsuit-captain = captain's armored spacesuit
@@ -20,12 +20,12 @@ steal-target-groups-clothing-outer-hardsuit-bso = blueshield officer's hardsuit
 steal-target-groups-clothing-shoes-boots-mag-bso = blueshield officer's magboots
 steal-target-groups-encryption-key-hybrid = salvage, med-sec, med-sci, or station master encryption key
 steal-target-groups-hopboard = bureaucratic digi-board
-steal-target-groups-hos-weapon = head of security's Proto-5x or WT550r
-steal-target-groups-security-rare-guns = warden's energy shotgun or the detective's energy magnum
+steal-target-groups-hos-weapon = Marine CO's Proto-5x or WT550r
+steal-target-groups-security-rare-guns = Marine Quartermaster's energy shotgun or the detective's energy magnum
 steal-target-groups-bso-weapon = blueshield officer's X-01 multiphase energy gun or blueguard service pistol
 
 # Thief single items
-steal-target-groups-strange-brigmed-bedsheet = strange brigmedic's bedsheet
+steal-target-groups-strange-brigmed-bedsheet = strange Marine Corpsman's bedsheet
 steal-target-groups-salvlead-mantle = salvage lead's ceremonial salvager's mantle
 
 steal-target-groups-firing-pin = firing pin
@@ -33,7 +33,7 @@ steal-target-groups-firing-pin-advanced-laser = prototype laser crystal
 steal-target-groups-firing-pin-smart-lmg = smartgun bolt assembly
 
 steal-target-groups-departmental-tech-fab-circuitboard = cargo, engineering, medical, or science techfab machine board
-steal-target-groups-secure-tech-fab-circuitboard = command or security techfab machine board
+steal-target-groups-secure-tech-fab-circuitboard = command or Marine Police techfab machine board
 steal-target-groups-log-probe-cartridge = log probe cartridge
 steal-target-groups-med-tek-cartridge = med tek cartridge
 steal-target-groups-astro-nav-cartridge = astro nav cartridge
@@ -54,10 +54,10 @@ steal-target-groups-captain-tablet = captain's management tablet
 steal-target-groups-handheld-monitors = handheld monitor
 steal-target-groups-galoshes = galosh
 steal-target-groups-rcd-rpd = RCDs and RPD
-steal-target-groups-misc-sunglasses = beer goggles, musician shades, security glasses, corpsman glasses, or detective's noir-tech glass
-steal-target-groups-rare-sunglasses = administration, skill, blueshield, or brigmedic sunglass
+steal-target-groups-misc-sunglasses = beer goggles, musician shades, MP glasses, Marine Corpsman glasses, or detective's noir-tech glass
+steal-target-groups-rare-sunglasses = administration, skill, blueshield, or Marine Corpsman sunglass
 steal-target-groups-assistant-headsets = assistant headset
-steal-target-groups-medical-belts = filled medical belt, EMT belt, corpsman duty belt, tactical trauma belt, tactical trauma rig, blueshield medical belt, or blueshield webbing
+steal-target-groups-medical-belts = filled medical belt, EMT belt, Marine Corpsman duty belt, tactical trauma belt, tactical trauma rig, blueshield medical belt, or blueshield webbing
 
 # docs
 steal-target-groups-corporate-documents = classified corporate secrets documents

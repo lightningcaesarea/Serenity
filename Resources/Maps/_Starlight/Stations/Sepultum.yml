@@ -148014,11 +148014,6 @@ entities:
       pos: -39.5,34.5
 - proto: LockerDetectiveFilled
   entities:
-  - uid: 22336
-    components:
-    - type: Transform
-      parent: 2
-      pos: -85.5,60.5
   - uid: 22337
     components:
     - type: Transform
@@ -171361,18 +171356,6 @@ entities:
     - type: Transform
       parent: 2
       pos: -72.5,-22.5
-- proto: SpawnPointDetective
-  entities:
-  - uid: 26153
-    components:
-    - type: Transform
-      parent: 2
-      pos: -86.5,58.5
-  - uid: 26154
-    components:
-    - type: Transform
-      parent: 2
-      pos: -84.5,58.5
 - proto: SpawnPointDutyOfficer
   entities:
   - uid: 26155
@@ -173337,7 +173320,7 @@ entities:
   - uid: 26472
     components:
     - type: MetaData
-      name: substation (Security)
+      name: substation (Marine Police)
     - type: Transform
       parent: 2
       pos: -89.5,57.5
@@ -181012,7 +180995,7 @@ entities:
     - type: Transform
       parent: 2
       pos: -53.5,29.5
-- proto: VendingMachineDetDrobe
+- proto: VendingMachineBountyVend
   entities:
   - uid: 27589
     components:
@@ -260408,4 +260391,11 @@ entities:
     - type: Transform
       parent: 2
       pos: -78.66753,23.581196
+- proto: VendingMachineMarinePoliceField
+  entities:
+  - uid: 22336
+    components:
+    - type: Transform
+      parent: 2
+      pos: -85.5,60.5
 ...

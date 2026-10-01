@@ -34,7 +34,7 @@
 
 - type: entity
   id: ClosetL3SecurityFilled
-  suffix: Filled, Security
+  suffix: Filled, Marine Police
   parent: ClosetL3Security
   components:
   - type: EntityTableContainerFill

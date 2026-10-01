@@ -440,8 +440,8 @@
   parent: BaseComputerAiAccess
   id: ComputerCriminalRecords
   # Cosmatic Drift Record System-start: Renamed from "criminal records computer" to "security records computer" to better reflect its purpose.
-  name: security records computer
-  description: This can be used to access security records.
+  name: Marine Police records computer
+  description: This can be used to access Marine Police records.
   # Cosmatic Drift Record System-end
   components:
     # We need to have both a CriminalRecordsConsole and CharacterRecordConsole
@@ -1226,8 +1226,8 @@
 - type: entity
   id: ComputerCargoOrdersSecurity
   parent: ComputerCargoOrders
-  name: security request computer
-  description: Used by the security department to order supplies.
+  name: Marine Police request computer
+  description: Used by the Marine Police to order supplies.
   components:
   - type: Sprite
     layers:

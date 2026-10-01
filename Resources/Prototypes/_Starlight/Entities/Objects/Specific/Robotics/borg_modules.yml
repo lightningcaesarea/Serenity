@@ -242,7 +242,7 @@
   id: BorgContrabandBag
   parent: BaseStorageItem
   name: contraband bag
-  description: An integrated evidence bag mounted directly into a security cyborg's chassis. It can collect contraband on contact, and will drop to the floor if the cyborg is incapacitated.
+  description: An integrated evidence bag mounted directly into a Marine Police cyborg's chassis. It can collect contraband on contact, and will drop to the floor if the cyborg is incapacitated.
   components:
   - type: Sprite
     sprite: Clothing/Back/Duffels/security.rsi
@@ -267,8 +267,8 @@
 - type: entity
   id: BorgModuleSecurity
   parent: [ BaseBorgModuleSecurity, BaseProviderBorgModule ]
-  name: security cyborg module
-  description: A security cyborg module which allows the unit to use unlethal equipment.
+  name: Marine Police cyborg module
+  description: A Marine Police cyborg module which allows the unit to use unlethal equipment.
   components:
   - type: Sprite
     layers:
@@ -292,7 +292,7 @@
   id: BorgModuleSecurityContraband
   parent: [ BaseBorgModuleSecurity, BaseProviderBorgModule ]
   name: contraband bag cyborg module
-  description: A security cyborg module containing an integrated evidence bag. It can collect contraband on contact and will drop to the floor if the cyborg is incapacitated.
+  description: A Marine Police cyborg module containing an integrated evidence bag. It can collect contraband on contact and will drop to the floor if the cyborg is incapacitated.
   components:
   - type: Sprite
     layers:

@@ -2,7 +2,7 @@
   name: crisis button
   parent: BaseItem
   id: CrisisButton
-  description: Used to broadcast an distress call to security comms.
+  description: Used to broadcast an distress call to Marine Police comms.
   components:
   - type: Sprite
     sprite: _Starlight/Objects/Specific/Security/crisisButton.rsi

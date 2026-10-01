@@ -16697,7 +16697,7 @@ entities:
   - uid: 114
     components:
     - type: MetaData
-      name: air alarm (security heating)
+      name: air alarm (Marine Police heating)
     - type: Transform
       parent: 2
       rot: 3.141592653589793 rad
@@ -22043,7 +22043,7 @@ entities:
   - uid: 795
     components:
     - type: MetaData
-      name: advanced APC (security heating)
+      name: advanced APC (Marine Police heating)
     - type: Transform
       parent: 2
       pos: 55.5,-65.5
@@ -175077,7 +175077,7 @@ entities:
   - uid: 25942
     components:
     - type: MetaData
-      name: north security hallway heater
+      name: north Marine Police hallway heater
     - type: Transform
       parent: 2
       rot: 1.5707963267948966 rad
@@ -175111,7 +175111,7 @@ entities:
   - uid: 25945
     components:
     - type: MetaData
-      name: south security hallway heater
+      name: south Marine Police hallway heater
     - type: Transform
       parent: 2
       rot: 1.5707963267948966 rad
@@ -175123,7 +175123,7 @@ entities:
   - uid: 25946
     components:
     - type: MetaData
-      name: security front heater
+      name: Marine Police front heater
     - type: Transform
       parent: 2
       rot: 1.5707963267948966 rad
@@ -193482,11 +193482,6 @@ entities:
       pos: -33.5,-16.5
 - proto: LockerDetectiveFilled
   entities:
-  - uid: 28613
-    components:
-    - type: Transform
-      parent: 2
-      pos: 89.5,-50.5
   - uid: 28614
     components:
     - type: Transform
@@ -230872,18 +230867,6 @@ entities:
     - type: Transform
       parent: 2
       pos: 6.5,-55.5
-- proto: SpawnPointDetective
-  entities:
-  - uid: 34511
-    components:
-    - type: Transform
-      parent: 2
-      pos: 86.5,-48.5
-  - uid: 34512
-    components:
-    - type: Transform
-      parent: 2
-      pos: 94.5,-48.5
 - proto: SpawnPointDutyOfficer
   entities:
   - uid: 34513
@@ -233080,7 +233063,7 @@ entities:
   - uid: 34872
     components:
     - type: MetaData
-      name: substation (security)
+      name: substation (Marine Police)
     - type: Transform
       parent: 2
       pos: 58.5,-50.5
@@ -241005,7 +240988,7 @@ entities:
     - type: Transform
       parent: 2
       pos: 18.5,-48.5
-- proto: VendingMachineDetDrobe
+- proto: VendingMachineBountyVend
   entities:
   - uid: 36095
     components:
@@ -265955,4 +265938,11 @@ entities:
     - type: Transform
       parent: 2
       pos: 77.42181,-57.254818
+- proto: VendingMachineMarinePoliceField
+  entities:
+  - uid: 28613
+    components:
+    - type: Transform
+      parent: 2
+      pos: 89.5,-50.5
 ...

@@ -12624,7 +12624,7 @@ entities:
   - uid: 215
     components:
     - type: MetaData
-      name: Security Substation
+      name: Marine Police Substation
     - type: Transform
       parent: 2
       pos: -33.5,4.5
@@ -16135,7 +16135,7 @@ entities:
   - uid: 676
     components:
     - type: MetaData
-      name: Main Hall South Security APC
+      name: Main Hall South Marine Police APC
     - type: Transform
       parent: 2
       pos: -28.5,-25.5
@@ -125401,21 +125401,6 @@ entities:
     - type: Transform
       parent: 2
       pos: 41.5,-10.5
-- proto: LockerDetectiveFilled
-  entities:
-  - uid: 17605
-    components:
-    - type: Transform
-      parent: 2
-      pos: -26.5,-26.5
-    - type: EntityStorage
-      air:
-        temperature: 293.1496
-        volume: 200
-        moles:
-          Oxygen: 1.6495836
-          Nitrogen: 6.2055764
-        immutable: False
 - proto: LockerElectricalSuppliesFilled
   entities:
   - uid: 17606
@@ -148575,18 +148560,6 @@ entities:
     - type: Transform
       parent: 2
       pos: 20.5,-12.5
-- proto: SpawnPointDetective
-  entities:
-  - uid: 21109
-    components:
-    - type: Transform
-      parent: 2
-      pos: -23.5,-29.5
-  - uid: 21110
-    components:
-    - type: Transform
-      parent: 2
-      pos: -25.5,-29.5
 - proto: SpawnPointDutyOfficer
   entities:
   - uid: 21111
@@ -149862,7 +149835,7 @@ entities:
   - uid: 21307
     components:
     - type: MetaData
-      name: Security Substation
+      name: Marine Police Substation
     - type: Transform
       parent: 2
       pos: -34.5,2.5
@@ -156384,7 +156357,7 @@ entities:
     - type: Transform
       parent: 2
       pos: -6.5,21.5
-- proto: VendingMachineDetDrobe
+- proto: VendingMachineBountyVend
   entities:
   - uid: 22158
     components:
@@ -176520,4 +176493,11 @@ entities:
     - type: Transform
       parent: 2
       pos: 22.523067,-13.471564
+- proto: VendingMachineMarinePoliceField
+  entities:
+  - uid: 17605
+    components:
+    - type: Transform
+      parent: 2
+      pos: -26.5,-26.5
 ...

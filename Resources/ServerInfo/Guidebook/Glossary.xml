@@ -30,7 +30,7 @@ Short for cyborgs, player-controlled robots.
 Refers to a user who has disconnected from the game. Disconnected users may still reconnect to the server and assume control of their character again.
 
 ## Brig
-The main area of the security department. This is where prisoners are brought and held for their punishment. The Warden is in charge of the brig's smooth operation.
+The main area of the Marine Police department. This is where prisoners are brought and held for their punishment. The Marine Quartermaster is in charge of the brig's smooth operation.
 
 ## Cap
 Short for Captain.
@@ -84,9 +84,9 @@ Typically utilized to refer to an Assistant due to the color of their standard u
 <!-- Starlight-edit: abbrev -->
 Abbreviation for Head of Personnel, head of the Service Department. Can also refer to the HoP's office, where IDs are given or changed.
 
-## HoS
+## Marine CO
 <!-- Starlight-edit: abbrev -->
-Abbreviation for Head of Security, head of the Security Department.
+Abbreviation for Marine Commanding Officer, head of the Marine Police.
 
 ## Insuls
 Short for Insulated Gloves. These are the yellow gloves most often worn by Engineers. They are offer complete protection from getting electrocuted from shocked things. Vastily more effective than their budget variety.
@@ -113,7 +113,7 @@ A portmanteau of "New" and "Nukie" used to refer to an inexperienced player in t
 A slang/shorthand term of a Nuclear Operative. May sometimes also appear as "Nuke Op".
 
 ## Perma
-Short for Permanent Brig. This is for the most serious crime and means that a prisoner will never be released. Most stations have a dedicated, separate area of security for the permanent brig.
+Short for Permanent Brig. This is for the most serious crime and means that a prisoner will never be released. Most stations have a dedicated, separate area of the Marine Police department for the permanent brig.
 
 ## QM
 <!-- Starlight-edit: abbrev -->
@@ -132,11 +132,11 @@ Short for Salvage tech.
 ## Sci
 Short for Science.
 
-## Sec
-Short for Security.
+## MP
+Short for Marine Police.
 
-## Secoff
-Short for Security Officer.
+## Trooper
+Short for Marine Trooper.
 
 ## Shift
 In-Character way to refer to rounds.
@@ -170,7 +170,7 @@ A catch-all reference to anyone employed by the Syndicate. This ranges from (sus
 Abbreviation for Telecrystal, a currency used by Syndicate Agents to purchase restricted contraband such as weapons and other illegal equipment.
 
 ## Wardenloose
-A joke term referencing a Singuloose. A wardenloose is when the Warden is seen outside of the brig.
+A joke term referencing a Singuloose. A wardenloose is when the Marine Quartermaster is seen outside of the brig.
 
 ## Xenoarchaeology
 Study of artifacts, usually performed by science.
@@ -204,7 +204,7 @@ Abbreviation for Low Roleplay. Servers marked LRP typically have relaxed rolepla
 
 ## MRP
 <!-- Starlight-edit: abbrev -->
-Abbreviation for Medium Roleplay. Servers marked MRP usually have a decent basis of roleplaying rules and generally require players to act as their character would realistically in a given situation. Less leeway is afforded to behavior such as openly defying Security or your boss.
+Abbreviation for Medium Roleplay. Servers marked MRP usually have a decent basis of roleplaying rules and generally require players to act as their character would realistically in a given situation. Less leeway is afforded to behavior such as openly defying the Marine Police or your boss.
 
 ## HRP
 <!-- Starlight-edit: abbrev -->
@@ -217,6 +217,6 @@ A term for a player who engages in antagonist-like activity without actually bei
 The baseline version of the game. Any changes to Upstream will "flow" down to all other forks of the game. All official Wizard's Den servers work off of Upstream.
 
 ## Validhunter
-A player who hunts down "valids", as in people that are valid to kill, even though this person isn't security.
+A player who hunts down "valids", as in people that are valid to kill, even though this person isn't Marine Police.
 
 </Document>

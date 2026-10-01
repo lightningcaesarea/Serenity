@@ -247,7 +247,7 @@
   parent: ClothingUniformSkirtBase
   id: ClothingUniformJumpskirtColorOrange
   name: orange jumpskirt
-  description: Don't wear this near paranoid security officers.
+  description: Don't wear this near paranoid Marine Troopers.
   components:
   - type: Sprite
     sprite: Clothing/Uniforms/Jumpskirt/color.rsi

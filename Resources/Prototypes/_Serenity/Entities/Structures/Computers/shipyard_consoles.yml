@@ -176,8 +176,8 @@
 - type: entity
   id: ComputerShipyardSecurity
   parent: ComputerShipyard
-  name: security vessel shipyard
-  description: Used to purchase security and combat-capable vessels.
+  name: Marine Police vessel shipyard
+  description: Used to purchase Marine Police and combat-capable vessels.
   components:
   - type: Sprite
     layers:

@@ -69306,13 +69306,6 @@ entities:
     - type: Transform
       parent: 2
       pos: 22.5,9.5
-- proto: LockerDetectiveFilled
-  entities:
-  - uid: 10172
-    components:
-    - type: Transform
-      parent: 2
-      pos: -5.5,-40.5
 - proto: LockerEngineerFilled
   entities:
   - uid: 10173
@@ -77031,7 +77024,7 @@ entities:
   - uid: 11337
     components:
     - type: MetaData
-      name: divine security techfab
+      name: divine Marine Police techfab
       desc: Prints equipment for use by security crew. blessed by the shit sec of stations past.
     - type: Transform
       parent: 2
@@ -79475,13 +79468,6 @@ entities:
     - type: Transform
       parent: 2
       pos: -34.5,-9.5
-- proto: SpawnPointDetective
-  entities:
-  - uid: 11679
-    components:
-    - type: Transform
-      parent: 2
-      pos: -7.5,-39.5
 - proto: SpawnPointDutyOfficer
   entities:
   - uid: 11680
@@ -83618,7 +83604,7 @@ entities:
     - type: Transform
       parent: 2
       pos: 5.5,-21.5
-- proto: VendingMachineDetDrobe
+- proto: VendingMachineBountyVend
   entities:
   - uid: 12338
     components:
@@ -97511,4 +97497,11 @@ entities:
       parent: 14835
       rot: 3.141592653589793 rad
       pos: -1.5,-2.5
+- proto: VendingMachineMarinePoliceField
+  entities:
+  - uid: 10172
+    components:
+    - type: Transform
+      parent: 2
+      pos: -5.5,-40.5
 ...

@@ -8153,7 +8153,7 @@ entities:
   - uid: 30
     components:
     - type: MetaData
-      name: air alarm (Sec - East)
+      name: air alarm (MP - East)
     - type: Transform
       parent: 2
       rot: 3.141592653589793 rad
@@ -8504,7 +8504,7 @@ entities:
   - uid: 51
     components:
     - type: MetaData
-      name: air alarm (Sec - Brig)
+      name: air alarm (MP - Brig)
     - type: Transform
       parent: 2
       rot: 3.141592653589793 rad
@@ -8990,7 +8990,7 @@ entities:
   - uid: 79
     components:
     - type: MetaData
-      name: air alarm (Security - Warden)
+      name: air alarm (Marine Police - Marine Quartermaster)
     - type: Transform
       parent: 2
       rot: -1.5707963267948966 rad
@@ -9125,7 +9125,7 @@ entities:
   - uid: 87
     components:
     - type: MetaData
-      name: air alarm (Sec - HOS Office)
+      name: air alarm (MP - HOS Office)
     - type: Transform
       parent: 2
       rot: 1.5707963267948966 rad
@@ -12327,7 +12327,7 @@ entities:
   - uid: 515
     components:
     - type: MetaData
-      name: Security Arrivals APC
+      name: Marine Police Arrivals APC
     - type: Transform
       parent: 2
       rot: -1.5707963267948966 rad
@@ -12479,7 +12479,7 @@ entities:
   - uid: 529
     components:
     - type: MetaData
-      name: APC (Sec - HOS)
+      name: APC (MP - HOS)
     - type: Transform
       parent: 2
       pos: 47.5,43.5
@@ -12992,7 +12992,7 @@ entities:
   - uid: 580
     components:
     - type: MetaData
-      name: APC (Sec - Warden)
+      name: APC (MP - Marine Quartermaster)
     - type: Transform
       parent: 2
       pos: 42.5,26.5
@@ -13020,7 +13020,7 @@ entities:
   - uid: 583
     components:
     - type: MetaData
-      name: APC (Sec - East)
+      name: APC (MP - East)
     - type: Transform
       parent: 2
       rot: 3.141592653589793 rad
@@ -13040,7 +13040,7 @@ entities:
   - uid: 585
     components:
     - type: MetaData
-      name: APC (Sec - Hallway West)
+      name: APC (MP - Hallway West)
     - type: Transform
       parent: 2
       pos: 38.5,32.5
@@ -13080,7 +13080,7 @@ entities:
   - uid: 589
     components:
     - type: MetaData
-      name: APC (Sec - Detective)
+      name: APC (MP - Detective)
     - type: Transform
       parent: 2
       rot: 1.5707963267948966 rad
@@ -13100,7 +13100,7 @@ entities:
   - uid: 591
     components:
     - type: MetaData
-      name: APC (Sec - Brig)
+      name: APC (MP - Brig)
     - type: Transform
       parent: 2
       rot: 3.141592653589793 rad
@@ -80470,13 +80470,6 @@ entities:
     - type: Transform
       parent: 2
       pos: 75.5,-1.5
-- proto: LockerDetectiveFilled
-  entities:
-  - uid: 11647
-    components:
-    - type: Transform
-      parent: 2
-      pos: 57.5,39.5
 - proto: LockerElectricalSuppliesFilled
   entities:
   - uid: 11648
@@ -94256,13 +94249,6 @@ entities:
     - type: Transform
       parent: 2
       pos: 26.5,6.5
-- proto: SpawnPointDetective
-  entities:
-  - uid: 13663
-    components:
-    - type: Transform
-      parent: 2
-      pos: 58.5,38.5
 - proto: SpawnPointDutyOfficer
   entities:
   - uid: 13664
@@ -95155,7 +95141,7 @@ entities:
   - uid: 13792
     components:
     - type: MetaData
-      name: substation (Sec)
+      name: substation (MP)
     - type: Transform
       parent: 2
       pos: 62.5,36.5
@@ -99299,7 +99285,7 @@ entities:
     - type: Transform
       parent: 2
       pos: 13.5,3.5
-- proto: VendingMachineDetDrobe
+- proto: VendingMachineBountyVend
   entities:
   - uid: 14384
     components:
@@ -113356,4 +113342,11 @@ entities:
     - type: Transform
       parent: 2
       pos: 71.78979,31.37478
+- proto: VendingMachineMarinePoliceField
+  entities:
+  - uid: 11647
+    components:
+    - type: Transform
+      parent: 2
+      pos: 57.5,39.5
 ...

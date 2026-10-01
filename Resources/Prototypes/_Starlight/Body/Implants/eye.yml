@@ -75,8 +75,8 @@
 
 - type: entity
   id: EyeImplantSecurity
-  name: security implant
-  description: Enables you to see information about station crew without security glasses.
+  name: MP implant
+  description: Enables you to see information about station crew without MP glasses.
   parent: BaseEntityEyeImplant
   components:
   - type: Sprite

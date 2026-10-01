@@ -149,8 +149,8 @@
 - type: entity
   parent: ClothingBeltSecurity
   id: ClothingBeltSecurityWebbing
-  name: security carrier
-  description: Unique and versatile chest rig, can hold security gear.
+  name: Marine Police carrier
+  description: Unique and versatile chest rig, can hold Marine Police gear.
   components:
   - type: Sprite
     sprite: _Serenity/Clothing/Belt/securitywebbing_dv.rsi

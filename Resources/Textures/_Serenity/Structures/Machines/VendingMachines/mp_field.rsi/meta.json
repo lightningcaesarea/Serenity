@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-4.0",
+  "copyright": "Created by GhostPrince for Frontier Station (nfsdtech.rsi, Frontier commit 5be37d18c2); recoloured to navy and relettered MP for Serenity.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "broken"
+    },
+    {
+      "name": "off"
+    },
+    {
+      "name": "panel"
+    },
+    {
+      "name": "normal-unshaded",
+      "delays": [
+        [
+          1.0,
+          0.1,
+          1.0,
+          0.1,
+          1.0,
+          0.1
+        ]
+      ]
+    }
+  ]
+}

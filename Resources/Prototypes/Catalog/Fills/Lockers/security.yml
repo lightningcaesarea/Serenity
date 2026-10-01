@@ -110,7 +110,7 @@
 
 - type: entity
   id: LockerBrigmedicFilled
-  suffix: Brigmedic, Filled
+  suffix: Marine Corpsman, Filled
   parent: LockerBrigmedic
   components:
   - type: EntityTableContainerFill

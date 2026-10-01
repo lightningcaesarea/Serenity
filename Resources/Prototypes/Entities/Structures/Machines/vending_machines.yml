@@ -1041,8 +1041,8 @@
   parent: VendingMachine
   id: VendingMachineSec
   categories: [ ShouldMapStation ] # Starlight
-  name: SecTech
-  description: A vending machine containing Security equipment. A label reads SECURITY PERSONNEL ONLY.
+  name: MP-Tech
+  description: A vending machine containing Marine Police equipment. A label reads MARINE POLICE PERSONNEL ONLY.
   components:
   - type: VendingMachine
     pack: SecTechInventory
@@ -1703,8 +1703,8 @@
   parent: VendingMachine
   id: VendingMachineSecDrobe
   categories: [ ShouldMapStation ] # Starlight
-  name: SecDrobe
-  description: A vending machine for security and security-related clothing!
+  name: MP-Drobe
+  description: A vending machine for Marine Police and Marine Police-related clothing!
   components:
   - type: VendingMachine
     pack: SecDrobeInventory
@@ -2028,7 +2028,7 @@
 - type: entity
   parent: VendingMachine
   id: VendingMachineDetDrobe
-  categories: [ ShouldMapStation ] # Starlight
+  # Serenity: no longer mapped, the Detective is disabled and BountyVend took its place
   name: DetDrobe
   description: A machine for all your detective needs, as long as you need clothes.
   components:

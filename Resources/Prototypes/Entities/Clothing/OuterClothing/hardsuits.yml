@@ -274,7 +274,7 @@
 - type: entity
   parent: [ClothingOuterHardsuitBase, BaseSecurityContraband]
   id: ClothingOuterHardsuitSecurity
-  name: security hardsuit
+  name: Marine Police hardsuit
   description: A special suit that protects against hazardous, low pressure environments. Has an additional layer of armor.
   components:
   - type: Sprite
@@ -313,8 +313,8 @@
 - type: entity
   parent: [ClothingOuterHardsuitBase, BaseSecurityContraband]
   id: ClothingOuterHardsuitBrigmedic
-  name: corpsman hardsuit
-  description: Special hardsuit of the guardian angel of the brig. It is the medical version of the security hardsuit.
+  name: Marine Corpsman hardsuit
+  description: Special hardsuit of the guardian angel of the brig. It is the medical version of the Marine Police hardsuit.
   components:
   - type: Sprite
     sprite: Clothing/OuterClothing/Hardsuits/brigmedic.rsi
@@ -358,7 +358,7 @@
 - type: entity
   parent: [ClothingOuterHardsuitBase, BaseSecurityContraband]
   id: ClothingOuterHardsuitWarden
-  name: armourer's hardsuit
+  name: Marine Quartermaster's hardsuit
   description: A specialized, heavy riot suit geared to combat low pressure environments.
   components:
   - type: Sprite
@@ -569,7 +569,7 @@
 - type: entity
   parent: [ClothingOuterHardsuitBase, BaseGrandTheftContraband] # Starlight, grand theft
   id: ClothingOuterHardsuitSecurityRed
-  name: head of security's hardsuit
+  name: Marine CO's hardsuit
   description: A special suit that protects against hazardous, low pressure environments. Has an additional layer of armor.
   components:
   - type: Sprite

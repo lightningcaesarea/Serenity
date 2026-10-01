@@ -235,7 +235,7 @@
   name: portable flasher
   parent: [BaseMachine, BaseSecurityContraband]
   id: PortableFlasher
-  description: An ultrabright flashbulb with a proximity trigger, useful for making an area security-only.
+  description: An ultrabright flashbulb with a proximity trigger, useful for making an area Marine Police-only.
   components:
     - type: EmitSoundOnTrigger
       predicted: true

@@ -261,8 +261,8 @@
 - type: entity
   parent: ClothingHeadHeadHatBaseFlippable
   id: ClothingHeadHatSecsoft
-  name: security cap
-  description: A baseball cap colored to match security's uniforms.
+  name: Marine Police cap
+  description: A baseball cap colored to match the Marine Police's uniforms.
   components:
   - type: Sprite
     sprite: Clothing/Head/Soft/secsoft.rsi
@@ -272,13 +272,13 @@
 - type: entity
   parent: [ClothingHeadHeadHatBaseFlipped, ClothingHeadHatSecsoft]
   id: ClothingHeadHatSecsoftFlipped
-  name: security cap
+  name: Marine Police cap
 
 - type: entity
   parent: ClothingHeadBaseButcherable
   id: ClothingHeadHatSecsoftDV
-  name: security cap
-  description: A baseball cap colored to match security's uniforms.
+  name: Marine Police cap
+  description: A baseball cap colored to match the Marine Police's uniforms.
   components:
   - type: Sprite
     sprite: _Serenity/Clothing/Head/Hats/cap_sec.rsi

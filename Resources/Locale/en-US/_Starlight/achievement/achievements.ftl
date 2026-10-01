@@ -29,7 +29,7 @@ achievement-stranded-name = Stranded
 achievement-stranded-description = Fail to make it back to the salvage shuttle in time during an expedition.
 
 achievement-how-to-charge-name = How to Charge?
-achievement-how-to-charge-description = Try to hit someone with an uncharged stun baton as a member of security.
+achievement-how-to-charge-description = Try to hit someone with an uncharged stun baton as a member of the Marine Police.
 
 achievement-guard-dog-name = Guard Dog
 achievement-guard-dog-description = Finish a round as BSO without a single command staff member dying.

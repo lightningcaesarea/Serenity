@@ -1,8 +1,8 @@
 - type: entity
   parent: CardboardBoxLargeSecurity
   id: CardboardBoxLargeSecuritySupplies
-  name: security supplies box
-  suffix: Security
+  name: Marine Police supplies box
+  suffix: Marine Police
   components:
   - type: EntityTableContainerFill
     containers:
@@ -98,8 +98,8 @@
 - type: entity
   parent: CardboardBoxLargeSecurity
   id: CardboardBoxLargeSecurityBrigmed
-  name: corpsman supplies box
-  suffix: Brigmed Basic
+  name: Marine Corpsman supplies box
+  suffix: Marine Corpsman Basic
   components:
   - type: EntityTableContainerFill
     containers:
@@ -120,7 +120,7 @@
   parent: CardboardBoxLargeSecurity
   id: CardboardBoxLargeSecurityTopicals
   name: advanced topicals box
-  suffix: Brigmed Topicals
+  suffix: Marine Corpsman Topicals
   components:
   - type: EntityTableContainerFill
     containers:

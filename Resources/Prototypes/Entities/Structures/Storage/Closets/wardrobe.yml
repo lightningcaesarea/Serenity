@@ -128,7 +128,7 @@
 - type: entity
   id: WardrobeSecurity
   parent: WardrobeBase
-  name: security wardrobe
+  name: Marine Police wardrobe
   components:
   - type: Appearance
   - type: EntityStorageVisuals

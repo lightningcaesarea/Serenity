@@ -74,7 +74,7 @@
 - type: entity
   parent: ToteBase
   id: BoxHoSCircuitboards
-  name: security circuit tote
+  name: Marine Police circuit tote
   components:
   - type: EntityTableContainerFill
     containers:

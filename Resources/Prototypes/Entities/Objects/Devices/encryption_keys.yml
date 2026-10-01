@@ -199,8 +199,8 @@
 - type: entity
   parent: [ EncryptionKey, BaseSecurityContraband ] # Starlight
   id: EncryptionKeySecurity
-  name: security encryption key
-  description: An encryption key used by security.
+  name: Marine Police encryption key
+  description: An encryption key used by the Marine Police.
   components:
   - type: EncryptionKey
     channels:

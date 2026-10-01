@@ -4,16 +4,16 @@ highlights-captain = Captain, "Cap", Bridge, "Command"
 highlights-head-of-personnel = Head Of Personnel, "HoP", Service, Bridge, "Command"
 highlights-chief-engineer = Chief Engineer, "CE", Engineering, Engineer, "Engi", Bridge, "Command"
 highlights-chief-medical-officer = Chief Medical Officer, "CMO", Medbay, Medical, "Med", Bridge, "Command"
-highlights-head-of-security = Head of Security, "HoS", Armory, Security, "Sec", Bridge, "Command"
+highlights-head-of-security = Marine CO, "CO", Armory, Marine Police, "MP", Bridge, "Command"
 highlights-quartermaster = Quartermaster, "QM", Cargo, Supply, Bridge, "Command"
 highlights-research-director = Research Director, "RD", Science, "Sci", "RND", "R&D", Bridge, "Command"
 # Starlight end
 
 # Security
-highlights-detective = Detective, "Det", Armory, Security, "Sec"
-highlights-security-cadet = Security Cadet, Secoff, Cadet, Armory, Security, "Sec"
-highlights-security-officer = Security Officer, Secoff, Officer, Armory, Security, "Sec"
-highlights-warden = Warden, "Ward", Brig, Genpop, Jail, "Prison", Armory, Security, "Sec"
+highlights-detective = Detective, "Det", Armory, Marine Police, "MP"
+highlights-security-cadet = Marine Cadet, Cadet, Armory, Marine Police, "MP"
+highlights-security-officer = Marine Trooper, Trooper, Armory, Marine Police, "MP"
+highlights-warden = Marine Quartermaster, Brig, Genpop, Jail, "Prison", Armory, Marine Police, "MP"
 
 # Cargo
 highlights-cargo-technician = Cargo Technician, Cargo Tech, "Cargo", Supply

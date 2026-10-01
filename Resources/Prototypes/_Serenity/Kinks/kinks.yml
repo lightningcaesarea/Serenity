@@ -1068,7 +1068,7 @@
 - type: kink
   id: prisoner
   name: "Prisoner and Guard"
-  description: "Detention dynamics. Fits Security play."
+  description: "Detention dynamics. Fits Marine Police play."
   category: scenario
 
 - type: kink

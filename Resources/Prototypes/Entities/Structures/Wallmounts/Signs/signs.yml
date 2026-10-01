@@ -218,8 +218,8 @@
 - type: entity
   parent: BaseSignDirectional
   id: SignDirectionalSec
-  name: sec sign
-  description: A direction sign, pointing out which way Security is.
+  name: MP sign
+  description: A direction sign, pointing out which way the Marine Police is.
   components:
   - type: Sprite
     sprite: _Serenity/Structures/Wallmounts/signs_security_dv.rsi
@@ -1266,8 +1266,8 @@
 - type: entity
   parent: BaseSign
   id: SignSecurity
-  name: security sign
-  description: A sign depicting the security insignia.
+  name: Marine Police sign
+  description: A sign depicting the Marine Police insignia.
   components:
   - type: Sprite
     sprite: _Serenity/Structures/Wallmounts/signs_security_dv.rsi

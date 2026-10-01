@@ -5,8 +5,8 @@ id-card-access-level-head-of-personnel = Head of Personnel
 id-card-access-level-cryogenics = Cryosleep
 id-card-access-level-emergency-shuttle-repeal = E.Shuttle Repeal All
 
-id-card-access-level-head-of-security = Head of Security
-id-card-access-level-security = Security
+id-card-access-level-head-of-security = Marine CO
+id-card-access-level-security = Marine Police
 id-card-access-level-armory = Armory
 id-card-access-level-brig = Brig
 id-card-access-level-detective = Detective

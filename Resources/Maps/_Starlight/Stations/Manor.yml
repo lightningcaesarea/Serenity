@@ -94544,7 +94544,7 @@ entities:
       parent: 2
       pos: -19.5,72.5
     - type: NavMapBeacon
-      text: HoS
+      text: Marine CO
     - type: WarpPoint
       location: HoS
 - proto: DefaultStationBeaconIAA
@@ -94706,7 +94706,7 @@ entities:
       parent: 2
       pos: -24.5,50.5
     - type: NavMapBeacon
-      text: Security
+      text: Marine Police
     - type: WarpPoint
       location: Security
   - uid: 15588
@@ -94742,7 +94742,7 @@ entities:
       parent: 2
       pos: -58.5,55.5
     - type: NavMapBeacon
-      text: Sec EVA
+      text: MP EVA
     - type: WarpPoint
       location: Sec EVA
 - proto: DefaultStationBeaconServerRoom
@@ -94867,7 +94867,7 @@ entities:
       parent: 2
       pos: -48.5,55.5
     - type: NavMapBeacon
-      text: Warden
+      text: Marine Quartermaster
     - type: WarpPoint
       location: Warden
 - proto: DefaultStationBeaconXenobiology
@@ -164617,11 +164617,6 @@ entities:
     - type: Transform
       parent: 2
       pos: -8.5,65.5
-  - uid: 25374
-    components:
-    - type: Transform
-      parent: 2
-      pos: -9.5,65.5
 - proto: LockerEngineerFilled
   entities:
   - uid: 25375
@@ -186840,7 +186835,7 @@ entities:
   - uid: 28923
     components:
     - type: MetaData
-      name: SMES (Security)
+      name: SMES (Marine Police)
     - type: Transform
       parent: 2
       pos: -41.5,74.5
@@ -187912,18 +187907,6 @@ entities:
     - type: Transform
       parent: 2
       pos: 28.5,13.5
-- proto: SpawnPointDetective
-  entities:
-  - uid: 29099
-    components:
-    - type: Transform
-      parent: 2
-      pos: -10.5,61.5
-  - uid: 29100
-    components:
-    - type: Transform
-      parent: 2
-      pos: -11.5,64.5
 - proto: SpawnPointDutyOfficer
   entities:
   - uid: 29101
@@ -189227,7 +189210,7 @@ entities:
   - uid: 29316
     components:
     - type: MetaData
-      name: substation (Security)
+      name: substation (Marine Police)
     - type: Transform
       parent: 2
       pos: -39.5,74.5
@@ -196210,7 +196193,7 @@ entities:
     - type: Transform
       parent: 2
       pos: 17.5,37.5
-- proto: VendingMachineDetDrobe
+- proto: VendingMachineBountyVend
   entities:
   - uid: 30398
     components:
@@ -221711,4 +221694,11 @@ entities:
     - type: Transform
       parent: 2
       pos: -2.5174084,78.74515
+- proto: VendingMachineMarinePoliceField
+  entities:
+  - uid: 25374
+    components:
+    - type: Transform
+      parent: 2
+      pos: -9.5,65.5
 ...

@@ -20,7 +20,7 @@
   parent: BaseAction
   id: ActionBorgCallForHelp
   name: Call for Backup!
-  description: Broadcast a distress signal to the Security channel with your current location. 120 second cooldown.
+  description: Broadcast a distress signal to the Marine Police channel with your current location. 120 second cooldown.
   components:
   - type: Action
     checkCanInteract: false

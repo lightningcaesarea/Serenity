@@ -119,7 +119,7 @@
   parent: [WeaponLauncherHydra]
   id: WeaponLauncherHydraLethal
   name: modified hydra # SL edit: give it a proper name
-  suffix: Security # starlight: differentiate
+  suffix: Marine Police # starlight: differentiate
   components:
   - type: RevolverAmmoProvider
     whitelist:

@@ -168,8 +168,8 @@
 - type: entity
   parent: CrateSecgear
   id: CrateVendingMachineRestockSecTechFilled
-  name: SecTech restock crate
-  description: Contains a restock box for the SecTech vending machine.
+  name: MP-Tech restock crate
+  description: Contains a restock box for the MP-Tech vending machine.
   components:
   - type: EntityTableContainerFill
     containers:

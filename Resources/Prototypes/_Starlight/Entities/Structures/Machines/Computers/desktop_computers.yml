@@ -206,8 +206,8 @@
 - type: entity
   parent: [ BaseDesktop, ComputerCriminalRecords ]
   id: ComputerCriminalRecordsDesktop
-  name: security records desktop computer
-  description: This can be used to access security records.
+  name: Marine Police records desktop computer
+  description: This can be used to access Marine Police records.
   components:
   - type: Computer
     board: CriminalRecordsComputerCircuitboardDesktop
@@ -287,8 +287,8 @@
 - type: entity
   parent: [ BaseDesktop, ComputerCargoOrdersSecurity ]
   id: ComputerCargoOrdersSecurityDesktop
-  name: security request desktop computer
-  description: Used by the security department to order supplies.
+  name: Marine Police request desktop computer
+  description: Used by the Marine Police to order supplies.
   components:
   - type: Computer
     board: CargoRequestSecurityComputerCircuitboardDesktop

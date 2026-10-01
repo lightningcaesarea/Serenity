@@ -15,7 +15,7 @@ research-technology-basic-implants = Basic Implants
 
 research-technology-medical-cyberlimbs = Medical cyberlimbs
 research-technology-cargo-cyberlimbs = Logistical cyberlimbs
-research-technology-security-cyberlimbs = Security cyberlimbs
+research-technology-security-cyberlimbs = Marine Police cyberlimbs
 research-technology-science-cyberlimbs = Scientific cyberlimbs
 research-technology-civilian-cyberlimbs = Civilian cyberlimbs
 research-technology-engineering-cyberlimbs = Engineering cyberlimbs

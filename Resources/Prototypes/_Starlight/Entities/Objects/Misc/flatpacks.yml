@@ -94,8 +94,8 @@
 - type: entity
   parent: [BaseFlatpack, BaseSecurityContraband]
   id: SecurityTechFabFlatpack
-  name: security techfab flatpack
-  description: A flatpack used for constructing a security techfab.
+  name: Marine Police techfab flatpack
+  description: A flatpack used for constructing a Marine Police techfab.
   components:
   - type: Flatpack
     entity: SecurityTechFab

@@ -61,14 +61,14 @@
 
 # Brigmedic stamp
 - type: entity
-  name: corpsman's rubber stamp
+  name: Marine Corpsman's rubber stamp
   parent: RubberStampBase
   id: RubberStampBrigmedic
   description: A rubber stamp for stamping important documents. No authority, yet you will still stamp every single document you can.
   suffix: DO NOT MAP
   components:
     - type: Stamp
-      stampedName: "Brigmedic"
+      stampedName: "Marine Corpsman"
       stampedColor: "#ae2e33"
       stampState: "paper_stamp-brigmedic"
     - type: Sprite

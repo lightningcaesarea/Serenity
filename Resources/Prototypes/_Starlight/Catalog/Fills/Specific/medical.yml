@@ -13,7 +13,7 @@
 - type: entity
   id: BottleCaseSecurityFilled
   parent: BottleCaseSecurity
-  suffix: Security, Filled
+  suffix: Marine Police, Filled
   components:
   - type: EntityTableContainerFill
     containers:
@@ -136,7 +136,7 @@
 - type: entity
   id: PenPackSecurityFilled
   parent: PenPackSecurity
-  suffix: Security, Filled
+  suffix: Marine Police, Filled
   components:
   - type: EntityTableContainerFill
     containers:
