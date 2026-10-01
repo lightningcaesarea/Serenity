@@ -2,7 +2,6 @@ iv-verb-toggle = Switch injecting / drawing
 iv-now-injecting = The line is set to give fluid to the patient.
 iv-now-drawing = The line is set to draw blood from the patient.
 
-iv-fold-first = Fold { THE($iv) } flat to carry it. Drag it onto yourself.
 iv-cannot-self = You can't set a line in yourself.
 iv-no-bag = { CAPITALIZE(THE($iv)) } has no bag hung on it.
 

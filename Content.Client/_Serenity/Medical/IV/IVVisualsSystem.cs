@@ -1,5 +1,4 @@
 using Content.Shared._Serenity.Medical.IV;
-using Content.Shared.Foldable;
 using Content.Shared.Rounding;
 using Robust.Client.GameObjects;
 
@@ -11,8 +10,6 @@ namespace Content.Client._Serenity.Medical.IV;
 public sealed partial class IVVisualsSystem : EntitySystem
 {
     [Dependency] private SpriteSystem _sprite = default!;
-
-    private const string FoldedLayer = "foldedLayer";
 
     public override void Initialize()
     {
@@ -33,21 +30,6 @@ public sealed partial class IVVisualsSystem : EntitySystem
         data.TryGetValue(IVVisuals.Attached, out var attachedData);
         data.TryGetValue(IVVisuals.Fill, out var fillData);
         data.TryGetValue(IVVisuals.Color, out var colorData);
-
-        data.TryGetValue(FoldableSystem.FoldedVisuals.State, out var foldedData);
-
-        // Folded, the stand is just the flatpack.
-        var folded = foldedData is true;
-        if (_sprite.LayerMapTryGet(sprite, FoldedLayer, out var foldedLayer, false))
-            _sprite.LayerSetVisible(sprite, foldedLayer, folded);
-        if (_sprite.LayerMapTryGet(sprite, IVVisualLayers.Base, out var unfoldedBase, false))
-            _sprite.LayerSetVisible(sprite, unfoldedBase, !folded);
-        if (folded)
-        {
-            if (_sprite.LayerMapTryGet(sprite, IVVisualLayers.Reagent, out var hiddenReagent, false))
-                _sprite.LayerSetVisible(sprite, hiddenReagent, false);
-            return;
-        }
 
         var hasBag = hasBagData is true;
         var baseState = !hasBag

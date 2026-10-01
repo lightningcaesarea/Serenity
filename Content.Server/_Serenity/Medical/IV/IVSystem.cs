@@ -62,8 +62,7 @@ public sealed partial class IVSystem : SharedIVSystem
 
     private void OnStandDragDrop(Entity<IVStandComponent> stand, ref DragDropDraggedEvent args)
     {
-        // Dropped on yourself the stand folds instead (DeployFoldable).
-        if (args.Handled || args.User == args.Target || !TryComp<IVLineComponent>(stand, out var line))
+        if (args.Handled || !TryComp<IVLineComponent>(stand, out var line))
             return;
 
         args.Handled = true;
@@ -105,7 +104,7 @@ public sealed partial class IVSystem : SharedIVSystem
 
     private void TryStartAttach(Entity<IVLineComponent> line, EntityUid user, EntityUid patient)
     {
-        if (!HasComp<BloodstreamComponent>(patient) || IsFolded(line))
+        if (!HasComp<BloodstreamComponent>(patient))
             return;
 
         if (!TryGetBag(line, out _))
