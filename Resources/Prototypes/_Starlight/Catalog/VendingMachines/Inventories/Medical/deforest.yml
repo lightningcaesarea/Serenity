@@ -4,7 +4,7 @@
 - type: vendingMachineInventory
   id: DeforestInterstellarWallInventory
   startingInventory:
-    HandheldHealthAnalyzer: 1
+    AdvancedHealthAnalyzer: 1 # Serenity: departmental machines stock the advanced analyzer
     ClothingBeltMedical: 2
     ClothingBeltMedicalEMT: 1
     Gauze: 3
@@ -52,7 +52,7 @@
 - type: vendingMachineInventory
   id: DeforestInterstellarInventory
   startingInventory:
-    HandheldHealthAnalyzer: 3
+    AdvancedHealthAnalyzer: 3 # Serenity: departmental machines stock the advanced analyzer
     ClothingBeltMedical: 3
     ClothingBeltMedicalEMT: 2
     Gauze: 4

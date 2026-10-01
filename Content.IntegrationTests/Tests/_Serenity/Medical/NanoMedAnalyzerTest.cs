@@ -12,6 +12,8 @@ public sealed class NanoMedAnalyzerTest
         "NanoMedPlusInventory",
         "GoldNanoMedInventory",
         "GoldNanoMedPlusInventory",
+        "DeforestInterstellarInventory",
+        "DeforestInterstellarWallInventory",
     ];
 
     private static readonly ProtoId<VendingMachineInventoryPrototype>[] Civilian =
@@ -20,10 +22,13 @@ public sealed class NanoMedAnalyzerTest
         "NanoMedCivilianWallInventory",
         "GoldNanoMedCivilianInventory",
         "GoldNanoMedCivilianWallInventory",
+        "DeforestPlanetaryInventory",
+        "DeforestPlanetaryWallInventory",
     ];
 
     /// <summary>
-    /// The medbay NanoMeds sell the advanced health analyzer instead of the basic one; the civilian NanoMeds still
+    /// The medbay NanoMeds and the departmental (Interstellar) DeForest machines sell the advanced health analyzer instead of
+    /// the basic one; the civilian NanoMeds and the Planetary DeForest machines still
     /// sell the basic one, which is the only analyzer anyone untrained can use.
     /// </summary>
     [Test]
