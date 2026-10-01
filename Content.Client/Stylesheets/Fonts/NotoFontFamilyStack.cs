@@ -82,7 +82,7 @@ public sealed class NotoFontFamilyStack(IResourceCache resCache, string variant 
     /// <returns>A Font resource.</returns>
     public Font GetFont(int size, FontKind kind = FontKind.Regular)
     {
-        //ALDebugTools.AssertContains(AvailableKinds, kind);
+        //SRDebugTools.AssertContains(AvailableKinds, kind);
         var paths = GetFontPaths(kind);
 
         return resCache.GetFont(paths, size);

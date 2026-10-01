@@ -1,6 +1,6 @@
-﻿// Afterlight
-using Content.Shared._Afterlight.Silicons.Borgs; // Afterlight
-using Content.Shared.Silicons.Borgs.Components; // Afterlight
+﻿// Starlight
+using Content.Shared._Serenity.Silicons.Borgs; // Starlight
+using Content.Shared.Silicons.Borgs.Components; // Starlight
 using JetBrains.Annotations;
 using Robust.Client.UserInterface;
 
@@ -27,7 +27,7 @@ public sealed class BorgSelectTypeUserInterface : BoundUserInterface
         base.Open();
 
         _menu = this.CreateWindow<BorgSelectTypeMenu>();
-        _menu.ConfirmBorgSubtype += subtypePrototype => SendMessage(new BorgSelectSubtypeMessage(subtypePrototype?.ID)); // Afterlight - borg subtypes - Starlight
+        _menu.ConfirmBorgSubtype += subtypePrototype => SendMessage(new BorgSelectSubtypeMessage(subtypePrototype?.ID)); // Starlight - borg subtypes - Starlight
         _menu.ConfirmedBorgType += prototype => SendMessage(new BorgSelectTypeMessage(prototype)); // Starlight
         _menu.SetupMenu(Owner); // Starlight-edit
     }

@@ -1,4 +1,4 @@
-using Content.Shared._Afterlight.Silicons.Borgs;
+using Content.Shared._Serenity.Silicons.Borgs;
 using Content.Shared._Starlight.Silicons.Laws;
 using Content.Shared.Actions;
 using Content.Shared.Administration.Logs;

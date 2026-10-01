@@ -190,7 +190,7 @@
       collection: MaleGasp
     DefaultDeathgasp:
       collection: MaleDeathGasp
-    #region Afterlight
+    #region Starlight
     Mew:
       collection: FelionoidMews
     Meow:
@@ -203,7 +203,7 @@
       path: /Audio/_Starlight/Effects/yip.ogg
     Whine:
       collection: Whine
-    #endregion Afterlight
+    #endregion Starlight
     #region Starlight
     Bubble:
       collection: Bubbles
@@ -254,7 +254,7 @@
       collection: FemaleGasp
     DefaultDeathgasp:
       collection: FemaleDeathGasp
-    #region Afterlight
+    #region Starlight
     Mew:
       collection: FelionoidMews
     Meow:
@@ -267,7 +267,7 @@
       path: /Audio/_Starlight/Effects/yip.ogg
     Whine:
       collection: Whine
-    #endregion Afterlight
+    #endregion Starlight
     #region Starlight
     Bubble:
       collection: Bubbles

@@ -318,7 +318,7 @@
   id: ClothingUniformJumpskirtHoP
   result: ClothingUniformJumpskirtHoP
 
-- type: latheRecipe # afterlight start
+- type: latheRecipe # starlight start
   parent: BaseCommandJumpsuitRecipe
   id: ClothingUniformJumpsuitHoPTurtleneck
   result: ClothingUniformJumpsuitHoPTurtleneck
@@ -326,7 +326,7 @@
 - type: latheRecipe
   parent: BaseCommandJumpsuitRecipe
   id: ClothingUniformJumpskirtHoPTurtleneck
-  result: ClothingUniformJumpskirtHoPTurtleneck # afterlight end
+  result: ClothingUniformJumpskirtHoPTurtleneck # starlight end
 
 ## HoS
 
@@ -390,7 +390,7 @@
   id: ClothingUniformJumpskirtHoSAlt
   result: ClothingUniformJumpskirtHoSAlt
 
-## BSO # afterlight start
+## BSO # starlight start
 - type: latheRecipe
   parent: BaseCommandJumpsuitRecipe
   id: ClothingUniformJumpskirtBlueShield
@@ -473,7 +473,7 @@
   id: ClothingUniformJumpsuitSalvageFormal
   result: ClothingUniformJumpsuitSalvageFormal
 
-## NTR # afterlight end, starlight start
+## NTR # starlight end, starlight start
 
 - type: latheRecipe
   parent: BaseCommandJumpsuitRecipe
