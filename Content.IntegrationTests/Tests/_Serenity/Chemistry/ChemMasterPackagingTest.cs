@@ -1,4 +1,5 @@
 using Content.IntegrationTests.Tests.Interaction;
+using Content.Server._Serenity.Skills;
 using Content.Shared._Serenity.Chemistry;
 using Content.Shared.Chemistry;
 using Content.Shared.Chemistry.Components;
@@ -23,6 +24,10 @@ public sealed class ChemMasterPackagingTest : InteractionTest
     {
         await SpawnTarget("ChemMaster");
         ToggleNeedPower();
+
+        // The ChemMaster needs the Chemistry skill to open its UI.
+        await Server.WaitPost(() => SEntMan.System<SkillSystem>().GrantSkill(SEntMan.GetEntity(Player), "Chemistry"));
+        await RunTicks(5);
 
         await InteractUsing("Beaker");
 
@@ -87,6 +92,10 @@ public sealed class ChemMasterPackagingTest : InteractionTest
     {
         await SpawnTarget("ChemMaster");
         ToggleNeedPower();
+
+        // The ChemMaster needs the Chemistry skill to open its UI.
+        await Server.WaitPost(() => SEntMan.System<SkillSystem>().GrantSkill(SEntMan.GetEntity(Player), "Chemistry"));
+        await RunTicks(5);
 
         await InteractUsing("Beaker");
 
