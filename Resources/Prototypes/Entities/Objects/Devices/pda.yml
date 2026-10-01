@@ -222,7 +222,7 @@
 - type: entity
   parent: BaseMedicalPDA
   id: MedicalInternPDA
-  name: medical intern PDA
+  name: nurse PDA
   description: Why isn't it white?
   components:
   - type: Pda

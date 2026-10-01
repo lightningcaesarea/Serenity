@@ -128,7 +128,7 @@
 - type: entity
   id: SpawnPointMedicalIntern
   parent: SpawnPointJobBase
-  name: medical intern
+  name: nurse
   components:
   - type: SpawnPoint
     job_id: MedicalIntern

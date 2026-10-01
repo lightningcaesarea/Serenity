@@ -21,7 +21,7 @@
 # Medical
 - type: jobSkills
   id: MedicalDoctor
-  skills: [ Medicine, Surgery, Diagnostics ]
+  skills: [ Medicine, Surgery, Chemistry, Diagnostics ] # Chemist is retired; doctors run chemistry
 
 - type: jobSkills
   id: MedicalIntern
