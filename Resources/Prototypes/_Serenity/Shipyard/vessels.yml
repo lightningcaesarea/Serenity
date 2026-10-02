@@ -78,6 +78,15 @@
   shuttlePath: /Maps/_Starlight/Shuttles/Shipyard/Comet.yml
 
 - type: vessel
+  id: Bellows
+  name: GTS-A1-100KL "Bellows"
+  description: The "Bellows" single-gas hauler by GTS in default livery, capable of transferring 100kL. Very affordable and has a standard shape for easy universal deployment.
+  price: 27500
+  category: Small
+  group: ShipyardSalvage # Serenity: Starlight files this under Engineering, which has no console here
+  shuttlePath: /Maps/_Starlight/Shuttles/Shipyard/Bellows.yml
+
+- type: vessel
   id: CargoGas
   name: CS-4T9 "Tanker"
   description: A small sized cargo shuttle 'borrowed' from another station that is able to hold gas.

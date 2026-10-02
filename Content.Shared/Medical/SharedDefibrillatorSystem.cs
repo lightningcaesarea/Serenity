@@ -106,7 +106,7 @@ public abstract partial class SharedDefibrillatorSystem : EntitySystem
 
     private void OnAfterInteract(Entity<DefibrillatorComponent> ent, ref AfterInteractEvent args)
     {
-        if (args.Handled || args.Target is not { } target)
+        if (args.Handled || args.Target is not { } target || !args.CanReach)
             return;
 
         // Starlight - To stop you from being able to defib someone by clicking on them with a hardsuit.
@@ -270,9 +270,8 @@ public abstract partial class SharedDefibrillatorSystem : EntitySystem
                 _damageable.TryChangeDamage(target, zapHeal, true, origin: user); // Starlight Edit: Comp.ZapHeal to Copy
 
             if (TryComp<MobThresholdsComponent>(target, out var targetThresholds) &&
-                TryComp<DamageableComponent>(target, out var targetDamageable) &&
                 _mobThreshold.TryGetThresholdForState(target, MobState.Dead, out var threshold, targetThresholds) &&
-                targetDamageable.TotalDamage < threshold)
+                _damageable.GetTotalDamage(target) < threshold)
             {
                 _mobState.ChangeMobState(target, MobState.Critical, targetMobState, user);
                 failedRevive = false;

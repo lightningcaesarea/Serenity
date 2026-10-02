@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using Content.Server._Serenity.Skills;
-using Content.Server.Botany;
-using Content.Server.Botany.Systems;
+using Content.Shared.Botany.Components;
+using Content.Shared.Botany.Items.Components;
+using Content.Shared.Botany.Systems;
 using Content.Shared._Serenity.Skills;
 using Content.Shared.DoAfter;
 using Content.Shared.Mind;
@@ -162,23 +163,30 @@ public sealed class SkillPrototypeTest
             var entMan = server.ResolveDependency<IEntityManager>();
             var proto = server.ResolveDependency<IPrototypeManager>();
             var skillSys = entMan.System<SkillSystem>();
-            var botany = entMan.System<BotanySystem>();
-
-            // SeedPrototype is a server-only prototype kind, so the YAML linter can't validate a ProtoId for it; the
-            // literal id trips the Release-only RA0033 analyzer rule, which is suppressed for this one line.
-#pragma warning disable RA0033
-            var seed = proto.Index<SeedPrototype>("tomato").Clone();
-#pragma warning restore RA0033
-            seed.Yield = 3;
+            var harvest = entMan.System<PlantHarvestSystem>();
 
             var user = entMan.SpawnAtPosition("MobHuman", map.GridCoords);
             Assert.That(skillSys.GetPlantHarvestBonus(user), Is.Zero);
-            Assert.That(botany.Harvest(seed, user).Count(), Is.EqualTo(3), "unskilled harvest gives the seed's yield");
+            var unskilled = HarvestCount(entMan, harvest, user, map.GridCoords);
+            Assert.That(unskilled, Is.Positive, "unskilled harvest gives the plant's yield");
 
             Assert.That(skillSys.GrantSkill(user, "Botany"));
-            Assert.That(botany.Harvest(seed, user).Count(), Is.EqualTo(4), "Botany adds one produce");
+            Assert.That(HarvestCount(entMan, harvest, user, map.GridCoords), Is.EqualTo(unskilled + 1), "Botany adds one produce");
         });
 
         await pair.CleanReturnAsync();
+    }
+
+    // A fresh ripe plant, hand-harvested by the user; returns how many produce it dropped.
+    private static int HarvestCount(IEntityManager entMan, PlantHarvestSystem harvest, EntityUid user, Robust.Shared.Map.EntityCoordinates coords)
+    {
+        var plant = entMan.SpawnAtPosition("WheatPlants", coords);
+        var holder = entMan.GetComponent<PlantHolderComponent>(plant);
+        holder.YieldMod = 1;
+        holder.ReadyForHarvest = true;
+
+        var before = entMan.Count<ProduceComponent>();
+        Assert.That(harvest.TryHandleHarvest(plant, user));
+        return entMan.Count<ProduceComponent>() - before;
     }
 }

@@ -1,3 +1,4 @@
+using Content.Shared.Damage.Systems;
 using System.Linq;
 using System.Numerics;
 using Content.Server._Serenity.Skills;
@@ -69,7 +70,7 @@ public sealed class IVTest
     // The test map has no air, so total damage keeps climbing from suffocation; a torn line deals piercing.
     private static FixedPoint2 Piercing(IEntityManager entMan, EntityUid mob)
     {
-        return entMan.GetComponent<DamageableComponent>(mob).Damage.DamageDict.TryGetValue("Piercing", out var piercing)
+        return entMan.System<DamageableSystem>().GetAllDamage(mob).DamageDict.TryGetValue("Piercing", out var piercing)
             ? piercing
             : FixedPoint2.Zero;
     }

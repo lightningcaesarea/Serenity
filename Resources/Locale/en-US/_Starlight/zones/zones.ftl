@@ -1,6 +1,7 @@
 zone-hallway = Hallway
 zone-maintenance = Maintenance
 zone-command = Command
+zone-nanotrasen = Nanotrasen
 zone-security = Marine Police
 zone-medical = Medical
 zone-engineering = Engineering
