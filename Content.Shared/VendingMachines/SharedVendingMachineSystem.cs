@@ -169,6 +169,16 @@ public abstract partial class SharedVendingMachineSystem : EntitySystem
     {
     }
 
+    /// <summary>
+    /// Serenity: the Federal Bills price of one <paramref name="entry"/>, matching what the vending UI shows.
+    /// The client sees the server-calculated price in the networked entry; the server overrides this to
+    /// calculate it the same way <see cref="CalculateInventoryPrices"/> does.
+    /// </summary>
+    public virtual int GetVendPrice(VendingMachineInventoryEntry entry, VendingMachineComponent component)
+    {
+        return component.ShowPrices ? entry.Price : 0;
+    }
+
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
@@ -319,15 +329,13 @@ public abstract partial class SharedVendingMachineSystem : EntitySystem
             return;
         }
 
-        // Serenity: require physical Federal Bills payment before dispensing a priced item.
-        if (!HasComp<EmaggedComponent>(uid))
+        // Serenity: require physical Federal Bills payment before dispensing a priced item. The price is
+        // the one the UI shows (see GetVendPrice), not the prototype's fallback price.
+        if (!_emag.CheckFlag(uid, EmagType.Interaction))
         {
-            if (vendComponent.ShowPrices
-                && PrototypeManager.TryIndex<EntityPrototype>(entry.ID, out var itemProto)
-                && itemProto.TryGetComponent<ItemPriceComponent>(out var priceComp, EntityManager.ComponentFactory)
-                && priceComp.FallbackPrice > 0)
+            var price = GetVendPrice(entry, vendComponent);
+            if (price > 0)
             {
-                var price = priceComp.FallbackPrice;
                 var billItem = _itemSlots.GetItemOrNull(uid, "billSlot");
                 if (billItem == null
                     || !TryComp(billItem.Value, out StackComponent? billStack)
