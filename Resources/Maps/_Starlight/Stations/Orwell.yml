@@ -79246,7 +79246,7 @@ entities:
     - type: AccessReader
       accessListsOriginal:
       - - Robotics
-- proto: ComputerShipyard
+- proto: ComputerShipyardCommand
   entities:
   - uid: 13155
     components:

@@ -78239,7 +78239,7 @@ entities:
     - type: AccessReader
       accessListsOriginal:
       - - Robotics
-- proto: ComputerShipyard
+- proto: ComputerShipyardCommand
   entities:
   - uid: 12259
     components:

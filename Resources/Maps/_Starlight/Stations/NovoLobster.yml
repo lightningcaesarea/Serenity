@@ -101420,7 +101420,7 @@ entities:
     - type: AccessReader
       accessListsOriginal:
       - - Robotics
-- proto: ComputerShipyard
+- proto: ComputerShipyardCommand
   entities:
   - uid: 15814
     components:
