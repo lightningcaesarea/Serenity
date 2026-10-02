@@ -24,8 +24,8 @@
   skills: [ Medicine, Surgery, Chemistry, Diagnostics ] # Chemist is retired; doctors run chemistry
 
 - type: jobSkills
-  id: MedicalIntern
-  skills: [ Medicine ]
+  id: MedicalIntern # displayed as Nurse
+  skills: [ Medicine, Diagnostics ]
 
 - type: jobSkills
   id: Paramedic

@@ -752,7 +752,8 @@ public sealed partial class ChatUIController : UIController
     }
     //Starlight end
 
-    public void UpdateSelectedChannel(ChatBox box)
+    /// <returns>Serenity: the channel the text would go to, its prefix's if it has one, else the selector's.</returns>
+    public ChatSelectChannel UpdateSelectedChannel(ChatBox box)
     {
         var (prefixChannel, _, radioChannel, customChannel, _) = SplitInputContents(box.ChatInput.Input.Text.ToLower()); // Starlight edit
 
@@ -768,6 +769,8 @@ public sealed partial class ChatUIController : UIController
                 //Starlight end
                 break;
         }
+
+        return prefixChannel == ChatSelectChannel.None ? box.SelectedChannel : prefixChannel; // Serenity
     }
 
     public (ChatSelectChannel chatChannel, string text, RadioChannelPrototype? radioChannel, CustomRadioChannelData? customChannel, LanguagePrototype? language) SplitInputContents(string text) //Starlight edit

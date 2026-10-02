@@ -1,10 +1,12 @@
 using Content.IntegrationTests.Tests.Interaction;
 using Content.Server.Station.Systems;
 using Content.Shared._Serenity.Shipyard;
+using Content.Shared._Serenity.Shipyard.BUI;
 using Content.Shared._Serenity.Shipyard.Components;
 using Content.Shared._Serenity.Shipyard.Events;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Stacks;
+using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
 
 namespace Content.IntegrationTests.Tests._Serenity.Economy;
@@ -76,12 +78,20 @@ public sealed class ShipyardConsoleTest : InteractionTest
     {
         await SpawnTarget("ComputerShipyardCommand");
         ToggleNeedPower();
+        var console = STarget!.Value;
+        var ui = SEntMan.System<SharedUserInterfaceSystem>();
+        await RunTicks(5);
 
+        // Anyone can open it, but purchases need Command access from the buyer or the inserted card.
         await Activate();
-        Assert.That(IsUiOpen(ShipyardConsoleUiKey.Shipyard), Is.False, "command shipyard opened without Command access");
+        Assert.That(IsUiOpen(ShipyardConsoleUiKey.Shipyard), "command shipyard window should open");
+        Assert.That(ui.TryGetUiState<ShipyardConsoleInterfaceState>(console, ShipyardConsoleUiKey.Shipyard, out var state));
+        Assert.That(state!.AccessGranted, Is.False, "purchases allowed without Command access");
 
-        await PlaceInHands("CaptainIDCard");
+        await InteractUsing("CaptainIDCard");
         await Activate();
-        Assert.That(IsUiOpen(ShipyardConsoleUiKey.Shipyard), "command shipyard did not open for a Command ID");
+        await RunTicks(5);
+        Assert.That(ui.TryGetUiState(console, ShipyardConsoleUiKey.Shipyard, out state));
+        Assert.That(state!.AccessGranted, "a Command ID in the slot should allow purchases");
     }
 }

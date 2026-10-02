@@ -15,7 +15,7 @@ public sealed class HealthAnalyzerWoundReadout
     public List<WoundDisplayInfo> Wounds = new();
 
     /// <summary>
-    /// True if an antibiotic is holding an infection back.
+    /// True if the patient has an infection and an antibiotic is holding it back.
     /// </summary>
     public bool InfectionSuppressed;
 }

@@ -390,7 +390,9 @@ public sealed partial class MedicalRecoverySystem : EntitySystem
         }
 
         _transform.SetCoordinates(carrier, Transform(progress.Pad).Coordinates);
-        Announce(progress.Console ?? carrier, Loc.GetString("medical-recovery-announce-arrived", ("name", name)));
+        Announce(progress.Console ?? carrier, Loc.GetString("medical-recovery-announce-arrived",
+            ("name", name),
+            ("location", GetLocationName(progress.Pad))));
     }
 
     private void Fail(Entity<MedicalRecoveryInProgressComponent> ent, string announcement)
@@ -417,6 +419,18 @@ public sealed partial class MedicalRecoverySystem : EntitySystem
         }
 
         return null;
+    }
+
+    /// <summary>
+    /// What to call the place a pad is in: the name of the grid it stands on ("NT Serenity"), or "the station"
+    /// for a pad that isn't on a named grid.
+    /// </summary>
+    public string GetLocationName(EntityUid pad)
+    {
+        if (Transform(pad).GridUid is { } grid && !string.IsNullOrWhiteSpace(Name(grid)))
+            return Name(grid);
+
+        return Loc.GetString("medical-recovery-location-fallback");
     }
 
     private void Announce(EntityUid source, string message)

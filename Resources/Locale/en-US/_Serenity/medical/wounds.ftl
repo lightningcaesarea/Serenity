@@ -105,6 +105,12 @@ health-analyzer-wound-tier = (tier { $tier })
 health-analyzer-infection-suppressed = An antibiotic is holding the infection back.
 health-analyzer-infection-detected = [color=#b9c24a]Infection detected.[/color]
 
+# Printed health report (advanced analyzer only)
+health-analyzer-report-section-wounds = Wounds and Infection
+health-analyzer-report-no-wounds = No wounds detected.
+health-analyzer-report-wound-line = {$wound} (tier {$tier})
+health-analyzer-report-wound-line-located = {$wound} ({$location}) (tier {$tier})
+
 # Where a wound is
 wound-location-head = head
 wound-location-torso = torso

@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using Content.Server._Serenity.Skills;
+using Content.Server.Botany;
+using Content.Server.Botany.Systems;
 using Content.Shared._Serenity.Skills;
 using Content.Shared.DoAfter;
 using Content.Shared.Mind;
@@ -140,6 +142,37 @@ public sealed class SkillPrototypeTest
 
             Assert.That(skillSys.RevokeSkill(clone, "Medicine"));
             Assert.That(skillSys.HasSkill(clone, "Medicine"), Is.False);
+        });
+
+        await pair.CleanReturnAsync();
+    }
+
+    /// <summary>
+    /// Botany gives one extra produce per hand harvest; without it the yield is the seed's own.
+    /// </summary>
+    [Test]
+    public async Task BotanyAddsHarvestYield()
+    {
+        await using var pair = await PoolManager.GetServerClient();
+        var server = pair.Server;
+        var map = await pair.CreateTestMap();
+
+        await server.WaitAssertion(() =>
+        {
+            var entMan = server.ResolveDependency<IEntityManager>();
+            var proto = server.ResolveDependency<IPrototypeManager>();
+            var skillSys = entMan.System<SkillSystem>();
+            var botany = entMan.System<BotanySystem>();
+
+            var seed = proto.Index<SeedPrototype>("tomato").Clone();
+            seed.Yield = 3;
+
+            var user = entMan.SpawnAtPosition("MobHuman", map.GridCoords);
+            Assert.That(skillSys.GetPlantHarvestBonus(user), Is.Zero);
+            Assert.That(botany.Harvest(seed, user).Count(), Is.EqualTo(3), "unskilled harvest gives the seed's yield");
+
+            Assert.That(skillSys.GrantSkill(user, "Botany"));
+            Assert.That(botany.Harvest(seed, user).Count(), Is.EqualTo(4), "Botany adds one produce");
         });
 
         await pair.CleanReturnAsync();
