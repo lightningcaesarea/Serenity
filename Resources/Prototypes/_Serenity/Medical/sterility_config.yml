@@ -29,6 +29,9 @@
   surgeryInfectionMaxChance: 0.9
   # While overdosed on an antibiotic, infections escalate this many times faster (and the antibiotic stops protecting).
   overdoseProgressionMultiplier: 3
+  # While overdosed, the chance of a new infection (each dirty-surgery and open-wound roll) is this many times higher.
+  # The caps still apply: surgeryInfectionMaxChance for surgery, 100% for open wounds.
+  overdoseInfectionChanceMultiplier: 3
   # Untreated open wounds can get infected: each update, a wound at minTier or worse adds chancePerTier * tier.
   openWounds:
     Laceration:
