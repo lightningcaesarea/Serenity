@@ -18,12 +18,12 @@ public sealed class StationlessPalletSaleTest : InteractionTest
 
     [TestPrototypes]
     private const string Prototypes = $@"
-- type: entity
-  parent: BaseItem
-  id: {Goods}
-  components:
-  - type: StaticPrice
-    price: 123
+-   type: entity
+    parent: BaseItem
+    id: {Goods}
+    components:
+    -   type: StaticPrice
+        price: 123
 ";
 
     [Test]

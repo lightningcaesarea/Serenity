@@ -21,11 +21,11 @@ public sealed class ShipyardConsoleTest : InteractionTest
 
     [TestPrototypes]
     private const string Prototypes = @"
-- type: entity
-  parent: BaseStation
-  id: SerenityTestShipyardStation
-  components:
-  - type: Transform
+-   type: entity
+    parent: BaseStation
+    id: SerenityTestShipyardStation
+    components:
+    -   type: Transform
 ";
 
     [Test]

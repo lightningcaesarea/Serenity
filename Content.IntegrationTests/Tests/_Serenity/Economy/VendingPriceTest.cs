@@ -19,33 +19,33 @@ public sealed class VendingPriceTest : InteractionTest
 
     [TestPrototypes]
     private const string Prototypes = $@"
-- type: priceCategory
-  id: serenity_test_price
-  min: 7
-  max: 7
+-   type: priceCategory
+    id: serenity_test_price
+    min: 7
+    max: 7
 
-- type: entity
-  parent: BaseItem
-  id: {Item}
-  components:
-  - type: ItemPrice
-    priceCategory: serenity_test_price
-    fallbackPrice: 200
+-   type: entity
+    parent: BaseItem
+    id: {Item}
+    components:
+    -   type: ItemPrice
+        priceCategory: serenity_test_price
+        fallbackPrice: 200
 
-- type: vendingMachineInventory
-  id: SerenityTestPricedInventory
-  startingInventory:
-    {Item}: 5
+-   type: vendingMachineInventory
+    id: SerenityTestPricedInventory
+    startingInventory:
+        {Item}: 5
 
-- type: entity
-  parent: VendingMachine
-  id: {Machine}
-  components:
-  - type: VendingMachine
-    pack: SerenityTestPricedInventory
-    ejectDelay: 0
-  - type: Sprite
-    sprite: error.rsi
+-   type: entity
+    parent: VendingMachine
+    id: {Machine}
+    components:
+    -   type: VendingMachine
+        pack: SerenityTestPricedInventory
+        ejectDelay: 0
+    -   type: Sprite
+        sprite: error.rsi
 ";
 
     [Test]
