@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using Content.Shared._Serenity.Skills;
 using Content.Shared.Roles;
 using Robust.Shared.Prototypes;
@@ -36,8 +38,18 @@ public sealed class MedicalRolesTest
                 Does.Contain((ProtoId<SkillPrototype>) "Chemistry"), "doctors run chemistry now");
             Assert.That(proto.Index(DoctorSkills).Skills,
                 Does.Contain((ProtoId<SkillPrototype>) "Surgery"), "doctors do surgery");
+
+            // The starting skills of each working role
+            Assert.That(SkillsOf(proto, "MedicalIntern"), Is.EquivalentTo(new[] { "Medicine", "Diagnostics" }), "Nurse");
+            Assert.That(SkillsOf(proto, "MedicalDoctor"), Is.EquivalentTo(new[] { "Medicine", "Diagnostics", "Surgery", "Chemistry" }), "Doctor");
+            Assert.That(SkillsOf(proto, "Paramedic"), Is.EquivalentTo(new[] { "Medicine", "Diagnostics" }), "Paramedic");
         });
 
         await pair.CleanReturnAsync();
+    }
+
+    private static IEnumerable<string> SkillsOf(IPrototypeManager proto, string job)
+    {
+        return proto.Index<JobSkillsPrototype>(job).Skills.Select(skill => skill.Id);
     }
 }
