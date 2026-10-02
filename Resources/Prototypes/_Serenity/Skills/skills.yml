@@ -112,8 +112,9 @@
   name: skill-botany-name
   description: skill-botany-desc
   category: skill-category-service
+  plantHarvestBonus: 1
   doAfters:
-  - events: [ HarvestEvent, BotanySwabDoAfterEvent ]
+  - events: [ BotanySwabDoAfterEvent ]
     skilled: 0.5
 
 - type: skill

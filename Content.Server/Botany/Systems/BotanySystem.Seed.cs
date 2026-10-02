@@ -16,6 +16,7 @@ using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
 using Content.Shared.Tools.Systems;
 using Content.Shared.Tools;
+using Content.Shared._Serenity.Skills; // Serenity
 
 namespace Content.Server.Botany.Systems;
 
@@ -31,6 +32,7 @@ public sealed partial class BotanySystem : EntitySystem
     [Dependency] private RandomHelperSystem _randomHelper = default!;
     [Dependency] private ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private SharedToolSystem _tools = default!;
+    [Dependency] private SharedSkillSystem _skills = default!; // Serenity
 
     private static readonly ProtoId<ToolQualityPrototype> HarvestTool = "Slicing";
 
@@ -147,10 +149,12 @@ public sealed partial class BotanySystem : EntitySystem
         if (proto.HarvestLogImpact != null)
             _adminLogger.Add(LogType.Botany, proto.HarvestLogImpact.Value, $"{ToPrettyString(user):player} harvested {Loc.GetString(proto.Name):seed} at Pos:{Transform(user).Coordinates}.");
 
-        return GenerateProduct(proto, Transform(user).Coordinates, yieldMod);
+        // Serenity: skilled harvesters (Botany) get extra produce
+        return GenerateProduct(proto, Transform(user).Coordinates, yieldMod, _skills.GetPlantHarvestBonus(user));
     }
 
-    public IEnumerable<EntityUid> GenerateProduct(SeedData proto, EntityCoordinates position, int yieldMod = 1)
+    /// <param name="extra">Serenity: produce added on top of the computed yield.</param>
+    public IEnumerable<EntityUid> GenerateProduct(SeedData proto, EntityCoordinates position, int yieldMod = 1, int extra = 0)
     {
         var totalYield = 0;
         if (proto.Yield > -1)
@@ -160,7 +164,7 @@ public sealed partial class BotanySystem : EntitySystem
             else
                 totalYield = proto.Yield * yieldMod;
 
-            totalYield = Math.Max(1, totalYield);
+            totalYield = Math.Max(1, totalYield) + Math.Max(0, extra); // Serenity
         }
 
         var products = new List<EntityUid>();
