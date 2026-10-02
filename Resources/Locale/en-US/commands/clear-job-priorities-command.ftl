@@ -1,4 +1,4 @@
-cmd-clearjobpriorities-desc = Clears the selected character's job preferences for a connected player.
+cmd-clearjobpriorities-desc = Clears a connected player's job preferences.
 cmd-clearjobpriorities-help = Usage: clearjobpriorities <player>
 cmd-clearjobpriorities-player-not-found = Player {$player} is not connected.
 cmd-clearjobpriorities-preferences-not-loaded = Preferences for {$player} have not loaded yet.

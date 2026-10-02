@@ -1,4 +1,4 @@
-using System.Linq;
+﻿using System.Linq;
 using Content.Server.Preferences.Managers;
 using Content.Shared.Administration;
 using Content.Shared.Preferences;
@@ -10,7 +10,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Server.Administration.Commands;
 
 /// <summary>
-/// Updates the selected character's job preference for a connected player.
+/// Updates a connected player's job preference.
 /// </summary>
 [AdminCommand(AdminFlags.Round)]
 public sealed partial class SetJobPriorityCommand : LocalizedCommands
@@ -58,10 +58,28 @@ public sealed partial class SetJobPriorityCommand : LocalizedCommands
             return;
         }
 
-        var preferences = _preferences.GetPreferences(player.UserId);
-        var slot = preferences.SelectedCharacterIndex;
-        var profile = preferences.SelectedCharacter.WithJobPriority(job, priority);
-        await _preferences.SetProfile(player.UserId, slot, profile);
+        // Serenity - job priorities are per player here, not per selected character.
+        var priorities = new Dictionary<ProtoId<JobPrototype>, JobPriority>(_preferences.GetPreferences(player.UserId).JobPriorities);
+        if (priority == JobPriority.Never)
+        {
+            priorities.Remove(job);
+        }
+        else
+        {
+            // There can only ever be one high priority job.
+            if (priority == JobPriority.High)
+            {
+                foreach (var (other, value) in priorities)
+                {
+                    if (value == JobPriority.High)
+                        priorities[other] = JobPriority.Medium;
+                }
+            }
+
+            priorities[job] = priority;
+        }
+
+        await _preferences.SetJobPriorities(player.UserId, priorities);
 
         shell.WriteLine(Loc.GetString("cmd-setjobpriority-success",
             ("player", player.Name),

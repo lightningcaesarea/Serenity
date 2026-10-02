@@ -1,13 +1,16 @@
-using System.Linq;
+﻿using System.Linq;
 using Content.Server.Preferences.Managers;
 using Content.Shared.Administration;
+using Content.Shared.Preferences;
+using Content.Shared.Roles;
 using Robust.Server.Player;
 using Robust.Shared.Console;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server.Administration.Commands;
 
 /// <summary>
-/// Clears every job preference from the selected character of a connected player.
+/// Clears every job preference of a connected player.
 /// </summary>
 [AdminCommand(AdminFlags.Round)]
 public sealed partial class ClearJobPrioritiesCommand : LocalizedCommands
@@ -40,11 +43,8 @@ public sealed partial class ClearJobPrioritiesCommand : LocalizedCommands
             return;
         }
 
-        var preferences = _preferences.GetPreferences(player.UserId);
-        await _preferences.SetProfile(
-            player.UserId,
-            preferences.SelectedCharacterIndex,
-            preferences.SelectedCharacter.WithJobPriorities([]));
+        // Serenity - job priorities are per player here, not per selected character.
+        await _preferences.SetJobPriorities(player.UserId, new Dictionary<ProtoId<JobPrototype>, JobPriority>());
 
         shell.WriteLine(Loc.GetString("cmd-clearjobpriorities-success", ("player", player.Name)));
     }

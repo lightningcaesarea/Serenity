@@ -1,4 +1,4 @@
-cmd-setjobpriority-desc = Sets the selected character's job preference for a connected player.
+cmd-setjobpriority-desc = Sets a connected player's job preference.
 cmd-setjobpriority-help = Usage: setjobpriority <player> <job> <high|medium|low|never>
 cmd-setjobpriority-player-not-found = Player {$player} is not connected.
 cmd-setjobpriority-job-not-found = Job {$job} does not exist.
