@@ -11,6 +11,8 @@ using Content.Shared.FixedPoint;
 using Content.Shared.MedicalScanner;
 using Content.Shared.StatusEffectNew;
 using Robust.Shared.GameObjects;
+using Robust.Shared.Localization;
+using Robust.Shared.Utility;
 
 namespace Content.IntegrationTests.Tests._Serenity.Medical;
 
@@ -44,6 +46,7 @@ public sealed class AnalyzerTest
         var infections = entMan.System<InfectionSystem>();
         var wounds = entMan.System<SharedWoundSystem>();
         var effects = entMan.System<StatusEffectsSystem>();
+        var loc = server.ResolveDependency<ILocalizationManager>();
 
         await server.WaitAssertion(() =>
         {
@@ -82,6 +85,19 @@ public sealed class AnalyzerTest
             var suppressed = FullState();
             readout.ApplyReadout(advanced, patient, ref suppressed);
             Assert.That(suppressed.Wounds!.InfectionSuppressed, Is.True);
+
+            // The printed report carries the wounds and the infection for an advanced analyzer only
+            var advancedReport = new FormattedMessage();
+            readout.AppendReportSection(advancedReport, suppressed);
+            var advancedText = advancedReport.ToString();
+            Assert.That(advancedText, Does.Contain(loc.GetString("health-analyzer-report-section-wounds")));
+            Assert.That(advancedText, Does.Contain(loc.GetString("wound-infection-1")));
+            Assert.That(advancedText, Does.Contain(FormattedMessage.FromMarkupOrThrow(loc.GetString("health-analyzer-infection-detected")).ToString()));
+            Assert.That(advancedText, Does.Contain(loc.GetString("health-analyzer-infection-suppressed")));
+
+            var basicReport = new FormattedMessage();
+            readout.AppendReportSection(basicReport, basicState);
+            Assert.That(basicReport.IsEmpty, Is.True, "a basic analyzer's report has no wound section");
 
             foreach (var uid in new[] { basic, advanced, patient })
             {
@@ -161,6 +177,48 @@ public sealed class AnalyzerTest
 
             entMan.DeleteEntity(medical);
             entMan.DeleteEntity(plain);
+        });
+
+        await pair.CleanReturnAsync();
+    }
+
+    /// <summary>
+    /// The "antibiotic is holding the infection back" note only appears when there is an infection to hold back, not
+    /// for a patient on an antibiotic with ordinary wounds.
+    /// </summary>
+    [Test]
+    public async Task SuppressionNoteNeedsAnInfection()
+    {
+        await using var pair = await PoolManager.GetServerClient();
+        var server = pair.Server;
+        var entMan = server.EntMan;
+        var mapData = await pair.CreateTestMap();
+        var readout = entMan.System<AnalyzerReadoutSystem>();
+        var infections = entMan.System<InfectionSystem>();
+        var wounds = entMan.System<SharedWoundSystem>();
+        var effects = entMan.System<StatusEffectsSystem>();
+
+        await server.WaitAssertion(() =>
+        {
+            var advanced = entMan.SpawnEntity("AdvancedHealthAnalyzer", mapData.GridCoords);
+            var patient = entMan.SpawnEntity("MobHuman", mapData.GridCoords);
+            var comp = entMan.GetComponent<WoundComponent>(patient);
+
+            wounds.AddWound(patient, comp, new WoundEntry("SlashLaceration", 2));
+            Assert.That(effects.TryAddStatusEffectDuration(patient, InfectionSystem.AntibioticEffect, TimeSpan.FromMinutes(1)));
+
+            var uninfected = FullState();
+            readout.ApplyReadout(advanced, patient, ref uninfected);
+            Assert.That(uninfected.Wounds, Is.Not.Null);
+            Assert.That(uninfected.Wounds!.InfectionSuppressed, Is.False, "no infection, nothing to hold back");
+
+            Assert.That(infections.TryInfect(patient, comp));
+            var infected = FullState();
+            readout.ApplyReadout(advanced, patient, ref infected);
+            Assert.That(infected.Wounds!.InfectionSuppressed, Is.True);
+
+            entMan.DeleteEntity(advanced);
+            entMan.DeleteEntity(patient);
         });
 
         await pair.CleanReturnAsync();

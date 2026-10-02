@@ -7,6 +7,8 @@ using Content.Shared._Serenity.Medical.Wounds;
 using Content.Shared._Serenity.Medical.Wounds.Systems;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
+using Content.Shared.EntityConditions.Conditions;
+using Content.Shared.EntityEffects.Effects.Damage;
 using Content.Shared.EntityEffects.Effects.StatusEffects;
 using Content.Shared.Damage.Components;
 using Content.Shared.StatusEffectNew;
@@ -407,6 +409,86 @@ public sealed class InfectionTest
             Assert.That(solution.GetTotalPrototypeQuantity(Antibiox).Float(), Is.EqualTo(15f));
 
             entMan.DeleteEntity(injector);
+        });
+
+        await pair.CleanReturnAsync();
+    }
+
+    /// <summary>
+    /// An Antibiox overdose hurts but doesn't kill: a double dose (two auto-injectors, 30u) deals roughly 60 Poison in
+    /// all while it stays at or over the overdose line, well short of critical.
+    /// </summary>
+    [Test]
+    public async Task DoubleDoseOfAntibioxHurtsButDoesNotKill()
+    {
+        await using var pair = await PoolManager.GetServerClient();
+        var proto = pair.Server.ProtoMan;
+        var reagent = proto.Index(Antibiox);
+
+        Assert.That(reagent.Metabolisms, Is.Not.Null);
+        var entry = reagent.Metabolisms!.Metabolisms.Single(m => m.Key.Id == "Bloodstream").Value;
+        var overdose = entry.Effects.OfType<HealthChange>().Single();
+        var threshold = overdose.Conditions!.OfType<ReagentCondition>().Single(c => c.Reagent == Antibiox).Min.Float();
+        var poisonPerTick = overdose.Damage.DamageDict["Poison"].Float();
+
+        // Metabolizing runs once a second and removes the rate's worth each time; the overdose effect applies on every
+        // tick that starts at or over the threshold
+        const float doubleDose = 30f;
+        var overdosedTicks = MathF.Floor((doubleDose - threshold) / entry.MetabolismRate.Float()) + 1;
+        var total = overdosedTicks * poisonPerTick;
+
+        Assert.Multiple(() =>
+        {
+            Assert.That(threshold, Is.GreaterThan(15f), "a single 15u auto-injector must not overdose");
+            Assert.That(total, Is.EqualTo(60f).Within(5f), "a double dose should deal about 60 Poison in all");
+        });
+
+        await pair.CleanReturnAsync();
+    }
+
+    /// <summary>
+    /// An antibiotic overdose makes a new infection much likelier, from open wounds and from dirty surgery alike,
+    /// without lifting the caps.
+    /// </summary>
+    [Test]
+    public async Task AntibioticOverdoseRaisesInfectionChance()
+    {
+        await using var pair = await PoolManager.GetServerClient();
+        var server = pair.Server;
+        var entMan = server.EntMan;
+        var mapData = await pair.CreateTestMap();
+        var infections = entMan.System<InfectionSystem>();
+        var effects = entMan.System<StatusEffectsSystem>();
+        var wounds = entMan.System<SharedWoundSystem>();
+        var config = server.ProtoMan.Index<SterilityConfigPrototype>(SterilityConfigPrototype.DefaultId);
+        var multiplier = config.OverdoseInfectionChanceMultiplier;
+
+        Assert.That(multiplier, Is.GreaterThan(1f));
+
+        // Dirty surgery: multiplied, still capped
+        var dirt = config.SurgeryInfectionThreshold + 10f;
+        Assert.Multiple(() =>
+        {
+            Assert.That(config.SurgeryInfectionChance(dirt, overdosed: true),
+                Is.EqualTo(Math.Min(config.SurgeryInfectionChance(dirt) * multiplier, config.SurgeryInfectionMaxChance)).Within(0.0001f));
+            Assert.That(config.SurgeryInfectionChance(10000f, overdosed: true), Is.EqualTo(config.SurgeryInfectionMaxChance), "still capped");
+        });
+
+        await server.WaitAssertion(() =>
+        {
+            var patient = entMan.SpawnEntity("MobHuman", mapData.GridCoords);
+            var comp = entMan.GetComponent<WoundComponent>(patient);
+
+            wounds.AddWound(patient, comp, new WoundEntry("SlashLaceration", 2));
+            var normal = infections.OpenWoundInfectionChance(patient, comp);
+            Assert.That(normal, Is.GreaterThan(0f));
+
+            // Overdosed: on the antibiotic, but its protection is gone and the risk is multiplied
+            Assert.That(effects.TryAddStatusEffectDuration(patient, InfectionSystem.AntibioticEffect, TimeSpan.FromMinutes(1)));
+            Assert.That(effects.TryAddStatusEffectDuration(patient, InfectionSystem.AntibioticOverdoseEffect, TimeSpan.FromMinutes(1)));
+            Assert.That(infections.OpenWoundInfectionChance(patient, comp), Is.EqualTo(Math.Min(normal * multiplier, 1f)).Within(0.0001f));
+
+            entMan.DeleteEntity(patient);
         });
 
         await pair.CleanReturnAsync();

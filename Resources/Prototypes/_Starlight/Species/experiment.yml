@@ -44,6 +44,11 @@
     LFoot: MobExperimentLFoot
     RFoot: MobExperimentRFoot
     Tail: MobHumanoidAnyMarking
+    Butt: MobHumanoidAnyMarking # Serenity: anatomy markings need a base layer to render
+    Vagina: MobHumanoidAnyMarking
+    Testicles: MobHumanoidAnyMarking
+    Penis: MobHumanoidAnyMarking
+    Breasts: MobHumanoidAnyMarking
 
 - type: markingPoints
   id: MobExperimentMarkingLimits

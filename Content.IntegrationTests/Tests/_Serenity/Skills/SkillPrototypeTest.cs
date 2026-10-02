@@ -1,6 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using Content.Server._Serenity.Skills;
+using Content.Shared.Botany.Components;
+using Content.Shared.Botany.Items.Components;
+using Content.Shared.Botany.Systems;
 using Content.Shared._Serenity.Skills;
 using Content.Shared.DoAfter;
 using Content.Shared.Mind;
@@ -143,5 +146,47 @@ public sealed class SkillPrototypeTest
         });
 
         await pair.CleanReturnAsync();
+    }
+
+    /// <summary>
+    /// Botany gives one extra produce per hand harvest; without it the yield is the seed's own.
+    /// </summary>
+    [Test]
+    public async Task BotanyAddsHarvestYield()
+    {
+        await using var pair = await PoolManager.GetServerClient();
+        var server = pair.Server;
+        var map = await pair.CreateTestMap();
+
+        await server.WaitAssertion(() =>
+        {
+            var entMan = server.ResolveDependency<IEntityManager>();
+            var proto = server.ResolveDependency<IPrototypeManager>();
+            var skillSys = entMan.System<SkillSystem>();
+            var harvest = entMan.System<PlantHarvestSystem>();
+
+            var user = entMan.SpawnAtPosition("MobHuman", map.GridCoords);
+            Assert.That(skillSys.GetPlantHarvestBonus(user), Is.Zero);
+            var unskilled = HarvestCount(entMan, harvest, user, map.GridCoords);
+            Assert.That(unskilled, Is.Positive, "unskilled harvest gives the plant's yield");
+
+            Assert.That(skillSys.GrantSkill(user, "Botany"));
+            Assert.That(HarvestCount(entMan, harvest, user, map.GridCoords), Is.EqualTo(unskilled + 1), "Botany adds one produce");
+        });
+
+        await pair.CleanReturnAsync();
+    }
+
+    // A fresh ripe plant, hand-harvested by the user; returns how many produce it dropped.
+    private static int HarvestCount(IEntityManager entMan, PlantHarvestSystem harvest, EntityUid user, Robust.Shared.Map.EntityCoordinates coords)
+    {
+        var plant = entMan.SpawnAtPosition("WheatPlants", coords);
+        var holder = entMan.GetComponent<PlantHolderComponent>(plant);
+        holder.YieldMod = 1;
+        holder.ReadyForHarvest = true;
+
+        var before = entMan.Count<ProduceComponent>();
+        Assert.That(harvest.TryHandleHarvest(plant, user));
+        return entMan.Count<ProduceComponent>() - before;
     }
 }

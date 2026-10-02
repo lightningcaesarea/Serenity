@@ -58,6 +58,22 @@
       pack: !type:ContainerSlot {}
 
 # The bag is its own solution entity, like a beaker; the legacy SolutionContainerManager is broken here.
+# Sold flat from the vending machines; unpacks like a flatpacked machine (a multitool on the floor, with room).
+- type: entity
+  parent: BaseFlatpack
+  id: IVStandFlatpack
+  name: IV stand flatpack
+  description: A flatpack used for constructing an IV stand.
+  components:
+  - type: Flatpack
+    entity: IVStand
+  - type: Sprite
+    sprite: _Serenity/Structures/Machines/Medical/iv_stand.rsi
+    layers:
+    - state: flatpack
+  - type: StaticPrice
+    price: 150
+
 - type: entity
   abstract: true
   parent: Solution
@@ -135,6 +151,8 @@
   id: IVBagSaline
   suffix: Saline
   components:
+  - type: Label
+    currentLabel: Saline
   - type: Solution
     solution:
       reagents:
@@ -146,6 +164,8 @@
   id: IVBagBlood
   suffix: Blood
   components:
+  - type: Label
+    currentLabel: Blood
   - type: Solution
     solution:
       reagents:

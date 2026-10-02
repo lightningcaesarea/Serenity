@@ -76,7 +76,7 @@ public sealed partial class InfectionSystem : EntitySystem
         if (HasAntibiotic(ent))
             return;
 
-        if (_random.Prob(Config.SurgeryInfectionChance(args.TotalDirtiness)))
+        if (_random.Prob(Config.SurgeryInfectionChance(args.TotalDirtiness, IsOverdosed(ent))))
             TryInfect(ent, ent.Comp);
     }
 
@@ -119,7 +119,7 @@ public sealed partial class InfectionSystem : EntitySystem
 
     /// <summary>
     /// The chance per update that the mob's untreated open wounds give it a new infection. 0 if it is already
-    /// infected or on an antibiotic.
+    /// infected or on an antibiotic. An antibiotic overdose makes it much likelier.
     /// </summary>
     public float OpenWoundInfectionChance(EntityUid uid, WoundComponent comp)
     {
@@ -139,6 +139,9 @@ public sealed partial class InfectionSystem : EntitySystem
 
             chance += risk.ChancePerTier * wound.Tier;
         }
+
+        if (IsOverdosed(uid))
+            chance *= Config.OverdoseInfectionChanceMultiplier;
 
         return Math.Min(chance, 1f);
     }

@@ -4,6 +4,7 @@ using Content.Shared.Botany.Events;
 using Content.Shared.Database;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
+using Content.Shared._Serenity.Skills; // Serenity
 using JetBrains.Annotations;
 
 namespace Content.Shared.Botany.Systems;
@@ -20,6 +21,7 @@ public sealed partial class PlantHarvestSystem : EntitySystem
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private PlantHolderSystem _plantHolder = default!;
     [Dependency] private PlantTraySystem _plantTray = default!;
+    [Dependency] private SharedSkillSystem _skills = default!; // Serenity
 
     [Dependency] private EntityQuery<PlantHolderComponent> _holderQuery;
     [Dependency] private EntityQuery<PlantHarvestComponent> _harvestQuery;
@@ -110,7 +112,8 @@ public sealed partial class PlantHarvestSystem : EntitySystem
         if (_dataQuery.TryComp(plant, out var plantData) && plantData.HarvestLogImpact != null)
             _adminLogger.Add(LogType.Botany, plantData.HarvestLogImpact.Value, $"{ToPrettyString(user):player} harvested {Loc.GetString(plantData.Name):seed} at Pos:{Transform(user).Coordinates}.");
 
-        DoHarvest(plant, user);
+        // Serenity: skilled harvesters (Botany) get extra produce on a hand harvest
+        DoHarvest(plant, user, _skills.GetPlantHarvestBonus(user));
         return true;
     }
 
@@ -118,7 +121,8 @@ public sealed partial class PlantHarvestSystem : EntitySystem
     /// Harvests the plant and produces the produce.
     /// </summary>
     [PublicAPI]
-    public void DoHarvest(Entity<PlantHolderComponent?> ent, EntityUid user)
+    /// <param name="extra">Serenity: produce added on top of the computed yield.</param>
+    public void DoHarvest(Entity<PlantHolderComponent?> ent, EntityUid user, int extra = 0)
     {
         if (!Resolve(ent.Owner, ref ent.Comp, false))
             return;
@@ -138,7 +142,7 @@ public sealed partial class PlantHarvestSystem : EntitySystem
         if (plant.Yield >= 0)
         {
             totalYield = ent.Comp.YieldMod < 0 ? plant.Yield : plant.Yield * ent.Comp.YieldMod;
-            totalYield = Math.Max(1, totalYield);
+            totalYield = Math.Max(1, totalYield) + Math.Max(0, extra); // Serenity
         }
 
         var position = Transform(user).Coordinates;

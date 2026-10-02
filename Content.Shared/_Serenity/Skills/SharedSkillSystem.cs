@@ -102,6 +102,21 @@ public abstract partial class SharedSkillSystem : EntitySystem
         return proto.Requires.Where(r => !HasSkill(user, r)).ToList();
     }
 
+    /// <summary>
+    /// Extra produce the character gets when harvesting a plant, summed over the skills they know.
+    /// </summary>
+    public int GetPlantHarvestBonus(EntityUid user)
+    {
+        var bonus = 0;
+        foreach (var skill in GetSkills(user))
+        {
+            if (Proto.TryIndex(skill, out var proto))
+                bonus += proto.PlantHarvestBonus;
+        }
+
+        return bonus;
+    }
+
     public string SkillName(ProtoId<SkillPrototype> skill)
         => Proto.TryIndex(skill, out var proto) ? Loc.GetString(proto.Name) : skill.Id;
 

@@ -9,7 +9,7 @@
   parent: BaseSubdermalImplant
   id: MedicalRecoveryImplant
   name: medical recovery implant
-  description: A subdermal implant that automatically recalls the carrier's body to the station if they die somewhere else — a shuttle, a debris field, an away site. Single use; a fresh implant must be installed to restore it.
+  description: A subdermal implant that automatically recalls the carrier's body to the station if they die somewhere else — a shuttle, a debris field, an away site. It also works as a medical tracker, reporting the carrier's vitals and position to the crew monitor. The recall is single use; a fresh implant must be installed to restore it.
   categories: [ HideSpawnMenu ]
   components:
   - type: SubdermalImplant
@@ -21,9 +21,23 @@
     - Dead
   - type: MedicalRecoveryOnTrigger
   - type: MedicalRecovery
+  # Medical tracker: the same suit-sensor link as the tracking implant (vitals and position on the crew
+  # monitor, on for good so the carrier can't turn it off). It has no death rattle: the recall trigger
+  # above only fires on death, and security shouldn't hear about medical's patients.
+  - type: SuitSensor
+    randomMode: false
+    controlsLocked: true
+    mode: SensorCords
+    activationContainer: "implant"
+  - type: DeviceNetwork
+    deviceNetId: Wireless
+    transmitFrequencyId: SuitSensor
+  - type: StationLimitedNetwork
+  - type: WirelessNetworkConnection
+    range: 500
 
-# Same base as the vanilla TrackingImplanter (an inject-only syringe). The implant itself does
-# not inherit from TrackingImplant, so it carries no suit sensor or security death rattle.
+# Same base as the vanilla TrackingImplanter (an inject-only syringe). The implant does not inherit
+# from TrackingImplant, so it gets the suit sensor above but not that implant's security death rattle.
 - type: entity
   parent: BaseImplantOnlyImplanter
   id: MedicalRecoveryImplanter

@@ -94,6 +94,13 @@ public sealed partial class SterilityConfigPrototype : IPrototype
     public float OverdoseProgressionMultiplier = 3f;
 
     /// <summary>
+    /// How many times likelier a new infection is while the patient is overdosed on an antibiotic. Multiplies the
+    /// per-roll chance from dirty surgery and from open wounds; their caps still apply.
+    /// </summary>
+    [DataField]
+    public float OverdoseInfectionChanceMultiplier = 3f;
+
+    /// <summary>
     /// An operation with a total dirtiness above this can infect the patient: the chance is
     /// <c>(dirtiness - threshold) × SurgeryInfectionChancePerDirt</c>, at most <see cref="SurgeryInfectionMaxChance"/>.
     /// Independent of the sepsis damage, so a dirty operation can do both.
@@ -128,14 +135,19 @@ public sealed partial class SterilityConfigPrototype : IPrototype
     public float[] SymptomDamage = [0f, 0.25f, 0.6f];
 
     /// <summary>
-    /// Chance that an operation with this total dirtiness infects the patient.
+    /// Chance that an operation with this total dirtiness infects the patient. An antibiotic overdose multiplies it by
+    /// <see cref="OverdoseInfectionChanceMultiplier"/>, still capped at <see cref="SurgeryInfectionMaxChance"/>.
     /// </summary>
-    public float SurgeryInfectionChance(float totalDirtiness)
+    public float SurgeryInfectionChance(float totalDirtiness, bool overdosed = false)
     {
         if (totalDirtiness <= SurgeryInfectionThreshold)
             return 0f;
 
-        return Math.Min((totalDirtiness - SurgeryInfectionThreshold) * SurgeryInfectionChancePerDirt, SurgeryInfectionMaxChance);
+        var chance = (totalDirtiness - SurgeryInfectionThreshold) * SurgeryInfectionChancePerDirt;
+        if (overdosed)
+            chance *= OverdoseInfectionChanceMultiplier;
+
+        return Math.Min(chance, SurgeryInfectionMaxChance);
     }
 
     /// <summary>
