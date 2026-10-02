@@ -164,7 +164,11 @@ public sealed class SkillPrototypeTest
             var skillSys = entMan.System<SkillSystem>();
             var botany = entMan.System<BotanySystem>();
 
+            // SeedPrototype is a server-only prototype kind, so the YAML linter can't validate a ProtoId for it; the
+            // literal id trips the Release-only RA0033 analyzer rule, which is suppressed for this one line.
+#pragma warning disable RA0033
             var seed = proto.Index<SeedPrototype>("tomato").Clone();
+#pragma warning restore RA0033
             seed.Yield = 3;
 
             var user = entMan.SpawnAtPosition("MobHuman", map.GridCoords);

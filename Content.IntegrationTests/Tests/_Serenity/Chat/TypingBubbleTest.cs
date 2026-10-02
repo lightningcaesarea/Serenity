@@ -57,8 +57,8 @@ public sealed class TypingBubbleTest : InteractionTest
     [TestCase("*waves", "emote")]
     [TestCase("[ooc chat", "ooc")]
     [TestCase("(looc chat", "ooc")]
-    [TestCase("hello", null)]
-    public async Task PrefixPicksBubble(string text, string? expected)
+    [TestCase("hello", "")] // no bubble channel
+    public async Task PrefixPicksBubble(string text, string expected)
     {
         var typing = CEntMan.System<TypingIndicatorSystem>();
         var chat = Client.ResolveDependency<IUserInterfaceManager>().GetUIController<ChatUIController>();
@@ -72,7 +72,7 @@ public sealed class TypingBubbleTest : InteractionTest
         await RunTicks(5);
 
         var comp = SEntMan.GetComponent<TypingIndicatorComponent>(SPlayer);
-        Assert.That(comp.ChannelIndicator, Is.EqualTo(expected == null ? null : (ProtoId<TypingIndicatorPrototype>?) expected));
+        Assert.That(comp.ChannelIndicator, Is.EqualTo(expected.Length == 0 ? null : (ProtoId<TypingIndicatorPrototype>?) expected));
 
         await Client.WaitPost(() => typing.ClientChangedChatFocus(false));
         await RunTicks(5);
