@@ -56530,7 +56530,7 @@ entities:
       parent: 2
       rot: 1.5707963267948966 rad
       pos: 22.5,46.5
-- proto: ComputerShipyard
+- proto: ComputerShipyardCommand
   entities:
   - uid: 8199
     components:

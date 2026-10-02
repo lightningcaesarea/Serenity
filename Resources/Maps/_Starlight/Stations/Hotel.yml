@@ -57018,7 +57018,7 @@ entities:
     - type: Transform
       parent: 2
       pos: -22.5,-57.5
-- proto: ComputerShipyard
+- proto: ComputerShipyardCommand
   entities:
   - uid: 9190
     components:

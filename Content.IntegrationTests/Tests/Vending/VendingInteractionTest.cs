@@ -62,6 +62,7 @@ public sealed class VendingInteractionTest : InteractionTest
   - type: VendingMachine
     pack: InteractionTestVendingInventory
     ejectDelay: 0 # no delay to speed up tests
+    showPrices: false # Serenity: priced vends need Federal Bills (see _Serenity/Economy/VendingPriceTest); these tests cover free dispensing
   - type: Sprite
     sprite: error.rsi
 ";

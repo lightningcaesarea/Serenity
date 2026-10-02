@@ -27,6 +27,7 @@
     TechnicalAssistant: 23
 
     Warden: 90
+    SeniorOfficer: 77 # Serenity: Senior Marine Trooper, between Marine Trooper and Marine Quartermaster
     Detective: 80
     Brigmedic: 73
     DutyOfficer: 70
@@ -94,6 +95,7 @@
     TechnicalAssistant: "Sector Station Administration"
 
     Warden: "Sector Station Administration"
+    SeniorOfficer: "Sector Station Administration" # Serenity
     Detective: "Sector Station Administration"
     Brigmedic: "Sector Station Administration"
     DutyOfficer: "Sector Station Administration"

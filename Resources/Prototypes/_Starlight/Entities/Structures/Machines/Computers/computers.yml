@@ -807,9 +807,12 @@
       - map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
         state: generic_panel_open
   # Serenity-start: Frontier-derived shipyard — ships are bought with Federal Bills inserted into the
-  # bill slot, deeded to the ID card in the ID slot, and can be sold back.
+  # bill slot, deeded to the ID card in the ID slot, and can be sold back. Access-locked consoles check the
+  # inserted ID or the buyer. Maps place the specialised consoles (_Serenity/.../shipyard_consoles.yml); this
+  # generic one (built from the circuitboard) sells the unrestricted service and salvage lines only, so it
+  # can't bypass the access-locked medical and command consoles.
   - type: ShipyardConsole
-    groups: [ Civilian, Cargo, Command ]
+    groups: [ ShipyardService, ShipyardSalvage ]
     targetIdSlot:
       name: id-card-console-target-id
       ejectSound: /Audio/Machines/id_swipe.ogg

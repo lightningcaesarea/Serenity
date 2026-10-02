@@ -3,11 +3,12 @@ economy-atm-ui-transfer = Transfer
 
 economy-atm-ui-balance = Balance: {$balance} cr.
 
-economy-atm-ui-deposit = To make a deposit, insert Federal Bills
-                        into the ATM. Deposits and withdrawals
-                        are free of charge. Federal Bills are not
-                        accepted here; exchange them for
-                        Federal Bills first.
+# Serenity: rewritten for the Federal Bills deposit flow.
+economy-atm-ui-deposit = To make a deposit, use a stack of Federal
+                        Bills on the ATM; the whole stack is added
+                        to your account balance. Withdrawals pay
+                        out Federal Bills. Deposits and withdrawals
+                        are free of charge.
 
 # ATM transfer UX
 economy-atm-ui-transfer-help = Enter a recipient character name and amount to transfer

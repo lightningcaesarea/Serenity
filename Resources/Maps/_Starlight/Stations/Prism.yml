@@ -61543,7 +61543,7 @@ entities:
     - type: Transform
       parent: 2
       pos: 86.5,61.5
-- proto: ComputerShipyard
+- proto: ComputerShipyardCommand
   entities:
   - uid: 1079
     components:
