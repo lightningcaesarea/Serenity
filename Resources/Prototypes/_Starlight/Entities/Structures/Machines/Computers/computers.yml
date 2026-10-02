@@ -806,10 +806,13 @@
         state: generic_keys
       - map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
         state: generic_panel_open
-  # Serenity-start: Frontier-derived shipyard — ships are bought with the buyer's own Sector Credits,
-  # deeded to the ID card in the slot, and can be sold back. Anyone may use it; the deed is the key.
+  # Serenity-start: Frontier-derived shipyard — ships are bought with Federal Bills inserted into the
+  # bill slot, deeded to the ID card in the slot, and can be sold back. Anyone may use it; the deed is the key.
+  # Maps place the specialised consoles (_Serenity/.../shipyard_consoles.yml); this generic one (built from
+  # the circuitboard) sells the unrestricted service and salvage lines only, so it can't bypass the
+  # access-locked medical and command consoles.
   - type: ShipyardConsole
-    groups: [ Civilian, Cargo, Command ]
+    groups: [ ShipyardService, ShipyardSalvage ]
     targetIdSlot:
       name: id-card-console-target-id
       ejectSound: /Audio/Machines/id_swipe.ogg
@@ -819,6 +822,12 @@
       whitelist:
         components:
         - IdCard
+    billSlot:
+      name: shipyard-console-bills-slot
+      ejectOnBreak: true
+      whitelist:
+        components:
+        - Cash
   - type: ActivatableUI
     singleUser: true
     key: enum.ShipyardConsoleUiKey.Shipyard
@@ -833,6 +842,7 @@
       disk_slot: !type:ContainerSlot
       pai_slot: !type:ContainerSlot
       ShipyardConsole-targetId: !type:ContainerSlot
+      ShipyardConsole-bills: !type:ContainerSlot
   # Serenity-end
   - type: Computer
     board: ShipyardComputerCircuitboard

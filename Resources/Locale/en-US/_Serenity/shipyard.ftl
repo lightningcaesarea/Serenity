@@ -1,6 +1,6 @@
 ## Shipyard console UI
 shipyard-console-menu-title = Shipyard
-shipyard-console-balance-label = Your balance:{" "}
+shipyard-console-balance-label = Inserted bills:{" "}
 shipyard-console-appraisal-label = Ship value:{" "}
 shipyard-console-deed-label = Registered ship:
 shipyard-console-deed-none = None
@@ -21,7 +21,6 @@ shipyard-console-invalid-vessel = That vessel is not for sale here.
 shipyard-console-invalid-price = That vessel has no price.
 shipyard-console-invalid-station = This console is not attached to a station.
 shipyard-console-no-bills = No Federal Bills inserted into the console.
-shipyard-console-no-bank = No Sector Credit account found.
 shipyard-console-no-deed = No ship deed on this card.
 shipyard-console-sale-reqs = The ship must be docked to the station with nobody aboard.
 shipyard-console-purchase-failed = Failed to prepare the ship. Contact Sector Station Administration.

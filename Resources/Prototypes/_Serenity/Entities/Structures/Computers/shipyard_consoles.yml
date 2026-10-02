@@ -232,6 +232,11 @@
       state: generic_keys
     - map: ["enum.WiresVisualLayers.MaintenancePanel"]
       state: generic_panel_open
+  # Serenity: only command staff (anyone with Command access) can buy from the command shipyard.
+  - type: AccessReader
+    access:
+    - [ Command ]
+  - type: ActivatableUIRequiresAccess
   - type: ShipyardConsole
     groups: [ ShipyardCommand, ShipyardMedical, ShipyardSecurity ]
     targetIdSlot:
