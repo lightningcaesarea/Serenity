@@ -331,46 +331,12 @@ namespace Content.Server.VendingMachines
         /// </summary>
         private void PersistInventoryPrices(EntityUid uid, VendingMachineComponent component)
         {
-        var isEmagged = HasComp<EmaggedComponent>(uid);
+            var isEmagged = HasComp<EmaggedComponent>(uid);
             void PriceDict(Dictionary<string, VendingMachineInventoryEntry> dict)
             {
                 foreach (var entry in dict.Values)
                 {
-            if (!component.ShowPrices || isEmagged)
-                    {
-                        entry.Price = 0;
-                        continue;
-                    }
-
-                    if (PrototypeManager.TryIndex<EntityPrototype>(entry.ID, out var proto) &&
-                        proto.TryGetComponent<ItemPriceComponent>(out var priceComponent, _componentFactory))
-                    {
-                        var categoryPrice = _itemPriceManager.GetPriceForPrototype(entry.ID, priceComponent.PriceCategory);
-                        entry.Price = categoryPrice ?? priceComponent.FallbackPrice;
-                    }
-                    else
-                    {
-                        if (PrototypeManager.TryIndex<EntityPrototype>(entry.ID, out var p2))
-                        {
-                            var guessed = GuessCategory(p2);
-                            if (guessed != null)
-                            {
-                                var catPrice = _itemPriceManager.GetPriceForPrototype(entry.ID, guessed);
-                                if (catPrice.HasValue)
-                                {
-                                    entry.Price = catPrice.Value;
-                                    continue;
-                                }
-                            }
-
-                            var est = _pricing.GetEstimatedPrice(p2);
-                            entry.Price = Math.Max(1, (int) Math.Round(est));
-                        }
-                        else
-                        {
-                            entry.Price = 1;
-                        }
-                    }
+                    entry.Price = !component.ShowPrices || isEmagged ? 0 : CalculateEntryPrice(entry.ID); // Serenity: shared helper
                 }
             }
 
@@ -388,43 +354,37 @@ namespace Content.Server.VendingMachines
         {
             foreach (var entry in inventory.Values)
             {
-                if (!showPrices)
-                {
-                    entry.Price = 0; // Free items for machines
-                    continue;
-                }
-
-                if (!PrototypeManager.TryIndex<EntityPrototype>(entry.ID, out var proto))
-                {
-                    entry.Price = 1;
-                    continue;
-                }
-
-                // Try to get price from ItemPriceManager using prototype
-                if (proto.Components.TryGetComponent("ItemPrice", out var comp) && comp is ItemPriceComponent priceComponent)
-                {
-                    // Use the new GetPriceForPrototype method to ensure consistent pricing
-                    var categoryPrice = _itemPriceManager.GetPriceForPrototype(entry.ID, priceComponent.PriceCategory);
-                    entry.Price = categoryPrice ?? priceComponent.FallbackPrice;
-                }
-                else
-                {
-                    // Ensure a sensible fallback even if no ItemPriceComponent is present
-                    var guessed = GuessCategory(proto);
-                    if (guessed != null)
-                    {
-                        var catPrice = _itemPriceManager.GetPriceForPrototype(entry.ID, guessed);
-                        if (catPrice.HasValue)
-                        {
-                            entry.Price = catPrice.Value;
-                            continue;
-                        }
-                    }
-
-                    var est = _pricing.GetEstimatedPrice(proto);
-                    entry.Price = Math.Max(1, (int) Math.Round(est));
-                }
+                // Serenity: one helper for UI, persisted and charged prices.
+                entry.Price = showPrices ? CalculateEntryPrice(entry.ID) : 0;
             }
+        }
+
+        /// <summary>
+        /// Serenity: the price charged for a vend is calculated exactly like the price sent to the UI.
+        /// Also persists it on the entry so the cargo credit in <see cref="EjectItem"/> uses the same figure.
+        /// </summary>
+        public override int GetVendPrice(VendingMachineInventoryEntry entry, VendingMachineComponent component)
+        {
+            entry.Price = component.ShowPrices ? CalculateEntryPrice(entry.ID) : 0;
+            return entry.Price;
+        }
+
+        /// <summary>
+        /// Serenity: the single price source for a vending entry: the round's ItemPriceManager category price,
+        /// then the prototype's fallback price, then a guessed category, then the estimated value.
+        /// </summary>
+        private int CalculateEntryPrice(string protoId)
+        {
+            if (!PrototypeManager.TryIndex<EntityPrototype>(protoId, out var proto))
+                return 1;
+
+            if (proto.TryGetComponent<ItemPriceComponent>(out var priceComponent, _componentFactory))
+                return _itemPriceManager.GetPriceForPrototype(protoId, priceComponent.PriceCategory) ?? priceComponent.FallbackPrice;
+
+            if (GuessCategory(proto) is { } guessed && _itemPriceManager.GetPriceForPrototype(protoId, guessed) is { } catPrice)
+                return catPrice;
+
+            return Math.Max(1, (int) Math.Round(_pricing.GetEstimatedPrice(proto)));
         }
 
         /// <summary>
@@ -464,76 +424,11 @@ namespace Content.Server.VendingMachines
             if (component.Ejecting || component.Broken)
                 return;
 
-            if (!TryComp<ActorComponent>(sender, out var actor))
+            if (!HasComp<ActorComponent>(sender))
                 return;
 
-            // Get balance for payment
-            if (!_playerResources.TryGetResource(sender, "credits", out var balance))
-                return;
-
-            // Get inventory entry for the correct inventory bucket
-            var entry = GetEntry(uid, itemId, type, component);
-            if (entry == null)
-                return;
-
-            if (entry.Amount <= 0)
-                return;
-
-            var isEmagged = HasComp<EmaggedComponent>(uid);
-
-            // If prices should be shown but this entry still has a 0 price, (likely because UI pricing
-            // operated on a copied dictionary and did not persist back to the component inventory)
-            // compute and persist the price now so payment logic can run
-            if (!isEmagged && component.ShowPrices && entry.Price <= 0)
-            {
-                if (PrototypeManager.TryIndex<EntityPrototype>(itemId, out var proto) &&
-                    proto.TryGetComponent<ItemPriceComponent>(out var priceComponent, _componentFactory))
-                {
-                    var categoryPrice = _itemPriceManager.GetPriceForPrototype(itemId, priceComponent.PriceCategory);
-                    entry.Price = categoryPrice ?? priceComponent.FallbackPrice;
-                }
-                else
-                {
-                    if (PrototypeManager.TryIndex<EntityPrototype>(itemId, out var p2))
-                    {
-                        var guessed = GuessCategory(p2);
-                        if (guessed != null)
-                        {
-                            var catPrice = _itemPriceManager.GetPriceForPrototype(itemId, guessed);
-                            if (catPrice.HasValue)
-                            {
-                                entry.Price = catPrice.Value;
-                            }
-                            else
-                            {
-                                var est = _pricing.GetEstimatedPrice(p2);
-                                entry.Price = Math.Max(1, (int) Math.Round(est));
-                            }
-                        }
-                        else
-                        {
-                            var est = _pricing.GetEstimatedPrice(p2);
-                            entry.Price = Math.Max(1, (int) Math.Round(est));
-                        }
-                    }
-                    else
-                    {
-                        entry.Price = 1;
-                    }
-                }
-            }
-
-            // If payment is required, pre-check funds but DO NOT! deduct yet
-            if (!isEmagged && component.ShowPrices && entry.Price > 0)
-            {
-                if (balance < entry.Price)
-                {
-                    Popup.PopupEntity($"Insufficient funds. Required: {entry.Price}\u20a1", uid, sender);
-                    return;
-                }
-            }
-
-            // Start the ejection, debit will ocur in EjectItem after item has spawned
+            // Serenity: no bank-ledger pre-check. Payment is the Federal Bills in the machine's bill slot,
+            // checked and taken in TryEjectVendorItem at the price GetVendPrice returns.
             TryEjectVendorItem(uid, type, itemId, component.CanShoot, sender, component);
         }
 

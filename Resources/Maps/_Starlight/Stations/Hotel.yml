@@ -57127,7 +57127,7 @@ entities:
     - type: AccessReader
       accessListsOriginal:
       - - Robotics
-- proto: ComputerShipyard
+- proto: ComputerShipyardCommand
   entities:
   - uid: 9190
     components:

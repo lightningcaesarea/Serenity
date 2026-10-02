@@ -77022,7 +77022,7 @@ entities:
     - type: Transform
       parent: 2
       pos: 0.5,65.5
-- proto: ComputerShipyard
+- proto: ComputerShipyardCommand
   entities:
   - uid: 12245
     components:

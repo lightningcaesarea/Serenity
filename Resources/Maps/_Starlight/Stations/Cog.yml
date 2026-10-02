@@ -84309,7 +84309,7 @@ entities:
     - type: Transform
       parent: 2
       pos: -19.5,-27.5
-- proto: ComputerShipyard
+- proto: ComputerShipyardCommand
   entities:
   - uid: 13140
     components:

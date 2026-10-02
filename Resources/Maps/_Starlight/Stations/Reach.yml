@@ -11134,7 +11134,7 @@ entities:
       - Experimental
       - CivilianServices
       - Biochemical
-- proto: ComputerShipyard
+- proto: ComputerShipyardCommand
   entities:
   - uid: 1561
     components:
