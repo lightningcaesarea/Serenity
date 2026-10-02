@@ -37,6 +37,12 @@ public sealed partial class SkillPrototype : IPrototype
     /// </summary>
     [DataField]
     public List<SkillDoAfterRule> DoAfters = new();
+
+    /// <summary>
+    /// Extra produce the character gets each time they harvest a plant by hand.
+    /// </summary>
+    [DataField]
+    public int PlantHarvestBonus;
 }
 
 /// <summary>

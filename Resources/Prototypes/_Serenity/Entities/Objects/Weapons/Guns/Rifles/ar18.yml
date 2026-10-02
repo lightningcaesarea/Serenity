@@ -18,8 +18,11 @@
     - state: mag-0
       map: [ "enum.GunVisualLayers.Mag" ]
       visible: false
+  # ar18.rsi only has the ground icon, so held/worn visuals borrow the similar dark carbine's sprite.
+  - type: Item
+    sprite: Objects/Weapons/Guns/Rifles/carbine.rsi
   - type: Clothing
-    sprite: Objects/Weapons/Guns/Rifles/ar18.rsi
+    sprite: Objects/Weapons/Guns/Rifles/carbine.rsi
   - type: Gun
     fireRate: 5
     burstFireRate: 10

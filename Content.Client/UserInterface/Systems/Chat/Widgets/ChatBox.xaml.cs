@@ -220,12 +220,12 @@ public partial class ChatBox : UIWidget
     private void OnTextChanged(LineEditEventArgs args)
     {
         // Update channel select button to correct channel if we have a prefix.
-        _controller.UpdateSelectedChannel(this);
+        var channel = _controller.UpdateSelectedChannel(this); // Serenity: keep the prefix-resolved channel
 
         _controller.UpdateLanguageNotifier(this); // Starlight
 
         // Warn typing indicator about change
-        _controller.NotifyChatTextChange(SelectedChannel);
+        _controller.NotifyChatTextChange(channel); // Serenity: bubble follows a typed prefix, not just the selector
     }
 
     private void OnFocusEnter(LineEditEventArgs args)
