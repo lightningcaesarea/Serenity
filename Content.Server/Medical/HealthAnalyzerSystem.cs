@@ -476,7 +476,8 @@ public sealed partial class HealthAnalyzerSystem : EntitySystem
             uiState.BloodLevel,
             damageable.TotalDamage,
             groupedInjuries,
-            reagents);
+            reagents,
+            uiState); // Serenity
     }
 
     private HealthAnalyzerDamageGroupSnapshot? BuildDamageGroupSnapshot(
@@ -595,6 +596,8 @@ public sealed partial class HealthAnalyzerSystem : EntitySystem
             }
         }
 
+        _serenityReadout.AppendReportSection(message, snapshot.ReadoutState); // Serenity: wounds and infection (advanced only)
+
         return message.ToMarkup();
     }
 
@@ -608,7 +611,8 @@ public sealed partial class HealthAnalyzerSystem : EntitySystem
         float BloodLevel,
         FixedPoint2 TotalDamage,
         List<HealthAnalyzerDamageGroupSnapshot> DamageGroups,
-        List<HealthAnalyzerReagentSnapshot> Reagents);
+        List<HealthAnalyzerReagentSnapshot> Reagents,
+        HealthAnalyzerUiState ReadoutState); // Serenity: the analyzer's readout, for the wounds and infection section
 
     private sealed record HealthAnalyzerDamageGroupSnapshot(
         string Name,
