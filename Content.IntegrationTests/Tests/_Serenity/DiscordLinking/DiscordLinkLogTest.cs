@@ -13,8 +13,8 @@ public sealed class DiscordLinkLogTest
 
     /// <summary>
     /// Discord delivers commands, modal submissions and member events on its own threads, not the game's main thread. The
-    /// static Loc looks its service up through a per-thread container, so on those threads it throws a
-    /// NullReferenceException: that is what made !linkpanel (and the whole Discord side of linking) fail. This proves it
+    /// static Loc looks its service up through a per-thread container, so on those threads it throws (a
+    /// NullReferenceException, or IoC's own assertion in a Debug build): that is what made !linkpanel (and the whole Discord side of linking) fail. This proves it
     /// still does, so the next test means something.
     /// </summary>
     [Test]
@@ -24,8 +24,9 @@ public sealed class DiscordLinkLogTest
 
         await pair.Server.WaitAssertion(() =>
         {
-            Assert.Throws<NullReferenceException>(() =>
-                Task.Run(() => Loc.GetString("serenity-discord-link-log-unlinked")).GetAwaiter().GetResult());
+            // A Release build throws a NullReferenceException; a Debug build (what CI runs) fails IoC's own assertion first
+            // ("IoC has no context on this thread"). Both are this failure, so accept either.
+            Assert.Catch(() => Task.Run(() => Loc.GetString("serenity-discord-link-log-unlinked")).GetAwaiter().GetResult());
         });
 
         await pair.CleanReturnAsync();
