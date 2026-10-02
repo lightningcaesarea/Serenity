@@ -7,7 +7,8 @@ using Robust.Shared.Prototypes;
 namespace Content.IntegrationTests.Tests._Serenity.Medical;
 
 /// <summary>
-/// Where IV stands are handed out: the medbay machines and the medicine lockers, not the public civilian machines.
+/// Where IV stands are handed out: flatpacks in the medbay machines, assembled stands in the medicine lockers, and nothing
+/// in the public civilian machines.
 /// </summary>
 [TestFixture]
 public sealed class IVStockingTest
@@ -34,7 +35,7 @@ public sealed class IVStockingTest
     ];
 
     [Test]
-    public async Task MedbayMachinesStockIVStands()
+    public async Task MedbayMachinesStockIVStandFlatpacks()
     {
         await using var pair = await PoolManager.GetServerClient();
         var proto = pair.Server.ProtoMan;
@@ -43,12 +44,12 @@ public sealed class IVStockingTest
         {
             foreach (var id in Medbay)
             {
-                Assert.That(proto.Index(id).StartingInventory.ContainsKey("IVStand"), $"{id} should stock an IV stand");
+                Assert.That(proto.Index(id).StartingInventory.ContainsKey("IVStandFlatpack"), $"{id} should stock an IV stand flatpack");
             }
 
             foreach (var id in Civilian)
             {
-                Assert.That(proto.Index(id).StartingInventory.ContainsKey("IVStand"), Is.False, $"{id} shouldn't stock an IV stand");
+                Assert.That(proto.Index(id).StartingInventory.ContainsKey("IVStandFlatpack"), Is.False, $"{id} shouldn't stock an IV stand flatpack");
             }
         });
 
