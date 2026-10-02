@@ -51,7 +51,6 @@ public sealed class CryoTeleportationTest : GameTest
           availableJobs:
             {_passenger}: [ -1, -1 ]
             {_mime}: [ 1, 1 ]
-            K9: [ 1, 1 ]
 ";
     // editorconfig-checker-enable
 
