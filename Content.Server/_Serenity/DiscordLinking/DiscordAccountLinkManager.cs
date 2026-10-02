@@ -265,10 +265,7 @@ public sealed partial class DiscordAccountLinkManager : IPostInjectInit
 
         _sawmill.Info($"Linked {pending.UserName} ({pending.UserId}) to Discord {user.Username} ({user.Id})");
         await ReplyPrivately(modal, Loc.GetString("serenity-discord-link-reply-success", ("player", pending.UserName)));
-        await PostLog(Loc.GetString("serenity-discord-link-log-linked",
-            ("discordId", user.Id.ToString()),
-            ("player", pending.UserName),
-            ("userId", pending.UserId.ToString())));
+        await PostLog(LogLinked(user.Username, user.Id, pending.UserName, pending.UserId.UserId));
     }
 
     private static string? ReadCode(ModalInteraction modal)
@@ -328,9 +325,7 @@ public sealed partial class DiscordAccountLinkManager : IPostInjectInit
             });
 
             var located = await _locator.LookupIdAsync(userId);
-            await PostLog(Loc.GetString("serenity-discord-link-log-removed",
-                ("discordId", discordId.ToString()),
-                ("player", located?.Username ?? link.PlayerUserId.ToString())));
+            await PostLog(LogRemoved(link.DiscordUsername ?? "?", discordId, located?.Username ?? "?", link.PlayerUserId));
         }
         catch (Exception e)
         {
@@ -413,9 +408,7 @@ public sealed partial class DiscordAccountLinkManager : IPostInjectInit
 
             var description = await DescribeLink(link);
             await Reply(args, Loc.GetString("serenity-discord-link-unlinked", ("link", description)));
-            await PostLog(Loc.GetString("serenity-discord-link-log-unlinked",
-                ("link", description),
-                ("by", args.Message.Author.Username)));
+            await PostLog(LogUnlinked(description, args.Message.Author.Username, args.Message.Author.Id.ToString()));
         }
         catch (Exception e)
         {
@@ -470,6 +463,37 @@ public sealed partial class DiscordAccountLinkManager : IPostInjectInit
             ("discordId", unchecked((ulong) link.DiscordId).ToString()),
             ("discordName", link.DiscordUsername ?? "?"),
             ("linkedAt", link.LinkedAt.ToString("yyyy-MM-dd HH:mm")));
+    }
+
+    // The staff-channel log lines all carry the same identity block, so whoever reads the log can tell who a player is
+    // without looking them up: the Discord username and ID and the SS14 name and user ID.
+
+    public static string LogLinked(string discordName, ulong discordId, string player, Guid userId)
+    {
+        return Loc.GetString("serenity-discord-link-log-linked",
+            ("discordName", discordName),
+            ("discordId", discordId.ToString()),
+            ("player", player),
+            ("userId", userId.ToString()));
+    }
+
+    public static string LogRemoved(string discordName, ulong discordId, string player, Guid userId)
+    {
+        return Loc.GetString("serenity-discord-link-log-removed",
+            ("discordName", discordName),
+            ("discordId", discordId.ToString()),
+            ("player", player),
+            ("userId", userId.ToString()));
+    }
+
+    /// <param name="link">The one-line link summary from <see cref="DescribeLink"/>, which already names both accounts and IDs.</param>
+    /// <param name="by">Who removed it (Discord username or in-game name) and their ID.</param>
+    public static string LogUnlinked(string link, string by, string byId)
+    {
+        return Loc.GetString("serenity-discord-link-log-unlinked",
+            ("link", link),
+            ("by", by),
+            ("byId", byId));
     }
 
     public async Task PostLog(string message)
