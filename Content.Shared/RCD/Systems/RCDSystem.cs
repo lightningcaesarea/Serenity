@@ -383,6 +383,7 @@ public sealed partial class RCDSystem : EntitySystem
             GetNetEntity(effect));      // Starlight Edit: Include layer as well in snapshot at start so finalize uses consistent placement state.
         var doAfterArgs = new DoAfterArgs(EntityManager, user, delay, ev, uid, target: args.Target, used: uid)
         {
+            NeedHand = true,
             BreakOnDamage = true,
             BreakOnHandChange = true,
             BreakOnMove = true,

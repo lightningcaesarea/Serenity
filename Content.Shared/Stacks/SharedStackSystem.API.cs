@@ -27,7 +27,10 @@ public abstract partial class SharedStackSystem
 
         ReduceCount(stackEnt, 1);
         var stackId = _prototype.Index(stackEnt.Comp.StackTypeId);
-        return PredictedSpawnNextToOrDrop(stackId.Spawn, stackEnt.Owner);
+        var entityUid = PredictedSpawnNextToOrDrop(stackId.Spawn, stackEnt.Owner);
+
+        SetCount(entityUid, 1);
+        return entityUid;
     }
 
     #region Starlight
@@ -91,7 +94,7 @@ public abstract partial class SharedStackSystem
     {
         transferred = 0;
 
-        if (donor == recipient)
+        if (donor.Owner == recipient.Owner)
             return false;
 
         if (!Resolve(recipient, ref recipient.Comp, false) || !Resolve(donor, ref donor.Comp, false))
