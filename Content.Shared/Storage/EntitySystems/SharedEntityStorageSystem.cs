@@ -133,7 +133,8 @@ public abstract partial class SharedEntityStorageSystem : EntitySystem
 
     private void OnRelayMovement(EntityUid uid, EntityStorageComponent component, ref ContainerRelayMovementEntityEvent args)
     {
-        if (!HasComp<HandsComponent>(args.Entity))
+        if (!component.Contents.Contains(args.Entity) &&
+            !HasComp<HandsComponent>(args.Entity))
             return;
 
         if (!_actionBlocker.CanMove(args.Entity))
@@ -305,7 +306,8 @@ public abstract partial class SharedEntityStorageSystem : EntitySystem
                 break;
         }
 
-        TakeGas(uid, component);
+        if (LifeStage(uid) >= EntityLifeStage.MapInitialized) // stop mappers from serializing air in locker
+            TakeGas(uid, component);
         ModifyComponents(uid, component);
         if (_net.IsClient && _timing.IsFirstTimePredicted)
             _audio.PlayPvs(component.CloseSound, uid);
@@ -398,12 +400,8 @@ public abstract partial class SharedEntityStorageSystem : EntitySystem
         if (containerAttemptEvent.Cancelled)
             return false;
 
-        // Consult the whitelist. The whitelist ignores the default assumption about how entity storage works.
-        if (component.Whitelist != null)
-            return _whitelistSystem.IsValid(component.Whitelist, toInsert);
-
-        // The inserted entity must be a mob or an item.
-        return HasComp<MobStateComponent>(toInsert) || HasComp<ItemComponent>(toInsert);
+        // Check the whitelist/blacklist.
+        return _whitelistSystem.CheckBoth(toInsert, component.Blacklist, component.Whitelist);
     }
 
     public bool TryOpenStorage(EntityUid user, EntityUid target, bool silent = false)
@@ -439,7 +437,8 @@ public abstract partial class SharedEntityStorageSystem : EntitySystem
         if (!Resolve(target, ref component))
             return false;
 
-        if (!HasComp<HandsComponent>(user))
+        if (!component.Contents.Contains(user) &&
+            !HasComp<HandsComponent>(user))
             return false;
 
         if (_weldable.IsWelded(target))

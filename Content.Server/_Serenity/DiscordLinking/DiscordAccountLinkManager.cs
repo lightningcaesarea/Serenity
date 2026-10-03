@@ -11,6 +11,7 @@ using NetCord.Rest;
 using Robust.Server.Player;
 using Robust.Shared.Asynchronous;
 using Robust.Shared.Configuration;
+using Robust.Shared.Localization;
 using Robust.Shared.Network;
 using DiscordInteraction = NetCord.Interaction;
 
@@ -31,6 +32,10 @@ public sealed partial class DiscordAccountLinkManager : IPostInjectInit
     [Dependency] private IPlayerLocator _locator = default!;
     [Dependency] private ITaskManager _tasks = default!;
     [Dependency] private ILogManager _log = default!;
+    // Discord delivers commands, modal submissions and member events on its own threads, where the static Loc can't reach
+    // the IoC container (it only exists on the main thread) and throws a NullReferenceException. An injected instance
+    // is resolved once, up front, and works from any thread.
+    [Dependency] private ILocalizationManager _loc = default!;
 
     public const string PanelButtonId = "serenity-link-open";
     private const string ModalId = "serenity-link-submit";
@@ -117,7 +122,7 @@ public sealed partial class DiscordAccountLinkManager : IPostInjectInit
         catch (Exception e)
         {
             _sawmill.Warning($"Couldn't check Discord membership for {userName} ({discordId}): {e.Message}");
-            return _failOpen ? null : Loc.GetString("serenity-discord-link-deny-unavailable");
+            return _failOpen ? null : _loc.GetString("serenity-discord-link-deny-unavailable");
         }
 
         if (member == null)
@@ -136,8 +141,8 @@ public sealed partial class DiscordAccountLinkManager : IPostInjectInit
             }
 
             return banned == true
-                ? Loc.GetString("serenity-discord-link-deny-banned")
-                : Loc.GetString("serenity-discord-link-deny-not-member", ("invite", InviteText()));
+                ? _loc.GetString("serenity-discord-link-deny-banned")
+                : _loc.GetString("serenity-discord-link-deny-not-member", ("invite", InviteText()));
         }
 
         if (member.Username != link.DiscordUsername)
@@ -148,14 +153,14 @@ public sealed partial class DiscordAccountLinkManager : IPostInjectInit
 
     private string UnlinkedMessage(string code)
     {
-        return Loc.GetString("serenity-discord-link-deny-unlinked",
+        return _loc.GetString("serenity-discord-link-deny-unlinked",
             ("invite", InviteText()),
             ("code", code),
             ("minutes", _codeMinutes));
     }
 
     private string InviteText()
-        => string.IsNullOrWhiteSpace(_invite) ? Loc.GetString("serenity-discord-link-no-invite") : _invite;
+        => string.IsNullOrWhiteSpace(_invite) ? _loc.GetString("serenity-discord-link-no-invite") : _invite;
 
     private string GetOrCreateCode(NetUserId userId, string userName)
     {
@@ -206,11 +211,11 @@ public sealed partial class DiscordAccountLinkManager : IPostInjectInit
         }
     }
 
-    private static ModalProperties BuildModal()
+    private ModalProperties BuildModal()
     {
-        return new ModalProperties(ModalId, Loc.GetString("serenity-discord-link-modal-title"),
+        return new ModalProperties(ModalId, _loc.GetString("serenity-discord-link-modal-title"),
         [
-            new TextInputProperties(CodeInputId, TextInputStyle.Short, Loc.GetString("serenity-discord-link-modal-label"))
+            new TextInputProperties(CodeInputId, TextInputStyle.Short, _loc.GetString("serenity-discord-link-modal-label"))
             {
                 MinLength = CodeLength,
                 MaxLength = CodeLength,
@@ -238,7 +243,7 @@ public sealed partial class DiscordAccountLinkManager : IPostInjectInit
 
         if (pending == null)
         {
-            await ReplyPrivately(modal, Loc.GetString("serenity-discord-link-reply-bad-code"));
+            await ReplyPrivately(modal, _loc.GetString("serenity-discord-link-reply-bad-code"));
             return;
         }
 
@@ -246,14 +251,14 @@ public sealed partial class DiscordAccountLinkManager : IPostInjectInit
         if (await _db.GetDiscordLinkByDiscord(user.Id) is { } existing)
         {
             var other = await _db.GetPlayerRecordByUserId(new NetUserId(existing.PlayerUserId));
-            await ReplyPrivately(modal, Loc.GetString("serenity-discord-link-reply-discord-taken",
+            await ReplyPrivately(modal, _loc.GetString("serenity-discord-link-reply-discord-taken",
                 ("player", other?.LastSeenUserName ?? existing.PlayerUserId.ToString())));
             return;
         }
 
         if (!await _db.AddDiscordLink(pending.UserId.UserId, user.Id, user.Username))
         {
-            await ReplyPrivately(modal, Loc.GetString("serenity-discord-link-reply-already-linked"));
+            await ReplyPrivately(modal, _loc.GetString("serenity-discord-link-reply-already-linked"));
             return;
         }
 
@@ -264,11 +269,8 @@ public sealed partial class DiscordAccountLinkManager : IPostInjectInit
         }
 
         _sawmill.Info($"Linked {pending.UserName} ({pending.UserId}) to Discord {user.Username} ({user.Id})");
-        await ReplyPrivately(modal, Loc.GetString("serenity-discord-link-reply-success", ("player", pending.UserName)));
-        await PostLog(Loc.GetString("serenity-discord-link-log-linked",
-            ("discordId", user.Id.ToString()),
-            ("player", pending.UserName),
-            ("userId", pending.UserId.ToString())));
+        await ReplyPrivately(modal, _loc.GetString("serenity-discord-link-reply-success", ("player", pending.UserName)));
+        await PostLog(LogLinked(user.Username, user.Id, pending.UserName, pending.UserId.UserId));
     }
 
     private static string? ReadCode(ModalInteraction modal)
@@ -324,13 +326,11 @@ public sealed partial class DiscordAccountLinkManager : IPostInjectInit
                 if (!_required || !_players.TryGetSessionById(userId, out var session))
                     return;
 
-                session.Channel.Disconnect(Loc.GetString("serenity-discord-link-kick-removed"));
+                session.Channel.Disconnect(_loc.GetString("serenity-discord-link-kick-removed"));
             });
 
             var located = await _locator.LookupIdAsync(userId);
-            await PostLog(Loc.GetString("serenity-discord-link-log-removed",
-                ("discordId", discordId.ToString()),
-                ("player", located?.Username ?? link.PlayerUserId.ToString())));
+            await PostLog(LogRemoved(link.DiscordUsername ?? "?", discordId, located?.Username ?? "?", link.PlayerUserId));
         }
         catch (Exception e)
         {
@@ -351,12 +351,12 @@ public sealed partial class DiscordAccountLinkManager : IPostInjectInit
 
             await _discord.SendMessageAsync(args.Message.ChannelId, new MessageProperties
             {
-                Content = Loc.GetString("serenity-discord-link-panel-text"),
+                Content = _loc.GetString("serenity-discord-link-panel-text"),
                 Components =
                 [
                     new ActionRowProperties(
                     [
-                        new ButtonProperties(PanelButtonId, Loc.GetString("serenity-discord-link-panel-button"), ButtonStyle.Primary),
+                        new ButtonProperties(PanelButtonId, _loc.GetString("serenity-discord-link-panel-button"), ButtonStyle.Primary),
                     ]),
                 ],
             });
@@ -376,13 +376,13 @@ public sealed partial class DiscordAccountLinkManager : IPostInjectInit
 
             if (args.Arguments.Count != 1)
             {
-                await Reply(args, Loc.GetString("serenity-discord-link-whois-usage", ("prefix", _discord.BotPrefix)));
+                await Reply(args, _loc.GetString("serenity-discord-link-whois-usage", ("prefix", _discord.BotPrefix)));
                 return;
             }
 
             var link = await ResolveLink(args.Arguments[0]);
             await Reply(args, link == null
-                ? Loc.GetString("serenity-discord-link-whois-none")
+                ? _loc.GetString("serenity-discord-link-whois-none")
                 : await DescribeLink(link));
         }
         catch (Exception e)
@@ -400,22 +400,20 @@ public sealed partial class DiscordAccountLinkManager : IPostInjectInit
 
             if (args.Arguments.Count != 1)
             {
-                await Reply(args, Loc.GetString("serenity-discord-link-unlink-usage", ("prefix", _discord.BotPrefix)));
+                await Reply(args, _loc.GetString("serenity-discord-link-unlink-usage", ("prefix", _discord.BotPrefix)));
                 return;
             }
 
             var link = await ResolveLink(args.Arguments[0]);
             if (link == null || !await _db.RemoveDiscordLink(link.PlayerUserId))
             {
-                await Reply(args, Loc.GetString("serenity-discord-link-whois-none"));
+                await Reply(args, _loc.GetString("serenity-discord-link-whois-none"));
                 return;
             }
 
             var description = await DescribeLink(link);
-            await Reply(args, Loc.GetString("serenity-discord-link-unlinked", ("link", description)));
-            await PostLog(Loc.GetString("serenity-discord-link-log-unlinked",
-                ("link", description),
-                ("by", args.Message.Author.Username)));
+            await Reply(args, _loc.GetString("serenity-discord-link-unlinked", ("link", description)));
+            await PostLog(LogUnlinked(description, args.Message.Author.Username, args.Message.Author.Id.ToString()));
         }
         catch (Exception e)
         {
@@ -464,12 +462,43 @@ public sealed partial class DiscordAccountLinkManager : IPostInjectInit
     public async Task<string> DescribeLink(SerenityDiscordLink link)
     {
         var located = await _locator.LookupIdAsync(new NetUserId(link.PlayerUserId));
-        return Loc.GetString("serenity-discord-link-describe",
+        return _loc.GetString("serenity-discord-link-describe",
             ("player", located?.Username ?? "?"),
             ("userId", link.PlayerUserId.ToString()),
             ("discordId", unchecked((ulong) link.DiscordId).ToString()),
             ("discordName", link.DiscordUsername ?? "?"),
             ("linkedAt", link.LinkedAt.ToString("yyyy-MM-dd HH:mm")));
+    }
+
+    // The staff-channel log lines all carry the same identity block, so whoever reads the log can tell who a player is
+    // without looking them up: the Discord username and ID and the SS14 name and user ID.
+
+    public string LogLinked(string discordName, ulong discordId, string player, Guid userId)
+    {
+        return _loc.GetString("serenity-discord-link-log-linked",
+            ("discordName", discordName),
+            ("discordId", discordId.ToString()),
+            ("player", player),
+            ("userId", userId.ToString()));
+    }
+
+    public string LogRemoved(string discordName, ulong discordId, string player, Guid userId)
+    {
+        return _loc.GetString("serenity-discord-link-log-removed",
+            ("discordName", discordName),
+            ("discordId", discordId.ToString()),
+            ("player", player),
+            ("userId", userId.ToString()));
+    }
+
+    /// <param name="link">The one-line link summary from <see cref="DescribeLink"/>, which already names both accounts and IDs.</param>
+    /// <param name="by">Who removed it (Discord username or in-game name) and their ID.</param>
+    public string LogUnlinked(string link, string by, string byId)
+    {
+        return _loc.GetString("serenity-discord-link-log-unlinked",
+            ("link", link),
+            ("by", by),
+            ("byId", byId));
     }
 
     public async Task PostLog(string message)

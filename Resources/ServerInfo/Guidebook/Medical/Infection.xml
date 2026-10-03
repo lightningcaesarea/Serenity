@@ -41,7 +41,7 @@ While antibiox is in the blood:
 - An existing infection is frozen at its current tier and its symptoms are suppressed. It carries on when the drug wears off.
 - The drug wipes out gut bacteria, leaving the patient with less stamina while it works and for a while afterwards.
 
-[color=red]Overdose (16 units or more):[/color] the patient is poisoned, the protection is lost, and any infection escalates about three times faster. Do not double up on doses.
+[color=red]Overdose (16 units or more):[/color] the patient is poisoned (a double dose is painful but not deadly by itself), the protection is lost, a new infection from dirty surgery or open wounds becomes about three times as likely, and any infection escalates about three times faster. Do not double up on doses.
 
 <Box>
     <GuideEntityEmbed Entity="AntibioxAutoInjector"/>

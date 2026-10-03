@@ -7,6 +7,8 @@ using Content.Shared.Cargo.Components;
 using Content.Shared.Cargo.Events;
 using Content.Shared.Cargo.Prototypes;
 using Content.Shared.CCVar;
+using Content.Shared.Database; // Serenity
+using Content.Shared.Stacks; // Serenity
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
 #region Starlight
@@ -25,6 +27,7 @@ public sealed partial class CargoSystem
     [Dependency] private AtmosphereSystem _atmosphereSystem = default!; //Starlight
 
     private static readonly SoundPathSpecifier ApproveSound = new("/Audio/Effects/Cargo/ping.ogg");
+    private static readonly ProtoId<StackPrototype> CashStackType = "Credit"; // Serenity: Federal Bills
     private bool _lockboxCutEnabled;
 
     private void InitializeShuttle()
@@ -300,11 +303,16 @@ public sealed partial class CargoSystem
     {
         var xform = Transform(uid);
 
-        if (_station.GetOwningStation(uid) is not { } station ||
-            !TryComp<StationBankAccountComponent>(station, out var bankAccount))
+        // Serenity: a pallet console on a grid that isn't a station (e.g. the Cargo Depot POI) has no
+        // station budget to credit, so it pays the seller in Federal Bills at the console instead.
+        if (_station.GetOwningStation(uid) is not { } station)
         {
+            SellPalletsForCash(uid, args.Actor);
             return;
         }
+
+        if (!TryComp<StationBankAccountComponent>(station, out var bankAccount))
+            return;
 
         if (xform.GridUid is not { } gridUid)
         {
@@ -347,6 +355,40 @@ public sealed partial class CargoSystem
         // Starlight - end
 
         Dirty(station, bankAccount);
+        _audio.PlayPvs(ApproveSound, uid);
+        UpdatePalletConsoleInterface(uid);
+    }
+
+    /// <summary>
+    /// Serenity: sells everything on the console grid's sell pallets and spawns the proceeds as Federal Bills
+    /// (SpaceCash) at the console. Used where there is no owning station to credit.
+    /// </summary>
+    private void SellPalletsForCash(EntityUid uid, EntityUid actor)
+    {
+        if (Transform(uid).GridUid is not { } gridUid)
+        {
+            _uiSystem.SetUiState(uid,
+                CargoPalletConsoleUiKey.Sale,
+                new CargoPalletConsoleInterfaceState(0, 0, false));
+            return;
+        }
+
+        // No station: bounty labels still resolve their own station, other EntitySoldEvent handlers ignore it.
+        if (!SellPallets(gridUid, EntityUid.Invalid, out var goods, out var gasses))
+            return;
+
+        var total = 0;
+        foreach (var (_, _, value) in goods)
+            total += (int) Math.Round(value);
+        foreach (var (_, value) in gasses)
+            total += (int) Math.Round(value);
+
+        if (total > 0)
+            _stack.SpawnAtPosition(total, CashStackType, Transform(uid).Coordinates);
+
+        _adminLogger.Add(LogType.Economy, LogImpact.Low,
+            $"{ToPrettyString(actor):player} sold {goods.Count} items for {total} Federal Bills at stationless pallet console {ToPrettyString(uid):console}");
+
         _audio.PlayPvs(ApproveSound, uid);
         UpdatePalletConsoleInterface(uid);
     }

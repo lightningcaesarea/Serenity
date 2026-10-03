@@ -15,6 +15,7 @@
     - Mouse
   - type: Absorbable
   - type: Hunger
+    baseDecayRate: 0.0222 # Serenity: guidebook says 33% faster than the 0.01667 default
   - type: Icon
     sprite: _Starlight/Mobs/Species/Rodentia/parts.rsi
     state: rodentia

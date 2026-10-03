@@ -87,6 +87,10 @@
       components:
       - MobState # no mobs
       - Pullable # no dragging things in
+    denySound: # Serenity: RMC deny buzz, matching the airlocks
+      path: /Audio/_RMC14/Machines/buzz_two.ogg
+      params:
+        volume: -7
   - type: Appearance
   - type: Damageable
     damageContainer: StructuralInorganic # Starlight - they really should take structural damage

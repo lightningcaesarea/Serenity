@@ -26,6 +26,11 @@
     Snout: MobHumanoidAnyMarking
     Hair: MobHumanoidAnyMarking
     FacialHair: MobHumanoidAnyMarking
+    Butt: MobHumanoidAnyMarking # Serenity: anatomy markings need a base layer to render
+    Vagina: MobHumanoidAnyMarking
+    Testicles: MobHumanoidAnyMarking
+    Penis: MobHumanoidAnyMarking
+    Breasts: MobHumanoidAnyMarking
     Chest: MobCycloriteTorso
     Eyes: MobCycloriteEyes
     LArm: MobCycloriteLArm

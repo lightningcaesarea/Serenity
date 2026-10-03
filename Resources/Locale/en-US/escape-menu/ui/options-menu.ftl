@@ -60,6 +60,9 @@ ui-options-show-looc-on-head = Show LOOC chat above characters head
 ui-options-fancy-speech = Show names in speech bubbles
 ui-options-fancy-name-background = Add background to speech bubble names
 ui-options-vsync = VSync
+ui-options-max-fps = Maximum FPS:
+ui-options-max-fps-display-rate = Display Rate
+ui-options-max-fps-tooltip = Maximum framerate the client should run at. Set to 0 for no limit. This has no effect if VSync is enabled.
 ui-options-fullscreen = Fullscreen
 ui-options-lighting-label = Lighting Quality:
 ui-options-lighting-very-low = Very Low
@@ -95,9 +98,6 @@ ui-options-vp-integer-scaling-tooltip = If this option is enabled, the viewport 
 ui-options-filter-label = Scaling filter:
 ui-options-filter-nearest = Nearest (no smoothing)
 ui-options-filter-bilinear = Bilinear (smoothed)
-ui-options-trace = Display the bullet's trace
-ui-options-trace-tooltip = If you're lagging while shooting, uncheck this box,
-                           and the hitscan won't display the texture of the smoke behind the flying bullet.
 ui-options-vp-vertical-fit = Vertical viewport fitting
 ui-options-vp-vertical-fit-tooltip = When enabled, the main viewport will ignore the horizontal axis entirely when
                                      fitting to your screen. If your screen is smaller than the viewport, then this

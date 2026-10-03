@@ -108,9 +108,10 @@ public sealed partial class DiscordLinkRemoveCommand : LocalizedCommands
 
         var description = await _links.DescribeLink(link);
         shell.WriteLine(Loc.GetString("serenity-discord-link-unlinked", ("link", description)));
-        await _links.PostLog(Loc.GetString("serenity-discord-link-log-unlinked",
-            ("link", description),
-            ("by", shell.Player?.Name ?? "SERVER")));
+        await _links.PostLog(_links.LogUnlinked(
+            description,
+            shell.Player?.Name ?? "SERVER",
+            shell.Player?.UserId.ToString() ?? "-"));
     }
 
     public override CompletionResult GetCompletion(IConsoleShell shell, string[] args)

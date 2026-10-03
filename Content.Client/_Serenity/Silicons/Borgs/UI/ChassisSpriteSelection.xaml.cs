@@ -20,6 +20,9 @@ public sealed partial class ChassisSpriteSelection : Control
     private readonly SpriteSystem _sprite;
 
     public EntityPrototype? SubtypePrototype;
+
+    public bool HasSelection; // Starlight
+
     public event Action? SubtypeSelected;
 
     private const int PrototypeViewSize = 2;
@@ -35,6 +38,9 @@ public sealed partial class ChassisSpriteSelection : Control
     public void Update(BorgTypePrototype borgTypePrototype)
     {
         MainContainer.Visible = true;
+
+        SubtypePrototype = null; // Starlight
+        HasSelection = false; // Starlight
 
         OptionsContainer.RemoveAllChildren();
 
@@ -70,11 +76,16 @@ public sealed partial class ChassisSpriteSelection : Control
             button.OnPressed += _ =>
             {
                 SubtypePrototype = ent;
+                HasSelection = true; // Starlight
                 SubtypeSelected?.Invoke();
             };
 
             if (borgTypePrototype.DefaultSubtype == ent.ID)
+            {
                 button.Pressed = true;
+                SubtypePrototype = ent; // Starlight
+                HasSelection = true; // Starlight
+            }
 
             buttons.Add(button);
         }
@@ -107,6 +118,7 @@ public sealed partial class ChassisSpriteSelection : Control
         button.OnPressed += _ =>
         {
             SubtypePrototype = null;
+            HasSelection = true; // Starlight
             SubtypeSelected?.Invoke();
         };
 

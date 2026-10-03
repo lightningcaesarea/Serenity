@@ -62,6 +62,7 @@ public sealed class VendingInteractionTest : InteractionTest
   - type: VendingMachine
     pack: InteractionTestVendingInventory
     ejectDelay: 0 # no delay to speed up tests
+    showPrices: false # Serenity: priced vends need Federal Bills (see _Serenity/Economy/VendingPriceTest); these tests cover free dispensing
   - type: Sprite
     sprite: error.rsi
 ";
@@ -196,14 +197,14 @@ public sealed class VendingInteractionTest : InteractionTest
     private async Task BreakVendor()
     {
         var damageableSys = SEntMan.System<DamageableSystem>();
-        Assert.That(TryComp<DamageableComponent>(out var damageableComp), $"{VendingMachineProtoId} does not have DamageableComponent.");
-        Assert.That(damageableComp.Damage.GetTotal(), Is.EqualTo(FixedPoint2.Zero), $"{VendingMachineProtoId} started with unexpected damage.");
+        Assert.That(HasComp<DamageableComponent>(), $"{VendingMachineProtoId} does not have DamageableComponent.");
+        Assert.That(damageableSys.GetAllDamage(STarget!.Value).GetTotal(), Is.EqualTo(FixedPoint2.Zero), $"{VendingMachineProtoId} started with unexpected damage.");
 
         // Damage the vending machine to the point that it breaks
         var damageType = ProtoMan.Index(TestDamageType);
         var damage = new DamageSpecifier(damageType, FixedPoint2.New(100));
         await Server.WaitPost(() => damageableSys.TryChangeDamage(SEntMan.GetEntity(Target).Value, damage, ignoreResistances: true));
         await RunTicks(5);
-        Assert.That(damageableComp.Damage.GetTotal(), Is.GreaterThan(FixedPoint2.Zero), $"{VendingMachineProtoId} did not take damage.");
+        Assert.That(damageableSys.GetAllDamage(STarget!.Value).GetTotal(), Is.GreaterThan(FixedPoint2.Zero), $"{VendingMachineProtoId} did not take damage.");
     }
 }

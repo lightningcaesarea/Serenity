@@ -7,7 +7,7 @@
     Gauze: 3
     Brutepack: 3
     Ointment: 3
-    IVStand: 2
+    IVStandFlatpack: 2
     IVBagSaline: 4
     IVBagBlood: 3
     ChemistryBottleEpinephrine: 3
@@ -53,7 +53,7 @@
     Gauze: 5
     Brutepack: 5
     Ointment: 5
-    IVStand: 2
+    IVStandFlatpack: 2
     IVBagBlood: 5
     Tourniquet: 2
     ChemistryBottleEpinephrine: 3
